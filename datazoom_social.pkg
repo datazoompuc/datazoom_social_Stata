@@ -1,0 +1,16 @@
+v 3
+d datazoom_social - Extração dos microdados do IBGE.
+d
+d							    Por: DataZoom - PUC-Rio/Departamento de Economia
+d
+d Os arquivos deste pacote destinam-se à extração dos microdados das pesquisas realizadas pelo IBGE.
+d
+d O programa datazoom_social.ado cria uma base de dados em formato STATA (.dta) para  
+d cada tipo de registro/pesquisa selecionado.
+d
+d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de 
+d comando ou via interface gráfica, através do comando "db datazoom_pns".
+
+f datazoom_social.ado
+f datazoom_social.dlg
+f datazoom_social.sthlp

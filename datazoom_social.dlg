@@ -1,0 +1,62 @@
+/*
+VERSION 11.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 410 250
+
+DIALOG main, label("DataZoom Social") tabtitle("Main")
+BEGIN
+
+TEXT     tx_gen      10  10   120  ., label("Escolha sua pesquisa:")
+RADIO    rb_pns      10 +20   100  ., label("PNS") option(pns)
+RADIO    rb_pme      10 +25   100  ., label("PME") option(pmenova)
+
+TEXT notes  15 130 300 ., label("Nota: reinstale periodicamente o pacote datazoom_social") left
+TEXT credit 15 160 300 ., label("PUC-Rio - Departamento de Economia") left
+
+END
+
+OK ok1,      label("OK")
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_social")
+
+PROGRAM command
+BEGIN
+	put "db datazoom_"
+	put main.rb_pns main.rb_pme " "
+END
+
+*/
+VERSION 1.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 350 200
+
+DIALOG main, label("DataZoom Social") tabtitle("Main")
+BEGIN
+
+GROUPBOX pesquisa 25 15 150 105, label("Escolha sua pesquisa:")
+	RADIO  rd_pns  +25 +25 100 25, first label("PNS")  option(datazooom_pns)
+	*RADIO  ck0000  @   +25 100 25, label("Oi")   option(0000)
+	RADIO  rd_pme  @   +25 100 25, last label("PME")  option(datazoom_pmenova)
+
+TEXT notes  15 130 300 15, label("Nota: reinstale periodicamente o pacote datazoom_social") left
+TEXT credit 15 160 300 15, label("PUC-Rio - Departamento de Economia") left
+
+END
+
+OK ok,      label("OK")
+SUBMIT sub
+CANCEL can, label("Cancel")
+HELP hlp,   view("help datazoom_social")
+RESET res
+
+PROGRAM command
+BEGIN
+	put "datazoom_social "
+	beginoptions
+		put " "
+		option main.rd_pns main.rd_pme
+		put " "
+    endoptions
+END
