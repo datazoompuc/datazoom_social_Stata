@@ -1,0 +1,132 @@
+---
+title: "datazoom.pnadcontinua"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{datazoom.pnadcontinua}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+datazoom.pnadcontinua is an R package that facilitates access to official data 
+regarding IBGE's Continuous PNAD. The package provides functions that download 
+and pre-process selected datasets in English and Portuguese.
+
+## Installation
+
+Install the package through Data Zoom's GitHub page using ```devtools```
+
+```
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("datazoompuc/PNAD_Continua/tree/rascunhos-painel/r-package")
+``` 
+
+## Panel of Individuals
+
+The Continuous PNAD is a panel survey, in which each household is interviewed for five consecutive quarters. Despite correctly identifying the same household in all five interviews, the survey does not assign the same identification number to each member of the household at every interview. In case the user wishes to work with a panel of individuals, it is necessary to construct a variable to identify each individual throughout different surveys. For this reason we use algorithms suggested by Ribas and Soares (2008). The authors elaborated a basic system identification and an advanced one. They differ by the number of variables used to identify individuals in different surveys. While what we call **basic** identification matches less observations, it is more likely
+that it contains false positives.  On the other hand, the **advanced ** method uses more characteristics, such as age differentials and schooling years to match observations across time. Either way the program may take a resonable amount of time to perform the identification process, depending on your computational capacity, especially considering the advanced identification.
+
+## Usage
+
+Start by loading the package
+```{r, eval= TRUE}
+library(datazoom.pnadcontinua)
+``` 
+
+### Loading data
+
+The package is flexible enough to process Continous PNAD stored in three forms through
+function ```load_pnadc```:
+
+* Downloading quarterly data directly from IBGE
+* Reading datasets on a directory
+* Reading specific .txt Continuous PNAD on the computer
+
+To download data, be sure to set argument ```surveys``` as a list of vectors, each 
+one consisting on a quarter-year pairing. The function will store the raw microdata
+on folder ```PNADC_microdata``` inside the directory set by ```download_directory```,
+which defaults to the working directory.
+
+```
+dates <- list(c(1, 2012), c(2, 2012), c(3, 2013))
+
+loaded_data <- load_pnadc(sources = dates)
+
+# Set lang = 'portuguese` to have the labels in Portuguese
+# Alternatively, set sources as a folder or a text file path:
+
+loaded_data <- load_pnadc(sources = './Desktop')
+``` 
+
+In such cases, ```loaded_data``` is a list of dataframes, with each element corresponding
+to a different quarter and being named accordingly.
+
+### Panel of individuals
+
+To build a panel of individuals in the survey, use either ```load_pnadc``` or
+```pnadc_panel```. The first loads raw data into R, while the latter uses clean data
+that is already loaded.
+
+For ```load_pnadc``` choose between each identification type
+with```panel = 'basic'``` ```panel = 'advanced'```, or ```panel = 'no``` to simply
+load and label the data.
+
+The function returns a list in which each elements corresponds to data from a 
+different panel.
+
+```
+dates <- list(c(1, 2012), c(2, 2012), c(3, 2012), c(4, 2012), c(1, 2013))
+
+loaded_data <- load_pnadc(sources = dates, panel = 'basic')
+
+# Set lang = 'portuguese` to have the labels in Portuguese
+# Alternatively, set sources as a folder or a text file path:
+
+loaded_data <- load_pnadc(sources = './Desktop', panel = 'advanced')
+``` 
+
+```pnadc_panel``` uses either data originally built from ```load_pnadc``` or any
+arbitrary number of dataframes with PNAD-C microdata. Parameter ```basic``` sets
+the kind of identification.
+
+```
+# Set parameter lang according to the langage in the data
+
+# The function accomodates and arbitrary number of dataframes or lists of dataframes
+
+panel_data <- load_pnadc(loaded_data, loaded_data[[1]],
+                         loaded_data[[2]], panel = 'basic')
+
+# Set lang = 'portuguese` to have the labels in Portuguese
+
+``` 
+
+**Warning**: beware that panel identification may take a long time. Besides,
+panel identification is recommended using the complete set of 5 quarters in the survey.
+A smaller number may harm the identification and generate a different output from
+the proccess with the complete set.
+
+### Dictionary
+
+The package also comes with dictionaries in English and Portuguese,
+```dictionary_eng```, ```dictionary_pt.br```, with a description of all variables in the
+survey, as well as of the variables assumed by them.
+
+```{r, eval = TRUE, echo = FALSE}
+head(dictionary_eng)
+``` 
+
+
+## Credits
+
+Data Zoom is developed by a team at Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio), Department of Economics. Our official website is at: http://www.econ.puc-rio.br/datazoom/index.html.
+
+
+
+

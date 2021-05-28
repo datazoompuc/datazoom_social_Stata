@@ -1,0 +1,317 @@
+* VERSION 1.4
+
+VERSION 10.0
+POSITION . . 515 420
+
+DIALOG main, label("CENSO - Access to STATA format microdata files") tabtitle("Main")
+BEGIN
+   TEXT instranos      10    5  430   ., label("Inputs")
+   
+   GROUPBOX caixayear 10 30 105 125, label("Year(s)")
+   CHECKBOX	chk70     +20 +20 100 ., label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
+   CHECKBOX	chk80     @  +20 100 ., label("1980")  onclickon(script c80on) onclickoff(program c80off) option(1980)
+   CHECKBOX	chk91     @  +20 100 ., label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
+   CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
+   CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
+   
+   BUTTON fldata      10 +35  105     ., label("Data...") onpush(script dados)
+   BUTTON fldict      10 +25  105     ., label("Saving...") onpush(script salvando)
+   
+  GROUPBOX caixaarq 10 +30 105 125, label("Type of Register") 
+   RADIO	pes     +10 +20 100 ., first 	label("Individual") onclickon(script peson) option(pes) 
+   RADIO	dom		+0 +20 100 ., middle 	label("Household") onclickon(script domon) option(dom) 
+   RADIO	fam		+0 +20 100 ., middle 	label("Family") onclickon(script famon) option(fam) 
+   RADIO	both		+0 +20 100 ., middle	label("Both merged") onclickon(script bothon) option(both) 
+   RADIO	all		+0 +20 100 ., last 		label("All merged") onclickon(script allon) option(all) 
+ 
+   GROUPBOX caixaCompatibility 10 +30 105 45, label("Compatibility")
+      CHECKBOX chkcomp    +10  +20  430   ., label("Activate option") option(comp)
+
+   TEXT instrUF       140    5  350   ., label("Select states and/or geographical regions:")
+	  CHECKBOX chkregN   130   30  160 126, label("North") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
+	  CHECKBOX chkAC   +5  +22  200   ., label("Acre") onclickoff(script nemtudoN) option(AC)
+      CHECKBOX chkAP    @  +25  200   ., label("Amapá") onclickoff(script nemtudoN) option(AP)
+      CHECKBOX chkAM    @  +25  200   ., label("Amazonas") onclickoff(script nemtudoN) option(AM)
+      CHECKBOX chkPA  +75  -50  200   ., label("Pará") onclickoff(script nemtudoN) option(PA)
+      CHECKBOX chkRO    @  +25  200   ., label("Rondônia") onclickoff(script nemtudoN) option(RO)
+      CHECKBOX chkRR    @  +25  200   ., label("Roraima") onclickoff(script nemtudoN) option(RR)
+      CHECKBOX chkTO  -75  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+
+   CHECKBOX chkregNE  130  +45  160 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
+      CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
+      CHECKBOX chkBA    @  +25  200   ., label("Bahia") onclickoff(script nemtudoNE) option(BA)
+      CHECKBOX chkCE    @  +25  200   ., label("Ceará") onclickoff(script nemtudoNE) option(CE)
+      CHECKBOX chkMA    @  +25  200   ., label("Maranhão") onclickoff(script nemtudoNE) option(MA)
+      CHECKBOX chkRN    @  +25  200   ., label("Rio Grande do Norte") onclickoff(script nemtudoNE) option(RN)
+      CHECKBOX chkFN    @  +25  200   ., label("F. de Noronha (1970)") onclickoff(script nemtudoNE) option(FN)
+      CHECKBOX chkPB  +70  -125  200   ., label("Paraíba") onclickoff(script nemtudoNE) option(PB)
+      CHECKBOX chkPE    @  +25  200   ., label("Pernambuco") onclickoff(script nemtudoNE) option(PE)
+      CHECKBOX chkPI    @  +25  200   ., label("Piauí") onclickoff(script nemtudoNE) option(PI)
+      CHECKBOX chkSE    @  +25  200   ., label("Sergipe") onclickoff(script nemtudoNE) option(SE)
+
+   CHECKBOX chkregSE  310   30  190  90, label("Southeast") onclickon(script marcatudoSE) onclickoff(script desmarcatudoSE) groupbox
+      CHECKBOX chkES   +5  +18  200   ., label("Espírito Santo") onclickoff(script nemtudoSE) option(ES)
+      CHECKBOX chkMG    @  +23  200   ., label("Minas Gerais") onclickoff(script nemtudoSE) option(MG)
+      CHECKBOX chkRJ  +90  -23  200   ., label("Rio de Janeiro") onclickoff(script nemtudoSE) option(RJ)
+      CHECKBOX chkSP    @  +23  200   ., label("São Paulo") onclickoff(script nemtudoSE) option(SP)
+      CHECKBOX chkGB  -90  +23  200   ., label("Guanabara (1970)") onclickoff(script nemtudoSE) option(GB)
+
+   CHECKBOX chkregS   310  +40  190  90,label("South") onclickon(script marcatudoS) onclickoff(script desmarcatudoS) groupbox
+      CHECKBOX chkPR   +5  +18  200   ., label("Paraná") onclickoff(script nemtudoS) option(PR)
+      CHECKBOX chkSC  @   +22 200   ., label("Santa Catarina") onclickoff(script nemtudoS) option(SC)
+      CHECKBOX chkRS  @  +22  200   ., label("Rio Grande do Sul") onclickoff(script nemtudoS) option(RS)
+
+   CHECKBOX chkregCO  310  +40  190 119, label("Center-West") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
+      CHECKBOX chkGO   +5  +18  200   ., label("Goiás") onclickoff(script nemtudoCO) option(GO)
+      CHECKBOX chkMT    @  +23  200   ., label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
+      CHECKBOX chkDF    @  +23  200   ., label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
+      CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2010)") onclickoff(script nemtudoCO) option(MS)
+
+	TEXT     credit     20   395  480    ., label("By PUC-Rio - Department of Economics") right  
+
+END
+
+SCRIPT PREINIT_SCRIPT
+BEGIN
+   create STRING saidadata
+   create STRING saidasalvando
+   main.chkTO.disable
+   main.fam.disable
+   main.all.disable
+END
+
+SCRIPT c70on
+BEGIN
+	main.chkGB.enable
+	main.chkFN.enable
+END
+
+SCRIPT c70off
+BEGIN
+	main.chkGB.disable
+	main.chkFN.disable
+END
+
+SCRIPT c80on
+BEGIN
+	main.chkMS.enable
+END
+
+SCRIPT c91on
+BEGIN	
+	main.chkMS.enable
+	main.chkTO.enable
+END
+
+SCRIPT c00on
+BEGIN
+	main.chkTO.enable
+	main.chkMS.enable
+	main.fam.enable
+	main.all.enable
+END
+
+SCRIPT c10on
+BEGIN
+	main.chkTO.enable
+	main.chkMS.enable
+END
+
+PROGRAM c80off
+BEGIN
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
+		call main.chkMS.disable
+	}
+END
+
+PROGRAM	c91off
+BEGIN
+	if main.chk00.isneq(1) & main.chk10.isneq(1) {
+		call main.chkMS.disable
+		call main.chkTO.disable
+	}
+END	
+
+PROGRAM	c00off
+BEGIN
+	if main.chk91.isneq(1) & main.chk10.isneq(1) {
+		call main.chkMS.disable
+		call main.chkTO.disable
+	}
+	call main.fam.disable
+	call main.all.disable
+END
+
+PROGRAM	c10off
+BEGIN
+	if main.chk91.isneq(1) & main.chk00.isneq(1) {
+		call main.chkMS.disable
+		call main.chkTO.disable
+	}
+END	
+
+
+SCRIPT dados
+BEGIN
+	create CHILD datazoom_datafolder AS data
+	data.settitle "Census original data file(s)"
+	data.setExitString saidadata
+END
+
+SCRIPT salvando
+BEGIN
+	create CHILD datazoom_finalfolder AS dic
+	dic.settitle "Census final data folder"
+	dic.setExitString saidasalvando
+	END
+
+SCRIPT marcatudoN
+BEGIN
+   main.chkAC.seton
+   main.chkAP.seton
+   main.chkAM.seton
+   main.chkPA.seton
+   main.chkRO.seton
+   main.chkRR.seton
+   main.chkTO.seton
+END
+
+SCRIPT desmarcatudoN
+BEGIN
+   main.chkAC.setoff
+   main.chkAP.setoff
+   main.chkAM.setoff
+   main.chkPA.setoff
+   main.chkRO.setoff
+   main.chkRR.setoff
+   main.chkTO.setoff
+END
+
+SCRIPT marcatudoNE
+BEGIN
+   main.chkAL.seton
+   main.chkBA.seton
+   main.chkCE.seton
+   main.chkFN.seton
+   main.chkMA.seton
+   main.chkPB.seton
+   main.chkPE.seton
+   main.chkPI.seton
+   main.chkRN.seton
+   main.chkSE.seton
+END
+
+SCRIPT desmarcatudoNE
+BEGIN
+   main.chkAL.setoff
+   main.chkBA.setoff
+   main.chkCE.setoff
+   main.chkFN.setoff
+   main.chkMA.setoff
+   main.chkPB.setoff
+   main.chkPE.setoff
+   main.chkPI.setoff
+   main.chkRN.setoff
+   main.chkSE.setoff
+END
+
+SCRIPT marcatudoSE
+BEGIN
+   main.chkES.seton
+   main.chkGB.seton
+   main.chkMG.seton
+   main.chkRJ.seton
+   main.chkSP.seton
+END
+
+SCRIPT desmarcatudoSE
+BEGIN
+   main.chkES.setoff
+   main.chkGB.setoff
+   main.chkMG.setoff
+   main.chkRJ.setoff
+   main.chkSP.setoff
+END
+
+SCRIPT marcatudoS
+BEGIN
+   main.chkPR.seton
+   main.chkRS.seton
+   main.chkSC.seton
+END
+
+SCRIPT desmarcatudoS
+BEGIN
+   main.chkPR.setoff
+   main.chkRS.setoff
+   main.chkSC.setoff
+END
+
+SCRIPT marcatudoCO
+BEGIN
+   main.chkDF.seton
+   main.chkGO.seton
+   main.chkMS.seton
+   main.chkMT.seton
+END
+
+SCRIPT desmarcatudoCO
+BEGIN
+   main.chkDF.setoff
+   main.chkGO.setoff
+   main.chkMS.setoff
+   main.chkMT.setoff
+END
+
+SCRIPT nemtudoN
+BEGIN
+   main.chkregN.setoff
+END
+
+SCRIPT nemtudoNE
+BEGIN
+   main.chkregNE.setoff
+END
+
+SCRIPT nemtudoSE
+BEGIN
+   main.chkregSE.setoff
+END
+
+SCRIPT nemtudoS
+BEGIN
+   main.chkregS.setoff
+END
+
+SCRIPT nemtudoCO
+BEGIN
+   main.chkregCO.setoff
+END
+
+OK ok1,      label("OK")
+SUBMIT sub1
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_censo")
+RESET res1
+
+PROGRAM command
+BEGIN
+   put "datazoom_censo"
+   beginoptions
+      put "years("
+	  option main.chk70 main.chk80 main.chk91 main.chk00 main.chk10
+	  put ") "
+      put "ufs("
+      option main.chkRO main.chkAC main.chkAM main.chkRR main.chkPA main.chkAP ///
+             main.chkTO main.chkFN main.chkMA main.chkPI main.chkCE main.chkRN ///
+             main.chkPB main.chkPE main.chkAL main.chkSE main.chkBA main.chkMG ///
+             main.chkES main.chkRJ main.chkGB main.chkSP main.chkPR main.chkSC ///
+             main.chkRS main.chkMS main.chkMT main.chkGO main.chkDF
+      put ") "
+      put saidadata " "
+      put saidasalvando
+      option main.chkcomp 
+	  option radio(main pes dom fam both all)
+	  
+   endoptions
+END

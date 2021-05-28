@@ -1,0 +1,41 @@
+v 3
+d DataZoom Portal - Resources to access IBGE microdata
+
+d 
+d The available packages contain programs and dictionaries to six IBGE Household surveys.
+d 
+d The resources were develop for STATA 12 and above for Windows version. 
+d Mac users may notice some diferences in the visual aspects of Dialog Boxes, 
+d but the programs should run appropriately.
+d
+d The original datafiles are not provided. The user can download the following datafiles 
+d from IBGE website (www.ibge.gov.br): Censo 2010; PNAD since 2001; Continuous PNAD since 2012;
+d PME since 03/2002 (New Methodology); POF 2002-2003, 2008-2009, and 2017-2018; PNS 2013;
+d and PNAD Covid 19. 
+
+d 
+d The dictionaries support the conversion of IBGE original data files into STATA format
+d ones. They can be used either with 'infile' stata command directly or through the 
+d programs provided.
+
+d 
+d The programs help users to get access to IBGE microdata. They also provide options 
+d to get waves-compatible databases, to deflate monetary variables, and to construct
+d customized databases. Dialog Boxes are provided to facilitate the process.
+
+d
+d Please visit www.econ.puc-rio.br/datazoom for more information.
+
+p datazoom_pnad_covid Access PNAD Covid 19 since May 2020.
+p datazoom_censo 	Access Censo Demografico's (compatible) databases, 1970 to 2010.
+p datazoom_pnad 	Access PNAD (compatible) databases, since 1981 wave.
+p datazoom_pnadcontinua	Access Continuous PNAD databases, since 2012 wave.
+p datazoom_pnadcont_anual	Access Annual Continuous PNAD databases, since 2012 wave.
+p datazoom_pmeantiga 	Access PME (identified panels) databases, 1991 to 2001.
+p datazoom_pmenova 	Access PME (identified panels) databases, since 03/2002 wave.
+p datazoom_pof2017 	Access POF 2017-18 databases.
+p datazoom_pof2008 	Access POF 2008-09 (customized) databases.
+p datazoom_pof2002 	Access POF 2002-03 (customized) databases.
+p datazoom_pof1995 	Access POF 1995-96 (customized) databases.
+p datazoom_ecinf 	Access ECINF 1997 and 2003 databases.
+p datazoom_pns      Access PNS 2013 database. 
