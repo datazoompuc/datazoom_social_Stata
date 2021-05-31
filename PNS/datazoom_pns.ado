@@ -19,7 +19,7 @@ qui findfile pns`year'`lang'.dct
 cap infile using "`r(fn)'", using(PNS_`year'.txt) clear
 
 if "`saving'" != ""{
-save "`saving'/pns`year'", replace 
+save "`saving'/pns_`year'", replace 
 
 display as result "A base de dados foi salva na pasta `saving'!"
 }
@@ -33,7 +33,7 @@ end
 program download_pns
 syntax, year(integer)
 
-local url "https://ftp.ibge.gov.br/PNS/2013/Microdados/Dados/PNS_"
+local url "https://ftp.ibge.gov.br/PNS/`year'/Microdados/Dados/PNS_"
 
 if `year' == 2013{
 	local complemento "2013.zip"
