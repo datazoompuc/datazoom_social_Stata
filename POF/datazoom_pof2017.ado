@@ -47,10 +47,6 @@ foreach TR of numlist `trs'{
 	}
 }
 
-if "`source'" == ""{
-	erase pof17.zip
-}
-
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
 
@@ -69,5 +65,7 @@ local url `url'`complemento'
 copy `url' pof17.zip
 
 unzipfile pof17.zip, replace
+
+erase pof17.zip
 
 end
