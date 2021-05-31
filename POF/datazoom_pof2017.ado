@@ -48,7 +48,7 @@ foreach TR of numlist `trs'{
 }
 
 if "`source'" == ""{
-	erase pof.zip
+	erase pof17.zip
 }
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
@@ -66,8 +66,8 @@ local complemento "2017_2018/Microdados/Dados_20210304.zip"
 
 local url `url'`complemento'
 
-copy `url' pof.zip
+copy `url' pof17.zip
 
-unzipfile pof.zip, replace
+unzipfile pof17.zip, replace
 
 end
