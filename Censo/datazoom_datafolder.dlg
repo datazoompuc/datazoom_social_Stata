@@ -1,0 +1,18 @@
+VERSION 10.0
+POSITION . . 360 65
+
+DIALOG main
+BEGIN
+   TEXT txCaminho     10  5 330   ., label(Selecione a pasta onde se localizam os arquivos de dados originais)
+   FILE caminho       @ +20 330   ., label(Procurar...) dir
+END
+
+OK ok1,      label("OK")
+CANCEL can1, label("Cancel")
+*HELP hlp1,   view("help global")
+RESET res1
+
+PROGRAM command
+BEGIN
+      put "original"  "(" main.caminho ") "
+END

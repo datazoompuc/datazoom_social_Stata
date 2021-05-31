@@ -1,0 +1,59 @@
+VERSION 11.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 350 200
+
+DIALOG main, label("PNS") tabtitle("Main")
+BEGIN
+
+GROUPBOX caixaBase 25 15 150 105, label("Data set")
+	BUTTON  fl_base    		+25 +25 100 25, label("Original data...") onpush(script dados)
+    BUTTON  fl_salvabase    @   +40 100 25, label("Saving...")        onpush(script salvando)
+
+GROUPBOX caixaAnos 175 15 150 105, label("Year(s)")
+	RADIO  ck2013  +25 +25 100 25, first label("2013")  option(2013)
+	RADIO  ck2019  @   +25 100 25, last label("2019")  option(2019)
+
+TEXT notes  15 130 300 15, label("Note: periodically reinstall the datazoom_pns package") left
+TEXT credit 15 160 300 15, label("By PUC-Rio - Department of Economics") left
+
+END
+
+OK ok,      label("OK")
+SUBMIT sub
+CANCEL can, label("Cancel")
+*HELP hlp,   view("help datazoom_pns")
+RESET res
+
+SCRIPT PREINIT_SCRIPT
+BEGIN
+*	create STRING lista_tipos
+	create STRING saidadata
+	create STRING saidasalvando
+END
+
+SCRIPT dados
+BEGIN
+	create CHILD datazoom_datafolder AS data
+	data.settitle "PNS original data file(s)"
+	data.setExitString saidadata
+END
+
+SCRIPT salvando
+BEGIN
+	create CHILD datazoom_finalfolder AS dic
+	dic.settitle "PNS new data file(s)"
+	dic.setExitString saidasalvando
+END
+
+PROGRAM command
+BEGIN
+	put "datazoom_pns "
+	beginoptions
+		put saidadata " "
+		put saidasalvando " "
+		put "year("
+		option main.ck2013 main.ck2019
+		put ") "
+   endoptions
+END

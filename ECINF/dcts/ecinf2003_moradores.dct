@@ -1,0 +1,15 @@
+dictionary {
+_column(1)		byte		v01		%2f	"Unidade da Federação"
+_column(1)		long		v02		%8f	"Número do Controle"
+_column(9)		byte		v03		%1f	"Grupo"
+_column(10)		byte		v04		%2f	"Número de Série"
+_column(12)		byte		v2301		%2f	"número de moradores do domicilio"
+_column(14)		byte		ordem		%2f	"número de ordem"
+_column(16)		byte		v2303		%1f	"Sexo"
+_column(17)		byte		v2304		%1f	"Cor ou raça"
+_column(18)		byte		v2305		%1f	"Condição na unidade domiciliar"
+_column(19)		byte		v2306		%2f	"Dia de nascimento"
+_column(21)		byte		v2307		%2f	"Mês de nascimento"
+_column(23)		int		v2308		%4f	"Ano de nascimento"
+_column(27)		int		v2803		%3f	"Idade do morador"
+}

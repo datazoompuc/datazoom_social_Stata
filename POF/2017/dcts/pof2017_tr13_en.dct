@@ -1,0 +1,17 @@
+dictionary {
+_column(1)		double	UF		%2f	"federative unit code"
+_column(3)		long	ESTRATO_POF		%4f	"survey-strata plan "
+_column(7)		byte	TIPO_SITUACAO_REG		%1f	"household condition"
+_column(8)		long	COD_UPA		%9f	"sample unit code "
+_column(17)		double	NUM_DOM		%2f	"household number"
+_column(19)		byte	NUM_UC		%1f	"consumption unit number"
+_column(20)		double	COD_INFORMANTE	%2f	"number associated with hh member"
+_column(22)		byte	QUADRO		%2f	"chart number"
+_column(24)		byte	SEQ		%2f	"sequential number"
+_column(26)		int	V9001		%7f	"expense / acquisition type code "
+_column(62)		byte	V9013		%1f	"main reason for restriction to purchase health-related products or services"
+_column(34)		long	PESO		%14.8f	"expansion factor "
+_column(48)		long	PESO_FINAL	%15.8f	"expansion factor"
+_column(62)		double	RENDA_TOTAL	%10.2f	"amount in reais (R$)"
+}
+

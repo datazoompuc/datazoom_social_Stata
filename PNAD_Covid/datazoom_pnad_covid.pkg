@@ -1,0 +1,21 @@
+v 3
+
+d datazoom_pnad_covid - Extração e construção do bases de dados da PNAD COVID 19
+d
+d							           Por: DataZoom - PUC-Rio/Departamento de Economia
+d
+d Os arquivos deste pacote destinam-se à extração dos microdados da Pesquisa Nacional 
+d por Amostra de Domicílios - PNAD COVID19 .
+d
+d Através da execução do pacote datazoom_pnad_covid, o usuário pode obter arquivos em  
+d formato STATA (.dta).
+d
+d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de comando
+d ou via interface gráfica, através do comando "db datazoom_pnad_covid".
+
+ 
+f datazoom_pnad_covid.dlg
+f datazoom_pnad_covid.ado
+f datazoom_pnad_covid.sthlp
+f datazoom_datafolder.dlg
+f datazoom_finalfolder.dlg
