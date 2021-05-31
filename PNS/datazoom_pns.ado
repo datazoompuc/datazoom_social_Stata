@@ -1,24 +1,51 @@
-******************************************************
-*                   datazoom_pns.ado                  *
-******************************************************
-* version 2.1
+* VERSION 2.2
 
-program define datazoom_pns
-syntax, original(str) saving(str) year(integer) [language(string)]
+program datazoom_pns
+syntax, [source(str)] [saving(str)] year(integer) [english]
 
-local lang ""
-if "`language'" == "eng"{
+cd "`source'"
+
+if "`source'" == ""{
+	download_pns, year(`year')
+}
+
+if "`english'" != ""{
 	local lang "_en"
 }
 
 /* Infile */
-display as input "Gerando a base..."
-display as input "Extraindo `original'/PNS_`year'.txt"
+
 qui findfile pns`year'`lang'.dct
-qui infile using "`r(fn)'", using("`original'/PNS_`year'.txt") clear
-save "`saving'/pns`year'", replace 
+cap infile using "`r(fn)'", using(PNS_`year'.txt) clear
+
+if "`saving'" != ""{
+save "`saving'/pns_`year'", replace 
 
 display as result "A base de dados foi salva na pasta `saving'!"
-di _newline "Esta versão do pacote datazoom_pns é compatível com os microdados da PNS 2013 divulgados em 30/09/2020 e da PNS 2019 divulgados em 03/03/2021"
+}
+
+if "`source'" == ""{
+	erase pns_`year'.txt
+}
+
+end
+
+program download_pns
+syntax, year(integer)
+
+local url "https://ftp.ibge.gov.br/PNS/`year'/Microdados/Dados/PNS_"
+
+if `year' == 2013{
+	local complemento "2013.zip"
+}
+else if `year' == 2019{
+	local complemento "2019_20210507.zip"
+}
+
+* esses números no final são a última data de atualização, então podem mudar eventualmente
+
+local url `url'`complemento'
+di _newline "Downloading from `url'. This may take a few minutes" 
+unzipfile `url', replace
 
 end
