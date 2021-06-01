@@ -3,10 +3,14 @@
 ******************************************************
 * version 1.0
 
-program define dz_social
-syntax, research(str)
+program define datazoom_social
+syntax, research(str) original(str) saving(str) year(integer)
 
-/* ... */
-db datazoom_`research'
+foreach pesq in `research' {
+	if `pesq' == "pns" {
+		datazoom_pns, original(str) saving(str) year(integer)
+	}
+	else continue, break
+}
 
 end
