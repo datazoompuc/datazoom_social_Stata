@@ -243,7 +243,7 @@ dictionary {
   _column(397) byte J057 %1f "This (these) treatment (s) was (were) done through the Unified Health System:"
   _column(398) byte J060 %1f "Module J Informant"
   _column(399) byte M001 %1f "Interview of the selected adult"
-  _column(400) byte M01001 %1f "In the past 30 days, someone smoked in the same closed environment where he worked"
+  _column(400) byte M002 %1f "Identification of selected resident's mother"
   _column(401) byte M00203 %1f "Is the selected resident able to respond?"
   _column(402) byte M00302 %1f "The informant of this part is:”
   _column(403) byte M00303 %1f "How many days a week do you commute from home to work?"
@@ -266,7 +266,7 @@ dictionary {
   _column(423) byte M01401 %1f "How many family members/relatives can you count on in good times or bad?"
   _column(424) byte M01501 %1f "How many close friends can you count on in good times or bad?"
   _column(425) byte M01601 %1f "How often did you meet with other people to practice physical activities, in the last 12 months"
-  _column(426) byte M01701 %"How often did you participate in group meetings (residents/employees association, social/community movements, academic centers, etc.) in the last 12 months?"
+  _column(426) byte M01701 %1f "How often did you participate in group meetings (residents/employees association, social/community movements, academic centers, etc.) in the last 12 months?"
   _column(427) byte M01801 %1f "How often did do volunteer unpaid work in the last 12 months?"
   _column(428) byte M01901 %1f "How often did you attend collective religious activities (not counting situations such as weddings, baptisms, etc.) in the last 12 months?"
   _column(429) byte N001 %1f "In general, how do you evaluate your health"
@@ -815,5 +815,4 @@ dictionary {
   _column(1226) byte VDM001 %1f "Range of time spent per day on commuting home-work"
   _column(1227) byte VDP001 %1f "Type of industrialized cigarette purchased"
   _column(1228) long VDDATA %8f "Microdata file generation date."
-  
 }
