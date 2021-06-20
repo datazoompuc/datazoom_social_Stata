@@ -19,7 +19,7 @@ Acesso aos microdados da PNS
 {col 5}source		{col 24}Local dos dados brutos
 {col 5}year		{col 24}2013 ou 2019
 {col 5}saving		{col 24}Local para salvar
-{col 5}english		{col 24}Labels em inglês       {break}
+{col 5}english		{col 24}Labels em inglês     
 {space 4}{hline 44}
 
 
@@ -29,13 +29,13 @@ Acesso aos microdados da PNS
 Carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem vir do armazenamento do computador ou diretamente do site do IBGE
 
 {p 4 4 2}
-Digite {bf:db datazoom_pns} para utilizar a função via caixa de diálo
+Digite {bf:db datazoom_pns} para utilizar a função via caixa de diálogo.
 
 
 {title:Options}
 
 {phang}
-{opt source} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt files. Caso a opção seja omitida, os dados serão baixados do  {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/9160-pesquisa-nacional-de-saude.html?=&t=microdados":site} do IB
+{opt source} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt files. Caso a opção seja omitida, os dados serão baixados do  {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/9160-pesquisa-nacional-de-saude.html?=&t=microdados":site} do IBGE.
 
 
 {title:Examples}
