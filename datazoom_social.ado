@@ -59,4 +59,9 @@ if "`research'" == "pnadcontinua_anual" {  /* Para pnad continua anual ficar ate
 	datazoom_pnadcont_anual, years(`date') original(`folder1') saving(`folder2') 
 }
 
+
+if "`research'" == "pnadcontinua" {
+	display "DataZoom Social - PNAD Continua"
+}
+
 end
