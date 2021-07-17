@@ -1,39 +1,48 @@
 /***
-_version 2.0_ 
+_version 2.2_ 
 
-{phang} _For the English version_, {help datazoom_pns_en}
+{vieweralsosee "PNAD" "help datazoom_pnas"}{...}
+{vieweralsosee "Censo" "help datazoom_censo"}{...}
 
-datazoom_pns
-===== 
+{viewerjumpto "Syntax" "datazoom_pns##synt"}{...}
+{viewerjumpto "Description" "datazoom_pns##desc"}{...}
+{viewerjumpto "Options" "datazoom_pns##opt"}{...}
+{viewerjumpto "Examples" "datazoom_pns##ex"}{...}
 
-Acesso aos microdados da PNS
+> _For the English version_, {help datazoom_pns_en}
 
+__datazoom_pns__ - Acesso aos microdados da PNS
+
+{marker synt}
 Syntax
------- 
+------
 
 > __datazoom_pns__ [, _options_]
 
-| _option_          |  _Description_          |
-|:------------------|:------------------------|
-| source		    | Local dos dados brutos  |
-| year		| 2013 ou 2019     |
-| saving		    | Local para salvar        |
-| english		    | Labels em inglês     |
+| _options_          	|  _Description_          |
+|:----------------------|:------------------------|
+| source		    	| Local dos dados brutos  |
+| year			| 2013 ou 2019            |
+| saving		    	| Local para salvar       |
+| english		    	| Labels em inglês        |
 
+Digite o comando __db datazoom_pns__ para utilizar a função via caixa de diálogo.       
 
+{marker desc}{...}
 Description
------------
+------
 
-Carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem vir do armazenamento do computador ou diretamente do site do IBGE.
+Carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem ser lidos do armazenamento local ou baixados automaticamente.         
 
-Digite __db datazoom_pns__ para utilizar a função via caixa de diálogo.
-
+{marker opt}{...}
 Options
 -------
+{dlgtab:Options}
 
 {phang}
-{opt source} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt files. Caso a opção seja omitida, os dados serão baixados do [site](https://www.ibge.gov.br/estatisticas/sociais/saude/9160-pesquisa-nacional-de-saude.html?=&t=microdados) do IBGE.
- 
+{opt source} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt. Caso a opção seja omitida, os dados serão baixados do {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/":site} do IBGE.               
+
+{marker ex}{...} 
 Examples
 ----------
 
@@ -51,11 +60,6 @@ Author
 DataZoom   
 PUC-Rio    
 Contato pelo [Github](https://github.com/datazoompuc/datazoom_social_Stata)    
-
-License
--------
-
-Specify the license of the software
 
 - - -
 
