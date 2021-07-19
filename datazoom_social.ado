@@ -155,4 +155,26 @@ if "`research'" == "pmenova" {
 }
 
 
+
+
+if "`research'" == "pmeantiga" {
+	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
+		datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') nid
+	}
+	else {
+		if "`nid'" != "" {
+			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') nid
+		}
+		else if "`idbas'" != "" {
+			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') idbas
+		}
+		else if "`idrs'" != "" {
+			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') idrs
+		}
+	}
+}
+
+
+
+
 end
