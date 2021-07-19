@@ -4,7 +4,7 @@
 * version 1.0
 
 program define datazoom_social
-syntax, research(str) folder1(str) folder2(str) date(integer) [state(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92]
+syntax, research(str) folder1(str) folder2(str) date(integer) [state(str)] [record(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92]
 
 
 if "`research'" == "pns" {
@@ -174,6 +174,11 @@ if "`research'" == "pmeantiga" {
 	}
 }
 
+
+
+if "`research'" == "ecinf" {
+	datazoom_ecinf, year(`date') tipo(`record') original(`folder1') saving(`folder2')
+}
 
 
 
