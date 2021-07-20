@@ -1,0 +1,18 @@
+dictionary {								
+_column(1)		byte		tiporeg		%1f		"tipo de registro"
+_column(2)		byte		v1		%2f		"unidade da federacao"
+_column(2)		long		v2		%8f		"numero de controle"
+_column(10)		byte		v3		%1f		"grupo"
+_column(11)		byte		v4		%2f		"numero de serie"
+_column(13)		byte		armetro		%1f		"tipo de area"
+_column(14)		int		estrato		%3f		"numero do estrato"
+_column(17)		int		nset		%3f		"numero de setores selecionados"
+_column(20)		byte		v1105		%1f		"tipo de entrevista"
+_column(21)		byte		v1106		%2f		"total de moradores"
+_column(23)		byte		v1107		%2f		"total moradores 10 anos ou +"
+_column(25)		byte		v1110		%2f		"total de conta-propria/empregador"
+_column(27)		byte		v1111		%2f		"total questionarios individuais"
+_column(29)		byte		v1201		%1f		"especie de domicilio"
+_column(30)		byte		v1202		%2f		"numero de comodos"
+_column(32)		byte		v1203		%1f		"condicao de ocupacao"
+}								

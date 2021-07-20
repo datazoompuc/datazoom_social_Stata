@@ -1,0 +1,17 @@
+v 3
+
+d datazoom_pnadcontinua - Access to PNAD COVID 19 Microdata - Version 1.0
+d
+d		             					By: DataZoom - PUC-Rio/Department of Economics 
+d 
+d This package provides programs to access  PNAD COVID19 microdata from IBGE 
+d since May 2020 wave.
+d
+d The program runs through command window directly or through a Dialog Box. In the last 
+d case, type "db datazoom_pnad_covid" to start.
+
+f datazoom_pnad_covid.dlg
+f datazoom_pnad_covid.ado
+f datazoom_pnad_covid.sthlp
+f datazoom_datafolder.dlg
+f datazoom_finalfolder.dlg
