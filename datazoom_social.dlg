@@ -1,62 +1,99 @@
-/*
-VERSION 11.0
-SYNCHRONOUS_ONLY
 
-POSITION . . 410 250
-
-DIALOG main, label("DataZoom Social") tabtitle("Main")
-BEGIN
-
-TEXT     tx_gen      10  10   120  ., label("Escolha sua pesquisa:")
-RADIO    rb_pns      10 +20   100  ., label("PNS") option(pns)
-RADIO    rb_pme      10 +25   100  ., label("PME") option(pmenova)
-
-TEXT notes  15 130 300 ., label("Nota: reinstale periodicamente o pacote datazoom_social") left
-TEXT credit 15 160 300 ., label("PUC-Rio - Departamento de Economia") left
-
-END
-
-OK ok1,      label("OK")
-CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_social")
-
-PROGRAM command
-BEGIN
-	put "db datazoom_"
-	put main.rb_pns main.rb_pme " "
-END
-
-*/
+  
 VERSION 1.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 200
+POSITION . . 634 315
 
-DIALOG main, label("DataZoom Social") tabtitle("Main")
+DIALOG main, label("Datazoom Social")
 BEGIN
-
-GROUPBOX pesquisa 25 15 150 105, label("Escolha sua pesquisa:")
-	RADIO  rd_pns  +25 +25 100 25, first label("PNS")  option(datazooom_pns)
-	*RADIO  ck0000  @   +25 100 25, label("Oi")   option(0000)
-	RADIO  rd_pme  @   +25 100 25, last label("PME")  option(datazoom_pmenova)
-
-TEXT notes  15 130 300 15, label("Nota: reinstale periodicamente o pacote datazoom_social") left
-TEXT credit 15 160 300 15, label("PUC-Rio - Departamento de Economia") left
-
+	
+	TEXT tx_eng  8   2 240 25, label("For the dialog box in English, click") left
+	HLINK hl_eng 192 4 240 25, label("here") left onpush(script child_en)
+	
+	BUTTON btn_censo 20 45 120 25, label("Censo") onpush(script child_censo)
+	BUTTON btn_ecinf +158 @   @  @, label("ECINF") onpush(script child_ecinf)
+	BUTTON btn_pme +158 @   @  @, label("PME") onpush(script child_pme)
+	BUTTON btn_pnad +158 @   @  @, label("PNAD") onpush(script child_pnad)
+	
+	BUTTON btn_pncon 20 145 120 25, label("PNAD Contínua") onpush(script child_pnad_continua)
+	BUTTON btn_pncov +158 @   @  @, label("PNAD Covid") onpush(script child_pnad_covid)
+	BUTTON btn_pns +158 @   @  @, label("PNS") onpush(script child_pns)
+	BUTTON btn_pof +158 @   @  @, label("POF") onpush(script child_pof)
+	
+	TEXTBOX txb_censo   10 75 140 ., label("Censo Demográfico - 1980 a 2010") center
+	TEXTBOX txbx_ecinf +158 @ @ @, label("Economia Informal Urbana - 1997 e 2003") center
+	TEXTBOX txbx_pme   +158 @ @ @, label("Pesquisa Mensal de Emprego - 1990 a 2015") center
+	TEXTBOX txb_pnad   +158 @ @ @, label("PNAD Antiga - 2001 a 2015") center
+	
+    TEXTBOX abc_censo   10 175 140 ., label("PNAD Contínua - 2012 a 2019") center
+	TEXTBOX abcd_ecinf +158 @ @ @, label("PNAD Covid - 2020") center
+	TEXTBOX abcd_pme   +158 @ @ @, label("Pesquisa Nacional de Saúde - 2013 e 2019") center
+	TEXTBOX abc_pnad   +158 @ @ @, label("Pesquisa de Orçamentos Familiares - 1995 a 2018") center
+	
+	FRAME fr_censo   0   30 160 100
+	FRAME fr_ecinf  +158 @  @   @
+	FRAME fr_pme  +158 @  @   @
+	FRAME fr_pnad  +158 @  @   @
+	
+	FRAME fr_pncon   0   128 160 100
+	FRAME fr_pncov  +158 @  @   @
+	FRAME fr_pns  +158 @  @   @
+	FRAME fr_pof  +158 @  @   @
+	
+    TEXT     credit     10   295  480    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     notes     10   275  480    ., label("Nota: reinstale periodicamente o pacote datazoom_social") left
 END
 
-OK ok,      label("OK")
-SUBMIT sub
-CANCEL can, label("Cancel")
-HELP hlp,   view("help datazoom_social")
-RESET res
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pof2017")
+RESET res1
 
-PROGRAM command
-BEGIN
-	put "datazoom_social "
-	beginoptions
-		put " "
-		option main.rd_pns main.rd_pme
-		put " "
-    endoptions
-END
+SCRIPT child_en
+   BEGIN
+      create CHILD datazoom_social_en, allowsubmit
+   END   
+ 
+ 
+ 
+SCRIPT child_censo
+   BEGIN
+      create CHILD datazoom_poftrs_17, allowsubmit
+   END
+
+SCRIPT child_ecinf
+   BEGIN
+      create CHILD datazoom_pofstd_17, allowsubmit
+   END
+
+SCRIPT child_pme
+   BEGIN
+      create CHILD datazoom_pofsel_17, allowsubmit
+   END
+   
+SCRIPT child_pnad
+   BEGIN
+      create CHILD datazoom_pofsel_17, allowsubmit
+   END   
+   
+
+
+SCRIPT child_pnad_continua
+   BEGIN
+      create CHILD datazoom_poftrs_17, allowsubmit
+   END
+
+SCRIPT child_pnad_covid
+   BEGIN
+      create CHILD datazoom_pofstd_17, allowsubmit
+   END
+
+SCRIPT child_pns
+   BEGIN
+      create CHILD datazoom_pofsel_17, allowsubmit
+   END
+   
+SCRIPT child_pof
+   BEGIN
+      create CHILD datazoom_pofsel_17, allowsubmit
+   END      
