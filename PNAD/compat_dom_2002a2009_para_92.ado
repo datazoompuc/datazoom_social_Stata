@@ -5,19 +5,19 @@
 program define compat_dom_2002a2009_para_92
 
 /* A. Ano */
-* nada a fazer nesta vari·vel nesta dÈcada
+* nada a fazer nesta vari√°vel nesta d√©cada
 
-/* B. N⁄MERO DE CONTROLE E S…RIE */
+/* B. N√öMERO DE CONTROLE E S√âRIE */
 drop v0102 v0103
 destring uf, replace
 
-/* C. N⁄MERO DE MORADORES */
-* nada a fazer nesta vari·vel nesta dÈcada
+/* C. N√öMERO DE MORADORES */
+* nada a fazer nesta vari√°vel nesta d√©cada
 
 
 /* D. TELEFONE */
 * A partir de 2001, pergunta-se sobre telefone celular e fixo,
-* diferentemente de anos anteriores, que sÛ perguntava por 
+* diferentemente de anos anteriores, que s√≥ perguntava por 
 * telefone.
 g telefone = v0220
 replace telefone = v2020 if telefone==.
@@ -28,10 +28,10 @@ drop v0220 v2020
 
 /* RECODES */
 
-/* N⁄MERO DE C‘MODOS/DORMIT”RIOS */
+/* N√öMERO DE C√îMODOS/DORMIT√ìRIOS */
 recode v0205 v0206 (99 -1 =.)
 
-/* VALOR DO ALUGUEL/PRESTA«√O */
+/* VALOR DO ALUGUEL/PRESTA√á√ÉO */
 replace v0208 = . if v0208>10^11
 replace v0209 = . if v0209>10^11
 
@@ -46,11 +46,11 @@ recode v0202 v0203 v0204 v0207 v0210 v0211 v0212 v0213 v0214 v0215 ///
 	v0216 v0217 v0218 v0219 v0221 v0222 v0223 v0224 v0225 v0226 ///
 	v0227 v0228 v0229 v0230 (9=.)
 
-cap recode v2081 v2091 (9=.) 	// essas vari·veis nao existem de 2007 em diante
+cap recode v2081 v2091 (9=.) 	// essas vari√°veis nao existem de 2007 em diante
 
-/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO : 1 = out/2012                                */
 gen double deflator = 1  if v0101 == 2012
 format deflator %26.25f

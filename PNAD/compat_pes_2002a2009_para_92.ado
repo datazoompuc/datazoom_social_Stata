@@ -6,7 +6,7 @@ program define compat_pes_2002a2009_para_92
 /* A.1 RECODE: ANO */
 * nada a fazer
 
-/* A.2 N⁄MERO DE CONTROLE E S…RIE */
+/* A.2 N√öMERO DE CONTROLE E S√âRIE */
 
 drop v0102 v0103
 destring uf, replace
@@ -29,12 +29,12 @@ foreach var in v5126 {
 	cap drop `var'
 }
 
-/* C. VARI¡VEIS DE EDUCA«√O */
+/* C. VARI√ÅVEIS DE EDUCA√á√ÉO */
 recode v0601 v0602 v0611 (0 9 = .)
 
 /* C.1 RECODE: ANOS DE ESTUDO */
 
-/* VARI¡VEIS UTILIZADAS PARA 2002 A 2006*/
+/* VARI√ÅVEIS UTILIZADAS PARA 2002 A 2006*/
 /* v0602=FREQUENTA ESCOLA OU CRECHE? */
 /* v0603=QUAL E O CURSO QUE FREQUENTA? */
 /* v0604=ESTE CURSO QUE FREQUENTA E SERIADO? */
@@ -58,7 +58,7 @@ loc max = r(max)
 
 if `min' <= 2006 {
 /* 2002 a 2006 */
-/* pessoas que ainda freq¸entam escola */
+/* pessoas que ainda freq√ºentam escola */
 	replace anoest =0 if v0602==2 & v0603==1 & v0605==1 & v0101 <= 2006
 	replace anoest =1 if v0602==2 & v0603==1 & v0605==2 & v0101 <= 2006
 	replace anoest =2 if v0602==2 & v0603==1 & v0605==3 & v0101 <= 2006
@@ -104,7 +104,7 @@ if `min' <= 2006 {
 	replace anoest =11 if v0602==2 & v0603==9 & v0101 <= 2006
 	replace anoest =15 if v0602==2 & v0603==10 & v0101 <= 2006
 
-/* pessoas que n„o freq¸entam */
+/* pessoas que n√£o freq√ºentam */
 
 	replace anoest =1 if v0602==4 & v0606==2 & v0607==1 & v0609==1 & v0610==1 & v0101 <= 2006
 	replace anoest =2 if v0602==4 & v0606==2 & v0607==1 & v0609==1 & v0610==2 & v0101 <= 2006
@@ -182,7 +182,7 @@ if `min' <= 2006 {
 
 if `max' >= 2007 {
 /* 2007 a 2009 */
-/* pessoas que ainda freq¸entam escola */
+/* pessoas que ainda freq√ºentam escola */
 	replace anoest =0 if v0602==2 & v6003==1 & v6030==1 & v0605==1 & v0101 >= 2007
 	replace anoest =1 if v0602==2 & v6003==1 & v6030==1 & v0605==2 & v0101 >= 2007
 	replace anoest =2 if v0602==2 & v6003==1 & v6030==1 & v0605==3 & v0101 >= 2007
@@ -239,7 +239,7 @@ if `max' >= 2007 {
 	replace anoest =11 if v0602==2 & v6003==10 & v0101 >= 2007
 	replace anoest =15 if v0602==2 & v6003==11 & v0101 >= 2007
 
-/* pessoas que n„o freq¸entam */
+/* pessoas que n√£o freq√ºentam */
 
 	replace anoest =1 if v0602==4 & v0606==2 & v6007==1 & v0609==1 & v0610==1 & v0101 >= 2007
 	replace anoest =2 if v0602==4 & v0606==2 & v6007==1 & v0609==1 & v0610==2 & v0101 >= 2007
@@ -348,11 +348,11 @@ label var anoest "anos de estudo"
 
 
 
-/* C.2 RECODE: S…RIE QUE FREQ‹ENTA NA ESCOLA */
+/* C.2 RECODE: S√âRIE QUE FREQ√úENTA NA ESCOLA */
 
 if `max' >= 2007 {
-* A PARTIR DE 2007, H¡ A POSSIBILIDADE DE O ENSINO FUNDAMENTAL SER EM 9 ANOS
-* NESSE CASO, O "PRIMEIRO ANO" EQUIVALE ¿ "CLASSE DE ALFABETIZA«√O".
+* A PARTIR DE 2007, H√Å A POSSIBILIDADE DE O ENSINO FUNDAMENTAL SER EM 9 ANOS
+* NESSE CASO, O "PRIMEIRO ANO" EQUIVALE √Ä "CLASSE DE ALFABETIZA√á√ÉO".
 	recode v6003 (1=8) if v6030 == 3 & v0605 == 1
 	recode v6007 (4=12) if v6070 == 3 & v0610 == 1
 	recode v0605 (1=.) (2=1) (3=2) (4=3) (5=4) (6=5) (7=6) (8=7) (0=8) if v6030 == 3
@@ -360,9 +360,9 @@ if `max' >= 2007 {
 }
 recode v0605 (9=.)
 rename v0605 serie_freq
-label var serie_freq "sÈrie - frequenta escola"
+label var serie_freq "s√©rie - frequenta escola"
 
-/* C.3 RECODE: CURSO QUE FREQ‹ENTA NA ESCOLA */
+/* C.3 RECODE: CURSO QUE FREQ√úENTA NA ESCOLA */
 generate byte curso_freq = .
 
 if `max' <= 2006 {
@@ -372,8 +372,8 @@ if `max' <= 2006 {
 }
 
 if `max' >= 2007 {
-* EM 2007, SURGIU A CATEGORIA "CLASSE DE ALFABETIZA«√O"
-* ANTERIORMENTE ELA SE INCLUÕA EM "PR…-ESCOLAR OU CRECHE"
+* EM 2007, SURGIU A CATEGORIA "CLASSE DE ALFABETIZA√á√ÉO"
+* ANTERIORMENTE ELA SE INCLU√çA EM "PR√â-ESCOLAR OU CRECHE"
 	recode v6003 (8 9=7) (10=8) (11=9)
 	replace curso_freq = v6003 if v0101 >= 2007
 }
@@ -385,22 +385,22 @@ label var curso_freq "curso - frequenta escola"
 *           = 4 supl segundo grau
 *           = 5 superior
 *           = 6 alfab de adultos
-*           = 7 prÈ-escolar ou creche
-*           = 8 prÈ-vestibular
+*           = 7 pr√©-escolar ou creche
+*           = 8 pr√©-vestibular
 *           = 9 mestrado/doutorado
 
 
-/* C.4 RECODE: S…RIE - N√O FREQUENTA ESCOLA */
+/* C.4 RECODE: S√âRIE - N√ÉO FREQUENTA ESCOLA */
 recode v0610 (9=.)
 rename v0610 serie_nao_freq
-label var serie_nao_freq "sÈrie - n„o frequenta escola"
-* ObservaÁ„o: no prim·rio - v0607==1 - podem existir atÈ 6 sÈries, e n„o apenas 4.
-*             no mÈdio, primeiro ciclo - v0607==2 - atÈ 5 sÈries, n„o apenas 4.
-*             no mÈdio, segundo ciclo - v0607==3 - 4 sÈries, n„o apenas 3.
-*             no segundo grau - v0607==5 - 4 sÈries, n„o apenas 3.
+label var serie_nao_freq "s√©rie - n√£o frequenta escola"
+* Observa√ß√£o: no prim√°rio - v0607==1 - podem existir at√© 6 s√©ries, e n√£o apenas 4.
+*             no m√©dio, primeiro ciclo - v0607==2 - at√© 5 s√©ries, n√£o apenas 4.
+*             no m√©dio, segundo ciclo - v0607==3 - 4 s√©ries, n√£o apenas 3.
+*             no segundo grau - v0607==5 - 4 s√©ries, n√£o apenas 3.
 
 
-/* C.5 RECODE: curso N√O FREQ‹ENTA NA ESCOLA */
+/* C.5 RECODE: curso N√ÉO FREQ√úENTA NA ESCOLA */
 generate byte curso_nao_freq = .
 
 if `max' <= 2006 {
@@ -416,16 +416,16 @@ if `max' >= 2007 {
 	drop v6003 v6030 v6007 v6070
 }
 
-label var curso_nao_freq "curso - n„o frequenta"
-* curso_nao_freq = 1 elementar (prim·rio)
-*               = 2 mÈdio primeiro ciclo (ginasial)
-*               = 3 mÈdio segundo ciclo (cientÌfico, cl·ssico etc.)
+label var curso_nao_freq "curso - n√£o frequenta"
+* curso_nao_freq = 1 elementar (prim√°rio)
+*               = 2 m√©dio primeiro ciclo (ginasial)
+*               = 3 m√©dio segundo ciclo (cient√≠fico, cl√°ssico etc.)
 *               = 4 primeiro grau
 *               = 5 segundo grau
 *               = 6 superior
 *               = 7 mestrado/doutorado
 *               = 8 alfab de adultos
-*               = 9 prÈ-escolar ou creche
+*               = 9 pr√©-escolar ou creche
 
 
 foreach var in v0604 v0606 v0608 v0609 v6002 v6020 v06111 v061111 v06112 v0612 ///
@@ -469,19 +469,19 @@ drop v9152 v9157 v9162 v9202 v9207 v9212
 
 cap drop v9921	// horas de afazeres domesticos
 
-/* MUDAN«A NA ORDEM DAS QUEST’ES INICIAIS DA SE«√O */
+/* MUDAN√áA NA ORDEM DAS QUEST√ïES INICIAIS DA SE√á√ÉO */
 * A partir de 2001, foram invertidas das questoes v9002, v9003 e v9004.
 * Antes, perguntava-se primeiro se o individuo havia trabalhado na producao
 * para o proprio consumo ou na construcao para o proprio uso. Agora, pergunta-se
 * primeiro se o individuo estava afastado de algum trabalho na semana de ref.
 * Isso pode alterar quem responde as questoes dependendo dos saltos.
 
-/* E.1 - Trabalhou na produÁ„o para prÛprio consumo */
+/* E.1 - Trabalhou na produ√ß√£o para pr√≥prio consumo */
 recode v9003 (3 = 0), g(trab_consumo)
 lab var trab_consumo "trab. producao p/ proprio consumo"
 * 1 = sim; 0 = nao
 
-/* E.2 - Trabalhou na construÁ„o para prÛprio uso */
+/* E.2 - Trabalhou na constru√ß√£o para pr√≥prio uso */
 recode v9004 (2 = 1) (4 = 0), g(trab_uso)
 lab var trab_uso "trab. construcao p/ proprio uso"
 * 1 = sim; 0 = nao
@@ -494,11 +494,11 @@ lab var trab_afast "esteve afastado do trabalho na s.r."
 drop v9002-v9004
 
 
-/* E.4.1 e E.4.2 CONDI«√O DE OCUPA«√O (na semana e no ano) */
-* atÈ 2007, essas vari·veis derivadas incluÌam crianÁas menores de 10 anos
-* na categoria "ocupados", com exceÁ„o de 1996 e 1997, quando n„o houve
-* seÁ„o de trabalho com crianÁas menores de 10 anos. Com isso, 
-* a partir de 2007, essa vari·veis possuem nomes ligeiramente diferentes.
+/* E.4.1 e E.4.2 CONDI√á√ÉO DE OCUPA√á√ÉO (na semana e no ano) */
+* at√© 2007, essas vari√°veis derivadas inclu√≠am crian√ßas menores de 10 anos
+* na categoria "ocupados", com exce√ß√£o de 1996 e 1997, quando n√£o houve
+* se√ß√£o de trabalho com crian√ßas menores de 10 anos. Com isso, 
+* a partir de 2007, essa vari√°veis possuem nomes ligeiramente diferentes.
 
 g cond_ocup_s = .
 g cond_ocup_a = .
@@ -528,8 +528,8 @@ if `min' >= 2007 {
 }
 recode cond_ocup_s cond_ocup_a (2 = 0)
 * 1 = ocupadas; 0 = desocupadas
-lab var cond_ocup_s "condicao de ocupaÁ„o na semana"
-lab var cond_ocup_a "condicao de ocupaÁ„o no ano"
+lab var cond_ocup_s "condicao de ocupa√ß√£o na semana"
+lab var cond_ocup_a "condicao de ocupa√ß√£o no ano"
 
 
 /* E.5 POSICAO NA OCUPACAO */
@@ -542,7 +542,7 @@ recode v4706 (5 = 4) (8 = 7) (14=.)
 recode v4715 (5 = 4) (8 = 7) (14=.)
 
 /* E.6 ATIVIDADE PRINCIPAL DO EMPREENDIMENTO do trab principal */
-* A partir de 2001, essas vari·veis incluem criancas menores de 10 anos
+* A partir de 2001, essas vari√°veis incluem criancas menores de 10 anos
 
 g ativ_semana = v4808 if v8005>=10
 g ativ_ano = v4812 if v8005>=10
@@ -589,9 +589,9 @@ foreach var in v1115 {
 	cap drop `var'
 }
 
-/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO : 1 = out/2012                                */
 gen double deflator = 1  if v0101 == 2012
 format deflator %26.25f
@@ -629,7 +629,7 @@ cap recode v4703 (17 = .)
 cap recode v4803 (17 = .)
 cap rename v4803 v4703
 
-recode /* cor */ v0404 /* m„e */ v0405 v0406 (9 = .)
+recode /* cor */ v0404 /* m√£e */ v0405 v0406 (9 = .)
 
 recode /* idade */ v8005 (999 =.)
 
@@ -637,13 +637,13 @@ recode /* idade */ v8005 (999 =.)
 cap rename v4838 v4738
 replace v4738 = . if v8005<10
 
-/* CondiÁ„o de atividade na semana - n„o se aplica ou n„o declarado */
+/* Condi√ß√£o de atividade na semana - n√£o se aplica ou n√£o declarado */
 replace v4704 = . if v4704 == 3
-/* Horas trabalhadas - n„o se aplica ou n„o declarado */
+/* Horas trabalhadas - n√£o se aplica ou n√£o declarado */
 replace v4707 = . if v4707 == 6
-/* Horas trabalhadas - n„o se aplica ou n„o declarado */
+/* Horas trabalhadas - n√£o se aplica ou n√£o declarado */
 replace v4711 = . if v4711 == 3
-/* Horas trabalhadas - n„o se aplica ou n„o declarado */
+/* Horas trabalhadas - n√£o se aplica ou n√£o declarado */
 replace v4713 = . if v4713 == 3
 
 

@@ -4,7 +4,9 @@
 * version 1.4
 program define datazoom_pnad
 
-syntax, years(numlist) original(str) saving(str) [pes dom both ncomp comp81 comp92]
+syntax, years(numlist) original(str) saving(str) [pes dom both ncomp comp81 comp92 english]
+
+if "`english'" != "" local lang "_en"
 
 if "`pes'"~="" & "`dom'"=="" {
 	display as result _newline "Obtendo arquivo de pessoas da PNAD"
@@ -227,8 +229,8 @@ foreach name of local register {
 		}
 		if `1' <= 1990 {                                     // Se tem ano até 1990
 			display as input "Extraindo `1'..."
-			cap findfile pnad`1'`name'.dct
-			if _rc==601 findfile pnad`1'`name'_en.dct
+			findfile pnad`1'`name'`lang'.dct
+			
 			loc dic = r(fn)
 			qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
 			
@@ -271,8 +273,8 @@ foreach name of local register {
 					/* contrói renda domiciliar compatível com anos 90 e 2000 */
 					if "`name'"=="dom" {
 						preserve
-						cap findfile pnad`1'pes.dct
-						if _rc==601 findfile pnad`1'pes_en.dct
+						findfile pnad`1'pes`lang'.dct
+						
 						qui cap infile using `"`r(fn)'"', using("`base`1'pes'") clear
 						keep if v0100 == 3                  // mantém somente pessoas
 						g ano = `1'
@@ -314,8 +316,8 @@ foreach name of local register {
 		else {                                               // Se não tem ano até 1990...
 			if `1' <= 2001 {                                  // ... e tem ano até 2001
 				display as input "Extraindo `1'..."
-				cap findfile pnad`1'`name'.dct
-				if _rc==601 findfile pnad`1'`name'_en.dct
+				findfile pnad`1'`name'`lang'.dct
+				
 				qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
 
 				if `1'==2001 egen id_dom = concat(v0101 v0102 v0103)
@@ -356,8 +358,8 @@ foreach name of local register {
 			}
 			else {                                            // Se só restam anos >= 2002
 				display as input "Extraindo `1'..."
-				cap findfile pnad`1'`name'.dct
-				if _rc==601 findfile pnad`1'`name'_en.dct
+				findfile pnad`1'`name'`lang'.dct
+				
 				qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
 			
 				egen id_dom = concat(v0101 v0102 v0103)

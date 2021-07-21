@@ -4,9 +4,9 @@
 
 program define compat_pes_1981a1990_para_81
 
-/* CRIANDO VARI¡VEL TEMPOR¡RIA PARA VERIFICAR PRESEN«A 
+/* CRIANDO VARI√ÅVEL TEMPOR√ÅRIA PARA VERIFICAR PRESEN√áA 
    DE ANOS NOS QUAIS EM VEZ DA VAR v0101 HAVIA AS
-   VARI¡VEIS v0102 E v0103                          */
+   VARI√ÅVEIS v0102 E v0103                          */
 
 tempvar anos_v0102
 gen byte `anos_v0102' = (ano==1983)|(ano==1990)
@@ -24,7 +24,7 @@ if r(mean)==1990 drop v0810- v3804
 
 cap drop v0102 v0103
 
-/* A. ACERTA C”DIGO DOS ESTADOS */
+/* A. ACERTA C√ìDIGO DOS ESTADOS */
 
 destring uf, replace
 recode uf (11/14=33) (20/29=35) (30/31 37=41) (32=42) (33/35=43) ///
@@ -32,13 +32,13 @@ recode uf (11/14=33) (20/29=35) (30/31 37=41) (32=42) (33/35=43) ///
 (56=26) (57=27) (58=28) (59/60=29) (61=53) (71=11) (72=12) ///
 (73=13) (74=14) (75=15) (76=16) (81=50) (82=51) (83=52) 
 gen regiao = int(uf/10)
-label var regiao "regi„o"
+label var regiao "regi√£o"
 tostring uf, replace
 
-/* B. N⁄MERO DE CONTROLE, S…RIE E ORDEM */
+/* B. N√öMERO DE CONTROLE, S√âRIE E ORDEM */
 * variavel "ordem" criada no ado principal
 
-/* C. RECODE E RENAME DAS VARI¡VEIS */
+/* C. RECODE E RENAME DAS VARI√ÅVEIS */
 
 /* C.1 DUMMY: ZONA URBANA */
 recode v0003 (5=0)
@@ -47,11 +47,11 @@ label var urbana "zona urbana"
 * urbana = 1 urbana
 *        = 0 rural
 
-/* C.2 DUMMY: REGI√O METROPOLITANA */
+/* C.2 DUMMY: REGI√ÉO METROPOLITANA */
 recode v0005 (2/3=0), g(metropol)
-label var metropol "regi„o metropolitana"
-* reg_metro = 1 regi„o metropolitana
-*           = 0 n„o
+label var metropol "regi√£o metropolitana"
+* reg_metro = 1 regi√£o metropolitana
+*           = 0 n√£o
 
 rename v0005 area_censit
 
@@ -62,14 +62,14 @@ lab var peso "peso amostral"
 quietly summ ano
 loc min = r(min)
 loc max = r(max)
-* Verifica se h· o ano de 1990,
+* Verifica se h√° o ano de 1990,
 * quando o peso era dado por v3091
 if `max' == 1990 {
    replace peso = v3091
    drop v3091
 }
 
-* Verifica se h· anos da dÈc. de 80,
+* Verifica se h√° anos da d√©c. de 80,
 * quando o peso era dado por v9991
 else {
    replace peso = v9991
@@ -86,11 +86,11 @@ label var sexo "0-mulher 1-homem"
 *      = 0 mulher
 
 /* C.5 DATA DE NASCIMENTO */
-* O ano de nascimento reporta a idade quando a idade È presumida.
+* O ano de nascimento reporta a idade quando a idade √© presumida.
 * Substituindo por missing.
 recode v0310 (0/98=.) if v0309 == 20 | v0309 == 30
 
-* Em alguns casos, o ano de nascimento e a idade est„o trocados.
+* Em alguns casos, o ano de nascimento e a idade est√£o trocados.
 gen x1 = v0310 if v0310 < 800
 gen x2 = v0805 if v0805 > 800
 replace v0310 = x2 if x1 ~= .
@@ -99,7 +99,7 @@ drop x1 x2
 recode v0310 (999=.)
 
 * Acrescentando o 1 no ano de nascimento
-* Pessoas com idade presumida n„o tem ano de nascimento
+* Pessoas com idade presumida n√£o tem ano de nascimento
 gen x1 = 1
 egen ano_nasc = concat(x1 v0310) if v0310 ~= .
 drop x1 v0310
@@ -108,46 +108,46 @@ label var ano_nasc "ano de nascimento"
 
 recode v0308 (0 99=.) 
 rename v0308 dia_nasc
-* 0(zero) seria idade presumida, 99 sem declaraÁ„o
+* 0(zero) seria idade presumida, 99 sem declara√ß√£o
 
 recode v0309 (20 30 99 =.)
 rename v0309 mes_nasc
-* 20 e 30 seriam idade presumida, 99 sem declaraÁ„o
+* 20 e 30 seriam idade presumida, 99 sem declara√ß√£o
 
 /* C.6 RENAME: IDADE */
 rename v0805 idade
 
-/* C.7 RENAME: CONDI«√O NO DOMICÕLIO */
+/* C.7 RENAME: CONDI√á√ÉO NO DOMIC√çLIO */
 rename v0305 cond_dom
-label var cond_dom "condiÁ„o no domicÌlio"
+label var cond_dom "condi√ß√£o no domic√≠lio"
 * cond_dom = 1 chefe
-*          = 2 cÙnjuge
+*          = 2 c√¥njuge
 *          = 3 filho
 *          = 4 outro parente
 *          = 5 agregado
 *          = 6 pensionista
-*          = 7 empregado domÈstico
-*          = 8 parente do empregado domÈstico
+*          = 7 empregado dom√©stico
+*          = 8 parente do empregado dom√©stico
 
-/* C.8 RENAME: CONDI«√O NA FAMÕLIA */
+/* C.8 RENAME: CONDI√á√ÉO NA FAM√çLIA */
 rename v0306 cond_fam
-label var cond_fam "condiÁ„o na famÌlia"
+label var cond_fam "condi√ß√£o na fam√≠lia"
 * cond_fam = 1 chefe
-*          = 2 cÙnjuge
+*          = 2 c√¥njuge
 *          = 3 filho
 *          = 4 outro parente
 *          = 5 agregado
 *          = 6 pensionista
-*          = 7 empregado domÈstico
-*          = 8 parente do empregado domÈstico
+*          = 7 empregado dom√©stico
+*          = 8 parente do empregado dom√©stico
 
-/* C.9 RENAME: N⁄MERO DA FAMÕLIA */
+/* C.9 RENAME: N√öMERO DA FAM√çLIA */
 rename v0307 num_fam
 rename v9329 num_pes_fam
 
 
-/* C.10 RECODE: COR OU RA«A */
-* obs: em 1984, esta vari·vel n„o existe para todas as pessoas
+/* C.10 RECODE: COR OU RA√áA */
+* obs: em 1984, esta vari√°vel n√£o existe para todas as pessoas
 
 g cor = .
 tempvar ano_cor
@@ -185,22 +185,22 @@ cap drop v2301
 *     = 4 preta
 *     = 6 amarela
 *     = 8 parda
-* A opÁ„o "0 indÌgena" somente apareceu a partir de 92.
+* A op√ß√£o "0 ind√≠gena" somente apareceu a partir de 92.
 
 
-/* C.11 VARI¡VEIS DE EDUCA«√O */
+/* C.11 VARI√ÅVEIS DE EDUCA√á√ÉO */
 
 /* C.11.1 RECODE: ANOS DE ESTUDO */
-/* EDUCA«√O */
-/* VARI¡VEIS UTILIZADAS */
+/* EDUCA√á√ÉO */
+/* VARI√ÅVEIS UTILIZADAS */
 /* v0314=QUAL E O CURSO QUE FREQUENTA? */
 /* v0312=QUAL E A SERIE QUE FREQUENTA? */
 /* v0317=QUAL FOI O CURSO MAIS ELEVADO QUE FREQUENTOU ANTERIORMENTE? */
 /* v0315=ESTE CURSO QUE FREQUENTOU ANTERIORMENTE ERA SERIADO? */
 
-/* pessoas que ainda freq¸entam escola */
+/* pessoas que ainda freq√ºentam escola */
 gen educa =0 if   v0314==1 & v0312==1
-lab var educa "anos de escolaridade - compatÌvel c/ anos 1980"
+lab var educa "anos de escolaridade - compat√≠vel c/ anos 1980"
 
 replace educa =1 if   v0314==1 & v0312==2
 replace educa =2 if   v0314==1 & v0312==3
@@ -270,7 +270,7 @@ replace educa =11 if   v0314==14
 
 replace educa =15 if   v0314==15
 
-/* pessoas que n„o freq¸entam */
+/* pessoas que n√£o freq√ºentam */
 replace educa =1 if   v0317==1 & v0315==1
 replace educa =2 if   v0317==1 & v0315==2
 replace educa =3 if   v0317==1 & v0315==3
@@ -312,7 +312,7 @@ replace educa =17 if   v0317==6 & v0315==6
 replace educa =17 if   v0317==7 
 replace educa =0 if   v0312==0 & v0314==0 & v0315==0 & v0317==0
 
-lab var educa "anos de estudo - compatÌvel c/ anos 1980"
+lab var educa "anos de estudo - compat√≠vel c/ anos 1980"
 
 drop v0318
 
@@ -321,23 +321,23 @@ gen freq_escola = 1 if (v0312>=1 & v0312<=8) | (v0314>=1 & v0314<=15)
 recode freq_escola (.=-1) if v0312==. & v0314==.
 recode freq_escola (.=0)
 recode freq_escola (-1=.)
-label var freq_escola "0-n„o freq 1-frequenta"
-* freq_escola = 1 se frequenta alguma sÈrie ou algum grau
-*             = 0 caso contr·rio
+label var freq_escola "0-n√£o freq 1-frequenta"
+* freq_escola = 1 se frequenta alguma s√©rie ou algum grau
+*             = 0 caso contr√°rio
 
 /* C.11.3 DUMMY: LER E ESCREVER */
 recode v0311 (3=0) (9=.)
 rename v0311 ler_escrever
 * ler_escrever = 1 sim
-*              = 0 n„o
+*              = 0 n√£o
 
-/* C.11.4 RECODE: S…RIE QUE FREQ‹ENTA NA ESCOLA */
+/* C.11.4 RECODE: S√âRIE QUE FREQ√úENTA NA ESCOLA */
 recode v0312 (0 9=.)
 recode v0312 (1=5) (2=6) (3=7) (4=8) if v0314 == 2
 rename v0312 serie_freq
 * A partir de 92, a pergunta inclui se frequenta creche.
 
-/* C.11.5 RECODE: GRAU QUE FREQ‹ENTA NA ESCOLA */
+/* C.11.5 RECODE: GRAU QUE FREQ√úENTA NA ESCOLA */
 recode v0314 (0 13 99=.) 
 recode v0314 (2 4=1) (3 5=2) (6=5) (8=6) (9 11=3) (10 12=4) (14=8) (15=9) 
 rename v0314 grau_freq
@@ -347,112 +347,112 @@ rename v0314 grau_freq
 *           = 4 supl segundo grau
 *           = 5 superior
 *           = 6 alfab de adultos
-*           = 7 prÈ-escolar ou creche
-*           = 8 prÈ-vestibular
+*           = 7 pr√©-escolar ou creche
+*           = 8 pr√©-vestibular
 *           = 9 mestrado/doutorado
 
-/* C.11.6 RECODE: S…RIE - N√O FREQUENTA ESCOLA */
+/* C.11.6 RECODE: S√âRIE - N√ÉO FREQUENTA ESCOLA */
 recode v0315 (0 9=.)
 rename v0315 serie_nao_freq
-* ObservaÁ„o: no prim·rio - v0317==1 - podem existir atÈ 6 sÈries, e n„o apenas 4.
+* Observa√ß√£o: no prim√°rio - v0317==1 - podem existir at√© 6 s√©ries, e n√£o apenas 4.
 
-/* C.11.7 RECODE: GRAU N√O FREQ‹ENTA NA ESCOLA */
+/* C.11.7 RECODE: GRAU N√ÉO FREQ√úENTA NA ESCOLA */
 recode v0317 (0 99=.)
 rename v0317 grau_nao_freq
-* grau_nao_freq = 1 elementar (prim·rio)
-*               = 2 mÈdio primeiro ciclo (ginasial)
-*               = 3 mÈdio segundo ciclo (cientÌfico, cl·ssico etc.)
+* grau_nao_freq = 1 elementar (prim√°rio)
+*               = 2 m√©dio primeiro ciclo (ginasial)
+*               = 3 m√©dio segundo ciclo (cient√≠fico, cl√°ssico etc.)
 *               = 4 primeiro grau
 *               = 5 segundo grau
 *               = 6 superior
 *               = 7 mestrado/doutorado
 *               = 8 alfab de adultos
-*               = 9 prÈ-escolar ou creche
-* O cÛdigo 9 sÛ existe a partir de 1992.
-* O cÛdigo 8 sÛ existe em 1981 e depois a partir de 1992.
-* O dicion·rio de 1981 n„o explicita que 8 È alfab. de adultos;
-* entretanto sÛ h· pessoas com mais de 16 anos nessa categoria e,
-* alÈm disso, sÛ tÍm 1 ano de estudo.
+*               = 9 pr√©-escolar ou creche
+* O c√≥digo 9 s√≥ existe a partir de 1992.
+* O c√≥digo 8 s√≥ existe em 1981 e depois a partir de 1992.
+* O dicion√°rio de 1981 n√£o explicita que 8 √© alfab. de adultos;
+* entretanto s√≥ h√° pessoas com mais de 16 anos nessa categoria e,
+* al√©m disso, s√≥ t√™m 1 ano de estudo.
 
 drop v0319
 
-/* C.12 CARACTERÕSTICAS DO TRABALHO PRINCIPAL NA SEMANA */
+/* C.12 CARACTER√çSTICAS DO TRABALHO PRINCIPAL NA SEMANA */
 /* C.12.0 DUMMY: TRABALHOU NA SEMANA */
 gen trabalhou_semana = 1 if v0501 == 1
 replace trabalhou_semana = 0 if  v0501 >= 2 & v0501 <9  
 label var trabalhou_semana "trabalhou na semana?"
 * trabalhou_semana = 1 sim
-*                  = 0 n„o
+*                  = 0 n√£o
 
 /* C.12.1 DUMMY: tinha TRABALHO NA SEMANA */
 gen tinha_trab_sem = v0501 == 2 if trabalhou_semana==0
 label var tinha_trab_sem "tinha trabalho na semana?"
 * tinha_trab_sem = 1 sim
-*               = 0 n„o
+*               = 0 n√£o
 
 drop v0501
 
 
-/* C.12.2 RENAME: OCUPA«√O NA SEMANA */
+/* C.12.2 RENAME: OCUPA√á√ÉO NA SEMANA */
 rename v0503 ocup_sem
-label var ocup_sem "ocupaÁ„o na semana"
+label var ocup_sem "ocupa√ß√£o na semana"
 
 recode v5030 (9=.)
 rename v5030 grupos_ocup_sem 
 label var grupos_ocup_sem "occupation groups - week"
-* grupos_ocup_sem = 1 tÈcnica, cientÌfica, artÌstica e assemelhada
+* grupos_ocup_sem = 1 t√©cnica, cient√≠fica, art√≠stica e assemelhada
 *             = 2 administrativa
 *             = 3 agrop. e prod. extrat. vegetal e animal
 *             = 4 ind. de transf.
-*             = 5 comÈrcio e ativ. auxiliares
-*             = 6 transp. e comunicaÁ„o
-*             = 7 prestaÁ„o de serviÁos
-*             = 8 outras ou n„o declaradas
+*             = 5 com√©rcio e ativ. auxiliares
+*             = 6 transp. e comunica√ß√£o
+*             = 7 presta√ß√£o de servi√ßos
+*             = 8 outras ou n√£o declaradas
 
-/* C.12.3 RENAME: ATIVIDADE/RAMOS DO NEG”CIO */
-* v0504 È mais desagregado - cÛdigos variam ao longo do tempo
-* v5040 È mais agregado e comum entre os anos das PNAD's
+/* C.12.3 RENAME: ATIVIDADE/RAMOS DO NEG√ìCIO */
+* v0504 √© mais desagregado - c√≥digos variam ao longo do tempo
+* v5040 √© mais agregado e comum entre os anos das PNAD's
 
 rename v0504 ramo_negocio_sem
-label var ramo_negocio_sem "ativ/ramo do negÛcio na semana"
+label var ramo_negocio_sem "ativ/ramo do neg√≥cio na semana"
 
 rename v5040 ramo_negocio_agreg
-label var ramo_negocio_agreg "ativ/ramo do negÛcio na semana - agregado"
-* ramo_negocio_agreg = 1 agrÌcola
+label var ramo_negocio_agreg "ativ/ramo do neg√≥cio na semana - agregado"
+* ramo_negocio_agreg = 1 agr√≠cola
 *                    = 2 ind. transf.
 *                    = 3 ind. constr.
 *                    = 4 out. ativ. industr.
-*                    = 5 comÈrcio mercadorias
-*                    = 6 prestaÁ„o de serviÁos
+*                    = 5 com√©rcio mercadorias
+*                    = 6 presta√ß√£o de servi√ßos
 *                    = 7 serv. aux. ativ. econom.
-*                    = 8 transporte e comunicaÁ„o
+*                    = 8 transporte e comunica√ß√£o
 *                    = 9 social
-*                    = 10 administr. p˙blica
-*                    = 11 outras atividades ou n„o declarada
+*                    = 10 administr. p√∫blica
+*                    = 11 outras atividades ou n√£o declarada
 
 
-/* C.12.4 RECODE: POSI«√O NA OCUPA«√O NA SEMANA */
-* v0505 È mais detalhado, mas de difÌcil compatibilizaÁ„o com as PNAD's dos anos 90
+/* C.12.4 RECODE: POSI√á√ÉO NA OCUPA√á√ÉO NA SEMANA */
+* v0505 √© mais detalhado, mas de dif√≠cil compatibiliza√ß√£o com as PNAD's dos anos 90
 * foi eliminada
 drop v0505
-* v5050 È mais agregado, mas tem correspondente nas PNAD's dos anos 90
+* v5050 √© mais agregado, mas tem correspondente nas PNAD's dos anos 90
 recode v5050 (5=.) 
 rename v5050 pos_ocup_sem
-label var pos_ocup_sem "posiÁ„o na ocupaÁ„o na semana"
+label var pos_ocup_sem "posi√ß√£o na ocupa√ß√£o na semana"
 * pos_ocup_sem = 1 empregado 
-*              = 2 conta prÛpria
+*              = 2 conta pr√≥pria
 *              = 3 empregador
-*              = 4 n„o remunerado
+*              = 4 n√£o remunerado
 
 
 /* C.12.5 RECODE: TEM CARTEIRA ASSINADA */
 recode v0506 (2=1) (4=0) (9=.)
 rename v0506 tem_carteira_assinada
-label var tem_carteira_assinada "0-n„o 1-sim"
-* tem_carteira_assinada = 0 n„o
+label var tem_carteira_assinada "0-n√£o 1-sim"
+* tem_carteira_assinada = 0 n√£o
 *                       = 1 sim
 
-/* NOS ANOS 80, NAS QUEST’ES SOBRE HORAS TRABALHADAS, RESPONDIA APENAS QUEM */
+/* NOS ANOS 80, NAS QUEST√ïES SOBRE HORAS TRABALHADAS, RESPONDIA APENAS QUEM */
 /* DECLARAVA tinha_trab_sem == 1                                             */
 
 /* C.12.6 HORAS TRABALHADAS */
@@ -501,7 +501,7 @@ recode v0578 (9999999=.) if ano >= 1981 & ano <= 1984
 recode v0578 (999999999=.) if ano >= 1985 & ano <= 1990
 rename v0578 renda_aposentadoria
 
-/* C.13.6 RECODE: VALOR PENS√O */
+/* C.13.6 RECODE: VALOR PENS√ÉO */
 recode v0579 (9999999=.) if ano >= 1981 & ano <= 1984
 recode v0579 (999999999=.) if ano >= 1985 & ano <= 1990
 rename v0579 renda_pensao
@@ -555,100 +555,100 @@ rename v0512 qual_inst_prev
 *                = 6 municipal
 
 /* C.15 RECODE: TINHA OUTRO TRABALHO? */
-* Apenas para quem tinha trabalho na semana de referÍncia
+* Apenas para quem tinha trabalho na semana de refer√™ncia
 recode v0502 (3=0) (9=.)
 rename v0502 tinha_outro_trab
 
-/* C.16 PESSOAS QUE N√O TINHAM TRABALHO NA SEMANA DE REFER NCIA               */
-/*      MAS TIVERAM OCUPA«√O NO PERÕODO DE 12 MESES ANTERIORES                */
-* As questıes sobre o trabalho anterior s„o pesquisadas, de 1981 a 90, para os
-* indivÌduos que n„o tinham trabalho na semana de referÍncia
-* A partir da PNAD de 92, foram pesquisados tambÈm os indivÌduos empregados na semana
-* de referÍncia, mas cujo trabalho na sem de ref n„o era o principal do ano.
-* AlÈm disso desde 1992 sÛ foram pesquisados detalhes do trabalho anterior nos 358 dias
-* anteriores ‡ semana de referÍncia.
-* Assim, nos anos 80, foram mantidas as informaÁıes apenas para quem teve trabalho
-* anterior nos ˙ltimos 12 meses.
+/* C.16 PESSOAS QUE N√ÉO TINHAM TRABALHO NA SEMANA DE REFER√äNCIA               */
+/*      MAS TIVERAM OCUPA√á√ÉO NO PER√çODO DE 12 MESES ANTERIORES                */
+* As quest√µes sobre o trabalho anterior s√£o pesquisadas, de 1981 a 90, para os
+* indiv√≠duos que n√£o tinham trabalho na semana de refer√™ncia
+* A partir da PNAD de 92, foram pesquisados tamb√©m os indiv√≠duos empregados na semana
+* de refer√™ncia, mas cujo trabalho na sem de ref n√£o era o principal do ano.
+* Al√©m disso desde 1992 s√≥ foram pesquisados detalhes do trabalho anterior nos 358 dias
+* anteriores √† semana de refer√™ncia.
+* Assim, nos anos 80, foram mantidas as informa√ß√µes apenas para quem teve trabalho
+* anterior nos √∫ltimos 12 meses.
 
 /* RECODE: TEMPO SEM TRABALHO */
-* Esta informaÁ„o n„o pode mais ser aferida com precis„o a partir dos anos 90.
-* Logo, as vari·veis abaixo ser„o usadas como auxiliares (v. seÁ„o C.18.3) e ent„o eliminadas.
+* Esta informa√ß√£o n√£o pode mais ser aferida com precis√£o a partir dos anos 90.
+* Logo, as vari√°veis abaixo ser√£o usadas como auxiliares (v. se√ß√£o C.18.3) e ent√£o eliminadas.
 recode v0519 (99=.)
 rename v0519 anos_nao_trab
 recode v0569 (99=.)
 rename v0569 meses_nao_trab
 
-/* RECODE: TEMPO NA OCUPA«√O ANTERIOR, NO ANO */
-* A partir de 1992, esta informaÁ„o n„o pode ser obtida para todos os indivÌduos.
+/* RECODE: TEMPO NA OCUPA√á√ÉO ANTERIOR, NO ANO */
+* A partir de 1992, esta informa√ß√£o n√£o pode ser obtida para todos os indiv√≠duos.
 drop v0523 v0573
 
-/* INFORMA«’ES SOBRE O EMPREGO ANTERIOR */
-* COMO AQUI … SIMPLESMENTE O ⁄LTIMO TRABALHO
-* (DE QUEM N√O TRABALHOU NA SEMANA DE REFE NCIA),
-* ENQUANTO DE 92 EM DIANTE … O PRINCIPAL TRABALHO
-* DO QUAL O INDIVÕDUO SAIU NO ANO, AS INFORMA«’ES
-* SOBRE O TRABALHO ANTERIOR DOS ANOS 80 E 90 N√O
-* S√O PERFEITAMENTE COMPATÕVEIS.
+/* INFORMA√á√ïES SOBRE O EMPREGO ANTERIOR */
+* COMO AQUI √â SIMPLESMENTE O √öLTIMO TRABALHO
+* (DE QUEM N√ÉO TRABALHOU NA SEMANA DE REFE√äNCIA),
+* ENQUANTO DE 92 EM DIANTE √â O PRINCIPAL TRABALHO
+* DO QUAL O INDIV√çDUO SAIU NO ANO, AS INFORMA√á√ïES
+* SOBRE O TRABALHO ANTERIOR DOS ANOS 80 E 90 N√ÉO
+* S√ÉO PERFEITAMENTE COMPAT√çVEIS.
 
-/* DUMMY: N√O TRABALHA E DEIXOU ⁄LTIMO EMPREGO NO ⁄LTIMO ANO - 12 MESES OU MENOS */
-/* VARI¡VEL TEMPOR¡RIA                                                                    */
+/* DUMMY: N√ÉO TRABALHA E DEIXOU √öLTIMO EMPREGO NO √öLTIMO ANO - 12 MESES OU MENOS */
+/* VARI√ÅVEL TEMPOR√ÅRIA                                                                    */
 gen tag = 1 if tinha_trab_sem == 0 & anos_nao_trab == 0 & meses_nao_trab ~= .
 replace tag = 1 if tinha_trab_sem == 0 & anos_nao_trab == 1 & meses_nao_trab == 0
 
-/* C.16.1. GEN: OCUPA«√O ANTERIOR, NO ANO */
+/* C.16.1. GEN: OCUPA√á√ÉO ANTERIOR, NO ANO */
 gen ocup_ant_ano = v0520 if tag == 1
-label var ocup_ant_ano "ocupaÁ„o anterior - no ano"
+label var ocup_ant_ano "ocupa√ß√£o anterior - no ano"
 
 /* C.16.2. GEN: RAMO ANTERIOR, NO ANO */
 gen ramo_negocio_ant_ano = v0521 if tag == 1
-label var ramo_negocio_ant_ano "ativ/ramo do negÛcio anterior - no ano"
+label var ramo_negocio_ant_ano "ativ/ramo do neg√≥cio anterior - no ano"
 
-/* C.16.3. RECODE: TINHA CARTEIRA ASSINADA NA OCUPA«√O ANTERIOR, NO ANO */
+/* C.16.3. RECODE: TINHA CARTEIRA ASSINADA NA OCUPA√á√ÉO ANTERIOR, NO ANO */
 recode v0525 (2=1) (4=0) (9=.) 
 replace v0525 = . if tag ~= 1
 rename v0525 tinha_cart_assin_ant_ano
-label var tinha_cart_assin_ant_ano "˙lt emprego - no ano - cart assin"
+label var tinha_cart_assin_ant_ano "√∫lt emprego - no ano - cart assin"
 
 drop tag anos_nao_trab meses_nao_trab
 
-/* C.18.3.6 RECODE: RECEBEU FGTS OCUPA«√O ANTERIOR, NO ANO */
-* ESSA PERGUNTA N√O CONSTA DAS PNAD'S DOS ANOS 90
+/* C.18.3.6 RECODE: RECEBEU FGTS OCUPA√á√ÉO ANTERIOR, NO ANO */
+* ESSA PERGUNTA N√ÉO CONSTA DAS PNAD'S DOS ANOS 90
 drop v0526
 
 /* C.17 RECODE: TOMOU PROV. PARA CONSEGUIR TRABALHO */
-/* NA SEMANA DE REFER NCIA: APENAS QUEM N√O TINHA TRABALHO NA SEMANA */
+/* NA SEMANA DE REFER√äNCIA: APENAS QUEM N√ÉO TINHA TRABALHO NA SEMANA */
 replace v0513=. if tinha_trab_sem == 1
 recode v0513 (3=0) (9=.) 
 rename v0513 tomou_prov_semana
 * tomou_prov_semana = 1 sim
-*                   = 0 n„o
+*                   = 0 n√£o
 
 /* C.18 RECODE: TOMOU PROV. CONSEGUIR PARA TRABALHO 2 MESES */
 replace v0514=. if tinha_trab_sem == 1
 recode v0514 (2=1) (4=0) (9=.)
 rename v0514 tomou_prov_2meses
 * tomou_prov_2meses = 1 sim
-*                   = 0 n„o
+*                   = 0 n√£o
 
 /* C.19 RECODE: QUE PROV. TOMOU PARA CONSEGUIR TRABALHO */
 recode v0515 (9=.)
 rename v0515 que_prov_tomou
 * que_prov_tomou = 1 consultou empregador
 *                         = 2 fez concurso
-*                         = 3 consultou agÍncia/sindicato
-*                         = 4 colocou an˙ncio
+*                         = 3 consultou ag√™ncia/sindicato
+*                         = 4 colocou an√∫ncio
 *                         = 5 consultou parente
 *                         = 6 outra
 *                         = 7 nada fez
 
-* As vari·veis sobre ocupaÁ„o anterior
+* As vari√°veis sobre ocupa√ß√£o anterior
 drop v0520 v0521 
 
 drop v0516 v0566 v0517 v0518 v0522 v0524 v9330
 
-/* D. DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* D. DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO (OUT/2012)                                            */
 gen double deflator = 0.807544/100000 if ano == 1990
 format deflator %26.25f

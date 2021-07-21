@@ -5,27 +5,27 @@
 program define compat_dom_1981a1990_para_81
 
 label var ano "ano da pesquisa"
-lab var id_dom "identificador do domicÌlio"
+lab var id_dom "identificador do domic√≠lio"
 
-/* CRIANDO VARI¡VEL TEMPOR¡RIA PARA VERIFICAR PRESEN«A 
+/* CRIANDO VARI√ÅVEL TEMPOR√ÅRIA PARA VERIFICAR PRESEN√áA 
    DE ANOS NOS QUAIS EM VEZ DA VAR v0101 HAVIA AS
-   VARI¡VEIS v0102 E v0103                          */
+   VARI√ÅVEIS v0102 E v0103                          */
 tempvar anos_v0102
 gen byte `anos_v0102' = (ano==1983)|(ano==1990)
 
-/* A. ACERTA C”DIGO DOS ESTADOS */
+/* A. ACERTA C√ìDIGO DOS ESTADOS */
 
-/* A.1 NA VARI¡VEL UF E CRIA VARI¡VEL DE REGI√O */
+/* A.1 NA VARI√ÅVEL UF E CRIA VARI√ÅVEL DE REGI√ÉO */
 destring uf, replace
 recode uf (11/14=33) (20/29=35) (30/31 37=41) (32=42) (33/35=43) ///
 (41/42=31) (43=32) (51=21) (52=22) (53=23) (54=24) (55=25) ///
 (56=26) (57=27) (58=28) (59/60=29) (61=53) (71=11) (72=12) ///
 (73=13) (74=14) (75=15) (76=16) (81=50) (82=51) (83=52) 
 gen regiao = int(uf/10)
-label var regiao "regi„o"
+label var regiao "regi√£o"
 tostring uf, replace
 
-/* C. RECODE E RENAME DAS VARI¡VEIS */
+/* C. RECODE E RENAME DAS VARI√ÅVEIS */
 
 /* C.1 DUMMY: ZONA URBANA */
 recode v0003 (5=0)
@@ -42,7 +42,7 @@ generate int peso =.
 lab var peso "peso amostral"
 
 quietly summ ano
-* Verifica se h· o ano de 1990,
+* Verifica se h√° o ano de 1990,
 * quando o peso era dado por v1091
 loc max = r(max)
 loc min = r(min)
@@ -52,7 +52,7 @@ if `max' == 1990 {
    drop v1091 v1080						/* v1080 peso censo 1980 */
 }
 
-* Verifica se h· anos da dÈc. de 80,
+* Verifica se h√° anos da d√©c. de 80,
 * quando o peso era dado por v9981
 else {
    replace peso = v9981 
@@ -63,29 +63,29 @@ else {
 rename v0107 tot_pess
 rename v0108 tot_pess_10_mais
 
-/* C.5 RECODE: ESP…CIE DE DOMICÕLIO */
+/* C.5 RECODE: ESP√âCIE DE DOMIC√çLIO */
 recode v0201 (2=1) (4=3) (6=5) (9=.)
 rename v0201 especie_dom
 * especie_dom = 1 particular permanente
 *             = 3 particular improvisado
 *             = 5 coletivo
 
-/* C.6 RECODE: TIPO DO DOMICÕLIO */
-* A OP«√O "R⁄STICO" FOI SOMADA ¿ "CASA", POIS PARECE SER A MELHOR SOLU«√O 
-* AS PROPOR«’ES DE "APTO" E "COMODO" N√O AUMENTAM EM 1992;
-* AO CONTR¡RIO, AT… DIMINUEM.
+/* C.6 RECODE: TIPO DO DOMIC√çLIO */
+* A OP√á√ÉO "R√öSTICO" FOI SOMADA √Ä "CASA", POIS PARECE SER A MELHOR SOLU√á√ÉO 
+* AS PROPOR√á√ïES DE "APTO" E "COMODO" N√ÉO AUMENTAM EM 1992;
+* AO CONTR√ÅRIO, AT√â DIMINUEM.
 recode v0202 (1 5=2) (3=4) (7=6) (9=.)
 rename v0202 tipo_dom
 * tipo_dom = 2 casa
 *          = 4 apto.
-*          = 6 cÙmodo
+*          = 6 c√¥modo
 
 /* C.7 RECODE: PAREDES */
 recode v0203 (0=1) (4=3) (6=4) (8=5) (9=.)
 rename v0203 parede
 * parede = 1 alvenaria
 *        = 2 madeira aparelhada
-*        = 3 taipa n„o revestida
+*        = 3 taipa n√£o revestida
 *        = 4 madeira aproveitada
 *        = 5 outra
 
@@ -99,67 +99,67 @@ rename v0205 cobertura
 *           = 5 mad. aprov.
 *           = 6 outro
 
-/* C.9 DUMMY: ABAST ¡GUA */
+/* C.9 DUMMY: ABAST √ÅGUA */
 recode v0206 (4=1) (2 3 5 6=0) (9=.)
 rename v0206 agua_rede
-label var agua_rede "·gua provÈm de rede"
+label var agua_rede "√°gua prov√©m de rede"
 * agua_rede = 1 sim
-*           = 0 n„o
+*           = 0 n√£o
 
 /* C.10 RECODE: ESGOTO */
 recode v0207 (8 9 =.)
 replace v0207 = . if v0208>1
 rename v0207 esgoto  
 * esgoto = 0 rede geral
-*        = 2 fossa sÈptica
+*        = 2 fossa s√©ptica
 *        = 4 fossa rudimentar
 *        = 6 outro
 
-/* C.11 SANIT¡RIO */
+/* C.11 SANIT√ÅRIO */
 
-* C.11.1 DUMMY: EXISTE SANIT¡RIO
+* C.11.1 DUMMY: EXISTE SANIT√ÅRIO
 gen sanit = 1 if v0208 == 1 | v0208 == 3
 replace sanit = 0 if v0208 == 5
 replace sanit = . if v0208 == 9 
-label var sanit "possui sanit·rio"
+label var sanit "possui sanit√°rio"
 * sanit = 1 sim
-*       = 0 n„o
+*       = 0 n√£o
 
-* C.11.2 DUMMY: SANIT¡RIO EXCLUSIVO
+* C.11.2 DUMMY: SANIT√ÅRIO EXCLUSIVO
 recode v0208 (3=0) (5 9=.)
 rename v0208 sanit_excl
-label var sanit_excl "sanit excl do domicÌlio"
+label var sanit_excl "sanit excl do domic√≠lio"
 * sanit_excl = 1 sim
-*            = 0 n„o
+*            = 0 n√£o
 
 /* C.12 DUMMY: LIXO */
 recode v0209 (0=1) (2 4 6 8=0) (9=.)
 rename v0209 lixo
-label var lixo "lixo È coletado"
+label var lixo "lixo √© coletado"
 * lixo = 1 sim
-*      = 0 n„o
+*      = 0 n√£o
 
-/* C.13 DUMMY: ILUMINA«√O EL…TRICA */
+/* C.13 DUMMY: ILUMINA√á√ÉO EL√âTRICA */
 recode v0210 (3=0) (9=.)
 rename v0210 ilum_eletr
-label var ilum_eletr "possui iluminaÁ„o elÈtrica"
+label var ilum_eletr "possui ilumina√ß√£o el√©trica"
 * ilum_eletr = 1 sim
-*            = 0 n„o
+*            = 0 n√£o
 
-/* C.14 RECODE: N⁄MERO DE C‘MODOS E DORMIT”RIOS */
+/* C.14 RECODE: N√öMERO DE C√îMODOS E DORMIT√ìRIOS */
 recode v0211 (99=.)
 recode v0231 (99=.)
 rename v0211 comodos
 rename v0231 dormit
 
-/* C.15 DUMMY: CONDI«√O DE OCUPA«√O */
+/* C.15 DUMMY: CONDI√á√ÉO DE OCUPA√á√ÉO */
 recode v0212 (0 2=1) (4 6 8=0) (9=.)
 rename v0212 posse_dom
-label var posse_dom "posse do domicÌlio"
+label var posse_dom "posse do domic√≠lio"
 * posse_dom = 1 sim
-*           = 0 n„o
+*           = 0 n√£o
 
-/* C.16 RECODE: ALUGUEL/PRESTA«√O */
+/* C.16 RECODE: ALUGUEL/PRESTA√á√ÉO */
 replace v0213 = . if v0213>=888888 & (ano<=1984 | ano==1987 | ano==1988)
 replace v0213 = . if v0213>=88000000 & (ano==1985 | ano==1986 | ano>=1989)
 
@@ -173,19 +173,19 @@ drop v0213
 recode v0214 (3=0) (9=.)
 rename v0214 filtro
 * filtro = 1 sim
-*        = 0 n„o
+*        = 0 n√£o
 
-/* C.18 DUMMY: FOG√O */
+/* C.18 DUMMY: FOG√ÉO */
 recode v0215 (2=1) (4=0) (9=.)
 rename v0215 fogao
 * fogao = 1 sim
-*       = 0 n„o
+*       = 0 n√£o
 
 /* C.19 DUMMY: GELADEIRA */
 recode v0216 (3=0) (9=.)
 rename v0216 geladeira
 * geladeira = 1 sim
-*           = 0 n„o
+*           = 0 n√£o
 
 tempvar rtv
 g `rtv' = ano==1982 | ano==1988 | ano==1989 | ano==1990
@@ -193,23 +193,23 @@ qui sum `rtv'
 loc max = r(max)
 
 if `max' == 1 {
-/* C.20 DUMMY: R¡DIO */
+/* C.20 DUMMY: R√ÅDIO */
 	recode v0217 (2=1) (4=0) (9=.)
 	rename v0217 radio
 	* radio = 1 sim
-	*       = 0 n„o
+	*       = 0 n√£o
 
-/* C.21 DUMMY: TELEVIS√O */
+/* C.21 DUMMY: TELEVIS√ÉO */
 	recode v0218 (3=0) (9=.)
 	rename v0218 tv
 	* tv = 1 sim
-	*    = 0 n„o
+	*    = 0 n√£o
 }
 if `max' == 0 {
 	g radio = .
 	g tv = .
-	lab var radio "radio (nao existe p/alguns anos da dÈcada 1980)"
-	lab var tv "TV (nao existe p/alguns anos da dÈcada 1980)"
+	lab var radio "radio (nao existe p/alguns anos da d√©cada 1980)"
+	lab var tv "TV (nao existe p/alguns anos da d√©cada 1980)"
 }
 
 
@@ -232,9 +232,9 @@ keep ano-prestacao id
 compress
 
 
-/* E. DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* E. DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO (OUT/2012)                                            */
 gen double deflator = 0.807544/100000 if ano == 1990
 format deflator %26.25f

@@ -8,11 +8,11 @@ program define compat_dom_1992a2001_para_92
 /* A. RECODE: ANO */
 recode v0101 (92=1992) (93=1993) (95=1995) (96=1996) (97=1997) (98=1998) (99=1999)
 
-/* B. N⁄MERO DE CONTROLE E S…RIE */
+/* B. N√öMERO DE CONTROLE E S√âRIE */
 destring uf, replace
 drop v0102 v0103
 
-/* C. N⁄MERO DE MORADORES */
+/* C. N√öMERO DE MORADORES */
 * obs: para 2001, v0106 indica numero de moradores com 5 anos ou mais
 * -1 deve ser missing
 replace v0106=. if v0101==2001
@@ -21,7 +21,7 @@ recode v0105 v0106 (-1 =.)
 
 /* D. TELEFONE */
 * A partir de 2001, pergunta-se sobre telefone celular e fixo
-* em contrapartida com anos anteriores, que sÛ perguntava por 
+* em contrapartida com anos anteriores, que s√≥ perguntava por 
 * telefone.
 qui sum v0101
 local max = r(max)
@@ -41,10 +41,10 @@ lab var telefone "tem telefone (de 2001 em diante, fixo ou celular)"
 
 /* RECODE */
 
-/* NUMERO DE C‘MODOS/DORMIT”RIOS */
+/* NUMERO DE C√îMODOS/DORMIT√ìRIOS */
 recode v0205 v0206 (99 -1 =.)
 
-/* VALOR DO ALUGUEL/PRESTA«√O */
+/* VALOR DO ALUGUEL/PRESTA√á√ÉO */
 recode v0208 v0209 (-1 =.)
 replace v0208 = . if v0208>10^11
 replace v0209 = . if v0209>10^11
@@ -62,9 +62,9 @@ recode v0202 v0203 v0204 v0207 v2081 v2091 v0210 v0211 v0212 v0213 v0214 v0215 /
 	v0216 v0217 v0218 v0219 v0221 v0222 v0223 v0224 v0225 v0226 ///
 	v0227 v0228 v0229 v0230 (9=.)
 
-/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO: 1 = out/2012                                 */
 
 gen double deflator = 0.488438 if v0101 == 2001

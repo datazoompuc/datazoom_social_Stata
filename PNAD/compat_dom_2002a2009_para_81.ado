@@ -4,20 +4,20 @@
 
 program define compat_dom_2002a2009_para_81
 
-/* A. ACERTA C”DIGO DOS ESTADOS */
-* AGREGA TOCANTINS COM GOI¡S
+/* A. ACERTA C√ìDIGO DOS ESTADOS */
+* AGREGA TOCANTINS COM GOI√ÅS
 
-/* A.1 NA VARI¡VEL UF E CRIA VARI¡VEL DE REGI√O */
+/* A.1 NA VARI√ÅVEL UF E CRIA VARI√ÅVEL DE REGI√ÉO */
 destring uf, replace
 recode uf (17=52)
 gen regiao = int(uf/10)
-label var regiao "regi„o"
+label var regiao "regi√£o"
 tostring uf, replace
 
-/* B. N⁄MERO DE CONTROLE E S…RIE */
+/* B. N√öMERO DE CONTROLE E S√âRIE */
 drop v0102 v0103
 
-/* C. RECODE E RENAME DAS VARI¡VEIS */
+/* C. RECODE E RENAME DAS VARI√ÅVEIS */
 
 /* C.0 RECODE: ANO */
 rename v0101 ano
@@ -26,7 +26,7 @@ label var ano "ano da pesquisa"
 /* C.1 DUMMY: ZONA URBANA */
 recode v4105 (1 2 3=1) (4 5 6 7 8=0)
 rename v4105 urbana
-label var urbana "·rea urbana"
+label var urbana "√°rea urbana"
 
 /* C.2 AREA CENSITARIA  */
 rename v4107 area_censit
@@ -43,10 +43,10 @@ recode v0106 (-1=.)
 rename v0105 tot_pess
 rename v0106 tot_pess_10_mais
 
-/* C.5 RENAME: ESP…CIE DE DOMICÕLIO */
+/* C.5 RENAME: ESP√âCIE DE DOMIC√çLIO */
 rename v0201 especie_dom
 
-/* C.6 RENAME: TIPO DE DOMICÕLIO */
+/* C.6 RENAME: TIPO DE DOMIC√çLIO */
 rename v0202 tipo_dom
 
 /* C.7 RECODE: PAREDE */
@@ -57,12 +57,12 @@ rename v0203 parede
 recode v0204 (7=6) (9=.)
 rename v0204 cobertura
 
-/* C.9 DUMMY: ABAST ¡GUA */
+/* C.9 DUMMY: ABAST √ÅGUA */
 recode v0212 (2=1) (4 6=0) (9=.)
 rename v0212 agua_rede 
 replace agua_rede = 1 if v0213==1
 replace agua_rede = 0 if v0213==3
-label var agua_rede "·gua provÈm de rede"
+label var agua_rede "√°gua prov√©m de rede"
 * agua_rede - 1 rede
 *			- 0 outra
 
@@ -70,48 +70,48 @@ label var agua_rede "·gua provÈm de rede"
 recode v0217 (1=0) (3=2) (5 7=6) (9=.)
 rename v0217 esgoto
 * esgoto = 0 rede geral
-*        = 2 fossa sÈptica 
+*        = 2 fossa s√©ptica 
 *        = 4 fossa rudimentar
 *        = 6 outra
 
-/* C.11 SANIT¡RIO */
+/* C.11 SANIT√ÅRIO */
 
-* C.11.1 DUMMY: EXISTE SANIT¡RIO
+* C.11.1 DUMMY: EXISTE SANIT√ÅRIO
 recode v0215 (3=0) (9=.)
 rename v0215 sanit
 label var sanit "possui sanitario"
 * sanitary 	- 1 possui
 *			- 0 nao possui
 
-/* C.11.2 DUMMY: SANIT¡RIO EXCLUSIVO */
+/* C.11.2 DUMMY: SANIT√ÅRIO EXCLUSIVO */
 recode v0216 (2=1) (4=0) (9=.)
 rename v0216 sanit_excl
-label var sanit_excl "sanit excl do domicÌlio"
+label var sanit_excl "sanit excl do domic√≠lio"
 
 /* C.12 DUMMY: LIXO */
 recode v0218 (2=1) (3/6=0) (9=.)
 rename v0218 lixo
-label var lixo "lixo È coletado"
+label var lixo "lixo √© coletado"
 
-/* C.13 DUMMY: ILUMINA«√O EL…TRICA */
+/* C.13 DUMMY: ILUMINA√á√ÉO EL√âTRICA */
 recode v0219 (3 5=0) (9=.)
 rename v0219 ilum_eletr
-label var ilum_eletr "possui ilum elÈtrica"
+label var ilum_eletr "possui ilum el√©trica"
 
-/* C.14 RECODE: N⁄MERO DE C‘MODOS E DORMIT”RIOS */
+/* C.14 RECODE: N√öMERO DE C√îMODOS E DORMIT√ìRIOS */
 recode v0205 (-1 99=.) 
 rename v0205 comodos
 recode v0206 (-1 99=.)
 rename v0206 dormit
 
-/* C.15 DUMMY: CONDI«√O DE OCUPA«√O */
+/* C.15 DUMMY: CONDI√á√ÉO DE OCUPA√á√ÉO */
 recode v0207 (2 = 1) (3/6 = 0) (9 = .), gen(posse_dom)
-label var posse_dom "posse do domicÌlio"
+label var posse_dom "posse do domic√≠lio"
 * posse_dom	- 1	proprio
 *			- 0	alugado/cedido/outro
 drop v0207
 
-/* C.16 VALOR DO ALUGUEL/PRESTA«√O */
+/* C.16 VALOR DO ALUGUEL/PRESTA√á√ÉO */
 recode v0208 (-1=.) 
 recode v0208 (999999999999=.)
 recode v0208 (999999999998=.)
@@ -127,7 +127,7 @@ rename v0209 prestacao
 recode v0224 (2=1) (4=0) (9=.)
 rename v0224 filtro
 
-/* C.18 DUMMY: FOG√O */
+/* C.18 DUMMY: FOG√ÉO */
 recode v0221 (3=0) (9=.)
 recode v0222 (2=1) (4=0) (9=.)
 gen fogao = 1 if v0221 == 1 | v0222 == 1
@@ -140,17 +140,17 @@ drop v0221 v0222
 recode v0228 (2 4=1) (6=0) (9=.)
 rename v0228 geladeira
 
-/* C.20 DUMMY: R¡DIO */
+/* C.20 DUMMY: R√ÅDIO */
 recode v0225 (3=0) (9=.)
 rename v0225 radio
 
-/* C.21 DUMMY: TELEVIS√O */
+/* C.21 DUMMY: TELEVIS√ÉO */
 recode v0226 (2=1) (4=0) (9=.)
 recode v0227 (3=0) (9=.)
 gen tv = 1 if v0226 == 1 | v0227 == 1
 replace tv = 0 if v0226 == 0 & v0227 == 0
 replace tv = . if v0226 == . & v0227 == .
-label var tv "possui televis„o"
+label var tv "possui televis√£o"
 drop v0226 v0227
 
 /* C.22 VALOR DA RENDA DOMICILIAR */
@@ -173,9 +173,9 @@ keep ano-prestacao
 compress
 
 
-/* D. DEFLACIONANDO E CONVERTENDO UNIDADES MONET¡RIAS PARA REAIS */
+/* D. DEFLACIONANDO E CONVERTENDO UNIDADES MONET√ÅRIAS PARA REAIS */
 
-/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET¡RIA) */
+/* CONVERTENDO OS VALORES NOMINAIS PARA REAIS (UNIDADE MONET√ÅRIA) */
 /* 	E DEFLACIONANDO : 1 = out/2012                                */
 gen double deflator = 1  if ano == 2012
 format deflator %26.25f
