@@ -5,7 +5,7 @@
 
 program define datazoom_pnad_covid
 
-syntax, months(numlist) original(str) saving(str) 
+syntax, months(numlist) original(str) saving(str)
 
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
