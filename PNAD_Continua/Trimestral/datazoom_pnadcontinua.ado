@@ -4,7 +4,9 @@
 *version stata 14.2
 program define datazoom_pnadcontinua
 
-syntax, years(numlist) original(str) saving(str) [nid idbas idrs]
+syntax, years(numlist) original(str) saving(str) [nid idbas idrs english]
+
+if "`english'" != "" local lang "_en"
 
 /* Pastas para guardar arquivos da sessão */
 cd "`saving'"
@@ -12,7 +14,7 @@ cd "`saving'"
 di "`original'"
 	
 /* Dicionário */
-findfile pnadcontinua.dct
+findfile pnadcontinua`lang'.dct
 loc dic = r(fn)
 
 /* Extração dos arquivos */
