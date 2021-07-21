@@ -1,11 +1,13 @@
 program datazoom_pofsel_02
 * VERSION 1.2
 
-syntax , id(string) lista(string asis) original(string) saving(string)
+syntax , id(string) lista(string asis) original(string) saving(string) [english]
+
+if "`english'" != "" local lang "_en"
 
 /* Lista de itens - desagregados e agregados */
 
-* AlimentaÁ„o no domicÌlio (DAD)
+* Alimenta√ß√£o no domic√≠lio (DAD)
 local Arroz  "63001/63003 63005 63033 63037"
 local Feijao  "63012/63017 63019 63021/63026 63031"
 local Outros_cereais_etc "63004 63006/63011 63027/63030 63032 63034 64051/64066 64068/64072 64074/64075 64078"
@@ -73,7 +75,7 @@ local Alimentos_preparados  "93040 94051/94065 94067/94069 94071/94074 94076/940
 local Outros_alimentacao_no_dom  "99090/99098"
 local Alimentacao_no_dom  `" `Cereais_leguminosas_etc' `Farinhas_feculas_e_massas' `Tuberculos_e_raizes' `Acucares_e_derivados' `Legumes_e_verduras' `Frutas' `Carnes_visceras_etc' `Aves_e_ovos' `Leites_e_derivados' `Panificados' `Oleos_e_gorduras' `Bebidas_e_infusoes' `Enlatados_e_conservas' `Sal_e_condimentos' `Alimentos_preparados' `Outros_alimentacao_no_dom'"'
 
-* AlimentaÁ„o fora do domicÌlio (DAF)
+* Alimenta√ß√£o fora do domic√≠lio (DAF)
 local Almoco_e_jantar  "24001 24041/24042 24051/24052 24055 48044"
 local Cafe_leite_chocolate  "24002 24005"
 local Sanduiches_e_salgados  "24004 24043"
@@ -189,11 +191,11 @@ local Vendas_esporadicas  "54008/54009 54016 54044 54048/54052 54091"
 local Emprestimos  "54014 54025 54031"
 local Aplicacoes_de_capital  "54015 54035 54046 55011/55014"	
 local Outros_renda  "54003/54004 54010 54030 54034 54039 54041 54053/54056 54058/54059 54092 54097 55014"
-local Outros_rendimentos `"`Vendas_esporadicas' `EmprÈstimos' `Aplicacoes_de_capital' `Outros_rendimentos'"'
+local Outros_rendimentos `"`Vendas_esporadicas' `Empr√©stimos' `Aplicacoes_de_capital' `Outros_rendimentos'"'
 local Rendimento_total `"`Rendimento_do_trabalho' `Tranferencia' `Rendimento_de_alguel' `Outros_renda'"'
 local Rendimento_nao_monetario
 																																																																																																																																																															
-tokenize `lista'	// lista do usu·rio
+tokenize `lista'	// lista do usu√°rio
 loc codigos  ""
 while "`1'"~="" {
 	if "`1'" == "Rendimento_nao_monetario" loc ren = 1
@@ -205,7 +207,7 @@ while "`1'"~="" {
 
 
 qui foreach TR of numlist 5/14 {
-	findfile pof2002_tr`TR'_en.dct
+	findfile pof2002_tr`TR'`lang'.dct
 
 	if "`TR'"=="5" {
 		infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS.txt") clear
@@ -297,7 +299,6 @@ loc i = 1
 tokenize `lista'
 while "`1'" ~="" {
 	di "`1'"
-	di "virgula"
 	local nomes_aux : copy local nomes
 	local numeros_aux : copy local numeros
 
@@ -307,8 +308,6 @@ while "`1'" ~="" {
 		
 		gettoken nome nomes_aux: nomes_aux
 		gettoken numero numeros_aux: numeros_aux
-		di "`nome'"
-		di "ponto e virgula"
 		if "`1'"=="`nome'" 	{
 			if "`1'"=="Rendimento_nao_monetario" {
 
@@ -320,7 +319,7 @@ while "`1'" ~="" {
 				g `n_monet2' = val_def_anual if cod_item_aux==10090
 				foreach n of numlist 8001/8017 8019/8071 8084/8098 10014 10020 ///
 						10023 10024 12005/12015 12017/12025 12096 {
-					replace `n_monet2' = - val_def_anual if cod_item_aux==`n'	/* rendimento n„o monetario 2 */
+					replace `n_monet2' = - val_def_anual if cod_item_aux==`n'	/* rendimento n√£o monetario 2 */
 				}
 
 				collapse (sum) n_monet `n_monet2', by(`variaveis_ID')
@@ -330,7 +329,7 @@ while "`1'" ~="" {
 				}
 
 				egen rnm = rowtotal(n_monet `n_monet2')
-				lab var rnm "non-monetary income"
+				lab var rnm "renda n√£o monet√°ria"
 				keep `variaveis_ID' rnm
 
 				tempfile item`i'
@@ -362,12 +361,12 @@ while "`1'" ~="" {
 				rename n_monet nm`numero' 
 				
 				if substr("`numero'",1,1)=="d" {
-					lab var v`numero' "total expenditure in `nome'"
-					lab var cr`numero' "`nome' - expenditure on credit"
-					lab var nm`numero' "`nome' - non-monetary expenditure"
+					lab var v`numero' "despesa total em `nome'"
+					lab var cr`numero' "`nome' - despesa a credito"
+					lab var nm`numero' "`nome' - despesa n√£o monet√°ria"
 				}
 				else {
-					lab var v`numero' "income from `nome'"
+					lab var v`numero' "rendimento de `nome'"
 					drop cr* nm*
 				}
 				
@@ -391,7 +390,7 @@ while "`1'" ~="" {
 }
 
 if `TR_prin'==1 {
-	findfile pof2002_tr1_en.dct
+	findfile pof2002_TR1`lang'.dct
 	qui infile using `"`r(fn)'"', using("`original'/`base_prin'") clear
 	sort `variaveis_ID'
 	loc i = `i' - 1
@@ -402,7 +401,7 @@ if `TR_prin'==1 {
 	egen id_`id'= group(`variaveis_ID')
 }
 else {
-	findfile pof2002_tr2_en.dct
+	findfile pof2002_TR2`lang'.dct
 	qui infile using `"`r(fn)'"', using("`original'/`base_prin'") clear
 	egen id_dom = group(uf seq dv domcl)
 	egen id_uc  = group(uf seq dv domcl uc)
@@ -422,6 +421,36 @@ else {
 		}
 	}
 }
+g urbano = 1 if estrato<=9 & uf==11
+replace urbano = 1 if estrato<=8 & uf==12
+replace urbano = 1 if estrato<=10 & uf==13
+replace urbano = 1 if estrato<=6 & uf==14
+replace urbano = 1 if estrato<=14 & uf==15
+replace urbano = 1 if estrato<=8 & uf==16
+replace urbano = 1 if estrato<=10 & uf==17
+replace urbano = 1 if estrato<=10 & uf==21
+replace urbano = 1 if estrato<=10 & uf==22
+replace urbano = 1 if estrato<=15 & uf==23
+replace urbano = 1 if estrato<=10 & uf==24
+replace urbano = 1 if estrato<=10 & uf==25
+replace urbano = 1 if estrato<=15 & uf==26
+replace urbano = 1 if estrato<=10 & uf==27
+replace urbano = 1 if estrato<=9 & uf==28
+replace urbano = 1 if estrato<=15 & uf==29
+replace urbano = 1 if estrato<=14 & uf==31
+replace urbano = 1 if estrato<=10 & uf==32
+replace urbano = 1 if estrato<=25 & uf==33
+replace urbano = 1 if estrato<=25 & uf==35
+replace urbano = 1 if estrato<=15 & uf==41
+replace urbano = 1 if estrato<=10 & uf==42
+replace urbano = 1 if estrato<=15 & uf==43
+replace urbano = 1 if estrato<=10 & uf==50
+replace urbano = 1 if estrato<=10 & uf==51
+replace urbano = 1 if estrato<=10 & uf==52
+replace urbano = 1 if estrato<=10 & uf==53
+replace urbano = 0 if urbano==.
+lab var urbano "1 area urbana; 0 area rural"
+
 cd "`saving'"
 save pof2002_`id'_customized, replace
 

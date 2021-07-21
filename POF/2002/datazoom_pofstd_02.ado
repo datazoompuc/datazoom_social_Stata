@@ -1,9 +1,11 @@
 * VERSION 1.2
 
 program datazoom_pofstd_02
-syntax , id(string) original(string) saving(string)
+syntax , id(string) original(string) saving(string) [english]
 
-* Alimenta��o no domic�lio (DAD)
+if "`english'" != "" local lang "_en"
+
+* Alimentação no domicílio (DAD)
 local Arroz  "63001/63003 63005 63033 63037"
 local Feijao  "63012/63017 63019 63021/63026 63031"
 local Outros_cereais_etc "63004 63006/63011 63027/63030 63032 63034 64051/64066 64068/64072 64074/64075 64078"
@@ -71,7 +73,7 @@ local Alimentos_preparados  "93040 94051/94065 94067/94069 94071/94074 94076/940
 local Outros_alimentacao_no_dom  "99090/99098"
 local listaDAD `"Cereais_leguminosas_etc "`Cereais_leguminosas_etc'" Farinhas_feculas_e_massas "`Farinhas_feculas_e_massas'" Tuberculos_e_raizes "`Tuberculos_e_raizes'" Acucares_e_derivados "`Acucares_e_derivados'" Legumes_e_verduras "`Legumes_e_verduras'" Frutas "`Frutas'" Carnes_visceras_etc "`Carnes_visceras_etc'" Aves_e_ovos "`Aves_e_ovos'" Leites_e_derivados "`Leites_e_derivados'" Panificados "`Panificados'" Oleos_e_gorduras "`Oleos_e_gorduras'" Bebidas_e_infusoes "`Bebidas_e_infusoes'" Enlatados_e_conservas "`Enlatados_e_conservas'" Sal_e_condimentos "`Sal_e_condimentos'" Alimentos_preparados "`Alimentos_preparados'" Outros_alimentacao_no_dom "`Outros_alimentacao_no_dom'""'
 
-* Alimenta��o fora do domic�lio (DAF)
+* Alimentação fora do domicílio (DAF)
 local Almoco_e_jantar  "24001 24041/24042 24051/24052 24055 48044"
 local Cafe_leite_chocolate  "24002 24005"
 local Sanduiches_e_salgados  "24004 24043"
@@ -88,7 +90,7 @@ local Energia_eletrica  "7002"
 local Telefone_fixo  "7004"
 local Telefone_celular  "28055"
 local Gas_domestico  "7003 7005"
-local �gua_e_esgoto  "7001"
+local Água_e_esgoto  "7001"
 local Outros_servicos_etc  "7016/7017 10012 10019 12003 12005/12015 12017/12019 12021/12025 12026 12096"
 local Servicos_e_taxas  `"`Energia_eletrica' `Telefone_fixo' `Telefone_celular' `Gas_domestico' `Agua_e_esgoto' `Outros_servicos_etc'"'
 local Manutencao_do_lar  "7006/7012 7018/7020 7098 8001/8053 8055/8057 8059 8061/8062 8064 8067 8069/8071 8073 8080/8085 8098 19001/19030 19048 95057 95106"
@@ -198,10 +200,10 @@ local Aluguel_de_bens_imoveis  "53021"
 local Aluguel_de_bens_moveis  "53022"
 local Rendimento_de_aluguel  `"`Aluguel_de_bens_imoveis' `Aluguel_de_bens_moveis'"'
 local Vendas_esporadicas  "54008/54009 54016 54044 54048/54052 54091"
-local Empr�stimos  "54014 54025 54031"
+local Empréstimos  "54014 54025 54031"
 local Aplicacoes_de_capital  "54015 54035 54046"	
 local Outros_renda  "54003/54004 54010 54030 54034 54039 54041 54053/54056 54058/54059 54092 54097 55014"
-local Outros_rendimentos `"`Vendas_esporadicas' `Empr�stimos' `Aplicacoes_de_capital' `Outros_renda'"'
+local Outros_rendimentos `"`Vendas_esporadicas' `Empréstimos' `Aplicacoes_de_capital' `Outros_renda'"'
 
 local listaREN `" Empregado "`Empregado'" Empregador "`Empregador'" Conta_propria  "`Conta_propria'" Aposentadoria_prev_publica "`Aposentadoria_prev_publica'" Aposentadoria_prev_privada "`Aposentadoria_prev_privada'" Bolsa_de_estudo "`Bolsa_de_estudo'" Pensao_aliment_mesada_doacao "`Pensao_aliment_mesada_doacao'" Transferencias_transitorias "`Transferencias_transitorias'" Rendimento_de_aluguel "`Rendimento_de_aluguel'" Outros_rendimentos "`Outros_rendimentos'""'
 local Rendimento_nao_monetario
@@ -209,7 +211,7 @@ local Rendimento_nao_monetario
 cd "`original'"
 
 qui foreach TR of numlist 5/14 {
-	findfile pof2002_tr`TR'_en.dct
+	findfile pof2002_tr`TR'`lang'.dct
 
 	if "`TR'"=="5" {
 		infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS.txt") clear
@@ -350,7 +352,7 @@ foreach type in `id' {
 	sort id_`type' itens
 	by id_`type' itens: egen va = total(val_def_anual)	/* valor da despesa */
 	by id_`type' itens: egen cr = total(`credit')	/* valor da despesa a prazo */
-	by id_`type' itens: egen nm = total(vre51)	/* valor da despesa n�o monetaria */
+	by id_`type' itens: egen nm = total(vre51)	/* valor da despesa não monetaria */
 
 	preserve
 
@@ -360,7 +362,7 @@ foreach type in `id' {
 	g vre52 = val_def_anual if cod_item_aux==10090
 	foreach n of numlist 8001/8017 8019/8071 8084/8098 8999 10014 10020 ///
 			10023/10024 12005/12015 12017/12025 12096 {
-		replace vre52 = - val_def_anual if cod_item_aux==`n'	/* rendimento n�o monetario 2 */
+		replace vre52 = - val_def_anual if cod_item_aux==`n'	/* rendimento não monetario 2 */
 	}
 
 	/* variacao patrimonial */
@@ -386,8 +388,8 @@ foreach type in `id' {
 
 	egen vre5 = rowtotal(vre51 vre52)
 	egen vvp = rowtotal(vvp*)
-	lab var vre5 "non-monetary income"
-	lab var vvp "asset/property variation"
+	lab var vre5 "renda não monetária"
+	lab var vvp "variação patrimonial"
 	keep `variaveis_ID' id_`type' vre5 vvp
 
 	tempfile rendanm
@@ -411,9 +413,9 @@ foreach type in `id' {
 		gettoken k lista: lista
 		di "`k'"
 		cap {
-			lab var vada`n' "expenditure in `k'"
-			lab var crda`n' "`k' - expenditure on credit" 
-			lab var nmda`n' "`k' - non-monetary expenditure" 
+			lab var vada`n' "despesa total em `k'"
+			lab var crda`n' "`k' - despesa a prazo" 
+			lab var nmda`n' "`k' - despesa não monetária" 
 		}
 		gettoken k lista: lista
 	}
@@ -422,9 +424,9 @@ foreach type in `id' {
 		gettoken k lista: lista
 		di "`k'"
 		cap {
-			lab var vada`n' "expenditure in `k'"
-			lab var crda`n' "`k' - expenditure on credit" 
-			lab var nmda`n' "`k' - non-monetary expenditure" 
+			lab var vada`n' "despesa total em `k'"
+			lab var crda`n' "`k' - despesa a prazo" 
+			lab var nmda`n' "`k' - despesa não monetária" 
 		}
 		gettoken k lista: lista
 	}
@@ -435,16 +437,16 @@ foreach type in `id' {
 		di "`k'"
 		if `n'<100 {
 			cap {
-				lab var vadd0`n' "expenditure in `k'"
-				lab var crdd0`n' "`k' - expenditure on credit" 
-				lab var nmdd0`n' "`k' - non-monetary expenditure" 
+				lab var vadd0`n' "despesa total em `k'"
+				lab var crdd0`n' "`k' - despesa a prazo" 
+				lab var nmdd0`n' "`k' - despesa não monetária" 
 			}
 		}
 		else {
 			cap {
-				lab var vadd`n' "expenditure in `k'"
-				lab var crdd`n' "`k' - expenditure on credit" 
-				lab var nmdd`n' "`k' - non-monetary expenditure" 
+				lab var vadd`n' "despesa total em `k'"
+				lab var crdd`n' "`k' - despesa a prazo" 
+				lab var nmdd`n' "`k' - despesa não monetária" 
 			}
 		}
 		gettoken k lista: lista
@@ -454,7 +456,7 @@ foreach type in `id' {
 		gettoken k lista: lista
 		di "`k'"
 		cap {
-			lab var vare`n' "income from `k'"
+			lab var vare`n' "rendimento proveniente de `k'"
 		}
 		gettoken k lista: lista
 	}
@@ -465,8 +467,38 @@ foreach type in `id' {
 	sort uf seq dv domcl
 	save `gasto_temp', replace
 
-	findfile pof2002_tr1_en.dct
+	findfile pof2002_tr1`lang'.dct
 	qui infile using `"`r(fn)'"', using("`original'/T_DOMICILIO.txt") clear	
+
+	g urbano = 1 if estrato<=9 & uf==11
+	replace urbano = 1 if estrato<=8 & uf==12
+	replace urbano = 1 if estrato<=10 & uf==13
+	replace urbano = 1 if estrato<=6 & uf==14
+	replace urbano = 1 if estrato<=14 & uf==15
+	replace urbano = 1 if estrato<=8 & uf==16
+	replace urbano = 1 if estrato<=10 & uf==17
+	replace urbano = 1 if estrato<=10 & uf==21
+	replace urbano = 1 if estrato<=10 & uf==22
+	replace urbano = 1 if estrato<=15 & uf==23
+	replace urbano = 1 if estrato<=10 & uf==24
+	replace urbano = 1 if estrato<=10 & uf==25
+	replace urbano = 1 if estrato<=15 & uf==26
+	replace urbano = 1 if estrato<=10 & uf==27
+	replace urbano = 1 if estrato<=9 & uf==28
+	replace urbano = 1 if estrato<=15 & uf==29
+	replace urbano = 1 if estrato<=14 & uf==31
+	replace urbano = 1 if estrato<=10 & uf==32
+	replace urbano = 1 if estrato<=25 & uf==33
+	replace urbano = 1 if estrato<=25 & uf==35
+	replace urbano = 1 if estrato<=15 & uf==41
+	replace urbano = 1 if estrato<=10 & uf==42
+	replace urbano = 1 if estrato<=15 & uf==43
+	replace urbano = 1 if estrato<=10 & uf==50
+	replace urbano = 1 if estrato<=10 & uf==51
+	replace urbano = 1 if estrato<=10 & uf==52
+	replace urbano = 1 if estrato<=10 & uf==53
+	replace urbano = 0 if urbano==.
+	lab var urbano "1 area urbana; 0 area rural"
 
 	if "`type'" == "dom" merge 1:1 `variaveis_ID' using `gasto_temp', nogen keep(match)
 	else merge 1:n uf seq dv domcl using `gasto_temp', nogen keep(match)
@@ -474,7 +506,7 @@ foreach type in `id' {
 
 	if "`type'" == "uc" {
 		preserve
-		findfile pof2002_tr3_en.dct
+		findfile pof2002_tr3`lang'.dct
 		qui infile using `"`r(fn)'"', using("`original'/T_CONDICOES_DE_VIDA.txt") clear
 		tempfile tr3
 		save `tr3', replace
@@ -485,7 +517,7 @@ foreach type in `id' {
 
 	if "`type'" == "pess" {
 		preserve
-		findfile pof2002_tr2_en.dct
+		findfile pof2002_tr2`lang'.dct
 		qui infile using `"`r(fn)'"', using("`original'/T_MORADOR.txt") clear		
 
 		tempfile tr2

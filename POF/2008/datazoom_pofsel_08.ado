@@ -1,7 +1,9 @@
 * VERSION 1.2
 program define datazoom_pofsel_08
 
-syntax , id(string) lista(string asis) original(string) saving(string)
+syntax , id(string) lista(string asis) original(string) saving(string) [english]
+
+if "`english'" != "" local lang "_en"
 
 if "`id'" == "dom" {
 	loc variaveis_ID = "cod_uf  num_seq  num_dv cod_domc"
@@ -102,7 +104,7 @@ tempfile despesas_temp
  Obs: Na maioria dos casos, todos as despesas estão concentrados em um Tipo de Registro apenas.*/
 foreach TR of numlist `lista_TR' {
 
-	findfile pof2008_tr`TR'.dct
+	findfile pof2008_tr`TR'`lang'.dct
 	if "`TR'"=="6" {
 		qui cap infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS_S.txt") clear
 	}
@@ -278,7 +280,7 @@ if `rnm' == 1 | `vp' == 1 {
 	preserve
 
 	qui foreach TR of numlist 6/15 {
-		findfile pof2008_tr`TR'.dct
+		findfile pof2008_tr`TR'`lang'.dct
 
 		if "`TR'"=="6" {
 			infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS_S.txt") clear
@@ -393,7 +395,7 @@ if `rnm' == 1 | `vp' == 1 {
 
 }
 
-findfile pof2008_tr1.dct
+findfile pof2008_tr1`lang'.dct
 qui infile using `"`r(fn)'"', using("`original'/T_DOMICILIO_S.txt") clear
 
 g urbano = 1 if num_ext_renda<=6 & cod_uf==11
@@ -435,7 +437,7 @@ else {
 
 	if "`TR_prin'"=="2" {
 		preserve
-		findfile pof2008_tr2.dct
+		findfile pof2008_tr2`lang'.dct
 		qui infile using `"`r(fn)'"', using("`original'/T_MORADOR_S.txt") clear
 		tempfile morador
 		save `morador'
@@ -446,7 +448,7 @@ else {
 	}
 	else {
 		preserve
-		findfile pof2008_tr4.dct
+		findfile pof2008_tr4`lang'.dct
 		qui infile using `"`r(fn)'"', using("`original'/T_CONDICOES_DE_VIDA_S.txt") clear
 		keep cod_uf-renda_total
 		tempfile vida

@@ -1,14 +1,15 @@
 * VERSION 1.0
 program datazoom_poftrs_17
-syntax , trs(string) original(string) saving(string)
+syntax , trs(string) original(string) saving(string) [english]
+
+if "`english'" != "" local lang "_en"
 
 cd "`saving'"
 
 tokenize `trs'
 di "`*'"
 while "`*'"~="" {
-	cap findfile pof2017_`1'.dct
-	if _rc==601 findfile pof2017_`1'_en.dct
+	cap findfile pof2017_`1'`lang'.dct
 
 	if "`1'"=="tr1" {
 		qui cap infile using `"`r(fn)'"', using("`original'/MORADOR.txt") clear

@@ -1,9 +1,15 @@
 * VERSION 1.0
+program define datazoom_pofsel_95
 
-program define datazoom_pofstd_95
-syntax , id(string) original(string) saving(string)
-               
-* Alimentação no domicílio (DAD)
+syntax , id(string) lista(string asis) original(string) saving(string) [english]
+
+if "`english'" != "" local lang "_en"
+
+/* Lista de itens - desagregados e agregados */
+
+cd "`original'"
+
+* AlimentaÃ§Ã£o no domicÃ­lio (DAD)
 local Arroz  "6301/6303 6333 6337"
 local Feijao  "6313/6325 6331 6336"
 local Outros_cereais_etc "6304/6312 6326/6330 6332 6335"
@@ -15,8 +21,8 @@ local Outras_farinhas_etc  "6401/6409 6411/6413 6415/6426 6435/6439 6442/6444"
 local Farinhas_feculas_e_massas  `" `Macarrao' `Farinha_de_trigo' `Farinha_de_mandioca' `Outras_farinhas_etc'"'
 local Batata_inglesa   "6351"
 local Cenoura   "6362"
-local Outros_tuberculos_etc  "6352/6361 6363/6366"
-local Tuberculos_e_raizes  `" `Batata_inglesa' `Cenoura' `Outros_tuberculos_etc'"'
+local Outros_tuberculos  "6352/6361 6363/6366"
+local Tuberculos_e_raizes  `" `Batata_inglesa' `Cenoura' `Outros_tuberculos'"'
 local Acucar_refinado   "6701"
 local Acucar_cristal   "6702"
 local Outros_acucares_etc  "6703/6765"
@@ -53,8 +59,8 @@ local Outros_panificados  "9202/9221 9225/9245 92061 92086/92088 92090 92099/921
 local Panificados  `"`Pao_frances' `Biscoito' `Outros_panificados'"'
 local Oleo_de_soja   "9403"
 local Azeite_de_oliva   "9401"
-local Outros_oleos_etc  "9402 9404/9429"
-local Oleos_e_gorduras  `"`Oleo_de_soja' `Azeite_de_oliva' `Outros_oleos_etc'"'
+local Outros_oleos_e_gorduras  "9402 9404/9429"
+local Oleos_e_gorduras  `"`Oleo_de_soja' `Azeite_de_oliva' `Outros_oleos_e_gorduras'"'
 local Cafe_moido   "9325"
 local Refrigerantes  "9301/9319 9335 9339/9343 9346 9349 9350 9354/9355 9357/9358 9360"
 local Cervejas_e_chopes  "9701/9702"
@@ -71,7 +77,7 @@ local Alimentos_preparados  "9451/9482"
 local Outros_alimentacao_no_dom  "9993/9998"
 local listaDAD `"Cereais_leguminosas_etc "`Cereais_leguminosas_etc'" Farinhas_feculas_e_massas "`Farinhas_feculas_e_massas'" Tuberculos_e_raizes "`Tuberculos_e_raizes'" Acucares_e_derivados "`Acucares_e_derivados'" Legumes_e_verduras "`Legumes_e_verduras'" Frutas "`Frutas'" Carnes_visceras_etc "`Carnes_visceras_etc'" Aves_e_ovos "`Aves_e_ovos'" Leites_e_derivados "`Leites_e_derivados'" Panificados "`Panificados'" Oleos_e_gorduras "`Oleos_e_gorduras'" Bebidas_e_infusoes "`Bebidas_e_infusoes'" Enlatados_e_conservas "`Enlatados_e_conservas'" Sal_e_condimentos "`Sal_e_condimentos'" Alimentos_preparados "`Alimentos_preparados'" Outros_alimentacao_no_dom "`Outros_alimentacao_no_dom'""'
 
-* Alimentação fora do domicílio (DAF)
+* AlimentaÃ§Ã£o fora do domicÃ­lio (DAF)
 local Almoco_e_jantar  "2401 4844"
 local Cafe_leite_chocolate  "2402 2405"
 local Sanduiches_e_salgados  "2404"
@@ -87,7 +93,7 @@ local Energia_eletrica  "4707"
 local Telefone_fixo  "0704 0713/0714"
 local Telefone_celular  "0715"
 local Gas_domestico  "0703 0705 0708"
-local Água_e_esgoto  "0701"
+local Agua_e_esgoto  "0701"
 local Outros_servicos_etc  "0706/0707 0709 0711/0712 0798"
 local Servicos_e_taxas  `"`Energia_eletrica' `Telefone_fixo' `Telefone_celular' `Gas_domestico' `Agua_e_esgoto' `Outros_servicos_etc'"'
 
@@ -122,7 +128,7 @@ local Produtos_de_uso_pessoal  "3001 3003/3010 3013/3024 3098 9601/9602 9605/960
 local Higiene_e_cuidados_pessoais  `"`Perfume' `Produtos_para_cabelo' `Sabonete' `Produtos_de_uso_pessoal'"'
 
 local Remedios  "2901/2937 2974"
-local Plano_seguro_saude  "4214 4225 4231"
+local Plano_Seguro_saude  "4214 4225 4231"
 local Consulta_e_tratamento_dentario  "4203/4204"
 local Consulta_medica  "4201"
 local Tratamento_ambulatorial  "4210 4215 4220"
@@ -186,6 +192,7 @@ local listaDDI `"Aluguel "`Aluguel'" Servicos_e_taxas "`Servicos_e_taxas'" Manut
 local Empregado  "5301/5304 5331/5333 5401/5402 5445 5447"
 local Empregador  "5304"
 local Conta_propria  "5306"
+local Rendimento_do_trabalho `"`Empregado' `Empregador' `Conta_propria'"'
 local Aposentadoria_prev_publica  "5311 5429"
 local Aposentadoria_prev_privada  "5312 5440 5457"
 local Bolsa_de_estudo  "5313"
@@ -197,14 +204,23 @@ local Aluguel_de_bens_imoveis  "5321"
 local Aluguel_de_bens_moveis  "5322"
 local Rendimento_de_aluguel  `"`Aluguel_de_bens_imoveis' `Aluguel_de_bens_moveis'"'
 local Vendas_esporadicas  "5408/5409 5416 5444 5448/5452 5491"
-local Empréstimos  "5414 5425 5431"
+local Emprestimos  "5414 5425 5431"
 local Aplicacoes_de_capital  "5415 5435 5446"	
 local Outros_renda  "5403/5404 5410 5430 5434 5439 5441 5453/5456 5458/5459 5492 5497 5514"
-local Outros_rendimentos `"`Vendas_esporadicas' `Empréstimos' `Aplicacoes_de_capital' `Outros_renda'"'
+local Outros_rendimentos `"`Vendas_esporadicas' `EmprÃ©stimos' `Aplicacoes_de_capital' `Outros_renda'"'
 local listaREN `" Empregado "`Empregado'" Empregador "`Empregador'" Conta_propria  "`Conta_propria'" Aposentadoria_prev_publica "`Aposentadoria_prev_publica'" Aposentadoria_prev_privada "`Aposentadoria_prev_privada'" Bolsa_de_estudo "`Bolsa_de_estudo'" Pensao_aliment_mesada_doacao "`Pensao_aliment_mesada_doacao'" Transferencias_transitorias "`Transferencias_transitorias'" Rendimento_de_aluguel "`Rendimento_de_aluguel'" Outros_rendimentos "`Outros_rendimentos'""'
 local Rendimento_nao_monetario
+																																																																																																																																																															
+tokenize `lista'	// lista do usuÃ¡rio
+loc codigos  ""
+while "`1'"~="" {
+	if "`1'" == "Rendimento_nao_monetario" loc ren = 1
+	else {
+		loc codigos  `" `codigos' "``1''" "'
+	}
+	macro shift
+}
 
-cd "`original'"
 
 local uf "BA CE DF GO MG PA PE PR RJ RS SP"
 tempfile pof95 p11
@@ -212,7 +228,7 @@ loc i = 1
 foreach a of numlist 3 4 6/12 {
 
 	if "`id'"=="pess" & `a'<9 continue
-	findfile pof1995_tr`a'_en.dct
+	findfile pof1995_tr`a'`lang'.dct
 	foreach x of local uf {
 		qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
 		keep if v0020==`a'
@@ -301,241 +317,123 @@ foreach a of numlist 3 4 6/12 {
 }
 keep v0020 v0040 v0050 v0060 v0065 v0067 ordem cod_item_aux val_def_anual
 
-*
-g str itens = ""
-*
-foreach j in DAD DAF DDI REN {
-	loc lista : copy local lista`j'
+*tempvar credito
+*gen credito = cond(obtencao==3 | obtencao==4,val_def_anual,0) if obtencao!=.
+
+*tempvar n_monet
+*gen n_monet = cond(obtencao>=5 & obtencao <= 9,val_def_anual,0) if obtencao!=.
+
+tempfile gastos
+save `gastos', replace
+
+local nomes "Despesa_com_alimentacao Alimentacao_no_dom Cereais_leguminosas_etc Arroz Feijao Outros_cereais_etc Farinhas_feculas_e_massas Macarrao Farinha_de_trigo Farinha_de_mandioca Outras_farinhas_etc Tuberculos_e_raizes Batata_inglesa Cenoura Outros_tuberculos Acucares_e_derivados Acucar_refinado Acucar_cristal Outros_acucares_etc Legumes_e_verduras Tomate Cebola Alface Outros_legumes_etc Frutas Banana Laranja Maca Outras_frutas Carnes_visceras_etc Carne_de_boi_de_primeira Carne_de_boi_de_segunda Carne_de_suino Carnes_e_peixes_ind Pescados_frescos Outros_carnes_etc Aves_e_ovos Frango Ovo_de_galinha Outros_aves_etc Leites_e_derivados Leite_de_vaca Leite_em_po Queijos Outros_leites_etc Panificados Pao_frances Biscoito Outros_panificados Oleos_e_gorduras Oleo_de_soja Azeite_de_oliva Outros_oleos_e_gorduras Bebidas_e_infusoes Cafe_moido Refrigerantes Cervejas_e_chopes Outras_bebidas_alcoolicas Outras_bebidas_etc Enlatados_e_conservas Sal_e_condimentos Massa_de_tomate Maionese Sal_refinado Outros_sal Alimentos_preparados Outros_alimentacao_no_dom Alimentacao_fora_do_dom Almoco_e_jantar Cafe_leite_chocolate Sanduiches_e_salgados Refri_e_outras_nao_alcoolicas Lanches Cervejas_e_outras_alcoolicas Outras_alimentacao_fora_do_dom Habitacao Aluguel Servicos_e_taxas Energia_eletrica Telefone_fixo Telefone_celular Gas_domestico Agua_e_esgoto Outros_servicos_etc Manutencao_do_lar Artigos_de_limpeza Mobiliarios_e_artigos_do_lar Eletrodomesticos Consertos_de_artigos_do_lar Vestuario Roupa_de_homem Roupa_de_mulher Roupa_de_crianca Calcados_e_apetrechos Joias_e_bijuterias Tecidos_e_armarinhos Transporte Urbano Gasolina_para_veiculo_proprio Alcool_para_veiculo_proprio Manutencao_de_veiculo_proprio Aquisicao_de_veiculos Viagens Outros_transporte Higiene_e_cuidados_pessoais Perfume Produtos_para_cabelo Sabonete Produtos_de_uso_pessoal Assistencia_a_saude Remedios Plano_Seguro_saude Consulta_e_tratamento_dentario Consulta_medica Tratamento_ambulatorial Servicos_de_cirurgia Hospitalizacao Exames_diversos Material_de_tratamento Outras_assistencia_saude Educacao Cursos_regulares Curso_superior Outros_cursos Livros_e_revistas_tecnicas Artigos_escolares Outras_educacao Recreacao_e_cultura Brinquedos_e_jogos Celular_e_acessorios Periodicos_livros_e_revistas Diversoes_e_esportes Outras_recreacao_etc Fumo Servicos_pessoais Cabeleireiro Manicuro_e_pedicuro Consertos_de_artigos_pessoais Outras_servicos_pessoais Despesas_diversas Jogos_e_apostas Comunicacao Cerimonias_e_festas Servicos_profissionais Imoveis_de_uso_ocasional Outras_despesas_diversas Outras_despesas_correntes Impostos Contribuicoes_trabalhistas Servicos_bancarios Pensoes_mesadas_e_doacoes Previdencia_privada Outras_despesas Aumento_do_ativo Imovel_aquisicao Imovel_reforma Outros_investimentos Diminuicao_do_passivo Emprestimo_e_carne Prestacao_de_imovel Rendimento_total Rendimento_do_trabalho Empregado Empregador Conta_propria Transferencia Aposentadoria_prev_publica Aposentadoria_prev_privada Bolsa_de_estudo Pensao_aliment_mesada_doacao Transferencias_transitorias Rendimento_de_aluguel Aluguel_de_bens_imoveis Aluguel_de_bens_moveis Outros_rendimentos Vendas_esporadicas Emprestimos Aplicacoes_de_capital Outros_renda Rendimento_nao_monetario"
+local numeros "da0 da1 da101	da1011 da1012	da1013 da102 da1021 da1022 da1023 da1024 da103	da1031 da1032	da1033 da104 da1041 da1042 da1043 da105 da1051	da1052 da1053	da1054 da106 da1061 da1062 da1063 da1064 da107	da1071 da1072	da1073 da1074	da1075 da1076	da108 da1081 da1082 da1083 da109	da1091 da1092	da1093 da1094	da110 da1101	da1102 da1103 da111	da1111 da1112 da1113 da112 da1121 da1122 da1123 da1124 da1125 da1131 da114 da1141 da1142 da1143	da1144 da115 da116 da2 da21	da22 da23 da24 da25	da26 da27 dd2 dd21 dd22 dd221 dd222 dd223 dd224 dd225 dd226	dd23 dd24 dd25 dd26 dd27 dd3 dd31 dd32 dd33 dd34 dd35 dd36 dd4 dd41 dd42 dd43 dd44 dd45	dd46 dd47 dd5 dd51 dd52	dd53 dd54 dd6 dd61 dd62	dd63 dd64 dd65 dd66	dd67 dd68 dd69 dd61	dd7	dd71 dd72 dd73 dd74	dd75 dd76 dd8 dd81 dd82 dd83 dd84 dd85 dd9 dd10	dd101 dd102	dd103 dd104	dd11 dd111 dd112 dd113 dd114 dd115 dd116 dd12 dd121	dd122 dd123	dd124 dd125	dd126 dd13 dd131 dd132 dd133 dd14 dd141	dd142 re0 re1 re11 re12	re13 re2 re21 re22 re23	re24 re25 re3 re31 re32 re4	re41 re42 re43 re44"
+
+use `gastos', clear	
+			
+if "`id'" == "dom" {
+	loc variaveis_ID = "v0040 v0050 v0060 v0065"
+}
+else if "`id'" == "uc" {
+	rename v0067 uc
+	loc variaveis_ID = "v0040 v0050 v0060 v0065 uc"
+}
+else if "`id'" == "pess" {
+	rename v0067 uc
+	loc variaveis_ID = "v0040 v0050 v0060 v0065 uc ordem"
+	loc TR_prin = "2"
+	keep if v0020>=9 & v0020<=12 & ordem~=.
+}
+
+tempfile base
 	
-	if "`j'" == "DAD" | "`j'" == "DAF" {
-		loc i = 1
-		qui while `"`lista'"' ~="" {
-			gettoken k lista: lista		/* para pular os nomes*/
-			noi di "`k'"
-			gettoken x lista: lista 	/* pega a lista de itens */
-			foreach n of numlist `x' {
-				if "`j'" == "DAD" {
-					if `i'<10 replace itens = "da0`i'" if cod_item_aux == `n'
-					else replace itens = "da`i'" if cod_item_aux == `n'
+loc i = 1
+tokenize `lista'
+while "`1'" ~="" {
+	di "`1'"
+	local nomes_aux : copy local nomes
+	local numeros_aux : copy local numeros
+
+	loc z = 1	// para controlar nomes errados na lista
+	
+	while "`nomes_aux'"~="" {
+		
+		gettoken nome nomes_aux: nomes_aux
+		gettoken numero numeros_aux: numeros_aux
+		if "`1'"=="`nome'" 	{
+*			else {
+				gettoken codigo codigos: codigos
+				preserve
+				g item = .
+				foreach n of numlist `codigo' {
+					replace item = 1 if cod_item_aux == `n'
+				}
+				keep if item==1
+				cap collapse (sum) val_def_anual, by(`variaveis_ID')
+				if _rc==2000 {
+					restore
+					macro shift
+					continue, break
+				}
+				rename val_def_anual v`numero'
+*				rename credito cr`numero' 
+*				rename n_monet nm`numero' 
+				
+				if substr("`numero'",1,1)=="d" {
+					lab var v`numero' "despesa total em `nome'"
+*					lab var cr`numero' "`nome' - expenditure on credit"
+*					lab var nm`numero' "`nome' - non-monetary expenditure"
 				}
 				else {
-					replace itens = "da2`i'" if cod_item_aux == `n'
+					lab var v`numero' "rendimento proveniente de `nome'"
+*					drop cr* nm*
 				}
-			}
-			loc i = `i' + 1
-		}
-	}
-	else if "`j'"=="DDI" {
-		local k `""21/27" "31/36" "41/47" "51/54" "61/69 610" "71/76" "81/85" "90" "101/104" "111/116" "121/126" "131/133" "141/142""'
-		tokenize `"`k'"'
+				
+				if `i'~=1 merge 1:1 `variaveis_ID' using `base', nogen
+				save `base', replace
+				restore
 
-		while `"`lista'"' ~="" {
-			qui foreach i of numlist `1' {
-				gettoken k lista: lista		/* para pular os nomes*/
-				noi di "`k'"
-				gettoken x lista: lista 	/* pega a lista de itens */
-				foreach n of numlist `x' {
-					if `i'<100 replace itens = "dd0`i'" if cod_item_aux == `n'
-					else replace itens = "dd`i'" if cod_item_aux == `n'
-				}
-			}
-			macro shift
+				loc i = `i' + 1
+				macro shift
+				continue, break
+*			}
 		}
-*		}
-	}
-	else {
-		local z `""11/13" "21/25" 30 40"'
-		tokenize `"`z'"'
-		while `"`lista'"' ~="" {
-			qui foreach ren of numlist `1' {
-				gettoken k lista: lista		/* para pular os nomes*/
-				noi di "`k'"
-				gettoken x lista: lista 	/* pega a lista de itens */
-				foreach n of numlist `x' {
-					replace itens = "re`ren'" if cod_item_aux == `n'
-				}
-			}
+		if `z' == 180 {
+			gettoken codigo codigos: codigos
 			macro shift
+			continue, break
 		}
 	}
 }
 
-
-tempfile gastos base
-save `gastos', replace
-
-foreach type in `id' {
-	cd "`original'"
-	use `gastos', clear
-
-	if "`type'" == "dom" {
-		loc variaveis_ID = "v0040 v0050 v0060 v0065"
-		loc TR_prin = "1"
-	}
-	else if "`type'" == "uc" {
-		rename v0067 uc
-		loc variaveis_ID = "v0040 v0050 v0060 v0065 uc"
-		loc TR_prin = "5"
-	}
-	else if "`type'" == "pess" {
-		rename v0067 uc
-		loc variaveis_ID = "v0040 v0050 v0060 v0065 uc ordem"
-		loc TR_prin = "2"
-		keep if v0020>=9 & v0020<=12 & ordem~=.
-	}
-
-	egen id_`type' = group(`variaveis_ID')
-
-*	tempvar credit
-*	g `credit' = cond(obtencao>=3  & obtencao<=4, val_def_anual,0) if obtencao~=0 		/* itens comprados a prazo */
-*	g vre51 = cond(obtencao>=5  & obtencao<=9, val_def_anual,0) if obtencao~=0 		/* despesa nao monetaria */
-
-	sort id_`type' itens
-	by id_`type' itens: egen va = total(val_def_anual)	/* valor da despesa */
-*	by id_`type' itens: egen cr = total(`credit')	/* valor da despesa a prazo */
-*	by id_`type' itens: egen nm = total(vre51)	/* valor da despesa não monetaria */
-
-/*
-	preserve
-
-	/* renda nao monetaria */
-	replace vre51 = . if cod_item_aux==10090	/* rendimento nao monetario 1 */
-
-	g vre52 = val_def_anual if cod_item_aux==10090
-	foreach n of numlist 8001/8017 8019/8071 8084/8098 8999 10014 10020 ///
-			10023/10024 12005/12015 12017/12025 12096 {
-		replace vre52 = - val_def_anual if cod_item_aux==`n'	/* rendimento não monetario 2 */
-	}
-
-	/* variacao patrimonial */
-	g vvp0 = .
-	foreach n of numlist 54005 54016 54009 54007 54014 54046 { 
-			replace vvp = val_def_anual if cod_item_aux==`n'
-	}
-
-	loc i = 55000
-	loc j = 55010
-	forval n = 1/4 {
-		loc i = `i' + 1
-		loc j = `j' + 1
-		g vvp`n' = val_def_anual if cod_item_aux==`i'
-		replace vvp`n' = - val_def_anual if cod_item_aux==`j'
-	}
-
-	collapse (sum) vre51 vre52 vvp*, by(`variaveis_ID' id_`type')
-
-	foreach var in vre52 vvp1 vvp2 vvp3 vvp4 {
-		replace `var' = . if `var'<0	/* para nao haver renda nao monetaria negativa*/
-	}
-
-	egen vre5 = rowtotal(vre51 vre52)
-	egen vvp = rowtotal(vvp*)
-	lab var vre5 "non-monetary income"
-	lab var vvp "asset/property variation"
-	keep `variaveis_ID' id_`type' vre5 vvp
-
-	tempfile rendanm
-	save `rendanm', replace
-
-	restore
-
-	drop vre51
-*/
-	drop if itens==""
-
-	bys id_`type' itens: keep if _n==1
-	keep `variaveis_ID' id_`type' itens va 
-
-	reshape wide va , i(`variaveis_ID' id_`type') j(itens) string
-
-*	drop crre* nmre* // exclui credito e nao monetario relacionados a rendimentos
-
-	/* introduzindo labels a partir das listas */
-	loc lista: copy local listaDAD
-	foreach n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 {
-		gettoken k lista: lista
-		di "`k'"
-		cap {
-			lab var vada`n' "expenditure in `k'"
-*			lab var crda`n' "`k' - expenditure on credit" 
-*			lab var nmda`n' "`k' - non-monetary expenditure" 
-		}
-		gettoken k lista: lista
-	}
-	loc lista: copy local listaDAF
-	foreach n of numlist 21/27 {
-		gettoken k lista: lista
-		di "`k'"
-		cap {
-			lab var vada`n' "expenditure in `k'"
-*			lab var crda`n' "`k' - expenditure on credit" 
-*			lab var nmda`n' "`k' - non-monetary expenditure" 
-		}
-		gettoken k lista: lista
-	}
-	loc lista: copy local listaDDI
-	foreach n of numlist 21/27 31/36 41/47 51/54 61/69 610 71/76 81/85 ///
-			90 101/104 111/116 121/126 131/133 141/142 {
-		gettoken k lista: lista
-		di "`k'"
-		if `n'<100 {
-			cap {
-				lab var vadd0`n' "expenditure in `k'"
-*				lab var crdd0`n' "`k' - expenditure on credit" 
-*				lab var nmdd0`n' "`k' - non-monetary expenditure" 
-			}
-		}
-		else {
-			cap {
-				lab var vadd`n' "expenditure in `k'"
-*				lab var crdd`n' "`k' - expenditure on credit" 
-*				lab var nmdd`n' "`k' - non-monetary expenditure" 
-			}
-		}
-		gettoken k lista: lista
-	}
-	loc lista: copy local listaREN
-	foreach n of numlist 11/13 21/25 30 40 {
-		gettoken k lista: lista
-		di "`k'"
-		cap {
-			lab var vare`n' "income from `k'"
-		}
-		gettoken k lista: lista
-	}
-
-*	merge 1:1 id_`type' using `rendanm', nogen keep(match)
-
-	save `base', replace
-
-	if "`type'" == "pess" {
-		foreach x of local uf {
-			findfile pof1995_tr2_en.dct
-			qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
-			keep if v0020==2
-			rename v0067 uc
-			rename v2130 ordem
-			save ``x'', replace
-		}
-		ap using `BA' `CE' `DF' `GO' `MG' `PA' `PE' `PR' `RJ' `RS'
-
-		sum `variaveis_ID'
-		merge 1:1 `variaveis_ID' using `base', nogen
-		save `base', replace
-	}
-
+if "`type'" == "pess" {
 	foreach x of local uf {
-		findfile pof1995_tr1_en.dct
+		findfile pof1995_tr2`lang'.dct
 		qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
-		keep if v0020==1
+		keep if v0020==2
+		rename v0067 uc
+		rename v2130 ordem
 		save ``x'', replace
 	}
 	ap using `BA' `CE' `DF' `GO' `MG' `PA' `PE' `PR' `RJ' `RS'
-	
-	if "`type'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen 
-	else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen
-	
-	cd "`saving'"
-	save "pof1995_`type'_standard", replace
+
+	sum `variaveis_ID'
+	merge 1:1 `variaveis_ID' using `base', nogen
+	save `base', replace
 }
+
+foreach x of local uf {
+	findfile pof1995_tr1`lang'.dct
+	qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
+	keep if v0020==1
+	save ``x'', replace
+}
+ap using `BA' `CE' `DF' `GO' `MG' `PA' `PE' `PR' `RJ' `RS'
+
+if "`type'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen 
+else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen
+
+cd "`saving'"
+save pof1995_`id'_customized, replace
+
 end
