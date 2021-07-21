@@ -4,44 +4,46 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes dom fam both all]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
 
-* `years' é lista de anos a extrair 
-* `ufs' são as unidades da federação
-* `original' são as pastas dos arquivos de microdados brutos
-* `saving' é a pasta para salvar as novas bases
-* `comp' especifica que será feita a compatibilização.
+if "`english'" != "" local lang "_en"
+
+* `years' Ã© lista de anos a extrair 
+* `ufs' sÃ£o as unidades da federaÃ§Ã£o
+* `original' sÃ£o as pastas dos arquivos de microdados brutos
+* `saving' Ã© a pasta para salvar as novas bases
+* `comp' especifica que serÃ¡ feita a compatibilizaÃ§Ã£o.
 * `pes' indica arquivo de pessoas
 * `dom' indica arquivo de domicilios
-* `fam' indica arquivo de família disponível apenas para o ano 2000
+* `fam' indica arquivo de famÃ­lia disponÃ­vel apenas para o ano 2000
 * `both' indica arquivo de domicilios e pessoas merged
-* `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
+* `all' indica arquivo de domicilios, pessoas e famÃ­lia merged para o ano 2000
  
-display as result _newline "Type(s) of Register:"
-if "`pes'"~="" display as result " Individual"
-if "`dom'"~="" display as result " Household"
-if "`fam'"~="" display as result " Family (2000)"
+ display as result _newline "Tipo(s) de Registro:"
+if "`pes'"~="" display as result " Pessoas"
+if "`dom'"~="" display as result " DomicÃ­lios"
+if "`fam'"~="" display as result " FamÃ­lias (2000)"
 if "`both'"~="" {
 	loc pes "pes"
 	loc dom "dom"
-	display as result " Individual and Household"
+	display as result " DomicÃ­lios e Pessoas"
 }
 if "`all'"~="" {
 	loc pes "pes"
 	loc dom "dom"
 	loc fam "fam"
-	display as result " Individual, Family and Household (2000)"
+	display as result "Pessoas, FamÃ­lias e DomicÃ­lios (2000)"
 }
-/* Pastas para guardar arquivos da sessão */
+/* Pastas para guardar arquivos da sessÃ£o */
 cd `"`saving'"'
 
-/* Listas de nomes das UFs (como são passados na opção `ufs'), respectivos códigos IBGE */
+/* Listas de nomes das UFs (como sÃ£o passados na opÃ§Ã£o `ufs'), respectivos cÃ³digos IBGE */
 /* e sufixos dos arquivos de microdados correspondentes em cada ano.                    */
 local nomesUFs =  "RO AC AM RR PA AP TO FN MA PI CE RN PB PE AL SE BA MG ES RJ GB SP PR SC RS MS MT GO DF"
 local codUFs   =  "11 12 13 14 15 16 17 20 21 22 23 24 25 26 27 28 29 31 32 33 34 35 41 42 43 50 51 52 53"
 local suf1970  = `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ GB SP PR SC RS "" MT GO DF"'
-*local suf1980  = `"11 12 13 14 15 16 "" "" 21 22 23 24 25 26 27 28 29 "31A 31B" 32 "33A 33B" "" "35 35B 35C" 41 42 43 50 51 52 53"'
-local suf1980  =  `"RO AC AM RR PA AP "" "" MA PI CE RN PB PE AL SE BA MG ES RJ "" SP PR SC RS MS MT GO DF"'
+*local suf1980  = `"11 12 13 14 15 16 "" "" 20 21 22 23 24 25 26 27 28 29 "31A 31B" 32 "33A 33B" "" "35 35B 35C" 41 42 43 50 51 52 53"'
+local suf1980  =  `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ "" SP PR SC RS MS MT GO DF"'
 local suf1991  = `"U11 U12 U13 U14 U15 U16 U17 "" U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 "" "P35 P36" U41 U42 U43 U50 U51 U52 U53"'
 local suf2000  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"'
@@ -49,27 +51,27 @@ local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "
 foreach ano in `years' {
 	if `ano' == 1970 {
 		if "`fam'" != "" {
-						di as err "Family option not allowed in `ano'"
+						di as err "OpÃ§Ã£o FamÃ­lia nÃ£o disponÃ­vel para o ano `ano'"
 						exit
 						}
 		foreach UF in `ufs' {
-			/* Achando posição da UF nas listas: */
+			/* Achando posiÃ§Ã£o da UF nas listas: */
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 			/* Loop para todos os arquivos da UF                              */
-			/* Transforma os conjuntos de sufixos "tokens" e pega o pos-ésimo */
+			/* Transforma os conjuntos de sufixos "tokens" e pega o pos-Ã©simo */
 			tokenize `suf1970'
 			local sufixos = "``pos''"
-			/* Mesmo para o código */
+			/* Mesmo para o cÃ³digo */
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			foreach suf in `sufixos' {
-				/* Abrindo arquivo e gerando variável UF, inexistente em 1970  */
-				/* Em 1970 abrir "quietly porque tem um monte de "-" (dá erro) */
-				display as input "Extracting `ano' `UF' - `suf' ..."
-				findfile censo`ano'_en.dct
+				/* Abrindo arquivo e gerando variÃ¡vel UF, inexistente em 1970  */
+				/* Em 1970 abrir "quietly porque tem um monte de "-" (dÃ¡ erro) */
+				display as input "Extraindo `ano' `UF' - `suf' ..."
+				findfile censo`ano'`lang'.dct
 				quietly infile using `"`r(fn)'"', using("`original'/DAMO70`suf'.txt") clear
 				
 				* resolvendo problema nos dados originais: caracteres nao numericos e/ou primeiro digito
@@ -89,9 +91,9 @@ foreach ano in `years' {
 				if "`UF'"=="PB" drop if `d1'~="2"
 
 				gen ano = 1970
-				lab var ano "survey year"
+				lab var ano "ano da pesquisa"
 				gen UF = `codUF'
-				lab var UF "state"
+				lab var UF "unidade da federaÃ§Ã£o"
 				
 				/* Gera identificacao do domicilio, da familia e numero de ordem das pessoas */
 				destring v007 v008 v009, replace force
@@ -100,25 +102,24 @@ foreach ano in `years' {
                       (v006 == 0 & v006[_n-1] ~= 0 & v007[_n-1] ~= 1) /// idem
 						)
 				tostring id_dom, replace
-				lab var id_dom "household identification number"
+				lab var id_dom "identificaÃ§Ã£o do domicÃ­lio"
 				sort id_dom, stable
 				bys id_dom: gen int num_fam = sum(v025==1) if (v006>=1 & v006<=4)
-				lab var num_fam "family number"
+				lab var num_fam "nÃºmero da famÃ­lia"
 				gsort UF id_dom num_fam v025 -v027
 				bys UF id_dom: g ordem = _n
-				lab var ordem "number associated with hh member"
+				lab var ordem "nÃºmero de ordem" 				
 				
 				/* Gera codigo do municipio em 1970 para trazer o codigo atual do municipio */ 
 				tempvar x
 				g `x' = substr(v002,2,.)
 				egen cod70 = concat(v001 `x')
 				lab var cod70 "municipalities'codes in 1970"
-
 				drop __*
 
 				findfile cod1970.dta
 				merge m:1 cod70 using `"`r(fn)'"', nogen keep(match) keepus(munic)
-
+				
 				local base ""
 				if "`comp'" != "" {
 					if "`both'"~="" {
@@ -157,7 +158,7 @@ foreach ano in `years' {
 							local base "`base' _dom_comp"
 						}
 					}
-					/* Áreas Mínimas Comparáveis */
+					/* Ãreas MÃ­nimas ComparÃ¡veis */
 					foreach n of local base {
 						use ``n'', clear
 						findfile amcs.dta
@@ -194,30 +195,31 @@ foreach ano in `years' {
 		}
 	}
 	else if `ano' == 1980 {
-
+	
 		if "`fam'" != "" {
-						di as err "Family option not allowed in `ano'"
+						di as err "OpÃ§Ã£o FamÃ­lia nÃ£o disponÃ­vel para o ano `ano'"
 						exit
 						}
-						
+		
+
 		foreach UF in `ufs' {
-			/* Achando posição da UF nas listas: */
+			/* Achando posiÃ§Ã£o da UF nas listas: */
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 			 /* Loop para todos os arquivos da UF                              */
-			 /* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			 /* Transformo os conjuntos de sufixos "tokens" e pego o pos-Ã©simo */
 			tokenize `suf1980'
 			local sufixos = "``pos''"
-			/* Mesmo para o código */
+			/* Mesmo para o cÃ³digo */
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			di "`sufixos'"
 			foreach suf in `sufixos' {
-				display as input "Extracting `ano' `UF' - `suf' ..."
-				/* Abrindo arquivo */
-				findfile censo`ano'_en.dct
+				display as input "Extraindo `ano' `UF' - `suf' ..."
+				/* Abrindo arquivo                              */
+				findfile censo`ano'`lang'.dct
 				capture infile using `"`r(fn)'"', using("`original'/AMO80.UF`suf'.txt") clear
 				if _rc == 601 {
 				/* Abrindo arquivo se em formato dbf           */
@@ -226,12 +228,12 @@ foreach ano in `years' {
 					qui merge 1:m uf munic ndom using "`original'/CD80PES`codUF'.dta", nogen keep(match) 
 					
 			
-					/* Renomeando as variáveis */
-					// Arquivo em formato dbf não contém as variáveis distrito(v6), número de ordem(v500), situação da pessoa (v598) e uf do mun que morava anteriormente (v518)
+					/* Renomeando as variÃ¡veis */
+					// Arquivo em formato dbf nÃ£o contÃ©m as variÃ¡veis distrito(v6), nÃºmero de ordem(v500), situaÃ§Ã£o da pessoa (v598) e uf do mun que morava anteriormente (v518)
 					qui rename uf v2
 					qui rename munic v5
 					cap qui tostring v5, format(%04.0f) replace
-					drop ndom // var ndom não existia em formato anterior (txt)
+					drop ndom // var ndom nÃ£o existia em formato anterior (txt)
 					qui rename situacao v198
 					qui rename especie v201
 					qui rename tipo v202
@@ -315,17 +317,17 @@ foreach ano in `years' {
 					qui rename rtotocuf v682
 					gen v6 = .
 					gen v500 = .
-					gen v598 = .								// Não existe na última versão do Censo 80
-					replace v598 = 1 if (v198 == 1 |v198 == 3) // Cidade ou vila ou Área urbana isolada
+					gen v598 = .								// NÃ£o existe na Ãºltima versÃ£o do Censo 80
+					replace v598 = 1 if (v198 == 1 |v198 == 3) // Cidade ou vila ou Ãrea urbana isolada
 					replace v598 = 0 if (v198 == 5 |v198 == 7) // Aglomerado rural ou zona rural 
 					gen v518 = .
 					destring, replace
 					}					
-				}		
-				gen ano = 1980
-				lab var ano "survey year"
-				
-				egen munic = concat(v2 v5)
+				}	
+				cap gen ano = 1980
+				lab var ano "ano da pesquisa"
+				qui tostring v5, format(%04.0f) replace
+				cap egen munic = concat(v2 v5)
 				destring munic, replace
 				lab var munic "municipality codes without DV (6 digits)"
 
@@ -333,10 +335,15 @@ foreach ano in `years' {
 				if "`comp'" != "" { 				
 					if "`both'"~="" {
 						global x "pes dom"
+						
+							
 						compat_censo80					/* Compatibiliza, se especificado */
+										
 						drop v503
 						tempfile _comp
+										
 						save `_comp', replace
+									
 						local base "`base' _comp"
 					}
 					else {
@@ -363,20 +370,21 @@ foreach ano in `years' {
 							local base "`base' _dom_comp"
 						}
 					}
-					/* Áreas Mínimas Comparáveis */
+					
+										
+					/* Ãreas MÃ­nimas ComparÃ¡veis */
 					foreach n of local base {
 						use ``n'', clear
-
 						findfile amcs.dta
-						sort munic
+						sort munic		
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-
 						save CENSO80_`UF'`n', replace
 					}
 				}
 				else {
 					if "`both'"~="" {
 						save CENSO80_`UF', replace
+					
 					}
 					else {
 						if "`pes'"~="" {
@@ -399,35 +407,35 @@ foreach ano in `years' {
 	else if `ano' == 1991 {
 	
 		if "`fam'" != "" {
-						di as err "Family option not allowed in `ano'"
+						di as err "OpÃ§Ã£o FamÃ­lia nÃ£o disponÃ­vel para o ano `ano'"
 						exit
 						}
-						
+		
 		foreach UF in `ufs' {
-			/* Achando posição da UF nas listas: */
+			/* Achando posiÃ§Ã£o da UF nas listas: */
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 			/* Loop para todos os arquivos da UF                              */
-			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-Ã©simo */
 			tokenize `suf1991'
 			local sufixos = "``pos''"
-			/* Mesmo para o código */
+			/* Mesmo para o cÃ³digo */
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			di "`sufixos'"
 			foreach suf in `sufixos' {
 				if "`pes'"~="" {
-					display as input "Extracting `ano' `UF' - `suf' ..."
+					display as input "Extraindo `ano' `UF' - `suf' ..."
 					/* Abrindo arquivo                              */
-					* resgata códigos do município e microrregião do arquivo de domicílios
-					findfile censo`ano'dom_en.dct
+					* resgata cÃ³digos do municÃ­pio e microrregiÃ£o do arquivo de domicÃ­lios
+					findfile censo`ano'dom`lang'.dct
 					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
-					/* Próximas linha roda se Stata não encontrar o .txt */
+					/* PrÃ³ximas linha roda se Stata nÃ£o encontrar o .txt */
 					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
 
-					keep if v0099 == 1 // i.e. guarda só os domicíios
+					keep if v0099 == 1 // i.e. guarda sÃ³ os domicÃ­ios
 					keep v0102 v1101 v1102 v7002
 					bys v0102: keep if _n==1
 					tempfile cod91
@@ -435,15 +443,15 @@ foreach ano in `years' {
 					save `cod91', replace
 
 					/* Primeiros base de pessoas                    */
-					findfile censo`ano'pes_en.dct
+					findfile censo`ano'pes`lang'.dct
 					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
-					/* Próximas linha roda se Stata não encontrar o .txt */
+					/* PrÃ³ximas linha roda se Stata nÃ£o encontrar o .txt */
 					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
 
-					keep if v0099 == 2 // i.e. guarda só os indivíduos
+					keep if v0099 == 2 // i.e. guarda sÃ³ os indivÃ­duos
 
 					gen ano = 1991
-					lab var ano "survey year"
+					lab var ano "ano da pesquisa"
 					drop v0099
 					
 					sort v0102
@@ -452,12 +460,12 @@ foreach ano in `years' {
 					egen munic = concat(v1101 v1102)
 					destring munic, replace
 					lab var munic "municipality codes without DV (6 digits)"
-
+		
 					/* Compatibiliza, se especificado */
 					if "`comp'" != "" {
 						compat_censo91pess
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -466,16 +474,16 @@ foreach ano in `years' {
 					save `CENSO91_`UF'_pes_`suf'', replace
 				}
 				if "`dom'"~="" {
-					/* Agora os domicílios */
-					findfile censo`ano'dom_en.dct
+					/* Agora os domicÃ­lios */
+					findfile censo`ano'dom`lang'.dct
 					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
-					/* Próximas linha roda se Stata não encontrar o .txt */
+					/* PrÃ³ximas linha roda se Stata nÃ£o encontrar o .txt */
 					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
 
-					keep if v0099 == 1 // i.e. guarda só os domicíios
-					bys v0102: keep if _n==1	
+					keep if v0099 == 1 // i.e. guarda sÃ³ os domicÃ­ios
+					bys v0102: keep if _n==1
 					gen ano = 1991
-					lab var ano "survey year"
+					lab var ano "ano da pesquisa"
 					drop v0098 v0099
 
 					egen munic = concat(v1101 v1102)
@@ -485,7 +493,7 @@ foreach ano in `years' {
 					if "`comp'" != "" {
 						compat_censo91dom
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -499,7 +507,7 @@ foreach ano in `years' {
 					use `CENSO91_`UF'_pes_`suf'', clear
 					merge m:1 `var' using `CENSO91_`UF'_dom_`suf'', nogen keep(match)
 					
-					/* Se não for o primeiro arquivo, junta com o anterior */
+					/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 					if "`suf'" != word(`"`sufixos'"', 1) {
 						if "`comp'"~= "" append using CENSO91_`UF'_comp
 						else append using CENSO91_`UF'
@@ -510,7 +518,7 @@ foreach ano in `years' {
 				else {
 					if "`pes'"~="" {
 						use `CENSO91_`UF'_pes_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO91_`UF'_pes_comp
 							else append using CENSO91_`UF'_pes
@@ -520,7 +528,7 @@ foreach ano in `years' {
 					}
 					else {
 						use `CENSO91_`UF'_dom_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO91_`UF'_dom_comp
 							else append using CENSO91_`UF'_dom
@@ -532,57 +540,55 @@ foreach ano in `years' {
 			}
 		}
 	}
-
 	else if `ano' == 2000 {
-	
-	di as input "Attention: utilize the Census 2000 files updated on September 8th, 2017"
+
+	di as input "AtenÃ§Ã£o: utilize os microdados do Censo 2000 atualizados em 08/09/2017"
 
 		foreach UF in `ufs' {
-			/* Achando posição da UF nas listas: */
+			/* Achando posiÃ§Ã£o da UF nas listas: */
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 			/* Loop para todos os arquivos da UF                              */
-			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-Ã©simo */
 			tokenize `suf2000'
 			local sufixos = "``pos''"
-			/* Mesmo para o código */
+			/* Mesmo para o cÃ³digo */
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			foreach suf in `sufixos' {
-			if "`fam'"~="" {
-					display as input "Extracting `ano' `UF' - `suf' ..."
-					findfile censo`ano'fam_en.dct
+				if "`fam'"~="" {
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					findfile censo`ano'fam`lang'.dct
 					/* Abrindo arquivo                              */
 					quietly infile using `"`r(fn)'"', using("`original'/Fami`suf'.txt") clear
 					
 					gen ano = 2000
-					lab var ano "survey year"
+					lab var ano "ano da pesquisa"
 
 					g munic = int(v0103/10)
 					lab var munic "municipality codes without DV (6 digits)"
 
-					/* Finaliza se compatibilização escolhida */
+					/* Finaliza se compatibilizaÃ§Ã£o escolhida */
 					if "`comp'" != "" {
-						di as err "Compatibilization not available for family files"
+						di as err "CompatibilizaÃ§Ã£o nÃ£o disponÃ­vel para opÃ§Ã£o FamÃ­lias"
 						exit
 						}
 					tempfile CENSO00_`UF'_fam_`suf'
 					save `CENSO00_`UF'_fam_`suf'', replace
-				}
+					}
 				if "`pes'"~="" {
-					display as input "Extracting `ano' `UF' - `suf' ..."
-					findfile censo`ano'pes_en.dct
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					findfile censo`ano'pes`lang'.dct
 					/* Abrindo arquivo                              */
-					/* Também há versões .dat e .txt dos arquivos,  */
-					/* então uso "capture" de novo.                 */
-					quietly cap infile using `"`r(fn)'"', using("`original'/Pes`suf'.txt") clear
+					/* TambÃ©m hÃ¡ versÃµes .dat e .txt dos arquivos,  */
+					/* entÃ£o uso "capture" de novo.                 */
+					quietly cap infile using `"`r(fn)'"', using("`original'/pes`suf'.txt") clear
 					if _rc == 601 quietly cap infile using `"`r(fn)'"', using("`original'/pes`suf'.dat") clear
 				
 					gen ano = 2000
-					lab var ano "survey year"
-
+					lab var ano " ano da pesquisa"					
 					g munic = int(v0103/10)
 					lab var munic "municipality codes without DV (6 digits)"
 
@@ -590,7 +596,7 @@ foreach ano in `years' {
 					if "`comp'" != "" {
 						compat_censo00pess
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -598,28 +604,27 @@ foreach ano in `years' {
 					tempfile CENSO00_`UF'_pes_`suf'
 					save `CENSO00_`UF'_pes_`suf'', replace
 				}
-				
 				if "`dom'"~="" {
-					/* Agora os domicílios */
+					/* Agora os domicÃ­lios */
 					
-					display as input "Extracting `ano' `UF' - `suf' ..."
-					findfile censo`ano'dom_en.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/Dom`suf'.txt") clear
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					findfile censo`ano'dom`lang'.dct
+					quietly cap infile using `"`r(fn)'"', using("`original'/dom`suf'.txt") clear
 					if _rc == 601 quietly cap infile using `"`r(fn)'"', using("`original'/dom`suf'.dat") clear
 				
 					gen ano = 2000
-					lab var ano "survey year"
+					lab var ano " ano da pesquisa"
 					
 					g munic = int(v0103/10)
 					lab var munic "municipality codes without DV (6 digits)"
-
+					
 					drop v0400 		// numero de serie = 0 para domicilios; deletar para nao haver conflito com arquivo de pessoas
 
 					/* Compatibiliza, se especificado */
 					if "`comp'" != "" {
 						compat_censo00dom
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -634,7 +639,7 @@ foreach ano in `years' {
 					use `CENSO00_`UF'_pes_`suf'', clear
 					merge m:1 `var' using `CENSO00_`UF'_dom_`suf'', nogen keep(match)
 
-					/* Se não for o primeiro arquivo, junta com o anterior */
+					/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 					if "`suf'" != word(`"`sufixos'"', 1) {
 						if "`comp'"~= "" append using CENSO00_both_`UF'_comp
 						else append using CENSO00_both_`UF'
@@ -650,7 +655,7 @@ foreach ano in `years' {
 					merge m:1 `var' using `CENSO00_`UF'_dom_`suf'', nogen keep(match)
 
 
-					/* Se não for o primeiro arquivo, junta com o anterior */
+					/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 					if "`suf'" != word(`"`sufixos'"', 1) {
 						append using CENSO00_all_`UF'
 					}
@@ -660,7 +665,7 @@ foreach ano in `years' {
 				else {
 					if "`fam'"~="" {
 						use `CENSO00_`UF'_fam_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							append using CENSO00_`UF'_fam
 							}
@@ -668,7 +673,7 @@ foreach ano in `years' {
 						}
 					if "`pes'"~="" {
 						use `CENSO00_`UF'_pes_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO00_`UF'_pes_comp
 							else append using CENSO00_`UF'_pes
@@ -678,7 +683,7 @@ foreach ano in `years' {
 					}
 					if "`dom'"~="" {
 						use `CENSO00_`UF'_dom_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO00_`UF'_dom_comp
 							else append using CENSO00_`UF'_dom
@@ -689,36 +694,39 @@ foreach ano in `years' {
 				}
 			}
 		}
-	di as input "Attention: utilize the Census 2000 files updated on September 8th, 2017"
+	di as input "AtenÃ§Ã£o: utilize os microdados do Censo 2000 atualizados em 08/09/2017"
 	}
 
 	else if `ano' == 2010 {
-			if "`fam'" != "" {
-						di as err "Family option not allowed in `ano'"
+		
+		if "`fam'" != "" {
+						di as err "OpÃ§Ã£o FamÃ­lia nÃ£o disponÃ­vel para o ano `ano'"
 						exit
 						}
+		
+
 		foreach UF in `ufs' {
-			/* Achando posição da UF nas listas: */
+			/* Achando posiÃ§Ã£o da UF nas listas: */
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 			/* Loop para todos os arquivos da UF                              */
-			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-Ã©simo */
 			tokenize `suf2010'
 			local sufixos = "``pos''"
-			/* Mesmo para o código */
+			/* Mesmo para o cÃ³digo */
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			foreach suf in `sufixos' {
 				if "`pes'"~="" {
-					display as input "Extracting `ano' `UF' - `suf' ..."
-				/* Infile arquivo novo para os 14 municípios */
-					findfile censo`ano'pes_en.dct
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					/* Infile arquivo novo para os 14 municÃ­pios */
+					findfile censo`ano'pes`lang'.dct
 					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Pessoas_14munic.txt") clear
 					if _rc == 601 {
-					di as err "File Amostra_Pessoas_14munic.txt not found."
-					di "See http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
+					di as err "Arquivo Amostra_Pessoas_14munic.txt nÃ£o encontrado"
+					di "Ver http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
 					exit
 						}
 					qui destring, replace
@@ -730,33 +738,34 @@ foreach ano in `years' {
 					save `CENSO10_`UF'_pes14', replace
 										
 					/* Abrindo arquivo principal */
-					findfile censo`ano'pes_en.dct
+					findfile censo`ano'pes`lang'.dct
 					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Pessoas_`suf'.txt") clear
 										
-					/* Dropando observações dos 14 municípios com erro nas áreas de ponderação - microdados separados */
+					/* Dropando observaÃ§Ãµes dos 14 municÃ­pios com erro nas Ã¡reas de ponderaÃ§Ã£o - microdados separados */
 					qui destring, replace
 					qui drop if v0001==33 & v0002==4557 | v0001==43 & v0002==5108 |v0001==21 & v0002==5302 |v0001==24 & v0002==8102 | v0001==29 & v0002==10800 |v0001==43 & v0002==13409 | v0001==43 & v0002==14407 | v0001==43 & v0002==14902 | v0001==41 & v0002==15200 | v0001==43 & v0002==15602 | v0001==43 & v0002==16907 | v0001==41 & v0002==19905 | v0001==43 & v0002==23002 | v0001==29 & v0002==27408  
 					
-					/* Substituindo essas observações pelas observações do novo arquivo*/
+					/* Substituindo essas observaÃ§Ãµes pelas observaÃ§Ãµes do novo arquivo*/
 					append using `CENSO10_`UF'_pes14'					
 				
 					
 					gen ano = 2010
-					lab var ano "survey year"
-					* Deixando a variável v0002 com 5 dígitos
+					lab var ano " ano da pesquisa"	
+					* Deixando a variÃ¡vel v0002 com 5 dÃ­gitos
 					tostring v0002, format(%05.0f) replace
 					replace v0002="....." if v0002=="."
-					*Criando a variável munic
+					*Criando a variÃ¡vel munic
 					egen munic = concat(v0001 v0002)
 					destring munic, replace
 					replace munic = int(munic/10)
 					lab var munic "municipality codes without DV (6 digits)"
 
+
 					/* Compatibiliza, se especificado */
 	            	if "`comp'" != "" {
 						compat_censo10pess
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -765,14 +774,15 @@ foreach ano in `years' {
 					save `CENSO10_`UF'_pes_`suf'', replace
 				}
 				if "`dom'"~="" | "`both'"~="" {
-					/* Agora os domicílios */
-					display as input "Extracting `ano' `UF' - `suf' ..."
-					/* Infile arquivo novo para os 14 municípios */
-					findfile censo`ano'dom_en.dct
+					/* Agora os domicÃ­lios */
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					
+					/* Infile arquivo novo para os 14 municÃ­pios */
+					findfile censo`ano'dom`lang'.dct
 					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Domicilios_14munic.txt") clear
 					if _rc == 601 {
-					di as err "File Amostra_Domicilios_14munic.txt not found"
-					di "See http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
+					di as err "Arquivo Amostra_Domicilios_14munic.txt nÃ£o encontrado"
+					di "Ver http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
 					exit
 					}
 					qui destring, replace
@@ -784,22 +794,23 @@ foreach ano in `years' {
 					save `CENSO10_`UF'_dom14', replace
 										
 					/* Abrindo arquivo principal */
-					findfile censo`ano'dom_en.dct
+					findfile censo`ano'dom`lang'.dct
 					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Domicilios_`suf'.txt") clear
 									
-					/* Dropando observações dos 14 municípios com erro nas áreas de ponderação - microdados separados */
+					/* Dropando observaÃ§Ãµes dos 14 municÃ­pios com erro nas Ã¡reas de ponderaÃ§Ã£o - microdados separados */
 					qui destring, replace
 					qui drop if v0001==33 & v0002==4557 | v0001==43 & v0002==5108 |v0001==21 & v0002==5302 |v0001==24 & v0002==8102 | v0001==29 & v0002==10800 |v0001==43 & v0002==13409 | v0001==43 & v0002==14407 | v0001==43 & v0002==14902 | v0001==41 & v0002==15200 | v0001==43 & v0002==15602 | v0001==43 & v0002==16907 | v0001==41 & v0002==19905 | v0001==43 & v0002==23002 | v0001==29 & v0002==27408  
 					
-					/* Substituindo essas observações pelas observações do novo arquivo*/
+					/* Substituindo essas observaÃ§Ãµes pelas observaÃ§Ãµes do novo arquivo*/
 					append using `CENSO10_`UF'_dom14'
 					
+					
 					gen ano = 2010
-					lab var ano "survey year"
-					* Deixando a variável v0002 com 5 dígitos
+					lab var ano " ano da pesquisa"
+					* Deixando a variÃ¡vel v0002 com 5 dÃ­gitos
 					tostring v0002, format(%05.0f) replace
 					replace v0002="....." if v0002=="."
-					*Criando a variável munic
+					*Criando a variÃ¡vel munic
 					egen munic = concat(v0001 v0002)
 					destring munic, replace
 					replace munic = int(munic/10)
@@ -809,7 +820,7 @@ foreach ano in `years' {
 	            	if "`comp'" != "" {
 						compat_censo10dom
 
-						/* Áreas Mínimas Comparáveis */
+						/* Ãreas MÃ­nimas ComparÃ¡veis */
 						findfile amcs.dta
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -822,7 +833,7 @@ foreach ano in `years' {
 				if "`both'"~="" {
 					use `CENSO10_`UF'_pes_`suf'', clear
 					merge m:1 `var' using `CENSO10_`UF'_dom_`suf'', nogen keep(match)
-					/* Se não for o primeiro arquivo, junta com o anterior */
+					/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 					if "`suf'" != word(`"`sufixos'"', 1) {
 						if "`comp'"~= "" append using CENSO10_`UF'_comp
 						else append using CENSO10_`UF'
@@ -833,7 +844,7 @@ foreach ano in `years' {
 				else {
 					if "`pes'"~="" {
 						use `CENSO10_`UF'_pes_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO10_`UF'_pes_comp
 							else append using CENSO10_`UF'_pes
@@ -843,7 +854,7 @@ foreach ano in `years' {
 					}
 					else {
 						use `CENSO10_`UF'_dom_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
+						/* Se nÃ£o for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
 							if "`comp'"~= "" append using CENSO10_`UF'_dom_comp
 							else append using CENSO10_`UF'_dom
@@ -857,8 +868,8 @@ foreach ano in `years' {
 	}
 }
 
-display as result "The databases were saved in the following folder `c(pwd)'"
+display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
-di _newline "This version of datazoom_censo is compatible with Censo 2010's microdata published in March 11th, 2016 and Censo 2000's microdata published in September 8th, 2017."
+di _newline "Esta versÃ£o do pacote datazoom_censo Ã© compatÃ­vel com os microdados do Censo 2010 divulgados em 11/03/2016 e Censo 2000 divulgados em 08/09/2017."
 
 end
