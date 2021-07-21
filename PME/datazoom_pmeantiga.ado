@@ -4,9 +4,11 @@
 ******************************************************
 program define datazoom_pmeantiga
 
-syntax, years(numlist) original(str) saving(str) [nid idbas idrs]
+syntax, years(numlist) original(str) saving(str) [nid idbas idrs english]
 
 cd "`saving'"
+
+if "`english'" != "" local lang "_en"
 
 tempfile PMEBA PMEMG PMEPE PMEPR PMERJ PMERS PMESP
 tempfile PMEBAmes PMEMGmes PMEPEmes PMEPRmes PMERJmes PMERSmes PMESPmes
@@ -19,10 +21,10 @@ qui while "`*'" != "" {
 	if `1' <= 1999 {
 
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
-		noi display as input _newline "Extraindo `1' - Domicílios"
+		noi display as input _newline "Extraindo `1' - DomicÃ­lios"
 		loc y = substr("`1'",3,2)
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_dom.dct
+			findfile pme_1991_2000_dom`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME`y'`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
@@ -49,9 +51,9 @@ qui while "`*'" != "" {
 	}
 
 	else if `1' == 2000 {
-		noi display as input _newline "Extraindo `1' - Domicílios"
+		noi display as input _newline "Extraindo `1' - DomicÃ­lios"
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_dom.dct
+			findfile pme_1991_2000_dom`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME2K`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
@@ -79,10 +81,10 @@ qui while "`*'" != "" {
 	}
 
 	else if `1' == 2001 {
-		noi display as input _newline "Extraindo `1' - Domicílios"
+		noi display as input _newline "Extraindo `1' - DomicÃ­lios"
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		foreach UF in BA MG PR PE RJ RS SP {
-			findfile pme_2001_dom.dct
+			findfile pme_2001_dom`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME2001`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
@@ -122,7 +124,7 @@ qui while "`*'" != "" {
 		noi display as input _newline "Extraindo `1' - Pessoas"
 		loc y = substr("`1'",3,2)
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_pes.dct
+			findfile pme_1991_2000_pes`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME`y'`UF'P.txt") clear
 			compress
 			save `PME`UF'', replace
@@ -143,8 +145,8 @@ qui while "`*'" != "" {
 				append using `PME`UF'mes'
 			}
 			
-			/*Utilização do deflator para variaveis monetarias*/
-			findfile deflatorpmeantiga.dta
+			/*UtilizaÃ§Ã£o do deflator para variaveis monetarias*/
+			findfile deflator_pmeantiga.dta
 			merge m:1 mes ano using `"`r(fn)'"', keep(match) nogen
 			foreach var in v309 v311 {
 				gen `var'df = `var'/(deflator*converter) if `var' ~= 999999999
@@ -162,7 +164,7 @@ qui while "`*'" != "" {
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		noi display as input _newline "Extraindo `1' - Pessoas"
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_pes.dct
+			findfile pme_1991_2000_pes`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME2K`UF'P.txt") clear
 			compress
 			save `PME`UF'', replace
@@ -183,8 +185,8 @@ qui while "`*'" != "" {
 				append using `PME`UF'mes'
 			}
 			
-			/*Utilização do deflator para variaveis monetarias*/
-			findfile deflatorpmeantiga.dta
+			/*UtilizaÃ§Ã£o do deflator para variaveis monetarias*/
+			findfile deflator_pmeantiga.dta
 			merge m:1 mes ano using `"`r(fn)'"', keep(match) nogen
 			foreach var in v309 v311 {
 				gen `var'df = `var'/(deflator*converter) if `var' ~= 999999999
@@ -202,11 +204,11 @@ qui while "`*'" != "" {
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		noi display as input _newline  "Extraindo `1' - Pessoas"
 		foreach UF in BA MG PR PE RJ RS SP {
-			findfile pme_2001_pes.dct
+			findfile pme_2001_pes`lang'.dct
 			infile using `"`r(fn)'"', using("`original'/PME2001`UF'P.txt") clear
-			/*Correção de leitura da base de pessoas de 2001: a base de dados agrupa 
-			na mesma linha do domícilio todos os respectivos indivíduos. Essa correção
-			reorganiza a base de forma a ler cada indíviduo junto com seu domícilio por
+			/*CorreÃ§Ã£o de leitura da base de pessoas de 2001: a base de dados agrupa 
+			na mesma linha do domÃ­cilio todos os respectivos indivÃ­duos. Essa correÃ§Ã£o
+			reorganiza a base de forma a ler cada indÃ­viduo junto com seu domÃ­cilio por
 			linha*/ 
 			reshape long  v201 v202 v203 v204 v205 v206 v236 v246 v207 v208 v209 v210 ///
 			              v211 v301 v302 v303 v304 v305 v306 v307 v308 v309 v339 v310 ///
@@ -219,26 +221,26 @@ qui while "`*'" != "" {
 
 			/* reintroduzindo as labels */
 			
-			lab var	v201	"número de ordem"
+			lab var	v201	"nÃºmero de ordem"
 			lab var	v202	"sexo"
-			lab var	v203	"condição no domicílio"
-			lab var	v204	"condição na família"
-			lab var	v205	"número da família"
+			lab var	v203	"condiÃ§Ã£o no domicÃ­lio"
+			lab var	v204	"condiÃ§Ã£o na famÃ­lia"
+			lab var	v205	"nÃºmero da famÃ­lia"
 			lab var	v206	"dia de nascimento"
-			lab var	v236	"mês de nascimento"
+			lab var	v236	"mÃªs de nascimento"
 			lab var	v246	"ano de nascimento"
 			lab var	v207	"sabe ler e escrever"
 			lab var	v208	"frequenta escola"
-			lab var	v209	"última série concluída"
+			lab var	v209	"Ãºltima sÃ©rie concluÃ­da"
 			lab var	v210	"grau"
 			lab var	v211	"concluiu o curso?"
 			lab var	v301	"que fez na semana?"
 			lab var	v302	"tinha mais de um trabalho?"
-			lab var	v303	"ocupação na semana"
-			lab var	v304	"atividade/ramo do negócio"
+			lab var	v303	"ocupaÃ§Ã£o na semana"
+			lab var	v304	"atividade/ramo do negÃ³cio"
 			lab var	v305	"ramo de atividade"
-			lab var	v306	"posição na ocupação"
-			lab var	v307	"frequência com que recebia"
+			lab var	v306	"posiÃ§Ã£o na ocupaÃ§Ã£o"
+			lab var	v307	"frequÃªncia com que recebia"
 			lab var	v308	"tem carteira assinada?"
 			lab var	v309	"rendimento mensal em dinheiro"
 			lab var	v339	"faixa de rendimento mensal"
@@ -246,29 +248,29 @@ qui while "`*'" != "" {
 			lab var	v311	"rendimento mensal - outros trabalhos"
 			lab var	v341	"faixa de rendimento - outros trabalhos"
 			lab var	v312	"horas efetiv. trabalhasdas - outros trabs."
-			lab var	v313	"tomou providência no período?"
-			lab var	v314	"tomou providência antes?"
-			lab var	v315	"que providência tomou?"
-			lab var	v931	"data em que tomou providência"
-			lab var	v316	"dia em que tomou providência"
-			lab var	v346	"mês em que tomou providência"
-			lab var	v356	"ano em que tomou providência"
-			lab var	v366	"quando tomou providência?"
-			lab var	v317	"há qto tempo procurava trab? (meses)"
-			lab var	v347	"há qto tempo procurava trab? (semanas)"
-			lab var	v318	"já teve trabalho remunerado?"
-			lab var	v319	"já teve trabalho não remunerado?"
-			lab var	v320	"há qto tempo saiu do último trab? (anos)"
-			lab var	v350	"há qto tempo saiu do último trab? (meses)"
-			lab var	v360	"há qto tempo saiu do último trab? (semanas)"
-			lab var	v321	"ocupação anterior"
+			lab var	v313	"tomou providÃªncia no perÃ­odo?"
+			lab var	v314	"tomou providÃªncia antes?"
+			lab var	v315	"que providÃªncia tomou?"
+			lab var	v931	"data em que tomou providÃªncia"
+			lab var	v316	"dia em que tomou providÃªncia"
+			lab var	v346	"mÃªs em que tomou providÃªncia"
+			lab var	v356	"ano em que tomou providÃªncia"
+			lab var	v366	"quando tomou providÃªncia?"
+			lab var	v317	"hÃ¡ qto tempo procurava trab? (meses)"
+			lab var	v347	"hÃ¡ qto tempo procurava trab? (semanas)"
+			lab var	v318	"jÃ¡ teve trabalho remunerado?"
+			lab var	v319	"jÃ¡ teve trabalho nÃ£o remunerado?"
+			lab var	v320	"hÃ¡ qto tempo saiu do Ãºltimo trab? (anos)"
+			lab var	v350	"hÃ¡ qto tempo saiu do Ãºltimo trab? (meses)"
+			lab var	v360	"hÃ¡ qto tempo saiu do Ãºltimo trab? (semanas)"
+			lab var	v321	"ocupaÃ§Ã£o anterior"
 			lab var	v322	"atividade anterior"
 			lab var	v323	"ramo de atividade anterior"
-			lab var	v324	"posição na ocupação anterior"
-			lab var	v325	"tempo no último emprego (anos)"
-			lab var	v355	"tempo no último emprego (meses)"
-			lab var	v326	"porque saiu do último emprego?"
-			lab var	v327	"tinha carteira assinada no último emprego?"
+			lab var	v324	"posiÃ§Ã£o na ocupaÃ§Ã£o anterior"
+			lab var	v325	"tempo no Ãºltimo emprego (anos)"
+			lab var	v355	"tempo no Ãºltimo emprego (meses)"
+			lab var	v326	"porque saiu do Ãºltimo emprego?"
+			lab var	v327	"tinha carteira assinada no Ãºltimo emprego?"
 			lab var	v328	"quando saiu, recebeu FGTS?"
 			lab var	v256	"idade calculada"
 
@@ -288,12 +290,12 @@ qui while "`*'" != "" {
 				append using `PME`UF'mes'
 			}
 			
-			/*Utilização do deflator para variaveis monetarias*/
+			/*UtilizaÃ§Ã£o do deflator para variaveis monetarias*/
 			g mes = v0105
 			g ano = 2001
-			lab var mes "mês da pesquisa"
+			lab var mes "mÃªs da pesquisa"
 			lab var ano "ano da pesquisa"
-			findfile deflatorpmeantiga.dta
+			findfile deflator_pmeantiga.dta
 			merge m:1 mes ano using `"`r(fn)'"', keep(match) nogen
 			foreach var in v309 v311 {
 				gen `var'df = `var'/(deflator*converter) if `var' ~= 999999999
@@ -307,14 +309,14 @@ qui while "`*'" != "" {
 	}
 }
 
-/*Preparação para rodar os algoritmos de identifição*/
+/*PreparaÃ§Ã£o para rodar os algoritmos de identifiÃ§Ã£o*/
 
 tempfile PME_PainelAtemp PME_PainelBtemp PME_PainelCtemp PME_PainelDtemp PME_PainelEtemp PME_PainelFtemp
 tempfile PME_PainelGtemp PME_PainelHtemp PME_PainelItemp PME_PainelJtemp PME_PainelKtemp PME_PainelLtemp
 tempfile PME_PainelMtemp PME_PainelNtemp PME_PainelOtemp PME_PainelPtemp PME_PainelQtemp PME_PainelRtemp PME_PainelStemp 
 
-/*Criando paineis para as bases de dados e adaptando variaveis para os algoritmos de identificação*/
-/*Adapta variáveis da PME para domícilios*/
+/*Criando paineis para as bases de dados e adaptando variaveis para os algoritmos de identificaÃ§Ã£o*/
+/*Adapta variÃ¡veis da PME para domÃ­cilios*/
 
 qui foreach aa in `years' {
 	if `aa' == 2001 {
@@ -326,7 +328,7 @@ qui foreach aa in `years' {
 			rename v0103 v103
 			gen mes = v0105
 			gen ano = 2001
-			lab var mes "mês da pesquisa"
+			lab var mes "mÃªs da pesquisa"
 			lab var ano "ano da pesquisa"
 			save `PME2001`mm'D', replace
 		}
@@ -341,7 +343,7 @@ qui foreach aa in `years' {
 		}
 	}
 
-/*Montando arquivo de domicílios com todos as pesquisas por ano*/
+/*Montando arquivo de domicÃ­lios com todos as pesquisas por ano*/
 	use `PME`aa'01D', clear
 	foreach mm in 02 03 04 05 06 07 08 09 10 11 12 {
 		append using `PME`aa'`mm'D'
@@ -349,7 +351,7 @@ qui foreach aa in `years' {
 	tempfile PME`aa'D
 	save `PME`aa'D', replace
 
-/*Adapta variáveis da PME de 2001 para pessoas*/
+/*Adapta variÃ¡veis da PME de 2001 para pessoas*/
 	if `aa' == 2001 {
 		foreach mm in 01 02 03 04 05 06 07 08 09 10 11 12 {
 			use `PME2001`mm'P', clear
@@ -371,9 +373,9 @@ qui foreach aa in `years' {
 	tempfile PME`aa'P
 	save `PME`aa'P', replace
 
-	/*Corrigindo possível erro na PME 1995: entre novembro e dezembro, o numero de controle 
-	para o mesmo domicilio é alterado. É possível recuperar a identificação do domicílio 
-	utilizando a variável pasta e número no 202/203*/
+	/*Corrigindo possÃ­vel erro na PME 1995: entre novembro e dezembro, o numero de controle 
+	para o mesmo domicilio Ã© alterado. Ã‰ possÃ­vel recuperar a identificaÃ§Ã£o do domicÃ­lio 
+	utilizando a variÃ¡vel pasta e nÃºmero no 202/203*/
 	if `aa' == 1995 {
 		use `PME1995D'
 		summ v102 if mes == 11
@@ -384,21 +386,21 @@ qui foreach aa in `years' {
 				
 			tempfile PME95_aux PME95_rem1 PME95_rem3 PME95_rem4 PME95_corr
 
-			***Abrindo 'Domicílios';
-			*uniformizando código para n. de controle e série com o de 'Pessoas'.
+			***Abrindo 'DomicÃ­lios';
+			*uniformizando cÃ³digo para n. de controle e sÃ©rie com o de 'Pessoas'.
 						
 			save `PME95_aux'
 			clear
 						
 			***Remessa 1
-			*Grupo de dezembro é o mesmo que de novembro;
-			*dezembro de 1995 é o último mês de entrevista deste grupo.
-			*Melhor tomar código antigo.
+			*Grupo de dezembro Ã© o mesmo que de novembro;
+			*dezembro de 1995 Ã© o Ãºltimo mÃªs de entrevista deste grupo.
+			*Melhor tomar cÃ³digo antigo.
 							
 			use `PME95_aux'
 			keep if mes >= 11 & v0106 == 1
 						
-			*Identificando n. de domicílios pesquisados por n. de controle
+			*Identificando n. de domicÃ­lios pesquisados por n. de controle
 			sort v102 v103
 			by v102: generate v103max = v103[_N]
 							
@@ -412,7 +414,7 @@ qui foreach aa in `years' {
 							
 							
 			***Remessa 2
-			*Grupo de dezembro está entrando na amostra;
+			*Grupo de dezembro estÃ¡ entrando na amostra;
 			*o de novembro, acaba de deixar amostra.
 			*Nada a fazer, portanto.
 							
@@ -420,12 +422,12 @@ qui foreach aa in `years' {
 			***Remessa 3
 			*Grupo de dezembro entrou na pesquisa em novembro;
 			*e vai aparecer em 96, com codigo novo.
-			*Melhor tomar o código novo.
+			*Melhor tomar o cÃ³digo novo.
 							
 			use `PME95_aux'
 			keep if mes >= 11 & v0106 == 3
 							
-			*Identificando n. de domicílios pesquisados por n. de controle
+			*Identificando n. de domicÃ­lios pesquisados por n. de controle
 			sort v102 v103
 			by v102: generate v103max = v103[_N]
 						
@@ -442,12 +444,12 @@ qui foreach aa in `years' {
 			***Remessa 4
 			*Grupo de dezembro entrou na pesquisa em outubro;
 			*e vai aparecer em 96, com codigo novo.
-			*Melhor tomar o código novo.
+			*Melhor tomar o cÃ³digo novo.
 				
 			use `PME95_aux'
 			keep if mes >= 10 & v0106 == 4
 							
-			*Identificando n. de domicílios pesquisados por n. de controle
+			*Identificando n. de domicÃ­lios pesquisados por n. de controle
 			sort v102 v103
 			by v102: generate v103max = v103[_N]
 						
@@ -488,7 +490,7 @@ qui foreach aa in `years' {
 	}
 }
 
-/* Criando pastas para guardar arquivos da sessão */
+/* Criando pastas para guardar arquivos da sessÃ£o */
 capture mkdir pmeantiga
 if _rc == 693 {
    tempname numpasta
@@ -503,7 +505,7 @@ else {
 }
 loc caminhoprin = c(pwd)
 
-/*Usando arquivos de domicílios para obter número da remessa de cada registro de pessoa*/
+/*Usando arquivos de domicÃ­lios para obter nÃºmero da remessa de cada registro de pessoa*/
 qui foreach aa in `years' {
 
 	use `PME`aa'P'
@@ -511,15 +513,15 @@ qui foreach aa in `years' {
 	findfile paineisPMEantiga.dta
 	merge m:1 ano mes v0106 using `"`r(fn)'"', keep(match) keepus(painel npesq) nogen
     lab var painel "painel da pesquisa"
-	lab var npesq "número da pesquisa"
+	lab var npesq "nÃºmero da pesquisa"
 	
 	/*Gera a variavel anos de estudos*/
 	generate aest1 = .
 
-	***1 - Sem instrução / Menos de um ano
+	***1 - Sem instruÃ§Ã£o / Menos de um ano
 	replace aest1 = 1 if (v210==0)
 
-	***2 - Um a três anos de estudo
+	***2 - Um a trÃªs anos de estudo
 	replace aest1 = 2 if (v210==1 & v209>=1 & v209<=3)
 	replace aest1 = 2 if (v210==1 & v211==3)
 	replace aest1 = 2 if (v210==1 & v209==0)
@@ -553,11 +555,11 @@ qui foreach aa in `years' {
 	replace aest1 = 5 if (v210==6)
 	replace aest1 = 5 if (v210==7)
 
-	***6 - Não determinado
+	***6 - NÃ£o determinado
 	replace aest1 = 6 if (v210==3 & v209==0)
 	replace aest1 = 6 if (v210==3 & v209==9)
 
-	***Branco - Não aplicável
+	***Branco - NÃ£o aplicÃ¡vel
 	lab var aest1 "grupos de anos de estudo"
 	
 	if "`nid'"~="" save PME`aa'P, replace
@@ -601,46 +603,46 @@ qui {
 	}
 }	
 	
-/*Executa a identificação básica*/
+/*Executa a identificaÃ§Ã£o bÃ¡sica*/
 qui if "`idbas'" != "" {
-	noi di as result "Executando Identificação Básica ..."
+	noi di as result "Executando IdentificaÃ§Ã£o BÃ¡sica ..."
 	foreach pa in $panels {
 		noi di "Painel `pa'"
 		use `PME_Painel`pa'temp', clear
 		
-		/*Algoritmo Básico*/
+		/*Algoritmo BÃ¡sico*/
 		****************************************************************
 		* Nota
 		****************************************************************
-		/* Este algoritmo pode ser aplicado tanto à nova quanto à antiga
-		PME. As variáveis utilizadas a seguir são as da nova pesquisa.
+		/* Este algoritmo pode ser aplicado tanto Ã  nova quanto Ã  antiga
+		PME. As variÃ¡veis utilizadas a seguir sÃ£o as da nova pesquisa.
 		Para utilizar o algoritmo com a antiga PME basta substituir
-		as seguintes variáveis:
+		as seguintes variÃ¡veis:
 		Na nova Na antiga
-		v035 = Região Metropolitana = v010
-		v040 = Número de controle = v102
-		v050 = Número de série = v103
-		v060 = Painel = deve ser construída
+		v035 = RegiÃ£o Metropolitana = v010
+		v040 = NÃºmero de controle = v102
+		v050 = NÃºmero de sÃ©rie = v103
+		v060 = Painel = deve ser construÃ­da
 		v063 = Grupo rotacional = v106
-		v070 = Mês da pesquisa = v105
-		v075 = Ano da pesquisa = deve ser construída
-		v072 = Número da pesquisa no domicílio = deve ser construída
-		v201 = Número de ordem = v201
+		v070 = MÃªs da pesquisa = v105
+		v075 = Ano da pesquisa = deve ser construÃ­da
+		v072 = NÃºmero da pesquisa no domicÃ­lio = deve ser construÃ­da
+		v201 = NÃºmero de ordem = v201
 		v203 = Sexo = v202
 		v204 = Dia de nascimento = v206
-		v214 = Mês de nascimento = v236
+		v214 = MÃªs de nascimento = v236
 		v224 = Ano de nascimento = v246
 		v234 = Idade calculada = v256
-		v205 = Condição no domicílio = v203
-		vDAE1= Anos de estudo I = deve ser construída
-		Recomenda-se rodá-lo com arquivos pequenos. Para PME, a sugestão
-		é de um arquivo por painel (variável PAINEL) */
+		v205 = CondiÃ§Ã£o no domicÃ­lio = v203
+		vDAE1= Anos de estudo I = deve ser construÃ­da
+		Recomenda-se rodÃ¡-lo com arquivos pequenos. Para PME, a sugestÃ£o
+		Ã© de um arquivo por painel (variÃ¡vel PAINEL) */
 		****************************************************************
-		* Variáveis do painel
+		* VariÃ¡veis do painel
 		****************************************************************
-		* Variável de identificação da pessoa no painel
+		* VariÃ¡vel de identificaÃ§Ã£o da pessoa no painel
 		g p201 = v201 if npesq == 1 /* definido com base na 1a entrevista */
-		* Variáveis que identificam o emparelhamento
+		* VariÃ¡veis que identificam o emparelhamento
 		g back = . /* com uma entrevista anterior */
 		g forw = . /* com uma entrevista posterior */
 		****************************************************************
@@ -649,42 +651,42 @@ qui if "`idbas'" != "" {
 		* Emparelhamento para cada par de entrevista por vez
 		forvalues i = 1/7 {
 		****************************************************************
-		* Emparelhamento-padrão - se a data de nascimento está correta
+		* Emparelhamento-padrÃ£o - se a data de nascimento estÃ¡ correta
 		****************************************************************
-		* Ordenando cada indivíduo pelo mês de entrevista
+		* Ordenando cada indivÃ­duo pelo mÃªs de entrevista
 			sort uf v102 v103 painel v0106 v202 v206 v236 v246 ano mes v201
-			* Loop para procurar a mesma pessoa em uma posição anterior
-			loc j = 1 /* j determina a posição anterior na base */
+			* Loop para procurar a mesma pessoa em uma posiÃ§Ã£o anterior
+			loc j = 1 /* j determina a posiÃ§Ã£o anterior na base */
 			loc stop = 0 /* se stop=1, a loop para */
 			loc count = 0
 			while `stop' == 0 {
 				loc lastcount = `count'
-				count if p201 == . & npesq == `i'+1 /* observações não
+				count if p201 == . & npesq == `i'+1 /* observaÃ§Ãµes nÃ£o
 				emparelhadas */
 				loc count = r(N)
 				if `count' == `lastcount' {
-		* Parar caso a loop não esteja emparelhando mais
+		* Parar caso a loop nÃ£o esteja emparelhando mais
 					loc stop = 1
 				}
 				else {
 					if r(N) != 0 {
-						* Captando a identificação p201 da observação anterior
+						* Captando a identificaÃ§Ã£o p201 da observaÃ§Ã£o anterior
 						replace p201 = p201[_n - `j'] if /*
-						Identificação do domicílio
+						IdentificaÃ§Ã£o do domicÃ­lio
 						*/ uf == uf[_n - `j'] & ///
 						v102 == v102[_n - `j'] & ///
 						v103 == v103[_n - `j'] & ///
 						painel == painel[_n - `j'] & ///
 						v0106 == v0106[_n - `j'] & /*
-						diferença entre períodos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
+						diferenÃ§a entre perÃ­odos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
 						excluir emparelhados */ & p201 ==. & forw[_n - `j'] != 1 & /*
-						Características individuais
+						CaracterÃ­sticas individuais
 						Sexo */ v202 == v202[_n - `j'] & /*
 						Dia de nascimento */ v206 == v206[_n - `j'] & /*
-						Mês de nascimento */ v236 == v236[_n - `j'] & /*
+						MÃªs de nascimento */ v236 == v236[_n - `j'] & /*
 						Ano de nascimento */ v246 == v246[_n - `j'] & /*
-						Informação observada */ v206!=99 & v236!=99 & v246!=9999
-						* Identificação de emparelhamento para quem está à frente
+						InformaÃ§Ã£o observada */ v206!=99 & v236!=99 & v246!=9999
+						* IdentificaÃ§Ã£o de emparelhamento para quem estÃ¡ Ã  frente
 						replace forw = 1 if uf == uf[_n + `j'] & ///
 						v102 == v102[_n + `j'] & ///
 						v103 == v103[_n + `j'] & ///
@@ -693,21 +695,21 @@ qui if "`idbas'" != "" {
 						p201 == p201[_n + `j'] & ///
 						npesq == `i' & npesq[_n + `j']==`i'+1 ///
 						& forw != 1
-						loc j = `j' + 1 /* passando para a próxima observação */
+						loc j = `j' + 1 /* passando para a prÃ³xima observaÃ§Ã£o */
 					}
 					else {
-					* Parar se não há observações para emparelhar
+					* Parar se nÃ£o hÃ¡ observaÃ§Ãµes para emparelhar
 						loc stop = 1
 					}
 				}
 			}
-			* Recodificar variáveis de identificação do emparelhamento
+			* Recodificar variÃ¡veis de identificaÃ§Ã£o do emparelhamento
 			replace back = p201 !=. if npesq == `i'+1
 			replace forw = 0 if forw != 1 & npesq == `i'
-			* Identificação para quem estava ausente na última entrevista
+			* IdentificaÃ§Ã£o para quem estava ausente na Ãºltima entrevista
 			replace p201 = `i'00 + v201 if p201 == . & npesq == `i'+1
 		}
-		/* criando identificacao do individuo, que é mantido em todas as pesquisas */
+		/* criando identificacao do individuo, que Ã© mantido em todas as pesquisas */
 		tempvar a b c d
 		tostring uf, g(`a')
 		tostring v102, g(`b') format(%08.0f)
@@ -721,9 +723,9 @@ qui if "`idbas'" != "" {
 	}
 }
 
-/*Executa a identificação de Ribas & Soares*/
+/*Executa a identificaÃ§Ã£o de Ribas & Soares*/
 qui if "`idrs'" != "" {
-	noi di as result "Executando Identificação Ribas-Soares ..."
+	noi di as result "Executando IdentificaÃ§Ã£o Ribas-Soares ..."
 	foreach pa in $panels {
 		noi di "Painel `pa'"
 		use `PME_Painel`pa'temp'
@@ -732,35 +734,35 @@ qui if "`idrs'" != "" {
 		****************************************************************
 		* Nota
 		****************************************************************
-		/* Este algoritmo pode ser aplicado tanto à nova quanto à antiga
-		PME. As variáveis utilizadas a seguir são as da nova pesquisa.
+		/* Este algoritmo pode ser aplicado tanto Ã  nova quanto Ã  antiga
+		PME. As variÃ¡veis utilizadas a seguir sÃ£o as da nova pesquisa.
 		Para utilizar o algoritmo com a antiga PME basta substituir
-		as seguintes variáveis:
+		as seguintes variÃ¡veis:
 		Na nova Na antiga
-		v035 = Região Metropolitana = v010
-		v040 = Número de controle = v102
-		v050 = Número de série = v103
-		v060 = Painel = deve ser construída
+		v035 = RegiÃ£o Metropolitana = v010
+		v040 = NÃºmero de controle = v102
+		v050 = NÃºmero de sÃ©rie = v103
+		v060 = Painel = deve ser construÃ­da
 		v063 = Grupo rotacional = v106
-		v070 = Mês da pesquisa = v105
-		v075 = Ano da pesquisa = deve ser construída
-		v072 = Número da pesquisa no domicílio = deve ser construída
-		v201 = Número de ordem = v201
+		v070 = MÃªs da pesquisa = v105
+		v075 = Ano da pesquisa = deve ser construÃ­da
+		v072 = NÃºmero da pesquisa no domicÃ­lio = deve ser construÃ­da
+		v201 = NÃºmero de ordem = v201
 		v203 = Sexo = v202
 		v204 = Dia de nascimento = v206
-		v214 = Mês de nascimento = v236
+		v214 = MÃªs de nascimento = v236
 		v224 = Ano de nascimento = v246
 		v234 = Idade calculada = v256
-		v205 = Condição no domicílio = v203
-		vDAE1= Anos de estudo I = deve ser construída
-		Recomenda-se rodá-lo com arquivos pequenos. Para PME, a sugestão
-		é de um arquivo por painel (variável PAINEL) */
+		v205 = CondiÃ§Ã£o no domicÃ­lio = v203
+		vDAE1= Anos de estudo I = deve ser construÃ­da
+		Recomenda-se rodÃ¡-lo com arquivos pequenos. Para PME, a sugestÃ£o
+		Ã© de um arquivo por painel (variÃ¡vel PAINEL) */
 		****************************************************************
-		* Variáveis do painel
+		* VariÃ¡veis do painel
 		****************************************************************
-		* Variável de identificação da pessoa no painel
+		* VariÃ¡vel de identificaÃ§Ã£o da pessoa no painel
 		g p201 = v201 if npesq == 1 /* definido com base na 1a entrevista */
-		* Variáveis que identificam o emparelhamento
+		* VariÃ¡veis que identificam o emparelhamento
 		g back = . /* com uma entrevista anterior */
 		g forw = . /* com uma entrevista posterior */
 		****************************************************************
@@ -769,42 +771,42 @@ qui if "`idrs'" != "" {
 		* Emparelhamento para cada par de entrevista por vez
 		forvalues i = 1/7 {
 		****************************************************************
-		* Emparelhamento-padrão - se a data de nascimento está correta
+		* Emparelhamento-padrÃ£o - se a data de nascimento estÃ¡ correta
 		****************************************************************
-		* Ordenando cada indivíduo pelo mês de entrevista
+		* Ordenando cada indivÃ­duo pelo mÃªs de entrevista
 		sort uf v102 v103 painel v0106 v202 v206 v236 v246 ano mes v201
-		* Loop para procurar a mesma pessoa em uma posição anterior
-		loc j = 1 /* j determina a posição anterior na base */
+		* Loop para procurar a mesma pessoa em uma posiÃ§Ã£o anterior
+		loc j = 1 /* j determina a posiÃ§Ã£o anterior na base */
 		loc stop = 0 /* se stop=1, a loop para */
 		loc count = 0
 		while `stop' == 0 {
 		loc lastcount = `count'
-		count if p201 == . & npesq == `i'+1 /* observações não
+		count if p201 == . & npesq == `i'+1 /* observaÃ§Ãµes nÃ£o
 		emparelhadas */
 		loc count = r(N)
 		if `count' == `lastcount' {
-		* Parar caso a loop não esteja emparelhando mais
+		* Parar caso a loop nÃ£o esteja emparelhando mais
 		loc stop = 1
 		}
 		else {
 		if r(N) != 0 {
-		* Captando a identificação p201 da observação anterior
+		* Captando a identificaÃ§Ã£o p201 da observaÃ§Ã£o anterior
 		replace p201 = p201[_n - `j'] if /*
-		Identificação do domicílio
+		IdentificaÃ§Ã£o do domicÃ­lio
 		*/ uf == uf[_n - `j'] & ///
 		v102 == v102[_n - `j'] & ///
 		v103 == v103[_n - `j'] & ///
 		painel == painel[_n - `j'] & ///
 		v0106 == v0106[_n - `j'] & /*
-		diferença entre períodos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
+		diferenÃ§a entre perÃ­odos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
 		excluir emparelhados */ & p201 ==. & forw[_n - `j'] != 1 & /*
-		Características individuais
+		CaracterÃ­sticas individuais
 		Sexo */ v202 == v202[_n - `j'] & /*
 		Dia de nascimento */ v206 == v206[_n - `j'] & /*
-		Mês de nascimento */ v236 == v236[_n - `j'] & /*
+		MÃªs de nascimento */ v236 == v236[_n - `j'] & /*
 		Ano de nascimento */ v246 == v246[_n - `j'] & /*
-		Informação observada */ v206!=99 & v236!=99 & v246!=9999
-		* Identificação de emparelhamento para quem está à frente
+		InformaÃ§Ã£o observada */ v206!=99 & v236!=99 & v246!=9999
+		* IdentificaÃ§Ã£o de emparelhamento para quem estÃ¡ Ã  frente
 		replace forw = 1 if uf == uf[_n + `j'] & ///
 		v102 == v102[_n + `j'] & ///
 		v103 == v103[_n + `j'] & ///
@@ -813,57 +815,57 @@ qui if "`idrs'" != "" {
 		p201 == p201[_n + `j'] & ///
 		npesq == `i' & npesq[_n + `j']==`i'+1 ///
 		& forw != 1
-		loc j = `j' + 1 /* passando para a próxima observação */
+		loc j = `j' + 1 /* passando para a prÃ³xima observaÃ§Ã£o */
 		}
 		else {
-		* Parar se não há observações para emparelhar
+		* Parar se nÃ£o hÃ¡ observaÃ§Ãµes para emparelhar
 		loc stop = 1
 		}
 		}
 		}
-		* Recodificar variáveis de identificação do emparelhamento
+		* Recodificar variÃ¡veis de identificaÃ§Ã£o do emparelhamento
 		replace back = p201 !=. if npesq == `i'+1
 		replace forw = 0 if forw != 1 & npesq == `i'
 		****************************************************************
-		* Emparelhamento avançado
+		* Emparelhamento avanÃ§ado
 		****************************************************************
-		* Se sexo e ano de nascimento não estiverem corretos
-		* Isolando observações já emparelhadas
+		* Se sexo e ano de nascimento nÃ£o estiverem corretos
+		* Isolando observaÃ§Ãµes jÃ¡ emparelhadas
 		tempvar aux
 		g `aux' = (forw==1 & (npesq==1 | back==1)) | (back==1 & npesq==8)
-		* Ordenando cada indivíduo pelo mês de entrevista
+		* Ordenando cada indivÃ­duo pelo mÃªs de entrevista
 		sort `aux' uf v102 v103 painel v0106 v206 v236 v201 ano mes
-		* Loop para procurar a mesma pessoa em uma posição anterior
-		loc j = 1 /* j determina a posição anterior na base */
+		* Loop para procurar a mesma pessoa em uma posiÃ§Ã£o anterior
+		loc j = 1 /* j determina a posiÃ§Ã£o anterior na base */
 		loc stop = 0 /* se stop=1, a loop para */
 		loc count = 0
 		while `stop' == 0 {
 		loc lastcount = `count'
-		count if p201 == . & npesq == `i'+1 /* observações não
+		count if p201 == . & npesq == `i'+1 /* observaÃ§Ãµes nÃ£o
 		emparelhadas */
 		loc count = r(N)
 		if `count' == `lastcount' {
-		* Parar caso a loop não esteja emparelhando mais
+		* Parar caso a loop nÃ£o esteja emparelhando mais
 		loc stop = 1
 		}
 		else {
 		if r(N) != 0 {
-		* Captando a identificação p201 da observação anterior
+		* Captando a identificaÃ§Ã£o p201 da observaÃ§Ã£o anterior
 		replace p201 = p201[_n - `j'] if /*
-		Identificação do domicílio
+		IdentificaÃ§Ã£o do domicÃ­lio
 		*/ uf == uf[_n - `j'] & ///
 		v102 == v102[_n - `j'] & ///
 		v103 == v103[_n - `j'] & ///
 		painel == painel[_n - `j'] & ///
 		v0106 == v0106[_n - `j'] & /*
-		diferença entre períodos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
+		diferenÃ§a entre perÃ­odos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
 		excluir emparelhados */ & p201 ==. & forw[_n - `j'] != 1 & /*
-		Características individuais
+		CaracterÃ­sticas individuais
 		Dia de nascimento */ v206 == v206[_n - `j'] & /*
-		Mês de nascimento */ v236 == v236[_n - `j'] & /*
-		Mesmo número de ordem */ v201 == v201[_n - `j'] & /*
-		Informação observada */ v206!=99 & v236!=99
-		* Identificação de emparelhamento para quem está à frente
+		MÃªs de nascimento */ v236 == v236[_n - `j'] & /*
+		Mesmo nÃºmero de ordem */ v201 == v201[_n - `j'] & /*
+		InformaÃ§Ã£o observada */ v206!=99 & v236!=99
+		* IdentificaÃ§Ã£o de emparelhamento para quem estÃ¡ Ã  frente
 		replace forw = 1 if uf == uf[_n + `j'] & ///
 		v102 == v102[_n + `j'] & ///
 		v103 == v103[_n + `j'] & ///
@@ -872,26 +874,26 @@ qui if "`idrs'" != "" {
 		p201 == p201[_n + `j'] & ///
 		npesq == `i' & npesq[_n + `j']==`i'+1 ///
 		& forw != 1
-		loc j = `j' + 1 /* passando para a próxima observação */
+		loc j = `j' + 1 /* passando para a prÃ³xima observaÃ§Ã£o */
 		}
 		else {
-		* Parar se não há observações para emparelhar
+		* Parar se nÃ£o hÃ¡ observaÃ§Ãµes para emparelhar
 		loc stop = 1
 		}
 		}
 		}
 		****************************************************************
-		* Emparelhamento avançado
+		* Emparelhamento avanÃ§ado
 		****************************************************************
-		* Somente para chefes, cônjuges e filhos adultos
+		* Somente para chefes, cÃ´njuges e filhos adultos
 		tempvar ager aux
-		* Função de erro na idade presumida
+		* FunÃ§Ã£o de erro na idade presumida
 		g `ager' = cond(v256>=25 & v256<999, exp(v256/30), 2)
-		* Isolando observações já emparelhadas
+		* Isolando observaÃ§Ãµes jÃ¡ emparelhadas
 		g `aux' = (forw==1 & (npesq==1 | back==1)) | (back==1 & npesq==8)
-		* Ordenando cada família pelo mês de entrevista
+		* Ordenando cada famÃ­lia pelo mÃªs de entrevista
 		sort `aux' uf v102 v103 painel v0106 v202 ano mes v256 aest1 v201
-		* Loop para procurar a mesma pessoa em uma posição anterior
+		* Loop para procurar a mesma pessoa em uma posiÃ§Ã£o anterior
 		loc j = 1
 		loc stop = 0
 		loc count = 0
@@ -899,7 +901,7 @@ qui if "`idrs'" != "" {
 		loc lastcount = `count'
 		count if p201==. & npesq==`i'+1 & ///
 		(v203<=2 | (v203==3 & v256>=25 ///
-		& v256<999)) /* observações não emparelhadas */
+		& v256<999)) /* observaÃ§Ãµes nÃ£o emparelhadas */
 		loc count = r(N)
 		if `count' == `lastcount' {
 		loc stop = 1
@@ -907,36 +909,36 @@ qui if "`idrs'" != "" {
 		else {
 		if r(N) != 0 {
 		replace p201 = p201[_n - `j'] if /*
-		Identificação do domicílio
+		IdentificaÃ§Ã£o do domicÃ­lio
 		*/ uf == uf[_n - `j'] & ///
 		v102 == v102[_n - `j'] & ///
 		v103 == v103[_n - `j'] & ///
 		painel == painel[_n - `j'] & ///
 		v0106 == v0106[_n - `j'] & /*
-		Diferença entre períodos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
+		DiferenÃ§a entre perÃ­odos */ npesq == `i'+1 & npesq[_n - `j'] == `i' /*
 		Excluir emparelhados */ & p201 ==. & forw[_n - `j'] != 1 & /*
-		Características individuais
+		CaracterÃ­sticas individuais
 		Sexo */ v202 == v202[_n - `j'] & /*
-		Diferença na idade */ abs(v256 - v256[_n - `j'])<=`ager' & /*
+		DiferenÃ§a na idade */ abs(v256 - v256[_n - `j'])<=`ager' & /*
 		Idade observada */ v256!=999 & /*
-		Se chefe ou cônjuge */ ((v203<=2 & v203[_n - `j']<=2) | /*
+		Se chefe ou cÃ´njuge */ ((v203<=2 & v203[_n - `j']<=2) | /*
 		ou filho com mais de 25 */ (v256>=25 & v256[_n - `j']>=25 & ///
 		v203==3 & v203[_n - `j']==3)) & /*
-		Até 4 dias de erro na data */ ((abs(v206 - v206[_n - `j'])<=4 & /*
-		Até 2 meses de erro na data*/ abs(v236 - v236[_n - `j'])<=2 & /*
-		Informação observada */ v206!=99 & v236!=99) /*
+		AtÃ© 4 dias de erro na data */ ((abs(v206 - v206[_n - `j'])<=4 & /*
+		AtÃ© 2 meses de erro na data*/ abs(v236 - v236[_n - `j'])<=2 & /*
+		InformaÃ§Ã£o observada */ v206!=99 & v236!=99) /*
 		ou */ | /*
-		1 ciclo de erro na educação*/ (abs(aest1 - aest1[_n - `j'])<=1 /*
+		1 ciclo de erro na educaÃ§Ã£o*/ (abs(aest1 - aest1[_n - `j'])<=1 /*
 		e */ & /*
-		Até 2 meses de erro na data*/ ((abs(v236 - v236[_n - `j'])<=2 & /*
-		Informação observada */ v236!=99 & /*
-		Informação não observada */ (v206==99 | v206[_n-`j']==99)) /*
+		AtÃ© 2 meses de erro na data*/ ((abs(v236 - v236[_n - `j'])<=2 & /*
+		InformaÃ§Ã£o observada */ v236!=99 & /*
+		InformaÃ§Ã£o nÃ£o observada */ (v206==99 | v206[_n-`j']==99)) /*
 		ou */ | /*
-		até 4 dias de erro na data */ (abs(v206 - v206[_n - `j'])<=4 & /*
-		Informação observada */ v206!=99 & /*
-		Informação não-observada */ (v236==99 | v236[_n - `j']==99)) /*
+		atÃ© 4 dias de erro na data */ (abs(v206 - v206[_n - `j'])<=4 & /*
+		InformaÃ§Ã£o observada */ v206!=99 & /*
+		InformaÃ§Ã£o nÃ£o-observada */ (v236==99 | v236[_n - `j']==99)) /*
 		ou */ | /*
-		informações não-observadas */ ((v206==99 | v206[_n - `j']==99) & ///
+		informaÃ§Ãµes nÃ£o-observadas */ ((v206==99 | v206[_n - `j']==99) & ///
 		(v236==99 | v236[_n - `j']==99)))))
 		replace forw = 1 if uf == uf[_n + `j'] & ///
 		v102 == v102[_n + `j'] & ///
@@ -956,17 +958,17 @@ qui if "`idrs'" != "" {
 		replace back = p201 !=. if npesq == `i'+1
 		replace forw = 0 if forw != 1 & npesq == `i'
 		****************************************************************
-		* Emparelhamento avançado
+		* Emparelhamento avanÃ§ado
 		****************************************************************
-		* Somente em domicílio onde alguém já emparelhou
-		* Quantas pessoas emparelharam no domicílio
+		* Somente em domicÃ­lio onde alguÃ©m jÃ¡ emparelhou
+		* Quantas pessoas emparelharam no domicÃ­lio
 		tempvar dom
 		bys ano mes uf v102 v103 painel v0106: egen `dom' = sum(back)
-		* Loop com os critérios de emparelhamento
+		* Loop com os critÃ©rios de emparelhamento
 		foreach w in /*mesma idade*/ "0" /*erro na idade = 1*/ "1" /*
 		erro na idade = 2*/ "2" /*erro na idade = f(idade)*/ "`ager'" /*
 		2xf(idade)*/ "2*`ager' & v256>=25" {
-		* Isolando observações já emparelhadas
+		* Isolando observaÃ§Ãµes jÃ¡ emparelhadas
 		tempvar aux
 		g `aux' = (forw==1 & (npesq==1 | back==1)) | ///
 		(back==1 & npesq==8) | (`dom'==0 & npesq==`i'+1)
@@ -985,23 +987,23 @@ qui if "`idrs'" != "" {
 		else {
 		if r(N) != 0 {
 		replace p201 = p201[_n - `j'] if /*
-		Identificação do domicílio
+		IdentificaÃ§Ã£o do domicÃ­lio
 		*/ uf == uf[_n - `j'] & ///
 		v102 == v102[_n - `j'] & ///
 		v103 == v103[_n - `j'] & ///
 		painel == painel[_n - `j'] & ///
 		v0106 == v0106[_n - `j'] & /*
-		Diferença entre períodos */ npesq == `i'+1 & npesq[_n-`j'] == `i' /*
+		DiferenÃ§a entre perÃ­odos */ npesq == `i'+1 & npesq[_n-`j'] == `i' /*
 		excluir emparelhados */ & p201 ==. & forw[_n - `j'] != 1 & /*
-		há emparelhados no domicílio*/ `dom' > 0 & `dom'!=. & /*
-		Características individuais
+		hÃ¡ emparelhados no domicÃ­lio*/ `dom' > 0 & `dom'!=. & /*
+		CaracterÃ­sticas individuais
 		Sexo */ v202 == v202[_n - `j'] & /*
-		Critérios mudam com a loop */ ((abs(v256-v256[_n - `j'])<=`w' & /*
-		se a idade é observada */ v256!=999) /*
-		caso contrário */ | /*
+		CritÃ©rios mudam com a loop */ ((abs(v256-v256[_n - `j'])<=`w' & /*
+		se a idade Ã© observada */ v256!=999) /*
+		caso contrÃ¡rio */ | /*
 		Mesma escolaridade */ (aest1==aest1[_n - `j'] & /*
-		Mesma condição no domicílio */ v203==v203[_n - `j'] & /*
-		Idade não observada */ (v256==999 | v256[_n - `j']==999)))
+		Mesma condiÃ§Ã£o no domicÃ­lio */ v203==v203[_n - `j'] & /*
+		Idade nÃ£o observada */ (v256==999 | v256[_n - `j']==999)))
 		replace forw = 1 if uf == uf[_n + `j'] & ///
 		v102 == v102[_n + `j'] & ///
 		v103 == v103[_n + `j'] & ///
@@ -1020,25 +1022,25 @@ qui if "`idrs'" != "" {
 		}
 		replace back = p201 !=. if npesq == `i'+1
 		replace forw = 0 if forw != 1 & npesq == `i'
-		* Identificação para quem estava ausente na última entrevista
+		* IdentificaÃ§Ã£o para quem estava ausente na Ãºltima entrevista
 		replace p201 = `i'00 + v201 if p201 == . & npesq == `i'+1
 		}
 		****************************************************************
 		* Recuperar quem saiu e retornou para o painel - 2a loop
 		****************************************************************
-		* Variável temporária identificando o emparelhamento à frente
+		* VariÃ¡vel temporÃ¡ria identificando o emparelhamento Ã  frente
 		tempvar fill
 		g `fill' = forw
 		* Loop retrospectivo por entrevista
 		foreach i in 7 6 5 4 3 2 1 {
 		tempvar ncode1 ncode2 aux max ager
-		* Função de erro na idade presumida
+		* FunÃ§Ã£o de erro na idade presumida
 		g `ager' = cond(v256>=25 & v256<999, exp(v256/30), 2)
-		* Variável que preserva o antigo número
+		* VariÃ¡vel que preserva o antigo nÃºmero
 		bys uf v102 v103 painel v0106 p201: g `ncode1' = p201
-		* Isolando observações emparelhadas
+		* Isolando observaÃ§Ãµes emparelhadas
 		g `aux' = ((`fill'==1 & (npesq==1 | back==1)) | (back==1 & npesq==8))
-		* Variável identificando a última entrevista
+		* VariÃ¡vel identificando a Ãºltima entrevista
 		bys uf v102 v103 painel v0106 p201: egen `max' = max(npesq)
 		sort `aux' uf v102 v103 painel v0106 v202 npesq v201 p201
 		loc j = 1
@@ -1054,40 +1056,40 @@ qui if "`idrs'" != "" {
 		else {
 		if r(N) != 0 {
 		replace p201 = p201[_n - `j'] if /*
-		Identificação do domicílio
+		IdentificaÃ§Ã£o do domicÃ­lio
 		*/ uf == uf[_n - `j'] & ///
 		v102 == v102[_n - `j'] & ///
 		v103 == v103[_n - `j'] & ///
 		painel == painel[_n - `j'] & ///
 		v0106 == v0106[_n - `j'] & /*
 		Quem entrou na entrevista i*/ p201>`i'00 & p201<`i'99 & /*
-		Não emparelhado */ back==0 & `fill'[_n - `j']!=1 & /*
-		Uma entrev. de diferença */ `max'[_n - `j']<`i' & ///
+		NÃ£o emparelhado */ back==0 & `fill'[_n - `j']!=1 & /*
+		Uma entrev. de diferenÃ§a */ `max'[_n - `j']<`i' & ///
 		p201[_n - `j']<`i'00-100 & /*
 		Sexo */ v202 == v202[_n - `j'] & /*
-		Diferença na idade */ ((abs(v256 - v256[_n - `j'])<=`ager' & /*
+		DiferenÃ§a na idade */ ((abs(v256 - v256[_n - `j'])<=`ager' & /*
 		Idade observada */ v256!=999 & /*
-		Até 4 dias de erro na data */ ((abs(v206 - v206[_n - `j'])<=4 & /*
-		Até 2 meses de erro na data*/ abs(v236 - v236[_n - `j'])<=2 & /*
-		informação observada */ v206!=99 & v236!=99) /*
+		AtÃ© 4 dias de erro na data */ ((abs(v206 - v206[_n - `j'])<=4 & /*
+		AtÃ© 2 meses de erro na data*/ abs(v236 - v236[_n - `j'])<=2 & /*
+		informaÃ§Ã£o observada */ v206!=99 & v236!=99) /*
 		ou */ | /*
-		1 ciclo de erro na educação*/ (abs(aest1 - aest1[_n - `j'])<=1 /*
+		1 ciclo de erro na educaÃ§Ã£o*/ (abs(aest1 - aest1[_n - `j'])<=1 /*
 		e */ & /*
-		Até 2 meses de erro na data*/ ((abs(v236 - v236[_n - `j'])<=2 & /*
-		Informação observada */ v236!=99 & /*
-		Informação não-observada */ (v206==99 | v206[_n - `j']==99)) /*
+		AtÃ© 2 meses de erro na data*/ ((abs(v236 - v236[_n - `j'])<=2 & /*
+		InformaÃ§Ã£o observada */ v236!=99 & /*
+		InformaÃ§Ã£o nÃ£o-observada */ (v206==99 | v206[_n - `j']==99)) /*
 		ou */ | /*
-		até 4 dias de erro na data */ (abs(v206 - v206[_n - `j'])<=4 & /*
-		Informação observada */ v206!=99 & /*
-		Informação não-observada */ (v236==99 | v236[_n - `j']==99)) /*
+		atÃ© 4 dias de erro na data */ (abs(v206 - v206[_n - `j'])<=4 & /*
+		InformaÃ§Ã£o observada */ v206!=99 & /*
+		InformaÃ§Ã£o nÃ£o-observada */ (v236==99 | v236[_n - `j']==99)) /*
 		ou */ | /*
-		nada é observado */ ((v206==99 | v206[_n - `j']==99) & ///
+		nada Ã© observado */ ((v206==99 | v206[_n - `j']==99) & ///
 		(v236==99 | v236[_n - `j']==99)))))) /*
 		ou */ | /*
 		mesma escolaridade */ (aest1==aest1[_n - `j'] & /*
-		e número de ordem */ v203==v203[_n - `j'] /*
-		Se idade não é observada */ & (v256==999 | v256[_n - `j']==999)))
-		* Identificação de emparelhamento para quem está à frente
+		e nÃºmero de ordem */ v203==v203[_n - `j'] /*
+		Se idade nÃ£o Ã© observada */ & (v256==999 | v256[_n - `j']==999)))
+		* IdentificaÃ§Ã£o de emparelhamento para quem estÃ¡ Ã  frente
 		replace `fill' = 1 if uf == uf[_n + `j'] & ///
 		v102 == v102[_n + `j'] & ///
 		v103 == v103[_n + `j'] & ///
@@ -1103,11 +1105,11 @@ qui if "`idrs'" != "" {
 		}
 		}
 		}
-		* Igualando o número de quem era igual
+		* Igualando o nÃºmero de quem era igual
 		bys uf v102 v103 painel v0106 `ncode1': egen `ncode2' = min(p201)
 		replace p201 = `ncode2'
 		}
-		/* criando identificacao do individuo, que é mantido em todas as pesquisas */
+		/* criando identificacao do individuo, que Ã© mantido em todas as pesquisas */
 		tempvar a b c d
 		tostring uf, g(`a')
 		tostring v102, g(`b') format(%08.0f)
@@ -1124,4 +1126,3 @@ qui if "`idrs'" != "" {
 di _newline "As bases de dados foram salvas em `caminhoprin'"
 cd "`saving'"
 end
-
