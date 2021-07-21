@@ -5,7 +5,9 @@
 
 program define datazoom_ecinf
 
-syntax, year(numlist) original(str) saving(str) tipo(str) [merged]
+syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
+
+if "`english'" != "" local lang "_en"
 
 cd "`saving'"
 
@@ -14,7 +16,7 @@ tokenize `tipo'
 
 while "`*'" != "" {
 	di _newline as input "Extraindo arquivo `year' `1' ..."
-	findfile ecinf`year'_`1'.dct
+	findfile ecinf`year'_`1'`lang'.dct
 	if "`year'"=="2003" {
 		qui infile using `"`r(fn)'"', using("`original'/`1'.txt") clear
 	}
