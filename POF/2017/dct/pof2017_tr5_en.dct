@@ -1,0 +1,22 @@
+dictionary {
+_column(1)	byte	UF	%2f	"federative unit code"
+_column(3)	int	ESTRATO_POF	%4f	"survey-strata plan"
+_column(7)	byte	TIPO_SITUACAO_REG	%1f	"household condition"
+_column(8)	long	COD_UPA	%9f	"sample unit code"
+_column(17)	byte	NUM_DOM	%2f	"household number"
+_column(19)	byte	NUM_UC	%1f	"consumption unit number"
+_column(20)	byte	QUADRO	%2f	"chart number in which the expense / acquisition item was recorded"
+_column(22)	int	V9001	%7f	"expense/acquisition type code"
+_column(29)	byte	V9002	%2f	"expense way"
+_column(31)	double	V8000	%10.2f	"amount in reais (R$)"
+_column(41)	byte	V9010	%2f	"last month the related expense was made"
+_column(43)	byte	V9011	%2f	"number of months"
+_column(45)	double	DEFLATOR	%12.10f	"multiplication factor"
+_column(57)	double	V8000_DEFLA	%10.2f	"deflated estimated rental amount"
+_column(67)	byte	COD_IMPUT_VALOR	%1f	"indicates whether estimated rental amount was imputed"
+_column(68)	byte	FATOR_ANUALIZACAO	%2f	"indicates the number used to annualize the estimated rent"
+_column(70)	double	PESO	%14.8f	"expansion factor"
+_column(84)	double	PESO_FINAL	%14.8f	"expansion factor"
+_column(98)	double	RENDA_TOTAL	%10.2f	" amount in reais (R$)"
+}
+
