@@ -1,17 +1,10 @@
 v 3
-d DataZoom - Recursos para bases de microdados do IBGE
+d DataZoom Social - Leitura de microdados
 
-d Os pacotes disponíveis nesta página contêm dicionários, programas e interface gráfica
-d relacionadas a quatro pesquisas domiciliares do IBGE. 
-d
-d Os recursos foram desenvolvidos para a versão acima STATA 12 para Windows. Usuários de STATA 
-d para Mac podem notar algumas diferenças no aspecto visual da interface gráfica, mas 
-d os programas devem funcionar normalmente.
-d
-d Os arquivos de microdados originais não são disponibilizados. A partir do site do 
-d IBGE (www.ibge.gov.br) é possível realizar o download para as seguintes pesquisas: 
-d Censo 2010; PNAD 2001 até a mais recente; PME 03/2002 até a mais recente (Nova 
-d Metodologia); POF 2002-2003, 2008-2009 e 2017-2018.
+l www.econ.puc-rio.br/datazoom.
+
+d O pacote traz dicionários, programas e interface gráfica
+d que permitem a extração de dados de diversas pesquisas socioeconômicas. 
 d 
 d Os dicionários permitem a conversão dos arquivos de microdados fornecidos pelo IBGE
 d em bases de dados no formato Stata. Podem ser utilizados para a extração de dados a
@@ -21,21 +14,27 @@ d
 d Os programas, além de auxiliarem na extração dos dados, realizam algumas operações
 d frequentemente úteis para o manuseio destes, como compatibilizar dados entre anos
 d de uma pesquisa, deflacionar valores monetários, etc. Para facilitar sua utilização,
-d cada programa pode ser executado através de uma interface gráfica incluída em seu
-d pacote.
-d
-d Mais informações disponíveis em www.econ.puc-rio.br/datazoom.
+d cada programa pode ser executado através de uma caixa de diálogo.
 
-p datazoom_censo Extrai e compatibiliza dados do Censos Demográficos de 1970 a 2010.
-p datazoom_pnad Extrai e compatibiliza dados da PNAD desde 1981.
-p datazoom_pnadcontinua Extrai e compatibiliza dados da PNAD Contínua desde 2012
-p datazoom_pnadcont_anual Extrai e compatibiliza dados da PNAD Contínua anual desde 2012
-p datazoom_pnad_covid Extrai e gera bases PNAD Covid 19 desde Maio 2020.
-p datazoom_pmeantiga Extrai dados e identifica os painéis da PME de 1991 a 2001.
-p datazoom_pmenova Extrai dados e identifica os painéis da PME desde 03/2002.
-p datazoom_pof2017 Extrai dados e gera bases personalizadas da POF 2017-18.
-p datazoom_pof2008 Extrai dados e gera bases personalizadas da POF 2008-09.
-p datazoom_pof2002 Extrai dados e gera bases personalizadas da POF 2002-03.
-p datazoom_pof1995 Extrai dados e gera bases personalizadas da POF 1995-96.
-p datazoom_ecinf Extrai dados da ECINF 1997 e 2003.
-p datazoom_pns Extrai dados da PNS 2013 e 2019.
+f datazoom_datafolder.dlg
+f datazoom_datafolder_en.dlg
+f datazoom_finalfolder.dlg
+f datazoom_finalfolder_en.dlg
+f datazoom_social.ado
+f datazoom_social.dlg
+f datazoom_social.pkg 
+f datazoom_social.sthlp
+
+f Censo/compat_censo00dom.ado
+f Censo/compat_censo00pess.ado
+f Censo/compat_censo10dom.ado
+f Censo/compat_censo10pess.ado
+f Censo/compat_censo70.ado
+f Censo/compat_censo80.ado
+f Censo/compat_censo91dom.ado
+f Censo/compat_censo91pess.ado
+f Censo/datazoom_censo.ado
+f Censo/datazoom_censo.dlg
+f Censo/datazoom_censo.sthlp
+f Censo/datazoom_censo_en.dlg
+f Censo/datazoom_censo_en.sthlp
