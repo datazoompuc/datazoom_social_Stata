@@ -11,6 +11,25 @@ d
 d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de 
 d comando ou via interface gráfica, através do comando "db datazoom_pns".
 
+f datazoom_datafolder.dlg
+f datazoom_datafolder_en.dlg
+f datazoom_finalfolder.dlg
+f datazoom_finalfolder_en.dlg
 f datazoom_social.ado
 f datazoom_social.dlg
+f datazoom_social.pkg 
 f datazoom_social.sthlp
+
+f Censo/compat_censo00dom.ado
+f Censo/compat_censo00pess.ado
+f Censo/compat_censo10dom.ado
+f Censo/compat_censo10pess.ado
+f Censo/compat_censo70.ado
+f Censo/compat_censo80.ado
+f Censo/compat_censo91dom.ado
+f Censo/compat_censo91pess.ado
+f Censo/datazoom_censo.ado
+f Censo/datazoom_censo.dlg
+f Censo/datazoom_censo.sthlp
+f Censo/datazoom_censo_en.dlg
+f Censo/datazoom_censo_en.sthlp
