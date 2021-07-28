@@ -54,3 +54,36 @@ F Censo/dct/censo2010dom.dct
 F Censo/dct/censo2010dom_en.dct
 F Censo/dct/censo2010pes.dct
 F Censo/dct/censo2010pes_en.dct
+
+F ECINF/datazoom_ecinf.ado
+F ECINF/datazoom_ecinf.dlg
+f ECINF/datazoom_ecinf_en.dlg
+f ECINF/datazoom_ecinf.sthlp
+f ECINF/datazoom_ecinf_en.sthlp
+
+F ECINF/dct/ecinf1997_domicilios.dct
+F ECINF/dct/ecinf1997_domicilios_en.dct
+F ECINF/dct/ecinf1997_indprop.dct
+F ECINF/dct/ecinf1997_indprop_en.dct
+F ECINF/dct/ecinf1997_moradores.dct
+F ECINF/dct/ecinf1997_moradores_en.dct
+F ECINF/dct/ecinf1997_pesocup.dct
+F ECINF/dct/ecinf1997_pesocup_en.dct
+F ECINF/dct/ecinf1997_trabrend.dct
+F ECINF/dct/ecinf1997_trabrend_en.dct
+F ECINF/dct/ecinf1997_uecon.dct
+F ECINF/dct/ecinf1997_uecon_en.dct
+F ECINF/dct/ecinf2003_domicilios.dct
+F ECINF/dct/ecinf2003_domicilios_en.dct
+F ECINF/dct/ecinf2003_indprop.dct
+F ECINF/dct/ecinf2003_indprop_en.dct
+F ECINF/dct/ecinf2003_moradores.dct
+F ECINF/dct/ecinf2003_moradores_en.dct
+F ECINF/dct/ecinf2003_pesocup.dct
+F ECINF/dct/ecinf2003_pesocup_en.dct
+F ECINF/dct/ecinf2003_sebrae.dct
+F ECINF/dct/ecinf2003_sebrae_en.dct
+F ECINF/dct/ecinf2003_trabrend.dct
+F ECINF/dct/ecinf2003_trabrend_en.dct
+F ECINF/dct/ecinf2003_uecon.dct
+F ECINF/dct/ecinf2003_uecon_en.dct
