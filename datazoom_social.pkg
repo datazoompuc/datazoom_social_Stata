@@ -10,10 +10,7 @@ d cada tipo de registro/pesquisa selecionado.
 d
 d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de 
 d comando ou via interface gráfica, através do comando "db datazoom_pns".
-f datazoom_datafolder.dlg
-f datazoom_datafolder_en.dlg
-f datazoom_finalfolder.dlg
-f datazoom_finalfolder_en.dlg
+
 f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.sthlp
