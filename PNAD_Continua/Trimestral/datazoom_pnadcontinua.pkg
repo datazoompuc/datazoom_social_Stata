@@ -1,0 +1,19 @@
+v 3
+d datazoom_pnadcontinua - Accesso aos Microdados da PNAD Contínua - Version 1.0
+d
+d		            Desenvolvido por: DataZoom - PUC-Rio/Department of Economics 
+d 
+d Este pacote oferece programas para a leitura dos microdados da PNAD Contínua
+d desde 2012
+d
+d Este programa pode ser utilizado diretamente via janela de comando ou via
+d caixa de diálogo. Neste caso, digite "db datazoom_pnadcontinua".
+
+f datazoom_pnadcontinua.ado
+f datazoom_pnadcontinua.dlg
+f datazoom_pnadcontinua.sthlp
+f datazoom_datafolder.dlg
+f datazoom_finalfolder.dlg
+F pnadcontinua_022016.dct
+F pnadcontinua_042015.dct
+F pnadcontinua.dct

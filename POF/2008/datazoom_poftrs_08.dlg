@@ -1,0 +1,122 @@
+* VERSION 1.2
+
+VERSION 10.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 430 380
+
+DIALOG main, label("POF 2008-2009 - Bases Originais em formato STATA") tabtitle("Main")
+BEGIN
+
+GROUPBOX trs 0 5 420 290, label("Tipos de Registros")
+
+	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - Domicílio") option(tr1)
+	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Pessoas") option(tr2)
+	CHECKBOX ch_tr3    @ +30 @ @, label("TR_3 - Pessoas(imputado)") option(tr3)
+	CHECKBOX ch_tr4    @ +30 @ @, label("TR_4 - Condições de Vida") option(tr4)
+	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - Bens Duráveis") option(tr5)
+	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - Despesa de 90 dias") option(tr6)
+	CHECKBOX ch_tr7    @ +30 @ @, label("TR_7 - Despesa de 12 meses") option(tr7)
+	CHECKBOX ch_tr8    @ +30 @ @, label("TR_8 - Outros Gastos") option(tr8)
+	CHECKBOX ch_tr9  +180  20 220 @, label("TR_9 - Despesas c/ Serviços Domésticos") option(tr9)
+	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Aluguel estimado") option(tr10)
+	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Caderneta de Despesa Coletiva") option(tr11)
+	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Despesa Individual") option(tr12)
+	CHECKBOX ch_tr13   @ +30 @ @, label("TR_13 - Despesas com veículos") option(tr13)
+	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Rendimentos e Deduções") option(tr14)
+	CHECKBOX ch_tr15   @ +30 @ @, label("TR_15 - Outros Rendimentos") option(tr15)
+	CHECKBOX ch_tr16   @ +30 @ @, label("TR_16 - Consumo Alimentar") option(tr16)
+	CHECKBOX ch_all  130 +30 140 20, label("Selecione todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
+
+GROUPBOX opc_dic 0 300 420 50, label("Bases de Dados")
+	
+*	TEXT   tx_base     10 +20 310  ., label("Select or insert the data and dictionaries folder (same for both)")
+	BUTTON   fl_base     75 +20 90 ., label("Dados originais...") onpush(script dados)
+*	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
+	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
+
+	TEXT     credit     5   360  400    ., label("PUC-Rio - Departamento de Economia") right  
+
+
+END
+
+OK ok1,      label("OK")
+SUBMIT sub1
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_poftrs_08")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+BEGIN
+   create STRING saidadata
+   create STRING saidasalvando
+END
+
+SCRIPT dados
+BEGIN
+	create CHILD datazoom_datafolder AS data
+	data.settitle "Arquivos de dados originais - POF 2008-09"
+	data.setExitString saidadata
+END
+
+SCRIPT salvando
+BEGIN
+	create CHILD datazoom_finalfolder AS dic
+	dic.settitle "Novas bases - POF 2008-09"
+	dic.setExitString saidasalvando
+END
+
+SCRIPT seleciona_todos
+	BEGIN
+		main.ch_tr1.seton
+		main.ch_tr2.seton
+		main.ch_tr3.seton
+		main.ch_tr4.seton
+		main.ch_tr5.seton
+		main.ch_tr6.seton
+		main.ch_tr7.seton
+		main.ch_tr8.seton
+		main.ch_tr9.seton
+		main.ch_tr10.seton
+		main.ch_tr11.seton
+		main.ch_tr12.seton
+		main.ch_tr13.seton
+		main.ch_tr14.seton
+		main.ch_tr15.seton
+		main.ch_tr16.seton
+	END
+
+SCRIPT desmarca_todos
+	BEGIN
+		main.ch_tr1.setoff
+		main.ch_tr2.setoff
+		main.ch_tr3.setoff
+		main.ch_tr4.setoff
+		main.ch_tr5.setoff
+		main.ch_tr6.setoff
+		main.ch_tr7.setoff
+		main.ch_tr8.setoff
+		main.ch_tr9.setoff
+		main.ch_tr10.setoff
+		main.ch_tr11.setoff
+		main.ch_tr12.setoff
+		main.ch_tr13.setoff
+		main.ch_tr14.setoff
+		main.ch_tr15.setoff
+		main.ch_tr16.setoff
+	END
+
+PROGRAM command
+BEGIN
+   put "datazoom_poftrs_08"
+   beginoptions
+      put "trs("
+      option main.ch_tr1 main.ch_tr2 main.ch_tr3 main.ch_tr4 main.ch_tr5 main.ch_tr6 main.ch_tr7 ///
+			 main.ch_tr8 main.ch_tr9 main.ch_tr10 main.ch_tr11 main.ch_tr12 main.ch_tr13 ///
+			 main.ch_tr14 main.ch_tr15 main.ch_tr16
+      put ") "
+      put saidadata " "
+      put saidasalvando
+   endoptions
+   stata
+END

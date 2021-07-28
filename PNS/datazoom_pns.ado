@@ -21,7 +21,7 @@ Syntax
 
 | _options_          	|  _Description_          |
 |:----------------------|:------------------------|
-| source		    	| Local dos dados brutos  |
+| original		    	| Local dos dados brutos  |
 | year			| 2013 ou 2019            |
 | saving		    	| Local para salvar       |
 | english		    	| Labels em inglês        |
@@ -40,7 +40,7 @@ Options
 {dlgtab:Options}
 
 {phang}
-{opt source} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt. Caso a opção seja omitida, os dados serão baixados do {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/":site} do IBGE.               
+{opt original} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt. Caso a opção seja omitida, os dados serão baixados do {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/":site} do IBGE.               
 
 {marker ex}{...} 
 Examples
@@ -52,7 +52,7 @@ Examples
 
     Caso o arquivo de dados brutos já esteja em seu computador
 
-        . datazoom_pns, source(~/mydir) year(2019)
+        . datazoom_pns, original(~/mydir) year(2019)
 
 Author
 ------
@@ -70,11 +70,11 @@ This help file was dynamically produced by
 * VERSION 2.2
 
 program datazoom_pns
-syntax, [source(str)] [saving(str)] year(integer) [english]
+syntax, [original(str)] [saving(str)] year(integer) [english]
 
-cd "`source'"
+cd "`original'"
 
-if "`source'" == ""{
+if "`original'" == ""{
 	download_pns, year(`year')
 }
 
@@ -86,7 +86,7 @@ save "`saving'/pns_`year'", replace
 display as result "A base de dados foi salva na pasta `saving'!"
 }
 
-if "`source'" == ""{
+if "`original'" == ""{
 	erase pns_`year'.txt
 }
 
