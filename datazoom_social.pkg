@@ -17,8 +17,8 @@ f datazoom_finalfolder_en.dlg
 f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.sthlp
-f Censo/compat_censo00dom.ado
-f Censo/compat_censo00pess.ado
+f /Censo/compat_censo00dom.ado
+f /Censo/compat_censo00pess.ado
 f Censo/compat_censo10dom.ado
 f Censo/compat_censo10pess.ado
 f Censo/compat_censo70.ado
