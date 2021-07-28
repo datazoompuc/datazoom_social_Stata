@@ -18,19 +18,3 @@ f datazoom_finalfolder_en.dlg
 f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.sthlp
-
-f Censo/compat_censo00dom.ado
-f Censo/compat_censo00pess.ado
-f Censo/compat_censo10dom.ado
-f Censo/compat_censo10pess.ado
-f Censo/compat_censo70.ado
-f Censo/compat_censo80.ado
-f Censo/compat_censo91dom.ado
-f Censo/compat_censo91pess.ado
-f Censo/datazoom_censo.ado
-f Censo/datazoom_censo.dlg
-f Censo/datazoom_censo.sthlp
-f Censo/datazoom_censo_en.dlg
-f Censo/datazoom_censo_en.sthlp
-f Censo/amcs.dta
-f Censo/cod1970.dta
