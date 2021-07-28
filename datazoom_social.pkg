@@ -10,7 +10,6 @@ d cada tipo de registro/pesquisa selecionado.
 d
 d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de 
 d comando ou via interface gráfica, através do comando "db datazoom_pns".
-
 f datazoom_datafolder.dlg
 f datazoom_datafolder_en.dlg
 f datazoom_finalfolder.dlg
@@ -19,7 +18,6 @@ f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.pkg 
 f datazoom_social.sthlp
-
 f Censo/compat_censo00dom.ado
 f Censo/compat_censo00pess.ado
 f Censo/compat_censo10dom.ado
@@ -33,7 +31,6 @@ f Censo/datazoom_censo.dlg
 f Censo/datazoom_censo.sthlp
 f Censo/datazoom_censo_en.dlg
 f Censo/datazoom_censo_en.sthlp
-
 F Censo/data/amcs.dta
 F Censo/data/cod1970.dta
 F Censo/dct/censo1970.dct
@@ -54,13 +51,11 @@ F Censo/dct/censo2010dom.dct
 F Censo/dct/censo2010dom_en.dct
 F Censo/dct/censo2010pes.dct
 F Censo/dct/censo2010pes_en.dct
-
-F ECINF/datazoom_ecinf.ado
-F ECINF/datazoom_ecinf.dlg
+f ECINF/datazoom_ecinf.ado
+f ECINF/datazoom_ecinf.dlg
 f ECINF/datazoom_ecinf_en.dlg
 f ECINF/datazoom_ecinf.sthlp
 f ECINF/datazoom_ecinf_en.sthlp
-
 F ECINF/dct/ecinf1997_domicilios.dct
 F ECINF/dct/ecinf1997_domicilios_en.dct
 F ECINF/dct/ecinf1997_indprop.dct
