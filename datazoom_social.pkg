@@ -10,7 +10,6 @@ d cada tipo de registro/pesquisa selecionado.
 d
 d Uma vez instalado o pacote, o programa pode ser executado a partir da linha de 
 d comando ou via interface gráfica, através do comando "db datazoom_pns".
-
 f datazoom_datafolder.dlg
 f datazoom_datafolder_en.dlg
 f datazoom_finalfolder.dlg
@@ -18,7 +17,6 @@ f datazoom_finalfolder_en.dlg
 f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.sthlp
-
 f Censo/compat_censo00dom.ado
 f Censo/compat_censo00pess.ado
 f Censo/compat_censo10dom.ado
@@ -52,7 +50,6 @@ f Censo/dct/censo2010dom.dct
 f Censo/dct/censo2010dom_en.dct
 f Censo/dct/censo2010pes.dct
 f Censo/dct/censo2010pes_en.dct
-
 f ECINF/datazoom_ecinf.ado
 f ECINF/datazoom_ecinf.dlg
 f ECINF/datazoom_ecinf_en.dlg
@@ -84,7 +81,6 @@ f ECINF/dct/ecinf2003_trabrend.dct
 f ECINF/dct/ecinf2003_trabrend_en.dct
 f ECINF/dct/ecinf2003_uecon.dct
 f ECINF/dct/ecinf2003_uecon_en.dct
-
 f PME/datazoom_pmeantiga.ado
 f PME/datazoom_pmeantiga.dlg
 f PME/datazoom_pmeantiga_en.dlg
@@ -109,7 +105,6 @@ f PME/dct/pme_2001_pes.dct
 f PME/dct/pme_2001_pes_en.dct
 f PME/dct/pmenova.dct
 f PME/dct/pmenova_en.dct
-
 f PNAD/compat_dom_1981a1990_para_81.ado
 f PNAD/compat_dom_1992a2001_para_81.ado
 f PNAD/compat_dom_1992a2001_para_92.ado
@@ -264,7 +259,6 @@ f PNAD/dct/pnad2015dom.dct
 f PNAD/dct/pnad2015dom_en.dct
 f PNAD/dct/pnad2015pes.dct
 f PNAD/dct/pnad2015pes_en.dct
-
 f PNAD_Continua/Anual/datazoom_pnadcont_anual.ado
 f PNAD_Continua/Anual/datazoom_pnadcont_anual.dlg
 f PNAD_Continua/Anual/datazoom_pnadcont_anual_en.dlg
@@ -305,14 +299,12 @@ f PNAD_Continua/Trimestral/dct/pnadcontinua_022016.dct
 f PNAD_Continua/Trimestral/dct/pnadcontinua_022016_en.dct
 f PNAD_Continua/Trimestral/dct/pnadcontinua_042015.dct
 f PNAD_Continua/Trimestral/dct/pnadcontinua_042015_en.dct
-
 f PNAD_Covid/datazoom_pnad_covid.ado
 f PNAD_Covid/datazoom_pnad_covid.dlg
 f PNAD_Covid/datazoom_pnad_covid_en.dlg
 f PNAD_Covid/datazoom_pnad_covid.sthlp
 f PNAD_Covid/datazoom_pnad_covid_en.sthlp
 f PNAD_Covid/dct/pnad_covid.dct
-
 f PNS/datazoom_pns.ado
 f PNS/datazoom_pns.dlg
 f PNS/datazoom_pns_en.dlg
@@ -322,7 +314,6 @@ f PNS/dct/pns2013.dct
 f PNS/dct/pns2013_en.dct
 f PNS/dct/pns2019.dct
 f PNS/dct/pns2019_en.dct
-
 f POF/2002/datazoom_pof1995.dlg
 f POF/2002/datazoom_pof1995_en.dlg
 f POF/2002/datazoom_pof1995.sthlp
@@ -364,7 +355,6 @@ f POF/1995/dct/pof1995_tr10.dct
 f POF/1995/dct/pof1995_tr10_en.dct
 f POF/1995/dct/pof1995_tr11.dct
 f POF/1995/dct/pof1995_tr11_en.dct
-
 f POF/2002/datazoom_pof2002.dlg
 f POF/2002/datazoom_pof2002_en.dlg
 f POF/2002/datazoom_pof2002.sthlp
@@ -412,7 +402,6 @@ f POF/2002/dct/pof2002_tr13.dct
 f POF/2002/dct/pof2002_tr13_en.dct
 f POF/2002/dct/pof2002_tr14.dct
 f POF/2002/dct/pof2002_tr14_en.dct
-
 f POF/2008/datazoom_pof2008.dlg
 f POF/2008/datazoom_pof2008_en.dlg
 f POF/2008/datazoom_pof2008.sthlp
@@ -464,7 +453,6 @@ f POF/2008/dct/pof2008_tr15.dct
 f POF/2008/dct/pof2008_tr15_en.dct
 f POF/2008/dct/pof2008_tr16.dct
 f POF/2008/dct/pof2008_tr16_en.dct
-
 f POF/2017/datazoom_pof2017.dlg
 f POF/2017/datazoom_pof2017_en.dlg
 f POF/2017/datazoom_pof2017.sthlp
