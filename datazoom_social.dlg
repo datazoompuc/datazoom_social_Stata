@@ -3,13 +3,13 @@
 VERSION 1.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 634 315
+POSITION . . 634 250
 
 DIALOG main, label("Datazoom Social")
 BEGIN
 	
-	TEXT tx_eng  8   2 240 25, label("For the dialog box in English, click") left
-	HLINK hl_eng 192 4 240 25, label("here") left onpush(script child_en)
+	TEXT tx_eng  10   3 250 25, label("For the English version of this dialog box, click") left
+	HLINK hl_eng 258 5 240 25, label("here") left onpush(script child_en)
 	
 	BUTTON btn_censo 20 45 120 25, label("Censo") onpush(script child_censo)
 	BUTTON btn_ecinf +158 @   @  @, label("ECINF") onpush(script child_ecinf)
@@ -41,8 +41,8 @@ BEGIN
 	FRAME fr_pns  +158 @  @   @
 	FRAME fr_pof  +158 @  @   @
 	
-    TEXT     credit     10   295  480    ., label("PUC-Rio - Departamento de Economia") right  
-	TEXT     notes     10   275  480    ., label("Nota: reinstale periodicamente o pacote datazoom_social") left
+    TEXT bottom1   10   230  480  ., label("PUC-Rio - Departamento de Economia") left
+	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
 END
 
 CANCEL can1, label("Cancel")
