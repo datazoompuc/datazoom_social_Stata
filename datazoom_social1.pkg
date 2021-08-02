@@ -19,8 +19,8 @@ f Censo/datazoom_censo.dlg
 f Censo/datazoom_censo.sthlp
 f Censo/datazoom_censo_en.dlg
 f Censo/datazoom_censo_en.sthlp
-F Censo/amcs.dta
-F Censo/cod1970.dta
+F Censo/data/amcs.dta
+F Censo/data/cod1970.dta
 F Censo/dct/censo1970.dct
 F Censo/dct/censo1970_en.dct
 F Censo/dct/censo1980.dct
