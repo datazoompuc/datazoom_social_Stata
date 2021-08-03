@@ -1,6 +1,4 @@
-
-  
-VERSION 1.0
+VERSION 2.0
 SYNCHRONOUS_ONLY
 
 POSITION . . 634 250
@@ -49,51 +47,53 @@ CANCEL can1, label("Cancel")
 HELP hlp1,   view("help datazoom_social")
 RESET res1
 
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+
 SCRIPT child_en
    BEGIN
       create CHILD datazoom_social_en, allowsubmit
    END   
  
- 
- 
 SCRIPT child_censo
    BEGIN
-      create CHILD datazoom_poftrs_17, allowsubmit
+      create CHILD datazoom_censo
    END
 
 SCRIPT child_ecinf
    BEGIN
-      create CHILD datazoom_pofstd_17, allowsubmit
+      create CHILD datazoom_ecinf
    END
 
 SCRIPT child_pme
    BEGIN
-      create CHILD datazoom_pofsel_17, allowsubmit
+      create CHILD datazoom_pme, allowsubmit
    END
    
 SCRIPT child_pnad
    BEGIN
-      create CHILD datazoom_pofsel_17, allowsubmit
+      create CHILD datazoom_pnad, allowsubmit
    END   
    
-
-
 SCRIPT child_pnad_continua
    BEGIN
-      create CHILD datazoom_poftrs_17, allowsubmit
+      create CHILD datazoom_pnad_continua, allowsubmit
    END
 
 SCRIPT child_pnad_covid
    BEGIN
-      create CHILD datazoom_pofstd_17, allowsubmit
+      create CHILD datazoom_pnad_covid, allowsubmit
    END
 
 SCRIPT child_pns
    BEGIN
-      create CHILD datazoom_pofsel_17, allowsubmit
+      create CHILD datazoom_pns, allowsubmit
    END
    
 SCRIPT child_pof
    BEGIN
-      create CHILD datazoom_pofsel_17, allowsubmit
+      create CHILD datazoom_pof, allowsubmit
    END      
