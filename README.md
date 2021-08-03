@@ -11,6 +11,14 @@ O DataZoom Social Stata `datazoom_social` é um pacote que compatibiliza microda
 
 ## Instalação
 
+```
+net install datazoom_social1, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
+net install datazoom_social2, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
+net install datazoom_social3, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
+net install datazoom_social4, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
+net install datazoom_social5, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
+```
+
 Para instalar o pacote pelo nosso repositório do GitHub, é necessário o comando `github`. Caso não tenha, instale com:
 
 ```
