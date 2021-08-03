@@ -1,0 +1,99 @@
+VERSION 2.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 634 250
+
+DIALOG main, label("Datazoom Social")
+BEGIN
+	
+	TEXT tx_eng  10   3 250 25, label("Para a caixa de diálogo em português, clique") left
+	HLINK hl_eng 258 5 240 25, label("aqui") left onpush(script child_pt)
+	
+	BUTTON btn_censo 		20 45 120 25, label("Censo") onpush(script child_censo)
+	BUTTON btn_ecinf 		+158 @   @  @, label("ECINF") onpush(script child_ecinf)
+	BUTTON btn_pme 			+158 @   @  @, label("PME") onpush(script child_pme)
+	BUTTON btn_pnad 		+158 @   @  @, label("PNAD") onpush(script child_pnad)
+	
+	BUTTON btn_pncon 		20 145 120 25, label("PNAD Contínua") onpush(script child_pnad_continua)
+	BUTTON btn_pncov 		+158 @   @  @, label("PNAD Covid") onpush(script child_pnad_covid)
+	BUTTON btn_pns 			+158 @   @  @, label("PNS") onpush(script child_pns)
+	BUTTON btn_pof 			+158 @   @  @, label("POF") onpush(script child_pof)
+	
+	TEXTBOX txb_censo    		10 75 140 ., label("Census - 1980 to 2010") center
+	TEXTBOX txb_ecinf    		+158 @ @ @, label("Urban Informal Economy - 1997 and 2003") center
+	TEXTBOX txb_pme    	 	+158 @ @ @, label("Monthly Employment Survey - 1990 to 2015") center
+	TEXTBOX txb_pnad     		+158 @ @ @, label("National Household Sample Survey - 2001 to 2015") center
+	
+    	TEXTBOX txb_pncon			10 175 140 ., label("Continuous PNAD - 2012 to 2019") center
+	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
+	TEXTBOX txb_pns   			+158 @ @ @, label("National Survey of Health - 2013 and 2019") center
+	TEXTBOX txb_pof 			+158 @ @ @, label("Consumer Expenditure Survey - 1995 to 2018") center
+	
+	FRAME fr_censo   		0   30 160 100
+	FRAME fr_ecinf  		+158 @  @   @
+	FRAME fr_pme  			+158 @  @   @
+	FRAME fr_pnad  			+158 @  @   @
+	
+	FRAME fr_pncon   		0   128 160 100
+	FRAME fr_pncov  		+158 @  @   @
+	FRAME fr_pns  			+158 @  @   @
+	FRAME fr_pof  			+158 @  @   @
+	
+    TEXT bottom1   10   230  480  ., label("PUC-Rio - Department of Economics") left
+	TEXT bottom2   568   230  100  ., label("Version 2.0") left
+END
+
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_social")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+
+SCRIPT child_pt
+   BEGIN
+      create CHILD datazoom_social, allowsubmit
+   END   
+ 
+SCRIPT child_censo
+   BEGIN
+      create CHILD datazoom_censo_en
+   END
+
+SCRIPT child_ecinf
+   BEGIN
+      create CHILD datazoom_ecinf_en
+   END
+
+SCRIPT child_pme
+   BEGIN
+      create CHILD datazoom_pme_en, allowsubmit
+   END
+   
+SCRIPT child_pnad
+   BEGIN
+      create CHILD datazoom_pnad_en, allowsubmit
+   END   
+   
+SCRIPT child_pnad_continua
+   BEGIN
+      create CHILD datazoom_pnad_continua_en, allowsubmit
+   END
+
+SCRIPT child_pnad_covid
+   BEGIN
+      create CHILD datazoom_pnad_covid_en, allowsubmit
+   END
+
+SCRIPT child_pns
+   BEGIN
+      create CHILD datazoom_pns_en, allowsubmit
+   END
+   
+SCRIPT child_pof
+   BEGIN
+      create CHILD datazoom_pof_en, allowsubmit
+   END      
