@@ -4,9 +4,9 @@
 * version 1.0
 
 program define datazoom_social
-syntax, research(str) folder1(str) folder2(str) date(integer) [state(str)] [record(str)]
-	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF */
-	[language(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92] /* Opções gerais */
+syntax, research(str) folder1(str) folder2(str) date(integer) [state(str)] [record(str)] /*
+*/	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF */     /*
+*/	[language(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92] /* Opções gerais */
 
 
 if "`research'" == "pns" {
