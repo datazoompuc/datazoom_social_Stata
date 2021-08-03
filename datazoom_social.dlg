@@ -19,12 +19,12 @@ BEGIN
 	BUTTON btn_pns 			+158 @   @  @, label("PNS") onpush(script child_pns)
 	BUTTON btn_pof 			+158 @   @  @, label("POF") onpush(script child_pof)
 	
-	TEXTBOX txb_censo    	10 75 140 ., label("Censo Demográfico - 1980 a 2010") center
-	TEXTBOX txb_ecinf    	+158 @ @ @, label("Economia Informal Urbana - 1997 e 2003") center
+	TEXTBOX txb_censo    		10 75 140 ., label("Censo Demográfico - 1980 a 2010") center
+	TEXTBOX txb_ecinf    		+158 @ @ @, label("Economia Informal Urbana - 1997 e 2003") center
 	TEXTBOX txb_pme    	 	+158 @ @ @, label("Pesquisa Mensal de Emprego - 1990 a 2015") center
-	TEXTBOX txb_pnad     	+158 @ @ @, label("PNAD Antiga - 2001 a 2015") center
+	TEXTBOX txb_pnad     		+158 @ @ @, label("PNAD Antiga - 2001 a 2015") center
 	
-    TEXTBOX txb_pncon			10 175 140 ., label("PNAD Contínua - 2012 a 2019") center
+    TEXTBOX txb_pncon				10 175 140 ., label("PNAD Contínua - 2012 a 2019") center
 	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
 	TEXTBOX txb_pns   			+158 @ @ @, label("Pesquisa Nacional de Saúde - 2013 e 2019") center
 	TEXTBOX txb_pof 			+158 @ @ @, label("Pesquisa de Orçamentos Familiares - 1995 a 2018") center
