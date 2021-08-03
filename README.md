@@ -5,11 +5,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://github.com/datazoompuc/datazoom_social_Stata/raw/master/logo.png" align="left" width="140" hspace="10" vspace="6"></a>
+<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://github.com/datazoompuc/datazoom_social_Stata/raw/master/logo.jpg" align="left" width="140" hspace="10" vspace="6"></a>
 
 O DataZoom Social Stata `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE: Censo Demográfico, Pesquisa Nacional por Amostra de Domicílios, Pesquisa Mensal do Emprego, Pesquisa de Orçamentos Familiares e Pesquisa de Economia Informal Urbana.
 
 ## Instalação
+
+Digite o código abaixo na linha de comando do Stata para baixar e instalar os arquivos referente ao pacote DataZoom Social 
 
 ```
 net install datazoom_social1, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
@@ -17,18 +19,6 @@ net install datazoom_social2, from("https://raw.githubusercontent.com/datazoompu
 net install datazoom_social3, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
 net install datazoom_social4, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
 net install datazoom_social5, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") replace
-```
-
-Para instalar o pacote pelo nosso repositório do GitHub, é necessário o comando `github`. Caso não tenha, instale com:
-
-```
-net install github, from("https://haghish.github.io/github/")
-```
-
-A instalação do pacote é feita com:
-
-```
-github install datazoompuc/datazoom_social_Stata
 ```
 
 ## Syntax
