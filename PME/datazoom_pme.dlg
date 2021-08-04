@@ -8,11 +8,11 @@ BEGIN
 	
 	BUTTON btn_censo 			20 10 120 25, label("PME Antiga") onpush(script child_antiga)
 	
-	BUTTON btn_pncon 			20 55 120 25, label("PME Nova") onpush(script child_nova)
+	BUTTON btn_pncon 			20 52 120 25, label("PME Nova") onpush(script child_nova)
 	
 	TEXTBOX txb_antiga    			150 15 200 25, label("1991 a 2001") center
 	
-    	TEXTBOX txb_nova			150 60 230 25, label("2001 a 2015 - Microdados reponderados") center
+    	TEXTBOX txb_nova			150 57 230 25, label("2001 a 2015 - Microdados reponderados") center
 	
 	FRAME fr_antiga   			0  0 400 45
 

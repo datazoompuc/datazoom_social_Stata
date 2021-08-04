@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 438 230
+POSITION . . 438 220
 
 DIALOG main, label("PME - Access to PME-Antiga Microdata") tabtitle("Main")
 BEGIN
@@ -32,8 +32,7 @@ GROUPBOX caixaid 165 98 260 88, label("Individual Identification")
 	RADIO	idbas	+0 +20 100 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +20 150 ., last label("Advanced (Ribas-Soares)") option(idrs)
 	
-TEXT     credit     10   210  415    ., label("By PUC-Rio - Department of Economics") right
-TEXT     notes     10   190  415    ., label("Note: reinstall periodically the package datazoom_pmeantiga") left 
+TEXT     credit     10   190  415    ., label("By PUC-Rio - Department of Economics") right 
 
 END
 
