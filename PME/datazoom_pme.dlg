@@ -34,10 +34,10 @@ SCRIPT PREINIT_SCRIPT
 
 SCRIPT child_antiga
    BEGIN
-      create CHILD datazoom_pmeantiga.dlg
+      create CHILD datazoom_pmeantiga
    END   
  
 SCRIPT child_nova
    BEGIN
-      create CHILD datazoom_pmenova.dlg
+      create CHILD datazoom_pmenova
    END
