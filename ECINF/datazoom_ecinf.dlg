@@ -36,7 +36,7 @@ END
 
 SCRIPT PREINIT_SCRIPT
 BEGIN
-*	create STRING lista_tipos
+ 	create STRING lista_tipos
 	create STRING saidadata
 	create STRING saidasalvando
 END
