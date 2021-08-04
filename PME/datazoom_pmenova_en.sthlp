@@ -153,9 +153,9 @@ Related commands:
 {help datazoom_ecinf} (if installed)  
 
 {p} Type "net from http://www.econ.puc-rio.br/datazoom/english" to install these commands.
-Para instalar a vers„o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
+Para instalar a vers√£o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
 
 {title: Reference} 
 
 {pstd} Ribas, R. P. and Soares, S. S. D. (2008). Sobre o painel da Pesquisa Mensal de Emprego (PME) 
-do IBGE. BrasÌlia: IPEA (Texto para Discuss„o ñ 1348).
+do IBGE. Bras√≠lia: IPEA (Texto para Discuss√£o ‚Äì 1348).

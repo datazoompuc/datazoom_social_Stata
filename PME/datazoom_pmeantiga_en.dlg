@@ -21,7 +21,7 @@ GROUPBOX caixaAnos 15 15 123 170, label("Years")
    CHECKBOX    ck2000 @ +24 120    ., label("2000")  option(2000)
    CHECKBOX    ck2001 @ +24 120    ., label("2001")  option(2001)
 
-GROUPBOX caixaDicion·rios 165 15 260 72, label("Original and Final Databases")
+GROUPBOX caixaDicion√°rios 165 15 260 72, label("Original and Final Databases")
 
 	BUTTON	fldados 	+20 +30 100 ., label("Data...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Saving...") onpush(script salvando) 

@@ -25,16 +25,16 @@ GROUPBOX caixaAnos 5 10  155 190, label("Ano(s)")
    CHECKBOX    ck2015 @ +24 120    ., label("2015")  option(2015)
    CHECKBOX    ck2016 +50 30  120    ., label("2016")  option(2016)
    
-GROUPBOX caixaDicion·rios 165 10 260 77, label("Bases de Dados")
+GROUPBOX caixaDicion√°rios 165 10 260 77, label("Bases de Dados")
 
 	BUTTON	fldados 	+20 +30 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Salvando...") onpush(script salvando) 
 	
-GROUPBOX caixaid 165 98 260 102, label("IdentificaÁ„o do IndivÌduo")
+GROUPBOX caixaid 165 98 260 102, label("Identifica√ß√£o do Indiv√≠duo")
 
-	RADIO	nid     +10 +22 100 ., first label("Sem identificaÁ„o") option(nid)
-	RADIO	idbas	+0 +20 100 ., middle label("B·sica") option(idbas)
-	RADIO	idrs	+0 +20 150 ., last label("AvanÁada (Ribas-Soares)") option(idrs)
+	RADIO	nid     +10 +22 100 ., first label("Sem identifica√ß√£o") option(nid)
+	RADIO	idbas	+0 +20 100 ., middle label("B√°sica") option(idbas)
+	RADIO	idrs	+0 +20 150 ., last label("Avan√ßada (Ribas-Soares)") option(idrs)
 	
 TEXT     credit     10   220  415    ., label("PUC-Rio - Departamento de Economia") right
 TEXT     notes     15   202   415    ., label("Nota: reinstale periodicamente o pacote datazoom_pmenova") left 

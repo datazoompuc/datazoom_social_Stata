@@ -11,7 +11,7 @@
 {title:Title}
 
 {phang}
-{bf:datazoom_pmenova} {hline 2} Acesso aos microdados da PME-Nova Metodologia em formato STATA - Vers„o 1.3
+{bf:datazoom_pmenova} {hline 2} Acesso aos microdados da PME-Nova Metodologia em formato STATA - Vers√£o 1.3
 
 {marker syntax}{...}
 {title:Syntax}
@@ -20,7 +20,7 @@
 [{cmd:,}
 {it:options}]
 
-{p}	OBS: digite 'db datazoom_pmenova' para utilizar o programa via caixa de di·logo
+{p}	OBS: digite 'db datazoom_pmenova' para utilizar o programa via caixa de di√°logo
 	
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -28,104 +28,104 @@
 {syntab:Inputs}
 {synopt:{opt years(numlist)}} anos da PME {p_end}
 {synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
-{synopt:{opt saving(str)}} caminho da pasta onde ser„o salvas as novas bases de dados {p_end}
+{synopt:{opt saving(str)}} caminho da pasta onde ser√£o salvas as novas bases de dados {p_end}
 
-{syntab:IdentificaÁ„o do IndivÌduo}
-{synopt:{opt nid}} Sem identificaÁ„o {p_end}
-{synopt:{opt idbas}} IdentificaÁ„o b·sica {p_end}
-{synopt:{opt idrs}} AvanÁada (Ribas-Soares) {p_end}
+{syntab:Identifica√ß√£o do Indiv√≠duo}
+{synopt:{opt nid}} Sem identifica√ß√£o {p_end}
+{synopt:{opt idbas}} Identifica√ß√£o b√°sica {p_end}
+{synopt:{opt idrs}} Avan√ßada (Ribas-Soares) {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
 
 {marker description}{...}
-{title:DescriÁ„o}
+{title:Descri√ß√£o}
 
 {phang}
-{cmd:datazoom_pmenova} extrai e contrÛi bases de dados da PME-Nova Metodologia em formato STATA (.dta) a partir
-dos microdados originais, os quais  n„o s„o disponibilizados pelo Portal (informaÁıes sobre como obter
+{cmd:datazoom_pmenova} extrai e contr√≥i bases de dados da PME-Nova Metodologia em formato STATA (.dta) a partir
+dos microdados originais, os quais  n√£o s√£o disponibilizados pelo Portal (informa√ß√µes sobre como obter
 os arquivos originais de dados, consulte o site do IBGE www.ibge.gov.br). O programa pode ser utilizado para
-o perÌodo entre 2002 e 2016. 
+o per√≠odo entre 2002 e 2016. 
 
-{phang} Apesar de ser uma pesquisa mensal, este programa n„o permite a escolha de meses especÌficos para extraÁ„o, 
-mas somente os anos. Como a pesquisa ainda È publicada pelo IBGE, este programa est· em constante atualizaÁ„o. Em geral,
- a ˙ltima atualizaÁ„o apresenta defasagem de dois meses relativamente ao mÍs corrente. Isso ocorre devido ‡ 
- divulgaÁ„o do Ìndice utilizado para deflacionar rendas em pesquisas domiciliares. O usu·rio deve estar conectado ‡ 
- internet para utilizaÁ„o deste programa, pois o processo de deflacionamento das vari·veis monet·rias utiliza recursos on line.
-  O perÌodo de referÍncia È janeiro de 2016.
+{phang} Apesar de ser uma pesquisa mensal, este programa n√£o permite a escolha de meses espec√≠ficos para extra√ß√£o, 
+mas somente os anos. Como a pesquisa ainda √© publicada pelo IBGE, este programa est√° em constante atualiza√ß√£o. Em geral,
+ a √∫ltima atualiza√ß√£o apresenta defasagem de dois meses relativamente ao m√™s corrente. Isso ocorre devido √† 
+ divulga√ß√£o do √≠ndice utilizado para deflacionar rendas em pesquisas domiciliares. O usu√°rio deve estar conectado √† 
+ internet para utiliza√ß√£o deste programa, pois o processo de deflacionamento das vari√°veis monet√°rias utiliza recursos on line.
+  O per√≠odo de refer√™ncia √© janeiro de 2016.
 
-{phang} Apesar de ser um painel de domicÌlios, os indivÌduos podem n„o apresentar o mesmo n˙mero de ordem ao longo das 
-entrevistas. Caso o usu·rio necessite trabalhar com um painel de indivÌduos, È necess·rio construir uma vari·vel que 
-identifique o mesmo indÌvÌduo ao longo das pesquisas. Para isso, s„o utilizados os algoritmos propostos por Ribas e Soares (2008). Os autores 
-elaboram uma identificaÁ„o b·sica e outra avanÁada, sendo diferenciadas pelo n˙mero de vari·veis utilizadas para realizar
- a identificaÁ„o do indivÌduo em pesquisas distintas. A ideia dos algoritmos È verificar inconsistÍncias no conjunto de 
- vari·veis. Em qualquer dessas opÁıes de identificaÁ„o, a depender da capacidade 
- computacional utilizada, o programa pode consumir um tempo razo·vel para realizar a identificaÁ„o, sendo recomend·vel
-  n„o executar o programa para mais de quatro ou cinco anos conjuntamente. Por outro lado, caso n„o haja 
-  interesse no painel de indivÌduos (por exemplo, c·lculo da taxa de desemprego mensal), existe a opÁ„o de n„o realizar a 
-  identificaÁ„o, vantajosa em termos de tempo de execuÁ„o do programa.
+{phang} Apesar de ser um painel de domic√≠lios, os indiv√≠duos podem n√£o apresentar o mesmo n√∫mero de ordem ao longo das 
+entrevistas. Caso o usu√°rio necessite trabalhar com um painel de indiv√≠duos, √© necess√°rio construir uma vari√°vel que 
+identifique o mesmo ind√≠v√≠duo ao longo das pesquisas. Para isso, s√£o utilizados os algoritmos propostos por Ribas e Soares (2008). Os autores 
+elaboram uma identifica√ß√£o b√°sica e outra avan√ßada, sendo diferenciadas pelo n√∫mero de vari√°veis utilizadas para realizar
+ a identifica√ß√£o do indiv√≠duo em pesquisas distintas. A ideia dos algoritmos √© verificar inconsist√™ncias no conjunto de 
+ vari√°veis. Em qualquer dessas op√ß√µes de identifica√ß√£o, a depender da capacidade 
+ computacional utilizada, o programa pode consumir um tempo razo√°vel para realizar a identifica√ß√£o, sendo recomend√°vel
+  n√£o executar o programa para mais de quatro ou cinco anos conjuntamente. Por outro lado, caso n√£o haja 
+  interesse no painel de indiv√≠duos (por exemplo, c√°lculo da taxa de desemprego mensal), existe a op√ß√£o de n√£o realizar a 
+  identifica√ß√£o, vantajosa em termos de tempo de execu√ß√£o do programa.
   
-{phang} Se a opÁ„o {opt nid} for escolhida, uma base de dados para cada ano selecionado ser· gerada. Ao utilizar as outras opÁıes, 
- uma base de dados para cada painel da PME ser· o produto final. Um painel da PME È um conjunto de domicÌlios que ingressam 
-e deixam o ciclo de entrevistas no mesmo mÍs, sendo identificados por letras mai˙sculas. Se for o caso, utilize o 
+{phang} Se a op√ß√£o {opt nid} for escolhida, uma base de dados para cada ano selecionado ser√° gerada. Ao utilizar as outras op√ß√µes, 
+ uma base de dados para cada painel da PME ser√° o produto final. Um painel da PME √© um conjunto de domic√≠lios que ingressam 
+e deixam o ciclo de entrevistas no mesmo m√™s, sendo identificados por letras mai√∫sculas. Se for o caso, utilize o 
 comando {help append} para empilhar as bases.
 
 
 {marker options}{...}
-{title:OpÁıes}
+{title:Op√ß√µes}
 {dlgtab:Inputs}
 
 {phang} 
-{opt years(numlist)} especifica a lista de anos com os quais o usu·rio deseja trabalhar. Este programa 
-pode ser utilizado para o perÌodo de 2002 a 2016. O primeiro mÍs disponÌvel È marÁo/2002. N„o È possÌvel 
-escolher meses especÌficos.
+{opt years(numlist)} especifica a lista de anos com os quais o usu√°rio deseja trabalhar. Este programa 
+pode ser utilizado para o per√≠odo de 2002 a 2016. O primeiro m√™s dispon√≠vel √© mar√ßo/2002. N√£o √© poss√≠vel 
+escolher meses espec√≠ficos.
 
-{phang} {opt original(str)} indica o caminho da pasta onde est„o localizados os arquivos de dados originais. 
-Existe um arquivo de microdados para cada mÍs da pesquisa. Todos eles devem estar posicionados na mesma pasta 
-para que o programa funcione adequadamente. O Portal n„o disponibiliza os dados originais, mas os mesmos podem ser
+{phang} {opt original(str)} indica o caminho da pasta onde est√£o localizados os arquivos de dados originais. 
+Existe um arquivo de microdados para cada m√™s da pesquisa. Todos eles devem estar posicionados na mesma pasta 
+para que o programa funcione adequadamente. O Portal n√£o disponibiliza os dados originais, mas os mesmos podem ser
  obtidos no site do IBGE.
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
-{dlgtab:IdentificaÁ„o do IndivÌduo}
+{dlgtab:Identifica√ß√£o do Indiv√≠duo}
 
 {phang}
-{opt nid}  solicita que o programa n„o crie uma vari·vel que identifique o mesmo indivÌduo ao longo das
- entrevistas. Esta opÁ„o È recomend·vel para o caso de n„o haver interesse em trabalhar com um painel de
-  indivÌduos, pois consome menos tempo para preparar as bases de dados em formato STATA.
+{opt nid}  solicita que o programa n√£o crie uma vari√°vel que identifique o mesmo indiv√≠duo ao longo das
+ entrevistas. Esta op√ß√£o √© recomend√°vel para o caso de n√£o haver interesse em trabalhar com um painel de
+  indiv√≠duos, pois consome menos tempo para preparar as bases de dados em formato STATA.
 
 {phang}
-{opt idbas}  solicita que seja gerada uma vari·vel que identifique unicamente o indivÌduo ao longo das pesquias. 
-Essa vari·vel È criada apÛs a verificaÁ„o de inconsistÍncia em um conjunto de vari·veis. Veja Ribas and Soares 
+{opt idbas}  solicita que seja gerada uma vari√°vel que identifique unicamente o indiv√≠duo ao longo das pesquias. 
+Essa vari√°vel √© criada ap√≥s a verifica√ß√£o de inconsist√™ncia em um conjunto de vari√°veis. Veja Ribas and Soares 
 (2008) para mais detalhes sobre o algoritmo.
 
 {phang}
-{opt idrs}  solicita a criaÁ„o de uma vari·vel de identificaÁ„o dos indivÌduos por meio da verificaÁ„o de inconsistÍncias 
-utilizando um conjunto maior de vari·veis que o algoritmo b·sico. Esta opÁ„o È time-consuming.
+{opt idrs}  solicita a cria√ß√£o de uma vari√°vel de identifica√ß√£o dos indiv√≠duos por meio da verifica√ß√£o de inconsist√™ncias 
+utilizando um conjunto maior de vari√°veis que o algoritmo b√°sico. Esta op√ß√£o √© time-consuming.
 
 
 {marker examples}{...}
 {title:Exemplos}
 
-{phang}  OBS: Recomenda-se a execuÁ„o do programa por meio da caixa de di·logo. Digite "db datazoom_pmenova" na janela 
+{phang}  OBS: Recomenda-se a execu√ß√£o do programa por meio da caixa de di√°logo. Digite "db datazoom_pmenova" na janela 
 de comando do STATA para iniciar.
 
-{phang} Exemplo 1: sem identificaÁ„o.
+{phang} Exemplo 1: sem identifica√ß√£o.
 
 {phang} datazoom_pmenova, years(2003 2008 2009) original(C:/pme) saving(D:/mydatabases) nid
 
-{phang} TrÍs bases de dados s„o geradas, uma para cada ano selecionado. Cada base conter· as observaÁıes de todos os meses 
+{phang} Tr√™s bases de dados s√£o geradas, uma para cada ano selecionado. Cada base conter√° as observa√ß√µes de todos os meses 
 	para os quais existem arquivos originais na pasta indicada.
 
 {phang}
 
-{phang} Exemplo 2: identificaÁ„o avanÁada.
+{phang} Exemplo 2: identifica√ß√£o avan√ßada.
 
 {phang} datazoom_pmenova, years(2005 2006) original(C:/pme) saving(D:/mydatabases) idbas
 
-{phang} Ser· criada uma base para cada painel da PME pesquisado em 2005 e 2006. Em cada base haver· uma vari·vel 
- que identifica unicamente os indivÌduos ao longo das pesquiasas. Haver· indivÌduos com menos de oito entrevistas, seja porque o painel ao 
- qual pertence teve inÌcio antes de 2005, seja porque seu ciclo de entrevistas terminaria somente em 2007.
+{phang} Ser√° criada uma base para cada painel da PME pesquisado em 2005 e 2006. Em cada base haver√° uma vari√°vel 
+ que identifica unicamente os indiv√≠duos ao longo das pesquiasas. Haver√° indiv√≠duos com menos de oito entrevistas, seja porque o painel ao 
+ qual pertence teve in√≠cio antes de 2005, seja porque seu ciclo de entrevistas terminaria somente em 2007.
 
 {title:Autor}
 {p}
@@ -134,7 +134,7 @@ PUC-Rio - Departmento de Economia
 
 Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
 
-{title:Veja tambÈm}
+{title:Veja tamb√©m}
 
 Pacotes relacionados:
 
@@ -147,10 +147,10 @@ Pacotes relacionados:
 {help datazoom_ecinf} (se instalado) 
 
 
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers„o em portuguÍs desses pacotes. 
+{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers√£o em portugu√™s desses pacotes. 
 For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".
 
-{title:ReferÍncia} 
+{title:Refer√™ncia} 
 
 {pstd} Ribas, R. P. and Soares, S. S. D. (2008). Sobre o painel da Pesquisa Mensal de Emprego (PME) 
-do IBGE. BrasÌlia: IPEA (Texto para Discuss„o ñ 1348).
+do IBGE. Bras√≠lia: IPEA (Texto para Discuss√£o ‚Äì 1348).
