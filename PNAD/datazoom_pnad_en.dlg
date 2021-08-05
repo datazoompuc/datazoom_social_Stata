@@ -8,7 +8,7 @@ POSITION . . 320 340
 DIALOG main, label("PNAD") tabtitle("Main")
 BEGIN
 
-GROUPBOX caixaPeriodo 10 25 140 315, label("Escolha um Periodo ...")
+GROUPBOX caixaPeriodo 10 25 140 315, label("Choose a time period...")
 
    RADIO    rad8190 20 +20 120    .,                           ///
       first label("1981 a 1990")                              ///
@@ -22,7 +22,7 @@ GROUPBOX caixaPeriodo 10 25 140 315, label("Escolha um Periodo ...")
       last label("2002 a 2015")                               ///
       onclickon(script mostra0209)
 
-   TEXT     instr1     +0   +30  130    ., label("... e selecione o(s) ano(s)") left
+   TEXT     instr1     +0   +30  130    ., label("... and the year(s)") left
 
    CHECKBOX    ck80 20 140 120    ., label("Todos") onclickon(script marcatudo80) onclickoff(script desmarcatudo80)
    CHECKBOX    ck1981 20 +24 120    ., label("1981") onclickon(program ad1981) onclickoff(program rm1981)
@@ -59,33 +59,33 @@ GROUPBOX caixaPeriodo 10 25 140 315, label("Escolha um Periodo ...")
    CHECKBOX    ck2014 +56 +0 120    ., label("2014") onclickon(program ad2014) onclickoff(program rm2014)
    CHECKBOX    ck2015 20 +24 120    ., label("2015") onclickon(program ad2015) onclickoff(program rm2015)
 
-GROUPBOX caixaBase 165 25 140 80, label("Bases de dados")
+GROUPBOX caixaBase 165 25 140 80, label("Databases")
 
-    BUTTON  fldata    +17 +18 100     ., label("Dados Originais...") onpush(script dadosoriginais)
-    BUTTON  fldata1    +0 +30 100     ., label("Salvando...") onpush(script dadosfinais)
+    BUTTON  fldata    +17 +18 100     ., label("Original files") onpush(script dadosoriginais)
+    BUTTON  fldata1    +0 +30 100     ., label("Save to") onpush(script dadosfinais)
 
-GROUPBOX caixaarq 165 +40 140 84, label("Tipo de Registro") 
+GROUPBOX caixaarq 165 +40 140 84, label("Type of Register") 
 
-	RADIO	pes 	 +10 +21 100 .,  first 	label("Pessoas") 	option(pes) 
-	RADIO	dom	 	 +0 +21 100 .,   middle	label("Domicílios")  	option(dom) 
-	RADIO	both 	 +0 +21 100 .,   last	label("Ambos Merged")  	option(both) 
+	RADIO	pes 	 +10 +21 100 .,  first 	label("Individuals") 	option(pes) 
+	RADIO	dom	 	 +0 +21 100 .,   middle	label("Households")  	option(dom) 
+	RADIO	both 	 +0 +21 100 .,   last	label("Both Merged")  	option(both) 
 
-GROUPBOX caixaid 165 +35 140 94, label("Compatibilidade")
+GROUPBOX caixaid 165 +35 140 94, label("Compatibility")
 
-	RADIO	ncomp       +10 +22 120 ., 	first	label("Não-compatível")  option(ncomp)
-	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatível anos 1980") option(comp81)
-	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatível anos 1990") option(comp92)
+	RADIO	ncomp       +10 +22 120 ., 	first	label("Incompatible")  option(ncomp)
+	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatible 1980s") option(comp81)
+	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatible 1990s") option(comp92)
 
-TEXT     credit     160   305  140    ., label("PUC-Rio - Departamento") right
-TEXT     credi2     160   320  140    ., label("de Economia") right
-TEXT     notes2     5   5  300    ., label("Arquivos de dados originais") left
+TEXT     credit     160   305  140    ., label("PUC-Rio - Department") right
+TEXT     credi2     160   320  140    ., label("of Economics") right
+TEXT     notes2     5   5  300    ., label("Original data files") left
 		
 END
 
 OK ok1      
 SUBMIT sub1      
 CANCEL can1
-HELP hlp1,   view("help datazoom_pnad")
+HELP hlp1,   view("help datazoom_pnad_en")
 RESET res1
 
 SCRIPT PREINIT_SCRIPT
@@ -298,14 +298,14 @@ SCRIPT desmarcatudo00
 
 SCRIPT dadosoriginais
 BEGIN
-	create CHILD datazoom_multi AS data
+	create CHILD datazoom_multi_en AS data
 	data.settitle "Arquivos de dados originais"
 	data.setExitString saidadata 
 END 
 
 SCRIPT dadosfinais
 BEGIN
-	create CHILD datazoom_finalfolder AS folder
+	create CHILD datazoom_finalfolder_en AS folder
 	folder.settitle "Novas bases de dados"
 	folder.setExitString saidadata1 
 END 
