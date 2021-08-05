@@ -3,9 +3,9 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 330 220
+POSITION . . 330 210
 
-DIALOG main, label("ECINF 1997, 2003") tabtitle("Main")
+DIALOG main, label("ECINF") tabtitle("Main")
 BEGIN
 
 GROUPBOX caixaanos 5 5 135 50, label("Anos")
@@ -24,14 +24,13 @@ GROUPBOX trs +140 5 160 170, label("Tipos de Registros")
 
 	CHECKBOX ch_tr1  +10 +20 130 20, label("Domicílios") option(domicilios)
 	CHECKBOX ch_tr2    @ +20 @ @, label("Moradores") option(moradores)	
-	CHECKBOX ch_tr3    @ +20 @ @, label("Trabalho e Rendimento") option(trabrend)
-	CHECKBOX ch_tr4    @ +20 @ @, label("Unidade Econômica") option(uecon)
+	CHECKBOX ch_tr3    @ +20 150 @, label("Trabalho e Rendimento") option(trabrend)
+	CHECKBOX ch_tr4    @ +20 130 @, label("Unidade Econômica") option(uecon)
 	CHECKBOX ch_tr5    @ +20 @ @, label("Pessoas Ocupadas") option(indprop)
 	CHECKBOX ch_tr6    @ +20 @ @, label("Proprietário") option(pesocup)
 	CHECKBOX ch_tr7    @ +20 @ @, label("Sebrae") option(sebrae)
 
-	TEXT     credit     5   202  310    ., label("PUC-Rio - Departamento de Economia") right  
-TEXT     notes     5   173  310   ., label("Nota: reinstale periodicamente o pacote datazoom_encif") left
+	TEXT     credit     5   175  310    ., label("PUC-Rio - Departamento de Economia") right  
 END
 
 SCRIPT PREINIT_SCRIPT

@@ -1,11 +1,9 @@
-* VERSION 2.0
-
 VERSION 2.0
 SYNCHRONOUS_ONLY
 
 POSITION . . 400 90
 
-DIALOG main, label("PME") tabtitle("Main")
+DIALOG main, label("PME")
 BEGIN
 	
 	BUTTON btn_censo 			20 10 120 25, label("PME Antiga") onpush(script child_antiga)
