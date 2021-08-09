@@ -1,7 +1,7 @@
 VERSION 11.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 200
+POSITION . . 350 170
 
 DIALOG main, label("PNS") tabtitle("Main")
 BEGIN
@@ -14,8 +14,7 @@ GROUPBOX caixaAnos 175 15 150 105, label("Ano(s)")
 	RADIO  ck2013  +25 +25 100 25, first label("2013")  option(2013)
 	RADIO  ck2019  @   +25 100 25, last label("2019")  option(2019)
 
-TEXT notes  15 130 300 15, label("Nota: reinstale periodicamente o pacote datazoom_pns") left
-TEXT credit 15 160 300 15, label("PUC-Rio - Departamento de Economia") left
+TEXT credit 15 130 300 15, label("PUC-Rio - Departamento de Economia") left
 
 END
 

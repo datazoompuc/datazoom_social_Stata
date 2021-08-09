@@ -19,7 +19,7 @@ GROUPBOX caixaAnos 20 20 190 220, label("Month")
 
 GROUPBOX caixaDicionários 210 60 190 130, label("Database")
 
-	BUTTON	fldados 	+20 +35 100 ., label("Original data...") onpush(script dados) 
+	BUTTON	fldados 	+45 +35 100 ., label("Original data...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
 	

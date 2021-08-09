@@ -1,54 +1,56 @@
-VERSION 2.0
+VERSION 11.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 160 205
+POSITION . . 350 170
 
-DIALOG main, label("POF")
+DIALOG main, label("POF") tabtitle("Main")
 BEGIN
-	
-	BUTTON btn_1995				20 10 120 25, label("1995") onpush(script child_1995)
-	
-	BUTTON btn_2002				20 +42 120 25, label("2002") onpush(script child_2002)
 
-	BUTTON btn_2008				20 +42 120 25, label("2008") onpush(script child_2008)
+GROUPBOX caixaAnos 10 15 150 160, label("Ano(s)")
+	RADIO  rd_1995  	+25 +25 100 25, first label("2013")  option(2013)
+	RADIO  rd_2002  	@   +25 100 25, last label("2019")  option(2019)
+	RADIO  rd_2008		@   +25 100 25, last label("2019")  option(2019)
+	RADIO  rd_2017  	@   +25 100 25, last label("2019")  option(2019)
 
-	BUTTON btn_2017				20 +42 120 25, label("2017") onpush(script child_2017)
-	
-	FRAME fr_1995   			0  0 400 45
+TEXT credit 15 130 300 15, label("PUC-Rio - Departamento de Economia") left
 
-	FRAME fr_2002	  			0  +43 400 45
-
-	FRAME fr_2008   			0  +43 400 45
-
-	FRAME fr_2017   			0  +43 400 45
 END
 
-CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pof")
-RESET res1
+OK ok,      label("OK")
+SUBMIT sub
+CANCEL can, label("Cancel")
+*HELP hlp,   view("help datazoom_pns")
+RESET res
 
 SCRIPT PREINIT_SCRIPT
-   BEGIN
-      create STRING nomeDialog
-      nomeDialog.storeDialogClassName
-   END
+BEGIN
+*	create STRING lista_tipos
+	create STRING saidadata
+	create STRING saidasalvando
+END
 
-SCRIPT child_1995
-   BEGIN
-      create CHILD datazoom_pof1995
-   END   
- 
-SCRIPT child_2002
-   BEGIN
-      create CHILD datazoom_pof2002
-   END   
+SCRIPT dados
+BEGIN
+	create CHILD datazoom_datafolder AS data
+	data.settitle "Dados originais da PNS"
+	data.setExitString saidadata
+END
 
-SCRIPT child_2008
-   BEGIN
-      create CHILD datazoom_pof2008
-   END   
+SCRIPT salvando
+BEGIN
+	create CHILD datazoom_finalfolder AS dic
+	dic.settitle "Novas bases da PNS"
+	dic.setExitString saidasalvando
+END
 
-SCRIPT child_2017
-   BEGIN
-      create CHILD datazoom_pof2017
-   END   
+PROGRAM command
+BEGIN
+	put "datazoom_pns "
+	beginoptions
+		put saidadata " "
+		put saidasalvando " "
+		put "year("
+		option main.ck2013 main.ck2019
+		put ") "
+   endoptions
+END
