@@ -6,7 +6,7 @@ POSITION . . 180 200
 DIALOG main, label("POF") tabtitle("Main")
 BEGIN
 
-GROUPBOX caixaAnos 10 15 150 160, label("Escolha o ano")
+GROUPBOX caixaAnos 10 15 150 160, label("Choose year")
 	RADIO  rd_1995  	+25 +25 100 25, first label("1995")  option(datazoom_pof1995)
 	RADIO  rd_2002  	@   +25 100 25, middle label("2002")  option(datazoom_pof2002)
 	RADIO  rd_2008		@   +25 100 25, middle label("2008")  option(datazoom_pof2008)

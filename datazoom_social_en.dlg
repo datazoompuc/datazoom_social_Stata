@@ -95,5 +95,5 @@ SCRIPT child_pns
    
 SCRIPT child_pof
    BEGIN
-      create CHILD datazoom_pof, allowsubmit
+      create CHILD datazoom_pof_en, allowsubmit
    END      

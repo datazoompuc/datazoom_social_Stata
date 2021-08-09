@@ -31,26 +31,26 @@ DEFINE ps_fl_salvabase 5
 DEFINE ps_tx_base 10
 DEFINE ps_tx_salvabase 10
 
-GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de Identificação")
+GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de IdentificaÃ§Ã£o")
 
-	RADIO   rd_dom     +5 +25 100 ., first label("Domicílio") option(dom)
+	RADIO   rd_dom     +5 +25 100 ., first label("DomicÃ­lio") option(dom)
 	RADIO   rd_uc       +65 @   150 ., middle label("Unidade de Consumo") option(uc)
 	RADIO   rd_pess     +125 @  100 ., last label("Pessoas") option(pess)
 	
-GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens à cesta")
+GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens Ã  cesta")
 	
-	RADIO rd_ali +15 +20 . ., label("Alimentação") onclickon(script habilita_ali) first
+	RADIO rd_ali +15 +20 . ., label("AlimentaÃ§Ã£o") onclickon(script habilita_ali) first
 	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
 	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
 	
-	TEXT        agr_ali         ps_agr_ali_x ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e ...")
+	TEXT        agr_ali         ps_agr_ali_x ps_agr_ali_y 230 ., label("Itens em AlimentaÃ§Ã£o: Selecione um item e ...")
 	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
 	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e ...")
 	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
 	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimetos: Selecione um item e ...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicioná-lo") onpush(program atualizaListas)
+	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicionÃ¡-lo") onpush(program atualizaListas)
 	
 GROUPBOX agr_ad ps_agr_ad_x ps_agr_ad_y 230 345, label("Itens Selecionados")
 
@@ -136,28 +136,28 @@ SCRIPT habilita_ren
 
 LIST nomes_alimentos
    BEGIN
-:: Despesa com alimentação
-:: :: Alimentação no domicílio
+:: Despesa com alimentaÃ§Ã£o
+:: :: AlimentaÃ§Ã£o no domicÃ­lio
 :: :: :: Cereais, leguminosas e oleaginosas
 :: :: :: :: Arroz 
-:: :: :: :: Feijão 
-:: :: :: :: Orgânicos 
+:: :: :: :: FeijÃ£o 
+:: :: :: :: OrgÃ¢nicos 
 :: :: :: :: Outros
-:: :: :: Farinhas féculas e massas
-:: :: :: :: Macarrão 
+:: :: :: Farinhas fÃ©culas e massas
+:: :: :: :: MacarrÃ£o 
 :: :: :: :: Farinha de trigo 
 :: :: :: :: Farinha de mandioca 
-:: :: :: :: Outras (farinhas féculas e massas)
-:: :: :: Tubérculos e raízes
+:: :: :: :: Outras (farinhas fÃ©culas e massas)
+:: :: :: TubÃ©rculos e raÃ­zes
 :: :: :: :: Batata inglesa 
 :: :: :: :: Cenoura 
 :: :: :: :: Mandioca 
-:: :: :: :: Outros (tubérculos e raízes)
-:: :: :: Açúcares e derivados
-:: :: :: :: Açúcar refinado 
-:: :: :: :: Açúcar cristal 
+:: :: :: :: Outros (tubÃ©rculos e raÃ­zes)
+:: :: :: AÃ§Ãºcares e derivados
+:: :: :: :: AÃ§Ãºcar refinado 
+:: :: :: :: AÃ§Ãºcar cristal 
 :: :: :: :: Light e Diet 
-:: :: :: :: Outros (açúcares e derivados)
+:: :: :: :: Outros (aÃ§Ãºcares e derivados)
 :: :: :: Legumes e verduras
 :: :: :: :: Tomate 
 :: :: :: :: Cebola 
@@ -166,43 +166,43 @@ LIST nomes_alimentos
 :: :: :: Frutas
 :: :: :: :: Banana 
 :: :: :: :: Laranja 
-:: :: :: :: Maça 
+:: :: :: :: MaÃ§a 
 :: :: :: :: Outras (frutas)
-:: :: :: Carnes vísceras e pescados
+:: :: :: Carnes vÃ­sceras e pescados
 :: :: :: :: Carne de boi de primeira 
 :: :: :: :: Carne de boi de segunda 
-:: :: :: :: Carne de suíno 
+:: :: :: :: Carne de suÃ­no 
 :: :: :: :: Carnes e peixes industrializados 
 :: :: :: :: Pescados frescos 
-:: :: :: :: Outros (carnes vísceras e pescados)
+:: :: :: :: Outros (carnes vÃ­sceras e pescados)
 :: :: :: Aves e ovos
 :: :: :: :: Frango 
 :: :: :: :: Ovo de galinha 
-:: :: :: :: Orgânicos 
+:: :: :: :: OrgÃ¢nicos 
 :: :: :: :: Outros (aves e ovos)
 :: :: :: Leites e derivados
 :: :: :: :: Leite de vaca 
-:: :: :: :: Leite em pó 
+:: :: :: :: Leite em pÃ³ 
 :: :: :: :: Queijos 
 :: :: :: :: Light e Diet 
-:: :: :: :: Orgânicos 
+:: :: :: :: OrgÃ¢nicos 
 :: :: :: :: Outros (leites e derivados)
 :: :: :: Panificados
-:: :: :: :: Pão francês 
+:: :: :: :: PÃ£o francÃªs 
 :: :: :: :: Biscoito 
 :: :: :: :: Light e diet 
 :: :: :: :: Outros (panificados)
-:: :: :: Óleos e gorduras
-:: :: :: :: Óleo de soja 
+:: :: :: Ã“leos e gorduras
+:: :: :: :: Ã“leo de soja 
 :: :: :: :: Azeite de oliva 
-:: :: :: :: Outros (óleos e gorduras)
-:: :: :: Bebidas e infusões
-:: :: :: :: Café moído 
+:: :: :: :: Outros (Ã³leos e gorduras)
+:: :: :: Bebidas e infusÃµes
+:: :: :: :: CafÃ© moÃ­do 
 :: :: :: :: Refrigerantes 
-:: :: :: :: Bebidas não alcoólicas light e diet 
+:: :: :: :: Bebidas nÃ£o alcoÃ³licas light e diet 
 :: :: :: :: Cervejas e chopes 
-:: :: :: :: Outras bebidas alcoólicas 
-:: :: :: :: Outras (bebidas e infusões)
+:: :: :: :: Outras bebidas alcoÃ³licas 
+:: :: :: :: Outras (bebidas e infusÃµes)
 :: :: :: Enlatados e conservas
 :: :: :: Sal e condimentos
 :: :: :: :: Massa de tomate 
@@ -210,43 +210,43 @@ LIST nomes_alimentos
 :: :: :: :: Sal refinado 
 :: :: :: :: Outros (sal e condimentos)
 :: :: :: Alimentos preparados
-:: :: :: Outros (alimentação no domicílio)
-:: :: Alimentação fora do domicílio
-:: :: :: Almoço e jantar 
-:: :: :: Café leite café
-:: :: :: Sanduíches e salgados 
-:: :: :: Refrigerantes e outras bebidas não alcoólicas 
+:: :: :: Outros (alimentaÃ§Ã£o no domicÃ­lio)
+:: :: AlimentaÃ§Ã£o fora do domicÃ­lio
+:: :: :: AlmoÃ§o e jantar 
+:: :: :: CafÃ© leite cafÃ©
+:: :: :: SanduÃ­ches e salgados 
+:: :: :: Refrigerantes e outras bebidas nÃ£o alcoÃ³licas 
 :: :: :: Lanches 
-:: :: :: Cervejas chopes e outras bebidas alcoólicas 
-:: :: :: Alimentação na escola 
-:: :: :: Alimentação light e diet 
-:: :: :: Outras (alimentação fora do domicílio)
+:: :: :: Cervejas chopes e outras bebidas alcoÃ³licas 
+:: :: :: AlimentaÃ§Ã£o na escola 
+:: :: :: AlimentaÃ§Ã£o light e diet 
+:: :: :: Outras (alimentaÃ§Ã£o fora do domicÃ­lio)
    END
    
 LIST nomes_alimentos2
    BEGIN
-Despesa_com_alimentação
-Alimentação_no_domicílio
+Despesa_com_alimentaÃ§Ã£o
+AlimentaÃ§Ã£o_no_domicÃ­lio
 Cereais_leguminosas_e_oleaginosas
 Arroz
-Feijão
-Cereais_Orgânicos
+FeijÃ£o
+Cereais_OrgÃ¢nicos
 Outros_(cereais_leguminosas_e_oleaginosas)
-Farinhas_féculas_e_massas
-Macarrão
+Farinhas_fÃ©culas_e_massas
+MacarrÃ£o
 Farinha_de_trigo
 Farinha_de_mandioca
-Outras_(farinhas_féculas_e_massas)
-Tubérculos_e_raízes
+Outras_(farinhas_fÃ©culas_e_massas)
+TubÃ©rculos_e_raÃ­zes
 Batata_inglesa
 Cenoura
 Mandioca
-Outros_(tubérculos_e_raízes)
-Açúcares_e_derivados
-Açúcar_refinado
-Açúcar_cristal
+Outros_(tubÃ©rculos_e_raÃ­zes)
+AÃ§Ãºcares_e_derivados
+AÃ§Ãºcar_refinado
+AÃ§Ãºcar_cristal
 Acucar_Light_e_Diet
-Outros_(açúcares_e_derivados)
+Outros_(aÃ§Ãºcares_e_derivados)
 Legumes_e_verduras
 Tomate
 Cebola
@@ -255,43 +255,43 @@ Outros_(legumes_e_verduras)
 Frutas
 Banana
 Laranja
-Maça
+MaÃ§a
 Outras_(frutas)
-Carnes_vísceras_e_pescados
+Carnes_vÃ­sceras_e_pescados
 Carne_de_boi_de_primeira
 Carne_de_boi_de_segunda
-Carne_de_suíno
+Carne_de_suÃ­no
 Carnes_e_peixes_industrializados
 Pescados_frescos
-Outros_(carnes_vísceras_e_pescados)
+Outros_(carnes_vÃ­sceras_e_pescados)
 Aves_e_ovos
 Frango
 Ovo_de_galinha
-Ovos_Orgânicos
+Ovos_OrgÃ¢nicos
 Outros_(aves_e_ovos)
 Leites_e_derivados
 Leite_de_vaca
-Leite_em_pó
+Leite_em_pÃ³
 Queijos
 Leites_Light_e_Diet
-Leites_Orgânicos
+Leites_OrgÃ¢nicos
 Outros_(leites_e_derivados)
 Panificados
-Pão_francês
+PÃ£o_francÃªs
 Biscoito
 Paes_Light_e_diet
 Outros_(panificados)
-Óleos_e_gorduras
-Óleo_de_soja
+Ã“leos_e_gorduras
+Ã“leo_de_soja
 Azeite_de_oliva
-Outros_(óleos_e_gorduras)
-Bebidas_e_infusões
-Café_moído
+Outros_(Ã³leos_e_gorduras)
+Bebidas_e_infusÃµes
+CafÃ©_moÃ­do
 Refrigerantes
-Bebidas_não_alcoólicas_light_e_diet
+Bebidas_nÃ£o_alcoÃ³licas_light_e_diet
 Cervejas_e_chopes
-Outras_bebidas_alcoólicas
-Outras_(bebidas_e_infusões)
+Outras_bebidas_alcoÃ³licas
+Outras_(bebidas_e_infusÃµes)
 Enlatados_e_conservas
 Sal_e_condimentos
 Massa_de_tomate
@@ -299,203 +299,203 @@ Maionese
 Sal_refinado
 Outros_(sal_e_condimentos)
 Alimentos_preparados
-Outros_(alimentação_no_domícilio)
-Alimentação_fora_do_domicílio
-Almoço_e_jantar
-Café_leite_café
-Sanduíches_e_salgados
-Refrigerantes_e_outras_bebidas_não_alcoólicas
+Outros_(alimentaÃ§Ã£o_no_domÃ­cilio)
+AlimentaÃ§Ã£o_fora_do_domicÃ­lio
+AlmoÃ§o_e_jantar
+CafÃ©_leite_cafÃ©
+SanduÃ­ches_e_salgados
+Refrigerantes_e_outras_bebidas_nÃ£o_alcoÃ³licas
 Lanches
-Cervejas_chopes_e_outras_bebidas_alcoólicas
-Alimentação_na_escola
-Alimentação_light_e_diet
-Outras_(alimentação_fora_do_domicílio)
+Cervejas_chopes_e_outras_bebidas_alcoÃ³licas
+AlimentaÃ§Ã£o_na_escola
+AlimentaÃ§Ã£o_light_e_diet
+Outras_(alimentaÃ§Ã£o_fora_do_domicÃ­lio)
    END
 
 LIST nomes_despesas
    BEGIN
-:: :: Habitação
+:: :: HabitaÃ§Ã£o
 :: :: :: Aluguel
-:: :: :: :: Aluguel monetário
-:: :: :: :: Aluguel não monetário
-:: :: :: Condomínio
-:: :: :: Serviços e taxas
-:: :: :: :: Energia elétrica
+:: :: :: :: Aluguel monetÃ¡rio
+:: :: :: :: Aluguel nÃ£o monetÃ¡rio
+:: :: :: CondomÃ­nio
+:: :: :: ServiÃ§os e taxas
+:: :: :: :: Energia elÃ©trica
 :: :: :: :: Telefone fixo
 :: :: :: :: Telefone celular
 :: :: :: :: Pacote de telefone,
-:: :: :: :: Gás doméstico
-:: :: :: :: Água e esgoto
-:: :: :: :: Outros (serviços e taxas)
-:: :: :: Manutenção do lar
+:: :: :: :: GÃ¡s domÃ©stico
+:: :: :: :: Ãgua e esgoto
+:: :: :: :: Outros (serviÃ§os e taxas)
+:: :: :: ManutenÃ§Ã£o do lar
 :: :: :: Artigos de limpeza
-:: :: :: Mobiliários e artigos do lar
-:: :: :: Eletrodomésticos
+:: :: :: MobiliÃ¡rios e artigos do lar
+:: :: :: EletrodomÃ©sticos
 :: :: :: Consertos de artigos do lar
-:: :: Vestuário
+:: :: VestuÃ¡rio
 :: :: :: Roupa de homem
 :: :: :: Roupa de mulher
-:: :: :: Roupa de criança
-:: :: :: Calçados e apetrechos
-:: :: :: Jóias e bijuterias
+:: :: :: Roupa de crianÃ§a
+:: :: :: CalÃ§ados e apetrechos
+:: :: :: JÃ³ias e bijuterias
 :: :: :: Tecidos e armarinhos
 :: :: Transporte
 :: :: :: Urbano
-:: :: ::  Gasolina - veículo próprio
-:: :: ::  Álcool - veículo próprio
-:: :: :: Manutenção e acessórios
-:: :: ::  Aquisição de veículos
-:: :: :: Viagens esporádicas
+:: :: ::  Gasolina - veÃ­culo prÃ³prio
+:: :: ::  Ãlcool - veÃ­culo prÃ³prio
+:: :: :: ManutenÃ§Ã£o e acessÃ³rios
+:: :: ::  AquisiÃ§Ã£o de veÃ­culos
+:: :: :: Viagens esporÃ¡dicas
 :: :: :: Outras (transporte)
 :: :: Higiene e cuidados pessoais
 :: :: :: Perfume
 :: :: :: Produtos para cabelo
 :: :: :: Sabonete
 :: :: :: Instrumentos e produtos de uso pessoal
-:: :: Assistência à saúde
-:: :: :: Remédios
-:: :: :: Plano/Seguro saúde
-:: :: :: Consulta e tratamento dentário
-:: :: :: Consulta médica
-:: :: :: Tratamento médico e ambulatorial
-:: :: :: Serviços de cirurgia
-:: :: :: Hospitalização
+:: :: AssistÃªncia Ã  saÃºde
+:: :: :: RemÃ©dios
+:: :: :: Plano/Seguro saÃºde
+:: :: :: Consulta e tratamento dentÃ¡rio
+:: :: :: Consulta mÃ©dica
+:: :: :: Tratamento mÃ©dico e ambulatorial
+:: :: :: ServiÃ§os de cirurgia
+:: :: :: HospitalizaÃ§Ã£o
 :: :: :: Exames diversos
 :: :: :: Material de tratamento
-:: :: :: Outras (assistência à saúde)
-:: :: Educação
+:: :: :: Outras (assistÃªncia Ã  saÃºde)
+:: :: EducaÃ§Ã£o
 :: :: :: Cursos regulares
 :: :: :: Curso superior
 :: :: :: Outros cursos e atividades
-:: :: :: Livros didáticos e revistas técnicas
+:: :: :: Livros didÃ¡ticos e revistas tÃ©cnicas
 :: :: :: Artigos escolares
-:: :: :: Outras (educação)
-:: :: Recreação e cultura
+:: :: :: Outras (educaÃ§Ã£o)
+:: :: RecreaÃ§Ã£o e cultura
 :: :: :: Brinquedos e jogos
-:: :: :: Celular e acessórios
-:: :: :: Periódicos livros e revistas não didáticos
-:: :: :: Recreações e esportes
-:: :: :: Outras (recreação e cultura)
+:: :: :: Celular e acessÃ³rios
+:: :: :: PeriÃ³dicos livros e revistas nÃ£o didÃ¡ticos
+:: :: :: RecreaÃ§Ãµes e esportes
+:: :: :: Outras (recreaÃ§Ã£o e cultura)
 :: :: Fumo
-:: :: Serviços pessoais
+:: :: ServiÃ§os pessoais
 :: :: :: Cabeleireiro
 :: :: :: Manicuro e pedicuro
 :: :: :: Consertos de artigos pessoais
-:: :: :: Outras (serviços pessoais)
+:: :: :: Outras (serviÃ§os pessoais)
 :: :: Despesas diversas
 :: :: :: Jogos e apostas
-:: :: :: Comunicação
-:: :: :: Cerimônias e festas
-:: :: :: Serviços profissionais
-:: :: :: Imóveis de uso ocasional
+:: :: :: ComunicaÃ§Ã£o
+:: :: :: CerimÃ´nias e festas
+:: :: :: ServiÃ§os profissionais
+:: :: :: ImÃ³veis de uso ocasional
 :: :: :: Outras (despesas diversas)
 :: :: Outras despesas correntes
 :: :: :: Impostos
-:: :: :: Contribuições trabalhistas
-:: :: :: Serviços bancários
-:: :: :: Pensões mesadas e doações
-:: :: :: Previdência privada
+:: :: :: ContribuiÃ§Ãµes trabalhistas
+:: :: :: ServiÃ§os bancÃ¡rios
+:: :: :: PensÃµes mesadas e doaÃ§Ãµes
+:: :: :: PrevidÃªncia privada
 :: :: :: Outras (outras despesas correntes)
 :: :: Aumento do ativo
-:: :: :: Imóvel (aquisição)
-:: :: :: Imóvel (reforma)
+:: :: :: ImÃ³vel (aquisiÃ§Ã£o)
+:: :: :: ImÃ³vel (reforma)
 :: :: :: Outros investimentos
-:: :: Diminuição do passivo
-:: :: :: Empréstimo
-:: :: :: Prestação de imóvel
+:: :: DiminuiÃ§Ã£o do passivo
+:: :: :: EmprÃ©stimo
+:: :: :: PrestaÃ§Ã£o de imÃ³vel
    END
 
 LIST nomes_despesas2
    BEGIN
-Habitação
+HabitaÃ§Ã£o
 Aluguel
-Aluguel_monetário
-Aluguel_não_monetário
-Condomínio
-Serviços_e_taxas
-Energia_elétrica
+Aluguel_monetÃ¡rio
+Aluguel_nÃ£o_monetÃ¡rio
+CondomÃ­nio
+ServiÃ§os_e_taxas
+Energia_elÃ©trica
 Telefone_fixo
 Telefone_celular
 Pacote_de_telefone
-Gás_doméstico
-Água_e_esgoto
-Outros_(serviços_e_taxas)
-Manutenção_do_lar
+GÃ¡s_domÃ©stico
+Ãgua_e_esgoto
+Outros_(serviÃ§os_e_taxas)
+ManutenÃ§Ã£o_do_lar
 Artigos_de_limpeza
-Mobiliários_e_artigos_do_lar
-Eletrodomésticos
+MobiliÃ¡rios_e_artigos_do_lar
+EletrodomÃ©sticos
 Consertos_de_artigos_do_lar
-Vestuário
+VestuÃ¡rio
 Roupa_de_homem
 Roupa_de_mulher
-Roupa_de_criança
-Calçados_e_apetrechos
+Roupa_de_crianÃ§a
+CalÃ§ados_e_apetrechos
 Joias_e_bijuterias
 Tecidos_e_armarinhos
 Transporte
 Urbano
-Gasolina_-_veículo_próprio
-Álcool_-_veículo_próprio
-Manutenção_e_acessórios
-Aquisição_de_veículos
-Viagens_esporádicas
+Gasolina_-_veÃ­culo_prÃ³prio
+Ãlcool_-_veÃ­culo_prÃ³prio
+ManutenÃ§Ã£o_e_acessÃ³rios
+AquisiÃ§Ã£o_de_veÃ­culos
+Viagens_esporÃ¡dicas
 Outras_(transporte)
 Higiene_e_cuidados_pessoais
 Perfume
 Produtos_para_cabelo
 Sabonete
 Instrumentos_e_produtos_de_uso_pessoal
-Assistência_à_saúde
-Remédios
-Plano/Seguro_saúde
-Consulta_e_tratamento_dentário
-Consulta_médica
-Tratamento_médico_e_ambulatorial
-Serviços_de_cirurgia
-Hospitalização
+AssistÃªncia_Ã _saÃºde
+RemÃ©dios
+Plano/Seguro_saÃºde
+Consulta_e_tratamento_dentÃ¡rio
+Consulta_mÃ©dica
+Tratamento_mÃ©dico_e_ambulatorial
+ServiÃ§os_de_cirurgia
+HospitalizaÃ§Ã£o
 Exames_diversos
 Material_de_tratamento
-Outras_(assistência_à_saúde)
-Educação
+Outras_(assistÃªncia_Ã _saÃºde)
+EducaÃ§Ã£o
 Cursos_regulares
 Curso_superior
 Outros_cursos_e_atividades
-Livros_didáticos_e_revistas_técnicas
+Livros_didÃ¡ticos_e_revistas_tÃ©cnicas
 Artigos_escolares
-Outras_(educação)
-Recreação_e_cultura
+Outras_(educaÃ§Ã£o)
+RecreaÃ§Ã£o_e_cultura
 Brinquedos_e_jogos
-Celular_e_acessórios
-Periódicos_livros_e_revistas_não_didáticos
-Recreações_e_esportes
-Outras_(recreação_e_cultura)
+Celular_e_acessÃ³rios
+PeriÃ³dicos_livros_e_revistas_nÃ£o_didÃ¡ticos
+RecreaÃ§Ãµes_e_esportes
+Outras_(recreaÃ§Ã£o_e_cultura)
 Fumo
-Serviços_pessoais
+ServiÃ§os_pessoais
 Cabeleireiro
 Manicuro_e_pedicuro
 Consertos_de_artigos_pessoais
-Outras_(serviços_pessoais)
+Outras_(serviÃ§os_pessoais)
 Despesas_diversas
 Jogos_e_apostas
-Comunicação
-Cerimônias_e_festas
-Serviços_profissionais
-Imóveis_de_uso_ocasional
+ComunicaÃ§Ã£o
+CerimÃ´nias_e_festas
+ServiÃ§os_profissionais
+ImÃ³veis_de_uso_ocasional
 Outras_(despesas_diversas)
 Outras_despesas_correntes
 Impostos
-Contribuições_trabalhistas
-Serviços_bancários
-Pensões_mesadas_e_doações
-Previdência_privada
+ContribuiÃ§Ãµes_trabalhistas
+ServiÃ§os_bancÃ¡rios
+PensÃµes_mesadas_e_doaÃ§Ãµes
+PrevidÃªncia_privada
 Outras_(outras_despesas_correntes)
 Aumento_do_ativo
-Imóvel_(aquisição)
-Imóvel_(reforma)
+ImÃ³vel_(aquisiÃ§Ã£o)
+ImÃ³vel_(reforma)
 Outros_investimentos
-Diminuição_do_passivo
-Empréstimo
-Prestação_de_imóvel
+DiminuiÃ§Ã£o_do_passivo
+EmprÃ©stimo
+PrestaÃ§Ã£o_de_imÃ³vel
    END
    
 LIST nomes_rendas
@@ -504,18 +504,18 @@ LIST nomes_rendas
 :: :: :: Rendimento_do_trabalho
 :: :: :: :: Empregado
 :: :: :: :: Empregador
-:: :: :: :: Conta_própria
-:: :: :: Transferência
-:: :: :: :: Aposentadoria_e_pensão_do_INSS
-:: :: :: :: Aposentadoria_pensão_da_previdência_pública
-:: :: :: :: Aposentadoria_pensão_da_previdência_privada
+:: :: :: :: Conta_prÃ³pria
+:: :: :: TransferÃªncia
+:: :: :: :: Aposentadoria_e_pensÃ£o_do_INSS
+:: :: :: :: Aposentadoria_pensÃ£o_da_previdÃªncia_pÃºblica
+:: :: :: :: Aposentadoria_pensÃ£o_da_previdÃªncia_privada
 :: :: :: :: Programas_sociais_federais
-:: :: :: :: Pensão_alimentícia_mesada_ou_doação
-:: :: :: :: Outras_transferências
+:: :: :: :: PensÃ£o_alimentÃ­cia_mesada_ou_doaÃ§Ã£o
+:: :: :: :: Outras_transferÃªncias
 :: :: :: Rendimento_de_aluguel
 :: :: :: Outras_rendas
-:: :: :: Rendimento_não_monetário
-:: :: Variação_patrimonial
+:: :: :: Rendimento_nÃ£o_monetÃ¡rio
+:: :: VariaÃ§Ã£o_patrimonial
    END
    
 LIST nomes_rendas2
@@ -524,18 +524,18 @@ Rendimento_total
 Rendimento_do_trabalho
 Empregado
 Empregador
-Conta_própria
-Transferência
-Aposentadoria_e_pensão_do_INSS
-Aposentadoria_pensão_da_previdência_pública
-Aposentadoria_pensão_da_previdência_privada
+Conta_prÃ³pria
+TransferÃªncia
+Aposentadoria_e_pensÃ£o_do_INSS
+Aposentadoria_pensÃ£o_da_previdÃªncia_pÃºblica
+Aposentadoria_pensÃ£o_da_previdÃªncia_privada
 Programas_sociais_federais
-Pensão_alimentícia_mesada_ou_doação
-Outras_transferências
+PensÃ£o_alimentÃ­cia_mesada_ou_doaÃ§Ã£o
+Outras_transferÃªncias
 Rendimento_de_aluguel
 Outras_rendas
-Rendimento_não_monetário
-Variação_patrimonial
+Rendimento_nÃ£o_monetÃ¡rio
+VariaÃ§Ã£o_patrimonial
    END
 
 PROGRAM atualizaListas
@@ -566,7 +566,7 @@ PROGRAM command
 BEGIN
    put "datazoom_pofsel_17 "
    beginoptions
-		/*Parte da syntax: tipo de extração*/
+		/*Parte da syntax: tipo de extraÃ§Ã£o*/
 		put "id("
 		option radio(main rd_dom rd_uc rd_pess)
 		/*Parte da syntax: lista de agregados*/
