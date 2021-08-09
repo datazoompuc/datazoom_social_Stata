@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 330
+POSITION . . 350 320
 
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
@@ -31,9 +31,7 @@ GROUPBOX caixaid 160 120 140 255, label("Individual Identification")
 	RADIO	idbas	+0 +22 150 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +22 150 ., last label("Advanced") option(idrs)
 	
-TEXT     credit     5   280 200    ., label("By PUC-Rio - Department of Economics") left
-TEXT     notes     5   300 360    ., label("Note: reinstall periodically the package datazoom_pnadcontinua") left
-
+TEXT     credit     0   280 340    ., label("PUC-Rio - Department of Economics") right
 
 END
 

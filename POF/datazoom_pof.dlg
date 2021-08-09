@@ -1,0 +1,54 @@
+VERSION 2.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 160 205
+
+DIALOG main, label("POF")
+BEGIN
+	
+	BUTTON btn_1995				20 10 120 25, label("1995") onpush(script child_1995)
+	
+	BUTTON btn_2002				20 +42 120 25, label("2002") onpush(script child_2002)
+
+	BUTTON btn_2008				20 +42 120 25, label("2008") onpush(script child_2008)
+
+	BUTTON btn_2017				20 +42 120 25, label("2017") onpush(script child_2017)
+	
+	FRAME fr_1995   			0  0 400 45
+
+	FRAME fr_2002	  			0  +43 400 45
+
+	FRAME fr_2008   			0  +43 400 45
+
+	FRAME fr_2017   			0  +43 400 45
+END
+
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pof")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+
+SCRIPT child_1995
+   BEGIN
+      create CHILD datazoom_pof1995
+   END   
+ 
+SCRIPT child_2002
+   BEGIN
+      create CHILD datazoom_pof2002
+   END   
+
+SCRIPT child_2008
+   BEGIN
+      create CHILD datazoom_pof2008
+   END   
+
+SCRIPT child_2017
+   BEGIN
+      create CHILD datazoom_pof2017
+   END   
