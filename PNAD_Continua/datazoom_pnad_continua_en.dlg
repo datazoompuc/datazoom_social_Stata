@@ -30,10 +30,10 @@ SCRIPT PREINIT_SCRIPT
 
 SCRIPT child_anual
    BEGIN
-      create CHILD datazoom_pnadcont_anual_en
+      create CHILD datazoom_pnadcont_anual_en, allowsubmit
    END   
  
 SCRIPT child_trimestral
    BEGIN
-      create CHILD datazoom_pnadcont_trimestral_en
+      create CHILD datazoom_pnadcont_trimestral_en, allowsubmit
    END
