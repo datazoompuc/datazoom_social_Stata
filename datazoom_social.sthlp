@@ -11,7 +11,7 @@
 {title:Title}
 
 {phang}
-{bf:datazoom_pns} {hline 2} Acesso aos microdados do IBGE em formato STATA - Versão 1.0
+{bf:datazoom_social} {hline 2} Acesso aos microdados das pesquisas domiciliares do IBGE em formato STATA - Versão 1.0
 
 {marker syntax}{...}
 {title:Syntax}
@@ -26,11 +26,15 @@
 {synopthdr}
 {synoptline}
 {syntab:Inputs}
-{synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
-{synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
+{synopt:{opt research(str)}} pesquisa domiciliar que deseja fazer leitura dos dados {p_end}
+{synopt:{opt folder1(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
+{synopt:{opt folder2(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 
-{syntab:Ano}
-{synopt:{opt year(number)}} ano {p_end}
+{syntab:Período}
+{synopt:{opt date(number)}} data da pesquisa (mês ou ano) {p_end}
+
+{syntab:Outras opções}
+{synopt:{opt ops}} acesse "https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README.md" para ver opções específicas de cada pesquisa {p_end}
 
 {synoptline}
 {p2colreset}{...}
@@ -39,30 +43,54 @@
 {marker description}{...}
 {title:Descrição}
 {pstd}
-{cmd:datazoom_pns} extrai bases de dados da PNS em formato STATA a partir dos microdados originais, 
-	os quais não são disponibilizados pelo Portal (informações sobre como obter os arquivos originais de dados, consulte o
-        site do IBGE www.ibge.gov.br). 
+{cmd:datazoom_social} extrai bases de dados de pesquisas domiciliares do IBGE em formato STATA a partir dos microdados originais, 
+	os quais não são disponibilizados pelo Portal (informações sobre como obter os arquivos originais de dados, 
+	consulte o nosso site http://www.econ.puc-rio.br/datazoom/ ou o site do IBGE www.ibge.gov.br). 
 
 
 {marker options}{...}
 {title:Opções}
 {dlgtab:Inputs}
 
-{phang} {opt original(str)} indica o caminho dos arquivos de dados originais. 
+{phang} {opt research(str)} indica qual pesquisa deseja compatibilizar os dados. 
 
-{phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
+{phang} {opt folder1(str)} indica o caminho dos arquivos de dados originais. 
 
-{dlgtab:Ano}
+{phang} {opt folder2(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
+
+{dlgtab:Período}
 
 {phang}
-{opt year(number)}  especifica a edição de interesse da PNS.
+{opt date(number)}  especifica a edição/período de interesse da pesquisa.
 			
 	
 {marker examples}{...}
 {title:Exemplo}
 
-{phang} datazoom_pns, original(C:\DataZoom\PNS\Dados) saving(C:\Bases) year(2013)
+{pstd}  OBS: Recomenda-se a execução do programa por meio da caixa de diálogo. Digite "db datazoom_social" na janela 
+de comando do STATA para iniciar.
 
+{phang} Exemplo 1: PNS
+
+{phang} datazoom_social, research(pns) folder1(C:\DataZoom\PNS\Dados) folder2(C:\Bases) date(2019)
+
+{pstd} Uma base de dados para o ano de 2019 é gerada
+
+{pstd} 
+
+{phang} Exemplo 2: Censo
+
+{phang} datazoom_social, research(censo) folder1(C:\DataZoom\PNS\Dados) folder2(C:\Bases) date(2010) state(AC) pes
+
+{pstd} Uma base de dados para o ano de 2010 para pessoas do estado do Acre é gerada
+
+{pstd}
+
+{phang} Exemplo 3: PME
+
+{phang} datazoom_social, research(pmenova) folder1(C:\DataZoom\PNS\Dados) folder2(C:\Bases) date(2014 2015) nid
+
+{pstd} Duas bases de dados para os anos de 2014 e 2015 são geradas.
 
 {title:Autor}
 {p}
@@ -74,20 +102,20 @@ Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
 
 {title:Veja também}
 
-Pacotes relacionados:
+Documentação e exemplos específicos para cada pesquisa:
 
-{help datazoom_censo} (se instalado)   
-{help datazoom_pnad} (se instalado)
-{help datazoom_pnadcontinua} (se instalado)
-{help datazoom_pnadcont_anual} (se instalado)  
-{help datazoom_pnad_covid} (se instalado)
-{help datazoom_pmeantiga} (se instalado)  
-{help datazoom_pmenova} (se instalado)   
-{help datazoom_pof2017}(se instalado)   
-{help datazoom_pof2008}(se instalado)   
-{help datazoom_pof2002} (se instalado)  
-{help datazoom_pof1995} (se instalado)   
-{help datazoom_ecinf} (se instalado) 
+{help datazoom_censo}   
+{help datazoom_pnad}
+{help datazoom_pnadcontinua}
+{help datazoom_pnadcont_anual}  
+{help datazoom_pnad_covid}
+{help datazoom_pmeantiga}  
+{help datazoom_pmenova}   
+{help datazoom_pof2017}   
+{help datazoom_pof2008}   
+{help datazoom_pof2002}  
+{help datazoom_pof1995}   
+{help datazoom_ecinf} 
 
 
 {p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
