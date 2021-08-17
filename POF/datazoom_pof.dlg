@@ -14,7 +14,7 @@ GROUPBOX caixaAnos 10 15 150 160, label("Escolha o ano")
 
 END
 
-OK ok,      label("OK")
+OK ok, label ("OK")
 CANCEL can, label("Cancel")
 *HELP hlp,   view("help datazoom_pof")
 RESET res

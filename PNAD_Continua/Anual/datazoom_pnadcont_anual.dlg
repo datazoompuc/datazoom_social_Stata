@@ -59,14 +59,14 @@ RESET res1
 	
 SCRIPT dados
 BEGIN
-	create CHILD datazoom_datafolder_anual AS data
+	create CHILD datazoom_datafolder AS data
 	data.settitle "Dados originais da PNAD Contínua Anual"
 	data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
-	create CHILD datazoom_finalfolder_anual AS dic
+	create CHILD datazoom_finalfolder AS dic
 	dic.settitle "Novas bases da PNAD Contínua Anual"
 	dic.setExitString saidasalvando
 	END

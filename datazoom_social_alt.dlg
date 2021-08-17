@@ -9,15 +9,15 @@ BEGIN
 	TEXT tx_eng  10   3 250 25, label("For the English version of this dialog box, click") left
 	HLINK hl_eng 258 5 240 25, label("here") left onpush(script child_en)
 	
-	BUTTON btn_censo 		20 45 120 25, label("Censo") onpush(script child_censo)
-	BUTTON btn_ecinf 		+158 @   @  @, label("ECINF") onpush(script child_ecinf)
-	BUTTON btn_pme 			+158 @   @  @, label("PME") onpush(script child_pme)
-	BUTTON btn_pnad 		+158 @   @  @, label("PNAD") onpush(script child_pnad)
+	RADIO rd_censo 			20 45 120 25,  first label("Censo") option(datazoom_censo)
+	RADIO rd_ecinf 			+158 @   @  @, middle label("ECINF") option(datazoom_ecinf)
+	RADIO rd_pme 			+158 @   @  @, middle label("PME") option(datazoom_pme)
+	RADIO rd_pnad 			+158 @   @  @, middle label("PNAD") option(datazoom_pnad)
 	
-	BUTTON btn_pncon 		20 145 120 25, label("PNAD Contínua") onpush(script child_pnad_continua)
-	BUTTON btn_pncov 		+158 @   @  @, label("PNAD Covid") onpush(script child_pnad_covid)
-	BUTTON btn_pns 			+158 @   @  @, label("PNS") onpush(script child_pns)
-	BUTTON btn_pof 			+158 @   @  @, label("POF") onpush(script child_pof)
+	RADIO rd_pncon 			20 145 120 25, middle label("PNAD Contínua") option(datazoom_pnad_continua)
+	RADIO rd_pncov 			+158 @   @  @, middle label("PNAD Covid") option(datazoom_pnad_covid)
+	RADIO rd_pns 			+158 @   @  @, middle label("PNS") option(datazoom_pns)
+	RADIO rd_pof 			+158 @   @  @, last label("POF") option(datazoom_pof)
 	
 	TEXTBOX txb_censo    		10 75 140 ., label("Censo Demográfico - 1980 a 2010") center
 	TEXTBOX txb_ecinf    		+158 @ @ @, label("Economia Informal Urbana - 1997 e 2003") center
@@ -43,6 +43,7 @@ BEGIN
 	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
 END
 
+OK ok1, label("OK")
 CANCEL can1, label("Cancel")
 HELP hlp1,   view("help datazoom_social")
 RESET res1
@@ -58,42 +59,8 @@ SCRIPT child_en
       create CHILD datazoom_social_en, allowsubmit
    END   
  
-SCRIPT child_censo
-   BEGIN
-      create CHILD datazoom_censo, allowsubmit
-   END
-
-SCRIPT child_ecinf
-   BEGIN
-      create CHILD datazoom_ecinf, allowsubmit
-   END
-
-SCRIPT child_pme
-   BEGIN
-      create CHILD datazoom_pme, allowsubmit
-   END
-   
-SCRIPT child_pnad
-   BEGIN
-      create CHILD datazoom_pnad, allowsubmit
-   END   
-   
-SCRIPT child_pnad_continua
-   BEGIN
-      create CHILD datazoom_pnad_continua, allowsubmit
-   END
-
-SCRIPT child_pnad_covid
-   BEGIN
-      create CHILD datazoom_pnad_covid, allowsubmit
-   END
-
-SCRIPT child_pns
-   BEGIN
-      create CHILD datazoom_pns, allowsubmit
-   END
-   
-SCRIPT child_pof
-   BEGIN
-      create CHILD datazoom_pof, allowsubmit
-   END     
+PROGRAM command
+BEGIN
+	put "db"
+	option main.rd_censo main.rd_ecinf main.rd_pme main.rd_pnad main.rd_pncon main.rd_pncov main.rd_pns main.rd_pof
+END
