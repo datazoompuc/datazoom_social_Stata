@@ -547,5 +547,6 @@ PROGRAM command
 			option radio(main pes dom both)
 			option radio(main ncomp comp81 comp92)
 			endoptions
+			stata
 	END
 	

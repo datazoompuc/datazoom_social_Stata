@@ -55,4 +55,5 @@ BEGIN
 		option main.ck2013 main.ck2019
 		put ") "
    endoptions
+   stata
 END

@@ -71,4 +71,5 @@ PROGRAM command
 			put saidadata " "
 			put saidasalvando
 		endoptions
+		stata
 	END

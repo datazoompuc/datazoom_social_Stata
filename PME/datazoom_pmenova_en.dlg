@@ -81,4 +81,5 @@ PROGRAM command
 		
 			option radio(main nid idbas idrs)
 		endoptions
+		stata
 	END

@@ -76,4 +76,5 @@ PROGRAM command
 			put saidasalvando
 			option radio(main nid idbas idrs)
 		endoptions
+		stata
 	END

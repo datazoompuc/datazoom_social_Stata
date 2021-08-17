@@ -109,4 +109,5 @@ BEGIN
 		put saidasalvando 
 *		option main.chmerge
    endoptions
+   stata
 END
