@@ -60,12 +60,12 @@ SCRIPT child_en
  
 SCRIPT child_censo
    BEGIN
-      create CHILD datazoom_censo
+      create CHILD datazoom_censo, allowsubmit
    END
 
 SCRIPT child_ecinf
    BEGIN
-      create CHILD datazoom_ecinf
+      create CHILD datazoom_ecinf, allowsubmit
    END
 
 SCRIPT child_pme
@@ -96,4 +96,4 @@ SCRIPT child_pns
 SCRIPT child_pof
    BEGIN
       create CHILD datazoom_pof, allowsubmit
-   END      
+   END     

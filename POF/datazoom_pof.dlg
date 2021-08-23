@@ -1,0 +1,34 @@
+VERSION 11.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 180 200
+
+DIALOG main, label("POF") tabtitle("Main")
+BEGIN
+
+GROUPBOX caixaAnos 10 15 150 160, label("Escolha o ano")
+	RADIO  rd_1995  	+25 +25 100 25, first label("1995")  option(datazoom_pof1995)
+	RADIO  rd_2002  	@   +25 100 25, middle label("2002")  option(datazoom_pof2002)
+	RADIO  rd_2008		@   +25 100 25, middle label("2008")  option(datazoom_pof2008)
+	RADIO  rd_2017  	@   +25 100 25, last label("2017")  option(datazoom_pof2017)
+
+END
+
+OK ok, label ("OK")
+CANCEL can, label("Cancel")
+*HELP hlp,   view("help datazoom_pof")
+RESET res
+
+SCRIPT PREINIT_SCRIPT
+BEGIN
+*	create STRING lista_tipos
+	create STRING saidadata
+	create STRING saidasalvando
+END
+
+PROGRAM command
+BEGIN
+	put "db"
+	option main.rd_1995 main.rd_2002 main.rd_2008 main.rd_2017
+	stata
+END

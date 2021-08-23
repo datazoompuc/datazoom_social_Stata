@@ -315,4 +315,5 @@ BEGIN
 	  option radio(main pes dom fam both all)
 	  
    endoptions
+   stata
 END
