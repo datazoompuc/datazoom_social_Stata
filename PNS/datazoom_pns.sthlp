@@ -11,8 +11,10 @@
 
 {p 8 8 2} {it:For the English version}, {help datazoom_pns_en}
 
+{title:Title}
+
 {p 4 4 2}
-{bf:datazoom_pns} - Acesso aos microdados da PNS
+{bf:datazoom_pns} {hline 2} Acesso aos microdados da PNS
 
 {marker synt}
 
@@ -20,14 +22,19 @@
 
 {p 8 8 2} {bf:datazoom_pns} [, {it:options}]
 
-{col 5}{it:options}          	{col 28}{it:Description}
-{space 4}{hline 48}
-{col 5}source		    	{col 28}Local dos dados brutos
-{col 5}year			{col 28}2013 ou 2019
-{col 5}saving		    	{col 28}Local para salvar
-{col 5}english		    	{col 28}Labels em inglês          
-{space 4}{hline 48}
-{p 4 4 2}
+{synoptset 20 tabbed}{...}
+
+{synopthdr}
+{synoptline}
+{synopt:{opt original(str)}} caminho dos arquivos brutos no seu computador {p_end}
+{synopt:{opt year(int)}} ano da pesquisa, 2013 ou 2019 {p_end}
+{synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
+{synopt:{opt english}} labels em inglês {p_end}
+
+{synoptline}
+{p2colreset}{...}
+{p 4 6 2}
+
 Digite o comando {bf:db datazoom_pns} para utilizar a função via caixa de diálogo.      {break}
 
 {marker desc}{...}
@@ -66,9 +73,4 @@ PUC-Rio      {break}
 Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
 {space 4}{hline}
-
-{p 4 4 2}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
-
 
