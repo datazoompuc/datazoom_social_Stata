@@ -1,17 +1,23 @@
 {smcl}
-{* *! version 1.4 22 October 2015}{...}
-{vieweralsosee "" "--"}{...}
-{vieweralsosee "Install command2" "ssc install command2"}{...}
-{vieweralsosee "Help command2 (if installed)" "help command2"}{...}
+{viewerdialog "Censo" "dialog datazoom_censo"}
+{viewerdialog "Pacote" "dialog datazoom_social"}
+{vieweralsosee "PNAD" "help datazoom_pnad"}{...}
+{vieweralsosee "PNS" "help datazoom_pns"}{...}
+{vieweralsosee "PNAD Contínua" "help datazoom_pnad_continua"}{...}
+{vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
+{vieweralsosee "PME" "help datazoom_pme"}{...}
+{vieweralsosee "POF" "help datazoom_pof"}{...}
+{vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
 {viewerjumpto "Syntax" "datazoom_censo##syntax"}{...}
 {viewerjumpto "Description" "datazoom_censo##description"}{...}
 {viewerjumpto "Options" "datazoom_censo##options"}{...}
-{viewerjumpto "Remarks" "datazoom_censo##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_censo##examples"}{...}
+{p 8 8 2} {it:For the English version}, {help datazoom_censo_en}
+
 {title:Title}
 
-{phang}
-{bf:datazoom_censo} {hline 2} Acesso aos microdados do Censo em formato STATA - Versão 1.4
+{p 4 4 2}
+{bf:datazoom_censo} {hline 2} Acesso aos microdados do Censo
 
 {marker syntax}{...}
 {title:Syntax}
@@ -20,8 +26,6 @@
 {cmdab:datazoom_censo}
 [{cmd:,}
 {it:options}]
-
-	OBS: digite 'db datazoom_censo' para utilizar o programa via caixa de diálogo
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -46,13 +50,14 @@
 {p2colreset}{...}
 {p 4 6 2}
 
+Digite {bf:db datazoom_censo} para utilizar a função via caixa de diálogo.
+
 {marker description}{...}
 {title:Descrição}
 
 {phang}
-{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato STATA (.dta) a partir
-dos microdados originais, os quais  não são disponibilizados pelo Portal (informações sobre como obter
-os arquivos originais de dados, consulte o site do IBGE www.ibge.gov.br). O programa pode ser utilizado para
+{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
+dos microdados originais, que podem ser obtidos do site do IBGE. O programa pode ser utilizado para
 os anos de 1970 a 2010.
 
 {phang} Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
@@ -71,11 +76,6 @@ para agosto de 2010.
 correspondentes à seleção em um único arquivo. O arquivo família existe somente para o Censo 2000. Se a opção {opt both} for escolhida, o programa 
 gera uma base de dados inclindo as variáveis de domicílios e pessoas no mesmo arquivo. Se a opção {opt all} for escolhida, disponível apenas para 
 o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicílios, famílias e pessoas no mesmo arquivo.
-
-{phang} Inicialmente, recomenda-se fortemente a utilização do programa via caixa de diálogo, pois facilita
-a inserção de informações necessárias para o seu adequado funcionamento. Digite 'db datazoom_censo' na
-janela de comando do STATA para acessar a caixa de diálogo.
-
 
 {marker remarks}{...}
 {title:Nota sobre os dados originais}
@@ -196,42 +196,19 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
 {marker examples}{...}
 {title:Exemplos}
 
-{phang} datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) pes
+	Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
 
-{pstd} O comando acima produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não 
- são compatibilizadas.
+		. datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) pes
 
+	As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
+
+		. datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) comp both
  
-{phang} datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) comp both
- 
-{pstd} O comando acima produz as mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as 
-variáveis de pessoas e domicílios, todas compatibilizadas.
- 
-{phang}  OBS: Recomenda-se a execução do programa por meio da caixa de diálogo. Digite "db datazoom_censo" na janela 
-de comando do STATA para iniciar.
+{title:Author}
 
+{p 4 4 2}
+DataZoom     {break}
+PUC-Rio - Departamento de Economia      {break}
+Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
-
-{title:Autor}
-{p}
-
-PUC-Rio - Departamento de Economia
-
-Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
-
-
-{title:Veja também}
-
-Pacotes relacionados:
-
-{help datazoom_pmenova} (se instalado)  
-{help datazoom_pmeantiga} (se instalado)  
-{help datazoom_pnad} (se instalado)  
-{help datazoom_pof2008} (se instalado)  
-{help datazoom_pof2002} (se instalado)  
-{help datazoom_pof1995} (se instalado)  
-{help datazoom_ecinf} (se instalado) 
-
-
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
-For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".
+{space 4}{hline}
