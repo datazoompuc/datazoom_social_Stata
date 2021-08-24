@@ -52,6 +52,7 @@ if _rc==901 exit
 
 /* Criando pastas para guardar arquivos da sessão */
 capture mkdir pnadcontinua
+
 if _rc == 693 {
    tempname numpasta
    local numpasta = 0
@@ -129,6 +130,7 @@ qui if "`idbas'" != "" {
 		noi display as result "Painel `pa'"
 		use `PNADC_Painel`pa'', clear
 		gen painel =.
+		
 		/*Algoritmo Básico*/
 		****************************************************************
 		* Variáveis do painel
