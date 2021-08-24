@@ -1,26 +1,28 @@
 {smcl}
-{* *! version 1.0 28 Jun 2013}{...}
-{vieweralsosee "" "--"}{...}
-{vieweralsosee "Install command2" "ssc install command2"}{...}
-{vieweralsosee "Help command2 (if installed)" "help command2"}{...}
+{viewerdialog "ECINF" "dialog datazoom_ecinf"}
+{viewerdialog "Pacote" "dialog datazoom_social"}
+{vieweralsosee "PNAD" "help datazoom_pnad"}{...}
+{vieweralsosee "Censo" "help datazoom_censo"}{...}
+{vieweralsosee "PNAD Contínua" "help datazoom_pnad_continua"}{...}
+{vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
+{vieweralsosee "PME" "help datazoom_pme"}{...}
+{vieweralsosee "POF" "help datazoom_pof"}{...}
+{vieweralsosee "Censo" "help datazoom_censo"}{...}
 {viewerjumpto "Syntax" "datazoom_ecinf##syntax"}{...}
 {viewerjumpto "Description" "datazoom_ecinf##description"}{...}
 {viewerjumpto "Options" "datazoom_ecinf##options"}{...}
-{viewerjumpto "Remarks" "datazoom_ecinf##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_ecinf##examples"}{...}
+{p 8 8 2} {it:For the English version}, {help datazoom_ecinf_en}
+
 {title:Title}
 
-{phang}
-{bf:datazoom_ecinf} {hline 2} Acesso aos microdados da ECINF em formato STATA - Versão 1.0
+{p 4 4 2}
+{bf:datazoom_ecinf} {hline 2} Acesso aos microdados da ECINF
 
 {marker syntax}{...}
 {title:Syntax}
-{p 8 17 2}
-{cmdab:datazoom_ecinf}
-[{cmd:,}
-{it:options}]
 
-{phang}	OBS: digite 'db datazoom_ecinf' na janela de comando para utilizar o programa via caixa de diálogo
+{p 8 8 2} {bf:datazoom_ecinf} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -34,12 +36,12 @@
 {p2colreset}{...}
 {p 4 6 2}
 
+Digite {bf:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
+
 {marker description}{...}
 {title:Descrição}
 {pstd}
-{cmd:datazoom_ecinf} extrai bases de dados da ECINF em formato STATA a partir dos microdados originais, 
-	os quais não são disponibilizados pelo Portal (informações sobre como obter os arquivos originais de dados, consulte o
-        site do IBGE www.ibge.gov.br). Este programa pode ser utilizado para 1997 e 2003.
+{cmd:datazoom_ecinf} extrai bases de dados da ECINF em formato Stata a partir dos microdados originais do IBGE. Este programa pode ser utilizado para 1997 e 2003.
 
 {marker options}{...}
 {title:Opções}
@@ -66,29 +68,14 @@
 {marker examples}{...}
 {title:Example}
 
-{phang} datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original(D:/Finep/ECINF/dados) saving(D:/teste)
+		. datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original("~/mydir") saving("~/mydir")
 
 
-{title:Autor}
-{p}
+{title:Author}
 
-PUC-Rio - Departamento de Economia
+{p 4 4 2}
+DataZoom     {break}
+PUC-Rio - Departamento de Economia      {break}
+Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
-Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
-
-
-{title:Veja também}
-
-Pacotes relacionados:
-
-{help datazoom_censo} (se instalado) 
-{help datazoom_pnad} (se instalado)  
-{help datazoom_pmenova} (se instalado)  
-{help datazoom_pmeantiga} (se instalado)  
-{help datazoom_pof2008} (se instalado)  
-{help datazoom_pof2002} (se instalado) 
-{help datazoom_pof1995} (se instalado) 
-
-
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
-For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".
+{space 4}{hline}
