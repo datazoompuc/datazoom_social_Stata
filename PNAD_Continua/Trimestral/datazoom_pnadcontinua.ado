@@ -24,85 +24,24 @@ local y`1' = ""
 	
 foreach year in `years'{
 	foreach trim in 01 02 03 04 {
-		if (`year' == 2021) {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
-			}
-			else continue, break
-		}
-		if (`year' == 2020) {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
-			}
-			else continue, break
+		local file_name "PNADC_`trim'`year'"
+		
+		if `year' == 2016 | `year' == 2017 | `year' == 2018 | (`year' == 2015 & `trim' == 4) | (`year' == 2019 & `trim' == 1){
+				local file_name "`file_name'_20190729"
 		}	
-		else if (`trim' == 04 & `year' == 2019) {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
-			}
-			else continue, break
-		}			
-		else if (`trim' == 03 & `year' == 2019) {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
-			}
-			else continue, break
-		}
-		else if (`trim' == 02 & `year' == 2019) {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
+		
+		di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
+				cap infile using "`dic'", using("`original'/`file_name'.txt") clear
+				if _rc == 0 {
+						qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
+						qui destring hous_id, replace
+						qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
+						qui destring ind_id, replace
+						tempfile PNADC_`trim'`year'
+						save `PNADC_`trim'`year'', replace
 				}
-			else continue, break
-		}						
-		else  {
-			di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-			cap infile using "`dic'", using("`original'/PNADC_`trim'`year'_20190729.txt") clear
-			if _rc == 0 {
-				qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-				qui destring hous_id, replace
-				qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-				qui destring ind_id, replace
-				tempfile PNADC_`trim'`year'
-				save `PNADC_`trim'`year'', replace
-				}
-			else continue, break
+				else continue, break
 		}
-	}
 }	
 
 if _rc==901 exit	
@@ -113,6 +52,7 @@ if _rc==901 exit
 
 /* Criando pastas para guardar arquivos da sessão */
 capture mkdir pnadcontinua
+
 if _rc == 693 {
    tempname numpasta
    local numpasta = 0
@@ -153,10 +93,10 @@ foreach aa in `years' {
 *tokenize `years'
 foreach aa in `years' {
 	foreach pa in 1 2 3 4 5 6 7 8{
-	use PNADC`aa', clear
-	keep if V1014 == `pa'
-	tempfile PNADC_Painel`pa'temp`aa'
-	save `PNADC_Painel`pa'temp`aa'', replace
+		use PNADC`aa', clear
+		keep if V1014 == `pa'
+		tempfile PNADC_Painel`pa'temp`aa'
+		save `PNADC_Painel`pa'temp`aa'', replace
 	}
 }
 
@@ -190,6 +130,7 @@ qui if "`idbas'" != "" {
 		noi display as result "Painel `pa'"
 		use `PNADC_Painel`pa'', clear
 		gen painel =.
+		
 		/*Algoritmo Básico*/
 		****************************************************************
 		* Variáveis do painel
