@@ -22,7 +22,7 @@
 {marker syntax}
 {title:Syntax}
 
-{p 8 8 2} {bf:datazoom_pns} [, {it:options}]
+{p 8 8 2} {cmd:datazoom_pns} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -42,7 +42,7 @@ Digite {bf:db datazoom_pns} para utilizar a função via caixa de diálogo.
 {title:Description}
 
 {p 4 4 2}
-Carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem ser lidos do armazenamento local ou baixados automaticamente.          {break}
+{cmd:datazoom_pns} carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem ser lidos do armazenamento local ou baixados automaticamente.          {break}
 
 {marker options}{...}
 
