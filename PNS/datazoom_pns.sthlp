@@ -50,19 +50,14 @@ Carrega os dados da PNS para o Stata com os nossos dicionários. Os dados podem 
 {dlgtab:Options}
 
 {phang}
-{opt original} Pode ser o caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt. Caso a opção seja omitida, os dados serão baixados do {browse "https://www.ibge.gov.br/estatisticas/sociais/saude/":site} do IBGE.              {break}
+{opt original} Caminho para uma pasta contendo os arquivos originais PNS_2013.txt ou PNS_2019.txt.              {break}
 
 {marker examples}{...} 
 {title:Examples}
 
-    Para baixar e ler os dados da PNS 2019
-
-        . datazoom_pns, year(2019)
-
-    Caso o arquivo de dados brutos já esteja em seu computador
+    Para ler os dados da PNS 2019
 
         . datazoom_pns, original("~/mydir") year(2019)
-
 
 {title:Author}
 
