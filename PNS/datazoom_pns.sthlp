@@ -17,7 +17,7 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:datazoom_pns} {hline 2} Acesso aos microdados da PNS
+{cmd:datazoom_pns} {hline 2} Acesso aos microdados da PNS
 
 {marker syntax}
 {title:Syntax}

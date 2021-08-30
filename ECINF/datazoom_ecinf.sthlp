@@ -17,12 +17,12 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:datazoom_ecinf} {hline 2} Acesso aos microdados da ECINF
+{cmd:datazoom_ecinf} {hline 2} Acesso aos microdados da ECINF
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {bf:datazoom_ecinf} [, {it:options}]
+{p 8 8 2} {cmd:datazoom_ecinf} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -36,15 +36,16 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-Digite {bf:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
+Digite {cmd:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
-{title:Descrição}
-{pstd}
+{title:Description}
+
+{p 4 4 2}
 {cmd:datazoom_ecinf} extrai bases de dados da ECINF em formato Stata a partir dos microdados originais do IBGE. Este programa pode ser utilizado para 1997 e 2003.
 
 {marker options}{...}
-{title:Opções}
+{title:Options}
 {dlgtab:Main}
 {phang}
 {opt year(numlist)}  especifica o ano a ser extraído. Não é possível escolher os dois anos ao mesmo tempo. 
@@ -66,7 +67,7 @@ Digite {bf:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
 
 
 {marker examples}{...}
-{title:Example}
+{title:Examples}
 
 		. datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original("~/mydir") saving("~/mydir")
 

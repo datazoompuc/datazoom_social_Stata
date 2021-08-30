@@ -49,20 +49,21 @@
 Digite {bf:db datazoom_pnad} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
-{title:Descrption}
+{title:Description}
 
-{cmd:datazoom_pnad} extrai e constrói bases de dados da PNAD em formato Stata (.dta) a partir dos microdados 
-originais do IBGE. O programa pode ser utilizado para
-todos anos desde 1981 (exceto os anos censitários e 1994).
+{p 4 4 2}
+{cmd:datazoom_pnad} extrai e constrói bases de dados da PNAD em formato Stata (.dta) a partir dos microdados originais do IBGE. 
+O programa pode ser utilizado para todos anos desde 1981 (exceto os anos censitários e 1994).
 
-Existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
-as variáveis mais frequentes na PNAD, ou seja, são desconsideraradas as variáveis que aparecem poucas vezes 
-nesses 30 anos. Além disso, é possível que aspectos metodológicos impeçam a compatibilização de algumas variáveis. 
-O processo de construção de variáveis compatibilizadas está documentado em "PNAD - Compatibilização", disponível para 
-download no site do Portal. Nesta opção, somente as variáveis compatibilizadas permanecem na base de dados final 
-(além das variáveis de controle). Caso haja variáveis monetárias na base final, todas serão deflacionadas para setembro
-de 2011.
+{p 4 4 2}
+Existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para as variáveis mais frequentes na PNAD, ou seja, 
+são desconsideraradas as variáveis que aparecem poucas vezes nesses 30 anos. Além disso, é possível que aspectos metodológicos 
+impeçam a compatibilização de algumas variáveis. O processo de construção de variáveis compatibilizadas está documentado em 
+"PNAD - Compatibilização", disponível para download no site do DataZoom. Nesta opção, somente as variáveis compatibilizadas permanecem 
+na base de dados final (além das variáveis de controle). Caso haja variáveis monetárias na base final, todas serão deflacionadas para setembro de 2011.
  
+
+{p 4 4 2} 
 Há duas possibilidades de compatibização, uma para os anos 1980 e outra para os
 1990. Isso ocorre devido a uma reformulação da PNAD ocorrida em 1992, quando, entre outras mudanças, houve separação
 dos arquivos de domicílios e pessoas, ampliação do questionário, alteração e sistematização dos nomes
@@ -73,12 +74,14 @@ outro lado, como houve relativamente poucas mudanças após 1992, a compatibiliz
 maioria das variáveis na base de dados (excluindo os suplementos). Nesta segunda possibilidade de compatibilização, 
 as PNAds dos anos 1980 não são consideradas.
 
+{p 4 4 2} 
 A base final, compatibilizada ou não, pode conter somente as variáveis de pessoas ou de domicílios, 
 ou dos dois tipos de registro conjuntamente. Ressalta-se que, para os anos 1980, somente os temas
 de educação, trabalho e rendimento foram investigados. Por conta
 disso, sob a opção de compatibilização para os anos 1980, todas as variáveis relacionadas a outros temas
 são excluídas, mesmo se elas existirem para o ano escolhido.
 
+{p 4 4 2} 
 O programa gera uma base de dados para cada ano escolhido. Se for o caso, use o comando 
 {help append} para juntar todos os anos. Se a opção {opt both} for escolhida, o programa gera uma base
 de dados incluindo as variáveis de domicílios e pessoas no mesmo arquivo.

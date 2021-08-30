@@ -17,12 +17,12 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:datazoom_censo} {hline 2} Acesso aos microdados do Censo
+{cmd:datazoom_censo} {hline 2} Acesso aos microdados do Censo
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {bf:datazoom_censo} [, {it:options}]
+{p 8 8 2} {cmd:datazoom_censo} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -50,14 +50,15 @@
 Digite {bf:db datazoom_censo} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
-{title:Descrição}
+{title:Description}
 
-{phang}
-{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
+{p 4 4 2}
+{cmd:datazoom_pns} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
 dos microdados originais, que podem ser obtidos do site do IBGE. O programa pode ser utilizado para
 os anos de 1970 a 2010.
 
-{phang} Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
+{p 4 4 2}
+Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
 as variáveis existentes ao menos em dois anos do Censo e que são passíveis de compatibilização em
 termos metodológicos. O processo de compatibilização está documentado em
 "Censo - Compatibilização", disponível para download no site do Portal. Nesta opção,
@@ -66,77 +67,18 @@ de controle). Além disso, são incorporadas variáveis relacionadas a mudanças
 período, as chamadas Áreas Mínimas Comparáveis. Finalmente, as variáveis monetárias são deflacionadas 
 para agosto de 2010.
 
-{phang}  O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
+{p 4 4 2}
+O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
 {help append} para juntar todos os estados. 
 
-{phang} Se apenas uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
+{p 4 4 2}
+Se apenas uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
 correspondentes à seleção em um único arquivo. O arquivo família existe somente para o Censo 2000. Se a opção {opt both} for escolhida, o programa 
 gera uma base de dados inclindo as variáveis de domicílios e pessoas no mesmo arquivo. Se a opção {opt all} for escolhida, disponível apenas para 
 o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicílios, famílias e pessoas no mesmo arquivo.
 
-{marker remarks}{...}
-{title:Nota sobre os dados originais}
-
-{phang}
-Os nomes e a quantidade de arquivos de microdados disponibilizados pelo IBGE mudam a cada versão do Censo. 
-Abaixo, segue uma lista com os nomes e a quantidade de arquivos esperados pelo {cmd:datazoom_censo} para cada 
-ano e unidade da federação. 
-
-{phang}
-Caso haja diferenças entre a lista abaixo e os arquivos do usuário, o programa 
-não irá funcionar adequadamente para as UFs em que há disparidade. 
-
-{phang}
-Se a quantidade de arquivos por UF for a mesma da lista, mas houver diferenças nos nomes, o programa 
-deve funcionar corretamente após o usuário renomear seus arquivos de dados adaptando-os à lista. 
-
-{phang}
-No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
-dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes. Se isso ocorrer, 
-o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 
-variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare com o dicionário em mãos.
-
-{phang} - Lista dos nomes dos arquivos de microdados. De 1991 em diante, os números dos sufixos, em geral, referem-se
- aos códigos IBGE de cada estado.
-
-{phang} 1970
-
-{phang} - prefixo para todos arquivos: Damo70
-
-{phang} - sufixos: RO AC AM RR PA AP FN MA PI CE RN PB PE AL SE BA MG ES RJ GB SP PR SC RS MT GO DF
-
-{phang} 1980
-
-{phang} - prefixo para todos arquivos: AMO80.UF
-
-{phang} - sufixos: RO AC AM RR PA AP MA PI CE RN PB PE AL SE BA MG ES RJ SP PR SC RS MS MT GO DF
-
-{phang} 1991 
-
-{phang} - prefixo para todos arquivos: CD102U
-
-{phang} - sufixos: U11 U12 U13 U14 U15 U16 U17 U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 P35 P36 U41 U42 U43 U50 U51 U52 U53
-
-{phang} - note que P35 e P36 referem-se aos dados para SP
-
-{phang} 2000
-
-{phang} - prefixos: Pes (para pessoas), Dom (para domicílios) e Fami (para família)
-
-{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
-
-{phang} 2010
-
-{phang} - prefixos: Amostra_Pessoas_ (para pessoas) e Amostra_Domicilios_ (para domicílios)
-
-{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53 14munic
-
-{phang} - note que 35_outras e 35_RMSP referem-se aos dados para SP
-
-{phang} - note que 14munic refere-se aos dados redefinidos pelo IBGE para 14 municípios
-
 {marker options}{...}
-{title:Opções}
+{title:Options}
 {dlgtab:Inputs}
 
 {phang} {opt years(numlist)}  especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
@@ -200,6 +142,68 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
 	As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
 
 		. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
+ 
+{marker remarks}{...}
+{title:Nota sobre os dados originais}
+
+{phang}
+Os nomes e a quantidade de arquivos de microdados disponibilizados pelo IBGE mudam a cada versão do Censo. 
+Abaixo, segue uma lista com os nomes e a quantidade de arquivos esperados pelo {cmd:datazoom_censo} para cada 
+ano e unidade da federação. 
+
+{phang}
+Caso haja diferenças entre a lista abaixo e os arquivos do usuário, o programa 
+não irá funcionar adequadamente para as UFs em que há disparidade. 
+
+{phang}
+Se a quantidade de arquivos por UF for a mesma da lista, mas houver diferenças nos nomes, o programa 
+deve funcionar corretamente após o usuário renomear seus arquivos de dados adaptando-os à lista. 
+
+{phang}
+No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
+dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes. Se isso ocorrer, 
+o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 
+variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare com o dicionário em mãos.
+
+{phang} - Lista dos nomes dos arquivos de microdados. De 1991 em diante, os números dos sufixos, em geral, referem-se
+ aos códigos IBGE de cada estado.
+
+{phang} 1970
+
+{phang} - prefixo para todos arquivos: Damo70
+
+{phang} - sufixos: RO AC AM RR PA AP FN MA PI CE RN PB PE AL SE BA MG ES RJ GB SP PR SC RS MT GO DF
+
+{phang} 1980
+
+{phang} - prefixo para todos arquivos: AMO80.UF
+
+{phang} - sufixos: RO AC AM RR PA AP MA PI CE RN PB PE AL SE BA MG ES RJ SP PR SC RS MS MT GO DF
+
+{phang} 1991 
+
+{phang} - prefixo para todos arquivos: CD102U
+
+{phang} - sufixos: U11 U12 U13 U14 U15 U16 U17 U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 P35 P36 U41 U42 U43 U50 U51 U52 U53
+
+{phang} - note que P35 e P36 referem-se aos dados para SP
+
+{phang} 2000
+
+{phang} - prefixos: Pes (para pessoas), Dom (para domicílios) e Fami (para família)
+
+{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
+
+{phang} 2010
+
+{phang} - prefixos: Amostra_Pessoas_ (para pessoas) e Amostra_Domicilios_ (para domicílios)
+
+{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53 14munic
+
+{phang} - note que 35_outras e 35_RMSP referem-se aos dados para SP
+
+{phang} - note que 14munic refere-se aos dados redefinidos pelo IBGE para 14 municípios
+ 
  
 {title:Author}
 
