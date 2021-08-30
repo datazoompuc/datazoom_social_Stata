@@ -150,9 +150,9 @@ indivíduo. O mesmo vale para variáveis de rendimento.
 {p 4 4 2} Para a construção de estimativas, é necessário o uso do fator de expansão 2 como fator de ponderação.
 Para mais informações ver {help weight}.
 
-{p 4 4 2}
 {title: Tipos de Registro}
 
+{p 4 4 2}
 {cmd:datazoom_poftrs_}{it:ano} extrai bases de dados da POF 1995-96 em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2} 
