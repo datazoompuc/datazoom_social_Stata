@@ -24,11 +24,11 @@
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {cmd:datazoom_pofstd_}{it: ano} [, {it:options} {it:std_options}]
+{p 8 8 2} {cmd:datazoom_pofstd_}{it:ano} [, {it:options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_pofsel_}{it: ano} [, {it:options} {it:sel_options}]
+{p 8 8 2} {cmd:datazoom_pofsel_}{it:ano} [, {it:options} {it:sel_options}]
 
-{p 8 8 2} {cmd:datazoom_poftrs_}{it: ano} [, {it:options} {it:trs_options}]
+{p 8 8 2} {cmd:datazoom_poftrs_}{it:ano} [, {it:options} {it:trs_options}]
 
 {p 4 4 2} Onde {it:ano} pode ser 95, 02, 08 ou 17
 
@@ -73,16 +73,16 @@ Digite {cmd:db datazoom_pof} para utilizar via caixa de diálogo.
 Para cada ano, há três comandos da forma {cmd:datazoom_pof}{it:(ano)}. Recomenda-se fortemente utilizar via caixa de diálogo.
 
 {p 4 4 2}
-{cmd: datazoom_pofstd_}{it: ano} gera uma base padronizada da POF.
+{cmd: datazoom_pofstd_}{it:ano} gera uma base padronizada da POF.
 Esta base contém variáveis de gasto/aquisição para uma cesta de consumo pré-definida com itens agredados, 
 seguindo uma classificação disponibilizada pelo IBGE. Essa função não está disponível para a POF 2017/18.
 
 {p 4 4 2}
-{cmd: datazoom_pofsel_95}{it: ano} permite criar uma base de dados personalizada, com as variáveis
+{cmd: datazoom_pofsel_}{it:ano} permite criar uma base de dados personalizada, com as variáveis
  relacionadas aos itens escolhidos pelo próprio usuário. Não disponível para 2017.
 	
 {p 4 4 2}
-{cmd: datazoom_poftrs_95}{it: ano} produz as bases de dados originais em formato Stata sem manipulações
+{cmd: datazoom_poftrs_}{it:ano} produz as bases de dados originais em formato Stata sem manipulações
  de variáveis, para os Tipos de Registro desejados.
 	
 {p 4 4 2}
@@ -99,7 +99,7 @@ Todas podem ser executadas em caixa de diálogo pelo comando {cmd: db datazoom_p
 {title: Bases Padronizadas}
 
 {p 4 4 2}
-{cmd:datazoom_pofstd_}{it: ano} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
+{cmd:datazoom_pofstd_}{it:ano} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
 		
 {p 4 4 2}
 Nesta base padronizada, o gasto em itens semelhantes são agregados em um únicoitem. Por exemplo, gastos em qualquer tipo de arroz, 
@@ -128,7 +128,7 @@ Para a construção de estimativas, é necessário o uso do fator de expansão 2
 {title: Gastos Selecionados}
 
 {p 4 4 2}
-{cmd:datazoom_pofsel_}{it: ano} extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
+{cmd:datazoom_pofsel_}{it:ano} extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2}
 Em {opt lista} o usuário define os itens que deseja incluir em sua cesta. Como cada item possui um nome específico
@@ -153,7 +153,7 @@ Para mais informações ver {help weight}.
 {p 4 4 2}
 {title: Tipos de Registro}
 
-{cmd:datazoom_poftrs_95} extrai bases de dados da POF 1995-96 em formato Stata a partir dos microdados originais do IBGE.
+{cmd:datazoom_poftrs_}{it:ano} extrai bases de dados da POF 1995-96 em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2} 
 Este programa auxilia o usuário a ter acesso aos 12 tipos de registros existentes na POF 1995-96, sem que haja
@@ -166,8 +166,8 @@ Este programa auxilia o usuário a ter acesso aos 12 tipos de registros existent
 
 {phang}
 {opt original(string)}  indica o caminho da pasta onde estão localizados os arquivos de dados
-        originais. Todos os 12 arquivos devem estar posicionados na mesma pasta para que o programa funcione
-        adequadamente. O Portal não disponibiliza os dados originais.
+        originais. Todos os arquivos devem estar posicionados na mesma pasta para que o programa funcione
+        adequadamente.
 
 {phang}
 {opt saving(string)}  indica o caminho da pasta onde devem ser salvas as bases de dados
@@ -193,8 +193,7 @@ conjunto de moradores do domicílio (que pode ter apenas um morador) que compart
 {dlgtab:Tipos de Registro}
 
 {phang}
-{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usuário deseja obter. A versão 1995-96 possui 12 tipos de 
-registro, numerados conforme a documentação do IBGE.
+{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usuário deseja obter.
 
 {marker examples}{...}
 {title:Examples}
