@@ -11,7 +11,7 @@
 {title:Title}
 
 {phang}
-{bf:datazoom_pofsel_95} {hline 2} Acesso ‡ bases personalizadas da POF 1995-96 em formato STATA - Vers„o 1.2
+{bf:datazoom_pofsel_95} {hline 2} Acesso √† bases personalizadas da POF 1995-96 em formato STATA - Vers√£o 1.2
 
 {marker syntax}{...}
 {title:Syntax}
@@ -20,66 +20,66 @@
 [{cmd:,}
 {it:options}]
 
-{phang}	OBS: digite 'db datazoom_pof1995' na janela de comando para utilizar o programa via caixa de di·logo 
+{phang}	OBS: digite 'db datazoom_pof1995' na janela de comando para utilizar o programa via caixa de di√°logo 
 	(fortemente recomentado)
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
 {syntab:Main}
-{synopt:{opt id(string)}} nÌvel de identificaÁ„o {p_end}
+{synopt:{opt id(string)}} n√≠vel de identifica√ß√£o {p_end}
 {synopt:{opt lista(string asis)}} lista de itens {p_end}
 {synopt:{opt original(string)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
-{synopt:{opt saving(string)}} caminho da pasta onde ser„o salvas as novas bases de dados {p_end}
+{synopt:{opt saving(string)}} caminho da pasta onde ser√£o salvas as novas bases de dados {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
 
 {marker description}{...}
-{title:DescriÁ„o}
+{title:Descri√ß√£o}
 
 {phang}
-{cmd:datazoom_pofsel_95} extrai e contrÛi bases de dados personalizadas em formato STATA (.dta) a partir dos microdados originais, 
-	os quais n„o s„o disponibilizados pelo Portal (informaÁıes sobre como obter os arquivos originais de dados, consulte o
-        site do IBGE www.ibge.gov.br). Este programa È parte do pacote POF 1995-96, que inclui {help datazoom_poftrs_95} e
-		{help datazoom_pofstd_95} (todos os programas s„o independentes uns dos outros).
+{cmd:datazoom_pofsel_95} extrai e contr√≥i bases de dados personalizadas em formato STATA (.dta) a partir dos microdados originais, 
+	os quais n√£o s√£o disponibilizados pelo Portal (informa√ß√µes sobre como obter os arquivos originais de dados, consulte o
+        site do IBGE www.ibge.gov.br). Este programa √© parte do pacote POF 1995-96, que inclui {help datazoom_poftrs_95} e
+		{help datazoom_pofstd_95} (todos os programas s√£o independentes uns dos outros).
 		
-{phang} Em {opt lista} o usu·rio define os itens que deseja incluir em sua cesta. Como cada item possui um nome especÌfico
- prÈ-definido que deve ser inserido para incluÌ-lo na lista, recomenda-se fortemente o uso deste comando via caixa de di·logo, 
- por meio da qual pode-se observar todos os itens disponÌveis por categoria (AlimentaÁ„o, Outros gastos e Rendimentos).
+{phang} Em {opt lista} o usu√°rio define os itens que deseja incluir em sua cesta. Como cada item possui um nome espec√≠fico
+ pr√©-definido que deve ser inserido para inclu√≠-lo na lista, recomenda-se fortemente o uso deste comando via caixa de di√°logo, 
+ por meio da qual pode-se observar todos os itens dispon√≠veis por categoria (Alimenta√ß√£o, Outros gastos e Rendimentos).
  
-{phang} O gasto em cada item escolhido ser· agregado ao nÌvel de identificaÁ„o desejado: domicÌlio, unidade de consumo ou 
-indivÌduo. O mesmo vale para vari·veis de rendimento. Todos os valores s„o anualizados e deflacionados para setembro/1996.
- As vari·veis de rendimento (renda bruta monet·ria, renda bruta n„o monet·ria e renda total) s„o correspondentes ao rendimento
- bruto mensal do domicÌlio ou da unidade de consumo (para registros de unidade de consumo e pessoas).Cada gasto est· atrelado a
- um determinado nÌvel de identificaÁ„o. Assim, em particular, n„o È possÌvel obter para o indivÌduo o gasto com itens associados
- ‡ unidade de consumo ou domicÌlio. Neste caso, execute o programa para cada
- nÌvel de identificaÁ„o e utilize o comando {help merge} para juntar as bases.
+{phang} O gasto em cada item escolhido ser√° agregado ao n√≠vel de identifica√ß√£o desejado: domic√≠lio, unidade de consumo ou 
+indiv√≠duo. O mesmo vale para vari√°veis de rendimento. Todos os valores s√£o anualizados e deflacionados para setembro/1996.
+ As vari√°veis de rendimento (renda bruta monet√°ria, renda bruta n√£o monet√°ria e renda total) s√£o correspondentes ao rendimento
+ bruto mensal do domic√≠lio ou da unidade de consumo (para registros de unidade de consumo e pessoas).Cada gasto est√° atrelado a
+ um determinado n√≠vel de identifica√ß√£o. Assim, em particular, n√£o √© poss√≠vel obter para o indiv√≠duo o gasto com itens associados
+ √† unidade de consumo ou domic√≠lio. Neste caso, execute o programa para cada
+ n√≠vel de identifica√ß√£o e utilize o comando {help merge} para juntar as bases.
  
-{phang} A base final, sob qualquer nÌvel de identificaÁ„o,
-	contÈm todas as vari·veis de caracterÌsticas do domicÌlio; e se IndivÌduo for escolhido, as vari·veis relacionadas ‡s caracterÌsticas 
-	individuais s„o incorporadas.
+{phang} A base final, sob qualquer n√≠vel de identifica√ß√£o,
+	cont√©m todas as vari√°veis de caracter√≠sticas do domic√≠lio; e se Indiv√≠duo for escolhido, as vari√°veis relacionadas √†s caracter√≠sticas 
+	individuais s√£o incorporadas.
 
-{phang} Para a construÁ„o de estimativas, È necess·rio o uso do fator de expans„o 2 como fator de ponderaÁ„o.
-Para mais informaÁıes ver {help weight}.
+{phang} Para a constru√ß√£o de estimativas, √© necess√°rio o uso do fator de expans√£o 2 como fator de pondera√ß√£o.
+Para mais informa√ß√µes ver {help weight}.
 	
 {marker options}{...}
-{title:OpÁıes}
+{title:Op√ß√µes}
 {dlgtab:Main}
 {phang}
-{opt id(string)}  especifica o nÌvel de identificaÁ„o para o qual o gasto deve se referir. S„o trÍs opÁıes: 
-	domicÌlio ({opt dom}), unidade de consumo ({opt uc}) e indivÌduo ({opt pess}). De acordo com a definiÁ„o 
-	do IBGE, uma unidade de consumo È um 
-	conjunto de moradores do domicÌlio (que pode ter apenas um morador) que compartilham da mesma fonte de alimentos.
+{opt id(string)}  especifica o n√≠vel de identifica√ß√£o para o qual o gasto deve se referir. S√£o tr√™s op√ß√µes: 
+	domic√≠lio ({opt dom}), unidade de consumo ({opt uc}) e indiv√≠duo ({opt pess}). De acordo com a defini√ß√£o 
+	do IBGE, uma unidade de consumo √© um 
+	conjunto de moradores do domic√≠lio (que pode ter apenas um morador) que compartilham da mesma fonte de alimentos.
 
 {phang}
-{opt lista(string asis)}  estabelece os itens para os quais os gastos devem ser computados e incluÌdos na base final.
- Pode contar vari·veis de rendimento tambÈm.	
+{opt lista(string asis)}  estabelece os itens para os quais os gastos devem ser computados e inclu√≠dos na base final.
+ Pode contar vari√°veis de rendimento tamb√©m.	
 
 {phang}
-{opt original(string)}  indica o caminho da pasta onde est„o localizados os arquivos de dados
+{opt original(string)}  indica o caminho da pasta onde est√£o localizados os arquivos de dados
         originais. Todos os 12 arquivos devem estar posicionados na mesma pasta para que o programa funcione
-        adequadamente. O Portal n„o disponibiliza os dados originais.
+        adequadamente. O Portal n√£o disponibiliza os dados originais.
 
 {phang}
 {opt saving(string)}  indica o caminho da pasta onde devem ser salvas as bases de dados
@@ -89,22 +89,22 @@ Para mais informaÁıes ver {help weight}.
 {marker examples}{...}
 {title:Exemplos}
 
-{p}	OBS: (fortemente recomentado) digite 'db datazoom_pof1995' na janela de comando para utilizar o programa via caixa de di·logo 
+{p}	OBS: (fortemente recomentado) digite 'db datazoom_pof1995' na janela de comando para utilizar o programa via caixa de di√°logo 
 
-{p} Exemplo 1: base final contÈm gastos anualizados em frutas, farinha de trigo e aÁ˙car refinado para unidades de consumo.
+{p} Exemplo 1: base final cont√©m gastos anualizados em frutas, farinha de trigo e a√ß√∫car refinado para unidades de consumo.
 
-{phang} datazoom_pofsel_95, id(uc) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo aÁ˙car_refinado)
-
-
-{p} Exemplo 2: como os gastos registrados na caderneta de poupanÁa s„o para a unidade de consumo, o comando abaixo È inv·lido, 
-j· que o nÌvel de identificaÁ„o escolhido foi "pess", ou seja, para indivÌduos.
-
-{phang} datazoom_pofsel_95, id(pess) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo aÁ˙car_refinado)
+{phang} datazoom_pofsel_95, id(uc) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo a√ß√∫car_refinado)
 
 
-{p} Exemplo 3: base final contÈm gastos anualizados com feij„o, cenoura e roupa de crianÁa, alÈm de rendimentos recebidos 
-de transferÍncias (aponsentadorias, pensıes, bolsas de estudo, transfÍncias transitÛrias). Todos os valores s„o agregados 
-ao nÌvel do domicÌlio, portanto, os rendimentos, por exemplo, que s„o individuais, s„o somados dentre de cada domicÌlio. 
+{p} Exemplo 2: como os gastos registrados na caderneta de poupan√ßa s√£o para a unidade de consumo, o comando abaixo √© inv√°lido, 
+j√° que o n√≠vel de identifica√ß√£o escolhido foi "pess", ou seja, para indiv√≠duos.
+
+{phang} datazoom_pofsel_95, id(pess) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo a√ß√∫car_refinado)
+
+
+{p} Exemplo 3: base final cont√©m gastos anualizados com feij√£o, cenoura e roupa de crian√ßa, al√©m de rendimentos recebidos 
+de transfer√™ncias (aponsentadorias, pens√µes, bolsas de estudo, transf√™ncias transit√≥rias). Todos os valores s√£o agregados 
+ao n√≠vel do domic√≠lio, portanto, os rendimentos, por exemplo, que s√£o individuais, s√£o somados dentre de cada domic√≠lio. 
 
 {phang} datazoom_pofsel_95, id(dom) original(c:/mydata) saving(c:/pof) lista(Feijao Cenoura Roupa_de_crianca Transferencia)
 
@@ -117,7 +117,7 @@ PUC-Rio - Departamento de Economia
 Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
 
 
-{title:Veja tambÈm}
+{title:Veja tamb√©m}
 
 Pacotes relacionados:
 
@@ -130,5 +130,5 @@ Pacotes relacionados:
 {help datazoom_ecinf} (se instalado) 
 
 
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers„o em portuguÍs desses pacotes. 
+{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers√£o em portugu√™s desses pacotes. 
 For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".

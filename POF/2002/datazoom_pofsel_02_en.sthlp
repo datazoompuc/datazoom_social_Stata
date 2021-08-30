@@ -91,14 +91,14 @@ folder so that the program functions properly.
 
 {p} Example 1: the final base contains annualized expenditure on fruits, flour and sugar at the Consumption Unit level
 
-{phang} datazoom_pofsel_02, id(uc) original(c:/mydata) saving(c:/pof) lista(grutas farinha_de_trigo açúcar_refinado)
+{phang} datazoom_pofsel_02, id(uc) original(c:/mydata) saving(c:/pof) lista(grutas farinha_de_trigo aÃ§Ãºcar_refinado)
 
 
 {p} Example 2: the command below is not valid, since the expenditures registered in notebooks 
 referred to each consumption unit and the command asks for
 individual level ("pess").
 
-{phang} datazoom_pofsel_02, id(pess) original (c:/mydata) saving (c:/proof) lista(frutas farinha_de_trigo açúcar_refinado)
+{phang} datazoom_pofsel_02, id(pess) original (c:/mydata) saving (c:/proof) lista(frutas farinha_de_trigo aÃ§Ãºcar_refinado)
 
 {p} Example 3: the final database contains annualized expenditures on beans, carrot and children's wear, besides transfer payments (pensions,
 scholarships, transitory transfer payments). All values are aggregated at the household level. Therefore, 
@@ -126,4 +126,4 @@ Related commands:
 {help datazoom_ecinf} (if installed) 
 
 {p} Type "net from http://www.econ.puc-rio.br/datazoom/english" to install these commands.
-Para instalar a versão em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
+Para instalar a versÃ£o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".

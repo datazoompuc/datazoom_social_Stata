@@ -11,7 +11,7 @@
 {title:Title}
 
 {phang}
-{bf:datazoom_poftrs_02} {hline 2}  Acesso ‡s bases da POF 2002-03 em formato STATA - Vers„o 1.2
+{bf:datazoom_poftrs_02} {hline 2}  Acesso √†s bases da POF 2002-03 em formato STATA - Vers√£o 1.2
 
 {marker syntax}{...}
 {title:Syntax}
@@ -20,7 +20,7 @@
 [{cmd:,}
 {it:options}]
 
-{phang}	OBS: digite 'db datazoom_pof2002' na janela de comando para utilizar o programa via caixa de di·logo
+{phang}	OBS: digite 'db datazoom_pof2002' na janela de comando para utilizar o programa via caixa de di√°logo
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -28,36 +28,36 @@
 {syntab:Main}
 {synopt:{opt trs(string)}} tipos de registros {p_end}
 {synopt:{opt original(string)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
-{synopt:{opt saving(string)}} caminho da pasta onde ser„o salvas as novas bases de dados {p_end}
+{synopt:{opt saving(string)}} caminho da pasta onde ser√£o salvas as novas bases de dados {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
 
 {marker description}{...}
-{title:DescriÁ„o}
+{title:Descri√ß√£o}
 
 {phang}
 {cmd:datazoom_poftrs_02} extrai bases de dados da POF 2002-03 em formato STATA (.dta) a partir dos microdados originais, 
-os quais n„o s„o disponibilizados pelo Portal (informaÁıes sobre como obter os arquivos originais de dados, consulte o
-        site do IBGE www.ibge.gov.br). Este programa È parte do pacote POF 2002-03, que inclui {help datazoom_pofstd_02} e
-		{help datazoom_pofsel_02} (todos os programas s„o independentes uns dos outros).
+os quais n√£o s√£o disponibilizados pelo Portal (informa√ß√µes sobre como obter os arquivos originais de dados, consulte o
+        site do IBGE www.ibge.gov.br). Este programa √© parte do pacote POF 2002-03, que inclui {help datazoom_pofstd_02} e
+		{help datazoom_pofsel_02} (todos os programas s√£o independentes uns dos outros).
 		
-{phang} Este programa auxilia o usu·rio a ter acesso aos 14 tipos de registros existentes na POF 2002-03, sem que haja
-	manipulaÁ„o de vari·veis, ou seja, apenas torna possÌvel a utilizaÁ„o dos microdados da POF via STATA.
+{phang} Este programa auxilia o usu√°rio a ter acesso aos 14 tipos de registros existentes na POF 2002-03, sem que haja
+	manipula√ß√£o de vari√°veis, ou seja, apenas torna poss√≠vel a utiliza√ß√£o dos microdados da POF via STATA.
 
 
 {marker options}{...}
-{title:OpÁıes}
+{title:Op√ß√µes}
 {dlgtab:Main}
 
 {phang}
-{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usu·rio deseja obter. A vers„o 2002-03 possui 14 tipos de 
-registros, numerados conforme a documentaÁ„o do IBGE.
+{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usu√°rio deseja obter. A vers√£o 2002-03 possui 14 tipos de 
+registros, numerados conforme a documenta√ß√£o do IBGE.
 
 {phang}
-{opt original(string)}  indica o caminho da pasta onde est„o localizados os arquivos de dados
+{opt original(string)}  indica o caminho da pasta onde est√£o localizados os arquivos de dados
         originais. Todos os 14 arquivos devem estar posicionados na mesma pasta para que o programa funcione
-        adequadamente. O Portal n„o disponibiliza os dados originais.
+        adequadamente. O Portal n√£o disponibiliza os dados originais.
 
 {phang}
 {opt saving(string)}  indica o caminho da pasta onde devem ser salvas as bases de dados
@@ -68,11 +68,11 @@ registros, numerados conforme a documentaÁ„o do IBGE.
 
 {phang} datazoom_poftrs_02, trs(tr1 tr6 tr12) original(c:/mydata) saving(c:/pof)
 
-{phang} A execuÁ„o do exemplo acima gera trÍs bases de dados, uma para cada tipo de registro especificado 
-(1 - DomicÌlio; 6 - Despesas de 12 meses; 12 - Rendimentos e deduÁıes). As trÍs bases ser„o salvas na pasta
+{phang} A execu√ß√£o do exemplo acima gera tr√™s bases de dados, uma para cada tipo de registro especificado 
+(1 - Domic√≠lio; 6 - Despesas de 12 meses; 12 - Rendimentos e dedu√ß√µes). As tr√™s bases ser√£o salvas na pasta
 "c:/pof".
 
-{phang}  OBS: Recomenda-se a execuÁ„o do programa por meio da caixa de di·logo. Digite "db
+{phang}  OBS: Recomenda-se a execu√ß√£o do programa por meio da caixa de di√°logo. Digite "db
         datazoom_pof2002" na janela de comando do STATA para iniciar.
 
 
@@ -84,7 +84,7 @@ PUC-Rio - Departamento de Economia
 Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
 
 
-{title:Veja tambÈm}
+{title:Veja tamb√©m}
 
 Pacotes relacionados:
 
@@ -97,5 +97,5 @@ Pacotes relacionados:
 {help datazoom_ecinf} (se instalado) 
 
 
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers„o em portuguÍs desses pacotes. 
+{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a vers√£o em portugu√™s desses pacotes. 
 For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".

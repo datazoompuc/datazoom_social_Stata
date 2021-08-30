@@ -94,19 +94,19 @@ the program functions properly.	The Portal does not provide these data.
 
 {p} Example 1: the final database contains annualized expenditures on fruits, flour and refined sugar at the Consumption Unit level.
 
-{phang} datazoom_pofsel_08, id(uc) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo açúcar_refinado)
+{phang} datazoom_pofsel_08, id(uc) original(c:/mydata) saving(c:/pof) lista(frutas farinha_de_trigo aÃ§Ãºcar_refinado)
 
 {p} Exemple 2: the command below would not be valid, since the expenditures registered on
  notebooks relate to the consumption unit level and the
 command asks for a database in individual level ('pess')
 
-{phang} datazoom_pofsel_08, id(pess) original (c:/mydata) saving (c:/pof) lista (frutas farinha_de_trigo açúcar_refinado)
+{phang} datazoom_pofsel_08, id(pess) original (c:/mydata) saving (c:/pof) lista (frutas farinha_de_trigo aÃ§Ãºcar_refinado)
 
 {p} Example 3: the final database contains annualized expenditures on beans, carrot and 
 children's wear, besides transfer payments (pensions, scholarships, transitory transfer payments). 
 All values are aggregated ate household level. Therefore, the income, which is individual, is added within each household.
 
-{phang} datazoom_pofsel_08, id(dom) original (c:/mydata) saving (c:/pof) lista (Feijão Cenoura Roupa_de_crianca Transferencia)
+{phang} datazoom_pofsel_08, id(dom) original (c:/mydata) saving (c:/pof) lista (FeijÃ£o Cenoura Roupa_de_crianca Transferencia)
 
 
 {title:Author}
@@ -129,4 +129,4 @@ Related commands:
 {help datazoom_ecinf} (if installed) 
 
 {p} Type "net from http://www.econ.puc-rio.br/datazoom/english" to install these commands.
-Para instalar a versão em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
+Para instalar a versÃ£o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".

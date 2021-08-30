@@ -89,4 +89,4 @@ Related packages:
 
 
 {p} Type "net from http://www.econ.puc-rio.br/datazoom/english" to install these commands.
-Para instalar a vers„o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
+Para instalar a vers√£o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
