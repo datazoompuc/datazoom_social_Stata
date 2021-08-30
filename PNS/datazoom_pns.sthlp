@@ -36,7 +36,7 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-Digite {bf:db datazoom_pns} para utilizar a função via caixa de diálogo.
+Digite {cmd:db datazoom_pns} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
 

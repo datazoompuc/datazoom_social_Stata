@@ -18,7 +18,7 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:datazoom_pns} {hline 2} Acesso aos microdados da PNAD
+{bf:datazoom_pnad} {hline 2} Acesso aos microdados da PNAD
 
 {marker syntax}{...}
 {title:Syntax}
@@ -47,7 +47,7 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-Digite {bf:db datazoom_pnad} para utilizar a função via caixa de diálogo.
+Digite {cmd:db datazoom_pnad} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
 {title:Description}

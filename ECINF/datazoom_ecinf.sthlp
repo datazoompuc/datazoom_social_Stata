@@ -47,7 +47,7 @@ Digite {cmd:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
 
 {marker options}{...}
 {title:Options}
-{dlgtab:Main}
+{dlgtab:Options}
 {phang}
 {opt year(numlist)}  especifica o ano a ser extraído. Não é possível escolher os dois anos ao mesmo tempo. 
 
