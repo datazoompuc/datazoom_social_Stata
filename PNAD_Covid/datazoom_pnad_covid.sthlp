@@ -75,6 +75,8 @@ Lendo os dados de Junho e Julho de 2020
 {p 6 6 2}
 Gera duas bases em formato .dta, uma para cada mês.
 
+{title:Author}
+
 {p 4 4 2}
 DataZoom     {break}
 PUC-Rio - Departamento de Economia      {break}
