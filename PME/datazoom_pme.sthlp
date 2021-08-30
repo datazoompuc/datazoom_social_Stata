@@ -22,7 +22,7 @@
 {marker syntax}
 {title:Syntax}
 
-{p 8 8 2} {bf:datazoom_pme}(antiga/nova) [, {it:options}]
+{p 8 8 2} {cmd:datazoom_pme}(antiga/nova) [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -40,22 +40,25 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-Digite {bf:db datazoom_pme} para utilizar a função via caixa de diálogo.
+Digite {cmd:db datazoom_pme} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
 
 {title:Description}
 
 {p 4 4 2}
-{cmd:datazoom_pmeantiga} e {cmd:datazoom_pmenova} extraem e constroem bases a partir dos microdados originais da PME --- respectivamente para a metodologia Antiga e Nova.
+{cmd:datazoom_pmeantiga} e {cmd:datazoom_pmenova} extraem e constroem bases a partir dos microdados originais da PME {c -} respectivamente para a metodologia Antiga e Nova.
 Ambas funcionam da mesma forma, apenas reajustadas para os diferentes formatos dos microdados. 
 
-A função {bf: datazoom_pmeantiga} abrange o período de 1991 a 2001, enquanto a {bf:datazoom_pmenova} abrange os anos de 2002 a 2016.
+{p 4 4 2}
+A função {cmd: datazoom_pmeantiga} abrange o período de 1991 a 2001, enquanto a {bf:datazoom_pmenova} abrange os anos de 2002 a 2016.
 
+{p 4 4 2}
 Apesar de ser uma pesquisa mensal, este programa não permite a escolha de meses específicos para extração, 
 mas somente os anos. Os dados da PME antiga são deflacionados para dezembro de 2001, enquanto os da nova
 para janeiro de 2016.
 
+{p 4 4 2}
 Apesar de ser um painel de domicílios, os indivíduos podem não apresentar o mesmo número de ordem ao longo das 
 entrevistas. Caso o usuário necessite trabalhar com um painel de indivíduos, é necessário construir uma variável que 
 identifique o mesmo indívíduo ao longo das pesquisas. Para isso, são utilizados os algoritmos propostos por Ribas e Soares (2008). Os autores 
@@ -67,6 +70,7 @@ não executar o programa para mais de quatro ou cinco anos conjuntamente. Por ou
 interesse no painel de indivíduos (por exemplo, cálculo da taxa de desemprego mensal), existe a opção de não realizar a 
 identificação, vantajosa em termos de tempo de execução do programa.
 
+{p 4 4 2}
 Se a opção {opt nid} for escolhida, uma base de dados para cada ano selecionado será gerada. Ao utilizar as outras opções, 
 uma base de dados para cada painel da PME será o produto final. Um painel da PME é um conjunto de domicílios que ingressam 
 e deixam o ciclo de entrevistas no mesmo mês, sendo identificados por letras maiúsculas. Se for o caso, utilize o 
