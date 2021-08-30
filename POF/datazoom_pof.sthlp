@@ -79,7 +79,7 @@ seguindo uma classificação disponibilizada pelo IBGE. Essa função não está
 
 {p 4 4 2}
 {cmd: datazoom_pofsel_95}{it: ano} permite criar uma base de dados personalizada, com as variáveis
- relacionadas aos itens escolhidos pelo próprio usuário.
+ relacionadas aos itens escolhidos pelo próprio usuário. Não disponível para 2017.
 	
 {p 4 4 2}
 {cmd: datazoom_poftrs_95}{it: ano} produz as bases de dados originais em formato Stata sem manipulações
@@ -88,6 +88,10 @@ seguindo uma classificação disponibilizada pelo IBGE. Essa função não está
 {p 4 4 2}
 Os dois primeiros comandos permitem ao usuário a escolha do nível de agregação das informações de gasto/aquisição: 
  Domicílio, Unidade de Consumo e Indivíduo. Note que alguns itens e informações não são válidas para todos os níveis.
+ 
+{p 4 4 2}
+Utilizando os comandos de Bases Padronizadas ou de Gastos Selecionados, os valores são anualizados e deflacionados: para setembro de 1996, no caso da POF 1995/96; para
+janeiro de 2003, no caso da POF 2002/03; e para janeiro de 2009, no caso da POF 2008/09.
 
 {p 4 4 2}
 Todas podem ser executadas em caixa de diálogo pelo comando {cmd: db datazoom_pof}
@@ -95,7 +99,7 @@ Todas podem ser executadas em caixa de diálogo pelo comando {cmd: db datazoom_p
 {title: Bases Padronizadas}
 
 {p 4 4 2}
-{cmd:datazoom_pofstd_95} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
+{cmd:datazoom_pofstd_}{it: ano} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
 		
 {p 4 4 2}
 Nesta base padronizada, o gasto em itens semelhantes são agregados em um únicoitem. Por exemplo, gastos em qualquer tipo de arroz, 
@@ -124,7 +128,7 @@ Para a construção de estimativas, é necessário o uso do fator de expansão 2
 {title: Gastos Selecionados}
 
 {p 4 4 2}
-{cmd:datazoom_pofsel_95} extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
+{cmd:datazoom_pofsel_}{it: ano} extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2}
 Em {opt lista} o usuário define os itens que deseja incluir em sua cesta. Como cada item possui um nome específico
@@ -132,7 +136,7 @@ Em {opt lista} o usuário define os itens que deseja incluir em sua cesta. Como 
  por meio da qual pode-se observar todos os itens disponíveis por categoria (Alimentação, Outros gastos e Rendimentos).
  
 {p 4 4 2} O gasto em cada item escolhido será agregado ao nível de identificação desejado: domicílio, unidade de consumo ou 
-indivíduo. O mesmo vale para variáveis de rendimento. Todos os valores são anualizados e deflacionados para setembro/1996.
+indivíduo. O mesmo vale para variáveis de rendimento.
  As variáveis de rendimento (renda bruta monetária, renda bruta não monetária e renda total) são correspondentes ao rendimento
  bruto mensal do domicílio ou da unidade de consumo (para registros de unidade de consumo e pessoas).Cada gasto está atrelado a
  um determinado nível de identificação. Assim, em particular, não é possível obter para o indivíduo o gasto com itens associados
