@@ -3,21 +3,22 @@
 {viewerdialog "Pacote" "dialog datazoom_social"}
 {vieweralsosee "PNAD" "help datazoom_pnad"}{...}
 {vieweralsosee "Censo" "help datazoom_censo"}{...}
-{vieweralsosee "PNAD Contínua" "help datazoom_pnad_continua"}{...}
+{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
+{vieweralsosee "PNAD Contínua Anual" "help datazoom_pnadcont_anual"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
 {vieweralsosee "PNS" "help datazoom_pns"}{...}
 {vieweralsosee "POF" "help datazoom_pof"}{...}
 {vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
-{viewerjumpto "Syntax" "datazoom_pns##syntax"}{...}
-{viewerjumpto "Description" "datazoom_pns##description"}{...}
-{viewerjumpto "Options" "datazoom_pns##options"}{...}
-{viewerjumpto "Examples" "datazoom_pns##examples"}{...}
+{viewerjumpto "Syntax" "datazoom_pme##syntax"}{...}
+{viewerjumpto "Description" "datazoom_pme##description"}{...}
+{viewerjumpto "Options" "datazoom_pme##options"}{...}
+{viewerjumpto "Examples" "datazoom_pme##examples"}{...}
 {p 8 8 2} {it:For the English version}, {help datazoom_pme_en}
 
 {title:Title}
 
 {p 4 4 2}
-{bf:datazoom_pmeantiga} e {bf:datazoom_pmenova} {hline 2} Acesso aos microdados da PME
+{cmd:datazoom_pmeantiga} e {cmd:datazoom_pmenova} {hline 2} Acesso aos microdados da PME
 
 {marker syntax}
 {title:Syntax}
@@ -90,7 +91,7 @@ para que o programa funcione adequadamente. Os dados originais podem ser obtidos
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
-{dlgtab:Identificação do Indivíduo}
+{dlgtab:Identificação}
 
 {phang}
 {opt nid}  solicita que o programa não crie uma variável que identifique o mesmo indivíduo ao longo das

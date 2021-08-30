@@ -1,17 +1,18 @@
 {smcl}
-{viewerdialog "PNS" "dialog datazoom_pns"}
+{viewerdialog "PNAD" "dialog datazoom_pnad"}
 {viewerdialog "Pacote" "dialog datazoom_social"}
 {vieweralsosee "PNS" "help datazoom_pns"}{...}
 {vieweralsosee "Censo" "help datazoom_censo"}{...}
-{vieweralsosee "PNAD Contínua" "help datazoom_pnad_continua"}{...}
+{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
+{vieweralsosee "PNAD Contínua Anual" "help datazoom_pnadcont_anual"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
 {vieweralsosee "PME" "help datazoom_pme"}{...}
 {vieweralsosee "POF" "help datazoom_pof"}{...}
 {vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
-{viewerjumpto "Syntax" "datazoom_pns##syntax"}{...}
-{viewerjumpto "Description" "datazoom_pns##description"}{...}
-{viewerjumpto "Options" "datazoom_pns##options"}{...}
-{viewerjumpto "Examples" "datazoom_pns##examples"}{...}
+{viewerjumpto "Syntax" "datazoom_pnad##syntax"}{...}
+{viewerjumpto "Description" "datazoom_pnad##description"}{...}
+{viewerjumpto "Options" "datazoom_pnad##options"}{...}
+{viewerjumpto "Examples" "datazoom_pnad##examples"}{...}
 {p 8 8 2} {it:For the English version}, {help datazoom_pnad_en}
 
 {title:Title}

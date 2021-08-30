@@ -3,7 +3,8 @@
 {viewerdialog "Pacote" "dialog datazoom_social"}
 {vieweralsosee "PNAD" "help datazoom_pnad"}{...}
 {vieweralsosee "PNS" "help datazoom_pns"}{...}
-{vieweralsosee "PNAD Contínua" "help datazoom_pnad_continua"}{...}
+{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
+{vieweralsosee "PNAD Contínua Anual" "help datazoom_pnadcont_anual"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
 {vieweralsosee "PME" "help datazoom_pme"}{...}
 {vieweralsosee "POF" "help datazoom_pof"}{...}
@@ -12,6 +13,7 @@
 {viewerjumpto "Description" "datazoom_censo##description"}{...}
 {viewerjumpto "Options" "datazoom_censo##options"}{...}
 {viewerjumpto "Examples" "datazoom_censo##examples"}{...}
+{viewerjumpto "Nota sobre os dados" "datazoom_censo##remarks"}{...}
 {p 8 8 2} {it:For the English version}, {help datazoom_censo_en}
 
 {title:Title}
