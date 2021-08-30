@@ -23,11 +23,13 @@
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {cmd:datazoom_pofstd_95} [, {it:options} {it:std_options}]
+{p 8 8 2} {cmd:datazoom_pofstd_}{it: ano} [, {it:options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_pofsel_95} [, {it:options} {it:sel_options}]
+{p 8 8 2} {cmd:datazoom_pofsel_}{it: ano} [, {it:options} {it:sel_options}]
 
-{p 8 8 2} {cmd:datazoom_poftrs_95} [, {it:options} {it:trs_options}]
+{p 8 8 2} {cmd:datazoom_poftrs_}{it: ano} [, {it:options} {it:trs_options}]
+
+{p 4 4 2} Onde {it:ano} pode ser 95, 02, 08 ou 17
 
 {synoptset 20 tabbed}{...}
 {synopthdr: options}
@@ -70,9 +72,9 @@ Digite {cmd:db datazoom_pof1995} para utilizar a função via caixa de diálogo.
 Há três comandos da forma {cmd:datazoom_pof1995}:
 
 {p 4 4 2}
-{cmd: datazoom_pofstd_95} gera uma base padronizada da POF 1995-96. 
+{cmd: datazoom_pofstd_95} gera uma base padronizada da POF.
 Esta base contém variáveis de gasto/aquisição para uma cesta de consumo pré-definida com itens agredados, 
-seguindo uma classificação disponibilizada pelo IBGE.
+seguindo uma classificação disponibilizada pelo IBGE. Essa função não está disponível para a POF 2017/18.
 
 {p 4 4 2}
 {cmd: datazoom_pofsel_95} permite criar uma base de dados personalizada, com as variáveis
@@ -89,7 +91,7 @@ Os dois primeiros comandos permitem ao usuário a escolha do nível de agregaç�
 {title: Bases Padronizadas}
 
 {p 4 4 2}
-{cmd:datazoom_pofstd_95} extrai e constrói uma base de dados padronizada da POF 1995-96 a partir dos microdados originais do IBGE
+{cmd:datazoom_pofstd_95} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
 		
 {p 4 4 2}
 Nesta base padronizada, o gasto em itens semelhantes são agregados em um únicoitem. Por exemplo, gastos em qualquer tipo de arroz, 
