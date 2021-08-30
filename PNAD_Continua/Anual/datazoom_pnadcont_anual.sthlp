@@ -60,7 +60,7 @@ comando {help append} para empilhar as bases.
 
 {marker options}{...}
 {title:Options}
-{dlgtab:Inputs}
+{dlgtab:Input}
 
 {phang} 
 {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
