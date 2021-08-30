@@ -69,7 +69,7 @@ Digite {cmd:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
 {marker examples}{...}
 {title:Examples}
 
-		. datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original("~/mydir") saving("~/mydir")
+{p 8 6 2}. datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original("~/mydir") saving("~/mydir")
 
 
 {title:Author}

@@ -58,7 +58,7 @@ Digite {bf:db datazoom_pns} para utilizar a função via caixa de diálogo.
 {p 4 4 2}
 Para ler os dados da PNS 2019
 
-        . datazoom_pns, original("~/mydir") year(2019)
+{p 8 6 2}. datazoom_pns, original("~/mydir") year(2019)
 
 {title:Author}
 

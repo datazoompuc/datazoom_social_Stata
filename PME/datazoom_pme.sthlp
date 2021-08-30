@@ -108,7 +108,7 @@ utilizando um conjunto maior de variáveis que o algoritmo básico. Esta opção
 {p 4 4 2}
 Sem identificação:
 
-		. datazoom_pmeantiga, years(1991 1992) original("~/mydir") saving("~/mydir") nid
+{p 8 6 2}. datazoom_pmeantiga, years(1991 1992) original("~/mydir") saving("~/mydir") nid
 
 {p 6 6 2}
 Três bases de dados são geradas, uma para cada ano selecionado. Cada base conterá as observações de todos os meses 
@@ -117,7 +117,7 @@ para os quais existem arquivos originais na pasta indicada.
 {p 4 4 2}	
     Identificação avançada:
 
-        . datazoom_pmenova, years(2005 2006) original("~/mydir") saving("~/mydir") idbas
+{p 8 6 2}. datazoom_pmenova, years(2005 2006) original("~/mydir") saving("~/mydir") idbas
 
 {p 6 6 2}		
 		Será criada uma base para cada painel da PME pesquisado em 2005 e 2006. Em cada base haverá uma variável 

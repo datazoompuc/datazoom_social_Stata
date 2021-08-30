@@ -138,12 +138,12 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
 {p 4 4 2}
 Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
 
-		. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
 
 {p 4 4 2}
 As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
 
-		. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
  
 {marker remarks}{...}
 {title:Nota sobre os dados originais}

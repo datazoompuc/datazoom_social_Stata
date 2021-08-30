@@ -134,7 +134,7 @@ anos 1980.
 {p 4 4 2}
 	Arquivo de pessoas, sem compatibilizar:
 
-		. datazoom_pnad, years(1984 1997 1999 2003) original("~/mydir") saving("~/mydir") pes ncomp 
+{p 8 6 2}. datazoom_pnad, years(1984 1997 1999 2003) original("~/mydir") saving("~/mydir") pes ncomp 
 
 {p 6 6 2}		
 	Quatro bases de dados serão geradas, uma para cada ano selecionado. 
@@ -142,7 +142,7 @@ anos 1980.
 {p 4 4 2}
 	Arquivo de domicílios não compatibilizados:
 
-		. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom ncomp
+{p 8 6 2}. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom ncomp
 
 {p 6 6 2}		
 Duas bases de dados serão geradas, uma para cada ano selecionado.
@@ -150,7 +150,7 @@ Duas bases de dados serão geradas, uma para cada ano selecionado.
 {p 4 4 2}
 Arquivo de domicílios, compatível com anos 1980:
 
-		. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom comp81
+{p 8 6 2}. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom comp81
 
 {p 6 6 2}		
 Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
@@ -159,7 +159,7 @@ Duas bases de dados serão geradas, uma para cada ano selecionado, contendo some
 {p 4 4 2}	
 	Arquivo de pessoas, compatível com anos 1990:
 
-		. datazoom_pnad, years(1997 2003) original("~/mydir") saving("~/mydir") pes comp92
+{p 8 6 2}. datazoom_pnad, years(1997 2003) original("~/mydir") saving("~/mydir") pes comp92
 
 {p 6 6 2}		
 Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
@@ -169,7 +169,7 @@ Duas bases de dados serão geradas, uma para cada ano selecionado, contendo some
 {p 4 4 2} 
 	Arquivos de pessoas e domicílios compatibilizados:
 
-		. datazoom_pnad, years(1992 2005) original("~/mydir") saving("~/mydir") both comp92
+{p 8 6 2}. datazoom_pnad, years(1992 2005) original("~/mydir") saving("~/mydir") both comp92
 
 {p 6 6 2}		
 Duas bases de dados serão geradas, uma para cada ano selecionado, com as variáveis de pessoas e
