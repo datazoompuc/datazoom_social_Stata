@@ -105,17 +105,21 @@ utilizando um conjunto maior de variáveis que o algoritmo básico. Esta opção
 {marker examples}{...} 
 {title:Examples}
 
-    Sem identificação:
+{p 4 4 2}
+Sem identificação:
 
 		. datazoom_pmeantiga, years(1991 1992) original("~/mydir") saving("~/mydir") nid
 
-		Três bases de dados são geradas, uma para cada ano selecionado. Cada base conterá as observações de todos os meses 
-	para os quais existem arquivos originais na pasta indicada.
-		
+{p 6 6 2}
+Três bases de dados são geradas, uma para cada ano selecionado. Cada base conterá as observações de todos os meses 
+para os quais existem arquivos originais na pasta indicada.
+	
+{p 4 4 2}	
     Identificação avançada:
 
         . datazoom_pmenova, years(2005 2006) original("~/mydir") saving("~/mydir") idbas
-		
+
+{p 6 6 2}		
 		Será criada uma base para cada painel da PME pesquisado em 2005 e 2006. Em cada base haverá uma variável 
  que identifica unicamente os indivíduos ao longo das pesquiasas. Haverá indivíduos com menos de oito entrevistas, seja porque o painel ao 
  qual pertence teve início antes de 2005, seja porque seu ciclo de entrevistas terminaria somente em 2007.

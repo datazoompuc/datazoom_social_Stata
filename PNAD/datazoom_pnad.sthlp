@@ -131,38 +131,48 @@ anos 1980.
 {marker examples}{...}
 {title:Exemplos}
 
+{p 4 4 2}
 	Arquivo de pessoas, sem compatibilizar:
 
 		. datazoom_pnad, years(1984 1997 1999 2003) original("~/mydir") saving("~/mydir") pes ncomp 
 
+{p 6 6 2}		
 	Quatro bases de dados serão geradas, uma para cada ano selecionado. 
 
+{p 4 4 2}
 	Arquivo de domicílios não compatibilizados:
 
 		. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom ncomp
 
-	Duas bases de dados serão geradas, uma para cada ano selecionado.
+{p 6 6 2}		
+Duas bases de dados serão geradas, uma para cada ano selecionado.
 
-	Arquivo de domicílios, compatível com anos 1980:
+{p 4 4 2}
+Arquivo de domicílios, compatível com anos 1980:
 
 		. datazoom_pnad, years(1990 2005) original("~/mydir") saving("~/mydir") dom comp81
 
-	Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
+{p 6 6 2}		
+Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
 	passíveis de compatibilização.
 
+{p 4 4 2}	
 	Arquivo de pessoas, compatível com anos 1990:
 
 		. datazoom_pnad, years(1997 2003) original("~/mydir") saving("~/mydir") pes comp92
 
-	Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
+{p 6 6 2}		
+Duas bases de dados serão geradas, uma para cada ano selecionado, contendo somente as variáveis
  passíveis de compatibilização. Note que não é possível incluir
  um arquivo dos anos 1980 para compatibilização nesta opção. 
 
+{p 4 4 2} 
 	Arquivos de pessoas e domicílios compatibilizados:
 
 		. datazoom_pnad, years(1992 2005) original("~/mydir") saving("~/mydir") both comp92
 
-	Duas bases de dados serão geradas, uma para cada ano selecionado, com as variáveis de pessoas e
+{p 6 6 2}		
+Duas bases de dados serão geradas, uma para cada ano selecionado, com as variáveis de pessoas e
  domicílios de cada ano em um único arquivo.
 
 {marker remarks}{...}

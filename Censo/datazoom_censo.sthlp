@@ -47,13 +47,13 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-Digite {bf:db datazoom_censo} para utilizar a função via caixa de diálogo.
+Digite {cmd:db datazoom_censo} para utilizar a função via caixa de diálogo.
 
 {marker description}{...}
 {title:Description}
 
 {p 4 4 2}
-{cmd:datazoom_pns} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
+{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
 dos microdados originais, que podem ser obtidos do site do IBGE. O programa pode ser utilizado para
 os anos de 1970 a 2010.
 
@@ -135,11 +135,13 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
 {marker examples}{...}
 {title:Exemplos}
 
-	Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
+{p 4 4 2}
+Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
 
 		. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
 
-	As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
+{p 4 4 2}
+As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
 
 		. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
  
