@@ -1,51 +1,55 @@
 {smcl}
-{* *! version 1.0 28 Jun 2013}{...}
-{vieweralsosee "" "--"}{...}
-{vieweralsosee "Install command2" "ssc install command2"}{...}
-{vieweralsosee "Help command2 (if installed)" "help command2"}{...}
-{viewerjumpto "Syntax" "datazoom_ecinf##syntax"}{...}
-{viewerjumpto "Description" "datazoom_ecinf##description"}{...}
-{viewerjumpto "Options" "datazoom_ecinf##options"}{...}
-{viewerjumpto "Remarks" "datazoom_ecinf##remarks"}{...}
-{viewerjumpto "Examples" "datazoom_ecinf##examples"}{...}
-{title:Title}
-{phang}
+{viewerdialog "ECINF" "dialog datazoom_ecinf_en"}
+{viewerdialog "Package" "dialog datazoom_social_en"}
+{vieweralsosee "PNAD" "help datazoom_pnad_en"}{...}
+{vieweralsosee "PNS" "help datazoom_pns_en"}{...}
+{vieweralsosee "PNAD Contínua" "help datazoom_pnadcontinua_en"}{...}
+{vieweralsosee "PNAD Contínua - Yearly" "help datazoom_pnadcont_anual_en"}{...}
+{vieweralsosee "PNAD Covid" "help datazoom_pnad_covid_en"}{...}
+{vieweralsosee "PME" "help datazoom_pme_en"}{...}
+{vieweralsosee "POF" "help datazoom_pof_en"}{...}
+{vieweralsosee "Censo" "help datazoom_censo_en"}{...}
+{viewerjumpto "Syntax" "datazoom_censo##syntax"}{...}
+{viewerjumpto "Description" "datazoom_censo##description"}{...}
+{viewerjumpto "Options" "datazoom_censo##options"}{...}
+{viewerjumpto "Examples" "datazoom_censo##examples"}{...}
+{viewerjumpto "Note on the original data" "datazoom_censo##remarks"}{...}
+{p 8 8 2} {it:Para a versão em português}, {help datazoom_ecinf}
 
-{bf:datazoom_ecinf} {hline 2} Access to STATA format ECINF databases - Version 1.0
+{title:Title}
+
+{p 4 4 2}
+{cmd:datazoom_ecinf} {hline 2} Access to ECINF microdata
 
 {marker syntax}{...}
 {title:Syntax}
-{p 8 17 2}
-{cmdab:datazoom_ecinf}
-[{cmd:,}
-{it:options}]
 
-{phang} Note: type 'db datazoom_ecinf' in the command window to use the program through the dialog blog.
+{p 8 8 2} {cmd:datazoom_ecinf} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
 {syntab:Main}
 {synopt:{opt year(numlist)}} wave {p_end}
-{synopt:{opt original(string)}} folder path where original datafiles are located {p_end}
-{synopt:{opt saving(string)}} folder where new databases are to be saved {p_end}
-{synopt:{opt tipo(str)}} types of register {p_end}
+{synopt:{opt original(str)}} path to original microdata {p_end}
+{synopt:{opt saving(str)}} path where databases will be saved {p_end}
+{synopt:{opt tipo(str)}} type of register {p_end}
+{synopt:{opt english}} variable labels in English {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
 
+Use command {cmd:db datazoom_ecinf_en} to access through dialog box.
+
 {marker description}{...}
 {title:Description}
 
-{pstd}
-{cmd:datazoom_ecinf} extracts ECINF databases from original IBGE microdata files, which are not available online 
-(for information on how to acquire original files,
-see www.ibge.gov.br).
-	This program suits 1997 and 2003 waves.
+{p 4 4 2}
+{cmd:datazoom_ecinf} extracts ECINF databases in Stata format from the original IBGE microdata. Supports years 1997 and 2003.
 
 {marker options}{...}
 {title:Options}
-{dlgtab:Main}
+{dlgtab:Options}
 {phang}
 {opt year(numlist)}  specifies the year to be extracted. It is not possible to select two waves simultaneously.
 
@@ -53,8 +57,6 @@ see www.ibge.gov.br).
 {opt original(string)}  indicates the path of the folder where the original data files are located. 
  All files should be located in the same folder so that the program
 functions properly.
-		The Portal does not provide these data. Please check IBGE website for information on how to get
-        microdata files.
 
 {phang}
 {opt saving(string)}  indicates the path of the folder where the user wants to save the new datafiles.
@@ -65,30 +67,18 @@ functions properly.
 	{opt trabrend} for labor and income; {opt uecon} for economic unit, {opt pesocup} for characteristics
 	of the employed; {opt indprop} for the proprietor's individual characteristics; and {opt sebrae} for the Sebrae supplement (suits only 2003).
 
-
 {marker examples}{...}
 {title:Examples}
 
-{phang} datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original(D:\Finep\ECINF\dados) saving(D:\teste)
+{p 8 6 2}. datazoom_ecinf, year(1997) tipo(pesocup indprop uecon) original("~/mydir") saving("~/mydir")
+
 
 {title:Author}
-{p}
 
-PUC-Rio - Department of Economics
+{p 4 4 2}
+DataZoom     {break}
+PUC-Rio - Department of Economics   {break}
+Contact through  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
-Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
+{space 4}{hline}
 
-{title:See Also}
-
-Related commands:
-
-{help datazoom_censo} (if installed) 
-{help datazoom_pnad} (if installed)  
-{help datazoom_pmenova} (if installed)  
-{help datazoom_pmeantiga} (if installed)  
-{help datazoom_pof2008} (if installed)
-{help datazoom_pof2002} (if installed)
-{help datazoom_pof1995} (if installed)
-
-{p} Type "net from http://www.econ.puc-rio.br/datazoom/english" to install these commands.
-Para instalar a vers�o em portugues, digite "net from http://www.econ.puc-rio.br/datazoom/portugues".
