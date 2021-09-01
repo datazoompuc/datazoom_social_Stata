@@ -12,6 +12,7 @@ f PNAD/datazoom_multi.dlg
 f PNAD/datazoom_pnad.ado
 f PNAD/datazoom_pnad.dlg
 f PNAD/datazoom_pnad.sthlp
+f PNAD/datazoom_pnad_en.sthlp
 F PNAD/dct/pnad1981dom.dct
 F PNAD/dct/pnad1981dom_en.dct
 F PNAD/dct/pnad1981pes.dct
