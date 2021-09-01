@@ -125,7 +125,7 @@ waves. Even so, due to methodological changes, some variables are not subject to
  automatically so as to aggregate the three types of variables.
  
 {marker examples}{...}
-{title:Exemplos}
+{title:Examples}
 
 {p 4 4 2}
 Produces eight databases, one for each state and year. Variables are not made compatible.

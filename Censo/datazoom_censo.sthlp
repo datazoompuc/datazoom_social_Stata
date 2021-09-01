@@ -135,7 +135,7 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
  três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
 
 {marker examples}{...}
-{title:Exemplos}
+{title:Examples}
 
 {p 4 4 2}
 Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
