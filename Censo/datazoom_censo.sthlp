@@ -29,11 +29,12 @@
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Inputs}
+{syntab:Input}
 {synopt:{opt years(numlist)}} anos do Censo {p_end}
 {synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais (.txt ou .dat) {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 {synopt:{opt ufs(str)}} códigos dos estados {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 
 {syntab:Compatibilidade}
 {synopt:{opt comp}} compatibiliza variáveis ao longo dos anos {p_end}
@@ -81,7 +82,7 @@ o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicíl
 
 {marker options}{...}
 {title:Options}
-{dlgtab:Inputs}
+{dlgtab:Input}
 
 {phang} {opt years(numlist)}  especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
 pode ser utilizado para os anos de 1970 a 2010.

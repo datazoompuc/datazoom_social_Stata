@@ -28,10 +28,11 @@
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Inputs}
+{syntab:Input}
 {synopt:{opt years(numlist)}} anos da PNAD {p_end}
 {synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais (.txt ou .dat) {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 
 {syntab:Tipos de Registro}
 {synopt:{opt pes}} pessoas {p_end}
@@ -89,7 +90,7 @@ de dados incluindo as variáveis de domicílios e pessoas no mesmo arquivo.
 
 {marker options}{...}
 {title:Options}
-{dlgtab:Inputs}
+{dlgtab:Input}
 
 {phang} {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa pode
 ser utilizado para os anos de 1981 a 2013, excluindo os anos censitários 1994.

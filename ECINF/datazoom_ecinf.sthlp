@@ -33,6 +33,7 @@
 {synopt:{opt original(string)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
 {synopt:{opt saving(string)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 {synopt:{opt tipo(str)}} tipo de registro {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}

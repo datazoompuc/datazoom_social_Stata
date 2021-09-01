@@ -28,10 +28,11 @@
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Inputs}
+{syntab:Input}
 {synopt:{opt years(numlist)}} anos da PME {p_end}
 {synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 
 {syntab:Identificação do Indivíduo}
 {synopt:{opt nid}} Sem identificação {p_end}
@@ -79,7 +80,7 @@ comando {help append} para empilhar as bases.
   
 {marker options}{...}
 {title:Options}
-{dlgtab:Inputs}
+{dlgtab:Input}
 
 {phang} 
 {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Podem ser de 1991 a 2001

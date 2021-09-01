@@ -31,7 +31,7 @@
 {synopt:{opt original(str)}} caminho dos arquivos brutos no seu computador {p_end}
 {synopt:{opt year(int)}} ano da pesquisa, 2013 ou 2019 {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
-{synopt:{opt english}} labels em inglês {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
