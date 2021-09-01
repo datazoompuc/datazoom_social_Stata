@@ -13,6 +13,7 @@
 {viewerjumpto "Description" "datazoom_pnad##description"}{...}
 {viewerjumpto "Options" "datazoom_pnad##options"}{...}
 {viewerjumpto "Examples" "datazoom_pnad##examples"}{...}
+{viewerjumpto "Nota sobre os dados originais" "datazoom_pnad##remarks"}{...}
 {p 8 8 2} {it:For the English version}, {help datazoom_pnad_en}
 
 {title:Title}
@@ -93,7 +94,7 @@ de dados incluindo as variáveis de domicílios e pessoas no mesmo arquivo.
 {dlgtab:Input}
 
 {phang} {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa pode
-ser utilizado para os anos de 1981 a 2013, excluindo os anos censitários 1994.
+ser utilizado para os anos de 1981 a 2015, excluindo os anos e censitários 1994.
 
 {phang} {opt original(str)} indica o caminho dos arquivos de dados originais. É necessário incluir um caminho 
 para cada arquivo com o qual o usuário deseja trabalhar.
