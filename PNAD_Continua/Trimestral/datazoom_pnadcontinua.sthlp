@@ -48,10 +48,8 @@ Digite {cmd:db datazoom_pnadcontinua} para utilizar a função via caixa de diá
 {title:Description}
 
 {p 4 4 2}
-{cmd:datazoom_pnadcontinua} extrai e constrói bases de dados da PNAD Contínua em formato STATA (.dta) a partir
-dos microdados originais, os quais  não são disponibilizados pelo Portal (informações sobre como obter
-os arquivos originais de dados, consulte o site do IBGE www.ibge.gov.br). O programa pode ser utilizado para
-os anos 2012 a 2020. 
+{cmd:datazoom_pnadcontinua} extrai e constrói bases de dados da PNAD Contínua em formato Stata a partir 
+dos microdados originais. O programa pode ser utilizado para os anos de 2012 a 2020. 
 
 {p 4 4 2}
 Embora seja uma pesquisa trimestral, este programa não permite a escolha de trimestres específicos para extração, 
@@ -85,8 +83,7 @@ pode ser utilizado para o período de 2012 a 2020. Não é possível escolher tr
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
 Existe um arquivo de microdados para cada trimestre da pesquisa. Todos eles devem estar posicionados na mesma pasta 
-para que o programa funcione adequadamente. O Portal não disponibiliza os dados originais, que podem ser
- obtidos no site do IBGE.
+para que o programa funcione adequadamente.
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
@@ -96,7 +93,7 @@ para que o programa funcione adequadamente. O Portal não disponibiliza os dados
 {p 4 4 2}
 Bases de dados trimestrais 
 
-{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original(C:/pnadc) saving(D:/mydatabases) 
+{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original("~/mydata") saving("~/mydata") english
 
 {p 6 6 2}
 Três bases de dados são geradas, uma para cada ano selecionado.

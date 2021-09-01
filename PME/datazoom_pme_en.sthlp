@@ -1,10 +1,10 @@
 {smcl}
-{viewerdialog "PME" "dialog datazoom_pme_em"}
-{viewerdialog "Pacote" "dialog datazoom_social_en"}
+{viewerdialog "PME" "dialog datazoom_pme_en"}
+{viewerdialog "Package" "dialog datazoom_social_en"}
 {vieweralsosee "PNAD" "help datazoom_pnad_en"}{...}
 {vieweralsosee "Censo" "help datazoom_censo_en"}{...}
 {vieweralsosee "PNAD Contínua" "help datazoom_pnadcontinua_en"}{...}
-{vieweralsosee "PNAD Contínua - Yearly" "help datazoom_pnadcont_anual_en"}{...}
+{vieweralsosee "Annual PNAD Contínua" "help datazoom_pnadcont_anual_en"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid_en"}{...}
 {vieweralsosee "PNS" "help datazoom_pns_en"}{...}
 {vieweralsosee "POF" "help datazoom_pof_en"}{...}

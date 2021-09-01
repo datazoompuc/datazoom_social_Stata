@@ -181,18 +181,22 @@ Duas bases de dados serão geradas, uma para cada ano selecionado, com as variá
 {marker remarks}{...}
 {title:Nota sobre os dados originais}
 
+{p 4 4 2}
 Os nomes dos arquivos de microdados disponibilizados pelo IBGE foram uniformizados a partir de 2001. 
 Os arquivos de pessoas possuem prefixo PES e os arquivos de domicílios, prefixo DOM, ambos com sufixo
 igual ao ano com quatro dígitos. Para os arquivos
 até 1999, é possível, no entanto, que haja diferenças nos nomes dos arquivos que o usuário possui 
 e aqueles utilizados pelo {cmd:datazoom_pnad}.
 
+{p 4 4 2}
 Abaixo, segue uma lista com os nomes de arquivos esperados pelo {cmd:datazoom_pnad} para cada 
 ano até 1999. De 2001 em diante, os nomes seguem o padrão adotado pelo IBGE desde 2001.
 
+{p 4 4 2}
 Caso haja diferenças entre a lista abaixo e os arquivos do usuário, o programa deve funcionar 
 corretamente somente após o usuário renomear seus arquivos de dados adaptando-os à lista. 
 
+{p 4 4 2}
 No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
 dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes aparentemente. Se isso ocorrer, 
 o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 

@@ -4,7 +4,7 @@
 {vieweralsosee "PNAD" "help datazoom_pnad_en"}{...}
 {vieweralsosee "PNS" "help datazoom_pns_en"}{...}
 {vieweralsosee "PNAD Contínua" "help datazoom_pnadcontinua_en"}{...}
-{vieweralsosee "PNAD Contínua - Yearly" "help datazoom_pnadcont_anual_en"}{...}
+{vieweralsosee "Annual PNAD Contínua" "help datazoom_pnadcont_anual_en"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid_en"}{...}
 {vieweralsosee "PME" "help datazoom_pme_en"}{...}
 {vieweralsosee "POF" "help datazoom_pof_en"}{...}
