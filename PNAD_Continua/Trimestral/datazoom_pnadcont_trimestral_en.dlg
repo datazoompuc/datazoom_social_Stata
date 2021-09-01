@@ -2,12 +2,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 330
+POSITION . . 350 320
 
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 140 260, label("Ano(s)")
+GROUPBOX caixaAnos 20 20 140 260, label("Year(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 120    ., label("2013")  option(2013)
@@ -20,20 +20,18 @@ GROUPBOX caixaAnos 20 20 140 260, label("Ano(s)")
    CHECKBOX	   ck2020 @ +24 120	   ., label("2020")  option(2020)
    CHECKBOX	   ck2021 @ +24 120	   ., label("2021")  option(2021)
    
-GROUPBOX caixaDicionários 160 20 140 250, label("Bases de Dados")
+GROUPBOX caixaDicionários 160 20 140 250, label("Databases")
 
-	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
-	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
+	BUTTON	fldados 	+20 +35 100 ., label("Original Files...") onpush(script dados) 
+	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
-GROUPBOX caixaid 160 120 140 255, label("Identificação do Indivíduo")
+GROUPBOX caixaid 160 120 140 255, label("Individual Identification")
 
-	RADIO	nid     +10 +22 150 ., first label("Sem identificação") option(nid)
-	RADIO	idbas	+0 +22 150 ., middle label("Básica") option(idbas)
-	RADIO	idrs	+0 +22 150 ., last label("Avançada") option(idrs)
+	RADIO	nid     +10 +22 150 ., first label("No Identification") option(nid)
+	RADIO	idbas	+0 +22 150 ., middle label("Basic") option(idbas)
+	RADIO	idrs	+0 +22 150 ., last label("Advanced") option(idrs)
 	
-TEXT     credit     5   280 200    ., label("PUC-Rio - Departamento de Economia") left
-TEXT     notes     5   300 360    ., label("Nota: reinstale periodicamente o pacote datazoom_pnadcontinua") left
-
+TEXT     credit     0   280 340    ., label("PUC-Rio - Department of Economics") right
 
 END
 
@@ -58,14 +56,14 @@ RESET res1
 SCRIPT dados
 BEGIN
 	create CHILD datazoom_datafolder AS data
-	data.settitle "Dados originais da PNAD Contínua"
+	data.settitle "Annual Continuous PNAD original data file"
 	data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
 	create CHILD datazoom_finalfolder AS dic
-	dic.settitle "Novas bases da PNAD Contínua"
+	dic.settitle "Annual Continuous PNAD final data folder"
 	dic.setExitString saidasalvando
 	END
 
@@ -84,4 +82,5 @@ PROGRAM command
 			option radio(main nid idbas idrs)
 			
 		endoptions
+		stata
 	END

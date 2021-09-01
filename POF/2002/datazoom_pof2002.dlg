@@ -10,9 +10,9 @@ BEGIN
 	BUTTON btn_gs +170 @   @  @, label("Gastos Selecionados") onpush(script carregachild_gs)
 	BUTTON btn_tr 360 @   @  @, label("Tipos de Registros") onpush(script carregachild_tr)
 
-	TEXTBOX tx_obs_bp 10 +40 150 80, label("Contrói uma base com gastos em itens agregados, de acordo com as tabulações do IBGE.") center
+	TEXTBOX tx_obs_bp 10 +40 150 80, label("ContrÃ³i uma base com gastos em itens agregados, de acordo com as tabulaÃ§Ãµes do IBGE.") center
 	TEXTBOX tx_obs_gs +170  @ 150 80, label("Personalize sua cesta de itens, incluindo gastos em itens desagregados.") center
-	TEXTBOX tx_obs_tr 350  @ 135 80, label("Extrai bases de dados originais, sem manipulações.") center
+	TEXTBOX tx_obs_tr 350  @ 135 80, label("Extrai bases de dados originais, sem manipulaÃ§Ãµes.") center
 	
 	FRAME fr_bp   0 0 170 160
 	FRAME fr_meio  +168 0 170 160

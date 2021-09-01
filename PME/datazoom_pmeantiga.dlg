@@ -2,9 +2,9 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 438 230
+POSITION . . 438 220
 
-DIALOG main, label("PME-Antiga - Acesso aos microdados") tabtitle("Main")
+DIALOG main, label("PME Antiga") 
 BEGIN
    
 GROUPBOX caixaAnos 15 15 123 170, label("Ano(s)")
@@ -21,19 +21,18 @@ GROUPBOX caixaAnos 15 15 123 170, label("Ano(s)")
    CHECKBOX    ck2000 @ +24 120    ., label("2000")  option(2000)
    CHECKBOX    ck2001 @ +24 120    ., label("2001")  option(2001)
 
-GROUPBOX caixaDicion·rios 165 15 260 72, label("Bases de Dados")
+GROUPBOX caixaDicion√°rios 165 15 260 72, label("Bases de Dados")
 
 	BUTTON	fldados 	+20 +30 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Salvando...") onpush(script salvando) 
 	
-GROUPBOX caixaid 165 98 260 88, label("IdentificaÁ„o do IndivÌduo")
+GROUPBOX caixaid 165 98 260 88, label("Identifica√ß√£o do Indiv√≠duo")
 
-	RADIO	nid     +10 +22 100 ., first label("Sem identificaÁ„o") option(nid)
-	RADIO	idbas	+0 +20 100 ., middle label("B·sica") option(idbas)
-	RADIO	idrs	+0 +20 150 ., last label("AvanÁada (Ribas-Soares)") option(idrs)
+	RADIO	nid     +10 +22 120 ., first label("Sem identifica√ß√£o") option(nid)
+	RADIO	idbas	+0 +20 100 ., middle label("B√°sica") option(idbas)
+	RADIO	idrs	+0 +20 150 ., last label("Avan√ßada (Ribas-Soares)") option(idrs)
 	
-TEXT     credit     10   210  415    ., label("PUC-Rio - Departamento de Economia") right
-TEXT     notes     10   190  415    ., label("Nota: reinstale periodicamente o pacote datazoom_pmeantiga") left 
+TEXT     credit     10   190  415    ., label("PUC-Rio - Departamento de Economia") right 
 END
 
 OK ok1,      label("OK")
@@ -76,4 +75,5 @@ PROGRAM command
 			put saidasalvando
 			option radio(main nid idbas idrs)
 		endoptions
+		stata
 	END

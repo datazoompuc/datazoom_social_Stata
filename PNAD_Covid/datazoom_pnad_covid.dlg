@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 420 300
+POSITION . . 420 280
 
 DIALOG main, label("PNAD COVID19") tabtitle("Main")
 BEGIN
@@ -17,15 +17,13 @@ GROUPBOX caixaAnos 20 20 190 220, label("Mês")
    CHECKBOX    ck10 @ +24 210    ., label("Outubro/2020")  option(10)
    CHECKBOX    ck11 @ +24 210    ., label("Novembro/2020")  option(11)	
    
-GROUPBOX caixaDicionários 210 20 190 220, label("Bases de Dados")
+GROUPBOX caixaDicionários 210 60 190 130, label("Bases de Dados")
 
-	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
+	BUTTON	fldados 	+45 +35 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
 
 	
-TEXT     credit     5   250 200    ., label("PUC-Rio - Departamento de Economia") left
-TEXT     notes     5   270 360    ., label("Nota: reinstale periodicamente o pacote datazoom_pnad_covid") left
-
+TEXT     credit     0   250 410    ., label("PUC-Rio - Departamento de Economia") right
 
 END
 
@@ -73,4 +71,5 @@ PROGRAM command
 			put saidadata " "
 			put saidasalvando
 		endoptions
+		stata
 	END

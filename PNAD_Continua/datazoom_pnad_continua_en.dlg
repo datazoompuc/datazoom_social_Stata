@@ -1,0 +1,39 @@
+VERSION 2.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 160 90
+
+DIALOG main, label("PNAD Contínua")
+BEGIN
+	
+	BUTTON btn_anual			20 10 120 25, label("Yearly") onpush(script child_anual)
+	
+	BUTTON btn_trimestral			20 52 120 25, label("Quarterly") onpush(script child_trimestral)
+	
+	FRAME fr_anual   			0  0 400 45
+
+	FRAME fr_trimestral   			0  43 400 45
+	
+    TEXT bottom1   10   230  480  ., label("PUC-Rio - Department of Economics") left
+	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
+END
+
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pnad_continua_en")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+
+SCRIPT child_anual
+   BEGIN
+      create CHILD datazoom_pnadcont_anual_en, allowsubmit
+   END   
+ 
+SCRIPT child_trimestral
+   BEGIN
+      create CHILD datazoom_pnadcont_trimestral_en, allowsubmit
+   END

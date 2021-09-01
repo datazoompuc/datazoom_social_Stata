@@ -73,7 +73,7 @@ PROGRAM command
 		}
 	put "datazoom_pofstd_02 "
 		beginoptions
-			/*Parte da syntax: tipo de extração*/
+			/*Parte da syntax: tipo de extraÃ§Ã£o*/
 			put "id("
 			put lista_tipos
 			/*Parte da syntax: caminho microdados e dicionarios*/

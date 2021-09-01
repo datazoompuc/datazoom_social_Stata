@@ -73,6 +73,8 @@ F ECINF/dct/ecinf2003_uecon.dct
 F ECINF/dct/ecinf2003_uecon_en.dct
 f PME/datazoom_pme.sthlp
 f PME/datazoom_pme_en.sthlp
+f PME/datazoom_pme.dlg
+f PME/datazoom_pme_en.dlg
 f PME/datazoom_pmeantiga.ado
 f PME/datazoom_pmeantiga.dlg
 f PME/datazoom_pmeantiga_en.dlg

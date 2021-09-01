@@ -2,9 +2,9 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 500
+POSITION . . 350 460
 
-DIALOG main, label("PNAD ContÌnua Anual") tabtitle("Main")
+DIALOG main, label("PNAD Cont√≠nua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
 GROUPBOX caixaAnos 20 20 140 400, label("Year(s)")
@@ -28,15 +28,13 @@ GROUPBOX caixaAnos 20 20 140 400, label("Year(s)")
    CHECKBOX	   ck20192 @ +20 120	   ., label("2019_visit2")  option(20192)
    CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visit5")  option(20195)   
    
-GROUPBOX caixaDicion·rios 160 20 140 400, label("Databases")
+GROUPBOX caixaDicion√°rios 160 160 140 120, label("Databases")
 
 	BUTTON	fldados 	+20 +35 100 ., label("Original Files...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
 	
-TEXT     credit     5   420  200    ., label("PUC-Rio - Economics Department") left
-TEXT     notes     5   440 360    ., label("Note: regularly update the datazoom_pnadcont_anual package") left
-
+TEXT     credit     0   420  340    ., label("PUC-Rio - Department of Economics") right
 
 END
 
@@ -60,14 +58,14 @@ RESET res1
 	
 SCRIPT dados
 BEGIN
-	create CHILD datazoom_datafolder_anual AS data
+	create CHILD datazoom_datafolder AS data
 	data.settitle "Annual Continuous PNAD original data file"
 	data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
-	create CHILD datazoom_finalfolder_anual AS dic
+	create CHILD datazoom_finalfolder AS dic
 	dic.settitle "Annual Continuous PNAD final data folder"
 	dic.setExitString saidasalvando
 	END
@@ -84,4 +82,5 @@ PROGRAM command
 			put saidadata " "
 			put saidasalvando
 		endoptions
+		stata
 	END
