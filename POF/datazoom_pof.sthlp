@@ -154,12 +154,11 @@ Para mais informações ver {help weight}.
 {title: Tipos de Registro}
 
 {p 4 4 2}
-{cmd:datazoom_poftrs_}{it:ano} extrai bases de dados da POF 1995-96 em formato Stata a partir dos microdados originais do IBGE.
+{cmd:datazoom_poftrs_}{it:ano} extrai registros da POF em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2} 
-Este programa auxilia o usuário a ter acesso aos 12 tipos de registros existentes na POF 1995-96, sem que haja
-	manipulação de variáveis, ou seja, apenas torna possível a leitura dos microdados da POF via Stata. Os Registros
-	desejados podem ser selecionados via caixa de diálogo.
+Os microdados da POF são separados em Tipos de Registro, diferentes em cada edição. Pode-se selecionar 
+os registros desejados para ler os dados via caixa de diálogo.
 	
 {marker options}{...}
 {title:Options}
