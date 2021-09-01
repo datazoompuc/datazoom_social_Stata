@@ -30,7 +30,7 @@
 {synopthdr}
 {synoptline}
 {syntab:Input}
-{synopt:{opt years(numlist)}} waves {p_end}
+{synopt:{opt years(numlist)}} {p_end}
 {synopt:{opt original(str)}} path to original microdata {p_end}
 {synopt:{opt saving(str)}} path where databases will be saved {p_end}
 {synopt:{opt ufs(str)}} Federation Unit codes {p_end}

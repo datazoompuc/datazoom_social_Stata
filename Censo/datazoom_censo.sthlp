@@ -89,8 +89,7 @@ pode ser utilizado para os anos de 1970 a 2010.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. Para
 todos os Censos existem ao menos um arquivo para cada estado. Todos eles devem estar posicionados na mesma pasta 
-para que o programa funcione adequadamente. O Portal não disponibiliza os dados originais. Para 2010, os dados
-encontram-se on line. Para os demais anos, consulte o site do IBGE para informações sobre como adquiri-los.
+para que o programa funcione adequadamente.
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 

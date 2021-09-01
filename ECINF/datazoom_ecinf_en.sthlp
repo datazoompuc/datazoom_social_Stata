@@ -1,19 +1,18 @@
 {smcl}
 {viewerdialog "ECINF" "dialog datazoom_ecinf_en"}
-{viewerdialog "Package" "dialog datazoom_social_en"}
+{viewerdialog "Pacote" "dialog datazoom_social_en"}
 {vieweralsosee "PNAD" "help datazoom_pnad_en"}{...}
-{vieweralsosee "PNS" "help datazoom_pns_en"}{...}
+{vieweralsosee "Censo" "help datazoom_censo_en"}{...}
 {vieweralsosee "PNAD Contínua" "help datazoom_pnadcontinua_en"}{...}
 {vieweralsosee "PNAD Contínua - Yearly" "help datazoom_pnadcont_anual_en"}{...}
 {vieweralsosee "PNAD Covid" "help datazoom_pnad_covid_en"}{...}
 {vieweralsosee "PME" "help datazoom_pme_en"}{...}
 {vieweralsosee "POF" "help datazoom_pof_en"}{...}
 {vieweralsosee "Censo" "help datazoom_censo_en"}{...}
-{viewerjumpto "Syntax" "datazoom_censo##syntax"}{...}
-{viewerjumpto "Description" "datazoom_censo##description"}{...}
-{viewerjumpto "Options" "datazoom_censo##options"}{...}
-{viewerjumpto "Examples" "datazoom_censo##examples"}{...}
-{viewerjumpto "Note on the original data" "datazoom_censo##remarks"}{...}
+{viewerjumpto "Syntax" "datazoom_ecinf_en##syntax"}{...}
+{viewerjumpto "Description" "datazoom_ecinf_en##description"}{...}
+{viewerjumpto "Options" "datazoom_ecinf_en##options"}{...}
+{viewerjumpto "Examples" "datazoom_ecinf_en##examples"}{...}
 {p 8 8 2} {it:Para a versão em português}, {help datazoom_ecinf}
 
 {title:Title}
@@ -30,7 +29,7 @@
 {synopthdr}
 {synoptline}
 {syntab:Main}
-{synopt:{opt year(numlist)}} wave {p_end}
+{synopt:{opt year(numlist)}} {p_end}
 {synopt:{opt original(str)}} path to original microdata {p_end}
 {synopt:{opt saving(str)}} path where databases will be saved {p_end}
 {synopt:{opt tipo(str)}} type of register {p_end}

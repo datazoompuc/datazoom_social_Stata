@@ -55,7 +55,7 @@ Digite {cmd:db datazoom_ecinf} para utilizar a função via caixa de diálogo.
 {phang}
 {opt original(string)}  indica o caminho da pasta onde estão localizados os arquivos de dados
         originais. Todos os arquivos devem estar posicionados na mesma pasta para que o programa funcione
-        adequadamente. O Portal não disponibiliza os dados originais.
+        adequadamente.
 
 {phang}
 {opt saving(string)}  indica o caminho da pasta onde devem ser salvas as bases de dados
