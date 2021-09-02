@@ -3,7 +3,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 330 220
+POSITION . . 330 230
 
 DIALOG main, label("ECINF") tabtitle("Main")
 BEGIN
@@ -31,7 +31,9 @@ GROUPBOX trs +140 5 160 170, label("Types of Register")
 	CHECKBOX ch_tr6    	@ +20 @ @, label("Proprietário") option(pesocup)
 	CHECKBOX ch_tr7    	@ +20 @ @, label("Sebrae") option(sebrae)
 
-	TEXT     credit     	5   175  310    ., label("PUC-Rio - Department of Economics") right  
+	CHECKBOX	eng     5  180 200 ., label("Labels in English") option(english)
+
+	TEXT     credit     	5   200  310    ., label("PUC-Rio - Department of Economics") right  
 
 END
 
@@ -110,6 +112,7 @@ BEGIN
 		/*Parte da syntax: caminho onde bases serao salvas*/
 		put saidasalvando 
 *		option main.chmerge
+		option main.eng
    endoptions
    stata
 END
