@@ -33,7 +33,9 @@ GROUPBOX opc_dic 0 275 375 50, label("Original and Final Data folders")
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
 	BUTTON   fl_salvabase +170 @ 90 ., label("Saving...") onpush(script salvando)
 
-	TEXT     credit     5   340  370    ., label("By PUC-Rio - Department of Economics") right  
+	CHECKBOX	eng     10  335 200 ., label("Labels in English") option(english)
+
+	TEXT     credit     5   340  370    ., label("PUC-Rio - Department of Economics") right  
 
 
 END
@@ -111,6 +113,7 @@ BEGIN
       put ") "
       put saidadata " "
       put saidasalvando
+      option main.eng
    endoptions
    stata
 END
