@@ -76,7 +76,7 @@ GROUPBOX caixaid 165 +35 140 94, label("Compatibility")
 	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatible 1980s") option(comp81)
 	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatible 1990s") option(comp92)
 
-	CHECKBOX	eng     20  305 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     20  305 200 ., label("Labels in English") option(english)
 
 TEXT     credit     160   305  140    ., label("PUC-Rio - Department") right
 TEXT     credi2     160   320  140    ., label("of Economics") right

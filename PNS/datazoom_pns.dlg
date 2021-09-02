@@ -10,9 +10,11 @@ GROUPBOX caixaBase 25 15 150 105, label("Bases de Dados")
 	BUTTON  fl_base    		+25 +25 100 25, label("Dados originais...") onpush(script dados)
     BUTTON  fl_salvabase    @   +40 100 25, label("Salvando...")        onpush(script salvando)
 
-GROUPBOX caixaAnos 175 15 150 105, label("Ano(s)")
-	RADIO  ck2013  +25 +25 100 25, first label("2013")  option(2013)
-	RADIO  ck2019  @   +25 100 25, last label("2019")  option(2019)
+GROUPBOX caixaAnos 175 15 150 73, label("Ano(s)")
+	RADIO  ck2013  +25 +20 100 25, first label("2013")  option(2013)
+	RADIO  ck2019  @   +20 100 25, last label("2019")  option(2019)
+
+	CHECKBOX	eng     185  95 200 ., label("Labels em inglês") option(english)
 
 TEXT credit 15 130 300 15, label("PUC-Rio - Departamento de Economia") left
 
@@ -54,6 +56,7 @@ BEGIN
 		put "year("
 		option main.ck2013 main.ck2019
 		put ") "
+		option main.eng
    endoptions
    stata
 END
