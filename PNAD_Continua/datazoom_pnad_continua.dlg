@@ -35,5 +35,5 @@ SCRIPT child_anual
  
 SCRIPT child_trimestral
    BEGIN
-      create CHILD datazoom_pnadcont_trimestral, allowsubmit
+      create CHILD datazoom_pnadcontinua, allowsubmit
    END

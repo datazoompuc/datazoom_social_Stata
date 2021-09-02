@@ -6,7 +6,7 @@ POSITION . . 160 90
 DIALOG main, label("PNAD Contínua")
 BEGIN
 	
-	BUTTON btn_anual			20 10 120 25, label("Yearly") onpush(script child_anual)
+	BUTTON btn_anual			20 10 120 25, label("Annua") onpush(script child_anual)
 	
 	BUTTON btn_trimestral			20 52 120 25, label("Quarterly") onpush(script child_trimestral)
 	
@@ -35,5 +35,5 @@ SCRIPT child_anual
  
 SCRIPT child_trimestral
    BEGIN
-      create CHILD datazoom_pnadcont_trimestral_en, allowsubmit
+      create CHILD datazoom_pnadcontinua_en, allowsubmit
    END
