@@ -1,34 +1,98 @@
-VERSION 11.0
+VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 180 200
+POSITION . . 500 230
 
-DIALOG main, label("POF") tabtitle("Main")
+DIALOG main, label("POF")
 BEGIN
 
-GROUPBOX caixaAnos 10 15 150 160, label("Escolha o ano")
-	RADIO  rd_1995  	+25 +25 100 25, first label("1995")  option(datazoom_pof1995)
-	RADIO  rd_2002  	@   +25 100 25, middle label("2002")  option(datazoom_pof2002)
-	RADIO  rd_2008		@   +25 100 25, middle label("2008")  option(datazoom_pof2008)
-	RADIO  rd_2017  	@   +25 100 25, last label("2017")  option(datazoom_pof2017)
+	GROUPBOX caixaAnos 5 5 490 40, label("Escolha o ano")
+	RADIO  ck1995  +5 20 100 25, first label("1995/96")  option(datazoom_pof1995)
+	RADIO  ck2002  +100   20 100 25, middle label("2002/03")  option(datazoom_pof2002)
+	RADIO  ck2008  +100   20 100 25, middle label("2008/09")  option(datazoom_pof2008)
+	RADIO  ck2017  +100   20 100 25, last label("2017/19")  option(datazoom_pof2017)
 
+	BUTTON btn_bp 25 75 120 25, label("Bases Padronizadas") onpush(program carregachild_bp)
+	BUTTON btn_gs +170 @   @  @, label("Gastos Selecionados") onpush(program carregachild_gs)
+	BUTTON btn_tr 360 @   @  @, label("Tipos de Registros") onpush(program carregachild_tr)
+
+	TEXTBOX tx_obs_bp 10 115 150 80, label("Contrói uma base com gastos em itens agregados, de acordo com as tabulações do IBGE.") center
+	TEXTBOX tx_obs_gs +170  @ 150 80, label("Personalize sua cesta de itens, incluindo gastos em itens desagregados.") center
+	TEXTBOX tx_obs_tr 350  @ 135 80, label("Extrai bases de dados originais, sem manipulações.") center
+	
+	FRAME fr_bp   0 50 170 160
+	FRAME fr_meio  +168 50 170 160
+	FRAME fr_tr  +168 50 170 160
+	
+TEXT     credit     10   210  480    ., label("PUC-Rio - Departamento de Economia") right  
 END
 
-OK ok, label ("OK")
-CANCEL can, label("Cancel")
-*HELP hlp,   view("help datazoom_pof")
-RESET res
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pof1995")
+RESET res1
 
 SCRIPT PREINIT_SCRIPT
-BEGIN
-*	create STRING lista_tipos
-	create STRING saidadata
-	create STRING saidasalvando
-END
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+   
+PROGRAM carregachild_tr
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_poftrs_95"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_poftrs_02"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_poftrs_08"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_poftrs_17"
+		stata
+	}
+   END
 
-PROGRAM command
-BEGIN
-	put "db"
-	option main.rd_1995 main.rd_2002 main.rd_2008 main.rd_2017
-	stata
-END
+PROGRAM carregachild_gs
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_pofsel_95"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_pofsel_02"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_pofsel_08"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_pofsel_17"
+		stata
+	}
+   END
+
+PROGRAM carregachild_bp
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_pofstd_95"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_pofstd_02"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_pofstd_08"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_pofstd_17"
+		stata
+	}
+   END
