@@ -19,7 +19,7 @@ GROUPBOX opc_dic 5 +45 340 60, label("Orignal and Final Data Files")
 	BUTTON   tx_base     45 +25 110  ., label("Data... ") onpush(script dados)
 	BUTTON   tx_salvabase +150 @ 110  ., label("Saving...") onpush(script salvando)
 
-	CHECKBOX	eng     10  +40 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     10  +40 200 ., label("Labels em inglÃªs") option(english)
 	
 TEXT     credit     10   +45  340    ., label("PUC-Rio - Department of Economics") right  
 
@@ -76,7 +76,7 @@ PROGRAM command
 		}
 	put "datazoom_pofstd_08 "
 		beginoptions
-			/*Parte da syntax: tipo de extração*/
+			/*Parte da syntax: tipo de extraÃ§Ã£o*/
 			put "id("
 			put lista_tipos
 			/*Parte da syntax: caminho microdados*/
