@@ -28,7 +28,7 @@ foreach year in `years'{
 		
 		if `year' == 2016 | `year' == 2017 | `year' == 2018 | (`year' == 2015 & `trim' == 4) | (`year' == 2019 & `trim' == 1){
 				local file_name "`file_name'_20190729"
-		}	
+			}	
 		
 		di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
 				cap infile using "`dic'", using("`original'/`file_name'.txt") clear
