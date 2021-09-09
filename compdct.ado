@@ -33,7 +33,7 @@ cap save `saving', replace
 end
 
 program read_compdct
-syntax, compdct(string) dict_name(string) out(string)
+syntax, compdct(string) dict_name(string) [out(string)]
 
 use `compdct', clear
 
