@@ -26,8 +26,12 @@ save `deflator', replace
 /*Abre Bases de Dados da PME Nova*/
 
 tokenize `years'
-findfile pmenova`lang'.dct
-loc dic = r(fn)
+
+tempfile dic
+
+findfile dict.dta
+
+read_compdct, compdct("`r(fn)'") dict_name("pmenova`lang'") out("`dic'")
 
 while "`*'" != "" {
 	local y`1' = ""
