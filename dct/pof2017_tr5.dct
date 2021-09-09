@@ -1,0 +1,22 @@
+dictionary {
+_column(1)	byte	UF	%2f	"Unidade da Federação"
+_column(3)	int	ESTRATO_POF	%4f	"Identifica os estratos do plano amostral da pesquisa"
+_column(7)	byte	TIPO_SITUACAO_REG	%1f	"Situação do Domicílio"
+_column(8)	long	COD_UPA	%9f	"Código da Unidade Primária de Amostragem"
+_column(17)	byte	NUM_DOM	%2f	"Número do Domicílio"
+_column(19)	byte	NUM_UC	%1f	"Número da unidade de consumo"
+_column(20)	byte	QUADRO	%2f	"Número do quadro no qual o item de despesa/aquisição foi registrado"
+_column(22)	int	V9001	%7f	"Código do tipo de despesa/aquisição"
+_column(29)	byte	V9002	%2f	"Forma de Aquisição"
+_column(31)	double	V8000	%10.2f	"Valor em reais (R$)"
+_column(41)	byte	V9010	%2f	"Último mês que a respectiva despesa/aquisição foi realizada"
+_column(43)	byte	V9011	%2f	"Número de meses"
+_column(45)	double	DEFLATOR	%12.10f	"Fator de multiplicação"
+_column(57)	double	V8000_DEFLA	%10.2f	"Valor do aluguel estimado deflacionado"
+_column(67)	byte	COD_IMPUT_VALOR	%1f	"Indica se o valor do aluguel estimado foi imputado"
+_column(68)	byte	FATOR_ANUALIZACAO	%2f	"Identifica o número utilizado para anualizar o aluguel estimado"
+_column(70)	double	PESO	%14.8f	"Identifica o fator de expansão"
+_column(84)	double	PESO_FINAL	%14.8f	"Identifica o fator de expansão"
+_column(98)	double	RENDA_TOTAL	%10.2f	"Valor em reais (R$)"
+}
+
