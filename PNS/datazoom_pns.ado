@@ -28,7 +28,13 @@ syntax, year(integer) [english] [original(str)]
 
 if "`english'" != "" local lang "_en"
 
-comp_infile, compdct(dict.dta) data("pns`year'`lang'.dct") dict_name("pns`year'`lang'") out("`original'")
+tempfile dic
+
+findfile dict.dta
+
+read_compdct, compdct("`r(fn)'") dict_name("pns2013`lang'") out("`dic'")
+
+qui infile using `dic', using(PNS_`year'.txt) clear
 
 end
 

@@ -6,7 +6,7 @@ syntax, folder(string) [saving(string)]
 local files: dir "`folder'" files "*.dct"
 
 foreach file in `files'{
-	import delimited "`folder'/`file'", clear delimiter("qwerty", asstring)
+	import delimited "`folder'/`file'", clear delimiter("qwerty", asstring) encoding(utf8)
 	* lê o arquivo .dct para .dta, cada linha de texto vira uma observação 
 	
 	local nome_dct = substr("`file'", 1, length("`file'") - 4)
@@ -35,25 +35,23 @@ end
 program read_compdct
 syntax, compdct(string) dict_name(string) [out(string)]
 
-findfile `compdct'
-
-use "`r(fn)'", clear
+use `compdct', clear
 
 keep if dct == "`dict_name'"
 * mantém só as linhas referentes ao dct desejado
 
 drop dct
 
-cd `out'
-
-outfile using "`dict_name'.dct", replace noquote
+outfile using "`out'", replace noquote
 
 end
 
 program comp_infile
 syntax, compdct(string) dict_name(string) data(string) [out(string)]
 
-read_compdct, compdct(`compdct') dict_name(`dict_name') out(`out')
+findfile `compdct'
+
+read_compdct, compdct("`r(fn)'") dict_name(`dict_name') out(`out')
 
 cap infile using "`dict_name'.dct", using(`data') clear
 
