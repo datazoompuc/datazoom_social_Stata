@@ -71,8 +71,14 @@ foreach ano in `years' {
 				/* Abrindo arquivo e gerando variável UF, inexistente em 1970  */
 				/* Em 1970 abrir "quietly porque tem um monte de "-" (dá erro) */
 				display as input "Extraindo `ano' `UF' - `suf' ..."
-				findfile censo`ano'`lang'.dct
-				quietly infile using `"`r(fn)'"', using("`original'/DAMO70`suf'.txt") clear
+				
+				tempfile dic
+
+				findfile dict.dta
+
+				read_compdct, compdct("`r(fn)'") dict_name("censo`ano'`lang'") out("`dic'")
+				
+				quietly infile using `dic', using("`original'/DAMO70`suf'.txt") clear
 				
 				* resolvendo problema nos dados originais: caracteres nao numericos e/ou primeiro digito
 				* da var v001 diferente do cod70.
@@ -218,9 +224,15 @@ foreach ano in `years' {
 			di "`sufixos'"
 			foreach suf in `sufixos' {
 				display as input "Extraindo `ano' `UF' - `suf' ..."
-				/* Abrindo arquivo                              */
-				findfile censo`ano'`lang'.dct
-				capture infile using `"`r(fn)'"', using("`original'/AMO80.UF`suf'.txt") clear
+				/* Abrindo arquivo           */
+				
+				tempfile dic
+
+				findfile dict.dta
+
+				read_compdct, compdct("`r(fn)'") dict_name("censo`ano'`lang'") out("`dic'")
+				
+				capture infile using `dic', using("`original'/AMO80.UF`suf'.txt") clear
 				if _rc == 601 {
 				/* Abrindo arquivo se em formato dbf           */
 					qui use "`original'/CD80DOM`codUF'.dta", clear
@@ -430,10 +442,16 @@ foreach ano in `years' {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					/* Abrindo arquivo                              */
 					* resgata códigos do município e microrregião do arquivo de domicílios
-					findfile censo`ano'dom`lang'.dct
-					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					capture infile using `dic', using("`original'/CD102`suf'.txt") clear
 					/* Próximas linha roda se Stata não encontrar o .txt */
-					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
+					if _rc == 601 cap infile using `dic', using("`original'/CD102`suf'.dat") clear
 
 					keep if v0099 == 1 // i.e. guarda só os domicíios
 					keep v0102 v1101 v1102 v7002
@@ -443,10 +461,16 @@ foreach ano in `years' {
 					save `cod91', replace
 
 					/* Primeiros base de pessoas                    */
-					findfile censo`ano'pes`lang'.dct
-					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
+					capture infile using `dic', using("`original'/CD102`suf'.txt") clear
 					/* Próximas linha roda se Stata não encontrar o .txt */
-					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
+					if _rc == 601 cap infile using `dic', using("`original'/CD102`suf'.dat") clear
 
 					keep if v0099 == 2 // i.e. guarda só os indivíduos
 
@@ -475,10 +499,16 @@ foreach ano in `years' {
 				}
 				if "`dom'"~="" {
 					/* Agora os domicílios */
-					findfile censo`ano'dom`lang'.dct
-					capture infile using `"`r(fn)'"', using("`original'/CD102`suf'.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					capture infile using `dic', using("`original'/CD102`suf'.txt") clear
 					/* Próximas linha roda se Stata não encontrar o .txt */
-					if _rc == 601 cap infile using `"`r(fn)'"', using("`original'/CD102`suf'.dat") clear
+					if _rc == 601 cap infile using `dic', using("`original'/CD102`suf'.dat") clear
 
 					keep if v0099 == 1 // i.e. guarda só os domicíios
 					bys v0102: keep if _n==1
@@ -560,9 +590,15 @@ foreach ano in `years' {
 			foreach suf in `sufixos' {
 				if "`fam'"~="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
-					findfile censo`ano'fam`lang'.dct
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'fam`lang'") out("`dic'")
+					
 					/* Abrindo arquivo                              */
-					quietly infile using `"`r(fn)'"', using("`original'/Fami`suf'.txt") clear
+					quietly infile using `dic', using("`original'/Fami`suf'.txt") clear
 					
 					gen ano = 2000
 					lab var ano "ano da pesquisa"
@@ -580,12 +616,18 @@ foreach ano in `years' {
 					}
 				if "`pes'"~="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
-					findfile censo`ano'pes`lang'.dct
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
 					/* Abrindo arquivo                              */
 					/* Também há versões .dat e .txt dos arquivos,  */
 					/* então uso "capture" de novo.                 */
-					quietly cap infile using `"`r(fn)'"', using("`original'/pes`suf'.txt") clear
-					if _rc == 601 quietly cap infile using `"`r(fn)'"', using("`original'/pes`suf'.dat") clear
+					quietly cap infile using `dic', using("`original'/pes`suf'.txt") clear
+					if _rc == 601 quietly cap infile using `dic', using("`original'/pes`suf'.dat") clear
 				
 					gen ano = 2000
 					lab var ano " ano da pesquisa"					
@@ -608,9 +650,15 @@ foreach ano in `years' {
 					/* Agora os domicílios */
 					
 					display as input "Extraindo `ano' `UF' - `suf' ..."
-					findfile censo`ano'dom`lang'.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/dom`suf'.txt") clear
-					if _rc == 601 quietly cap infile using `"`r(fn)'"', using("`original'/dom`suf'.dat") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/dom`suf'.txt") clear
+					if _rc == 601 quietly cap infile using `dic', using("`original'/dom`suf'.dat") clear
 				
 					gen ano = 2000
 					lab var ano " ano da pesquisa"
@@ -722,8 +770,14 @@ foreach ano in `years' {
 				if "`pes'"~="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					/* Infile arquivo novo para os 14 municípios */
-					findfile censo`ano'pes`lang'.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Pessoas_14munic.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Pessoas_14munic.txt") clear
 					if _rc == 601 {
 					di as err "Arquivo Amostra_Pessoas_14munic.txt não encontrado"
 					di "Ver http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
@@ -738,8 +792,14 @@ foreach ano in `years' {
 					save `CENSO10_`UF'_pes14', replace
 										
 					/* Abrindo arquivo principal */
-					findfile censo`ano'pes`lang'.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Pessoas_`suf'.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Pessoas_`suf'.txt") clear
 										
 					/* Dropando observações dos 14 municípios com erro nas áreas de ponderação - microdados separados */
 					qui destring, replace
@@ -778,8 +838,14 @@ foreach ano in `years' {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
 					/* Infile arquivo novo para os 14 municípios */
-					findfile censo`ano'dom`lang'.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Domicilios_14munic.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Domicilios_14munic.txt") clear
 					if _rc == 601 {
 					di as err "Arquivo Amostra_Domicilios_14munic.txt não encontrado"
 					di "Ver http://www.ibge.gov.br/home/estatistica/populacao/censo2010/resultados_gerais_amostra_areas_ponderacao/default_redefinidos.shtm"
@@ -794,8 +860,14 @@ foreach ano in `years' {
 					save `CENSO10_`UF'_dom14', replace
 										
 					/* Abrindo arquivo principal */
-					findfile censo`ano'dom`lang'.dct
-					quietly cap infile using `"`r(fn)'"', using("`original'/Amostra_Domicilios_`suf'.txt") clear
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Domicilios_`suf'.txt") clear
 									
 					/* Dropando observações dos 14 municípios com erro nas áreas de ponderação - microdados separados */
 					qui destring, replace
