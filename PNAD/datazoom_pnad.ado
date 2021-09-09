@@ -229,10 +229,14 @@ foreach name of local register {
 		}
 		if `1' <= 1990 {                                     // Se tem ano até 1990
 			display as input "Extraindo `1'..."
-			findfile pnad`1'`name'`lang'.dct
 			
-			loc dic = r(fn)
-			qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
+			
+			qui cap infile using `dic', using("`base`1'`name''") clear
 			
 			/* Parte específica ao período de 1981 a 1990:
 			 Até 1990 domicílios e pessoas são registrados no mesmo arquivo.
@@ -273,9 +277,14 @@ foreach name of local register {
 					/* contrói renda domiciliar compatível com anos 90 e 2000 */
 					if "`name'"=="dom" {
 						preserve
-						findfile pnad`1'pes`lang'.dct
 						
-						qui cap infile using `"`r(fn)'"', using("`base`1'pes'") clear
+						tempfile dic
+
+						findfile dict.dta
+
+						read_compdct, compdct("`r(fn)'") dict_name("pnad`1'pes`lang'") out("`dic'")
+						
+						qui cap infile using `dic', using("`base`1'pes'") clear
 						keep if v0100 == 3                  // mantém somente pessoas
 						g ano = `1'
 						if `1'==1983 | `1'==1990 egen id_dom = concat(ano v0102 v0103)
@@ -316,9 +325,14 @@ foreach name of local register {
 		else {                                               // Se não tem ano até 1990...
 			if `1' <= 2001 {                                  // ... e tem ano até 2001
 				display as input "Extraindo `1'..."
-				findfile pnad`1'`name'`lang'.dct
 				
-				qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
+				tempfile dic
+
+				findfile dict.dta
+
+				read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
+				
+				qui cap infile using `dic', using("`base`1'`name''") clear
 
 				if `1'==2001 egen id_dom = concat(v0101 v0102 v0103)
 				else egen id_dom = concat(v0101 uf v0102 v0103)
@@ -358,9 +372,14 @@ foreach name of local register {
 			}
 			else {                                            // Se só restam anos >= 2002
 				display as input "Extraindo `1'..."
-				findfile pnad`1'`name'`lang'.dct
 				
-				qui cap infile using `"`r(fn)'"', using("`base`1'`name''") clear
+				tempfile dic
+
+				findfile dict.dta
+
+				read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
+				
+				qui cap infile using `dic', using("`base`1'`name''") clear
 			
 				egen id_dom = concat(v0101 v0102 v0103)
 				lab var id_dom "identificação do domicílio"
