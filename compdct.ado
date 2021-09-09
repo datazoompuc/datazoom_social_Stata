@@ -35,13 +35,28 @@ end
 program read_compdct
 syntax, compdct(string) dict_name(string) [out(string)]
 
-use `compdct', clear
+findfile `compdct'
+
+use "`r(fn)'", clear
 
 keep if dct == "`dict_name'"
 * mantém só as linhas referentes ao dct desejado
 
 drop dct
 
-outfile using "`out'/`dict_name'.dct", replace noquote
+cd `out'
+
+outfile using "`dict_name'.dct", replace noquote
+
+end
+
+program comp_infile
+syntax, compdct(string) dict_name(string) data(string) [out(string)]
+
+read_compdct, compdct(`compdct') dict_name(`dict_name') out(`out')
+
+cap infile using "`dict_name'.dct", using(`data') clear
+
+erase `dict_name'.dct
 
 end

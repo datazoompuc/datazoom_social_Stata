@@ -28,11 +28,7 @@ syntax, year(integer) [english] [original(str)]
 
 if "`english'" != "" local lang "_en"
 
-qui findfile dict.dta
-
-read_compdct, compdct("`r(fn)'") dict_name("pns`year'`lang'") out("`original'")
-
-cap infile using "pns`year'`lang'.dct", using(PNS_`year'.txt) clear 
+comp_infile, compdct(dict.dta) data("pns`year'`lang'.dct") dict_name("pns`year'`lang'") out("`original'")
 
 end
 
