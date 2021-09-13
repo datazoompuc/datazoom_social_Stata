@@ -45,16 +45,3 @@ drop dct
 outfile using "`out'", replace noquote
 
 end
-
-program comp_infile
-syntax, compdct(string) dict_name(string) data(string) [out(string)]
-
-findfile `compdct'
-
-read_compdct, compdct("`r(fn)'") dict_name(`dict_name') out(`out')
-
-cap infile using "`dict_name'.dct", using(`data') clear
-
-erase `dict_name'.dct
-
-end
