@@ -32,7 +32,7 @@ tempfile dic
 
 findfile dict.dta
 
-read_compdct, compdct("`r(fn)'") dict_name("pns2013`lang'") out("`dic'")
+read_compdct, compdct("`r(fn)'") dict_name("pns`year'`lang'") out("`dic'")
 
 qui infile using `dic', using(PNS_`year'.txt) clear
 

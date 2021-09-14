@@ -8,7 +8,7 @@ f datazoom_social_en.dlg
 f datazoom_social.pkg 
 f datazoom_social.sthlp
 F dict.dta
-f compdct.ado
+f read_compdct.ado
 f Censo/compat_censo00dom.ado
 f Censo/compat_censo00pess.ado
 f Censo/compat_censo10dom.ado

@@ -44,18 +44,20 @@ tempfile dic_19_5
 
 findfile dict.dta
 
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_2012a2014`lang'") out("`dic_14_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_1entr_2015`lang'") out("`dic_15_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_1entr_2016`lang'") out("`dic_16_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_5entr_2016`lang'") out("`dic_16_5'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_1entr_2017`lang'") out("`dic_17_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_educ`lang'") out("`dic_17_2'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_tic`lang'") out("`dic_17_4'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_5entr_2017`lang'") out("`dic_17_5'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_1entr_2018`lang'") out("`dic_18_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_5entr_2018`lang'") out("`dic_18_5'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_1entr_2019`lang'") out("`dic_19_1'")
-read_compdct, compdct("`r(fn)'") dict_name("pnad_anual_5entr_2019`lang'") out("`dic_19_5'")
+local masterdict = "`r(fn)'"
+
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_2012a2014`lang'") out("`dic_14_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2015`lang'") out("`dic_15_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2016`lang'") out("`dic_16_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2016`lang'") out("`dic_16_5'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2017`lang'") out("`dic_17_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_educ`lang'") out("`dic_17_2'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_tic`lang'") out("`dic_17_4'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2017`lang'") out("`dic_17_5'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2018`lang'") out("`dic_18_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2018`lang'") out("`dic_18_5'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2019`lang'") out("`dic_19_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2019`lang'") out("`dic_19_5'")
 
 /* Extraindo dos arquivos */
 *tokenize `years'
