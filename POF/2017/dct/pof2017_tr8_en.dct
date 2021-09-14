@@ -30,7 +30,7 @@ _column(43)		byte	V02161		%1f	"is bottled or piped gas used in this household in
 _column(44)		byte	V02162		%1f	"is firewood or charcoal used in this household when preparing food?"
 _column(45)		byte	V02163		%1f	"is electrical energy used in this household in food preparation?"
 _column(46)		byte	V02164		%1f	"is another fuel (oil, kerosene, etc.) used in this household in the preparation of food?"
-_column(47)		byte	V0217		%1f	"this household is":"
+_column(47)		byte	V0217		%1f	"this household is:"
 _column(48)		byte	V0219		%1f	"this rental agreement is:"
 _column(49)		byte	V0220		%1f	"is there paving on the street where this domicile is located?"
 _column(50)		byte	V0221		%1f	"the postal distribution service for this domicile is carried out:"
