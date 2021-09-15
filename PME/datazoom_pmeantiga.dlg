@@ -31,7 +31,9 @@ GROUPBOX caixaid 165 98 260 88, label("Identificação do Indivíduo")
 	RADIO	nid     +10 +22 120 ., first label("Sem identificação") option(nid)
 	RADIO	idbas	+0 +20 100 ., middle label("Básica") option(idbas)
 	RADIO	idrs	+0 +20 150 ., last label("Avançada (Ribas-Soares)") option(idrs)
-	
+
+	CHECKBOX	eng     29  190 200 ., label("Labels em inglês") option(english)
+
 TEXT     credit     10   190  415    ., label("PUC-Rio - Departamento de Economia") right 
 END
 
@@ -74,6 +76,7 @@ PROGRAM command
 			put saidadata " "
 			put saidasalvando
 			option radio(main nid idbas idrs)
+			option main.eng
 		endoptions
 		stata
 	END

@@ -3,7 +3,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 330 210
+POSITION . . 330 230
 
 DIALOG main, label("ECINF") tabtitle("Main")
 BEGIN
@@ -30,7 +30,9 @@ GROUPBOX trs +140 5 160 170, label("Tipos de Registros")
 	CHECKBOX ch_tr6    @ +20 @ @, label("Proprietário") option(pesocup)
 	CHECKBOX ch_tr7    @ +20 @ @, label("Sebrae") option(sebrae)
 
-	TEXT     credit     5   175  310    ., label("PUC-Rio - Departamento de Economia") right  
+	CHECKBOX	eng     5  180 200 ., label("Labels em inglês") option(english)
+
+	TEXT     credit     5   200  310    ., label("PUC-Rio - Departamento de Economia") right  
 END
 
 SCRIPT PREINIT_SCRIPT
@@ -108,6 +110,7 @@ BEGIN
 		/*Parte da syntax: caminho onde bases serao salvas*/
 		put saidasalvando 
 *		option main.chmerge
+		option main.eng
    endoptions
    stata
 END

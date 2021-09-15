@@ -33,8 +33,9 @@ GROUPBOX caixaDicionários 160 160 140 120, label("Databases")
 	BUTTON	fldados 	+20 +35 100 ., label("Original Files...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
+	CHECKBOX	eng     170  40 200 ., label("Labels in English") option(english)
 	
-TEXT     credit     0   420  340    ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     0   430  340    ., label("PUC-Rio - Department of Economics") right
 
 END
 
@@ -81,6 +82,7 @@ PROGRAM command
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
 			put saidasalvando
+			option main.eng
 		endoptions
 		stata
 	END
