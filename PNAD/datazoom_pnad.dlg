@@ -8,7 +8,7 @@ POSITION . . 320 340
 DIALOG main, label("PNAD") tabtitle("Main")
 BEGIN
 
-GROUPBOX caixaPeriodo 10 25 140 315, label("Escolha um Periodo ...")
+GROUPBOX caixaPeriodo 10 25 140 279, label("Escolha um Periodo ...")
 
    RADIO    rad8190 20 +20 120    .,                           ///
       first label("1981 a 1990")                              ///
@@ -75,6 +75,8 @@ GROUPBOX caixaid 165 +35 140 94, label("Compatibilidade")
 	RADIO	ncomp       +10 +22 120 ., 	first	label("Não-compatível")  option(ncomp)
 	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatível anos 1980") option(comp81)
 	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatível anos 1990") option(comp92)
+
+	CHECKBOX	eng     20  305 200 ., label("Labels em inglês") option(english)
 
 TEXT     credit     160   305  140    ., label("PUC-Rio - Departamento") right
 TEXT     credi2     160   320  140    ., label("de Economia") right
@@ -546,6 +548,7 @@ PROGRAM command
 			put saidadata1 
 			option radio(main pes dom both)
 			option radio(main ncomp comp81 comp92)
+			option main.eng
 			endoptions
 			stata
 	END

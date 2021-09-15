@@ -19,7 +19,9 @@ GROUPBOX opc_dic 5 +45 340 60, label("Bases de Dados")
 	BUTTON   tx_base     45 +25 110  ., label("Dados originais ... ") onpush(script dados)
 	BUTTON   tx_salvabase +150 @ 110  ., label("Salvando...") onpush(script salvando)
 	
-TEXT     credit     10   +45  340    ., label("PUC-Rio - Departamento de Economia") right  
+	CHECKBOX	eng     10  +40 200 ., label("Labels em inglês") option(english)
+
+TEXT     credit     10   +5  340    ., label("PUC-Rio - Departamento de Economia") right  
 
 END
 
@@ -80,6 +82,7 @@ PROGRAM command
 			put ") "
 			put saidadata " "
 			put saidasalvando
+			option main.eng
 	   endoptions
 	   stata
 	END

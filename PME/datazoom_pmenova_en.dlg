@@ -35,8 +35,10 @@ GROUPBOX caixaid 165 98 260 102, label("Individual Identification")
 	RADIO	nid     +10 +22 120 ., first label("No Identification") option(nid)
 	RADIO	idbas	+0 +20 100 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +20 150 ., last label("Advanced (Ribas-Soares)") option(idrs)
+
+	CHECKBOX	eng     13  202 200 ., label("Labels in English") option(english)
 	
-TEXT     credit     10   202  415    ., label("By PUC-Rio - Department of Economics") right
+TEXT     credit     10   202  415    ., label("PUC-Rio - Department of Economics") right
   
 END
 
