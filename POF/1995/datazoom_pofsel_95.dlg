@@ -31,15 +31,15 @@ DEFINE ps_fl_salvabase 5
 DEFINE ps_tx_base 10
 DEFINE ps_tx_salvabase 10
 
-GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de IdentificaÁ„o")
+GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de Identifica√ß√£o")
 
-	RADIO   rd_dom     +5 +25 100 ., first label("DomicÌlio") option(dom)
+	RADIO   rd_dom     +5 +25 100 ., first label("Domic√≠lio") option(dom)
 	RADIO   rd_uc       +65 @   150 ., middle label("Unidade de Consumo") option(uc)
 	RADIO   rd_pess     +125 @  100 ., last label("Pessoas") option(pess)
 	
-GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens ‡ cesta")
+GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens √† cesta")
 	
-	RADIO rd_ali +15 +20 . ., label("AlimentaÁ„o") onclickon(script habilita_ali) first
+	RADIO rd_ali +15 +20 . ., label("Alimenta√ß√£o") onclickon(script habilita_ali) first
 	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
 	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
 	
@@ -50,7 +50,7 @@ GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens ‡ cest
 	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e ...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicion·-lo") onpush(program atualizaListas)
+	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicion√°-lo") onpush(program atualizaListas)
 	
 GROUPBOX agr_ad ps_agr_ad_x ps_agr_ad_y 230 345, label("Itens Selecionados")
 
@@ -60,6 +60,8 @@ GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Bases de Dados")
 	
 	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais...") onpush(script dados)
 	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando...") onpush(script salvando)
+
+	CHECKBOX	eng     10  355 200 ., label("Labels em ingl√™s") option(english)
 
 TEXT     credit     10   360  490    ., label("PUC-Rio - Departamento de Economia") right  
 	
@@ -136,24 +138,24 @@ SCRIPT habilita_ren
 
 LIST nomes_alimentos
    BEGIN
-*:: Despesa com AlimentaÁ„o
-*:: :: AlimentaÁ„o no domicÌlio
+*:: Despesa com Alimenta√ß√£o
+*:: :: Alimenta√ß√£o no domic√≠lio
 :: :: :: Cereais, leguminosas e oleaginosas
 :: :: :: :: Arroz 
-:: :: :: :: Feij„o 
+:: :: :: :: Feij√£o 
 :: :: :: :: Outros
-:: :: :: Farinhas fÈculas e massas
-:: :: :: :: Macarr„o 
+:: :: :: Farinhas f√©culas e massas
+:: :: :: :: Macarr√£o 
 :: :: :: :: Farinha de trigo 
 :: :: :: :: Farinha de mandioca 
 :: :: :: :: Outras
-:: :: :: TubÈrculos e raÌzes
+:: :: :: Tub√©rculos e ra√≠zes
 :: :: :: :: Batata inglesa 
 :: :: :: :: Cenoura 
 :: :: :: :: Outros
-:: :: :: AÁ˙cares e derivados
-:: :: :: :: AÁ˙car refinado 
-:: :: :: :: AÁ˙car cristal 
+:: :: :: A√ß√∫cares e derivados
+:: :: :: :: A√ß√∫car refinado 
+:: :: :: :: A√ß√∫car cristal 
 :: :: :: :: Outros
 :: :: :: Legumes e verduras
 :: :: :: :: Tomate 
@@ -163,12 +165,12 @@ LIST nomes_alimentos
 :: :: :: Frutas
 :: :: :: :: Banana 
 :: :: :: :: Laranja 
-:: :: :: :: MaÁa 
+:: :: :: :: Ma√ßa 
 :: :: :: :: Outras
-:: :: :: Carnes, vÌsceras e pescados
+:: :: :: Carnes, v√≠sceras e pescados
 :: :: :: :: Carne de boi de primeira 
 :: :: :: :: Carne de boi de segunda 
-:: :: :: :: Carne de suÌno 
+:: :: :: :: Carne de su√≠no 
 :: :: :: :: Carnes e peixes industrializados 
 :: :: :: :: Pescados frescos 
 :: :: :: :: Outros
@@ -178,22 +180,22 @@ LIST nomes_alimentos
 :: :: :: :: Outros
 :: :: :: Leites e derivados
 :: :: :: :: Leite de vaca 
-:: :: :: :: Leite em pÛ 
+:: :: :: :: Leite em p√≥ 
 :: :: :: :: Queijos 
 :: :: :: :: Outros
 :: :: :: Panificados
-:: :: :: :: P„o francÍs 
+:: :: :: :: P√£o franc√™s 
 :: :: :: :: Biscoito 
 :: :: :: :: Outros
-:: :: :: ”leos e gorduras
-:: :: :: :: ”leo de soja 
+:: :: :: √ìleos e gorduras
+:: :: :: :: √ìleo de soja 
 :: :: :: :: Azeite de oliva 
 :: :: :: :: Outros
-:: :: :: Bebidas e infusıes
-:: :: :: :: CafÈ moÌdo 
+:: :: :: Bebidas e infus√µes
+:: :: :: :: Caf√© mo√≠do 
 :: :: :: :: Refrigerantes 
 :: :: :: :: Cervejas e chopes 
-:: :: :: :: Outras bebidas alcoÛlicas 
+:: :: :: :: Outras bebidas alco√≥licas 
 :: :: :: :: Outras
 :: :: :: Enlatados e conservas
 :: :: :: Sal e condimentos
@@ -202,15 +204,15 @@ LIST nomes_alimentos
 :: :: :: :: Sal refinado 
 :: :: :: :: Outros
 :: :: :: Alimentos preparados
-:: :: :: Outros (alimentaÁ„o no domicÌlio)
-*:: :: AlimentaÁ„o fora do domicÌlio
-:: :: :: AlmoÁo e jantar 
-:: :: :: CafÈ, leite, cafÈ com leite
-:: :: :: SanduÌches e salgados 
-:: :: :: Refrigerantes e outras bebidas n„o alcoÛlicas 
+:: :: :: Outros (alimenta√ß√£o no domic√≠lio)
+*:: :: Alimenta√ß√£o fora do domic√≠lio
+:: :: :: Almo√ßo e jantar 
+:: :: :: Caf√©, leite, caf√© com leite
+:: :: :: Sandu√≠ches e salgados 
+:: :: :: Refrigerantes e outras bebidas n√£o alco√≥licas 
 :: :: :: Lanches 
-:: :: :: Cervejas, chopes e outras bebidas alcoÛlicas 
-:: :: :: Outras (alimentaÁ„o fora do domicÌlio)
+:: :: :: Cervejas, chopes e outras bebidas alco√≥licas 
+:: :: :: Outras (alimenta√ß√£o fora do domic√≠lio)
    END
 
 LIST nomes_alimentos2
@@ -294,33 +296,33 @@ Outras_alimentacao_fora_do_dom
 
 LIST nomes_despesas
    BEGIN
-:: HabitaÁ„o
+:: Habita√ß√£o
 :: :: Aluguel
-:: :: ServiÁos e taxas
-:: :: :: Energia elÈtrica
+:: :: Servi√ßos e taxas
+:: :: :: Energia el√©trica
 :: :: :: Telefone fixo
 :: :: :: Telefone celular
-:: :: :: G·s domÈstico
-:: :: :: ¡gua e esgoto
+:: :: :: G√°s dom√©stico
+:: :: :: √Ågua e esgoto
 :: :: :: Outros
-:: :: ManutenÁ„o do lar
+:: :: Manuten√ß√£o do lar
 :: :: Artigos de limpeza
-:: :: Mobili·rios e artigos do lar
-:: :: EletrodomÈsticos
+:: :: Mobili√°rios e artigos do lar
+:: :: Eletrodom√©sticos
 :: :: Consertos de artigos do lar
-:: Vestu·rio
+:: Vestu√°rio
 :: :: Roupa de homem
 :: :: Roupa de mulher
-:: :: Roupa de crianÁa
-:: :: CalÁados e apetrechos
-:: :: JÛias e bijuterias
+:: :: Roupa de crian√ßa
+:: :: Cal√ßados e apetrechos
+:: :: J√≥ias e bijuterias
 :: :: Tecidos e armarinhos
 :: Transporte
 :: :: Urbano
-:: :: Gasolina p/ veÌculo prÛprio
-:: :: ¡lcool p/ veÌculo prÛprio
-:: :: ManutenÁ„o de veÌculo prÛprio
-:: :: AquisiÁ„o de veÌculos
+:: :: Gasolina p/ ve√≠culo pr√≥prio
+:: :: √Ålcool p/ ve√≠culo pr√≥prio
+:: :: Manuten√ß√£o de ve√≠culo pr√≥prio
+:: :: Aquisi√ß√£o de ve√≠culos
 :: :: Viagens
 :: :: Outros
 :: Higiene e cuidados pessoais
@@ -328,57 +330,57 @@ LIST nomes_despesas
 :: :: Produtos para cabelo
 :: :: Sabonete
 :: :: Instrumentos e produtos de uso pessoal
-:: AssistÍncia ‡ sa˙de
-:: :: RemÈdios
-:: :: Plano/Seguro sa˙de
-:: :: Consulta e tratamento dent·rio
-:: :: Consulta mÈdica
+:: Assist√™ncia √† sa√∫de
+:: :: Rem√©dios
+:: :: Plano/Seguro sa√∫de
+:: :: Consulta e tratamento dent√°rio
+:: :: Consulta m√©dica
 :: :: Tratamento ambulatorial
-:: :: ServiÁos de cirurgia
-:: :: HospitalizaÁ„o
+:: :: Servi√ßos de cirurgia
+:: :: Hospitaliza√ß√£o
 :: :: Exames diversos
 :: :: Material de tratamento
 :: :: Outras
-:: EducaÁ„o
+:: Educa√ß√£o
 :: :: Cursos regulares
 :: :: Curso superior
 :: :: Outros cursos
-:: :: Livros did·ticos e revistas tÈcnicas
+:: :: Livros did√°ticos e revistas t√©cnicas
 :: :: Artigos escolares
 :: :: Outras
-:: RecreaÁ„o e cultura
+:: Recrea√ß√£o e cultura
 :: :: Brinquedos e jogos
-:: :: Celular e acessÛrios
-:: :: PeriÛdicos, livros e revistas
-:: :: Diversıes e esportes
+:: :: Celular e acess√≥rios
+:: :: Peri√≥dicos, livros e revistas
+:: :: Divers√µes e esportes
 :: :: Outras
 :: Fumo
-:: ServiÁos pessoais
+:: Servi√ßos pessoais
 :: :: Cabeleireiro
 :: :: Manicuro e pedicuro
 :: :: Consertos de artigos pessoais
 :: :: Outras
 :: Despesas diversas
 :: :: Jogos e apostas
-:: :: ComunicaÁ„o
-:: :: CerimÙnias e festas
-:: :: ServiÁos profissionais
-:: :: ImÛveis de uso ocasional
+:: :: Comunica√ß√£o
+:: :: Cerim√¥nias e festas
+:: :: Servi√ßos profissionais
+:: :: Im√≥veis de uso ocasional
 :: :: Outras
 :: Outras despesas correntes
 :: :: Impostos
-:: :: ContribuiÁıes trabalhistas
-:: :: ServiÁos banc·rios
-:: :: Pensıes, mesadas e doaÁıes
-:: :: PrevidÍncia privada
+:: :: Contribui√ß√µes trabalhistas
+:: :: Servi√ßos banc√°rios
+:: :: Pens√µes, mesadas e doa√ß√µes
+:: :: Previd√™ncia privada
 :: :: Outras
 :: Aumento do ativo
-:: :: ImÛvel (aquisiÁ„o)
-:: :: ImÛvel (reforma)
+:: :: Im√≥vel (aquisi√ß√£o)
+:: :: Im√≥vel (reforma)
 :: :: Outros investimentos
-:: DiminuiÁ„o do passivo
-:: :: EmprÈstimo e carnÍ
-:: :: PrestaÁ„o de imÛvel
+:: Diminui√ß√£o do passivo
+:: :: Empr√©stimo e carn√™
+:: :: Presta√ß√£o de im√≥vel
    END
 
 LIST nomes_despesas2
@@ -476,22 +478,22 @@ LIST nomes_rendas
 :: :: Rendimento do trabalho
 :: :: :: Empregado
 :: :: :: Empregador
-:: :: :: Conta prÛpria
-:: :: TransferÍncia
-:: :: :: Aposentadoria previdÍncia p˙blica
-:: :: :: Aposentadoria previdÍncia privada
+:: :: :: Conta pr√≥pria
+:: :: Transfer√™ncia
+:: :: :: Aposentadoria previd√™ncia p√∫blica
+:: :: :: Aposentadoria previd√™ncia privada
 :: :: :: Bolsa de estudo
-:: :: :: Pens„o alimentÌcia, mesada e doaÁ„o
-:: :: :: TransferÍncias transitÛrias
+:: :: :: Pens√£o aliment√≠cia, mesada e doa√ß√£o
+:: :: :: Transfer√™ncias transit√≥rias
 :: :: Rendimento de aluguel
-:: :: :: Aluguel de bens imÛveis
-:: :: :: Aluguel de bens mÛveis
+:: :: :: Aluguel de bens im√≥veis
+:: :: :: Aluguel de bens m√≥veis
 :: :: Outros rendimentos
-:: :: :: Vendas espor·dicas
-:: :: :: EmprÈstimos
-:: :: :: AplicaÁıes de capital
+:: :: :: Vendas espor√°dicas
+:: :: :: Empr√©stimos
+:: :: :: Aplica√ß√µes de capital
 :: :: :: Outros
-*:: :: Rendimento n„o monet·rio
+*:: :: Rendimento n√£o monet√°rio
    END
    
 LIST nomes_rendas2
@@ -546,7 +548,7 @@ PROGRAM command
 BEGIN
    put "datazoom_pofsel_95 "
    beginoptions
-		/*Parte da syntax: tipo de extraÁ„o*/
+		/*Parte da syntax: tipo de extra√ß√£o*/
 		put "id("
 		option radio(main rd_dom rd_uc rd_pess)
 		/*Parte da syntax: lista de agregados*/
@@ -555,6 +557,7 @@ BEGIN
 		put ") "
 		put saidadata " "
 		put saidasalvando
+		option main.eng
    endoptions
    stata
 END

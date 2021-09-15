@@ -61,7 +61,9 @@ GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Original and Final Dat
 	BUTTON   tx_base     ps_tx_base +35 110  ., label("Data...") onpush(script dados)
 	BUTTON   tx_salvabase +130 @ 110  ., label("Saving...") onpush(script salvando)
 
-TEXT     credit     10   360  490    ., label("By PUC-Rio - Department of Economics") right  
+	CHECKBOX	eng     10  355 200 ., label("Labels in English") option(english)
+
+TEXT     credit     10   360  490    ., label("PUC-Rio - Department of Economics") right  
 	
 END
 
@@ -136,24 +138,24 @@ SCRIPT habilita_ren
 
 LIST nomes_alimentos
    BEGIN
-*:: Despesa com Alimentação
-*:: :: Alimentação no domicílio
+*:: Despesa com AlimentaÃ§Ã£o
+*:: :: AlimentaÃ§Ã£o no domicÃ­lio
 :: :: :: Cereais, leguminosas e oleaginosas
 :: :: :: :: Arroz 
-:: :: :: :: Feijão 
+:: :: :: :: FeijÃ£o 
 :: :: :: :: Outros
-:: :: :: Farinhas féculas e massas
-:: :: :: :: Macarrão 
+:: :: :: Farinhas fÃ©culas e massas
+:: :: :: :: MacarrÃ£o 
 :: :: :: :: Farinha de trigo 
 :: :: :: :: Farinha de mandioca 
 :: :: :: :: Outras
-:: :: :: Tubérculos e raízes
+:: :: :: TubÃ©rculos e raÃ­zes
 :: :: :: :: Batata inglesa 
 :: :: :: :: Cenoura 
 :: :: :: :: Outros
-:: :: :: Açúcares e derivados
-:: :: :: :: Açúcar refinado 
-:: :: :: :: Açúcar cristal 
+:: :: :: AÃ§Ãºcares e derivados
+:: :: :: :: AÃ§Ãºcar refinado 
+:: :: :: :: AÃ§Ãºcar cristal 
 :: :: :: :: Outros
 :: :: :: Legumes e verduras
 :: :: :: :: Tomate 
@@ -163,12 +165,12 @@ LIST nomes_alimentos
 :: :: :: Frutas
 :: :: :: :: Banana 
 :: :: :: :: Laranja 
-:: :: :: :: Maça 
+:: :: :: :: MaÃ§a 
 :: :: :: :: Outras
-:: :: :: Carnes, vísceras e pescados
+:: :: :: Carnes, vÃ­sceras e pescados
 :: :: :: :: Carne de boi de primeira 
 :: :: :: :: Carne de boi de segunda 
-:: :: :: :: Carne de suíno 
+:: :: :: :: Carne de suÃ­no 
 :: :: :: :: Carnes e peixes industrializados 
 :: :: :: :: Pescados frescos 
 :: :: :: :: Outros
@@ -178,22 +180,22 @@ LIST nomes_alimentos
 :: :: :: :: Outros
 :: :: :: Leites e derivados
 :: :: :: :: Leite de vaca 
-:: :: :: :: Leite em pó 
+:: :: :: :: Leite em pÃ³ 
 :: :: :: :: Queijos 
 :: :: :: :: Outros
 :: :: :: Panificados
-:: :: :: :: Pão francês 
+:: :: :: :: PÃ£o francÃªs 
 :: :: :: :: Biscoito 
 :: :: :: :: Outros
-:: :: :: Óleos e gorduras
-:: :: :: :: Óleo de soja 
+:: :: :: Ã“leos e gorduras
+:: :: :: :: Ã“leo de soja 
 :: :: :: :: Azeite de oliva 
 :: :: :: :: Outros
-:: :: :: Bebidas e infusões
-:: :: :: :: Café moído 
+:: :: :: Bebidas e infusÃµes
+:: :: :: :: CafÃ© moÃ­do 
 :: :: :: :: Refrigerantes 
 :: :: :: :: Cervejas e chopes 
-:: :: :: :: Outras bebidas alcoólicas 
+:: :: :: :: Outras bebidas alcoÃ³licas 
 :: :: :: :: Outras
 :: :: :: Enlatados e conservas
 :: :: :: Sal e condimentos
@@ -202,15 +204,15 @@ LIST nomes_alimentos
 :: :: :: :: Sal refinado 
 :: :: :: :: Outros
 :: :: :: Alimentos preparados
-:: :: :: Outros (alimentação no domicílio)
-*:: :: Alimentação fora do domicílio
-:: :: :: Almoço e jantar 
-:: :: :: Café, leite, café com leite
-:: :: :: Sanduíches e salgados 
-:: :: :: Refrigerantes e outras bebidas não alcoólicas 
+:: :: :: Outros (alimentaÃ§Ã£o no domicÃ­lio)
+*:: :: AlimentaÃ§Ã£o fora do domicÃ­lio
+:: :: :: AlmoÃ§o e jantar 
+:: :: :: CafÃ©, leite, cafÃ© com leite
+:: :: :: SanduÃ­ches e salgados 
+:: :: :: Refrigerantes e outras bebidas nÃ£o alcoÃ³licas 
 :: :: :: Lanches 
-:: :: :: Cervejas, chopes e outras bebidas alcoólicas 
-:: :: :: Outras (alimentação fora do domicílio)
+:: :: :: Cervejas, chopes e outras bebidas alcoÃ³licas 
+:: :: :: Outras (alimentaÃ§Ã£o fora do domicÃ­lio)
    END
 
 LIST nomes_alimentos2
@@ -294,33 +296,33 @@ Outras_alimentacao_fora_do_dom
 
 LIST nomes_despesas
    BEGIN
-:: Habitação
+:: HabitaÃ§Ã£o
 :: :: Aluguel
-:: :: Serviços e taxas
-:: :: :: Energia elétrica
+:: :: ServiÃ§os e taxas
+:: :: :: Energia elÃ©trica
 :: :: :: Telefone fixo
 :: :: :: Telefone celular
-:: :: :: Gás doméstico
-:: :: :: Água e esgoto
+:: :: :: GÃ¡s domÃ©stico
+:: :: :: Ãgua e esgoto
 :: :: :: Outros
-:: :: Manutenção do lar
+:: :: ManutenÃ§Ã£o do lar
 :: :: Artigos de limpeza
-:: :: Mobiliários e artigos do lar
-:: :: Eletrodomésticos
+:: :: MobiliÃ¡rios e artigos do lar
+:: :: EletrodomÃ©sticos
 :: :: Consertos de artigos do lar
-:: Vestuário
+:: VestuÃ¡rio
 :: :: Roupa de homem
 :: :: Roupa de mulher
-:: :: Roupa de criança
-:: :: Calçados e apetrechos
-:: :: Jóias e bijuterias
+:: :: Roupa de crianÃ§a
+:: :: CalÃ§ados e apetrechos
+:: :: JÃ³ias e bijuterias
 :: :: Tecidos e armarinhos
 :: Transporte
 :: :: Urbano
-:: :: Gasolina p/ veículo próprio
-:: :: Álcool p/ veículo próprio
-:: :: Manutenção de veículo próprio
-:: :: Aquisição de veículos
+:: :: Gasolina p/ veÃ­culo prÃ³prio
+:: :: Ãlcool p/ veÃ­culo prÃ³prio
+:: :: ManutenÃ§Ã£o de veÃ­culo prÃ³prio
+:: :: AquisiÃ§Ã£o de veÃ­culos
 :: :: Viagens
 :: :: Outros
 :: Higiene e cuidados pessoais
@@ -328,57 +330,57 @@ LIST nomes_despesas
 :: :: Produtos para cabelo
 :: :: Sabonete
 :: :: Instrumentos e produtos de uso pessoal
-:: Assistência à saúde
-:: :: Remédios
-:: :: Plano/Seguro saúde
-:: :: Consulta e tratamento dentário
-:: :: Consulta médica
+:: AssistÃªncia Ã  saÃºde
+:: :: RemÃ©dios
+:: :: Plano/Seguro saÃºde
+:: :: Consulta e tratamento dentÃ¡rio
+:: :: Consulta mÃ©dica
 :: :: Tratamento ambulatorial
-:: :: Serviços de cirurgia
-:: :: Hospitalização
+:: :: ServiÃ§os de cirurgia
+:: :: HospitalizaÃ§Ã£o
 :: :: Exames diversos
 :: :: Material de tratamento
 :: :: Outras
-:: Educação
+:: EducaÃ§Ã£o
 :: :: Cursos regulares
 :: :: Curso superior
 :: :: Outros cursos
-:: :: Livros didáticos e revistas técnicas
+:: :: Livros didÃ¡ticos e revistas tÃ©cnicas
 :: :: Artigos escolares
 :: :: Outras
-:: Recreação e cultura
+:: RecreaÃ§Ã£o e cultura
 :: :: Brinquedos e jogos
-:: :: Celular e acessórios
-:: :: Periódicos, livros e revistas
-:: :: Diversões e esportes
+:: :: Celular e acessÃ³rios
+:: :: PeriÃ³dicos, livros e revistas
+:: :: DiversÃµes e esportes
 :: :: Outras
 :: Fumo
-:: Serviços pessoais
+:: ServiÃ§os pessoais
 :: :: Cabeleireiro
 :: :: Manicuro e pedicuro
 :: :: Consertos de artigos pessoais
 :: :: Outras
 :: Despesas diversas
 :: :: Jogos e apostas
-:: :: Comunicação
-:: :: Cerimônias e festas
-:: :: Serviços profissionais
-:: :: Imóveis de uso ocasional
+:: :: ComunicaÃ§Ã£o
+:: :: CerimÃ´nias e festas
+:: :: ServiÃ§os profissionais
+:: :: ImÃ³veis de uso ocasional
 :: :: Outras
 :: Outras despesas correntes
 :: :: Impostos
-:: :: Contribuições trabalhistas
-:: :: Serviços bancários
-:: :: Pensões, mesadas e doações
-:: :: Previdência privada
+:: :: ContribuiÃ§Ãµes trabalhistas
+:: :: ServiÃ§os bancÃ¡rios
+:: :: PensÃµes, mesadas e doaÃ§Ãµes
+:: :: PrevidÃªncia privada
 :: :: Outras
 :: Aumento do ativo
-:: :: Imóvel (aquisição)
-:: :: Imóvel (reforma)
+:: :: ImÃ³vel (aquisiÃ§Ã£o)
+:: :: ImÃ³vel (reforma)
 :: :: Outros investimentos
-:: Diminuição do passivo
-:: :: Empréstimo e carnê
-:: :: Prestação de imóvel
+:: DiminuiÃ§Ã£o do passivo
+:: :: EmprÃ©stimo e carnÃª
+:: :: PrestaÃ§Ã£o de imÃ³vel
    END
 
 LIST nomes_despesas2
@@ -476,22 +478,22 @@ LIST nomes_rendas
 :: :: Rendimento do trabalho
 :: :: :: Empregado
 :: :: :: Empregador
-:: :: :: Conta própria
-:: :: Transferência
-:: :: :: Aposentadoria previdência pública
-:: :: :: Aposentadoria previdência privada
+:: :: :: Conta prÃ³pria
+:: :: TransferÃªncia
+:: :: :: Aposentadoria previdÃªncia pÃºblica
+:: :: :: Aposentadoria previdÃªncia privada
 :: :: :: Bolsa de estudo
-:: :: :: Pensão alimentícia, mesada e doação
-:: :: :: Transferências transitórias
+:: :: :: PensÃ£o alimentÃ­cia, mesada e doaÃ§Ã£o
+:: :: :: TransferÃªncias transitÃ³rias
 :: :: Rendimento de aluguel
-:: :: :: Aluguel de bens imóveis
-:: :: :: Aluguel de bens móveis
+:: :: :: Aluguel de bens imÃ³veis
+:: :: :: Aluguel de bens mÃ³veis
 :: :: Outros rendimentos
-:: :: :: Vendas esporádicas
-:: :: :: Empréstimos
-:: :: :: Aplicações de capital
+:: :: :: Vendas esporÃ¡dicas
+:: :: :: EmprÃ©stimos
+:: :: :: AplicaÃ§Ãµes de capital
 :: :: :: Outros
-*:: :: Rendimento não monetário
+*:: :: Rendimento nÃ£o monetÃ¡rio
    END
    
 LIST nomes_rendas2
@@ -546,7 +548,7 @@ PROGRAM command
 BEGIN
    put "datazoom_pofsel_95"
    beginoptions
-		/*Parte da syntax: tipo de extração*/
+		/*Parte da syntax: tipo de extraÃ§Ã£o*/
 		put "id("
 		option radio(main rd_dom rd_uc rd_pess)
 		/*Parte da syntax: lista de agregados*/
@@ -555,6 +557,7 @@ BEGIN
 		put ") "
 		put saidadata " "
 		put saidasalvando
+		option main.eng
    endoptions
    stata
 END

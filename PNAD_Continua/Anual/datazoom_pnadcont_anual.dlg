@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 500
+POSITION . . 350 460
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
@@ -28,14 +28,14 @@ GROUPBOX caixaAnos 20 20 140 400, label("Ano(s)")
    CHECKBOX	   ck20192 @ +20 120	   ., label("2019_visita2")  option(20192)
    CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visita5")  option(20195)
 
-GROUPBOX caixaDicionários 160 20 140 400, label("Base de Dados")
+GROUPBOX caixaDicionários 160 160 140 120, label("Base de Dados")
 
 	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
 
-	
-TEXT     credit     5   420  200    ., label("PUC-Rio - Departmento de Economia") left
-TEXT     notes     5   440 360    ., label("Nota: reinstale periodicamente o pacote datazoom_pnadcont_anual") left
+	CHECKBOX	eng     170  40 200 ., label("Labels em inglês") option(english)
+
+TEXT     credit     0   430  340    ., label("PUC-Rio - Departmento de Economia") right
 
 
 END
@@ -60,14 +60,14 @@ RESET res1
 	
 SCRIPT dados
 BEGIN
-	create CHILD datazoom_datafolder_anual AS data
+	create CHILD datazoom_datafolder AS data
 	data.settitle "Dados originais da PNAD Contínua Anual"
 	data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
-	create CHILD datazoom_finalfolder_anual AS dic
+	create CHILD datazoom_finalfolder AS dic
 	dic.settitle "Novas bases da PNAD Contínua Anual"
 	dic.setExitString saidasalvando
 	END
@@ -83,5 +83,7 @@ PROGRAM command
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
 			put saidasalvando
+			option main.eng
 		endoptions
+		stata
 	END

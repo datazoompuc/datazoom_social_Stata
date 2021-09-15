@@ -5,34 +5,35 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 330 230
 
-DIALOG main, label("ECINF 1997, 2003") tabtitle("Main")
+DIALOG main, label("ECINF") tabtitle("Main")
 BEGIN
 
 GROUPBOX caixaanos 5 5 135 50, label("Year")
 
-	RADIO ch1997  +15 +20 60 ., first label("1997") option(1997) onclickon(script on1997)
-	RADIO ch2003  +60 @ @ .,  last label("2003") option(2003) onclickon(script on2003)
+	RADIO ch1997  		+15 +20 60 ., first label("1997") option(1997) onclickon(script on1997)
+	RADIO ch2003  		+60 @ @ .,  last label("2003") option(2003) onclickon(script on2003)
 	
 
 GROUPBOX caixaBase 5 +50 135 100, label("Databases")
 
     BUTTON  fl_base    		+17 +26 100     ., label("Original files...") onpush(script dados)
-    BUTTON  fl_salvabase    +0 +35 100     ., label("Final databases...") onpush(script salvando)
+    BUTTON  fl_salvabase    	+0 +35 100     ., label("Final databases...") onpush(script salvando)
 
 *CHECKBOX chmerge 20 +35 135 30, label("Merge Databases") option(merged) onclickon(script marca) onclickoff(script desmarca)
 
 GROUPBOX trs +140 5 160 170, label("Types of Register")
 
-	CHECKBOX ch_tr1  +10 +20 130 20, label("DomicÌlios") option(domicilios)
-	CHECKBOX ch_tr2    @ +20 @ @, label("Moradores") option(moradores)	
-	CHECKBOX ch_tr3    @ +20 @ @, label("Trabalho e Rendimento") option(trabrend)
-	CHECKBOX ch_tr4    @ +20 @ @, label("Unidade EconÙmica") option(uecon)
-	CHECKBOX ch_tr5    @ +20 @ @, label("Pessoas Ocupadas") option(indprop)
-	CHECKBOX ch_tr6    @ +20 @ @, label("Propriet·rio") option(pesocup)
-	CHECKBOX ch_tr7    @ +20 @ @, label("Sebrae") option(sebrae)
+	CHECKBOX ch_tr1  	+10 +20 130 20, label("Domic√≠lios") option(domicilios)
+	CHECKBOX ch_tr2    	@ +20 @ @, label("Moradores") option(moradores)	
+	CHECKBOX ch_tr3    	@ +20 150 @, label("Trabalho e Rendimento") option(trabrend)
+	CHECKBOX ch_tr4    	@ +20 130 @, label("Unidade Econ√¥mica") option(uecon)
+	CHECKBOX ch_tr5    	@ +20 @ @, label("Pessoas Ocupadas") option(indprop)
+	CHECKBOX ch_tr6    	@ +20 @ @, label("Propriet√°rio") option(pesocup)
+	CHECKBOX ch_tr7    	@ +20 @ @, label("Sebrae") option(sebrae)
 
-	TEXT     credit     5   210  310    ., label("By PUC-Rio - Department of Economics") right  
-    TEXT     notes     5   175  310   ., label("Note: reinstall periodically the package datazoom_ecinf") left 
+	CHECKBOX	eng     5  180 200 ., label("Labels in English") option(english)
+
+	TEXT     credit     	5   200  310    ., label("PUC-Rio - Department of Economics") right  
 
 END
 
@@ -111,5 +112,7 @@ BEGIN
 		/*Parte da syntax: caminho onde bases serao salvas*/
 		put saidasalvando 
 *		option main.chmerge
+		option main.eng
    endoptions
+   stata
 END

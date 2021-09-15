@@ -68,6 +68,8 @@ BEGIN
       CHECKBOX chkDF    @  +23  200   ., label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
       CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2010)") onclickoff(script nemtudoCO) option(MS)
 
+	CHECKBOX	eng     135  365 200 ., label("Labels em inglês") option(english)
+
 	TEXT     credit     20   395  480    ., label("PUC-Rio - Departamento de Economia") right  
 
 END
@@ -313,6 +315,8 @@ BEGIN
       put saidasalvando
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
+	  option main.eng
 	  
    endoptions
+   stata
 END

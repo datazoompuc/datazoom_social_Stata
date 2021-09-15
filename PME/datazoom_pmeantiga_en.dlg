@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 438 230
+POSITION . . 438 220
 
 DIALOG main, label("PME - Access to PME-Antiga Microdata") tabtitle("Main")
 BEGIN
@@ -21,19 +21,20 @@ GROUPBOX caixaAnos 15 15 123 170, label("Years")
    CHECKBOX    ck2000 @ +24 120    ., label("2000")  option(2000)
    CHECKBOX    ck2001 @ +24 120    ., label("2001")  option(2001)
 
-GROUPBOX caixaDicion·rios 165 15 260 72, label("Original and Final Databases")
+GROUPBOX caixaDicion√°rios 165 15 260 72, label("Original and Final Databases")
 
 	BUTTON	fldados 	+20 +30 100 ., label("Data...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Saving...") onpush(script salvando) 
 	
 GROUPBOX caixaid 165 98 260 88, label("Individual Identification")
 
-	RADIO	nid     +10 +22 100 ., first label("No Identification") option(nid)
+	RADIO	nid     +10 +22 120 ., first label("No Identification") option(nid)
 	RADIO	idbas	+0 +20 100 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +20 150 ., last label("Advanced (Ribas-Soares)") option(idrs)
-	
-TEXT     credit     10   210  415    ., label("By PUC-Rio - Department of Economics") right
-TEXT     notes     10   190  415    ., label("Note: reinstall periodically the package datazoom_pmeantiga") left 
+
+	CHECKBOX	eng     29  190 200 ., label("Labels in English") option(english)
+
+TEXT     credit     10   190  415    ., label("PUC-Rio - Department of Economics") right 
 
 END
 
@@ -76,5 +77,7 @@ PROGRAM command
 			put saidadata " "
 			put saidasalvando
 			option radio(main nid idbas idrs)
+			option main.eng
 		endoptions
+		stata
 	END

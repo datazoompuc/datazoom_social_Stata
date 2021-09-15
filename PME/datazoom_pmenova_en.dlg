@@ -2,9 +2,9 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 438 250
+POSITION . . 438 225
 
-DIALOG main, label("PME - Access to 'PME nova' microdata") tabtitle("Main")
+DIALOG main, label("PME Nova") 
 BEGIN
    
 GROUPBOX caixaAnos 5 10 155 190, label("Year(s)")
@@ -23,21 +23,22 @@ GROUPBOX caixaAnos 5 10 155 190, label("Year(s)")
    CHECKBOX    ck2013 @ +24 120    ., label("2013")  option(2013)
    CHECKBOX    ck2014 @ +24 120    ., label("2014")  option(2014)
    CHECKBOX    ck2015 @ +24 120    ., label("2015")  option(2015)
-   CHECKBOX    ck2016 +50 30  120   .,label("2016")  option(2016)
+   CHECKBOX    ck2016 +50 30  45   .,label("2016")  option(2016)
   
-GROUPBOX caixaDicion·rios 165 10 260 77, label("Original and Final Databases")
+GROUPBOX caixaDicion√°rios 165 10 260 77, label("Original and Final Databases")
 
 	BUTTON	fldados 	+20 +30 100 ., label("Data...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Saving...") onpush(script salvando) 
 	
 GROUPBOX caixaid 165 98 260 102, label("Individual Identification")
 
-	RADIO	nid     +10 +22 100 ., first label("No Identification") option(nid)
+	RADIO	nid     +10 +22 120 ., first label("No Identification") option(nid)
 	RADIO	idbas	+0 +20 100 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +20 150 ., last label("Advanced (Ribas-Soares)") option(idrs)
+
+	CHECKBOX	eng     13  202 200 ., label("Labels in English") option(english)
 	
-TEXT     credit     10   230  415    ., label("By PUC-Rio - Department of Economics") right
-TEXT     notes     10   205   415    ., label("Note: reinstall periodically the package datazooom_pmenova") left 
+TEXT     credit     10   202  415    ., label("PUC-Rio - Department of Economics") right
   
 END
 
@@ -82,4 +83,5 @@ PROGRAM command
 		
 			option radio(main nid idbas idrs)
 		endoptions
+		stata
 	END

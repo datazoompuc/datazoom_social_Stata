@@ -9,9 +9,13 @@ f PNAD/compat_pes_1992a2001_para_92.ado
 f PNAD/compat_pes_2002a2009_para_81.ado
 f PNAD/compat_pes_2002a2009_para_92.ado
 f PNAD/datazoom_multi.dlg
+f PNAD/datazoom_multi_en.dlg
 f PNAD/datazoom_pnad.ado
+f PNAD/datazoom_pnad_en.dlg
 f PNAD/datazoom_pnad.dlg
+f PNAD/datazoom_pnad_en.dlg
 f PNAD/datazoom_pnad.sthlp
+f PNAD/datazoom_pnad_en.sthlp
 F PNAD/dct/pnad1981dom.dct
 F PNAD/dct/pnad1981dom_en.dct
 F PNAD/dct/pnad1981pes.dct

@@ -1,36 +1,40 @@
 {smcl}
-{* *! version 1.4 22 October 2015}{...}
-{vieweralsosee "" "--"}{...}
-{vieweralsosee "Install command2" "ssc install command2"}{...}
-{vieweralsosee "Help command2 (if installed)" "help command2"}{...}
+{viewerdialog "Censo" "dialog datazoom_censo"}
+{viewerdialog "Pacote" "dialog datazoom_social"}
+{vieweralsosee "PNAD" "help datazoom_pnad"}{...}
+{vieweralsosee "PNS" "help datazoom_pns"}{...}
+{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
+{vieweralsosee "PNAD Contínua Anual" "help datazoom_pnadcont_anual"}{...}
+{vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
+{vieweralsosee "PME" "help datazoom_pme"}{...}
+{vieweralsosee "POF" "help datazoom_pof"}{...}
+{vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
 {viewerjumpto "Syntax" "datazoom_censo##syntax"}{...}
 {viewerjumpto "Description" "datazoom_censo##description"}{...}
 {viewerjumpto "Options" "datazoom_censo##options"}{...}
-{viewerjumpto "Remarks" "datazoom_censo##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_censo##examples"}{...}
+{viewerjumpto "Nota sobre os dados" "datazoom_censo##remarks"}{...}
+{p 8 8 2} {it:For the English version}, {help datazoom_censo_en}
+
 {title:Title}
 
-{phang}
-{bf:datazoom_censo} {hline 2} Acesso aos microdados do Censo em formato STATA - Versão 1.4
+{p 4 4 2}
+{cmd:datazoom_censo} {hline 2} Acesso aos microdados do Censo
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 17 2}
-{cmdab:datazoom_censo}
-[{cmd:,}
-{it:options}]
-
-	OBS: digite 'db datazoom_censo' para utilizar o programa via caixa de diálogo
+{p 8 8 2} {cmd:datazoom_censo} [, {it:options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Inputs}
+{syntab:Input}
 {synopt:{opt years(numlist)}} anos do Censo {p_end}
 {synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais (.txt ou .dat) {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 {synopt:{opt ufs(str)}} códigos dos estados {p_end}
+{synopt:{opt english}} labels das variáveis em inglês {p_end}
 
 {syntab:Compatibilidade}
 {synopt:{opt comp}} compatibiliza variáveis ao longo dos anos {p_end}
@@ -46,16 +50,18 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-{marker description}{...}
-{title:Descrição}
+Digite {cmd:db datazoom_censo} para utilizar a função via caixa de diálogo.
 
-{phang}
-{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato STATA (.dta) a partir
-dos microdados originais, os quais  não são disponibilizados pelo Portal (informações sobre como obter
-os arquivos originais de dados, consulte o site do IBGE www.ibge.gov.br). O programa pode ser utilizado para
+{marker description}{...}
+{title:Description}
+
+{p 4 4 2}
+{cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
+dos microdados originais, que podem ser obtidos do site do IBGE. O programa pode ser utilizado para
 os anos de 1970 a 2010.
 
-{phang} Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
+{p 4 4 2}
+Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
 as variáveis existentes ao menos em dois anos do Censo e que são passíveis de compatibilização em
 termos metodológicos. O processo de compatibilização está documentado em
 "Censo - Compatibilização", disponível para download no site do Portal. Nesta opção,
@@ -64,19 +70,83 @@ de controle). Além disso, são incorporadas variáveis relacionadas a mudanças
 período, as chamadas Áreas Mínimas Comparáveis. Finalmente, as variáveis monetárias são deflacionadas 
 para agosto de 2010.
 
-{phang}  O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
+{p 4 4 2}
+O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
 {help append} para juntar todos os estados. 
 
-{phang} Se apenas uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
+{p 4 4 2}
+Se apenas uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
 correspondentes à seleção em um único arquivo. O arquivo família existe somente para o Censo 2000. Se a opção {opt both} for escolhida, o programa 
 gera uma base de dados inclindo as variáveis de domicílios e pessoas no mesmo arquivo. Se a opção {opt all} for escolhida, disponível apenas para 
 o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicílios, famílias e pessoas no mesmo arquivo.
 
-{phang} Inicialmente, recomenda-se fortemente a utilização do programa via caixa de diálogo, pois facilita
-a inserção de informações necessárias para o seu adequado funcionamento. Digite 'db datazoom_censo' na
-janela de comando do STATA para acessar a caixa de diálogo.
+{marker options}{...}
+{title:Options}
+{dlgtab:Input}
 
+{phang} {opt years(numlist)}  especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
+pode ser utilizado para os anos de 1970 a 2010.
 
+{phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. Para
+todos os Censos existem ao menos um arquivo para cada estado. Todos eles devem estar posicionados na mesma pasta 
+para que o programa funcione adequadamente.
+
+{phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
+
+{phang} {opt ufs(str)} especifica os estados para os quais o programa deve gerar uma base de dados. Cada estado é
+identificado por meio de um código de duas letras, o mesmo usualmente utilizado como referência para cada estado: 
+Rondônia RO, Acre AC, Amazonas AM, Roraima RR, 
+Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piaui PI, Ceará CE, Rio Grande do Norte RN, 
+Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
+Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
+MT, Goiás GO, Distrito Federal DF.
+
+{dlgtab:Compatibilidade}
+
+{phang}
+{opt comp}  solicita que a compatibilização de variáveis seja executada. Sob essa opção, o número de variáveis
+na base final é reduzida ao conjunto de variáveis que aparecem em ao menos dois anos do Censo. Por conta de mudanças
+metodológicas aplicadas pelo IBGE de ano para ano na realização da pesquisa, embora existam em mais de um ano, 
+algumas variáveis não são passíveis de compatibilização, sendo excluídas no processo.
+
+{dlgtab:Tipo de Registro}
+
+{phang}
+{opt pes}  especifica que o usuário deseja obter apenas o arquivo de pessoas, compatibilizado ou não. 
+Se nenhum tipo de registro for escolhido, o programa automaticamente executa essa opção. (Não pode ser
+combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
+
+{phang}
+{opt dom}  especifica que o usuário deseja obter apenas o arquivo de domicílios, compatibilizado ou não. 
+(Não pode ser combinada com {opt pes}, {opt fam}, {opt both} ou {opt all}).
+
+{phang}
+{opt fam}  especifica que o usuário deseja obter apenas o arquivo de famílias para o ano 2000. 
+(Não pode ser combinada com {opt pes}, {opt dom}, {opt both} ou {opt all}).
+
+{phang} 
+{opt both} especifica que o usuário deseja obter as variáveis de pessoas e domicílios em uma única base de dados,
+ compatibilizada ou não, ou seja, o programa executa o comando {help merge} automaticamente para unir os
+ dois tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt all}).
+
+{phang} 
+{opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados 
+para o ano 2000, ou seja, o programa executa o comando {help merge} automaticamente para unir os
+ três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
+
+{marker examples}{...}
+{title:Examples}
+
+{p 4 4 2}
+Produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não são compatibilizadas.
+
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
+
+{p 4 4 2}
+As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
+
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
+ 
 {marker remarks}{...}
 {title:Nota sobre os dados originais}
 
@@ -137,101 +207,13 @@ variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare c
 {phang} - note que 35_outras e 35_RMSP referem-se aos dados para SP
 
 {phang} - note que 14munic refere-se aos dados redefinidos pelo IBGE para 14 municípios
-
-{marker options}{...}
-{title:Opções}
-{dlgtab:Inputs}
-
-{phang} {opt years(numlist)}  especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para os anos de 1970 a 2010.
-
-{phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. Para
-todos os Censos existem ao menos um arquivo para cada estado. Todos eles devem estar posicionados na mesma pasta 
-para que o programa funcione adequadamente. O Portal não disponibiliza os dados originais. Para 2010, os dados
-encontram-se on line. Para os demais anos, consulte o site do IBGE para informações sobre como adquiri-los.
-
-{phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
-
-{phang} {opt ufs(str)} especifica os estados para os quais o programa deve gerar uma base de dados. Cada estado é
-identificado por meio de um código de duas letras, o mesmo usualmente utilizado como referência para cada estado: 
-Rondônia RO, Acre AC, Amazonas AM, Roraima RR, 
-Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piaui PI, Ceará CE, Rio Grande do Norte RN, 
-Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
-Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
-MT, Goiás GO, Distrito Federal DF.
-
-{dlgtab:Compatibilidade}
-
-{phang}
-{opt comp}  solicita que a compatibilização de variáveis seja executada. Sob essa opção, o número de variáveis
-na base final é reduzida ao conjunto de variáveis que aparecem em ao menos dois anos do Censo. Por conta de mudanças
-metodológicas aplicadas pelo IBGE de ano para ano na realização da pesquisa, embora existam em mais de um ano, 
-algumas variáveis não são passíveis de compatibilização, sendo excluídas no processo.
-
-{dlgtab:Tipo de Registro}
-
-{phang}
-{opt pes}  especifica que o usuário deseja obter apenas o arquivo de pessoas, compatibilizado ou não. 
-Se nenhum tipo de registro for escolhido, o programa automaticamente executa essa opção. (Não pode ser
-combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
-
-{phang}
-{opt dom}  especifica que o usuário deseja obter apenas o arquivo de domicílios, compatibilizado ou não. 
-(Não pode ser combinada com {opt pes}, {opt fam}, {opt both} ou {opt all}).
-
-{phang}
-{opt fam}  especifica que o usuário deseja obter apenas o arquivo de famílias para o ano 2000. 
-(Não pode ser combinada com {opt pes}, {opt dom}, {opt both} ou {opt all}).
-
-{phang} 
-{opt both} especifica que o usuário deseja obter as variáveis de pessoas e domicílios em uma única base de dados,
- compatibilizada ou não, ou seja, o programa executa o comando {help merge} automaticamente para unir os
- dois tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt all}).
-
-{phang} 
-{opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados 
-para o ano 2000, ou seja, o programa executa o comando {help merge} automaticamente para unir os
- três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
-
-{marker examples}{...}
-{title:Exemplos}
-
-{phang} datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) pes
-
-{pstd} O comando acima produz oito bases de dados, uma para cada estado e anos escolhidos. As variáveis não 
- são compatibilizadas.
-
  
-{phang} datazoom_censo, years(1970 2000) original("C:/censo") saving("C:/censo/bases") ufs(BA RJ SP DF) comp both
  
-{pstd} O comando acima produz as mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as 
-variáveis de pessoas e domicílios, todas compatibilizadas.
- 
-{phang}  OBS: Recomenda-se a execução do programa por meio da caixa de diálogo. Digite "db datazoom_censo" na janela 
-de comando do STATA para iniciar.
+{title:Author}
 
+{p 4 4 2}
+DataZoom     {break}
+PUC-Rio - Departamento de Economia      {break}
+Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
-
-{title:Autor}
-{p}
-
-PUC-Rio - Departamento de Economia
-
-Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
-
-
-{title:Veja também}
-
-Pacotes relacionados:
-
-{help datazoom_pmenova} (se instalado)  
-{help datazoom_pmeantiga} (se instalado)  
-{help datazoom_pnad} (se instalado)  
-{help datazoom_pof2008} (se instalado)  
-{help datazoom_pof2002} (se instalado)  
-{help datazoom_pof1995} (se instalado)  
-{help datazoom_ecinf} (se instalado) 
-
-
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
-For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".
+{space 4}{hline}

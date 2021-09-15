@@ -1,26 +1,29 @@
 {smcl}
-{* *! version 1.0 24th June 2020}{...}
-{vieweralsosee "" "--"}{...}
-{vieweralsosee "Install command2" "ssc install command2"}{...}
-{vieweralsosee "Help command2 (if installed)" "help command2"}{...}
+{viewerdialog "PNAD Covid" "dialog datazoom_pnad_covid"}
+{viewerdialog "Pacote" "dialog datazoom_social"}
+{vieweralsosee "PNAD" "help datazoom_pnad"}{...}
+{vieweralsosee "Censo" "help datazoom_censo"}{...}
+{vieweralsosee "PNAD Contínua Anual" "help datazoom_pnadcont_anual"}{...}
+{vieweralsosee "PNS" "help datazoom_pns"}{...}
+{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
+{vieweralsosee "PME" "help datazoom_pme"}{...}
+{vieweralsosee "POF" "help datazoom_pof"}{...}
+{vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
 {viewerjumpto "Syntax" "datazoom_pnad_covid##syntax"}{...}
 {viewerjumpto "Description" "datazoom_pnad_covid##description"}{...}
 {viewerjumpto "Options" "datazoom_pnad_covid##options"}{...}
-{viewerjumpto "Remarks" "datazoom_pnad_covid##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_pnad_covid##examples"}{...}
+{p 8 8 2} {it:For the English version}, {help datazoom_pnad_covid_en}
+
 {title:Title}
 
-{phang}
-{bf:datazoom_pnad_covid} {hline 2} Acesso aos microdados da PNAD COVID19 em formato STATA - Versão 1.0
+{p 4 4 2}
+{cmd:datazoom_pnad_covid} {hline 2} Acesso aos microdados da PNAD Covid
 
 {marker syntax}{...}
 {title:Syntax}
-{p 8 17 2}
-{cmdab:datazoom_pnad_covid}
-[{cmd:,}
-{it:options}]
 
-{p}	OBS: digite 'db datazoom_pnad_covid' para utilizar o programa via caixa de diálogo
+{p 8 8 2} {cmd:datazoom_pnad_covid} [, {it:options}]
 	
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -33,20 +36,22 @@
 {p2colreset}{...}
 {p 4 6 2}
 
-{marker description}{...}
-{title:Descrição}
+Digite {cmd:db datazoom_pnad_covid} para utilizar a função via caixa de diálogo.
 
-{phang}
-{cmd:datazoom_pnad_covid} extrai e constrói bases de dados da PNAD COVID19 em formato STATA (.dta) a partir
-dos microdados originais, os quais  não são disponibilizados pelo Portal (informações sobre como obter
-os arquivos originais de dados, consulte o site do IBGE (www.ibge.gov.br). Como a pesquisa ainda é publicada pelo IBGE, este programa está em constante atualização.
+{marker description}{...}
+{title:Description}
+
+{p 4 4 2}
+{cmd:datazoom_pnad_covid} extrai e constrói bases de dados da PNAD COVID19 em formato Stata a partir
+dos microdados originais do IBGE. Os dados abrangem vários meses do ano de 2020.
   
-{phang} O programa gera uma base para cada mês. Se for o caso, utilize o 
+{p 4 4 2}
+O programa gera uma base para cada mês. Se for o caso, utilize o 
 comando {help append} para empilhar as bases.
 
 
 {marker options}{...}
-{title:Opções}
+{title:Options}
 {dlgtab:Inputs}
 
 {phang} 
@@ -60,36 +65,21 @@ Existe um arquivo de microdados para cada mês da pesquisa. Todos eles devem est
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
 {marker examples}{...}
-{title:Exemplos}
+{title:Examples}
 
-{phang}  OBS: Recomenda-se a execuçãoo do programa por meio da caixa de diálogo. Digite "db datazoom_pnad_covid" na janela 
-de comando do STATA para iniciar.
+{p 4 4 2}
+Lendo os dados de Junho e Julho de 2020
 
-{title:Autor}
-{p}
+{p 8 6 2}. datazoom_pnad_covid, month(06 07) original("~/mydir") saving("~/mydir")
 
-PUC-Rio - Departmento de Economia
+{p 6 6 2}
+Gera duas bases em formato .dta, uma para cada mês.
 
-Email {browse "mailto:datazoom@econ.puc-rio.br":datazoom@econ.puc-rio.br}
+{title:Author}
 
-{title:Veja também}
+{p 4 4 2}
+DataZoom     {break}
+PUC-Rio - Departamento de Economia      {break}
+Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
 
-Pacotes relacionados:
-
-{help datazoom_censo} (se instalado)  
-{help datazoom_pnad} (se instalado)  
-{help datazoom_pnadcontinua} (se instalado)  
-{help datazoom_pmeantiga} (se instalado)
-{help datazoom_pnadcontinua} (se instalado)  
-{help datazoom_pnadcont_anual} (se instalado)  
-{help datazoom_pmenova} (se instalado)  
-{help datazoom_pof2017} (se instalado)  
-{help datazoom_pof2008} (se instalado)  
-{help datazoom_pof2002} (se instalado)  
-{help datazoom_pof1995} (se instalado)  
-{help datazoom_ecinf} (se instalado) 
-{help datazoom_pns} (se instalado) 
-
-
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
-For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".
+{space 4}{hline}

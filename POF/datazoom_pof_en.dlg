@@ -1,0 +1,98 @@
+VERSION 10.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 500 230
+
+DIALOG main, label("POF")
+BEGIN
+
+	GROUPBOX caixaAnos 5 5 490 40, label("Choose the year")
+	RADIO  ck1995  +5 20 100 25, first label("1995/96")  option(datazoom_pof1995)
+	RADIO  ck2002  +100   20 100 25, middle label("2002/03")  option(datazoom_pof2002)
+	RADIO  ck2008  +100   20 100 25, middle label("2008/09")  option(datazoom_pof2008)
+	RADIO  ck2017  +100   20 100 25, last label("2017/19")  option(datazoom_pof2017)
+
+	BUTTON btn_bp 25 75 120 25, label("Standard Databases") onpush(program carregachild_bp)
+	BUTTON btn_gs +170 @   @  @, label("Selected Expenditures") onpush(program carregachild_gs)
+	BUTTON btn_tr 360 @   @  @, label("Types of Register") onpush(program carregachild_tr)
+
+	TEXTBOX tx_obs_bp 10 115 150 80, label("These databases contain expenditure variables for agregated items.") center
+	TEXTBOX tx_obs_gs +170  @ 150 80, label("Create your own basket. More specific expenditures are available here.") center
+	TEXTBOX tx_obs_tr 350  @ 135 80, label("Databases without the intervention of any algorithm are available here.") center
+	
+	FRAME fr_bp   0 50 170 160
+	FRAME fr_meio  +168 50 170 160
+	FRAME fr_tr  +168 50 170 160
+	
+TEXT     credit     10   210  480    ., label("PUC-Rio - Department of Economics") right  
+END
+
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pof1995")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+   
+PROGRAM carregachild_tr
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_poftrs_95_en"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_poftrs_02_en"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_poftrs_08_en"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_poftrs_17_en"
+		stata
+	}
+   END
+
+PROGRAM carregachild_gs
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_pofsel_95_en"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_pofsel_02_en"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_pofsel_08_en"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_pofsel_17_en"
+		stata
+	}
+   END
+
+PROGRAM carregachild_bp
+   BEGIN
+	if main.ck1995{
+      		put "db datazoom_pofstd_95_en"
+		stata
+	}
+	if main.ck2002{
+      		put "db datazoom_pofstd_02_en"
+		stata
+	}
+	if main.ck2008{
+      		put "db datazoom_pofstd_08_en"
+		stata
+	}
+	if main.ck2017{
+      		put "db datazoom_pofstd_17_en"
+		stata
+	}
+   END

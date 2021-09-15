@@ -2,7 +2,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 330
+POSITION . . 350 315
 
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
@@ -20,20 +20,20 @@ GROUPBOX caixaAnos 20 20 140 260, label("Ano(s)")
    CHECKBOX	   ck2020 @ +24 120	   ., label("2020")  option(2020)
    CHECKBOX	   ck2021 @ +24 120	   ., label("2021")  option(2021)
    
-GROUPBOX caixaDicionários 160 20 140 250, label("Bases de Dados")
+GROUPBOX caixaDicionários 160 20 140 260, label("Bases de Dados")
 
 	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
 
-GROUPBOX caixaid 160 120 140 255, label("Identificação do Indivíduo")
+GROUPBOX caixaid 160 120 140 100, label("Identificação do Indivíduo")
 
 	RADIO	nid     +10 +22 150 ., first label("Sem identificação") option(nid)
 	RADIO	idbas	+0 +22 150 ., middle label("Básica") option(idbas)
 	RADIO	idrs	+0 +22 150 ., last label("Avançada") option(idrs)
-	
-TEXT     credit     5   280 200    ., label("PUC-Rio - Departamento de Economia") left
-TEXT     notes     5   300 360    ., label("Nota: reinstale periodicamente o pacote datazoom_pnadcontinua") left
 
+	CHECKBOX	eng     170  232 200 ., label("Labels em inglês") option(english)
+
+TEXT     credit     0   285 340    ., label("PUC-Rio - Departamento de Economia") right
 
 END
 
@@ -82,6 +82,8 @@ PROGRAM command
 			put saidasalvando
 
 			option radio(main nid idbas idrs)
+			option main.eng
 			
 		endoptions
+		stata
 	END

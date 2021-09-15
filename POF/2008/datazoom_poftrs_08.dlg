@@ -10,20 +10,20 @@ BEGIN
 
 GROUPBOX trs 0 5 420 290, label("Tipos de Registros")
 
-	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - Domicílio") option(tr1)
+	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - DomicÃ­lio") option(tr1)
 	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Pessoas") option(tr2)
 	CHECKBOX ch_tr3    @ +30 @ @, label("TR_3 - Pessoas(imputado)") option(tr3)
-	CHECKBOX ch_tr4    @ +30 @ @, label("TR_4 - Condições de Vida") option(tr4)
-	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - Bens Duráveis") option(tr5)
+	CHECKBOX ch_tr4    @ +30 @ @, label("TR_4 - CondiÃ§Ãµes de Vida") option(tr4)
+	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - Bens DurÃ¡veis") option(tr5)
 	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - Despesa de 90 dias") option(tr6)
 	CHECKBOX ch_tr7    @ +30 @ @, label("TR_7 - Despesa de 12 meses") option(tr7)
 	CHECKBOX ch_tr8    @ +30 @ @, label("TR_8 - Outros Gastos") option(tr8)
-	CHECKBOX ch_tr9  +180  20 220 @, label("TR_9 - Despesas c/ Serviços Domésticos") option(tr9)
+	CHECKBOX ch_tr9  +180  20 220 @, label("TR_9 - Despesas c/ ServiÃ§os DomÃ©sticos") option(tr9)
 	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Aluguel estimado") option(tr10)
 	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Caderneta de Despesa Coletiva") option(tr11)
 	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Despesa Individual") option(tr12)
-	CHECKBOX ch_tr13   @ +30 @ @, label("TR_13 - Despesas com veículos") option(tr13)
-	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Rendimentos e Deduções") option(tr14)
+	CHECKBOX ch_tr13   @ +30 @ @, label("TR_13 - Despesas com veÃ­culos") option(tr13)
+	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Rendimentos e DeduÃ§Ãµes") option(tr14)
 	CHECKBOX ch_tr15   @ +30 @ @, label("TR_15 - Outros Rendimentos") option(tr15)
 	CHECKBOX ch_tr16   @ +30 @ @, label("TR_16 - Consumo Alimentar") option(tr16)
 	CHECKBOX ch_all  130 +30 140 20, label("Selecione todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
@@ -34,6 +34,8 @@ GROUPBOX opc_dic 0 300 420 50, label("Bases de Dados")
 	BUTTON   fl_base     75 +20 90 ., label("Dados originais...") onpush(script dados)
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
 	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
+
+	CHECKBOX	eng     10  355 200 ., label("Labels em inglÃªs") option(english)
 
 	TEXT     credit     5   360  400    ., label("PUC-Rio - Departamento de Economia") right  
 
@@ -117,6 +119,7 @@ BEGIN
       put ") "
       put saidadata " "
       put saidasalvando
+      option main.eng
    endoptions
    stata
 END

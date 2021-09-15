@@ -24,7 +24,7 @@ BEGIN
 	TEXTBOX txb_pme    	 	+158 @ @ @, label("Pesquisa Mensal de Emprego - 1990 a 2015") center
 	TEXTBOX txb_pnad     		+158 @ @ @, label("PNAD Antiga - 2001 a 2015") center
 	
-    	TEXTBOX txb_pncon			10 175 140 ., label("PNAD Contínua - 2012 a 2019") center
+    	TEXTBOX txb_pncon			10 175 140 ., label("PNAD Contínua - 2012 a 2021") center
 	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
 	TEXTBOX txb_pns   			+158 @ @ @, label("Pesquisa Nacional de Saúde - 2013 e 2019") center
 	TEXTBOX txb_pof 			+158 @ @ @, label("Pesquisa de Orçamentos Familiares - 1995 a 2018") center
@@ -60,12 +60,12 @@ SCRIPT child_en
  
 SCRIPT child_censo
    BEGIN
-      create CHILD datazoom_censo
+      create CHILD datazoom_censo, allowsubmit
    END
 
 SCRIPT child_ecinf
    BEGIN
-      create CHILD datazoom_ecinf
+      create CHILD datazoom_ecinf, allowsubmit
    END
 
 SCRIPT child_pme
@@ -96,4 +96,4 @@ SCRIPT child_pns
 SCRIPT child_pof
    BEGIN
       create CHILD datazoom_pof, allowsubmit
-   END      
+   END     
