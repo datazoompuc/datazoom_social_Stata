@@ -11,8 +11,6 @@ f PNS/datazoom_pns.sthlp
 f PNS/datazoom_pns_en.sthlp
 f POF/datazoom_pof.sthlp
 f POF/datazoom_pof_en.sthlp
-f POF/1995/datazoom_pof1995.dlg
-f POF/1995/datazoom_pof1995_en.dlg
 f POF/1995/datazoom_pofsel_95.ado
 f POF/1995/datazoom_pofstd_95.ado
 f POF/1995/datazoom_poftrs_95.ado
@@ -22,8 +20,6 @@ f POF/1995/datazoom_poftrs_95.dlg
 f POF/1995/datazoom_pofsel_95_en.dlg
 f POF/1995/datazoom_pofstd_95_en.dlg
 f POF/1995/datazoom_poftrs_95_en.dlg
-f POF/2002/datazoom_pof2002.dlg
-f POF/2002/datazoom_pof2002_en.dlg
 f POF/2002/datazoom_pofsel_02.ado
 f POF/2002/datazoom_pofstd_02.ado
 f POF/2002/datazoom_poftrs_02.ado
@@ -33,8 +29,6 @@ f POF/2002/datazoom_poftrs_02.dlg
 f POF/2002/datazoom_pofsel_02_en.dlg
 f POF/2002/datazoom_pofstd_02_en.dlg
 f POF/2002/datazoom_poftrs_02_en.dlg
-f POF/2008/datazoom_pof2008.dlg
-f POF/2008/datazoom_pof2008_en.dlg
 f POF/2008/datazoom_pofsel_08.ado
 f POF/2008/datazoom_pofstd_08.ado
 f POF/2008/datazoom_poftrs_08.ado
@@ -44,8 +38,6 @@ f POF/2008/datazoom_poftrs_08.dlg
 f POF/2008/datazoom_pofsel_08_en.dlg
 f POF/2008/datazoom_pofstd_08_en.dlg
 f POF/2008/datazoom_poftrs_08_en.dlg
-f POF/2017/datazoom_pof2017.dlg
-f POF/2017/datazoom_pof2017_en.dlg
 f POF/2017/datazoom_poftrs_17.ado
 f POF/2017/datazoom_poftrs_17.dlg
 f POF/2017/datazoom_poftrs_17_en.dlg
