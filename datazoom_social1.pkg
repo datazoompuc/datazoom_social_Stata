@@ -69,8 +69,8 @@ f PNAD_Continua/Anual/datazoom_pnadcont_anual_en.dlg
 f PNAD_Continua/Anual/datazoom_pnadcont_anual.sthlp
 f PNAD_Continua/Anual/datazoom_pnadcont_anual_en.sthlp
 f PNAD_Continua/Trimestral/datazoom_pnadcontinua.ado
-f PNAD_Continua/Trimestral/datazoom_pnadcont_trimestral.dlg
-f PNAD_Continua/Trimestral/datazoom_pnadcont_trimestral_en.dlg
+f PNAD_Continua/Trimestral/datazoom_pnadcontinua.dlg
+f PNAD_Continua/Trimestral/datazoom_pnadcontinua_en.dlg
 f PNAD_Continua/Trimestral/datazoom_pnadcontinua.sthlp
 f PNAD_Continua/Trimestral/datazoom_pnadcontinua_en.sthlp
 f POF/datazoom_pof.dlg
