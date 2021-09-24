@@ -32,7 +32,7 @@ foreach year in `years'{
 		
 		if `year' == 2016 | `year' == 2017 | `year' == 2018 | (`year' == 2015 & `trim' == 4) | (`year' == 2019 & `trim' == 1){
 				local file_name "`file_name'_20190729"
-		}	
+			}	
 		
 		di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
 				cap infile using "`dic'", using("`original'/`file_name'.txt") clear
@@ -42,7 +42,7 @@ foreach year in `years'{
 						qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
 						qui destring ind_id, replace
 						tempfile PNADC_`trim'`year'
-						save `PNADC_`trim'`year'', replace
+						save "`PNADC_`trim'`year''", replace
 				}
 				else continue, break
 		}
@@ -86,7 +86,7 @@ foreach aa in `years' {
 	}
 	else {
 		tempfile PNADC`aa'
-		save PNADC`aa', replace
+		save "PNADC`aa'", replace
 	}
 }
 
@@ -100,7 +100,7 @@ foreach aa in `years' {
 		use PNADC`aa', clear
 		keep if V1014 == `pa'
 		tempfile PNADC_Painel`pa'temp`aa'
-		save `PNADC_Painel`pa'temp`aa'', replace
+		save "`PNADC_Painel`pa'temp`aa''", replace
 	}
 }
 
@@ -111,7 +111,7 @@ foreach pa in 1 2 3 4 5 6 7 8{
 		keep if V1014 == `pa'
 	}
 	tempfile PNADC_Painel`pa'	
-	save `PNADC_Painel`pa'', replace	
+	save "`PNADC_Painel`pa''", replace	
 }
 
 global panels = ""
