@@ -1,0 +1,15 @@
+dictionary {
+_column(1)		str1		v01		%2f	"state"
+_column(1)		long		v02		%8f	"control number"
+_column(9)		byte		v03		%1f	"group"
+_column(10)		byte		v04		%2f	"serial number"
+_column(12)		byte		v2301		%2f	"total number of household members"
+_column(14)		byte		ordem		%2f	"number associated with the hh member"
+_column(16)		byte		v2303		%1f	"gender"
+_column(17)		byte		v2304		%1f	"race"
+_column(18)		byte		v2305		%1f	"status inside the household"
+_column(19)		byte		v2306		%2f	"day of birth"
+_column(21)		byte		v2307		%2f	"month of birth"
+_column(23)		int		v2308		%4f	"year of birth"
+_column(27)		int		v2803		%3f	"age"
+}

@@ -14,8 +14,12 @@ cd "`saving'"
 di "`original'"
 	
 /* Dicionário */
-findfile pnadcontinua`lang'.dct
-loc dic = r(fn)
+
+tempfile dic
+
+findfile dict.dta
+
+read_compdct, compdct("`r(fn)'") dict_name("pnadcontinua`lang'") out("`dic'")
 
 /* Extração dos arquivos */
 tokenize `years'

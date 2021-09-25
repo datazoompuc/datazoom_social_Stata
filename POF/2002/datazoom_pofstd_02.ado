@@ -211,37 +211,42 @@ local Rendimento_nao_monetario
 cd "`original'"
 
 qui foreach TR of numlist 5/14 {
-	findfile pof2002_tr`TR'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof2002_tr`TR'`lang'") out("`dic'")
 
 	if "`TR'"=="5" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS.txt") clear
+		infile using `dic', using("`original'/T_DESPESA_90DIAS.txt") clear
 	}
 	if "`TR'"=="6" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_12MESES.txt") clear
+		infile using `dic', using("`original'/T_DESPESA_12MESES.txt") clear
 	}
 	if "`TR'"=="7" {
-		infile using `"`r(fn)'"', using("`original'/T_OUTRAS_DESPESAS.txt") clear
+		infile using `dic', using("`original'/T_OUTRAS_DESPESAS.txt") clear
 	}
 	if "`TR'"=="8" {
-		infile using `"`r(fn)'"', using("`original'/T_SERVICO_DOMS.txt") clear
+		infile using `dic', using("`original'/T_SERVICO_DOMS.txt") clear
 	}
 	if "`TR'"=="9" {
-		infile using `"`r(fn)'"', using("`original'/T_CADERNETA_DESPESA.txt") clear
+		infile using `dic', using("`original'/T_CADERNETA_DESPESA.txt") clear
 	}
 	if "`TR'"=="10" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA.txt") clear
+		infile using `dic', using("`original'/T_DESPESA.txt") clear
 	}
 	if "`TR'"=="11" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_VEICULO.txt") clear
+		infile using `dic', using("`original'/T_DESPESA_VEICULO.txt") clear
 	}
 	if "`TR'"=="12" {
-		infile using `"`r(fn)'"', using("`original'/T_RENDIMENTOS1.txt") clear
+		infile using `dic', using("`original'/T_RENDIMENTOS1.txt") clear
 	}
 	if "`TR'"=="13" {
-		infile using `"`r(fn)'"', using("`original'/T_OUTROS_RECI.txt") clear
+		infile using `dic', using("`original'/T_OUTROS_RECI.txt") clear
 	}
 	if "`TR'"=="14" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_ESP.txt") clear
+		infile using `dic', using("`original'/T_DESPESA_ESP.txt") clear
 	}
 
 	if `TR' == 9 {

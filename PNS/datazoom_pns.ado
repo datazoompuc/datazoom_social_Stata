@@ -9,7 +9,7 @@ if "`original'" == ""{
 	download_pns, year(`year')
 }
 
-load_pns, year(`year') `english'
+load_pns, year(`year') original(`original') `english'
 
 if "`saving'" != ""{
 save "`saving'/pns_`year'", replace 
@@ -24,12 +24,17 @@ if "`original'" == ""{
 end
 
 program load_pns
-syntax, year(integer) [english]
+syntax, year(integer) [english] [original(str)]
 
 if "`english'" != "" local lang "_en"
 
-qui findfile pns`year'`lang'.dct
-cap infile using "`r(fn)'", using(PNS_`year'.txt) clear
+tempfile dic
+
+findfile dict.dta
+
+read_compdct, compdct("`r(fn)'") dict_name("pns`year'`lang'") out("`dic'")
+
+qui infile using `dic', using(PNS_`year'.txt) clear
 
 end
 

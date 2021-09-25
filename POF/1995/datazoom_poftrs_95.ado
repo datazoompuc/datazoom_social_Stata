@@ -11,9 +11,15 @@ local uf "BA CE DF GO MG PA PE PR RJ RS SP"
 while "`*'"!="" {
 	if length("`1'")==3 local a=substr("`1'",3,1)
 	else local a=substr("`1'",3,2)
-	findfile pof1995_tr`a'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof1995_tr`a'`lang'") out("`dic'")
+	
 	foreach x of local uf {
-		qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
+		qui infile using `dic', using("`x'4x.txt") clear
 		keep if v0020==`a'
 		tempfile `x'
 		save ``x''

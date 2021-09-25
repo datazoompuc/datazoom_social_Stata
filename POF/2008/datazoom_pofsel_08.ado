@@ -103,37 +103,42 @@ tempfile despesas_temp
 /*Agrega os despesas para cada Tipo de Registro separadamente. Posteriormente, é utilizado um merge para unir as bases. ///
  Obs: Na maioria dos casos, todos as despesas estão concentrados em um Tipo de Registro apenas.*/
 foreach TR of numlist `lista_TR' {
+	
+	tempfile dic
 
-	findfile pof2008_tr`TR'`lang'.dct
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof2008_tr`TR'`lang'") out("`dic'")
+	
 	if "`TR'"=="6" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_90DIAS_S.txt") clear
 	}
 	if "`TR'"=="7" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_DESPESA_12MESES_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_12MESES_S.txt") clear
 	}
 	if "`TR'"=="8" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_OUTRAS_DESPESAS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_OUTRAS_DESPESAS_S.txt") clear
 	}
 	if "`TR'"=="9" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_SERVICO_DOMS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_SERVICO_DOMS_S.txt") clear
 	}
 	if "`TR'"=="10" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_ALUGUEL_ESTIMADO_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_ALUGUEL_ESTIMADO_S.txt") clear
 	}
 	if "`TR'"=="11" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_CADERNETA_DESPESA_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_CADERNETA_DESPESA_S.txt") clear
 	}
 	if "`TR'"=="12" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_DESPESA_INDIVIDUAL_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_INDIVIDUAL_S.txt") clear
 	}
 	if "`TR'"=="13" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_DESPESA_VEICULO_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_VEICULO_S.txt") clear
 	}
 	if "`TR'"=="14" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_RENDIMENTOS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_RENDIMENTOS_S.txt") clear
 	}
 	if "`TR'"=="15" {
-		qui cap infile using `"`r(fn)'"', using("`original'/T_OUTROS_RECI_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_OUTROS_RECI_S.txt") clear
 	}
 	
 	if `TR' != 11 {

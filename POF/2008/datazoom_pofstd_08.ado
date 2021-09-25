@@ -12,38 +12,43 @@ local listaREN `"Renda_Empregado "53001/53004 54015/54018 54020 54036/54038 5500
 cd "`original'"
 
 qui foreach TR of numlist 6/15 {
-	findfile pof2008_tr`TR'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof2008_tr`TR'`lang'") out("`dic'")
 	
 	if "`TR'"=="6" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_90DIAS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_90DIAS_S.txt") clear
 	}
 	if "`TR'"=="7" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_12MESES_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_12MESES_S.txt") clear
 	}
 	if "`TR'"=="8" {
-		infile using `"`r(fn)'"', using("`original'/T_OUTRAS_DESPESAS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_OUTRAS_DESPESAS_S.txt") clear
 	}
 	if "`TR'"=="9" {
-		infile using `"`r(fn)'"', using("`original'/T_SERVICO_DOMS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_SERVICO_DOMS_S.txt") clear
 	}
 	if "`TR'"=="10" {
-		infile using `"`r(fn)'"', using("`original'/T_ALUGUEL_ESTIMADO_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_ALUGUEL_ESTIMADO_S.txt") clear
 	}
 	if "`TR'"=="11" {
-		infile using `"`r(fn)'"', using("`original'/T_CADERNETA_DESPESA_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_CADERNETA_DESPESA_S.txt") clear
 	}
 	if "`TR'"=="12" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_INDIVIDUAL_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_INDIVIDUAL_S.txt") clear
 	}
 	if "`TR'"=="13" {
-		infile using `"`r(fn)'"', using("`original'/T_DESPESA_VEICULO_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_DESPESA_VEICULO_S.txt") clear
 	}
 	if "`TR'"=="14" {
-		infile using `"`r(fn)'"', using("`original'/T_RENDIMENTOS_S.txt") clear
+		qui cap infile using `dic', using("`original'/T_RENDIMENTOS_S.txt") clear
 	}
 	if "`TR'"=="15" {
-		infile using `"`r(fn)'"', using("`original'/T_OUTROS_RECI_S.txt") clear
-	}
+		qui cap infile using `dic', using("`original'/T_OUTROS_RECI_S.txt") clear
+	}	
 
 	if `TR' ~= 11 {
 		gen long cod_item_aux = int((100000*num_quadro + cod_item)/100)
