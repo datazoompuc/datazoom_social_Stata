@@ -4,13 +4,13 @@
 * version 1.0
 
 program define datazoom_social
-syntax, research(str) folder1(str) folder2(str) date(numlist) [state(str)] [record(str)] /*
+syntax, research(str) source(str) save(str) date(numlist) [state(str)] [record(str)] /*
 */	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF */     /*
 */	[language(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92] /* Opções gerais */
 
 
 if "`research'" == "pns" {
-	datazoom_pns, original(`folder1') saving(`folder2') year(`date') `language'
+	datazoom_pns, original(`source') saving(`save') year(`date') `language'
 }
 
 
@@ -22,36 +22,36 @@ if "`research'" == "censo" {
 	else {
 		if "`comp'" == "" {
 			if "`pes'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') pes `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') pes `language'
 			}
 			else if "`fam'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') fam `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') fam `language'
 			}
 			else if "`dom'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') dom `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') dom `language'
 			}
 			else if "`both'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') both `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') both `language'
 			}
 			else if "`all'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') all `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') all `language'
 			}
 		}
 		else {
 			if "`pes'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') comp pes `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') comp pes `language'
 			}
 			else if "`fam'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') comp fam `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') comp fam `language'
 			}
 			else if "`dom'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') comp dom `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') comp dom `language'
 			}
 			else if "`both'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') comp both `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') comp both `language'
 			}
 			else if "`all'" != "" {
-				datazoom_censo, years(`date') ufs(`state') original(`folder1') saving(`folder2') comp all `language'
+				datazoom_censo, years(`date') ufs(`state') original(`source') saving(`save') comp all `language'
 			}
 		}
 	}
@@ -60,23 +60,23 @@ if "`research'" == "censo" {
 
 
 if "`research'" == "pnadcontinua_anual" {  /* Para pnad continua anual ficar atendo ao construir a caixa de diálogo para a opção do ano */
-	datazoom_pnadcont_anual, years(`date') original(`folder1') saving(`folder2') `language'
+	datazoom_pnadcont_anual, years(`date') original(`source') saving(`save') `language'
 }
 
 
 if "`research'" == "pnadcontinua" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
-		datazoom_pnadcontinua, years(`date') original(`folder1') saving(`folder2') nid `language'
+		datazoom_pnadcontinua, years(`date') original(`source') saving(`save') nid `language'
 	}
 	else {
 		if "`nid'" != "" {
-			datazoom_pnadcontinua, years(`date') original(`folder1') saving(`folder2') nid `language'
+			datazoom_pnadcontinua, years(`date') original(`source') saving(`save') nid `language'
 		}
 		else if "`idbas'" != "" {
-			datazoom_pnadcontinua, years(`date') original(`folder1') saving(`folder2') idbas `language'
+			datazoom_pnadcontinua, years(`date') original(`source') saving(`save') idbas `language'
 		}
 		else if "`idrs'" != "" {
-			datazoom_pnadcontinua, years(`date') original(`folder1') saving(`folder2') idrs `language'
+			datazoom_pnadcontinua, years(`date') original(`source') saving(`save') idrs `language'
 		}
 	}
 }
@@ -89,13 +89,13 @@ if "`research'" == "pnad" { /* ncomp comp81 comp92 */
 			display "É necessário escolher um tipo de registro: Pessoas, Domicílios ou Ambos"
 		}
 		else if "`pes'" != "" {
-			datazoom_pnad, years(`date') original(`folder1') saving(`folder2') pes ncomp `language'
+			datazoom_pnad, years(`date') original(`source') saving(`save') pes ncomp `language'
 		}
 		else if "`dom'" != "" {
-			datazoom_pnad, years(`date') original(`folder1') saving(`folder2') dom ncomp `language'
+			datazoom_pnad, years(`date') original(`source') saving(`save') dom ncomp `language'
 		}
 		else if "`both'" != ""{
-			datazoom_pnad, years(`date') original(`folder1') saving(`folder2') both ncomp `language'
+			datazoom_pnad, years(`date') original(`source') saving(`save') both ncomp `language'
 		}
 	}
 	else {
@@ -104,13 +104,13 @@ if "`research'" == "pnad" { /* ncomp comp81 comp92 */
 				display "É necessário escolher um tipo de registro: Pessoas, Domicílios ou Ambos"
 			}
 			else if "`pes'" != "" {
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') pes comp81 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') pes comp81 `language'
 			}
 			else if "`dom'" != "" {
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') dom comp81 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') dom comp81 `language'
 			}
 			else if "`both'" != ""{
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') both comp81 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') both comp81 `language'
 			}
 		}
 		else if "`comp92'" != "" {
@@ -118,13 +118,13 @@ if "`research'" == "pnad" { /* ncomp comp81 comp92 */
 				display "É necessário escolher um tipo de registro: Pessoas, Domicílios ou Ambos"
 			}
 			else if "`pes'" != "" {
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') pes comp92 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') pes comp92 `language'
 			}
 			else if "`dom'" != "" {
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') dom comp92 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') dom comp92 `language'
 			}
 			else if "`both'" != ""{
-				datazoom_pnad, years(`date') original(`folder1') saving(`folder2') both comp92 `language'
+				datazoom_pnad, years(`date') original(`source') saving(`save') both comp92 `language'
 			}
 		}
 	}
@@ -133,24 +133,24 @@ if "`research'" == "pnad" { /* ncomp comp81 comp92 */
 
 
 if "`research'" == "pnad_covid" {
-	datazoom_pnad_covid, months(`date') original(`folder1') saving(`folder2') `language'
+	datazoom_pnad_covid, months(`date') original(`source') saving(`save') `language'
 }
 
 
 
 if "`research'" == "pmenova" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
-		datazoom_pmenova, years(`date') original(`folder1') saving(`folder2') nid `language'
+		datazoom_pmenova, years(`date') original(`source') saving(`save') nid `language'
 	}
 	else {
 		if "`nid'" != "" {
-			datazoom_pmenova, years(`date') original(`folder1') saving(`folder2') nid `language'
+			datazoom_pmenova, years(`date') original(`source') saving(`save') nid `language'
 		}
 		else if "`idbas'" != "" {
-			datazoom_pmenova, years(`date') original(`folder1') saving(`folder2') idbas `language'
+			datazoom_pmenova, years(`date') original(`source') saving(`save') idbas `language'
 		}
 		else if "`idrs'" != "" {
-			datazoom_pmenova, years(`date') original(`folder1') saving(`folder2') idrs `language'
+			datazoom_pmenova, years(`date') original(`source') saving(`save') idrs `language'
 		}
 	}
 }
@@ -160,17 +160,17 @@ if "`research'" == "pmenova" {
 
 if "`research'" == "pmeantiga" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
-		datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') nid `language'
+		datazoom_pmeantiga, years(`date') original(`source') saving(`save') nid `language'
 	}
 	else {
 		if "`nid'" != "" {
-			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') nid `language'
+			datazoom_pmeantiga, years(`date') original(`source') saving(`save') nid `language'
 		}
 		else if "`idbas'" != "" {
-			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') idbas `language'
+			datazoom_pmeantiga, years(`date') original(`source') saving(`save') idbas `language'
 		}
 		else if "`idrs'" != "" {
-			datazoom_pmeantiga, years(`date') original(`folder1') saving(`folder2') idrs `language'
+			datazoom_pmeantiga, years(`date') original(`source') saving(`save') idrs `language'
 		}
 	}
 }
@@ -178,7 +178,7 @@ if "`research'" == "pmeantiga" {
 
 
 if "`research'" == "ecinf" {
-	datazoom_ecinf, year(`date') tipo(`record') original(`folder1') saving(`folder2') `language'
+	datazoom_ecinf, year(`date') tipo(`record') original(`source') saving(`save') `language'
 }
 
 
@@ -192,13 +192,13 @@ if "`research'" == "pof"{
 	}
 	else {
 		if "`datatype'" == "std" {
-			datazoom_pof`datatype'_`ano', id(`identification') original(`folder1') saving(`folder2') `language'
+			datazoom_pof`datatype'_`ano', id(`identification') original(`source') saving(`save') `language'
 		}
 		else if "`datatype'" == "sel" {
-			datazoom_pof`datatype'_`ano', id(`identification') lista(`list') original(`folder1') saving(`folder2') `language'
+			datazoom_pof`datatype'_`ano', id(`identification') lista(`list') original(`source') saving(`save') `language'
 		}
 		else if "`datatype'" == "trs" {
-			datazoom_pof`datatype'_`ano', trs(`registertype') original(`folder1') saving(`folder2') `language'
+			datazoom_pof`datatype'_`ano', trs(`registertype') original(`source') saving(`save') `language'
 		}
 	}
 }
