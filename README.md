@@ -29,8 +29,8 @@ Onde as [*options*] podem ser:
 | Opção             | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
 | `research(...)`   | Escolha da Pesquisa                                                     |
-| `folder1(...)`    | Pasta onde o *raw data* estão salvos                                    |
-| `folder2(...)`    | Pasta onde deseja salvar a base de dados gerada pelo Stata              |
+| `source(...)`    | Pasta onde o *raw data* estão salvos                                    |
+| `save(...)`    | Pasta onde deseja salvar a base de dados gerada pelo Stata              |
 | `date(...)`       | Data de referência dos dados compatibilizados                           |
 | english           | Para obter variáveis em inglês, colocar essa opção no final do comando  |
 | outras opções     | Opções específicas de cada pesquisa, relacionadas abaixo                |
@@ -47,17 +47,17 @@ Basta navegar pelas opções da Caixa de Diálogo para fazer as leituras dos mic
 
 ## Opções específicas de cada pesquisa
 
-As opções `research(...)`, `folder1(...)`, `folder2(...)` e `date(...)` são mandatórias. A depender da pesquisa escolhida, outras opções serão requeridas
+As opções `research(...)`, `source(...)`, `save(...)` e `date(...)` são mandatórias. A depender da pesquisa escolhida, outras opções serão requeridas
 
 ### PNS
 
-__datazom_social, research(pns)__ *folder1(...) folder2(...) date(...)*
+__datazom_social, research(pns)__ *source(...) save(...) date(...)*
 
 Os anos disponíveis para a PNS são 2013 e 2019. A função da PNS pode ser utilizada diretamente. Ver `h datazoom_pns`
 
 ### Censo Demográfico
 
-__datazom_social, research(censo)__ *folder1(...) folder2(...) date(...) state(...)* [*ops*]
+__datazom_social, research(censo)__ *source(...) save(...) date(...) state(...)* [*ops*]
 
 Os anos disponíveis para o Censo são 1970, 1980, 1991, 2000 e 2010. Na opção de estado, pode ser colocado a sigla de quantos estados desejar para leitura de dados - ex.: `state(AP MS AM)`. Ainda há as seguintes opções:
 
@@ -74,16 +74,16 @@ A função do Censo pode ser utilizada diretamente. Ver `h datazoom_censo`
 
 ### PNAD Contínua (PNADC) - Divulgação Anual
 
-__datazom_social, research(pnadcontinua_anual)__ *folder1(...) folder2(...) date(...)*
+__datazom_social, research(pnadcontinua_anual)__ *source(...) save(...) date(...)*
 
 Essa função compatibiliza os microdados referente a visita domiciliar específica de um ano. Os anos disponíveis para a PNADC Anual são de 2012 a 2019. A função da PNADC Anual pode ser utilizada diretamente. Ver `h datazoom_pnadcont_anual`
 
-___Atenção:___ Na opção `folder1(...)` deve conter o caminho específico do arquivo com os microdados
+___Atenção:___ Na opção `source(...)` deve conter o caminho específico do arquivo com os microdados
 
 
 ### PNAD Contínua (PNADC) - Divulgação Trimestral
 
-__datazom_social, research(pnadcontinua)__ *folder1(...) folder2(...) date(...)* [*ops*]
+__datazom_social, research(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PNADC Trimestral são de 2012 a 2021 (primeiro trimestre para este último ano). Para criação do painél, há as seguintes opções:
 
@@ -93,12 +93,12 @@ Os anos disponíveis para a PNADC Trimestral são de 2012 a 2021 (primeiro trime
 | `idbas`             |  Identificação básica                |
 | `idrs`             | Identificação Avançada (Metodologia Ribas e Soares)     |
 
-Para criaçao do painel, os arquivos de microdados de todos os trimestres dos anos de interesse devem estar na pasta `folderl(...)`. A função da PNADC Trimestral pode ser utilizada diretamente. Ver `h datazoom_pnadcontinua`
+Para criaçao do painel, os arquivos de microdados de todos os trimestres dos anos de interesse devem estar na pasta `source(...)`. A função da PNADC Trimestral pode ser utilizada diretamente. Ver `h datazoom_pnadcontinua`
 
 
 ### PNAD
 
-__datazom_social, research(pnad)__ *folder1(...) folder2(...) date(...)* [*ops*]
+__datazom_social, research(pnad)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PNAD são de 1981 a 2015, quando foi descontinuada. Ainda há as seguintes opções:
 
@@ -116,14 +116,14 @@ A função da PNAD pode ser utilizada diretamente. Ver `h datazoom_pnad`
 
 ### PNAD Covid
 
-__datazom_social, research(pnad_covid)__ *folder1(...) folder2(...) date(...)*
+__datazom_social, research(pnad_covid)__ *source(...) save(...) date(...)*
 
 Os períodos disponíveis para a PNAD Covid são de Maio até Novembro de 2020. A função da PNAD Covid pode ser utilizada diretamente. Ver `h datazoom_pnad_covid`
 
 
 ### PME Nova
 
-__datazom_social, research(pmenova)__ *folder1(...) folder2(...) date(...)* [*ops*]
+__datazom_social, research(pmenova)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PME são de 2002 a 2016. Para criação do painél, há as seguintes opções:
 
@@ -133,12 +133,12 @@ Os anos disponíveis para a PME são de 2002 a 2016. Para criação do painél, 
 | `idbas`             |  Identificação básica                |
 | `idrs`             | Identificação Avançada (Metodologia Ribas e Soares)     |
 
-Para criaçao do painel, os arquivos de microdados de todos os meses dos anos de interesse devem estar na pasta `folderl(...)`. A função da PME pode ser utilizada diretamente. Ver `h datazoom_pmenova`
+Para criaçao do painel, os arquivos de microdados de todos os meses dos anos de interesse devem estar na pasta `source(...)`. A função da PME pode ser utilizada diretamente. Ver `h datazoom_pmenova`
 
 
 ### PME Antiga
 
-__datazom_social, research(pmeantiga)__ *folder1(...) folder2(...) date(...)* [*ops*]
+__datazom_social, research(pmeantiga)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PME são de 1991 a 2001. Para criação do painél, há as seguintes opções:
 
@@ -148,12 +148,12 @@ Os anos disponíveis para a PME são de 1991 a 2001. Para criação do painél, 
 | `idbas`             |  Identificação básica                |
 | `idrs`             | Identificação Avançada (Metodologia Ribas e Soares)     |
 
-Para criaçao do painel, os arquivos de microdados de todos os meses dos anos de interesse devem estar na pasta `folderl(...)`. A função da PME pode ser utilizada diretamente. Ver `h datazoom_pmeantiga`
+Para criaçao do painel, os arquivos de microdados de todos os meses dos anos de interesse devem estar na pasta `source(...)`. A função da PME pode ser utilizada diretamente. Ver `h datazoom_pmeantiga`
 
 
 ### ENCIF
 
-__datazom_social, research(ecinf)__ *folder1(...) folder2(...) date(...) record(...)*
+__datazom_social, research(ecinf)__ *source(...) save(...) date(...) record(...)*
 
 A ECINF está disponível para os anos de 1997 e 2003. O *input* `record(...)`deve ser preenchido com o Tipo de Registro:
 
@@ -172,13 +172,13 @@ A função da ECINF pode ser utilizada diretamente. Ver `h datazoom_ecinf`
 
 ### POF
 
-__datazom_social, research(pof)__ *folder1(...) folder2(...) date(...) datatype(...)* [*ops*]
+__datazom_social, research(pof)__ *source(...) save(...) date(...) datatype(...)* [*ops*]
 
 Os anos disponíveis para POF são 1995, 2002, 2008 e 2017. O *input* `datatype(...)` deve ser preenchido com o tipo de dado que o usuário deseja extrair: Bases Padronizadas `datatype(std)`, Gastos Selecionados `datatype(sel)` e Tipos de Registro `datatype(trs)`. Para cada Tipo de Dado escolhido, há opções específicas:
 
 * Bases Padronizadas:
 
-__datazom_social, research(pof)__ *folder1(...) folder2(...) date(...) datatype(std) identification(...)*
+__datazom_social, research(pof)__ *source(...) save(...) date(...) datatype(std) identification(...)*
 
 | `identification`              | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
@@ -188,13 +188,13 @@ __datazom_social, research(pof)__ *folder1(...) folder2(...) date(...) datatype(
 
 * Gastos Selecionados:
 
-__datazom_social, research(pof)__ *folder1(...) folder2(...) date(...) datatype(sel) identification(...) list(...)*
+__datazom_social, research(pof)__ *source(...) save(...) date(...) datatype(sel) identification(...) list(...)*
 
 `identification(...)` possui as mesmas opções do tópico anterior. Para `identification(...)` utilizar a Caixa de Diálogo para ver opções.
 
 * Tipos de Registro
 
-__datazom_social, research(pof)__ *folder1(...) folder2(...) date(...) datatype(std) registertype(...)*
+__datazom_social, research(pof)__ *source(...) save(...) date(...) datatype(std) registertype(...)*
 
 Para `registertype(...)` há 7 tipos de registros, numerados conforme a documentação do IBGE. Utilizar Caixa de Diálogo para ver opções.
 
