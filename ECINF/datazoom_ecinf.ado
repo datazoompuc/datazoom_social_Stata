@@ -16,17 +16,23 @@ tokenize `tipo'
 
 while "`*'" != "" {
 	di _newline as input "Extraindo arquivo `year' `1' ..."
-	findfile ecinf`year'_`1'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("ecinf`year'_`1'`lang'") out("`dic'")
+	
 	if "`year'"=="2003" {
-		qui infile using `"`r(fn)'"', using("`original'/`1'.txt") clear
+		qui infile using `dic', using("`original'/`1'.txt") clear
 	}
 	qui else {
-		if "`1'"=="domicilios" infile using `"`r(fn)'"', using("`original'/DOMICÍLIOS.txt") clear
-		if "`1'"=="moradores" infile using `"`r(fn)'"', using("`original'/MORADORES.txt") clear
-		if "`1'"=="trabrend" infile using `"`r(fn)'"', using("`original'/TRABALHO e  RENDIMENTO.txt") clear
-		if "`1'"=="uecon" infile using `"`r(fn)'"', using("`original'/UNIDADE ECONÔNICA.txt") clear
-		if "`1'"=="pesocup" infile using `"`r(fn)'"', using("`original'/PESSOAL OCUPADO.txt") clear
-		if "`1'"=="indprop" infile using `"`r(fn)'"', using("`original'/CARACTERÍSTICAS DOS PROPRIETÁRIOS.txt") clear
+		if "`1'"=="domicilios" infile using `dic', using("`original'/DOMICÍLIOS.txt") clear
+		if "`1'"=="moradores" infile using `dic', using("`original'/MORADORES.txt") clear
+		if "`1'"=="trabrend" infile using `dic', using("`original'/TRABALHO e  RENDIMENTO.txt") clear
+		if "`1'"=="uecon" infile using `dic', using("`original'/UNIDADE ECONÔNICA.txt") clear
+		if "`1'"=="pesocup" infile using `dic', using("`original'/PESSOAL OCUPADO.txt") clear
+		if "`1'"=="indprop" infile using `dic', using("`original'/CARACTERÍSTICAS DOS PROPRIETÁRIOS.txt") clear
 	}
 	if "`1'"=="moradores" & `year'==2003 {
 			sort v02 v04, stable

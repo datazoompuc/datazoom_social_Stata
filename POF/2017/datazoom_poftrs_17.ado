@@ -9,52 +9,57 @@ cd "`saving'"
 tokenize `trs'
 di "`*'"
 while "`*'"~="" {
-	cap findfile pof2017_`1'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof2017_`1'`lang'") out("`dic'")
 
 	if "`1'"=="tr1" {
-		qui cap infile using `"`r(fn)'"', using("`original'/MORADOR.txt") clear
+		qui cap infile using `dic', using("`original'/MORADOR.txt") clear
 	}
 	if "`1'"=="tr2" {
-		qui cap infile using `"`r(fn)'"', using("`original'/DESPESA_COLETIVA.txt") clear
+		qui cap infile using `dic', using("`original'/DESPESA_COLETIVA.txt") clear
 	}
 	if "`1'"=="tr3" {
-		qui cap infile using `"`r(fn)'"', using("`original'/CADERNETA_COLETIVA.txt") clear
+		qui cap infile using `dic', using("`original'/CADERNETA_COLETIVA.txt") clear
 	}
 	if "`1'"=="tr4" {
-		qui cap infile using `"`r(fn)'"', using("`original'/DESPESA_INDIVIDUAL.txt") clear
+		qui cap infile using `dic', using("`original'/DESPESA_INDIVIDUAL.txt") clear
 	}
 	if "`1'"=="tr5" {
-		qui cap infile using `"`r(fn)'"', using("`original'/ALUGUEL_ESTIMADO.txt") clear
+		qui cap infile using `dic', using("`original'/ALUGUEL_ESTIMADO.txt") clear
 	}
 	if "`1'"=="tr6" {
-		qui cap infile using `"`r(fn)'"', using("`original'/RENDIMENTO_TRABALHO.txt") clear
+		qui cap infile using `dic', using("`original'/RENDIMENTO_TRABALHO.txt") clear
 	}
 	if "`1'"=="tr7" {
-		qui cap infile using `"`r(fn)'"', using("`original'/OUTROS_RENDIMENTOS.txt") clear
+		qui cap infile using `dic', using("`original'/OUTROS_RENDIMENTOS.txt") clear
 	}
 	if "`1'"=="tr8" {
-		qui cap infile using `"`r(fn)'"', using("`original'/DOMICILIO.txt") clear
+		qui cap infile using `dic', using("`original'/DOMICILIO.txt") clear
 	}	
 	if "`1'"=="tr9" {
-		qui cap infile using `"`r(fn)'"', using("`original'/INVENTARIO.txt") clear
+		qui cap infile using `dic', using("`original'/INVENTARIO.txt") clear
 	}	
 	if "`1'"=="tr10" {
-		qui cap infile using `"`r(fn)'"', using("`original'/CARACTERISTICAS_DIETA.txt") clear
+		qui cap infile using `dic', using("`original'/CARACTERISTICAS_DIETA.txt") clear
 	}	
 	if "`1'"=="tr11" {
-		qui cap infile using `"`r(fn)'"', using("`original'/CONSUMO_ALIMENTAR.txt") clear
+		qui cap infile using `dic', using("`original'/CONSUMO_ALIMENTAR.txt") clear
 	}	
 	if "`1'"=="tr12" {
-		qui cap infile using `"`r(fn)'"', using("`original'/CONDICOES_VIDA.txt") clear
+		qui cap infile using `dic', using("`original'/CONDICOES_VIDA.txt") clear
 	}	
 	if "`1'"=="tr13" {
-		qui cap infile using `"`r(fn)'"', using("`original'/RESTRICAO_PRODUTOS_SERVICOS_SAUDE.txt") clear
+		qui cap infile using `dic', using("`original'/RESTRICAO_PRODUTOS_SERVICOS_SAUDE.txt") clear
 	}	
 	if "`1'"=="tr14" {
-		qui cap infile using `"`r(fn)'"', using("`original'/SERVICO_NAO_MONETARIO_POF2.txt") clear
+		qui cap infile using `dic', using("`original'/SERVICO_NAO_MONETARIO_POF2.txt") clear
 	}	
 	if "`1'"=="tr15" {
-		qui cap infile using `"`r(fn)'"', using("`original'/SERVICO_NAO_MONETARIO_POF4.txt") clear
+		qui cap infile using `dic', using("`original'/SERVICO_NAO_MONETARIO_POF4.txt") clear
 	}	
 
 	save pof2017_`1', replace

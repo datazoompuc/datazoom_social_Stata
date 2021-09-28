@@ -24,8 +24,14 @@ qui while "`*'" != "" {
 		noi display as input _newline "Extraindo `1' - Domicílios"
 		loc y = substr("`1'",3,2)
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_dom`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME`y'`UF'D.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_1991_2000_dom`lang'") out("`dic'")
+		
+			infile using `dic', using("`original'/PME`y'`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -53,8 +59,14 @@ qui while "`*'" != "" {
 	else if `1' == 2000 {
 		noi display as input _newline "Extraindo `1' - Domicílios"
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_dom`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME2K`UF'D.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_1991_2000_dom`lang'") out("`dic'")
+		
+			infile using `dic', using("`original'/PME2K`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -84,8 +96,14 @@ qui while "`*'" != "" {
 		noi display as input _newline "Extraindo `1' - Domicílios"
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		foreach UF in BA MG PR PE RJ RS SP {
-			findfile pme_2001_dom`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME2001`UF'D.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_2001_dom`lang'") out("`dic'")
+			
+			infile using `dic', using("`original'/PME2001`UF'D.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -124,8 +142,14 @@ qui while "`*'" != "" {
 		noi display as input _newline "Extraindo `1' - Pessoas"
 		loc y = substr("`1'",3,2)
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_pes`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME`y'`UF'P.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_1991_2000_pes`lang'") out("`dic'")
+		
+			infile using `dic', using("`original'/PME`y'`UF'P.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -164,8 +188,14 @@ qui while "`*'" != "" {
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		noi display as input _newline "Extraindo `1' - Pessoas"
 		foreach UF in BA MG PE RJ RS SP {
-			findfile pme_1991_2000_pes`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME2K`UF'P.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_1991_2000_pes`lang'") out("`dic'")
+		
+			infile using `dic', using("`original'/PME2K`UF'P.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -204,8 +234,14 @@ qui while "`*'" != "" {
 		/*Extrai arquivos por UF, separa o ano e empilha em anos*/
 		noi display as input _newline  "Extraindo `1' - Pessoas"
 		foreach UF in BA MG PR PE RJ RS SP {
-			findfile pme_2001_pes`lang'.dct
-			infile using `"`r(fn)'"', using("`original'/PME2001`UF'P.txt") clear
+		
+			tempfile dic
+
+			findfile dict.dta
+
+			read_compdct, compdct("`r(fn)'") dict_name("pme_2001_pes`lang'") out("`dic'")
+		
+			infile using `dic', using("`original'/PME2001`UF'P.txt") clear
 			/*Correção de leitura da base de pessoas de 2001: a base de dados agrupa 
 			na mesma linha do domícilio todos os respectivos indivíduos. Essa correção
 			reorganiza a base de forma a ler cada indíviduo junto com seu domícilio por

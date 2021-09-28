@@ -214,9 +214,15 @@ loc i = 1
 foreach a of numlist 3 4 6/12 {
 
 	if "`id'"=="pess" & `a'<9 continue
-	findfile pof1995_tr`a'`lang'.dct
+	
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("pof1995_tr`a'`lang'") out("`dic'")	
+	
 	foreach x of local uf {
-		qui infile using `"`r(fn)'"', using("`x'4x.txt") clear
+		qui infile using `dic', using("`x'4x.txt") clear
 		keep if v0020==`a'
 		tempfile `x'
 		save ``x''
