@@ -5,7 +5,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://github.com/datazoompuc/datazoom_social_Stata/raw/master/logo.jpg" align="left" width="140" hspace="10" vspace="6"></a>
+<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.jpg" align="left" width="140" hspace="10" vspace="6"></a>
 
 O DataZoom Social Stata `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE: Censo Demográfico, Pesquisa Nacional por Amostra de Domicílios, Pesquisa Mensal do Emprego, Pesquisa de Orçamentos Familiares e Pesquisa de Economia Informal Urbana.
 
@@ -39,7 +39,11 @@ ___Atenção:___ Dado o número de pesquisas e opções relacionadas às mesmas,
 
 ## Caixa de Diálogo
 
-XXX
+A Caixa de Diálogo do pacote pode ser acessada utilizando o seguinte comando: `db datazoom_social`. A seguinte janela se abrirá:
+
+<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/dlg.jpg" align="center" width="140" hspace="10" vspace="6"></a>
+
+Basta navegar pelas opções da Caixa de Diálogo para fazer as leituras dos microdados do IBGE.
 
 ## Opções específicas de cada pesquisa
 
