@@ -41,7 +41,7 @@ ___Atenção:___ Dado o número de pesquisas e opções relacionadas às mesmas,
 
 A Caixa de Diálogo do pacote pode ser acessada utilizando o seguinte comando: `db datazoom_social`. A seguinte janela se abrirá:
 
-<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/dlg.jpg" align="center" width="140" hspace="10" vspace="6"></a>
+<a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/dlg.JPG" align="center" width="540" hspace="10" vspace="6"></a>
 
 Basta navegar pelas opções da Caixa de Diálogo para fazer as leituras dos microdados do IBGE.
 
