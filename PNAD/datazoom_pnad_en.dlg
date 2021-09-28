@@ -300,7 +300,7 @@ SCRIPT desmarcatudo00
 
 SCRIPT dadosoriginais
 BEGIN
-	create CHILD datazoom_multi_en AS data
+	create CHILD datazoom_datafolder_en AS data
 	data.settitle "Arquivos de dados originais"
 	data.setExitString saidadata 
 END 
