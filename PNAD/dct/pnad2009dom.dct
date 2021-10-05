@@ -1,6 +1,6 @@
 dictionary {				
 _column(1)	int	v0101	%4f	"ano"
-_column(5)	str2	uf	%2s	"unidade da federaçao"
+_column(5)	str2	uf	%2s	"unidade da federaÃ§ao"
 _column(5)	str8	v0102	%8s	"controle"
 _column(13)	str3	v0103	%3s	"numero de serie"
 _column(16)	byte	v0104	%2f	"tipo de entrevista"
