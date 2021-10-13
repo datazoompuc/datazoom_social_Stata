@@ -8,12 +8,12 @@ syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
 
 cd "`saving'"
 
-load_ecinf, year(`year') original(`original') saving(`saving') tipo(`tipo') `merged' `english'
+load_ecinf, year(`year') original(`original') tipo(`tipo') `merged' `english'
 
 end
 
 program load_ecinf
-syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
+syntax, year(numlist) original(str) tipo(str) [merged english]
 
 if "`english'" != "" local lang "_en"
 

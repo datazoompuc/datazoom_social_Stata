@@ -637,14 +637,38 @@ qui {
 			global panels = "$panels `pa'" /* Coleta os paineis existentes */
 		}
 	}
-}	
+}
+
+foreach pa in $panels{
+	local painel_temps `painel_temps' `PME_Painel`pa'temp'
+}
+
+if "`nid'" == ""{
+
+	pme_antiga_`idbas'`idrs', temps(`painel_temps')
+
+}
+
+di _newline "As bases de dados foram salvas em `caminhoprin'"
+cd "`saving'"
+
+end	
+
+program pme_antiga_idbas
+syntax, temps(string)
 	
 /*Executa a identificação básica*/
-qui if "`idbas'" != "" {
 	noi di as result "Executando Identificação Básica ..."
-	foreach pa in $panels {
-		noi di "Painel `pa'"
-		use `PME_Painel`pa'temp', clear
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
 		
 		/*Algoritmo Básico*/
 		****************************************************************
@@ -755,16 +779,27 @@ qui if "`idbas'" != "" {
 		lab var p201 "numero de ordem correto"
 		lab var idind "identificacao do individuo"
 		drop __* back forw
-		save PME_Painel_`pa'_basic, replace
+		save PME_Painel_`pa_name'_basic, replace
 	}
-}
+end
+
+
+program pme_antiga_idrs
+syntax, temps(string)
 
 /*Executa a identificação de Ribas & Soares*/
-qui if "`idrs'" != "" {
+
 	noi di as result "Executando Identificação Ribas-Soares ..."
-	foreach pa in $panels {
-		noi di "Painel `pa'"
-		use `PME_Painel`pa'temp'
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
 		
 		/*Algoritmo de Ribas e Soares*/
 		****************************************************************
@@ -1155,10 +1190,6 @@ qui if "`idrs'" != "" {
 		lab var p201 "numero de ordem correto"
 		lab var idind "identificacao do individuo"
 		drop __* back forw
-		save PME_Painel_`pa'_rs, replace
+		save PME_Painel_`pa_name'_rs, replace
 	}
-}
-
-di _newline "As bases de dados foram salvas em `caminhoprin'"
-cd "`saving'"
 end
