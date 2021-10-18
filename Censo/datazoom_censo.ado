@@ -3,6 +3,7 @@
 ******************************************************
 * version 1.4
 program define datazoom_censo
+
 syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
 
 * `years' é lista de anos a extrair 

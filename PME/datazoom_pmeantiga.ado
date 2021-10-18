@@ -645,7 +645,7 @@ foreach pa in $panels{
 
 if "`nid'" == ""{
 
-	pme_antiga_`idbas'`idrs', temps(`painel_temps')
+	pmeantiga_`idbas'`idrs', temps(`painel_temps')
 
 }
 
@@ -654,7 +654,7 @@ cd "`saving'"
 
 end	
 
-program pme_antiga_idbas
+program pmeantiga_idbas
 syntax, temps(string)
 	
 /*Executa a identificação básica*/
@@ -784,7 +784,7 @@ syntax, temps(string)
 end
 
 
-program pme_antiga_idrs
+program pmeantiga_idrs
 syntax, temps(string)
 
 /*Executa a identificação de Ribas & Soares*/

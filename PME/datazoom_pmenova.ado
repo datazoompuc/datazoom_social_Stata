@@ -15,7 +15,7 @@ if "`english'" != "" local lang "_en"
 /* Deflator */
 
 findfile deflator_pmenova.dta
-use "`r(fn)'"
+use "`r(fn)'", clear
 rename ano v075
 rename mes v070
 sort v070 v075
@@ -172,15 +172,37 @@ foreach pa in A B C D E F G H I J K L M N O P Q R S T U V W X{
 	}
 }
 
+foreach pa in $panels{
+	local painel_temps `painel_temps' `PME_Painel`pa'temp'
+}
 
+if "`nid'" == ""{
+
+	pmenova_`idbas'`idrs', temps(`painel_temps')
+
+}
+
+di _newline "As bases de dados foram salvas em `caminhoprin'"
+cd "`saving'"
+
+end
 	
 	
-	/*Executa a identificação básica*/
-qui if "`idbas'" != "" {
-	noi display as result "Executando Identificação Básica ..."
-	foreach pa in $panels {
-		noi display as result "Painel `pa'"
-		use `PME_Painel`pa'temp', clear
+program pmenova_idbas
+syntax, temps(string)
+	
+/*Executa a identificação básica*/
+	noi di as result "Executando Identificação Básica ..."
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
 		
 		/*Algoritmo Básico*/
 		****************************************************************
@@ -290,16 +312,29 @@ qui if "`idbas'" != "" {
 		lab var p201 "numero de ordem correto"
 		lab var idind "identificacao do individuo"
 		drop __* back forw
-		save pmenova_painel_`pa'_basic, replace
+		save pmenova_painel_`pa_name'_basic, replace
 	}
-}
+	
+end
+
+
+
+program pmenova_idrs
+syntax, temps(string)
 
 /*Executa a identificação de Ribas & Soares*/
-qui if "`idrs'" != "" {
-	noi display as result "Executando Identificação Ribas-Soares ..."
-	foreach pa in $panels {
-		noi display as result "Painel `pa'"
-		use `PME_Painel`pa'temp'
+
+	noi di as result "Executando Identificação Ribas-Soares ..."
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
 		
 		/*Algoritmo de Ribas e Soares*/
 		****************************************************************
@@ -689,9 +724,7 @@ qui if "`idrs'" != "" {
 		lab var p201 "numero de ordem correto"
 		lab var idind "identificacao do individuo"
 		drop __* back forw
-		save pmenova_painel_`pa'_rs, replace
+		save pmenova_painel_`pa_name'_rs, replace
 	}
-}
-di _newline "As bases de dados foram salvas em `caminhoprin'"
-cd "`saving'"
+
 end
