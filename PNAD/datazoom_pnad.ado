@@ -6,8 +6,6 @@ program define datazoom_pnad
 
 syntax, years(numlist) original(str) saving(str) [pes dom both ncomp comp81 comp92 english]
 
-if "`english'" != "" local lang "_en"
-
 if "`pes'"~="" & "`dom'"=="" {
 	display as result _newline "Obtendo arquivo de pessoas da PNAD"
 	loc register = "pes"
@@ -189,6 +187,16 @@ qui foreach ano in `years' {
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
+load_pnad, years(`years') original(`original') register(`register') `ncomp' `comp81' `comp92' `english'
+
+display as result "As bases de dados foram salvas na pasta `c(pwd)' - compatível com a última versão dos microdados divulgados em 13/03/2020"
+
+end
+
+program load_pnad
+syntax, years(numlist) original(string) register(string) [ncomp comp81 comp92 english]
+
+if "`english'" != "" local lang "_en"
 
 loc q = 0 // vai indicar se pes já foi realizado
 foreach name of local register {
@@ -399,7 +407,6 @@ foreach name of local register {
 		}
 	}
 }
-display as result "As bases de dados foram salvas na pasta `c(pwd)' - compatível com a última versão dos microdados divulgados em 13/03/2020"
 
 end
 
