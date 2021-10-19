@@ -1,13 +1,13 @@
 * VERSION 2.2
 
 program datazoom_pns
-syntax, [original(str)] [saving(str)] year(integer) [english]
+syntax, original(str) [saving(str)] year(integer) [english]
 
 cd "`original'"
 
-if "`original'" == ""{
+/* if "`original'" == ""{
 	download_pns, year(`year')
-}
+} */
 
 load_pns, year(`year') original(`original') `english'
 

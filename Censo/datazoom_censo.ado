@@ -6,8 +6,6 @@ program define datazoom_censo
 
 syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
 
-if "`english'" != "" local lang "_en"
-
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
 * `original' são as pastas dos arquivos de microdados brutos
@@ -36,6 +34,15 @@ if "`all'"~="" {
 }
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
+
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english'
+
+end
+
+program load_censo
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english]
+
+if "`english'" != "" local lang "_en"
 
 /* Listas de nomes das UFs (como são passados na opção `ufs'), respectivos códigos IBGE */
 /* e sufixos dos arquivos de microdados correspondentes em cada ano.                    */

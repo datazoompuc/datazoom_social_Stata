@@ -125,14 +125,41 @@ forvalues pa = 1(1)8{
 
 display "$panels"
 
+foreach pa in $panels{
+	local painel_temps `painel_temps' `PNADC_Painel`pa''
+}
+
+if "`nid'" == ""{
+
+	pnadcont_`idbas'`idrs', temps(`painel_temps')
+
+}
+
+di _newline "Esta versão do pacote datazoom_pnadcontinua é compatí­vel com a última versão dos microdados da PNAD Contínua divulgados em 08/02/2021"
+di _newline "As bases de dados foram salvas em `c(pwd)'"
+
+end
+
+
 /*_______________________________________________________________________*/
 /*______________________Executa a identificação Básica___________________*/
 /*_______________________________________________________________________*/
-qui if "`idbas'" != "" {
-	noi display as result "Executando Identificação Básica ..."
-	foreach pa in $panels {
-		noi display as result "Painel `pa'"
-		use `PNADC_Painel`pa'', clear
+
+program pnadcont_idbas
+syntax, temps(string)
+
+	noi di as result "Executando Identificação Básica ..."
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
+
 		gen painel =.
 		
 		/*Algoritmo Básico*/
@@ -229,20 +256,35 @@ qui if "`idbas'" != "" {
 		replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 		lab var idind "identificacao do individuo"
 		drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
-		replace painel=`pa'
-		save PNAD_painel_`pa'_basic, replace
+		replace painel=`pa_name'
+		save PNAD_painel_`pa_name'_basic, replace
 	}
-}
+
+end
+
 
 /*_______________________________________________________________________*/
 /*___________________Executa a identificação Ribas Soares________________*/
 /*_______________________________________________________________________*/
-qui if "`idrs'" != "" {
-	noi display as result "Executando Identificação Avançada ..."
-	foreach pa in $panels {
-		noi display as result "Painel `pa'"
-		use `PNADC_Painel`pa'', clear
-	    gen painel =.
+
+program pnadcont_idrs
+syntax, temps(string)
+
+/*Executa a identificação de Ribas & Soares*/
+
+	noi di as result "Executando Identificação Avançada ..."
+
+	local n: word count `temps'
+
+	forvalues i = 1/`n'{
+
+		local pa: word `i' of `temps'
+		local pa_name: word `i' of $panels
+
+		noi di "Painel `pa_name'"
+		use `pa', clear
+
+	   gen painel =.
 		/*Algoritmo de Ribas e Soares*/
 		****************************************************************
 		* Variaveis do painel
@@ -610,12 +652,12 @@ qui if "`idrs'" != "" {
 	*replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 	lab var idind "identificacao do individuo"
 	drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
-	replace painel=`pa'
-	save PNAD_painel_`pa'_rs, replace
+	replace painel=`pa_name'
+	save PNAD_painel_`pa_name'_rs, replace
 	}
-}
+	
+end
 
 ********************************************************************
-di _newline "Esta versão do pacote datazoom_pnadcontinua é compatí­vel com a última versão dos microdados da PNAD Contínua divulgados em 08/02/2021"
-di _newline "As bases de dados foram salvas em `c(pwd)'"
-end
+
+
