@@ -113,7 +113,7 @@ foreach id in pes dom both{
 
 foreach id in pes dom both{
 	foreach comp in ncomp comp81 comp92{
-		datazoom_pnad, years(2002/2015) /*
+		datazoom_pnad, years(2002/2009 2011/2015) /*
 					*/ original("$dados\PNAD") /*
 					*/ saving("$dados\bases_teste") /*
 					*/ `id' `comp'
