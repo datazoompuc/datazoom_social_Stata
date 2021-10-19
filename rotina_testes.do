@@ -48,7 +48,7 @@ datazoom_ecinf, year( 1997 ) /*
 * 2003
 
 datazoom_ecinf, year( 2003 ) /*
-				*/ original("$dados\ECINF\1997") /*
+				*/ original("$dados\ECINF\2003") /*
 				*/ saving("$dados\bases_teste") /*
 				*/ tipo( pesocup sebrae indprop uecon trabrend moradores domicilios  )
 				
