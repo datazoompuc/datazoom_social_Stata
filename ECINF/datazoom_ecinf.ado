@@ -7,9 +7,16 @@ program define datazoom_ecinf
 
 syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
 
-if "`english'" != "" local lang "_en"
-
 cd "`saving'"
+
+load_ecinf, year(`year') original(`original') tipo(`tipo') `merged' `english'
+
+end
+
+program load_ecinf
+syntax, year(numlist) original(str) tipo(str) [merged english]
+
+if "`english'" != "" local lang "_en"
 
 loc n = 1
 tokenize `tipo'
