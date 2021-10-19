@@ -43,6 +43,65 @@ if "`ncomp'"=="" & "`comp81'"=="" & "`comp92'"=="" {
 
 /* Faz o matching entre os anos escolhidos e as bases de dados originais */
 qui foreach ano in `years' {
+
+	if `ano' == 1981 | `ano' == 1982 | `ano' == 1984{
+	
+	/* por exemplo: PNAD81BR.TXT */
+	local digitos = substr("`year'", 3, 2)
+	local file_name PNAD`digitos'BR.TXT
+	
+	}
+	else if `ano' == 1983 | `ano' == 1988{
+	
+	// por exemplo: PND83RM4.DAT
+	local digitos = substr("`year'", 3, 2)
+	local file_name PND`digitos'RM4.DAT
+	
+	}
+	else if `ano' == 1985 | `ano' == 1986{
+	
+	// por exemplo: PNAD1985.DAT
+	local file_name PNAD`ano'.DAT
+	
+	}
+	else if `ano' == 1987 | `ano' == 1989 | `ano' == 1990{
+	
+	// por exemplo: PND1989N.DAT
+	local file_name PND`ano'N.DAT
+	
+	}
+	else if `ano' == 1992 | `ano' == 1993 | `ano' == 1995{
+	
+	// por exemplo: DOM93.DAT
+	local digitos = substr("`year'", 3, 2)
+	local prefix = cond("`name'" == "dom", "DOM", "PES")
+	local file_name `prefix'`digitos'.DAT
+	
+	}
+	else if `ano' == 1996{
+	
+	// por exemplo: D96BR.TXT
+	local digitos = substr("`year'", 3, 2)
+	local prefix = cond("`name'" == "dom", "D", "P")
+	local file_name `prefix'`digitos'BR.txt
+	
+	}
+	else if `ano' == 1997{
+	
+	// por exemplo: Domicilios97
+	local digitos = substr("`year'", 3, 2)
+	local prefix = cond("`name'" == "dom", "Domicilios", "Pessoas")
+	local file_name `prefix'`digitos'
+	
+	}
+	else if `ano' == 1998 | `ano' == 1999{
+	
+	// por exemplo: Domicilio98.TXT Pessoa98.TXT
+	local digitos = substr("`year'", 3, 2)
+	local prefix = cond("`name'" == "dom", "Domicilio", "Pessoa")
+	local file_name `prefix'`digitos'.TXT	
+	}
+
 	while "`*'" ~= "" {
 
 		/* se formato anos 1981, 1982, 1984 */
