@@ -268,7 +268,6 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 					}
 				}
 			}
-			clear
 		}
 		
 else if `ano' <= 2001 {                                  // ... se tem ano até 2001
@@ -304,8 +303,8 @@ else if `ano' <= 2001 {                                  // ... se tem ano até 
 					else save pnad`ano'_comp92, replace
 				}
 			}
-}
-				clear		
+	}
+	
 }
 
 else if `ano' >= 2002 {                                            // Se só restam anos >= 2002
@@ -343,7 +342,6 @@ else if `ano' >= 2002 {                                            // Se só res
 			}
 		}
 	}
-				clear
 }
 		
 end				
