@@ -86,7 +86,7 @@ foreach name of local register {
 		else{
 			load_pnad, file("`file_name'") original("`original'") dict_name("pnad`ano'`name'`lang'")
 		
-			treat_pnad, ano(`ano') name(`name') base("`file_name'")
+			treat_pnad, ano(`ano') name(`name') base("`file_name'") `pes' `dom' `both' `ncomp' `comp81' `comp92'
 		}
 	}
 }	
@@ -101,14 +101,14 @@ syntax, ano(int) name(string)
 if `ano' == 1981 | `ano' == 1982 | `ano' == 1984{
 	
 	/* por exemplo: PNAD81BR.TXT */
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	local file_name PNAD`digitos'BR.TXT
 	
 }
 else if `ano' == 1983 | `ano' == 1988{
 	
 	// por exemplo: PND83RM1.DAT, RM2, RM3, ..., RM8
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	forvalues i = 1/8{
 	local file_name_`i' PND`digitos'RM`i'.DAT
 	}
@@ -128,7 +128,7 @@ else if `ano' == 1987 | `ano' == 1989 | `ano' == 1990{
 else if `ano' == 1992 | `ano' == 1993 | `ano' == 1995{
 	
 	// por exemplo: DOM93.DAT
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	local prefix = cond("`name'" == "dom", "DOM", "PES")
 	local file_name `prefix'`digitos'.DAT
 	
@@ -136,7 +136,7 @@ else if `ano' == 1992 | `ano' == 1993 | `ano' == 1995{
 else if `ano' == 1996{
 	
 	// por exemplo: D96BR.TXT
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	local prefix = cond("`name'" == "dom", "D", "P")
 	local file_name `prefix'`digitos'BR.txt
 	
@@ -144,7 +144,7 @@ else if `ano' == 1996{
 else if `ano' == 1997{
 	
 	// por exemplo: Domicilios97
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	local prefix = cond("`name'" == "dom", "Domicilios", "Pessoas")
 	local file_name `prefix'`digitos'
 	
@@ -152,7 +152,7 @@ else if `ano' == 1997{
 else if `ano' == 1998 | `ano' == 1999{
 	
 	// por exemplo: Domicilio98.TXT Pessoa98.TXT
-	local digitos = substr("`year'", 3, 2)
+	local digitos = substr("`ano'", 3, 2)
 	local prefix = cond("`name'" == "dom", "domicilio", "pessoa")
 	local file_name `prefix'`digitos'.txt	
 }
@@ -183,7 +183,7 @@ syntax, file(string) original(string) dict_name(string)
 end
 
 program treat_pnad
-syntax, ano(int) name(string) base(string)
+syntax, ano(int) name(string) base(string) [pes dom both ncomp comp81 comp92]
 
 if `ano' <= 1990 {                                     // Se tem ano até 1990
 
