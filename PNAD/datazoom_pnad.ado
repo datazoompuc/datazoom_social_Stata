@@ -77,17 +77,13 @@ foreach name of local register {
 		Carregamento dos dados
 							*/
 		
-		if `ano' == 1983 | `ano' == 1988{ /* vem quebrado em 8 arquivos */
+		/* 83 e 88 vêm quebrados em 8 arquivos */
+		foreach file in file_name{
 		
-			foreach file in file_name{
-		
-			}
-		}	
-		else{
 			load_pnad, file("`file_name'") original("`original'") dict_name("pnad`ano'`name'`lang'")
 		
 			treat_pnad, ano(`ano') name(`name') base("`file_name'") `pes' `dom' `both' `ncomp' `comp81' `comp92'
-		}
+		}	
 	}
 }	
 
@@ -161,6 +157,9 @@ else if `ano' >= 2001{
 	local prefix = cond("`name'" == "dom", "DOM", "PES")
 	local file_name `prefix'`ano'.txt
 }
+else{
+	di as error "`ano': Ano inválido" _newline "`ano': Invalid year"
+{
 return local base`ano'`name' `file_name'	
 
 end
