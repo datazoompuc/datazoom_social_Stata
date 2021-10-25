@@ -78,7 +78,7 @@ foreach name of local register {
 							*/
 		
 		/* 83 e 88 vêm quebrados em 8 arquivos */
-		foreach file in file_name{
+		foreach file in `file_name'{
 		
 			load_pnad, file("`file_name'") original("`original'") dict_name("pnad`ano'`name'`lang'")
 		
@@ -159,7 +159,7 @@ else if `ano' >= 2001{
 }
 else{
 	di as error "`ano': Ano inválido" _newline "`ano': Invalid year"
-{
+}
 return local base`ano'`name' `file_name'	
 
 end
