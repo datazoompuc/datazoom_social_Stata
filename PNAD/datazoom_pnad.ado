@@ -174,7 +174,11 @@ syntax, file(string) original(string) dict_name(string)
 
 	read_compdct, compdct("`r(fn)'") dict_name("`dict_name'") out("`dic'")
 			
-	qui cap infile using `dic', using("`original'/`file'") clear
+	cap infile using `dic', using("`original'/`file'") clear
+	if _rc == 601{
+	di as error "`original'/`file'" _newline "Erro na leitura do arquivo" _newline "Failed to read data"
+	exit 601
+	}
 
 end
 
