@@ -77,13 +77,19 @@ foreach name of local register {
 		Carregamento dos dados
 							*/
 		
+		tempfile base
+		
 		/* 83 e 88 vêm quebrados em 8 arquivos */
 		foreach file in `file_name'{
+			
+			load_pnad, file("`file'") original("`original'") dict_name("pnad`ano'`name'`lang'")
+			
+			cap append using `base'
+			
+			save `base', replace
+		}
 		
-			load_pnad, file("`file_name'") original("`original'") dict_name("pnad`ano'`name'`lang'")
-		
-			treat_pnad, ano(`ano') name(`name') base("`file_name'") `pes' `dom' `both' `ncomp' `comp81' `comp92'
-		}	
+		treat_pnad, ano(`ano') name(`name') base("`base'") `pes' `dom' `both' `ncomp' `comp81' `comp92'
 	}
 }	
 
@@ -105,8 +111,9 @@ else if `ano' == 1983 | `ano' == 1988{
 	
 	// por exemplo: PND83RM1.DAT, RM2, RM3, ..., RM8
 	local digitos = substr("`ano'", 3, 2)
+	local file_name ""
 	forvalues i = 1/8{
-	local file_name_`i' PND`digitos'RM`i'.DAT
+	local file_name "`file_name' PND`digitos'RM`i'.DAT"
 	}
 }	
 else if `ano' == 1985 | `ano' == 1986{
@@ -160,7 +167,7 @@ else if `ano' >= 2001{
 else{
 	di as error "`ano': Ano inválido" _newline "`ano': Invalid year"
 }
-return local base`ano'`name' `file_name'	
+return local base`ano'`name' `file_name'
 
 end
 
