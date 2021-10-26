@@ -89,7 +89,23 @@ foreach name of local register {
 			save `base', replace
 		}
 		
-		treat_pnad, ano(`ano') name(`name') base("`base'") `pes' `dom' `both' `ncomp' `comp81' `comp92'
+		local id `pes'`dom'`both'
+		local comp `ncomp'`comp81'`comp92'
+		
+		if "`id'" == "pes" | "`id'" == "dom"{
+			treat_pnad, ano(`ano') name(`name') base("`base'") id(`id') comp(`comp')
+		}
+		/* Caso seja both, roda para os dois e mergeia */
+		else{
+			tempfile base_pes
+			datazoom_pnad, years(`years') original(`original') saving(`saving') pes `ncomp' `comp81' `comp92'
+			
+			tempfile base_dom
+			datazoom_pnad, years(`years') original(`original') saving(`saving') dom `ncomp' `comp81' `comp92'
+			
+			merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
+			save pnad`ano', replace	
+		}
 	}
 }	
 
@@ -100,11 +116,18 @@ end
 program grab_name, rclass /* retorna um local como r(file_name) */
 syntax, ano(int) name(string)
 
-if `ano' == 1981 | `ano' == 1982 | `ano' == 1984{
+if `ano' == 1981 | `ano' == 1982{
 	
 	/* por exemplo: PNAD81BR.TXT */
 	local digitos = substr("`ano'", 3, 2)
 	local file_name PNAD`digitos'BR.TXT
+	
+}
+else if `ano' == 1984{
+	
+	/* por exemplo: PNAD81BR.DAT */
+	local digitos = substr("`ano'", 3, 2)
+	local file_name PNAD`digitos'BR.DAT
 	
 }
 else if `ano' == 1983 | `ano' == 1988{
@@ -146,10 +169,10 @@ else if `ano' == 1996{
 }
 else if `ano' == 1997{
 	
-	// por exemplo: Domicilios97
+	// por exemplo: Domicilios97., sem extensão
 	local digitos = substr("`ano'", 3, 2)
 	local prefix = cond("`name'" == "dom", "Domicilios", "Pessoas")
-	local file_name `prefix'`digitos'
+	local file_name `prefix'`digitos'.
 	
 }
 else if `ano' == 1998 | `ano' == 1999{
@@ -207,74 +230,74 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 
 	if "`name'"=="pes" {
 		keep if v0100 == 3                  // mantém somente pessoas
-			sort id_dom v0305 v0306, stable
-			by id_dom: gen ordem = _n
-			lab var ordem "número de ordem do morador"
-		}
-		else keep if v0100 == 1                                // mantém somente domicílios
+		sort id_dom v0305 v0306, stable
+		by id_dom: gen ordem = _n
+		lab var ordem "número de ordem do morador"
+	}
+	else keep if v0100 == 1                                // mantém somente domicílios
 
-			/* Fim da parte específica a 1981-90 */
+	/* Fim da parte específica a 1981-90 */
 
-			if "`ncomp'" ~= "" {
-				tempfile pnad`ano'`name'
-				if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-				else { 
-					if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-					else {
-						merge 1:m id_dom using `pnad`ano'pes', nogen	keep(match)	
-						save pnad`ano', replace								// salva base final com merge
-					}
-				}
-			}
+	if "`ncomp'" ~= "" {
+		tempfile pnad`ano'`name'
+		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
+		else { 
+			if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
 			else {
-				if "`comp81'"~="" {
+				merge 1:m id_dom using `pnad`ano'pes', nogen	keep(match)	
+				save pnad`ano', replace								// salva base final com merge
+			}
+		}
+	}
+	else {
+		if "`comp81'"~="" {
 
-					/* contrói renda domiciliar compatível com anos 90 e 2000 */
-					if "`name'"=="dom" {
-						preserve
+			/* contrói renda domiciliar compatível com anos 90 e 2000 */
+			if "`name'"=="dom" {
+				preserve
 						
-						tempfile dic
+				tempfile dic
 
-						findfile dict.dta
+				findfile dict.dta
 
-						read_compdct, compdct("`r(fn)'") dict_name("pnad`ano'pes`lang'") out("`dic'")
+				read_compdct, compdct("`r(fn)'") dict_name("pnad`ano'pes`lang'") out("`dic'")
 						
-						qui cap infile using `dic', using("`base'") clear
-						keep if v0100 == 3                  // mantém somente pessoas
-						g ano = `ano'
-						if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
-						else egen id_dom = concat(ano v0101)	
+				qui cap infile using `dic', using("`base'") clear
+				keep if v0100 == 3                  // mantém somente pessoas
+				g ano = `ano'
+				if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
+				else egen id_dom = concat(ano v0101)	
 
-						tempvar aux1 aux2
-						g `aux2' = v0602 if v0305<6
-						if `ano'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
-						else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
-						bys id_dom: egen renda_domB = total(`aux2')
-						replace renda_domB = . if `aux1'>0
-						bys id_dom: keep if _n==1
-						keep id_dom renda_domB
-						tempfile rdom
-						save `rdom', replace
+				tempvar aux1 aux2
+				g `aux2' = v0602 if v0305<6
+				if `ano'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
+				else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
+				bys id_dom: egen renda_domB = total(`aux2')
+				replace renda_domB = . if `aux1'>0
+				bys id_dom: keep if _n==1
+				keep id_dom renda_domB
+				tempfile rdom
+				save `rdom', replace
 
-						restore
-						merge 1:1 id_dom using `rdom', nogen
-					}
-					cap drop v0101
+				restore
+				merge 1:1 id_dom using `rdom', nogen
+			}
+			cap drop v0101
 
-					compat_`name'_1981a1990_para_81		// compatibiliza
+			compat_`name'_1981a1990_para_81		// compatibiliza
 
-					tempfile pnad`ano'`name'
-					if "`both'"=="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-					else {
-						if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-							save pnad`ano'_comp81, replace								// salva base final com merge
-						}
-					}
+			tempfile pnad`ano'`name'
+			if "`both'"=="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
+			else {
+				if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
+				else {
+					merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
+					save pnad`ano'_comp81, replace								// salva base final com merge
 				}
 			}
 		}
+	}
+}
 		
 else if `ano' <= 2001 {                                  // ... se tem ano até 2001
 	if `ano'==2001 egen id_dom = concat(v0101 v0102 v0103)

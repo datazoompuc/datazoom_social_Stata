@@ -4,7 +4,7 @@ if "`c(username)'" == "igorr" {
 
 cd $dados
 
-mkdir bases_teste
+cap mkdir bases_teste
 
 /* Censo (AP 2010) */
 
@@ -115,6 +115,17 @@ foreach id in pes dom both{
 	foreach comp in ncomp comp81 comp92{
 		datazoom_pnad, years(2002/2009 2011/2015) /*
 					*/ original("$dados\PNAD") /*
+					*/ saving("$dados\bases_teste") /*
+					*/ `id' `comp'
+	}
+}
+
+/* PNADs Antigas */
+
+foreach id in pes dom both{
+	foreach comp in ncomp comp81 comp92{
+		datazoom_pnad, years(1981/1990 1992/1993 1995/1999) /*
+					*/ original("$dados\PNAD\Antigos") /*
 					*/ saving("$dados\bases_teste") /*
 					*/ `id' `comp'
 	}
