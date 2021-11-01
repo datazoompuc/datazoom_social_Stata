@@ -94,6 +94,10 @@ foreach name of local register {
 		
 		if "`id'" == "pes" | "`id'" == "dom"{
 			treat_pnad, ano(`ano') name(`name') base("`base'") id(`id') comp(`comp')
+			
+			local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
+			
+			save pnad`ano'`id'`suffix', replace	
 		}
 		/* Caso seja both, roda para os dois e mergeia */
 		else{
@@ -104,11 +108,13 @@ foreach name of local register {
 			datazoom_pnad, years(`years') original(`original') saving(`saving') dom `ncomp' `comp81' `comp92'
 			
 			merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)
-			
-			local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
-			
-			save pnad`ano'`suffix', replace	
 		}
+		
+		local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
+		
+		local suffix = cond("`both'" == "", "`suffix'", "`id'`suffix'")
+		
+		save pnad`ano'`suffix', replace	
 	}
 }	
 
@@ -215,7 +221,7 @@ syntax, file(string) original(string) dict_name(string)
 end
 
 program treat_pnad
-syntax, ano(int) name(string) base(string) [pes dom both ncomp comp81 comp92]
+syntax, ano(int) name(string) base(string) id(string) comp(string)
 
 if `ano' <= 1990 {                                     // Se tem ano até 1990
 
@@ -231,7 +237,7 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 	else egen id_dom = concat(ano v0101)
 	lab var id_dom "identificação do domicílio"
 
-	if "`name'"=="pes" {
+	if "`id'"=="pes" {
 		keep if v0100 == 3                  // mantém somente pessoas
 		sort id_dom v0305 v0306, stable
 		by id_dom: gen ordem = _n
@@ -241,50 +247,42 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 
 	/* Fim da parte específica a 1981-90 */
 
-	if "`ncomp'" ~= "" {
-		tempfile pnad`ano'`name'
-		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-	}
-	else {
-		if "`comp81'"~="" {
+	if "`comp'" == "comp81"{
 
-			/* contrói renda domiciliar compatível com anos 90 e 2000 */
-			if "`name'"=="dom" {
-				preserve
+		/* contrói renda domiciliar compatível com anos 90 e 2000 */
+		if "`id'"=="dom" {
+			preserve
 						
-				tempfile dic
+			tempfile dic
 
-				findfile dict.dta
+			findfile dict.dta
 
-				read_compdct, compdct("`r(fn)'") dict_name("pnad`ano'pes`lang'") out("`dic'")
+			read_compdct, compdct("`r(fn)'") dict_name("pnad`ano'pes`lang'") out("`dic'")
 						
-				qui cap infile using `dic', using("`base'") clear
-				keep if v0100 == 3                  // mantém somente pessoas
-				g ano = `ano'
-				if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
-				else egen id_dom = concat(ano v0101)	
+			qui cap infile using `dic', using("`base'") clear
+			keep if v0100 == 3                  // mantém somente pessoas
+			g ano = `ano'
+			if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
+			else egen id_dom = concat(ano v0101)	
 
-				tempvar aux1 aux2
-				g `aux2' = v0602 if v0305<6
-				if `ano'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
-				else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
-				bys id_dom: egen renda_domB = total(`aux2')
-				replace renda_domB = . if `aux1'>0
-				bys id_dom: keep if _n==1
-				keep id_dom renda_domB
-				tempfile rdom
-				save `rdom', replace
+			tempvar aux1 aux2
+			g `aux2' = v0602 if v0305<6
+			if `ano'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
+			else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
+			bys id_dom: egen renda_domB = total(`aux2')
+			replace renda_domB = . if `aux1'>0
+			bys id_dom: keep if _n==1
+			keep id_dom renda_domB
+			tempfile rdom
+			save `rdom', replace
 
-				restore
-				merge 1:1 id_dom using `rdom', nogen
-			}
-			cap drop v0101
-
-			compat_`name'_1981a1990_para_81		// compatibiliza
-
-			tempfile pnad`ano'`name'
-			if "`both'"=="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
+			restore
+			merge 1:1 id_dom using `rdom', nogen
 		}
+		cap drop v0101
+
+		compat_`id'_1981a1990_para_81		// compatibiliza				
+		// salva base final após compatibilizar mas sem merge
 	}
 }
 		
@@ -293,21 +291,8 @@ else if `ano' <= 2001 {                                  // ... se tem ano até 
 	else egen id_dom = concat(v0101 uf v0102 v0103)
 	lab var id_dom "identificação do domicílio"
 				
-	if "`ncomp'" ~= "" {
-		tempfile pnad`ano'`name'
-		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-	}
-	else { 
-		if "`comp81'"~="" compat_`name'_1992a2001_para_81
-		else compat_`name'_1992a2001_para_92
-					
-		tempfile pnad`ano'`name'
-		if "`both'"=="" {
-			if "`comp81'"~="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-			else save pnad`ano'`name'_comp92, replace
-		}
-	}
-	
+	if "`comp'" == "comp81" compat_`id'_1992a2001_para_81
+	else compat_`id'_1992a2001_para_92
 }
 
 else if `ano' >= 2002 {                                            // Se só restam anos >= 2002
@@ -316,21 +301,8 @@ else if `ano' >= 2002 {                                            // Se só res
 	egen id_dom = concat(v0101 v0102 v0103)
 	lab var id_dom "identificação do domicílio"
 				
-	if "`ncomp'" ~= "" 	{ 
-		tempfile pnad`ano'`name'
-		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-	}
-	else {
-		if "`comp81'"~="" compat_`name'_2002a2009_para_81
-		else compat_`name'_2002a2009_para_92
-					
-		tempfile pnad`ano'`name'
-		if "`both'"=="" {
-			if "`comp81'"~="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-			else save pnad`ano'`name'_comp92, replace
-		}
-		}
-	}
+	if "`comp'" == "comp81" compat_`id'_2002a2009_para_81
+	else compat_`id'_2002a2009_para_92
 }
 		
 end				
