@@ -95,7 +95,7 @@ generates a single file, with both individual and household data.
 {phang} {opt years(numlist)} list of years to be extracted. Avaliable years range from 1981 to 
 2015, with the exception of 1994 and the years when Censo was held.
 
-{phang} {opt original(str)} folder path to the original data. Each file must be given a path.
+{phang} {opt original(str)} folder path to the original data.
 
 {phang} {opt saving(str)} path to the folder when final databases are to be saved.
 
