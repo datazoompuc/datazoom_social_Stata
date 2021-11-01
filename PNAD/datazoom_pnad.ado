@@ -103,8 +103,11 @@ foreach name of local register {
 			tempfile base_dom
 			datazoom_pnad, years(`years') original(`original') saving(`saving') dom `ncomp' `comp81' `comp92'
 			
-			merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-			save pnad`ano', replace	
+			merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)
+			
+			local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
+			
+			save pnad`ano'`suffix', replace	
 		}
 	}
 }	
@@ -241,13 +244,6 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 	if "`ncomp'" ~= "" {
 		tempfile pnad`ano'`name'
 		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-		else { 
-			if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-			else {
-				merge 1:m id_dom using `pnad`ano'pes', nogen	keep(match)	
-				save pnad`ano', replace								// salva base final com merge
-			}
-		}
 	}
 	else {
 		if "`comp81'"~="" {
@@ -288,13 +284,6 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 
 			tempfile pnad`ano'`name'
 			if "`both'"=="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-			else {
-				if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-				else {
-					merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-					save pnad`ano'_comp81, replace								// salva base final com merge
-				}
-			}
 		}
 	}
 }
@@ -307,31 +296,16 @@ else if `ano' <= 2001 {                                  // ... se tem ano até 
 	if "`ncomp'" ~= "" {
 		tempfile pnad`ano'`name'
 		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-		else {
-			if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-			else {
-				merge 1:m id_dom using `pnad`ano'pes', nogen	keep(match)	
-				save pnad`ano', replace								// salva base final com merge
-				}
-			}
-		}
-		else { 
-			if "`comp81'"~="" compat_`name'_1992a2001_para_81
-			else compat_`name'_1992a2001_para_92
+	}
+	else { 
+		if "`comp81'"~="" compat_`name'_1992a2001_para_81
+		else compat_`name'_1992a2001_para_92
 					
-			tempfile pnad`ano'`name'
-			if "`both'"=="" {
-				if "`comp81'"~="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-				else save pnad`ano'`name'_comp92, replace
-			}
-			else {
-				if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-				else {
-					merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-					if "`comp81'"~="" save pnad`ano'_comp81, replace								// salva base final com merge
-					else save pnad`ano'_comp92, replace
-				}
-			}
+		tempfile pnad`ano'`name'
+		if "`both'"=="" {
+			if "`comp81'"~="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
+			else save pnad`ano'`name'_comp92, replace
+		}
 	}
 	
 }
@@ -345,13 +319,6 @@ else if `ano' >= 2002 {                                            // Se só res
 	if "`ncomp'" ~= "" 	{ 
 		tempfile pnad`ano'`name'
 		if "`both'"=="" save pnad`ano'`name', replace				// salva base final sem compatibilizar e sem merge
-		else {
-			if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-			else {
-				merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-				save pnad`ano', replace								// salva base final com merge
-			}
-		}
 	}
 	else {
 		if "`comp81'"~="" compat_`name'_2002a2009_para_81
@@ -362,13 +329,6 @@ else if `ano' >= 2002 {                                            // Se só res
 			if "`comp81'"~="" save pnad`ano'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
 			else save pnad`ano'`name'_comp92, replace
 		}
-		else {
-			if "`name'"=="pes" save `pnad`ano'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-			else {
-				merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)	
-				if "`comp81'"~="" save pnad`ano'_comp81, replace								// salva base final com merge
-				else save pnad`ano'_comp92, replace
-			}
 		}
 	}
 }
