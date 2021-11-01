@@ -4,29 +4,9 @@
 * version 1.4
 program define datazoom_pnad
 
-syntax, years(numlist) original(str) saving(str) [pes dom both ncomp comp81 comp92 english]
+syntax, years(numlist) original(str) [saving(str)] [pes dom both ncomp comp81 comp92 english]
 
 if "`english'" != "" local lang "_en"
-
-if "`pes'"~="" & "`dom'"=="" {
-	display as result _newline "Obtendo arquivo de pessoas da PNAD"
-	loc register = "pes"
-}
-if "`dom'"~="" & "`pes'"=="" {
-	display as result _newline "Obtendo arquivo de domicílios da PNAD"
-	loc register = "dom"
-}
-if ("`pes'"~="" & "`dom'"~="") | "`both'"~="" {
-	display as result _newline "Obtendo arquivos de domicílios e pessoas da PNAD"
-	loc both = "both"
-	loc pes = "pes"
-	loc dom = "dom"
-	loc register = "pes dom"
-}
-if "`pes'"=="" & "`dom'"=="" & "`both'"=="" {
-	display as result _newline "Nenhum tipo de registro escolhido: obtendo arquivo de pessoas da PNAD"
-	loc register = "pes"
-}
 
 /*	Opcoes de compatibilizacao */
 
@@ -34,36 +14,44 @@ if "`ncomp'"~="" {
 	display as result _newline "Obtendo microdados não compatibilizados"
 }
 
-
 * se não escolheu nenhuma compatibilização, default = noncompatible
 if "`ncomp'"=="" & "`comp81'"=="" & "`comp92'"=="" {
 	local ncomp = "ncomp"
 	display as result _newline "Nenhuma opção de compatibilização escolhida: obtendo microdados não compatibilizados"
 }
 
-
-
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-loc q = 0 // vai indicar se pes já foi realizado
+local name "`pes'`dom'`both'"
 
 /* Abrindo bases no Stata e salvando em arquivos temporários com formato ".dta" */
 display as input "Anos selecionados: `years'"
 
-foreach name of local register {
-	if "`name'"=="pes" di _newline as result "Gerando bases de pessoas ..."
-	else {
-		di _newline as result "Gerando bases de domicílios ..."
-		loc q = 1
-	}
+if "`name'"=="pes" di _newline as result "Gerando bases de pessoas ..."
+else if "`name'" == "dom" {
+	di _newline as result "Gerando bases de domicílios ..."
+}
 	
-	foreach ano in `years'{
+foreach ano in `years'{
+	
+	if `ano' <= 1990 & "`comp92'"~="" {
+		display as error "Opção 'comp92' não se aplica à decada de 1980"
+		exit, clear
+	}
 		
-		if `ano' <= 1990 & "`comp92'"~="" {
-			display as error "Opção 'comp92' não se aplica à decada de 1980"
-			exit, clear
-		}
+	/* Caso seja both, roda para os dois e mergeia */
+	if "`both'" != ""{
+		tempfile base_pes
+		datazoom_pnad, years(`ano') original(`original') pes `ncomp' `comp81' `comp92'
+			
+		save `base_pes', replace
+			
+		datazoom_pnad, years(`ano') original(`original') dom `ncomp' `comp81' `comp92'
+			
+		merge 1:m id_dom using `base_pes', nogen keep(match)
+	}
+	else{
 		
 				/* 
 		Match entre ano/registro e nome do arquivo
@@ -92,31 +80,22 @@ foreach name of local register {
 		local id `pes'`dom'`both'
 		local comp `ncomp'`comp81'`comp92'
 		
-		if "`id'" == "pes" | "`id'" == "dom"{
-			treat_pnad, ano(`ano') name(`name') base("`base'") id(`id') comp(`comp')
-			
-			local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
-			
-			save pnad`ano'`id'`suffix', replace	
-		}
-		/* Caso seja both, roda para os dois e mergeia */
-		else{
-			tempfile base_pes
-			datazoom_pnad, years(`years') original(`original') saving(`saving') pes `ncomp' `comp81' `comp92'
-			
-			tempfile base_dom
-			datazoom_pnad, years(`years') original(`original') saving(`saving') dom `ncomp' `comp81' `comp92'
-			
-			merge 1:m id_dom using `pnad`ano'pes', nogen keep(match)
-		}
+		treat_pnad, ano(`ano') base("`base'") id(`id') comp(`comp')
+	}
 		
+	if "`saving'" != ""{
+			
+		cd `saving'
+			
+		local id `pes'`dom'`both'
+			
 		local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
 		
-		local suffix = cond("`both'" == "", "`suffix'", "`id'`suffix'")
+		local suffix = cond("`both'" != "", "`suffix'", "`id'`suffix'")
 		
 		save pnad`ano'`suffix', replace	
 	}
-}	
+}
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)' - compatível com a última versão dos microdados divulgados em 13/03/2020"
 
@@ -221,7 +200,7 @@ syntax, file(string) original(string) dict_name(string)
 end
 
 program treat_pnad
-syntax, ano(int) name(string) base(string) id(string) comp(string)
+syntax, ano(int) base(string) id(string) comp(string)
 
 if `ano' <= 1990 {                                     // Se tem ano até 1990
 
