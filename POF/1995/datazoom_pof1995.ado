@@ -25,25 +25,23 @@ if "`sel'" == "" & "`std'" == ""{
 		use `base_`tr'', clear
 		save pof1995_`tr', replace
 	}
-
-	di as result "As bases foram salvas em `saving'"
-	
-	exit	
 }
 
 * Caso contrário, falta aplicar a função de bases selecionadas ou a de bases padronizadas
 
-if "`sel'" != ""{
+else if "`sel'" != ""{
 	pofsel_95, id(`id') sel(`sel') trs(`trs') temps(`bases') original(`original') `english'
 	
 	cd "`saving'"
 	save pof1995_`id'_custom, replace
 }
-else if "`std'" != ""{
+else{
 	pof_std95, std(`std')
 	
 	salva etc
 }
+
+di as result "As bases foram salvas em `saving'"
 
 end
 
@@ -300,11 +298,13 @@ foreach item in `sel'{
 												entra no local */
 }
 
+di as input "Itens selecionados:" _newline "`sel'"
+
 tempfile pof95 p11
 
 forvalues i = 1/`: word count `trs''{
 	local tr: word `i' of `trs'
-	local base: word `i' of `bases'
+	local base: word `i' of `temps'
 	
 	use `base', clear
 	
@@ -382,17 +382,13 @@ forvalues i = 1/`: word count `trs''{
 	}
 	
 	cap append using `pof95'
-	save `pof95', replace
+	qui save `pof95', replace
 	
 }
 
 keep v0020 v0040 v0050 v0060 v0065 v0067 ordem cod_item_aux val_def_anual
 
-*tempvar credito
-*gen credito = cond(obtencao==3 | obtencao==4,val_def_anual,0) if obtencao!=.
 
-*tempvar n_monet
-*gen n_monet = cond(obtencao>=5 & obtencao <= 9,val_def_anual,0) if obtencao!=.
 
 tempfile gastos
 save `gastos', replace
@@ -418,64 +414,47 @@ else if "`id'" == "pess" {
 
 tempfile base
 
-loc i = 1
-tokenize `sel'
-while "`1'" ~="" {
-	di "`1'"
-	local nomes_aux : copy local nomes
-	local numeros_aux : copy local numeros
+local iteracao = 1
 
-	loc z = 1	// para controlar nomes errados na lista
+di as input "Agregando as despesas"
+
+forvalues i = 1/`: word count `sel''{
+	local item: word `i' of `sel'
+	local codigo: word `i' of `codigos'
 	
-	while "`nomes_aux'"~="" {
+	if "`codigo'" == "" continue
+	
+	preserve
+	gen item = .
+	foreach n of numlist `codigo'{
+		replace item = 1 if cod_item_aux == `n'
+	}
 		
-		gettoken nome nomes_aux: nomes_aux
-		gettoken numero numeros_aux: numeros_aux
-		if "`1'"=="`nome'" 	{
-*			else {
-				gettoken codigo codigos: codigos
-				preserve
-				g item = .
-				foreach n of numlist `codigo' {
-					replace item = 1 if cod_item_aux == `n'
-				}
-				keep if item==1
-				cap collapse (sum) val_def_anual, by(`variaveis_ID')
-				if _rc==2000 {
-					restore
-					macro shift
-					continue, break
-				}
-				rename val_def_anual v`numero'
-*				rename credito cr`numero' 
-*				rename n_monet nm`numero' 
-				
-				if substr("`numero'",1,1)=="d" {
-					lab var v`numero' "despesa total em `nome'"
-*					lab var cr`numero' "`nome' - expenditure on credit"
-*					lab var nm`numero' "`nome' - non-monetary expenditure"
-				}
-				else {
-					lab var v`numero' "rendimento proveniente de `nome'"
-*					drop cr* nm*
-				}
-				
-				if `i'~=1 merge 1:1 `variaveis_ID' using `base', nogen
+	keep if item == 1
+	cap collapse (sum) val_def_anual, by(`variaveis_ID') // gera os gastos totais no `item'
+	if _rc == 2000{
+		restore
+		continue, break
+	}
+	forvalues j = 1/`: word count `nomes''{
+		local nome: word `j' of `nomes'
+		local numero: word `j' of `numeros'
+	
+		if "`item'" == "`nome'" & "`numero'" != ""{
+			rename val_def_anual v`numero'
+			if substr("`numero'",1,1)=="d" lab var v`numero' "despesa total em `nome'"
+			else lab var v`numero' "rendimento proveniente de `nome'"
+			
+				if `iteracao'~=1 merge 1:1 `variaveis_ID' using `base', nogen
 				save `base', replace
 				restore
 
-				loc i = `i' + 1
-				macro shift
-				continue, break
-*			}
-		}
-		if `z' == 180 {
-			gettoken codigo codigos: codigos
-			macro shift
-			continue, break
+				local iteracao = `iteracao' + 1
 		}
 	}
 }
+
+
 
 if "`id'" == "pess" {
 	
@@ -487,8 +466,17 @@ if "`id'" == "pess" {
 	rename v2130 ordem
 
 	sum `variaveis_ID'
-	merge 1:1 `variaveis_ID' using `base_pessoas', nogen
-	save `base', replace
+	
+	di as input "Merge com base de pessoas"
+	
+	cap merge 1:1 `variaveis_ID' using `base', nogen // A base na memória é a de pes, que é mergeada com a `base' de gastos selecionados
+	if _rc == 601{
+	di as error "Sem observações dos itens selecionados. Muitos gastos não estão presentes nos registros de pessoas."
+	exit 601
+	}
+	else if _rc != 0 exit _rc
+	
+	qui save `base', replace
 }
 
 /* Ler base de domicílios para mergear */
@@ -497,7 +485,9 @@ tempfile base_dom
 
 load_pof95, trs(tr1) temps(`base_dom') original(`original') `english'
 
-if "`id'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen 
-else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen
+di as input "Merge com base de domicílios"
+
+if "`id'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen // A base na memória é a de dom, que é mergeada com a `base' de gastos selecionados
+else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen 
 
 end
