@@ -64,21 +64,20 @@ forvalues i = 1/`: word count `trs''{
 
 	local tr: word `i' of `trs'
 	local base: word `i' of `temps'
-
-	if length("`tr'")==3 local suffix = substr("`tr'",3,1)
-	else local suffix = substr("`tr'",3,2)
 	
-	di as input "Extraindo TR`suffix'"
+	local num = substr("`tr'", 3, .) // tr1 -> 1, tr11 -> 11
+	
+	di as input "Extraindo TR`num'"
 	
 	tempfile dic
 
 	findfile dict.dta
 
-	read_compdct, compdct("`r(fn)'") dict_name("pof1995_tr`suffix'`lang'") out("`dic'")
+	read_compdct, compdct("`r(fn)'") dict_name("pof1995_tr`num'`lang'") out("`dic'")
 	
 	foreach uf of local ufs{
 		qui infile using `dic', using("`uf'4x.txt") clear
-		qui keep if v0020==`suffix'
+		qui keep if v0020==`num'
 		
 		cap append using `base'
 		
