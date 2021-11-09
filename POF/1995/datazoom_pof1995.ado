@@ -36,9 +36,12 @@ else if "`sel'" != ""{
 	save pof1995_`id'_custom, replace
 }
 else{
-	pofstd_95, id(`id') trs(`trs') temps(`bases') original(`original') `english'
+	foreach type in `id'{
+		pofstd_95, id(`type') trs(`trs') temps(`bases') original(`original') `english'
 	
-	salva etc
+		cd "`saving'"
+		save "pof1995_`type'_standard", replace
+	}
 }
 
 di as result "As bases foram salvas em `saving'"
@@ -781,5 +784,175 @@ forvalues i = 1/`: word count `trs''{
 }
 
 keep v0020 v0040 v0050 v0060 v0065 v0067 ordem cod_item_aux val_def_anual
+
+gen str itens = ""
+
+/* Algoritmo que faz o match entre cada item e as listas de gastos agregados */
+
+foreach j in DAD DAF DDI REN {
+	loc lista : copy local lista`j'
+	
+	if "`j'" == "DAD" | "`j'" == "DAF" {
+		loc i = 1
+		qui while `"`lista'"' ~="" { /* Cada lista vai alternando (nome, código), (nome, código), ... */
+			gettoken k lista: lista		/* para pular os nomes*/
+			noi di "`k'"
+			gettoken x lista: lista 	/* pega a lista de itens */
+			foreach n of numlist `x' {
+				if "`j'" == "DAD" {
+					local suffix = cond(`i' < 10, "0`i'", "`i'") // para ficar final 01, 02, ...
+					replace itens = "da`suffix'" if cod_item_aux == `n'
+				}
+				else {
+					replace itens = "da2`i'" if cod_item_aux == `n'
+				}
+			}
+			loc i = `i' + 1
+		}
+	}
+	else if "`j'"=="DDI" {
+		local k `""21/27" "31/36" "41/47" "51/54" "61/69 610" "71/76" "81/85" "90" "101/104" "111/116" "121/126" "131/133" "141/142""'
+		tokenize `"`k'"'
+
+		while `"`lista'"' ~="" {
+			qui foreach i of numlist `1' {
+				gettoken k lista: lista		/* para pular os nomes*/
+				noi di "`k'"
+				gettoken x lista: lista 	/* pega a lista de itens */
+				foreach n of numlist `x' {
+					local suffix = cond(`i' < 100, "0`i'", "`i'")
+					replace itens = "dd`suffix'" if cod_item_aux == `n'
+				}
+			}
+			macro shift
+		}
+*		}
+	}
+	else {
+		local z `""11/13" "21/25" 30 40"'
+		tokenize `"`z'"'
+		while `"`lista'"' ~="" {
+			qui foreach ren of numlist `1' {
+				gettoken k lista: lista		/* para pular os nomes*/
+				noi di "`k'"
+				gettoken x lista: lista 	/* pega a lista de itens */
+				foreach n of numlist `x' {
+					replace itens = "re`ren'" if cod_item_aux == `n'
+				}
+			}
+			macro shift
+		}
+	}
+}
+
+tempfile gastos base
+save `gastos', replace
+
+cd "`original'"
+use `gastos', clear
+
+if "`id'" == "dom" {
+	loc variaveis_ID = "v0040 v0050 v0060 v0065"
+	loc TR_prin = "1"
+}
+else if "`id'" == "uc" {
+	rename v0067 uc
+	loc variaveis_ID = "v0040 v0050 v0060 v0065 uc"
+	loc TR_prin = "5"
+}
+else if "`id'" == "pess" {
+	rename v0067 uc
+	loc variaveis_ID = "v0040 v0050 v0060 v0065 uc ordem"
+	loc TR_prin = "2"
+	keep if v0020>=9 & v0020<=12 & ordem~=.
+}
+
+/* Agregando os gastos */
+
+egen id_`id' = group(`variaveis_ID')
+
+sort id_`id' itens
+by id_`id' itens: egen va = total(val_def_anual)	/* valor da despesa */
+
+drop if itens==""
+
+bys id_`id' itens: keep if _n==1
+keep `variaveis_ID' id_`id' itens va 
+
+reshape wide va , i(`variaveis_ID' id_`id') j(itens) string
+
+/* introduzindo labels a partir das listas */
+loc lista: copy local listaDAD
+foreach n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 {
+	gettoken k lista: lista
+	di "`k'"
+	cap {
+		lab var vada`n' "despesa total em `k'"
+	}
+	gettoken k lista: lista
+}
+loc lista: copy local listaDAF
+foreach n of numlist 21/27 {
+	gettoken k lista: lista
+	di "`k'"
+	cap {
+		lab var vada`n' "despesa total em `k'" 
+	}
+	gettoken k lista: lista
+}
+loc lista: copy local listaDDI
+foreach n of numlist 21/27 31/36 41/47 51/54 61/69 610 71/76 81/85 ///
+		90 101/104 111/116 121/126 131/133 141/142 {
+	gettoken k lista: lista
+	di "`k'"
+	if `n'<100 {
+		cap {
+			lab var vadd0`n' "despesa total em `k'"
+		}
+	}
+	else {
+		cap {
+			lab var vadd`n' "despesa total em `k'"
+		}
+	}
+	gettoken k lista: lista
+}
+loc lista: copy local listaREN
+foreach n of numlist 11/13 21/25 30 40 {
+	gettoken k lista: lista
+	di "`k'"
+	cap {
+		lab var vare`n' "renda proveniente de `k'"
+	}
+	gettoken k lista: lista
+}
+
+save `base', replace
+
+if "`id'" == "pess" {
+
+	tempfile base_pessoas
+	
+	load_pof95, trs(tr2) temps(`base_pessoas') original(`original') `english' // Carregando o TR de pessoas para mergear
+	
+	rename v0067 uc
+	rename v2130 ordem
+
+	sum `variaveis_ID'
+
+	merge 1:1 `variaveis_ID' using `base', nogen // A base na memória é a de pessoas, que é mergeada com a `base' de gastos selecionados
+	save `base', replace
+}
+
+/* Ler base de domicílios para mergear */
+
+tempfile base_dom
+
+load_pof95, trs(tr1) temps(`base_dom') original(`original') `english'
+
+di as input "Merge com base de domicílios"
+	
+if "`id'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen // A base na memória é a de dom, que é mergeada com a `base' de gastos selecionados
+else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen
 
 end
