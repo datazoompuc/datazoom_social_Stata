@@ -96,8 +96,7 @@ de dados incluindo as variáveis de domicílios e pessoas no mesmo arquivo.
 {phang} {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa pode
 ser utilizado para os anos de 1981 a 2015, excluindo os anos e censitários 1994.
 
-{phang} {opt original(str)} indica o caminho dos arquivos de dados originais. É necessário incluir um caminho 
-para cada arquivo com o qual o usuário deseja trabalhar.
+{phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais.
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
