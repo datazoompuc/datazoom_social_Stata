@@ -67,9 +67,7 @@ f PNS/datazoom_pns.sthlp
 f PNS/datazoom_pns_en.sthlp
 f POF/datazoom_pof.sthlp
 f POF/datazoom_pof_en.sthlp
-f POF/1995/datazoom_pofsel_95.ado
-f POF/1995/datazoom_pofstd_95.ado
-f POF/1995/datazoom_poftrs_95.ado
+f POF/1995/datazoom_pof1995.ado
 f POF/1995/datazoom_pofsel_95.dlg
 f POF/1995/datazoom_pofstd_95.dlg
 f POF/1995/datazoom_poftrs_95.dlg

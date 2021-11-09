@@ -7,6 +7,9 @@ if "`sel'" != "" & "`id'" != "pess"{
 else if "`sel'" != "" & "`id'" == "pess"{
 	local trs tr9 tr10 tr11 tr12 // Mantém somente os TRs individuais
 }	
+else if "`std'" != ""{
+	local trs tr3 tr4 tr6 tr7 tr8 tr9 tr10 tr11 tr12 // Para std
+}
 else if "`trs'" == "" local trs tr1 tr2 tr3 tr4 tr5 tr6 tr7 tr8 tr9 tr10 tr11 tr12
 
 foreach tr in `trs'{
