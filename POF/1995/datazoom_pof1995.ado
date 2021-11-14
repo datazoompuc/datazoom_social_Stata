@@ -73,7 +73,7 @@ forvalues i = 1/`: word count `trs''{
 
 	findfile dict.dta
 
-	read_compdct, compdct("`r(fn)'") dict_name("pof1995_tr`num'`lang'") out("`dic'")
+	read_compdct, compdct("`r(fn)'") dict_name("pof1995_`tr'`lang'") out("`dic'")
 	
 	foreach uf of local ufs{
 		qui infile using `dic', using("`uf'4x.txt") clear
