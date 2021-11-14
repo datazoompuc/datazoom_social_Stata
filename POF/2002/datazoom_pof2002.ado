@@ -386,9 +386,9 @@ forvalues i = 1/`: word count `sel''{
 				lab var rnm "renda não monetária"
 				keep `variaveis_ID' rnm
 
-				tempfile item`i'
+				tempfile item`iteracao'
 				sort `variaveis_ID'
-				save `item`i'', replace
+				save `item`iteracao'', replace
 
 				restore
 				
@@ -436,11 +436,11 @@ if `TR_prin'==1 {
 
 	tempfile base_dom
 	
-	load_pof95, trs(tr1) temps(`base_dom') original(`original') `english'
+	load_pof02, trs(tr1) temps(`base_dom') original(`original') `english'
 	
 	sort `variaveis_ID'
-	loc i = `i' - 1
-	forval j = 1/`i' {
+	loc iteracao = `iteracao' - 1
+	forval j = 1/`iteracao' {
 		sort `variaveis_ID'
 		merge 1:1 `variaveis_ID' using `item`j'', nogen keep(match master)
 	}
@@ -449,21 +449,21 @@ if `TR_prin'==1 {
 else {
 	tempfile base_pes
 	
-	load_pof95, trs(tr2) temps(`base_pes') original(`original') `english'
+	load_pof02, trs(tr2) temps(`base_pes') original(`original') `english'
 	egen id_dom = group(uf seq dv domcl)
 	egen id_uc  = group(uf seq dv domcl uc)
 
 	if `TR_prin'==3 {
 		bys uf seq dv domcl uc: keep if _n==1
 		keep uf seq dv domcl uc id_dom id_uc estrato fator_set fator renda
-		loc i = `i' - 1
-		forval j = 1/`i' {
+		loc iteracao = `iteracao' - 1
+		forval j = 1/`iteracao' {
 			merge 1:1 uf seq dv domcl uc using `item`j'', nogen keep(match master)
 		}
 	}
 	else {
-		loc i = `i' - 1
-		forval j = 1/`i' {
+		loc iteracao = `iteracao' - 1
+		forval j = 1/`iteracao' {
 			merge 1:1 uf seq dv domcl uc ordem using `item`j'', nogen keep(match master)
 		}
 	}

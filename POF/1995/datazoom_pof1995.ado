@@ -307,6 +307,8 @@ di as input "Itens selecionados:" _newline "`sel'"
 
 tempfile pof95 p11
 
+/* Harmonização de variáveis e append */
+
 forvalues i = 1/`: word count `trs''{
 	local tr: word `i' of `trs'
 	local base: word `i' of `temps'
