@@ -13,11 +13,36 @@ levelsof Descricao_3, local(itens)
 
 foreach item in `itens'{
 
+	local novo_nums ""
+
 	qui preserve
 	
 	qui keep if Descricao_3 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+	local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -42,11 +67,36 @@ levelsof Descricao_2, local(itens)
 
 foreach item in `itens'{
 	
+	local novo_nums ""
+	
 	qui preserve
 	
 	qui keep if Descricao_2 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -71,11 +121,36 @@ levelsof Descricao_1, local(itens)
 
 foreach item in `itens'{
 	
+	local novo_nums ""
+	
 	qui preserve
 	
 	qui keep if Descricao_1 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -96,8 +171,31 @@ foreach item in `itens'{
 file write alimentacao _n "* Nível 0" _n
 
 import excel "F:\Dados\POF\2017\Tradutor_Alimentação.xls", sheet("Planilha1") firstrow clear
-
+local novo_nums ""
 levelsof Codigo, local(nums)
+
+	local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 
 di as result "local Alimentação v_DA_0 `nums'"
 
@@ -114,12 +212,37 @@ drop if Descricao_3 == "Alimentacao"
 levelsof Descricao_5, local(itens)
 
 foreach item in `itens'{
-
+	
+	local novo_nums ""
+	
 	qui preserve
 	
 	qui keep if Descricao_5 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -142,12 +265,35 @@ file write despesa "* Nível 4" _n
 levelsof Descricao_4, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_4 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -170,12 +316,35 @@ file write despesa "* Nível 3" _n
 levelsof Descricao_3, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_3 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -198,12 +367,35 @@ file write despesa "* Nível 2" _n
 levelsof Descricao_2, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_2 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -226,12 +418,35 @@ file write despesa "* Nível 1" _n
 levelsof Descricao_1, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_1 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -254,12 +469,35 @@ file write despesa "* Nível 0" _n
 levelsof Descricao_0, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_0 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -289,12 +527,35 @@ file write rendimento "* Nível 3" _n
 levelsof Descricao_3, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_3 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -318,12 +579,35 @@ file write rendimento _n "* Nível 2" _n
 levelsof Descricao_2, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_2 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
@@ -347,12 +631,35 @@ file write rendimento _n "* Nível 1" _n
 levelsof Descricao_1, local(itens)
 
 foreach item in `itens'{
-
+	local novo_nums ""
 	qui preserve
 	
 	qui keep if Descricao_1 == "`item'"
 	
 	qui levelsof Codigo, local(nums)
+	
+		local n: word count `nums'
+	local min: word 1 of `nums'
+	local max: word `n' of `nums'
+	local mini `min'
+	local maxi `min'
+	local maxx = `max' + 1
+	forvalues i = `min'/`maxx'{ // Algoritmo maluco que encurta numlists: 1 2 3 4 6 7 -> 1/4 6/7.
+	
+		local test = strpos("`nums'", "`i'")
+		if "`test'" != "0"{
+			local maxi `i'
+			local z = 0
+		}
+		else{
+			local z = `z' + 1
+			local numi = "`mini'/`maxi'"
+			local mini = `i' + 1
+			if `z' == 1 local novo_nums "`novo_nums' `numi'" 
+		}
+	}
+	
+	local nums "`novo_nums'"
 	
 	qui local nome_item = subinstr("`item'", " ", "_", .)
 	
