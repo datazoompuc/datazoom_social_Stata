@@ -2,10 +2,10 @@ program datazoom_pof2017
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 if "`sel'" != "" & "`id'" != "pess"{
-	local trs tr6 tr7 tr8 tr9 tr10 tr11 tr12 tr13 tr14 tr15 // Apenas TRs de despesas e rendimentos
+	local trs tr2 tr3 tr4 tr5 tr6 tr7 tr14 tr15 // Apenas TRs de despesas e rendimentos
 }
 else if "`sel'" != "" & "`id'" == "pess"{
-	local trs tr12 tr13 tr14 tr15 // Mantém somente os TRs individuais
+	local trs tr4 tr6 tr7 tr15 // Mantém somente os TRs individuais
 }	
 else if "`std'" != ""{
 	local trs tr6 tr7 tr8 tr9 tr10 tr11 tr12 tr13 tr14 tr15 // Para std
@@ -112,8 +112,7 @@ local Cenoura v_DA_1032  64012/64012 64019/64019
 local Cervejas_e_chopes v_DA_1124  83001/83002 83033/83033 83043/83043 83050/83051
 local Farinha_de_mandioca v_DA_1023  65014/65014
 local Farinha_de_trigo v_DA_1022  65010/65010
-local Feijao v_DA_1012  63050/63050 63056/63056
-local Feijão v_DA_1012  63012/63017 63019/63019 63021/63026 63031/63031 63046/63046 63055/63055
+local Feijão v_DA_1012  63012/63017 63019/63019 63021/63026 63031/63031 63046/63046 63050/63050 63055/63056
 local Frango v_DA_1081  78001/78014 78025/78027 78032/78032 78036/78036 78038/78038 78047/78048 78062/78062 78066/78066 78068/78068 78070/78072
 local Laranja v_DA_1062  68012/68015 68017/68018 68095/68095 68097/68097
 local Leite_de_vaca v_DA_1091  79001/79002 79031/79031 79036/79038
@@ -324,9 +323,74 @@ foreach item in `sel'{
 		local codigos  `" `codigos' "`codigo'" "' /* Armazena o código de todos os itens selecionados. */
 		local nomes `nomes' `nome'										
 	}											
-}
+} /* Após isso temos locals da forma:
+		`sel' = Arroz Feijão
+		`nomes' = v_DA_1011 v_DA_1012
+		`codigos' = "63001/63003 63018/63018 63033/63034 63052/63054" "63012/63017 63019/63019 63021/63026 63031/63031 63046/63046 63050/63050 63055/63056" 
+	*/
 
 di as input "Itens selecionados:" _newline "`sel'"
 
+if "`id'" == "dom" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM"
+}
+else if "`id'" == "uc" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC"
+}
+else if "`id'" == "pess" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC COD_INFORMANTE"
+}
 
+/* Agregação dos gastos */
+
+tempfile gastos
+
+* Appendando todos os TRs
+forvalues i = 1/`: word count `trs''{
+	local tr: word `i' of `trs'
+	local base: word `i' of `temps'
+	
+	use `base', clear
+	
+	gen long cod_item_aux = int(V9001/100) /* Variável identificadora dos bens
+										Os tradutores omitem os últimos 2 dígitos */
+	
+	cap gen valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO
+	if _rc != 0 gen valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO // Para os registros de rendimentos
+	
+	keep `variaveis_ID' cod_item_aux valor_anual_def PESO
+	
+	cap append using `gastos'
+	save `gastos', replace
+}	
+
+tempfile despesas
+
+/* Identificação dos gastos */
+forvalues i = 1/`: word count `sel''{
+	local item: word `i' of `sel'
+	local nome: word `i' of `nomes'
+	local codigo: word `i' of `codigos'
+	
+	use `gastos', clear
+	
+	di "`item'"
+	
+	gen item = .
+	
+	foreach n of numlist `codigo'{
+		replace item = 1 if cod_item_aux == `n' 
+	}
+	keep if item == 1
+	
+	label var valor_anual_def "Gasto anual com `item'"
+	rename valor_anual_def `nome'
+	
+	drop item cod_item_aux
+	
+	if `i' > 1 merge m:m `variaveis_ID' PESO using `despesas', nogen
+	
+	qui save `despesas', replace
+}
+	
 end
