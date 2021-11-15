@@ -1,3 +1,5 @@
+/* Cria um arquivo txt com o código para criar os locals identificadores dos bens do datazoom_pof2017.ado */
+
 cd F:/Dados/POF/2017
 
 file open alimentacao using "alimentacao.txt", write replace
@@ -268,6 +270,99 @@ foreach item in `itens'{
 	di as result "local `nome_item' v_DT_`codigo' `nums'"
 	
 	file write despesa "local `nome_item' v_DT_`codigo' `nums'" _n
+	
+	qui restore
+
+}
+
+/* Tradutor de Rendimentos */
+
+cd F:/Dados/POF/2017
+
+file open rendimento using "rendimento.txt", write replace
+
+import excel "F:\Dados\POF\2017\Tradutor_Rendimento.xls", firstrow clear
+drop if Codigo == "Ver arquivo Rendimento Não Monetário" | Codigo == "Ver arquivo Variação Patrimonial"
+destring Codigo, replace
+
+file write rendimento "* Nível 3" _n
+levelsof Descricao_3, local(itens)
+
+foreach item in `itens'{
+
+	qui preserve
+	
+	qui keep if Descricao_3 == "`item'"
+	
+	qui levelsof Codigo, local(nums)
+	
+	qui local nome_item = subinstr("`item'", " ", "_", .)
+	
+	qui levelsof Nivel_3, local(codigos)
+	
+	qui local codigo: word 1 of `codigos'
+	
+	di as result "local `nome_item' v_RE_`codigo' `nums'"
+	
+	file write rendimento "local `nome_item' v_RE_`codigo' `nums'" _n
+	
+	qui restore
+
+}
+
+import excel "F:\Dados\POF\2017\Tradutor_Rendimento.xls", firstrow clear
+drop if Codigo == "Ver arquivo Rendimento Não Monetário" | Codigo == "Ver arquivo Variação Patrimonial"
+destring Codigo, replace
+
+file write rendimento _n "* Nível 2" _n
+levelsof Descricao_2, local(itens)
+
+foreach item in `itens'{
+
+	qui preserve
+	
+	qui keep if Descricao_2 == "`item'"
+	
+	qui levelsof Codigo, local(nums)
+	
+	qui local nome_item = subinstr("`item'", " ", "_", .)
+	
+	qui levelsof Nivel_2, local(codigos)
+	
+	qui local codigo: word 1 of `codigos'
+	
+	di as result "local `nome_item' v_RE_`codigo' `nums'"
+	
+	file write rendimento "local `nome_item' v_RE_`codigo' `nums'" _n
+	
+	qui restore
+
+}
+
+import excel "F:\Dados\POF\2017\Tradutor_Rendimento.xls", firstrow clear
+drop if Codigo == "Ver arquivo Rendimento Não Monetário" | Codigo == "Ver arquivo Variação Patrimonial"
+destring Codigo, replace
+
+file write rendimento _n "* Nível 1" _n
+levelsof Descricao_1, local(itens)
+
+foreach item in `itens'{
+
+	qui preserve
+	
+	qui keep if Descricao_1 == "`item'"
+	
+	qui levelsof Codigo, local(nums)
+	
+	qui local nome_item = subinstr("`item'", " ", "_", .)
+	
+	qui levelsof Nivel_1, local(codigos)
+	
+	qui local codigo: word 1 of `codigos'
+	
+	di as result "local `nome_item' v_RE_`codigo' `nums'"
+	
+	file write rendimento "local `nome_item' v_RE_`codigo' `nums'" _n
 	
 	qui restore
 
