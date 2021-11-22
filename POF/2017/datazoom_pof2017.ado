@@ -89,6 +89,8 @@ syntax, id(string) sel(string) trs(string) temps(string) original(string) [engli
 /* Criando locais para cada item de consumo e seus códigos */
 	// Cada local `item' tem como primeiro elemento o identificados da variável a ser usado como nome
 	// em seguida vem a numlist de todos os códigos que correspondem a ele
+	
+* Obs: Os códigos para a definição dos locals foi gerado a partir do arquivo leitura_tradutores.do, que usa os arquivos de tradutores do IBGE.	
 
 /* Alimentação (arquivo Tradutor_Alimentação) */
 
@@ -355,6 +357,13 @@ forvalues i = 1/`: word count `trs''{
 	gen long cod_item_aux = int(V9001/100) /* Variável identificadora dos bens
 										Os tradutores omitem os últimos 2 dígitos */
 	
+	/* Códigos para padronizar os gastos (deflator, peso, anualização)
+	 Dependendo do registro, a forma de calcular muda
+	 Os códigos do programa abaixo reproduzem o que é feito no arquivo Memórias de Cálculo
+	 Após essas transformações, os gastos podem ser simplesmente somados */
+	
+	variavel_gastos, tr(`tr')
+	
 	cap gen valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO
 	if _rc != 0 gen valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO // Para os registros de rendimentos
 	
@@ -393,4 +402,48 @@ forvalues i = 1/`: word count `sel''{
 	qui save `despesas', replace
 }
 	
+end
+
+program variavel_gastos
+syntax, tr(string)
+
+/* Tabela de Despesa Geral */
+
+if "`tr'" == "tr5"{ // Aluguel Estimado
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+}
+if "`tr'" == "tr2"{ // Despesa Coletiva
+	replace valor_anual_def = V800_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+					*/ if QUADRO == 10 | QUADRO == 19
+	replace valor_anual_def = V800_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+					*/ if QUADRO != 10 & QUADRO != 19
+	gen inss_anual = V1904_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL				
+}
+
+if "`tr'" == "tr3"{ // Caderneta Coletiva
+	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL
+}
+if "`tr'" == "tr4"{ // Despesa Individual
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+					*/ if QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+					*/ QUADRO == 49 | QUADRO == 50
+	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL /*
+					*/ if !(QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+					*/ QUADRO == 49 | QUADRO == 50)			
+}
+
+if "`tr'" == "tr6"{ // Rendimento do Trabalho
+	* "valores de deduções com previdência pública, imposto de renda, e ISS e outros impostos..."
+	gen prev_pub_anual = V531112_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+	gen imp_renda_anual = V531122_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+	gen prev_pub_anual = V531132_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+}
+if "`tr'" == "tr7"{ // Outros Rendimentos
+	gen deducao_anual = .
+	replace deducao_anual = V8501_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO == 54
+	replace deducao_anual = V8501_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO != 54
+}
+
+/* Tabela de Rendimento */
+
 end
