@@ -40,7 +40,7 @@ else if "`sel'" != ""{
 }
 else{
 	foreach type in `id'{
-		pofstd_17, id(`type') trs(`trs') temps(`bases') original(`original') `english'
+		pofstd_17, id(`type') temps(`bases') original(`original') `english'
 	
 		cd "`saving'"
 		save "pof2017_`type'_standard", replace
@@ -92,7 +92,7 @@ syntax, id(string) sel(string) trs(string) temps(string) original(string) [engli
 	
 * Obs: Os códigos para a definição dos locals foi gerado a partir do arquivo leitura_tradutores.do, que usa os arquivos de tradutores do IBGE.	
 
-if "`sel'" == "Todos" local sel Variação_Patrimonial Rendimento_Total Transferência Rendimento_do_Trabalho Rendimento_de_aluguel Outras_rendas Programas_sociais_federais Pensão_aliment_mesada_ou_doação Outras_Transferências Aposentadoria_pensão_prev_pub Aposentadoria_pensão_prev_priv Aposentadoria_e_pensão_INSS Empregador Empregado Conta_propria Despesa_Total Diminuição_do_passivo Despesas_Correntes Aumento_do_ativo Prestação_de_imóvel Empréstimo Outras_despesas_correntes Despesas_de_consumo Despesas_de_Consumo Outros_investimentos Imóvel_reforma Imóvel_aquisição Serviços_bancários Previdência_privada Pensões_mesadas_e_doações Impostos Outras_outras_desp_correntes Contribuições_trabalhistas Fumo Vestuario Transporte Serviços_pessoais Recreação_e_cultura Higiene_e_cuidados_pessoais Habitacao Educacao Despesas_diversas Assistencia_a_saude Tecidos_e_armarinhos Roupa_de_mulher Roupa_de_homem Roupa_de_crianca Joias_e_bijuterias Calcados_e_apetrechos Álcool_veículo_próprio Viagens_esporadicas Urbano Outras_transporte Manutencao_e_acessorios Gasolina_veiculo_proprio Aquisicao_de_veiculos Outras_servicos_pessoais Manicure_e_pedicure Conserto_de_artigos_pessoais Cabeleireiro Recreações_e_esportes Periódicos_livros_revistas_nãod Outras_recreacao_cultura Celular_e_acessórios Brinquedos_e_jogos Sabonete Produtos_para_cabelo Perfume Instrumentos_produt_uso_pessoal Servicos_e_taxas Mobiliario_e_artigos_do__lar Manutencao_do_lar Eletrodomesticos Consertos_de_artigos_do_lar Condominio Artigos_de_limpeza Aluguel Outros_cursos_e_atividades Outras_educacao Livros_didaticos_e_revistas_tec Cursos_superiores Cursos_regulares Artigos_escolares Serviços_profissionais Outras_despesas_diversas Jogos_e_apostas Imóveis_de_uso_ocasional Comunicação Cerimônias_e_festas Tratamento_medico_e_ambulatoria Servico_de_cirurgia Remedios Plano_seguro_saude Outras_assistencia_saude Material_de_tratamento Hospitalizacao Exames_diversos Consulta_medica Consulta_e_tratamento_dentario Telefone_fixo Telefone_celular Pacote_de_telefone_tv_internet Outros_servicos_e_taxas Gas_domestico Energia_eletrica Agua_e_esgoto Aluguel_não_monetario Aluguel_monetario Alimentação Alimentação_no_domicílio Alimentação_fora_do_domicílio Óleos_e_gorduras Tubérculos_e_raízes Sal_e_condimentos Panificados Outros_alimentacao_no_Dom Leites_e_derivados Legumes_e_verduras Frutas Farinhas_féculas_e_massas Enlatados_e_conservas Cereais_leguminosas_oleaginosas Carnes_vísceras_e_pescados Bebidas_e_infusões Açúcares_e_derivados Acucar_Light_e_Diet Aves_e_ovos Alimentos_preparados Sanduíches_e_salgados Refrigerantes_e_outras_nãoalcoo Outras_alimentacao_fora_Dom Lanches Cervejas_chopes_outras_alcool Café_leite_caféleite_chocolate Almoço_e_jantar Alimentação_light_e_diet Óleo_de_soja Outros_oleos_gorduras Azeite_de_oliva Outros_tuberculos_raizes Mandioca Cenoura Batata_inglesa Sal_refinado Outros_sal_condimentos Massa_de_tomate Maionese Pão_francês Outros_panificados Paes_Light_e_diet Biscoito Queijos Outros_leites_derivados Leites_derivados_Orgânicos Leite_Light_e_Diet Leite_em_pó Leite_de_vaca Tomate Outros_legumes_verduras Cebola Alface Outras_frutas Maçã Laranja Banana Outras_farinhas_fec_massas Macarrão Farinha_de_trigo Farinha_de_mandioca Outros_cereais_leg_oleag Feijão Arroz Cereais_Orgânicos Pescados_frescos Outros_carnes_visc_pescados Carnes_peixes_industrializados Carne_de_suíno Carne_de_boi_de_segunda Carne_de_boi_de_primeira Refrigerantes Outras_bebidas_alcoólicas Outras_Bebidas_Infusoes Cervejas_e_chopes Café_moído Bebidas_nãoalcoól_light_e_diet Outros_Acucares_Derivados Açúcar_refinado Açúcar_cristal Ovo_de_galinha Outros_Aves_Ovos Frango
+if "`sel'" == "Todos" local sel Variação_Patrimonial Rendimento_Total Transferência Rendimento_do_Trabalho Rendimento_de_aluguel Outras_rendas Programas_sociais_federais Pensão_aliment_mesada_ou_doação Outras_Transferências Aposentadoria_pensão_prev_pub Aposentadoria_pensão_prev_priv Aposentadoria_e_pensão_INSS Empregador Empregado Conta_propria Despesa_Total Diminuição_do_passivo Despesas_Correntes Aumento_do_ativo Prestação_de_imóvel Empréstimo Outras_despesas_correntes Despesas_de_consumo Despesas_de_Consumo Outros_investimentos Imóvel_reforma Imóvel_aquisição Serviços_bancários Previdência_privada Pensões_mesadas_e_doações Impostos Outras_outras_desp_correntes Contribuições_trabalhistas Fumo Vestuario Transporte Serviços_pessoais Recreação_e_cultura Higiene_e_cuidados_pessoais Habitacao Educacao Despesas_diversas Assistencia_a_saude Tecidos_e_armarinhos Roupa_de_mulher Roupa_de_homem Roupa_de_crianca Joias_e_bijuterias Calcados_e_apetrechos Álcool_veículo_próprio Viagens_esporadicas Transporte_Urbano Outras_transporte Manutencao_e_acessorios Gasolina_veiculo_proprio Aquisicao_de_veiculos Outras_servicos_pessoais Manicure_e_pedicure Conserto_de_artigos_pessoais Cabeleireiro Recreações_e_esportes Periódicos_livros_revistas_nãod Outras_recreacao_cultura Celular_e_acessórios Brinquedos_e_jogos Sabonete Produtos_para_cabelo Perfume Instrumentos_produt_uso_pessoal Servicos_e_taxas Mobiliario_e_artigos_do__lar Manutencao_do_lar Eletrodomesticos Consertos_de_artigos_do_lar Condominio Artigos_de_limpeza Aluguel Outros_cursos_e_atividades Outras_educacao Livros_didaticos_e_revistas_tec Cursos_superiores Cursos_regulares Artigos_escolares Serviços_profissionais Outras_despesas_diversas Jogos_e_apostas Imóveis_de_uso_ocasional Comunicação Cerimônias_e_festas Tratamento_medico_e_ambulatoria Servico_de_cirurgia Remedios Plano_seguro_saude Outras_assistencia_saude Material_de_tratamento Hospitalizacao Exames_diversos Consulta_medica Consulta_e_tratamento_dentario Telefone_fixo Telefone_celular Pacote_de_telefone_tv_internet Outros_servicos_e_taxas Gas_domestico Energia_eletrica Agua_e_esgoto Aluguel_não_monetario Aluguel_monetario Alimentação Alimentação_no_domicílio Alimentação_fora_do_domicílio Óleos_e_gorduras Tubérculos_e_raízes Sal_e_condimentos Panificados Outros_alimentacao_no_Dom Leites_e_derivados Legumes_e_verduras Frutas Farinhas_féculas_e_massas Enlatados_e_conservas Cereais_leguminosas_oleaginosas Carnes_vísceras_e_pescados Bebidas_e_infusões Açúcares_e_derivados Acucar_Light_e_Diet Aves_e_ovos Alimentos_preparados Sanduíches_e_salgados Refrigerantes_e_outras_nãoalcoo Outras_alimentacao_fora_Dom Lanches Cervejas_chopes_outras_alcool Café_leite_caféleite_chocolate Almoço_e_jantar Alimentação_light_e_diet Óleo_de_soja Outros_oleos_gorduras Azeite_de_oliva Outros_tuberculos_raizes Mandioca Cenoura Batata_inglesa Sal_refinado Outros_sal_condimentos Massa_de_tomate Maionese Pão_francês Outros_panificados Paes_Light_e_diet Biscoito Queijos Outros_leites_derivados Leites_derivados_Orgânicos Leite_Light_e_Diet Leite_em_pó Leite_de_vaca Tomate Outros_legumes_verduras Cebola Alface Outras_frutas Maçã Laranja Banana Outras_farinhas_fec_massas Macarrão Farinha_de_trigo Farinha_de_mandioca Outros_cereais_leg_oleag Feijão Arroz Cereais_Orgânicos Pescados_frescos Outros_carnes_visc_pescados Carnes_peixes_industrializados Carne_de_suíno Carne_de_boi_de_segunda Carne_de_boi_de_primeira Refrigerantes Outras_bebidas_alcoólicas Outras_Bebidas_Infusoes Cervejas_e_chopes Café_moído Bebidas_nãoalcoól_light_e_diet Outros_Acucares_Derivados Açúcar_refinado Açúcar_cristal Ovo_de_galinha Outros_Aves_Ovos Frango
 
 
 ************************************************
@@ -443,7 +443,7 @@ local Aquisicao_de_veiculos v_DT_110405  50015/50015 51001/51009 51011/51013 510
 local Gasolina_veiculo_proprio v_DT_110402  23014/23015
 local Manutencao_e_acessorios v_DT_110404  23021/23021 33001/33067 33999/33999
 local Outras_transporte v_DT_110407  23010/23010 23017/23020 23022/23022 50002/50003 50009/50013 50999/50999
-local Urbano v_DT_110401  23001/23009 23011/23013 23023/23032 23999/23999 48028/48028
+local Transporte_Urbano v_DT_110401  23001/23009 23011/23013 23023/23032 23999/23999 48028/48028
 local Viagens_esporadicas v_DT_110406  41002/41016 41018/41018 41027/41043 41058/41058 41063/41064 41068/41068 41999/41999
 local Álcool_veículo_próprio v_DT_110403  23016/23016
 
@@ -661,13 +661,16 @@ forvalues i = 1/`: word count `sel''{
 	qui save `despesas', replace
 }
 
+tempfile base_dom
+load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
+
+if "`id'" == "dom" merge 1:1 `variaveis_ID' using `despesas', nogen
+
+else merge 1:n `variaveis_ID' using `despesas', nogen
+
 if "`id'" == "pess"{
 	tempfile base_morador
-	load_pof17, trs(tr1)
-}
-else if "`id'" == "dom"{
-	tempfile base_dom
-	load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
+	load_pof17, trs(tr1) temps(`base_morador') original(`original') `english'
 	
 	merge 1:1 `variaveis_ID' using `despesas', nogen
 }
@@ -727,5 +730,54 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 /* Tabela de Rendimento Não Monetário */
 
 /* Tabela de Variação Patrimonial */
+
+end
+
+program pofstd_17
+syntax, id(string) temps(string) original(string) [english]
+
+/* Inclui:
+	- Despesas Alimentares de nível 2 (v_DA_xxx)
+	- Despesas Gerais de nível 4 (v_DT_xxxxxx)
+	- Despesas Gerais de nível 3 que não têm subdivisão no nível 4 (v_DT_xxxx)
+	- Despesas Gerais de nível 2 que não têm subdivisão
+*/
+
+local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leite_caféleite_chocolate Cervejas_chopes_outras_alcool Lanches Outras_alimentacao_fora_Dom /*
+	*/ Refrigerantes_e_outras_nãoalcoo Sanduíches_e_salgados /* Alimentação fora do domicílio
+	
+	*/ Alimentos_preparados Aves_e_ovos Açúcares_e_derivados Bebidas_e_infusões Carnes_vísceras_e_pescados Cereais_leguminosas_oleaginosas Enlatados_e_conservas /*
+	*/ Farinhas_féculas_e_massas Frutas Legumes_e_verduras Leites_e_derivados Outros_alimentacao_no_Dom Panificados Sal_e_condimentos Tubérculos_e_raízes /*
+	*/ Óleos_e_gorduras /* Alimentação fora do domicílio
+	
+	*/ Consulta_e_tratamento_dentario Consulta_medica Exames_diversos Hospitalizacao Material_de_tratamento Outras_assistencia_saude Plano_seguro_saude /*
+	*/ Remedios Servico_de_cirurgia Tratamento_medico_e_ambulatoria /* Assistência à saúde
+	
+	*/ Cerimônias_e_festas Comunicação Imóveis_de_uso_ocasional Jogos_e_apostas Outras_despesas_diversas Serviços_profissionais /* Despesas diversas 
+	
+	*/ Artigos_escolares Cursos_regulares Cursos_superiores Livros_didaticos_e_revistas_tec Outras_educacao Outros_cursos_e_atividades /* Educação
+	
+	*/ Aluguel Artigos_de_limpeza Condominio Consertos_de_artigos_do_lar Eletrodomesticos Manutencao_do_lar Mobiliario_e_artigos_do__lar Servicos_e_taxas /* Habitação 
+	
+	*/ Instrumentos_produt_uso_pessoal Perfume Produtos_para_cabelo Sabonete /* Higiene e cuidados pessoais 
+	
+	*/ Brinquedos_e_jogos Celular_e_acessórios Outras_recreacao_cultura Periódicos_livros_revistas_nãod Recreações_e_esportes /* Recreação e cultura 
+	
+	*/ Cabeleireiro Conserto_de_artigos_pessoais Manicure_e_pedicure Outras_servicos_pessoais /* Serviços pessoais 
+	
+	*/ Aquisicao_de_veiculos Gasolina_veiculo_proprio Manutencao_e_acessorios Outras_transporte Transporte_Urbano Viagens_esporadicas Álcool_veículo_próprio /* Transporte 
+	
+	*/ Calcados_e_apetrechos Joias_e_bijuterias Roupa_de_crianca Roupa_de_homem Roupa_de_mulher Tecidos_e_armarinhos /* Vestuário
+	
+	*/ Fumo /* Despesas de Consumo
+	
+	*/ Contribuições_trabalhistas Impostos Outras_outras_desp_correntes Pensões_mesadas_e_doações Previdência_privada Serviços_bancários /* Outras despesas correntes 
+	
+	*/ Imóvel_aquisição Imóvel_reforma Outros_investimentos /* Aumento do ativo
+	
+	*/ Empréstimo Prestação_de_imóvel /* Diminuição do passivo 
+*/
+
+pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`bases') original(`original') `english'
 
 end
