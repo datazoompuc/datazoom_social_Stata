@@ -711,6 +711,21 @@ if "`tr'" == "tr4"{ // Despesa Individual
 					*/ QUADRO == 49 | QUADRO == 50)			
 }
 
+/* Tabela de Rendimento */
+
+if "`tr'" == "tr6"{ // Rendimento do Trabalho
+	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO
+}
+if "`tr'" == "tr7"{ // Outros Rendimentos
+	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO if QUADRO == 54
+	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
+}
+
+end
+
+program calc_deducoes
+syntax, 
+
 if "`tr'" == "tr6"{ // Rendimento do Trabalho
 	* "valores de deduções com previdência pública, imposto de renda, e ISS e outros impostos..."
 	gen prev_pub_anual = V531112_DEFLA * V9011 * FATOR_ANUALIZACAO
@@ -723,15 +738,10 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 	replace deducao_anual = V8501_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
 }
 
-/* Tabela de Rendimento */
+end
 
-if "`tr'" == "tr6"{ // Rendimento do Trabalho
-	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO
-}
-if "`tr'" == "tr7"{ // Outros Rendimentos
-	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO if QUADRO == 54
-	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
-}
+program calc_renda_nao_monetaria
+syntax, 
 
 /* Tabela de Rendimento Não Monetário
 
@@ -743,9 +753,26 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 */	
 
 if "`rend_nao_monet'" != ""{
-	if "`tr'" == {
-		gen 
+	if "`tr'" == "tr2" { // Despesa Coletiva
+		gen desp_nao_monet  = .
+		replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+						*/ if (V9002 >= 7 & V9002 <= 11) & (QUADRO == 10 | QUADRO == 19)
+		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
+						*/ if (V9002 >= 7 & V9002 <= 11) & !(QUADRO == 10 | QUADRO == 19)				
 	}
+	if "`tr'" == "tr3"{ // Caderneta Coletiva
+		gen desp_nao_monet  = .
+		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO if V9002 >= 7 & V9002 <= 11
+	}
+	if "`tr'" == "tr4"{ // Despesa Individual
+		gen desp_nao_monet  = .
+		replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+						*/ if (QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+						*/ QUADRO == 49 | QUADRO == 50) & (V9002 >= 7 & V9002 <= 11)
+		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
+						*/ if !(QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+						*/ QUADRO == 49 | QUADRO == 50)	& (V9002 >= 7 & V9002 <= 11)		
+}
 }
 
 /* Tabela de Variação Patrimonial */
@@ -755,6 +782,9 @@ if "`var_patrimonial'" != ""{
 }
 
 end
+
+program calc_variacao_patrimonial
+syntax, 
 
 program pofstd_17
 syntax, id(string) trs(string) temps(string) original(string) [english]
