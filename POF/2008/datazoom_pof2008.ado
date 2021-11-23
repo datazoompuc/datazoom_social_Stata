@@ -711,10 +711,10 @@ lab var urbano "1 area urbana; 0 area rural"
 if "`id'" == "pess" {
 	preserve
 	tempfile tr2
-	load_pof08, trs(tr2) temps(`base_dom') original(`original') `english'
+	load_pof08, trs(tr2) temps(`tr2') original(`original') `english'
 	restore
 
-		merge 1:1 `variaveis_ID' using `tr2', nogen keep(match)
-	}
+	merge 1:1 `variaveis_ID' using `tr2', nogen keep(match)
+}
 
 end
