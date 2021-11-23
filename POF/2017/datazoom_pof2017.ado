@@ -92,7 +92,8 @@ syntax, id(string) sel(string) trs(string) temps(string) original(string) [engli
 	
 * Obs: Os códigos para a definição dos locals foi gerado a partir do arquivo leitura_tradutores.do, que usa os arquivos de tradutores do IBGE.	
 
-if "`sel'" == "Todos" local sel Despesa_Total Diminuição_do_passivo Despesas_Correntes Aumento_do_ativo Prestação_de_imóvel Empréstimo Outras_despesas_correntes Despesas_de_consumo Despesas_de_Consumo Outros_investimentos Imóvel_reforma Imóvel_aquisição Serviços_bancários Previdência_privada Pensões_mesadas_e_doações Impostos Contribuições_trabalhistas Fumo Vestuario Transporte Serviços_pessoais Recreação_e_cultura Higiene_e_cuidados_pessoais Habitacao Educacao Despesas_diversas Assistencia_a_saude Tecidos_e_armarinhos Roupa_de_mulher Roupa_de_homem Roupa_de_crianca Joias_e_bijuterias Calcados_e_apetrechos Álcool_veículo_próprio Viagens_esporadicas Urbano Outras_transporte Manutencao_e_acessorios Gasolina_veiculo_proprio Aquisicao_de_veiculos Outras_servicos_pessoais Manicure_e_pedicure Conserto_de_artigos_pessoais Cabeleireiro Recreações_e_esportes Periódicos_livros_revistas_nãod Outras_recreacao_cultura Celular_e_acessórios Brinquedos_e_jogos Sabonete Produtos_para_cabelo Perfume Instrumentos_produt_uso_pessoal Servicos_e_taxas Mobiliario_e_artigos_do__lar Manutencao_do_lar Eletrodomesticos Consertos_de_artigos_do_lar Condominio Artigos_de_limpeza Aluguel Outros_cursos_e_atividades Outras_educacao Livros_didaticos_e_revistas_tec Cursos_superiores Cursos_regulares Artigos_escolares Serviços_profissionais Outras_despesas_diversas Jogos_e_apostas Imóveis_de_uso_ocasional Comunicação Cerimônias_e_festas Tratamento_medico_e_ambulatoria Servico_de_cirurgia Remedios Plano_seguro_saude Outras Material_de_tratamento Hospitalizacao Exames_diversos Consulta_medica Consulta_e_tratamento_dentario Pacote_de_telefone Telefone_fixo Telefone_celular Pacote_de_telefone_tv_internet Outros_servicos_e_taxas Gas_domestico Energia_eletrica Agua_e_esgoto Aluguel_não_monetario Aluguel_monetario Alimentação Alimentação_no_domicílio Alimentação_fora_do_domicílio Óleos_e_gorduras Tubérculos_e_raízes Sal_e_condimentos Panificados Outros_alimentacao_no_Dom Leites_e_derivados Legumes_e_verduras Frutas Farinhas_féculas_e_massas Enlatados_e_conservas Cereais_leguminosas_oleaginosas Carnes_vísceras_e_pescados Bebidas_e_infusões Açúcares_e_derivados Aves_e_ovos Alimentos_preparados Sanduíches_e_salgados Refrigerantes_e_outras_nãoalcoo Outras_alimentacao_fora_Dom Lanches Cervejas_chopes_outras_alcool Café_leite_café Almoço_e_jantar Alimentação_light_e_diet Óleo_de_soja Outros_oleos_gorduras Azeite_de_oliva Outros_tuberculos_raizes Mandioca Cenoura Batata_inglesa Sal_refinado Outros_sal_condimentos Massa_de_tomate Maionese Pão_francês Outros_panificados Light_e_diet Biscoito Queijos Outros_leites_derivados Orgânicos Light_e_Diet Leite_em_pó Leite_de_vaca Tomate Outros_legumes_verduras Cebola Alface Outras_frutas Maçã Laranja Banana Outras_farinhas_fec_massas Macarrão Farinha_de_trigo Farinha_de_mandioca Outros_cereais_leg_oleag Feijão Arroz Pescados_frescos Outros_carnes_visc_pescados Carnes_peixes_industrializados Carne_de_suíno Carne_de_boi_de_segunda Carne_de_boi_de_primeira Refrigerantes Outras_bebidas_alcoólicas Outras_Bebidas_Infusoes Cervejas_e_chopes Café_moído Bebidas_nãoalcoól_light_e_diet Outros_Acucares_Derivados Açúcar_refinado Açúcar_cristal Ovo_de_galinha Outros_Aves_Ovos Frango
+if "`sel'" == "Todos" local sel Variação_Patrimonial Rendimento_Total Transferência Rendimento_do_Trabalho Rendimento_de_aluguel Outras_rendas Programas_sociais_federais Pensão_aliment_mesada_ou_doação Outras_Transferências Aposentadoria_pensão_prev_pub Aposentadoria_pensão_prev_priv Aposentadoria_e_pensão_INSS Empregador Empregado Conta_propria Despesa_Total Diminuição_do_passivo Despesas_Correntes Aumento_do_ativo Prestação_de_imóvel Empréstimo Outras_despesas_correntes Despesas_de_consumo Despesas_de_Consumo Outros_investimentos Imóvel_reforma Imóvel_aquisição Serviços_bancários Previdência_privada Pensões_mesadas_e_doações Impostos Contribuições_trabalhistas Fumo Vestuario Transporte Serviços_pessoais Recreação_e_cultura Higiene_e_cuidados_pessoais Habitacao Educacao Despesas_diversas Assistencia_a_saude Tecidos_e_armarinhos Roupa_de_mulher Roupa_de_homem Roupa_de_crianca Joias_e_bijuterias Calcados_e_apetrechos Álcool_veículo_próprio Viagens_esporadicas Urbano Outras_transporte Manutencao_e_acessorios Gasolina_veiculo_proprio Aquisicao_de_veiculos Outras_servicos_pessoais Manicure_e_pedicure Conserto_de_artigos_pessoais Cabeleireiro Recreações_e_esportes Periódicos_livros_revistas_nãod Outras_recreacao_cultura Celular_e_acessórios Brinquedos_e_jogos Sabonete Produtos_para_cabelo Perfume Instrumentos_produt_uso_pessoal Servicos_e_taxas Mobiliario_e_artigos_do__lar Manutencao_do_lar Eletrodomesticos Consertos_de_artigos_do_lar Condominio Artigos_de_limpeza Aluguel Outros_cursos_e_atividades Outras_educacao Livros_didaticos_e_revistas_tec Cursos_superiores Cursos_regulares Artigos_escolares Serviços_profissionais Outras_despesas_diversas Jogos_e_apostas Imóveis_de_uso_ocasional Comunicação Cerimônias_e_festas Tratamento_medico_e_ambulatoria Servico_de_cirurgia Remedios Plano_seguro_saude Outras Material_de_tratamento Hospitalizacao Exames_diversos Consulta_medica Consulta_e_tratamento_dentario Telefone_fixo Telefone_celular Pacote_de_telefone_tv_internet Outros_servicos_e_taxas Gas_domestico Energia_eletrica Agua_e_esgoto Aluguel_não_monetario Aluguel_monetario Alimentação Alimentação_no_domicílio Alimentação_fora_do_domicílio Óleos_e_gorduras Tubérculos_e_raízes Sal_e_condimentos Panificados Outros_alimentacao_no_Dom Leites_e_derivados Legumes_e_verduras Frutas Farinhas_féculas_e_massas Enlatados_e_conservas Cereais_leguminosas_oleaginosas Carnes_vísceras_e_pescados Bebidas_e_infusões Açúcares_e_derivados Aves_e_ovos Alimentos_preparados Sanduíches_e_salgados Refrigerantes_e_outras_nãoalcoo Outras_alimentacao_fora_Dom Lanches Cervejas_chopes_outras_alcool Café_leite_café Almoço_e_jantar Alimentação_light_e_diet Óleo_de_soja Outros_oleos_gorduras Azeite_de_oliva Outros_tuberculos_raizes Mandioca Cenoura Batata_inglesa Sal_refinado Outros_sal_condimentos Massa_de_tomate Maionese Pão_francês Outros_panificados Light_e_diet Biscoito Queijos Outros_leites_derivados Orgânicos Light_e_Diet Leite_em_pó Leite_de_vaca Tomate Outros_legumes_verduras Cebola Alface Outras_frutas Maçã Laranja Banana Outras_farinhas_fec_massas Macarrão Farinha_de_trigo Farinha_de_mandioca Outros_cereais_leg_oleag Feijão Arroz Pescados_frescos Outros_carnes_visc_pescados Carnes_peixes_industrializados Carne_de_suíno Carne_de_boi_de_segunda Carne_de_boi_de_primeira Refrigerantes Outras_bebidas_alcoólicas Outras_Bebidas_Infusoes Cervejas_e_chopes Café_moído Bebidas_nãoalcoól_light_e_diet Outros_Acucares_Derivados Açúcar_refinado Açúcar_cristal Ovo_de_galinha Outros_Aves_Ovos Frango
+
 
 ************************************************
 ** Alimentação (arquivo Tradutor_Alimentação) **
@@ -347,12 +348,9 @@ local Agua_e_esgoto v_DT_1102036  6002/6002 6018/6018 12017/12017 12027/12027
 local Energia_eletrica v_DT_1102031  6001/6001
 local Gas_domestico v_DT_1102035  6003/6003 7001/7001
 local Outros_servicos_e_taxas v_DT_1102037  6005/6006 6999/6999 10999/10999 12003/12003 12005/12012 12014/12016 12018/12026 12028/12030 12032/12034 12036/12036 12999/12999
-local Pacote_de_telefone_tv_internet v_DT_1102034  6007/6017
+local Pacote_de_telefone_tv_internet v_DT_1102034  6007/6017 28030/28030
 local Telefone_celular v_DT_1102033  44001/44003 44007/44007
 local Telefone_fixo v_DT_1102032  6004/6004
-
-* Servidos e taxas
-local Pacote_de_telefone,_tv_e_internet v_DT_1102034  28030/28030
 
 * Serviços profissionais
 
@@ -512,7 +510,8 @@ local Diminuição_do_passivo v_DT_3  10003/10003 10008/10008 48001/48003 48022/
 
 /* Nível 0 */
 
-local Despesa_Total v_DT_0  1/233 239/239 250/250 259/260 269/270 279/280 289/290 299/306 309/310 319/320 329/330 339/340 349/350 359/360 369/370 379/380 389/392 399/403 409/410 419/421 429/430 439/440 449/450 459/460 469/470 479/480 489/491 499/512 519/519 530/530 540/540 550/550 599/610 699/711 799/808 860/861 870/870 880/880 890/890 899/923 999/1080 1082/1110 1199/1203 1299/1300 1399/1399 1500/1512 1599/1604 1699/1711 1799/1804 1899/1901 1999/1999 2001/2104 2199/2203 2299/2303 2399/2399 2500/2500 2599/2601 2699/2702 2799/2808 2899/2908 2999/3067 3099/3104 3199/3208 3299/3306 3399/3403 3499/3504 3599/3605 3699/3702 3799/3805 3899/3923 3999/4035 4099/4107 4199/4210 4299/4305 4399/4400 4499/4503 4599/4600 4699/4702 4799/4803 4899/4913 4999/5124 5199/5199 5300/5300 5400/5403 5500/5506 5999/5999 6001/6054 6056/6058 6061/6081 6085/6086 6089/6089 6091/6091 6093/6093 6095/6095 6097/6097 6099/6104 6999/6999 7001/7084 7086/7111 7113/7113 7999/7999 8001/8083 8600/8610 8700/8702 8800/8800 8900/8900 8999/8999 9001/9233 9999/9999 10001/10016 10999/10999 11001/11080 11082/11104 11999/11999 12001/12036 12999/12999 13001/13009 13999/13999 15001/15124 15999/15999 16001/16039 16041/16041 16999/16999 17001/17084 17086/17111 17113/17113 17999/17999 18001/18045 18999/18999 19001/19017 19999/19999 21001/21025 21999/21999 22001/22032 22999/22999 23001/23032 23999/23999 25001/25005 25999/25999 26001/26015 26999/26999 27001/27028 27999/27999 28001/28054 28056/28083 28999/28999 29001/29086 29088/29089 29999/29999 30001/30036 30999/30999 31001/31046 31999/31999 32001/32063 32065/32072 32074/32086 32999/32999 33001/33067 33999/33999 34001/34030 34999/34999 35001/35047 35999/35999 36001/36054 36999/36999 37001/37024 37999/37999 38001/38055 38999/38999 39001/39233 39999/39999 40001/40019 40999/40999 41002/41069 41071/41072 41999/41999 42001/42104 42999/42999 43001/43057 43999/43999 44001/44009 44999/44999 45001/45030 45999/45999 46001/46007 46999/46999 47001/47029 47999/47999 48001/480
+local Despesa_Total v_DT_0  1/233 239/239 250/250 259/260 269/270 279/280 289/290 299/306 309/310 319/320 329/330 339/340 349/350 359/360 369/370 379/380 389/392 399/403 409/410 419/421 429/430 439/440 449/450 459/460 469/470 479/480 489/491 499/512 519/519 530/530 540/540 550/550 599/610 699/711 799/808 860/861 870/870 880/880 890/890 899/923 999/1080 1082/1110 1199/1203 1299/1300 1399/1399 1500/1512 1599/1604 1699/1711 1799/1804 1899/1901 1999/1999 2001/2104 2199/2203 2299/2303 2399/2399 2500/2500 2599/2601 2699/2702 2799/2808 2899/2908 2999/3067 3099/3104 3199/3208 3299/3306 3399/3403 3499/3504 3599/3605 3699/3702 3799/3805 3899/3923 3999/4035 4099/4107 4199/4210 4299/4305 4399/4400 4499/4503 4599/4600 4699/4702 4799/4803 4899/4913 4999/5124 5199/5199 5300/5300 5400/5403 5500/5506 5999/5999 6001/6054 6056/6058 6061/6081 6085/6086 6089/6089 6091/6091 6093/6093 6095/6095 6097/6097 6099/6104 6999/6999 7001/7084 7086/7111 7113/7113 7999/7999 8001/8083 8600/8610 8700/8702 8800/8800 8900/8900 8999/8999 9001/9233 9999/9999 10001/10016 10999/10999 11001/11080 11082/11104 11999/11999 12001/12036 12999/12999 13001/13009 13999/13999 15001/15124 15999/15999 16001/16039 16041/16041 16999/16999 17001/17084 17086/17111 17113/17113 17999/17999 18001/18045 18999/18999 19001/19017 19999/19999 21001/21025 21999/21999 22001/22032 22999/22999 23001/23032 23999/23999 25001/25005 25999/25999 26001/26015 26999/26999 27001/27028 27999/27999 28001/28054 28056/28083 28999/28999 29001/29086 29088/29089 29999/29999 30001/30036 30999/30999 31001/31046 31999/31999 32001/32063 32065/32072 32074/32086 32999/32999 33001/33067 33999/33999 34001/34030 34999/34999 35001/35047 35999/35999 36001/36054 36999/36999 37001/37024 37999/37999 38001/38055 38999/38999 39001/39233 39999/39999 40001/40019 40999/40999 41002/41069 41071/41072 41999/41999 42001/42104 42999/42999 43001/43057 43999/43999 44001/44009 44999/44999 45001/45030 45999/45999 46001/46007 46999/46999 47001/47029 47999/47999 48001/48017 48019/48037 48999/48999 49001/49074 49076/49088 49090/49132 49999/49999 50001/50017 50999/50999 51001/51025 51999/51999 53001/53006 54001/54035 55001/55067 86001/86003 86007/86008 86011/86026 86028/86036 86039/86046 86048/86050 86052/86054 86056/86058 86061/86081 86085/86086 86089/86089 86091/86091 86093/86093 86095/86095 86097/86097 86099/86104 87001/87014 87016/87016 87018/87021 88001/88002 89001/89001
+
 
 *****************************************
 ** Rendimento (Tradutor de Rendimento) **
@@ -531,10 +530,10 @@ local Empregador v_RE_112  53005/53005 55012/55012
 
 * Transferência
 local Aposentadoria_e_pensão_INSS v_RE_121  54004/54005 55003/55004 55050/55050
-local Aposentadoria_e_pensão_previdência_privada v_RE_123  54008/54008 54029/54029 55007/55007 55033/55033 55047/55047
-local Aposentadoria_e_pensão_previdência_publica v_RE_122  54006/54007 54031/54031 55005/55006 55064/55064
+local Aposentadoria_pensão_prev_priv v_RE_123  54008/54008 54029/54029 55007/55007 55033/55033 55047/55047
+local Aposentadoria_pensão_prev_pub v_RE_122  54006/54007 54031/54031 55005/55006 55064/55064
 local Outras_Transferências v_RE_126  54003/54003 54009/54010 54023/54023 54027/54027 54030/54030 55009/55009 55017/55019 55027/55032 55034/55034 55036/55036 55045/55045 55049/55049 55051/55052 55054/55055 55059/55059 55062/55062 55065/55066
-local Pensão_alimentícia,_mesada_ou_doação v_RE_125  54011/54013 55057/55057 55063/55063
+local Pensão_aliment_mesada_ou_doação v_RE_125  54011/54013 55057/55057 55063/55063
 local Programas_sociais_federais v_RE_124  54001/54002 54024/54024 55056/55056
 
 /* Nível 2 */
@@ -543,7 +542,7 @@ local Programas_sociais_federais v_RE_124  54001/54002 54024/54024 55056/55056
 local Outras_rendas v_RE_14  54018/54019 54035/54035 55041/55041 55046/55046 55048/55048 55060/55060 55067/55067
 local Rendimento_de_aluguel v_RE_13  54014/54015
 local Rendimento_do_Trabalho v_RE_11  53001/53006 54016/54017 54020/54022 54025/54026 54028/54028 54032/54034 55001/55002 55011/55015 55038/55040 55042/55043 55058/55058
-local Transferência v_RE_12  54001/54013 54023/54024 54027/5
+local Transferência v_RE_12  54001/54013 54023/54024 54027/54027 54029/54031 55003/55007 55009/55009 55017/55019 55027/55034 55036/55036 55045/55045 55047/55047 55049/55052 55054/55057 55059/55059 55062/55066
 
 /* Nível 1 */
 	// Rendimento Total inclui o Não Monetário
@@ -610,13 +609,19 @@ forvalues i = 1/`: word count `trs''{
 	 Os códigos do programa abaixo reproduzem o que é feito no arquivo Memórias de Cálculo
 	 Após essas transformações, os gastos podem ser simplesmente somados */
 	
+	gen valor_anual_def = .
+	
 	variavel_gastos, tr(`tr')
 	
 	keep `variaveis_ID' cod_item_aux valor_anual_def
 	
-	cap append using `gastos'
-	save `gastos', replace
-}	
+	save `base', replace
+}
+
+clear
+
+append using `temps'
+save `gastos', replace	
 
 tempfile despesas
 
@@ -632,22 +637,37 @@ forvalues i = 1/`: word count `sel''{
 	
 	gen item = .
 	
-	foreach n of numlist `codigo'{
-		replace item = 1 if cod_item_aux == `n' 
+	foreach cod in `codigo'{
+		foreach n of numlist `cod'{
+			replace item = 1 if cod_item_aux == `n' 
+		}
 	}
 	keep if item == 1
+	if _N == 0{
+		di "Sem observações para `item' a esse nível de id"
+		continue
+	}
 	
 	/* Agregação */
-	by `variaveis_ID': collapse (sum) valor_anual_def
+	collapse (sum) valor_anual_def, by(`variaveis_ID')
 	
 	label var valor_anual_def "Gasto anual com `item'"
 	rename valor_anual_def `nome'
 	
-	drop item cod_item_aux
-	
 	if `i' > 1 merge 1:1 `variaveis_ID' using `despesas', nogen
 	
 	qui save `despesas', replace
+}
+
+if "`id'" == "pess"{
+	tempfile base_morador
+	load_pof17, trs(tr1)
+}
+else if "`id'" == "dom"{
+	tempfile base_dom
+	load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
+	
+	merge 1:1 `variaveis_ID' using `despesas', nogen
 }
 	
 end
@@ -658,48 +678,48 @@ syntax, tr(string)
 /* Tabela de Despesa Geral */
 
 if "`tr'" == "tr5"{ // Aluguel Estimado
-	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO
 }
 if "`tr'" == "tr2"{ // Despesa Coletiva
-	replace valor_anual_def = V800_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
 					*/ if QUADRO == 10 | QUADRO == 19
-	replace valor_anual_def = V800_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
 					*/ if QUADRO != 10 & QUADRO != 19
-	gen inss_anual = V1904_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL				
+	gen inss_anual = V1904_DEFLA * V9011 * FATOR_ANUALIZACAO				
 }
 
 if "`tr'" == "tr3"{ // Caderneta Coletiva
-	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL
+	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO
 }
 if "`tr'" == "tr4"{ // Despesa Individual
-	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL /*
+	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
 					*/ if QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
 					*/ QUADRO == 49 | QUADRO == 50
-	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL /*
+	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO /*
 					*/ if !(QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
 					*/ QUADRO == 49 | QUADRO == 50)			
 }
 
 if "`tr'" == "tr6"{ // Rendimento do Trabalho
 	* "valores de deduções com previdência pública, imposto de renda, e ISS e outros impostos..."
-	gen prev_pub_anual = V531112_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
-	gen imp_renda_anual = V531122_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
-	gen prev_pub_anual = V531132_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+	gen prev_pub_anual = V531112_DEFLA * V9011 * FATOR_ANUALIZACAO
+	gen imp_renda_anual = V531122_DEFLA * V9011 * FATOR_ANUALIZACAO
+	gen iss_anual = V531132_DEFLA * V9011 * FATOR_ANUALIZACAO
 }
 if "`tr'" == "tr7"{ // Outros Rendimentos
 	gen deducao_anual = .
-	replace deducao_anual = V8501_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO == 54
-	replace deducao_anual = V8501_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO != 54
+	replace deducao_anual = V8501_DEFLA * V9011 * FATOR_ANUALIZACAO if QUADRO == 54
+	replace deducao_anual = V8501_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
 }
 
 /* Tabela de Rendimento */
 
 if "`tr'" == "tr6"{ // Rendimento do Trabalho
-	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL
+	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO
 }
 if "`tr'" == "tr7"{ // Outros Rendimentos
-	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO == 54
-	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO * PESO_FINAL if QUADRO != 54
+	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO if QUADRO == 54
+	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
 }
 
 /* Tabela de Rendimento Não Monetário */
