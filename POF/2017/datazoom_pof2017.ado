@@ -1,15 +1,12 @@
 program datazoom_pof2017
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
-if "`sel'" != "" & "`id'" != "pess"{
+if ("`sel'" != "" | "`std'" != "") & "`id'" != "pess"{
 	local trs tr2 tr3 tr4 tr5 tr6 tr7 tr14 tr15 // Apenas TRs de despesas e rendimentos
 }
-else if "`sel'" != "" & "`id'" == "pess"{
+else if ("`sel'" != "" | "`std'" != "") & "`id'" == "pess"{
 	local trs tr4 tr6 tr7 tr15 // Mantém somente os TRs individuais
 }	
-else if "`std'" != ""{
-	local trs tr6 tr7 tr8 tr9 tr10 tr11 tr12 tr13 tr14 tr15 // Para std
-}
 else if "`trs'" == "" local trs tr1 tr2 tr3 tr4 tr5 tr6 tr7 tr8 tr9 tr10 tr11 tr12 tr13 tr14 tr15
 
 foreach tr in `trs'{
@@ -563,10 +560,10 @@ foreach item in `sel'{
 	local codigo: list codigo - nome
 	
 	if "`item'" == "Rendimento_Não_Monetário"{
-		local Rendimento_Não_Monetário 1
+		local rend_nao_monet rend_nao_monet
 	}
 	else if "`item'" == "Variação_Patrimonial"{
-		local Variação_Patrimonial 1
+		local var_patrimonial var_patrimonial
 	} // Caso algum desses dois seja escolhido, os locais ficam marcados para calcular
 	
 	else{
@@ -617,7 +614,7 @@ forvalues i = 1/`: word count `trs''{
 	
 	gen valor_anual_def = .
 	
-	variavel_gastos, tr(`tr')
+	variavel_gastos, tr(`tr') `rend_nao_monet' `var_patrimonial'
 	
 	keep `variaveis_ID' cod_item_aux valor_anual_def
 	
@@ -639,7 +636,7 @@ forvalues i = 1/`: word count `sel''{
 	
 	use `gastos', clear
 	
-	di "`item'"
+	di as text "`item'"
 	
 	qui{
 		gen item = .
@@ -651,7 +648,7 @@ forvalues i = 1/`: word count `sel''{
 		}
 		keep if item == 1
 	}
-	if _N == 0{
+	if r(N) == 0{
 		di as error "Sem observações para `item' a esse nível de id"
 		continue
 	}
@@ -663,10 +660,12 @@ forvalues i = 1/`: word count `sel''{
 	label var valor_anual_def "Gasto anual com `item'"
 	rename valor_anual_def `nome'
 	
-	if `i' > 1 merge 1:1 `variaveis_ID' using `despesas', nogen
+	if `i' > 1 qui merge 1:1 `variaveis_ID' using `despesas', nogen
 	
 	qui save `despesas', replace
 }
+
+qui save `despesas', replace
 
 tempfile base_dom
 load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
@@ -685,7 +684,7 @@ if "`id'" == "pess"{
 end
 
 program variavel_gastos
-syntax, tr(string)
+syntax, tr(string) [rend_nao_monet var_patrimonial]
 
 /* Tabela de Despesa Geral */
 
@@ -734,9 +733,26 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
 }
 
-/* Tabela de Rendimento Não Monetário */
+/* Tabela de Rendimento Não Monetário
+
+	Cálculo seguindo o arquivo Rendimento Não Monetário da apsta Memórias de Cálculo
+	
+	1. Para cada UC, soma os valores de despesa não monetária
+	2. Rendimento = max{Aluguel Estimado - despesas não monetárias, 0}
+	
+*/	
+
+if "`rend_nao_monet'" != ""{
+	if "`tr'" == {
+		gen 
+	}
+}
 
 /* Tabela de Variação Patrimonial */
+
+if "`var_patrimonial'" != ""{
+
+}
 
 end
 
@@ -748,6 +764,8 @@ syntax, id(string) trs(string) temps(string) original(string) [english]
 	- Despesas Gerais de nível 4 (v_DT_xxxxxx)
 	- Despesas Gerais de nível 3 que não têm subdivisão no nível 4 (v_DT_xxxx)
 	- Despesas Gerais de nível 2 que não têm subdivisão
+	- Rendimentos de nível 3
+	- Rendimentos restantes de nível 2
 */
 
 local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leite_caféleite_chocolate Cervejas_chopes_outras_alcool Lanches Outras_alimentacao_fora_Dom /*
@@ -783,8 +801,18 @@ local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leit
 	*/ Imóvel_aquisição Imóvel_reforma Outros_investimentos /* Aumento do ativo
 	
 	*/ Empréstimo Prestação_de_imóvel /* Diminuição do passivo 
-*/
+	
+	*/ Conta_propria Empregado Empregador /* Rendimento do Trabalho 
+	
+	*/ Aposentadoria_e_pensão_INSS Aposentadoria_pensão_prev_priv Aposentadoria_pensão_prev_pub Outras_Transferências Pensão_aliment_mesada_ou_doação Programas_sociais_federais /* Transferência
+	
+	*/ Outras_rendas Rendimento_de_aluguel Rendimento_Não_Monetário Variação_Patrimonial
 
+* Outras rendas
+
+* Rendimento de aluguel
+
+	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
 
 end
