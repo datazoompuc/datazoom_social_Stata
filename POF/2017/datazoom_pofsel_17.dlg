@@ -142,7 +142,7 @@ LIST nomes_alimentos
 :: :: :: :: Arroz 
 :: :: :: :: Feijão 
 :: :: :: :: Orgânicos 
-:: :: :: :: Outros
+:: :: :: :: Outros (cereais, leguminosas e oleaginosas)
 :: :: :: Farinhas féculas e massas
 :: :: :: :: Macarrão 
 :: :: :: :: Farinha de trigo 
@@ -166,7 +166,7 @@ LIST nomes_alimentos
 :: :: :: Frutas
 :: :: :: :: Banana 
 :: :: :: :: Laranja 
-:: :: :: :: Maça 
+:: :: :: :: Maçã
 :: :: :: :: Outras (frutas)
 :: :: :: Carnes vísceras e pescados
 :: :: :: :: Carne de boi de primeira 
@@ -174,7 +174,7 @@ LIST nomes_alimentos
 :: :: :: :: Carne de suíno 
 :: :: :: :: Carnes e peixes industrializados 
 :: :: :: :: Pescados frescos 
-:: :: :: :: Outros (carnes vísceras e pescados)
+:: :: :: :: Outros (carnes, vísceras e pescados)
 :: :: :: Aves e ovos
 :: :: :: :: Frango 
 :: :: :: :: Ovo de galinha 
@@ -213,7 +213,7 @@ LIST nomes_alimentos
 :: :: :: Outros (alimentação no domicílio)
 :: :: Alimentação fora do domicílio
 :: :: :: Almoço e jantar 
-:: :: :: Café leite café
+:: :: :: Café leite café-leite e chocolate
 :: :: :: Sanduíches e salgados 
 :: :: :: Refrigerantes e outras bebidas não alcoólicas 
 :: :: :: Lanches 
@@ -225,91 +225,91 @@ LIST nomes_alimentos
    
 LIST nomes_alimentos2
    BEGIN
-Despesa_com_alimentação
+Alimentação
 Alimentação_no_domicílio
-Cereais_leguminosas_e_oleaginosas
+Cereais_leguminosas_oleaginosas
 Arroz
 Feijão
 Cereais_Orgânicos
-Outros_(cereais_leguminosas_e_oleaginosas)
+Outros_cereais_leg_oleag
 Farinhas_féculas_e_massas
 Macarrão
 Farinha_de_trigo
 Farinha_de_mandioca
-Outras_(farinhas_féculas_e_massas)
+Outras_farinhas_fec_massas
 Tubérculos_e_raízes
 Batata_inglesa
 Cenoura
 Mandioca
-Outros_(tubérculos_e_raízes)
+Outros_tuberculos_raizes
 Açúcares_e_derivados
 Açúcar_refinado
 Açúcar_cristal
 Acucar_Light_e_Diet
-Outros_(açúcares_e_derivados)
+Outros_Acucares_Derivados
 Legumes_e_verduras
 Tomate
 Cebola
 Alface
-Outros_(legumes_e_verduras)
+Outros_legumes_verduras
 Frutas
 Banana
 Laranja
 Maça
-Outras_(frutas)
+Outras_frutas
 Carnes_vísceras_e_pescados
 Carne_de_boi_de_primeira
 Carne_de_boi_de_segunda
 Carne_de_suíno
 Carnes_e_peixes_industrializados
 Pescados_frescos
-Outros_(carnes_vísceras_e_pescados)
+Outros_carnes_visc_pescados
 Aves_e_ovos
 Frango
 Ovo_de_galinha
 Ovos_Orgânicos
-Outros_(aves_e_ovos)
+Outros_Aves_Ovos
 Leites_e_derivados
 Leite_de_vaca
 Leite_em_pó
 Queijos
 Leites_Light_e_Diet
-Leites_Orgânicos
-Outros_(leites_e_derivados)
+Leites_derivados_Orgânicos
+Outros_leites_derivados
 Panificados
 Pão_francês
 Biscoito
 Paes_Light_e_diet
-Outros_(panificados)
+Outros_panificados
 Óleos_e_gorduras
 Óleo_de_soja
 Azeite_de_oliva
-Outros_(óleos_e_gorduras)
+Outros_oleos_gorduras
 Bebidas_e_infusões
 Café_moído
 Refrigerantes
-Bebidas_não_alcoólicas_light_e_diet
+Bebidas_nãoalcoól_light_e_diet
 Cervejas_e_chopes
 Outras_bebidas_alcoólicas
-Outras_(bebidas_e_infusões)
+Outras_Bebidas_Infusoes
 Enlatados_e_conservas
 Sal_e_condimentos
 Massa_de_tomate
 Maionese
 Sal_refinado
-Outros_(sal_e_condimentos)
+Outros_sal_condimentos
 Alimentos_preparados
-Outros_(alimentação_no_domícilio)
+Outros_alimentacao_no_Dom
 Alimentação_fora_do_domicílio
 Almoço_e_jantar
-Café_leite_café
+Café_leite_caféleite_chocolate
 Sanduíches_e_salgados
-Refrigerantes_e_outras_bebidas_não_alcoólicas
+Refrigerantes_e_outras_nãoalcoo
 Lanches
-Cervejas_chopes_e_outras_bebidas_alcoólicas
+Cervejas_chopes_outras_alcool
 Alimentação_na_escola
 Alimentação_light_e_diet
-Outras_(alimentação_fora_do_domicílio)
+Outras_alimentacao_fora_Dom
    END
 
 LIST nomes_despesas
