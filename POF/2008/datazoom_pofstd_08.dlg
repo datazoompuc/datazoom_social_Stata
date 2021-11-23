@@ -76,10 +76,10 @@ PROGRAM command
 		put "." nomeDialog ".lista_tipos.setvalue" `"""' lista_tipos "pess " `"""'
 		stata hidden immediate
 		}
-	put "datazoom_pofstd_08 "
+	put "datazoom_pof2008 "
 		beginoptions
 			/*Parte da syntax: tipo de extração*/
-			put "id("
+			put "std id("
 			put lista_tipos
 			/*Parte da syntax: caminho microdados*/
 			put ") "

@@ -104,7 +104,7 @@ SCRIPT desmarca_todos
 
 PROGRAM command
 BEGIN
-   put "datazoom_poftrs_02"
+   put "datazoom_pof2002"
    beginoptions
       put "trs("
       option main.ch_tr1 main.ch_tr2 main.ch_tr3 main.ch_tr4 main.ch_tr5 main.ch_tr6 main.ch_tr7 ///
