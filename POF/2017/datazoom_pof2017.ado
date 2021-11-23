@@ -40,7 +40,7 @@ else if "`sel'" != ""{
 }
 else{
 	foreach type in `id'{
-		pofstd_17, id(`type') temps(`bases') original(`original') `english'
+		pofstd_17, id(`type') trs(`trs') temps(`bases') original(`original') `english'
 	
 		cd "`saving'"
 		save "pof2017_`type'_standard", replace
@@ -596,10 +596,14 @@ else if "`id'" == "pess" {
 
 tempfile gastos
 
-* Appendando todos os TRs
+* Preparando os TRs de consumo
 forvalues i = 1/`: word count `trs''{
 	local tr: word `i' of `trs'
 	local base: word `i' of `temps'
+	
+	if "`tr'" != "tr2" & "`tr'" != "tr3" & "`tr'" != "tr4" & "`tr'" != "tr5" & "`tr'" != "tr6" & "`tr'" != "tr7"{
+		continue // apenas os de gastos e rendimentos
+	}
 	
 	use `base', clear
 	
@@ -637,18 +641,21 @@ forvalues i = 1/`: word count `sel''{
 	
 	di "`item'"
 	
-	gen item = .
+	qui{
+		gen item = .
 	
-	foreach cod in `codigo'{
-		foreach n of numlist `cod'{
-			replace item = 1 if cod_item_aux == `n' 
+		foreach cod in `codigo'{
+			foreach n of numlist `cod'{
+				replace item = 1 if cod_item_aux == `n' 
+			}
 		}
+		keep if item == 1
 	}
-	keep if item == 1
 	if _N == 0{
-		di "Sem observações para `item' a esse nível de id"
+		di as error "Sem observações para `item' a esse nível de id"
 		continue
 	}
+	
 	
 	/* Agregação */
 	collapse (sum) valor_anual_def, by(`variaveis_ID')
@@ -734,7 +741,7 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 end
 
 program pofstd_17
-syntax, id(string) temps(string) original(string) [english]
+syntax, id(string) trs(string) temps(string) original(string) [english]
 
 /* Inclui:
 	- Despesas Alimentares de nível 2 (v_DA_xxx)
@@ -778,6 +785,6 @@ local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leit
 	*/ Empréstimo Prestação_de_imóvel /* Diminuição do passivo 
 */
 
-pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`bases') original(`original') `english'
+pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
 
 end
