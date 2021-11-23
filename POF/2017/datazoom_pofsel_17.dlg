@@ -419,7 +419,7 @@ Telefone_celular
 Pacote_de_telefone
 Gás_doméstico
 Água_e_esgoto
-Outros_(serviços_e_taxas)
+Outros_servicos_e_taxas
 Manutenção_do_lar
 Artigos_de_limpeza
 Mobiliários_e_artigos_do_lar
@@ -434,64 +434,64 @@ Joias_e_bijuterias
 Tecidos_e_armarinhos
 Transporte
 Urbano
-Gasolina_-_veículo_próprio
-Álcool_-_veículo_próprio
+Gasolina_veículo_próprio
+Álcool_veículo_próprio
 Manutenção_e_acessórios
 Aquisição_de_veículos
 Viagens_esporádicas
-Outras_(transporte)
+Outras_transporte
 Higiene_e_cuidados_pessoais
 Perfume
 Produtos_para_cabelo
 Sabonete
-Instrumentos_e_produtos_de_uso_pessoal
+Instrumentos_produt_uso_pessoal
 Assistência_à_saúde
 Remédios
-Plano/Seguro_saúde
+Plano_seguro_saude
 Consulta_e_tratamento_dentário
 Consulta_médica
-Tratamento_médico_e_ambulatorial
+Tratamento_médico_e_ambulatoria
 Serviços_de_cirurgia
 Hospitalização
 Exames_diversos
 Material_de_tratamento
-Outras_(assistência_à_saúde)
+Outras_assistencia_saude
 Educação
 Cursos_regulares
 Curso_superior
 Outros_cursos_e_atividades
-Livros_didáticos_e_revistas_técnicas
+Livros_didaticos_e_revistas_tec
 Artigos_escolares
-Outras_(educação)
+Outras_educacao
 Recreação_e_cultura
 Brinquedos_e_jogos
 Celular_e_acessórios
-Periódicos_livros_e_revistas_não_didáticos
+Periódicos_livros_revistas_nãod
 Recreações_e_esportes
-Outras_(recreação_e_cultura)
+Outras_recreacao_cultura
 Fumo
 Serviços_pessoais
 Cabeleireiro
 Manicuro_e_pedicuro
 Consertos_de_artigos_pessoais
-Outras_(serviços_pessoais)
+Outras_servicos_pessoais
 Despesas_diversas
 Jogos_e_apostas
 Comunicação
 Cerimônias_e_festas
 Serviços_profissionais
 Imóveis_de_uso_ocasional
-Outras_(despesas_diversas)
+Outras_despesas_diversas
 Outras_despesas_correntes
 Impostos
 Contribuições_trabalhistas
 Serviços_bancários
 Pensões_mesadas_e_doações
 Previdência_privada
-Outras_(outras_despesas_correntes)
+Outras_outras_desp_correntes
 Aumento_do_ativo
-Imóvel_(aquisição)
-Imóvel_(reforma)
+Imóvel_aquisição
+Imóvel_reforma
 Outros_investimentos
 Diminuição_do_passivo
 Empréstimo
@@ -500,22 +500,22 @@ Prestação_de_imóvel
    
 LIST nomes_rendas
    BEGIN
-:: :: Rendimento_total
-:: :: :: Rendimento_do_trabalho
+:: :: Rendimento total
+:: :: :: Rendimento do trabalho
 :: :: :: :: Empregado
 :: :: :: :: Empregador
 :: :: :: :: Conta_própria
 :: :: :: Transferência
-:: :: :: :: Aposentadoria_e_pensão_do_INSS
-:: :: :: :: Aposentadoria_pensão_da_previdência_pública
-:: :: :: :: Aposentadoria_pensão_da_previdência_privada
-:: :: :: :: Programas_sociais_federais
-:: :: :: :: Pensão_alimentícia_mesada_ou_doação
-:: :: :: :: Outras_transferências
-:: :: :: Rendimento_de_aluguel
-:: :: :: Outras_rendas
-:: :: :: Rendimento_não_monetário
-:: :: Variação_patrimonial
+:: :: :: :: Aposentadoria e pensão do INSS
+:: :: :: :: Aposentadoria e pensão da previdência pública
+:: :: :: :: Aposentadoria e pensão da_previdência privada
+:: :: :: :: Programas sociais federais
+:: :: :: :: Pensão alimentícia mesada ou doação
+:: :: :: :: Outras transferências
+:: :: :: Rendimento de aluguel
+:: :: :: Outras rendas
+:: :: :: Rendimento não monetário
+:: :: Variação patrimonial
    END
    
 LIST nomes_rendas2
@@ -526,16 +526,16 @@ Empregado
 Empregador
 Conta_própria
 Transferência
-Aposentadoria_e_pensão_do_INSS
-Aposentadoria_pensão_da_previdência_pública
-Aposentadoria_pensão_da_previdência_privada
+Aposentadoria_e_pensão_INSS
+Aposentadoria_pensão_prev_pub
+Aposentadoria_pensão_prev_priv
 Programas_sociais_federais
-Pensão_alimentícia_mesada_ou_doação
+Pensão_aliment_mesada_ou_doação
 Outras_transferências
 Rendimento_de_aluguel
 Outras_rendas
-Rendimento_não_monetário
-Variação_patrimonial
+Rendimento_Não_Monetário
+Variação_Patrimonial
    END
 
 PROGRAM atualizaListas
