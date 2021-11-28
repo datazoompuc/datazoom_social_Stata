@@ -579,6 +579,9 @@ foreach item in `sel'{
 
 di as input "Itens selecionados:" _newline "`sel'"
 
+local rem Rendimento_Não_Monetário Variação_Patrimonial
+local sel: list sel - rem // Remove da lista, já que eles não são calculados da mesma forma
+
 if "`id'" == "dom" {
 	loc variaveis_ID = "UF  COD_UPA NUM_DOM"
 }
@@ -614,7 +617,7 @@ forvalues i = 1/`: word count `trs''{
 	
 	gen valor_anual_def = .
 	
-	variavel_gastos, tr(`tr') `rend_nao_monet' `var_patrimonial'
+	variavel_gastos, tr(`tr')
 	
 	keep `variaveis_ID' cod_item_aux valor_anual_def
 	
@@ -672,7 +675,7 @@ load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
 
 if "`id'" == "dom" merge 1:1 `variaveis_ID' using `despesas', nogen
 
-else merge 1:n `variaveis_ID' using `despesas', nogen
+else merge 1:n UF  COD_UPA NUM_DOM using `despesas', nogen
 
 if "`id'" == "pess"{
 	tempfile base_morador
@@ -680,11 +683,23 @@ if "`id'" == "pess"{
 	
 	merge 1:1 `variaveis_ID' using `despesas', nogen
 }
+
+tempfile base_final
+save `base_final', replace
+
+/* Cálculos Adicionais */
+
+if "`rend_nao_monet'" != ""{
+	tempfile rend_nao_monet
+	calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
+	
+	merge 1:1 `variaveis_ID' using `base_final', nogen
+}
 	
 end
 
 program variavel_gastos
-syntax, tr(string) [rend_nao_monet var_patrimonial]
+syntax, tr(string)
 
 /* Tabela de Despesa Geral */
 
@@ -723,7 +738,7 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 
 end
 
-program calc_deducoes
+program calc_deducoes, rclass
 syntax, 
 
 if "`tr'" == "tr6"{ // Rendimento do Trabalho
@@ -740,40 +755,138 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 
 end
 
-program calc_renda_nao_monetaria
-syntax, 
+program calc_rend_nao_monet // Monta a base com a renda não monetária e salva no local `temp'
+syntax, id(string) original(string) temp(string) [english]
 
 /* Tabela de Rendimento Não Monetário
 
-	Cálculo seguindo o arquivo Rendimento Não Monetário da apsta Memórias de Cálculo
+	Cálculo seguindo o arquivo Rendimento Não Monetário da pasta Memórias de Cálculo
 	
 	1. Para cada UC, soma os valores de despesa não monetária
-	2. Rendimento = max{Aluguel Estimado - despesas não monetárias, 0}
+	2. Calcula aluguel estimado
+	3. Diferença entre aluguel estimado e algumas despesas monetárias
+	4. Soma despesas não monetárias com diferença
 	
 */	
 
-if "`rend_nao_monet'" != ""{
-	if "`tr'" == "tr2" { // Despesa Coletiva
-		gen desp_nao_monet  = .
-		replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
-						*/ if (V9002 >= 7 & V9002 <= 11) & (QUADRO == 10 | QUADRO == 19)
-		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
-						*/ if (V9002 >= 7 & V9002 <= 11) & !(QUADRO == 10 | QUADRO == 19)				
-	}
-	if "`tr'" == "tr3"{ // Caderneta Coletiva
-		gen desp_nao_monet  = .
-		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO if V9002 >= 7 & V9002 <= 11
-	}
-	if "`tr'" == "tr4"{ // Despesa Individual
-		gen desp_nao_monet  = .
-		replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
-						*/ if (QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
-						*/ QUADRO == 49 | QUADRO == 50) & (V9002 >= 7 & V9002 <= 11)
-		replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
-						*/ if !(QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
-						*/ QUADRO == 49 | QUADRO == 50)	& (V9002 >= 7 & V9002 <= 11)		
+if "`id'" == "dom" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM"
 }
+else {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC" // Como usa o registro de Alugues Estimado,
+													// só é possível calcular a nível de UC
 }
+
+/* Parte 1: Extraindo despesas não monetárias e somando */
+
+* Despesa Coletiva
+
+load_pof17, trs(tr2) temps(`temp') original(`original') `english'
+
+gen desp_nao_monet  = .
+replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+					*/ if (V9002 >= 7 & V9002 <= 11) & (QUADRO == 10 | QUADRO == 19)
+replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
+					*/ if (V9002 >= 7 & V9002 <= 11) & !(QUADRO == 10 | QUADRO == 19)
+					
+save `temp', replace					
+
+* Caderneta Coletiva
+
+tempfile extra
+
+load_pof17, trs(tr3) temps(`extra') original(`original') `english'
+
+gen desp_nao_monet  = .
+replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO if V9002 >= 7 & V9002 <= 11
+
+append using `temp'
+
+* Despesa Individual
+
+load_pof17, trs(tr4) temps(`extra') original(`original') `english'
+
+gen desp_nao_monet  = .
+replace desp_nao_monet = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+					*/ if (QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+					*/ QUADRO == 49 | QUADRO == 50) & (V9002 >= 7 & V9002 <= 11)
+replace desp_nao_monet = V8000_DEFLA * FATOR_ANUALIZACAO /*
+					*/ if !(QUADRO == 44 | QUADRO == 47 | QUADRO == 48 | /*
+					*/ QUADRO == 49 | QUADRO == 50)	& (V9002 >= 7 & V9002 <= 11)
+						
+append using `temp'			
+
+/* Somando todos os valores de despeda não monetária */
+
+collapse (sum) desp_nao_monet, by(`variaveis_ID')
+
+save `temp', replace
+
+/* Parte 2: Extraindo aluguel estimado */
+
+load_pof17, trs(tr5) temps(`extra') original(`original') `english'
+
+gen aluguel_estimado = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO 			
+
+collapse (sum) aluguel_estimado, by(`variaveis_ID')
+
+merge 1:1 using `temp', nogen
+
+save `temp', replace
+
+/* Parte 3: Subtraindo algumas despesas monetárias */
+
+* Despesa Coletiva
+
+load_pof17, trs(tr2) temps(`extra') original(`original') `english'
+
+gen codigo = int(V9001/100)
+
+local valores 8001/8024 8026/8068 8999 10006 10011 12005/12008 12010/12015 12017/12020 12023/12025 12027/12036 12999
+
+gen inlist = .
+
+foreach n of numlist `valores' replace inlist = 1 if codigo == `n'  
+
+keep if V9002 <= 6 & inlist == 1
+
+drop codigo inlist
+
+gen valor_subtracao  = .
+replace valor_subtracao = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+					*/ if QUADRO == 10
+replace valor_subtracao = V8000_DEFLA * FATOR_ANUALIZACAO /*
+					*/ if QUADRO != 10
+					
+collapse (sum) valor_subtracao, by(`variaveis_ID')	
+merge 1:1 using `temp', nogen
+
+replace aluguel_estimado = 0 if missing(aluguel_estimado)
+replace valor_subtracao = 0 if missing(valor_subtracao)		
+
+gen dif = aluguel_estimado -  valor_subtracao
+replace dif = . if dif <= 0
+
+/* Parte 4: Somando */
+
+replace desp_nao_monet = 0 if missing(despesa_nao_monet)
+replace dif = 0 if missing(despesa_nao_monet)
+
+gen rend_nao_monet = desp_nao_monet + dif	
+
+local suffix = cond("`id'" == "dom", "do Domicílio", "da Unidade de Consumo")
+label var rend_nao_monet "Rendimento não monetário estimado `suffix'"
+
+drop desp_nao_monet aluguel_estimado valor_subtracao dif
+
+rename rend_nao_monet v_RE_15 // Código na tabela
+
+save `temp', replace
+
+end
+
+program calc_variacao_patrimonial, rclass
+syntax, 
 
 /* Tabela de Variação Patrimonial */
 
@@ -782,9 +895,6 @@ if "`var_patrimonial'" != ""{
 }
 
 end
-
-program calc_variacao_patrimonial
-syntax, 
 
 program pofstd_17
 syntax, id(string) trs(string) temps(string) original(string) [english]
