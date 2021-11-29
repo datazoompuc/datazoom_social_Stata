@@ -42,6 +42,10 @@ else{
 		cd "`saving'"
 		save "pof2017_`type'_standard", replace
 	}
+	if "`id'" == ""{
+		di as error "option {bf: id()} required"
+		exit 198
+	}
 }
 
 di as result "As bases foram salvas em `saving'"
@@ -650,15 +654,15 @@ forvalues i = 1/`: word count `sel''{
 			}
 		}
 		keep if item == 1
-	}
-	if r(N) == 0{
+	}	
+	
+	/* Agregação */
+	cap collapse (sum) valor_anual_def, by(`variaveis_ID')
+	if _rc == 2000{
 		di as error "Sem observações para `item' a esse nível de id"
 		continue
 	}
-	
-	
-	/* Agregação */
-	collapse (sum) valor_anual_def, by(`variaveis_ID')
+	else if _rc != 0 exit _rc
 	
 	label var valor_anual_def "Gasto anual com `item'"
 	rename valor_anual_def `nome'
@@ -690,8 +694,10 @@ save `base_final', replace
 /* Cálculos Adicionais */
 
 if "`rend_nao_monet'" != ""{
+	di as text "Renda Não Monetária"
+
 	tempfile rend_nao_monet
-	calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
+	qui calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
 	
 	merge 1:n `variaveis_ID' using `base_final', nogen
 }
