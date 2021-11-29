@@ -659,7 +659,7 @@ forvalues i = 1/`: word count `sel''{
 	/* Agregação */
 	cap collapse (sum) valor_anual_def, by(`variaveis_ID')
 	if _rc == 2000{
-		di as error "Sem observações para `item' a esse nível de id"
+		di as error "Sem observações para `item' a esse nível de id"				
 		continue
 	}
 	else if _rc != 0 exit _rc
@@ -672,6 +672,13 @@ forvalues i = 1/`: word count `sel''{
 	qui save `despesas', replace
 }
 
+if `: word count `sel'' == 0{
+	keep `variaveis_ID'
+	duplicates drop // Caso o usuário escolha somente Rendimento Não Monetário por ex,
+					// que é calculado à parte, como a base não foi colapsada ela tem que ser
+					// posta no nível de agregação certo para merges futuros
+}
+
 qui save `despesas', replace
 
 tempfile base_dom
@@ -679,13 +686,13 @@ load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
 
 if "`id'" == "dom" merge 1:1 `variaveis_ID' using `despesas', nogen
 
-else merge 1:n UF COD_UPA NUM_DOM using `despesas', nogen
+else merge 1:m UF COD_UPA NUM_DOM using `despesas', nogen
 
 if "`id'" == "pess"{
 	tempfile base_morador
 	load_pof17, trs(tr1) temps(`base_morador') original(`original') `english'
 	
-	merge 1:1 `variaveis_ID' using `despesas', nogen
+	merge m:1 `variaveis_ID' using `despesas', nogen
 }
 
 tempfile base_final
@@ -699,7 +706,7 @@ if "`rend_nao_monet'" != ""{
 	tempfile rend_nao_monet
 	qui calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
 	
-	merge 1:n `variaveis_ID' using `base_final', nogen
+	merge 1:m `variaveis_ID' using `base_final', nogen
 }
 	
 end
@@ -956,9 +963,13 @@ local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leit
 	
 	*/ Outras_rendas Rendimento_de_aluguel Rendimento_Não_Monetário Variação_Patrimonial
 
-* Outras rendas
+* Alguns gastos só existem nas despesas coletivas	
+	
+local faltantes_pess Alimentos_preparados Aves_e_ovos Açúcares_e_derivados Bebidas_e_infusões Carnes_vísceras_e_pescados Cereais_leguminosas_oleaginosas /*
+	*/ Enlatados_e_conservas Farinhas_féculas_e_massas Frutas Legumes_e_verduras Leites_e_derivados Outros_alimentacao_no_Dom Panificados Sal_e_condimentos /*
+	*/ Tubérculos_e_raízes Óleos_e_gorduras Aluguel Condominio Manutencao_do_lar Imóvel_reforma Prestação_de_imóvel
 
-* Rendimento de aluguel
+if "`id'" == "pess" local gastos_selecionados: list gastos_selecionados - faltantes_pess
 
 	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
