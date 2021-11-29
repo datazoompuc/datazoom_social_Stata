@@ -675,7 +675,7 @@ load_pof17, trs(tr8) temps(`base_dom') original(`original') `english'
 
 if "`id'" == "dom" merge 1:1 `variaveis_ID' using `despesas', nogen
 
-else merge 1:n UF  COD_UPA NUM_DOM using `despesas', nogen
+else merge 1:n UF COD_UPA NUM_DOM using `despesas', nogen
 
 if "`id'" == "pess"{
 	tempfile base_morador
@@ -693,7 +693,7 @@ if "`rend_nao_monet'" != ""{
 	tempfile rend_nao_monet
 	calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
 	
-	merge 1:1 `variaveis_ID' using `base_final', nogen
+	merge 1:n `variaveis_ID' using `base_final', nogen
 }
 	
 end
@@ -830,7 +830,7 @@ gen aluguel_estimado = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO
 
 collapse (sum) aluguel_estimado, by(`variaveis_ID')
 
-merge 1:1 using `temp', nogen
+merge 1:1 `variaveis_ID' using `temp', nogen
 
 save `temp', replace
 
@@ -846,7 +846,9 @@ local valores 8001/8024 8026/8068 8999 10006 10011 12005/12008 12010/12015 12017
 
 gen inlist = .
 
-foreach n of numlist `valores' replace inlist = 1 if codigo == `n'  
+foreach n of numlist `valores'{
+	qui replace inlist = 1 if codigo == `n'  
+}	
 
 keep if V9002 <= 6 & inlist == 1
 
@@ -859,7 +861,7 @@ replace valor_subtracao = V8000_DEFLA * FATOR_ANUALIZACAO /*
 					*/ if QUADRO != 10
 					
 collapse (sum) valor_subtracao, by(`variaveis_ID')	
-merge 1:1 using `temp', nogen
+merge 1:1 `variaveis_ID' using `temp', nogen
 
 replace aluguel_estimado = 0 if missing(aluguel_estimado)
 replace valor_subtracao = 0 if missing(valor_subtracao)		
@@ -869,8 +871,8 @@ replace dif = . if dif <= 0
 
 /* Parte 4: Somando */
 
-replace desp_nao_monet = 0 if missing(despesa_nao_monet)
-replace dif = 0 if missing(despesa_nao_monet)
+replace desp_nao_monet = 0 if missing(desp_nao_monet)
+replace dif = 0 if missing(dif)
 
 gen rend_nao_monet = desp_nao_monet + dif	
 
