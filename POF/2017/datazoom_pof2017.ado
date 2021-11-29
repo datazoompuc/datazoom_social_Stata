@@ -36,12 +36,11 @@ else if "`sel'" != ""{
 	save pof2017_`id'_custom, replace
 }
 else{
-	foreach type in `id'{
-		pofstd_17, id(`type') trs(`trs') temps(`bases') original(`original') `english'
+	pofstd_17, id(`id') trs(`trs') temps(`bases') original(`original') `english'
 	
-		cd "`saving'"
-		save "pof2017_`type'_standard", replace
-	}
+	cd "`saving'"
+	save "pof2017_`id'_standard", replace
+	
 	if "`id'" == ""{
 		di as error "option {bf: id()} required"
 		exit 198
@@ -664,7 +663,11 @@ forvalues i = 1/`: word count `sel''{
 	}
 	else if _rc != 0 exit _rc
 	
-	label var valor_anual_def "Gasto anual com `item'"
+	local tipo = substr("`nome'", 3, 2) // v_DA_xx -> DA, v_RE_xx -> RE
+	
+	if "`tipo'" != "RE" label var valor_anual_def "Despesa com `item'"
+	else label var valor_anual_def "Rendimento com `item'"
+	
 	rename valor_anual_def `nome'
 	
 	if `i' > 1 qui merge 1:1 `variaveis_ID' using `despesas', nogen
