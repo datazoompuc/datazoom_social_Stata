@@ -706,7 +706,8 @@ if "`rend_nao_monet'" != ""{
 	tempfile rend_nao_monet
 	qui calc_rend_nao_monet, id(`id') original(`original') temp(`rend_nao_monet') `english'
 	
-	merge 1:m `variaveis_ID' using `base_final', nogen
+	if "`id'" != "pess" merge 1:1 `variaveis_ID' using `base_final', nogen
+	else merge 1:m UF COD_UPA NUM_DOM NUM_UC using `base_final', nogen
 }
 	
 end
@@ -786,7 +787,7 @@ if "`id'" == "dom" {
 	loc variaveis_ID = "UF  COD_UPA NUM_DOM"
 }
 else {
-	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC" // Como usa o registro de Alugues Estimado,
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC" // Como usa o registro de Aluguéis Estimado,
 													// só é possível calcular a nível de UC
 }
 
