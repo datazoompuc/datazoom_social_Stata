@@ -699,7 +699,7 @@ if "`id'" == "pess"{
 }
 
 tempfile base_final
-save `base_final', replace
+qui save `base_final', replace
 
 /* Cálculos Adicionais */
 
@@ -711,6 +711,19 @@ if "`rend_nao_monet'" != ""{
 	
 	if "`id'" != "pess" merge 1:1 `variaveis_ID' using `base_final', nogen
 	else merge 1:m UF COD_UPA NUM_DOM NUM_UC using `base_final', nogen
+	
+	qui save `base_final', replace
+}
+if "`var_patrimonial'" != ""{
+	di as text "Variação Patrimonial"
+
+	tempfile var_patrimonial
+	qui calc_var_patrimonial, id(`id') original(`original') temp(`var_patrimonial') `english'
+	
+	if "`id'" != "pess" merge 1:1 `variaveis_ID' using `base_final', nogen
+	else merge 1:m UF COD_UPA NUM_DOM NUM_UC using `base_final', nogen
+	
+	qui save `base_final', replace
 }
 	
 end
@@ -755,7 +768,7 @@ if "`tr'" == "tr7"{ // Outros Rendimentos
 
 end
 
-program calc_deducoes, rclass
+program calc_deducoes
 syntax, 
 
 if "`tr'" == "tr6"{ // Rendimento do Trabalho
@@ -904,14 +917,129 @@ save `temp', replace
 
 end
 
-program calc_variacao_patrimonial, rclass
-syntax, 
+program calc_var_patrimonial // Monta a base de variação patrimonial e salva no local `temp'
+syntax, id(string) original(string) temp(string) [english]
 
-/* Tabela de Variação Patrimonial */
+/* Tabela de Variação Patrimonial
 
-if "`var_patrimonial'" != ""{
+	Cálculo seguindo o arquivo Variação Patrimonial da pasta Memórias de Cálculo
+	
+	1. Soma os valores de uma lista de itens
 
+*/	
+
+if "`id'" == "dom" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM"
 }
+else if "`id'" == "uc" {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC"
+}
+else {
+	loc variaveis_ID = "UF  COD_UPA NUM_DOM NUM_UC COD_INFORMANTE"
+}
+
+/* Parte 1: Extraindo despesas não monetárias e somando */
+
+* Outros Rendimentos
+
+load_pof17, trs(tr7) temps(`temp') original(`original') `english'
+
+gen codigo = int(V9001/100)
+
+gen var_patrimonial = .
+replace var_patrimonial = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+					*/ if QUADRO == 54
+replace var_patrimonial = V8500_DEFLA * FATOR_ANUALIZACAO /*
+					*/ if QUADRO != 54
+
+qui save `temp', replace					
+					
+* Mantém apenas alguns itens
+
+local valores 55008 55010 55016 55020/55026 55035 55037 55044 55053 55061	
+
+gen inlist = .
+
+foreach n of numlist `valores'{
+	qui replace inlist = 1 if codigo == `n'  
+}
+
+keep if inlist == 1
+
+collapse (sum) soma_1 = var_patrimonial, by(`variaveis_ID')
+
+tempfile parte1
+qui save `parte1', replace			
+
+* Calcula a diferença entre alguns códigos
+
+* 57001 e 56001
+
+use `temp', clear
+
+by `variaveis_ID': egen cod57001 = total(var_patrimonial) if codigo == 57001
+by `variaveis_ID': egen cod56001 = total(var_patrimonial) if codigo == 56001
+
+replace cod57001 = 0 if missing(cod57001)
+replace cod56001 = 0 if missing(cod56001)
+
+gen dif1 = cod57001 - cod56001
+replace dif1 = . if dif1 <= 0
+
+* 57002 e 56002
+
+by `variaveis_ID': egen cod57002 = total(var_patrimonial) if codigo == 57002
+by `variaveis_ID': egen cod56002 = total(var_patrimonial) if codigo == 56002
+
+replace cod57002 = 0 if missing(cod57002)
+replace cod56002 = 0 if missing(cod56002)
+
+gen dif2 = cod57002 - cod56002
+replace dif2 = . if dif2 <= 0
+
+* 57003 e 56003
+
+by `variaveis_ID': egen cod57003 = total(var_patrimonial) if codigo == 57003
+by `variaveis_ID': egen cod56003 = total(var_patrimonial) if codigo == 56003
+
+replace cod57003 = 0 if missing(cod57003)
+replace cod56003 = 0 if missing(cod56003)
+
+gen dif3 = cod57003 - cod56003
+replace dif3 = . if dif3 <= 0
+
+* 57004 e 56004
+
+by `variaveis_ID': egen cod57004 = total(var_patrimonial) if codigo == 57004
+by `variaveis_ID': egen cod56004 = total(var_patrimonial) if codigo == 56004
+
+replace cod57004 = 0 if missing(cod57004)
+replace cod56004 = 0 if missing(cod56004)
+
+gen dif4 = cod57004 - cod56004
+replace dif4 = . if dif4 <= 0
+
+* Somando as diferenças
+
+collapse (sum) dif1 dif2 dif3 dif4, by(`variaveis_ID')
+
+replace dif1 = 0 if missing(dif1)
+replace dif2 = 0 if missing(dif2)
+replace dif3 = 0 if missing(dif3)
+replace dif4 = 0 if missing(dif4)
+
+gen soma_2 = dif1 + dif2 + dif3 + dif4
+
+drop dif1 dif2 dif3 dif4 cod57001 cod56001 cod57002 cod56002 cod57003 cod56003 cod57004 cod56004 var_patrimonial
+
+merge 1:1 `variaveis_ID' using `parte1', nogen
+
+replace soma_1 = 0 if missing(soma_1)
+replace soma_2 = 0 if missing(soma_2)
+
+gen v_RE_2 = soma_1 + soma_2
+
+qui save `temp', replace
 
 end
 
