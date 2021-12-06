@@ -676,10 +676,10 @@ forvalues i = 1/`: word count `sel''{
 }
 
 if `: word count `sel'' == 0{
-	keep `variaveis_ID'
-	duplicates drop // Caso o usuário escolha somente Rendimento Não Monetário por ex,
-					// que é calculado à parte, como a base não foi colapsada ela tem que ser
-					// posta no nível de agregação certo para merges futuros
+	qui keep `variaveis_ID'
+	qui duplicates drop // Caso o usuário escolha somente Rendimento Não Monetário por ex,
+						// que é calculado à parte, como a base não foi colapsada ela tem que ser
+						// posta no nível de agregação certo para merges futuros
 }
 
 qui save `despesas', replace
@@ -720,8 +720,7 @@ if "`var_patrimonial'" != ""{
 	tempfile var_patrimonial
 	qui calc_var_patrimonial, id(`id') original(`original') temp(`var_patrimonial') `english'
 	
-	if "`id'" != "pess" merge 1:1 `variaveis_ID' using `base_final', nogen
-	else merge 1:m UF COD_UPA NUM_DOM NUM_UC using `base_final', nogen
+	merge 1:1 `variaveis_ID' using `base_final', nogen
 	
 	qui save `base_final', replace
 }
@@ -977,8 +976,8 @@ qui save `parte1', replace
 
 use `temp', clear
 
-by `variaveis_ID': egen cod57001 = total(var_patrimonial) if codigo == 57001
-by `variaveis_ID': egen cod56001 = total(var_patrimonial) if codigo == 56001
+egen cod57001 = total(var_patrimonial) if codigo == 57001, by(`variaveis_ID')
+egen cod56001 = total(var_patrimonial) if codigo == 56001, by(`variaveis_ID')
 
 replace cod57001 = 0 if missing(cod57001)
 replace cod56001 = 0 if missing(cod56001)
@@ -988,8 +987,8 @@ replace dif1 = . if dif1 <= 0
 
 * 57002 e 56002
 
-by `variaveis_ID': egen cod57002 = total(var_patrimonial) if codigo == 57002
-by `variaveis_ID': egen cod56002 = total(var_patrimonial) if codigo == 56002
+egen cod57002 = total(var_patrimonial) if codigo == 57002, by(`variaveis_ID')
+egen cod56002 = total(var_patrimonial) if codigo == 56002, by(`variaveis_ID')
 
 replace cod57002 = 0 if missing(cod57002)
 replace cod56002 = 0 if missing(cod56002)
@@ -999,8 +998,8 @@ replace dif2 = . if dif2 <= 0
 
 * 57003 e 56003
 
-by `variaveis_ID': egen cod57003 = total(var_patrimonial) if codigo == 57003
-by `variaveis_ID': egen cod56003 = total(var_patrimonial) if codigo == 56003
+egen cod57003 = total(var_patrimonial) if codigo == 57003, by(`variaveis_ID')
+egen cod56003 = total(var_patrimonial) if codigo == 56003, by(`variaveis_ID')
 
 replace cod57003 = 0 if missing(cod57003)
 replace cod56003 = 0 if missing(cod56003)
@@ -1010,8 +1009,8 @@ replace dif3 = . if dif3 <= 0
 
 * 57004 e 56004
 
-by `variaveis_ID': egen cod57004 = total(var_patrimonial) if codigo == 57004
-by `variaveis_ID': egen cod56004 = total(var_patrimonial) if codigo == 56004
+egen cod57004 = total(var_patrimonial) if codigo == 57004, by(`variaveis_ID')
+egen cod56004 = total(var_patrimonial) if codigo == 56004, by(`variaveis_ID')
 
 replace cod57004 = 0 if missing(cod57004)
 replace cod56004 = 0 if missing(cod56004)
@@ -1030,7 +1029,7 @@ replace dif4 = 0 if missing(dif4)
 
 gen soma_2 = dif1 + dif2 + dif3 + dif4
 
-drop dif1 dif2 dif3 dif4 cod57001 cod56001 cod57002 cod56002 cod57003 cod56003 cod57004 cod56004 var_patrimonial
+drop dif1 dif2 dif3 dif4
 
 merge 1:1 `variaveis_ID' using `parte1', nogen
 
@@ -1038,6 +1037,10 @@ replace soma_1 = 0 if missing(soma_1)
 replace soma_2 = 0 if missing(soma_2)
 
 gen v_RE_2 = soma_1 + soma_2
+
+drop soma_1 soma_2
+
+label var v_RE_2 "Rendimento por Variação Patrimonial"
 
 qui save `temp', replace
 
@@ -1103,6 +1106,9 @@ local faltantes_pess Alimentos_preparados Aves_e_ovos Açúcares_e_derivados Beb
 
 if "`id'" == "pess" local gastos_selecionados: list gastos_selecionados - faltantes_pess
 
+di "`gastos_selecionados'"
+
+exit
 	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
 
