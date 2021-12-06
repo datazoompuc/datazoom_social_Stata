@@ -1105,10 +1105,6 @@ local faltantes_pess Alimentos_preparados Aves_e_ovos Açúcares_e_derivados Beb
 	*/ Tubérculos_e_raízes Óleos_e_gorduras Aluguel Condominio Manutencao_do_lar Imóvel_reforma Prestação_de_imóvel
 
 if "`id'" == "pess" local gastos_selecionados: list gastos_selecionados - faltantes_pess
-
-di "`gastos_selecionados'"
-
-exit
 	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
 
