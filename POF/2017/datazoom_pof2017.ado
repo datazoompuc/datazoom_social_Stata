@@ -1,6 +1,14 @@
 program datazoom_pof2017
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
+if `: word count `id'' > 1{
+	foreach type in `id'{
+		datazoom_pof2017, id(`type') original(`original') saving(`saving') std `english'
+	}
+	
+	exit
+}
+
 if ("`sel'" != "" | "`std'" != "") & "`id'" != "pess"{
 	local trs tr2 tr3 tr4 tr5 tr6 tr7 tr14 tr15 // Apenas TRs de despesas e rendimentos
 }
@@ -37,15 +45,16 @@ else if "`sel'" != ""{
 }
 else{
 	pofstd_17, id(`id') trs(`trs') temps(`bases') original(`original') `english'
-	
+		
 	cd "`saving'"
 	save "pof2017_`id'_standard", replace
 	
 	if "`id'" == ""{
 		di as error "option {bf: id()} required"
 		exit 198
-	}
+	}	
 }
+
 
 di as result "As bases foram salvas em `saving'"
 
