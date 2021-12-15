@@ -520,7 +520,7 @@ LIST nomes_rendas
    
 LIST nomes_rendas2
    BEGIN
-Rendimento_total
+Rendimento_Total
 Rendimento_do_trabalho
 Empregado
 Empregador

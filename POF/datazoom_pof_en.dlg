@@ -80,19 +80,19 @@ PROGRAM carregachild_gs
 PROGRAM carregachild_bp
    BEGIN
 	if main.ck1995{
-      		put "db datazoom_pofstd_95_en"
+      		put "db datazoom_pofstd_en, message(1995)"
 		stata
 	}
 	if main.ck2002{
-      		put "db datazoom_pofstd_02_en"
+      		put "db datazoom_pofstd_en, message(2002)"
 		stata
 	}
 	if main.ck2008{
-      		put "db datazoom_pofstd_08_en"
+      		put "db datazoom_pofstd_en, message(2008)"
 		stata
 	}
 	if main.ck2017{
-      		put "db datazoom_pofstd_17_en"
+      		put "db datazoom_pofstd_en, message(2017)"
 		stata
 	}
    END

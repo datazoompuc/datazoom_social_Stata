@@ -29,7 +29,7 @@ END
 OK ok1,      label("OK")
 SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pofstd_17")
+HELP hlp1,   view("help datazoom_pof")
 RESET res1
 
 SCRIPT PREINIT_SCRIPT
@@ -74,7 +74,7 @@ PROGRAM command
 		put "." nomeDialog ".lista_tipos.setvalue" `"""' lista_tipos "pess " `"""'
 		stata hidden immediate
 		}
-	put __MESSAGE
+	put "datazoom_pof" __MESSAGE
 		beginoptions
 			/*Parte da syntax: tipo de extração*/
 			put "std id("

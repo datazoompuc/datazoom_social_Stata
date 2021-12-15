@@ -74,7 +74,7 @@ PROGRAM command
 		put "." nomeDialog ".lista_tipos.setvalue" `"""' lista_tipos "pess " `"""'
 		stata hidden immediate
 		}
-	put __MESSAGE
+	put "datazoom_pof" __MESSAGE
 		beginoptions
 			/*Parte da syntax: tipo de extração*/
 			put "std id("
