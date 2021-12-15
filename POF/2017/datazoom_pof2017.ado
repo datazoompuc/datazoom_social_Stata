@@ -765,15 +765,15 @@ local estratos_rural /*
 	*/ 5010/5013 5113/5118 5218/5225 5307/5308
 
 gen capital = .
-foreach n in numlist `estratos_capital'{
+foreach n of numlist `estratos_capital'{
 	replace capital = 1 if ESTRATO_POF == `n'
 }
 
-foreach n in numlist `estratos_capital' `estratos_restoRM' `estratos_restoUF'{
+foreach n of numlist `estratos_capital' `estratos_restoRM' `estratos_restoUF'{
 	replace urbano = 1 if ESTRATO_POF == `n'
 }
 
-foreach n in numlist `estratos_rural'{
+foreach n of numlist `estratos_rural'{
 	replace capital = 0 if ESTRATO_POF == `n'
 }	
 	
