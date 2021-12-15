@@ -1144,7 +1144,7 @@ local gastos_selecionados Alimentação_light_e_diet Almoço_e_jantar Café_leit
 	
 	*/ Aposentadoria_e_pensão_INSS Aposentadoria_pensão_prev_priv Aposentadoria_pensão_prev_pub Outras_Transferências Pensão_aliment_mesada_ou_doação Programas_sociais_federais /* Transferência
 	
-	*/ Outras_rendas Rendimento_de_aluguel Rendimento_Não_Monetário Variação_Patrimonial
+	*/ Outras_rendas Rendimento_de_aluguel Rendimento_Não_Monetário Variação_Patrimonial Rendimento_Total
 
 * Alguns gastos só existem nas despesas coletivas	
 	
