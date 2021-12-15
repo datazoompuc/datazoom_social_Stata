@@ -1,0 +1,581 @@
+* VERSION 1.2
+
+VERSION 10.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 505 385
+
+DIALOG main, label("POF 2017-2018 - Gastos Selecionados")
+BEGIN
+
+DEFINE ps_opc_extr_x 0
+DEFINE ps_opc_agr_x    0
+DEFINE ps_opc_extr_y  5
+DEFINE ps_opc_agr_y    75
+
+DEFINE ps_agr_ali_x   5
+DEFINE ps_agr_ali_y  130
+
+DEFINE ps_agr_ad_x   270
+DEFINE ps_agr_ad_y    5
+
+DEFINE ps_tx_obs_txb_x 295
+DEFINE ps_tx_obs_txb_y +215
+
+DEFINE ps_opc_dic_x 0
+DEFINE ps_opc_dic_y 265
+
+DEFINE ps_fl_base 5
+DEFINE ps_fl_salvabase 5
+
+DEFINE ps_tx_base 10
+DEFINE ps_tx_salvabase 10
+
+GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de Identificação")
+
+	RADIO   rd_dom     +5 +25 100 ., first label("Domicílio") option(dom)
+	RADIO   rd_uc       +65 @   150 ., middle label("Unidade de Consumo") option(uc)
+	RADIO   rd_pess     +125 @  100 ., last label("Pessoas") option(pess)
+	
+GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens à cesta")
+	
+	RADIO rd_ali +15 +20 . ., label("Alimentação") onclickon(script habilita_ali) first
+	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
+	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
+	
+	TEXT        agr_ali         ps_agr_ali_x ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e ...")
+	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
+	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e ...")
+	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
+	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimetos: Selecione um item e ...")
+	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
+	
+	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicioná-lo") onpush(program atualizaListas)
+	
+GROUPBOX agr_ad ps_agr_ad_x ps_agr_ad_y 230 345, label("Itens Selecionados")
+
+	TEXTBOX txb_agradd +10 +20 210 310, label("") left
+	
+GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Bases de Dados")
+	
+	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais ...") onpush(script dados)
+	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando ...") onpush(script salvando)
+
+TEXT     credit     10   360  490    ., label("PUC-Rio - Departamento de Economia") right  
+	
+END
+
+OK ok1,      label("OK")
+SUBMIT sub1, labe("Submit")
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help datazoom_pofsel_08")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING listaNomes_display
+	  create STRING listaNomes
+      create STRING nomeDialog
+	  create STRING saidadata
+	  create STRING saidasalvando
+      nomeDialog.storeDialogClassName
+	  main.agr_desp.hide
+      main.cb_despesas.hide
+      main.agr_ren.hide
+      main.cb_rendas.hide
+   END
+   
+SCRIPT POSTINIT_SCRIPT
+	BEGIN
+		listaNomes.setvalue ""
+	END
+  
+SCRIPT dados
+BEGIN
+	create CHILD datazoom_datafolder AS data
+	data.settitle "Arquivos de dados originais - POF 2017-2018"
+	data.setExitString saidadata
+END
+
+SCRIPT salvando
+BEGIN
+	create CHILD datazoom_finalfolder AS dic
+	dic.settitle "Novas bases - POF 2017-2018"
+	dic.setExitString saidasalvando
+END
+
+SCRIPT habilita_ali
+   BEGIN
+      main.agr_ali.show
+      main.cb_alimentos.show
+      main.agr_desp.hide
+      main.cb_despesas.hide
+      main.agr_ren.hide
+      main.cb_rendas.hide
+   END
+   
+SCRIPT habilita_desp
+   BEGIN
+      main.agr_ali.hide
+      main.cb_alimentos.hide
+      main.agr_desp.show
+      main.cb_despesas.show
+      main.agr_ren.hide
+      main.cb_rendas.hide
+   END
+   
+SCRIPT habilita_ren
+   BEGIN
+      main.agr_ali.hide
+      main.cb_alimentos.hide
+      main.agr_desp.hide
+      main.cb_despesas.hide
+      main.agr_ren.show
+      main.cb_rendas.show
+   END
+
+LIST nomes_alimentos
+   BEGIN
+:: Despesa com alimentação
+:: :: Alimentação no domicílio
+:: :: :: Cereais, leguminosas e oleaginosas
+:: :: :: :: Arroz 
+:: :: :: :: Feijão 
+:: :: :: :: Orgânicos 
+:: :: :: :: Outros (cereais, leguminosas e oleaginosas)
+:: :: :: Farinhas féculas e massas
+:: :: :: :: Macarrão 
+:: :: :: :: Farinha de trigo 
+:: :: :: :: Farinha de mandioca 
+:: :: :: :: Outras (farinhas féculas e massas)
+:: :: :: Tubérculos e raízes
+:: :: :: :: Batata inglesa 
+:: :: :: :: Cenoura 
+:: :: :: :: Mandioca 
+:: :: :: :: Outros (tubérculos e raízes)
+:: :: :: Açúcares e derivados
+:: :: :: :: Açúcar refinado 
+:: :: :: :: Açúcar cristal 
+:: :: :: :: Light e Diet 
+:: :: :: :: Outros (açúcares e derivados)
+:: :: :: Legumes e verduras
+:: :: :: :: Tomate 
+:: :: :: :: Cebola 
+:: :: :: :: Alface 
+:: :: :: :: Outros (legumes e verduras)
+:: :: :: Frutas
+:: :: :: :: Banana 
+:: :: :: :: Laranja 
+:: :: :: :: Maçã
+:: :: :: :: Outras (frutas)
+:: :: :: Carnes vísceras e pescados
+:: :: :: :: Carne de boi de primeira 
+:: :: :: :: Carne de boi de segunda 
+:: :: :: :: Carne de suíno 
+:: :: :: :: Carnes e peixes industrializados 
+:: :: :: :: Pescados frescos 
+:: :: :: :: Outros (carnes, vísceras e pescados)
+:: :: :: Aves e ovos
+:: :: :: :: Frango 
+:: :: :: :: Ovo de galinha 
+:: :: :: :: Orgânicos 
+:: :: :: :: Outros (aves e ovos)
+:: :: :: Leites e derivados
+:: :: :: :: Leite de vaca 
+:: :: :: :: Leite em pó 
+:: :: :: :: Queijos 
+:: :: :: :: Light e Diet 
+:: :: :: :: Orgânicos 
+:: :: :: :: Outros (leites e derivados)
+:: :: :: Panificados
+:: :: :: :: Pão francês 
+:: :: :: :: Biscoito 
+:: :: :: :: Light e diet 
+:: :: :: :: Outros (panificados)
+:: :: :: Óleos e gorduras
+:: :: :: :: Óleo de soja 
+:: :: :: :: Azeite de oliva 
+:: :: :: :: Outros (óleos e gorduras)
+:: :: :: Bebidas e infusões
+:: :: :: :: Café moído 
+:: :: :: :: Refrigerantes 
+:: :: :: :: Bebidas não alcoólicas light e diet 
+:: :: :: :: Cervejas e chopes 
+:: :: :: :: Outras bebidas alcoólicas 
+:: :: :: :: Outras (bebidas e infusões)
+:: :: :: Enlatados e conservas
+:: :: :: Sal e condimentos
+:: :: :: :: Massa de tomate 
+:: :: :: :: Maionese 
+:: :: :: :: Sal refinado 
+:: :: :: :: Outros (sal e condimentos)
+:: :: :: Alimentos preparados
+:: :: :: Outros (alimentação no domicílio)
+:: :: Alimentação fora do domicílio
+:: :: :: Almoço e jantar 
+:: :: :: Café leite café-leite e chocolate
+:: :: :: Sanduíches e salgados 
+:: :: :: Refrigerantes e outras bebidas não alcoólicas 
+:: :: :: Lanches 
+:: :: :: Cervejas chopes e outras bebidas alcoólicas 
+:: :: :: Alimentação na escola 
+:: :: :: Alimentação light e diet 
+:: :: :: Outras (alimentação fora do domicílio)
+   END
+   
+LIST nomes_alimentos2
+   BEGIN
+Alimentação
+Alimentação_no_domicílio
+Cereais_leguminosas_oleaginosas
+Arroz
+Feijão
+Cereais_Orgânicos
+Outros_cereais_leg_oleag
+Farinhas_féculas_e_massas
+Macarrão
+Farinha_de_trigo
+Farinha_de_mandioca
+Outras_farinhas_fec_massas
+Tubérculos_e_raízes
+Batata_inglesa
+Cenoura
+Mandioca
+Outros_tuberculos_raizes
+Açúcares_e_derivados
+Açúcar_refinado
+Açúcar_cristal
+Acucar_Light_e_Diet
+Outros_Acucares_Derivados
+Legumes_e_verduras
+Tomate
+Cebola
+Alface
+Outros_legumes_verduras
+Frutas
+Banana
+Laranja
+Maça
+Outras_frutas
+Carnes_vísceras_e_pescados
+Carne_de_boi_de_primeira
+Carne_de_boi_de_segunda
+Carne_de_suíno
+Carnes_e_peixes_industrializados
+Pescados_frescos
+Outros_carnes_visc_pescados
+Aves_e_ovos
+Frango
+Ovo_de_galinha
+Ovos_Orgânicos
+Outros_Aves_Ovos
+Leites_e_derivados
+Leite_de_vaca
+Leite_em_pó
+Queijos
+Leites_Light_e_Diet
+Leites_derivados_Orgânicos
+Outros_leites_derivados
+Panificados
+Pão_francês
+Biscoito
+Paes_Light_e_diet
+Outros_panificados
+Óleos_e_gorduras
+Óleo_de_soja
+Azeite_de_oliva
+Outros_oleos_gorduras
+Bebidas_e_infusões
+Café_moído
+Refrigerantes
+Bebidas_nãoalcoól_light_e_diet
+Cervejas_e_chopes
+Outras_bebidas_alcoólicas
+Outras_Bebidas_Infusoes
+Enlatados_e_conservas
+Sal_e_condimentos
+Massa_de_tomate
+Maionese
+Sal_refinado
+Outros_sal_condimentos
+Alimentos_preparados
+Outros_alimentacao_no_Dom
+Alimentação_fora_do_domicílio
+Almoço_e_jantar
+Café_leite_caféleite_chocolate
+Sanduíches_e_salgados
+Refrigerantes_e_outras_nãoalcoo
+Lanches
+Cervejas_chopes_outras_alcool
+Alimentação_na_escola
+Alimentação_light_e_diet
+Outras_alimentacao_fora_Dom
+   END
+
+LIST nomes_despesas
+   BEGIN
+:: :: Habitação
+:: :: :: Aluguel
+:: :: :: :: Aluguel monetário
+:: :: :: :: Aluguel não monetário
+:: :: :: Condomínio
+:: :: :: Serviços e taxas
+:: :: :: :: Energia elétrica
+:: :: :: :: Telefone fixo
+:: :: :: :: Telefone celular
+:: :: :: :: Pacote de telefone,
+:: :: :: :: Gás doméstico
+:: :: :: :: Água e esgoto
+:: :: :: :: Outros (serviços e taxas)
+:: :: :: Manutenção do lar
+:: :: :: Artigos de limpeza
+:: :: :: Mobiliários e artigos do lar
+:: :: :: Eletrodomésticos
+:: :: :: Consertos de artigos do lar
+:: :: Vestuário
+:: :: :: Roupa de homem
+:: :: :: Roupa de mulher
+:: :: :: Roupa de criança
+:: :: :: Calçados e apetrechos
+:: :: :: Jóias e bijuterias
+:: :: :: Tecidos e armarinhos
+:: :: Transporte
+:: :: :: Urbano
+:: :: ::  Gasolina - veículo próprio
+:: :: ::  Álcool - veículo próprio
+:: :: :: Manutenção e acessórios
+:: :: ::  Aquisição de veículos
+:: :: :: Viagens esporádicas
+:: :: :: Outras (transporte)
+:: :: Higiene e cuidados pessoais
+:: :: :: Perfume
+:: :: :: Produtos para cabelo
+:: :: :: Sabonete
+:: :: :: Instrumentos e produtos de uso pessoal
+:: :: Assistência à saúde
+:: :: :: Remédios
+:: :: :: Plano/Seguro saúde
+:: :: :: Consulta e tratamento dentário
+:: :: :: Consulta médica
+:: :: :: Tratamento médico e ambulatorial
+:: :: :: Serviços de cirurgia
+:: :: :: Hospitalização
+:: :: :: Exames diversos
+:: :: :: Material de tratamento
+:: :: :: Outras (assistência à saúde)
+:: :: Educação
+:: :: :: Cursos regulares
+:: :: :: Curso superior
+:: :: :: Outros cursos e atividades
+:: :: :: Livros didáticos e revistas técnicas
+:: :: :: Artigos escolares
+:: :: :: Outras (educação)
+:: :: Recreação e cultura
+:: :: :: Brinquedos e jogos
+:: :: :: Celular e acessórios
+:: :: :: Periódicos livros e revistas não didáticos
+:: :: :: Recreações e esportes
+:: :: :: Outras (recreação e cultura)
+:: :: Fumo
+:: :: Serviços pessoais
+:: :: :: Cabeleireiro
+:: :: :: Manicuro e pedicuro
+:: :: :: Consertos de artigos pessoais
+:: :: :: Outras (serviços pessoais)
+:: :: Despesas diversas
+:: :: :: Jogos e apostas
+:: :: :: Comunicação
+:: :: :: Cerimônias e festas
+:: :: :: Serviços profissionais
+:: :: :: Imóveis de uso ocasional
+:: :: :: Outras (despesas diversas)
+:: :: Outras despesas correntes
+:: :: :: Impostos
+:: :: :: Contribuições trabalhistas
+:: :: :: Serviços bancários
+:: :: :: Pensões mesadas e doações
+:: :: :: Previdência privada
+:: :: :: Outras (outras despesas correntes)
+:: :: Aumento do ativo
+:: :: :: Imóvel (aquisição)
+:: :: :: Imóvel (reforma)
+:: :: :: Outros investimentos
+:: :: Diminuição do passivo
+:: :: :: Empréstimo
+:: :: :: Prestação de imóvel
+   END
+
+LIST nomes_despesas2
+   BEGIN
+Habitação
+Aluguel
+Aluguel_monetário
+Aluguel_não_monetário
+Condomínio
+Serviços_e_taxas
+Energia_elétrica
+Telefone_fixo
+Telefone_celular
+Pacote_de_telefone
+Gás_doméstico
+Água_e_esgoto
+Outros_servicos_e_taxas
+Manutenção_do_lar
+Artigos_de_limpeza
+Mobiliários_e_artigos_do_lar
+Eletrodomésticos
+Consertos_de_artigos_do_lar
+Vestuário
+Roupa_de_homem
+Roupa_de_mulher
+Roupa_de_criança
+Calçados_e_apetrechos
+Joias_e_bijuterias
+Tecidos_e_armarinhos
+Transporte
+Transporte_Urbano
+Gasolina_veículo_próprio
+Álcool_veículo_próprio
+Manutenção_e_acessórios
+Aquisição_de_veículos
+Viagens_esporádicas
+Outras_transporte
+Higiene_e_cuidados_pessoais
+Perfume
+Produtos_para_cabelo
+Sabonete
+Instrumentos_produt_uso_pessoal
+Assistência_à_saúde
+Remédios
+Plano_seguro_saude
+Consulta_e_tratamento_dentário
+Consulta_médica
+Tratamento_médico_e_ambulatoria
+Serviços_de_cirurgia
+Hospitalização
+Exames_diversos
+Material_de_tratamento
+Outras_assistencia_saude
+Educação
+Cursos_regulares
+Curso_superior
+Outros_cursos_e_atividades
+Livros_didaticos_e_revistas_tec
+Artigos_escolares
+Outras_educacao
+Recreação_e_cultura
+Brinquedos_e_jogos
+Celular_e_acessórios
+Periódicos_livros_revistas_nãod
+Recreações_e_esportes
+Outras_recreacao_cultura
+Fumo
+Serviços_pessoais
+Cabeleireiro
+Manicuro_e_pedicuro
+Consertos_de_artigos_pessoais
+Outras_servicos_pessoais
+Despesas_diversas
+Jogos_e_apostas
+Comunicação
+Cerimônias_e_festas
+Serviços_profissionais
+Imóveis_de_uso_ocasional
+Outras_despesas_diversas
+Outras_despesas_correntes
+Impostos
+Contribuições_trabalhistas
+Serviços_bancários
+Pensões_mesadas_e_doações
+Previdência_privada
+Outras_outras_desp_correntes
+Aumento_do_ativo
+Imóvel_aquisição
+Imóvel_reforma
+Outros_investimentos
+Diminuição_do_passivo
+Empréstimo
+Prestação_de_imóvel
+   END
+   
+LIST nomes_rendas
+   BEGIN
+:: :: Rendimento total
+:: :: :: Rendimento do trabalho
+:: :: :: :: Empregado
+:: :: :: :: Empregador
+:: :: :: :: Conta_própria
+:: :: :: Transferência
+:: :: :: :: Aposentadoria e pensão do INSS
+:: :: :: :: Aposentadoria e pensão da previdência pública
+:: :: :: :: Aposentadoria e pensão da_previdência privada
+:: :: :: :: Programas sociais federais
+:: :: :: :: Pensão alimentícia mesada ou doação
+:: :: :: :: Outras transferências
+:: :: :: Rendimento de aluguel
+:: :: :: Outras rendas
+:: :: :: Rendimento não monetário
+:: :: Variação patrimonial
+   END
+   
+LIST nomes_rendas2
+   BEGIN
+Rendimento_total
+Rendimento_do_trabalho
+Empregado
+Empregador
+Conta_própria
+Transferência
+Aposentadoria_e_pensão_INSS
+Aposentadoria_pensão_prev_pub
+Aposentadoria_pensão_prev_priv
+Programas_sociais_federais
+Pensão_aliment_mesada_ou_doação
+Outras_transferências
+Rendimento_de_aluguel
+Outras_rendas
+Rendimento_Não_Monetário
+Variação_Patrimonial
+   END
+
+PROGRAM atualizaListas
+   BEGIN
+      if main.rd_ali.iseq(1) {
+         put "." nomeDialog ".listaNomes_display.setvalue" `"""' listaNomes_display main.cb_alimentos " " `" :: ""'
+	     stata hidden immediate
+		 put "." nomeDialog ".listaNomes.setvalue" `"""' listaNomes " " main.cb_alimentos `"""'
+	     stata hidden immediate
+		 }
+	  if main.rd_des.iseq(1) {
+         put "." nomeDialog ".listaNomes_display.setvalue" `"""' listaNomes_display main.cb_despesas " " `" :: ""'
+	     stata hidden immediate
+		 put "." nomeDialog ".listaNomes.setvalue" `"""' listaNomes " " main.cb_despesas `"""'
+	     stata hidden immediate
+		 }
+	  if main.rd_ren.iseq(1) {
+         put "." nomeDialog ".listaNomes_display.setvalue" `"""' listaNomes_display main.cb_rendas " " `" :: ""'
+	     stata hidden immediate
+		 put "." nomeDialog ".listaNomes.setvalue" `"""' listaNomes " " main.cb_rendas `"""'
+	     stata hidden immediate
+		 }
+	  put "." nomeDialog ".main.txb_agradd.setlabel" `"""' listaNomes_display `"""'
+      stata hidden immediate
+   END
+   
+PROGRAM command
+BEGIN
+   put "datazoom_pof2017 "
+   beginoptions
+		/*Parte da syntax: tipo de extração*/
+		put "id("
+		option radio(main rd_dom rd_uc rd_pess)
+		/*Parte da syntax: lista de agregados*/
+		put ") sel("
+		put listaNomes
+		/*Parte da syntax: caminho microdados e dicionarios*/
+		put ") "
+		put saidadata " "
+		put saidasalvando
+   endoptions
+   stata
+END
