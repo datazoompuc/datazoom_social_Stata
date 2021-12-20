@@ -4,27 +4,9 @@
 * version 1.4
 program define datazoom_pnad
 
-syntax, years(numlist) original(str) saving(str) [pes dom both ncomp comp81 comp92 english]
+syntax, years(numlist) original(str) [saving(str)] [pes dom both ncomp comp81 comp92 english]
 
-if "`pes'"~="" & "`dom'"=="" {
-	display as result _newline "Obtendo arquivo de pessoas da PNAD"
-	loc register = "pes"
-}
-if "`dom'"~="" & "`pes'"=="" {
-	display as result _newline "Obtendo arquivo de domicílios da PNAD"
-	loc register = "dom"
-}
-if ("`pes'"~="" & "`dom'"~="") | "`both'"~="" {
-	display as result _newline "Obtendo arquivos de domicílios e pessoas da PNAD"
-	loc both = "both"
-	loc pes = "pes"
-	loc dom = "dom"
-	loc register = "pes dom"
-}
-if "`pes'"=="" & "`dom'"=="" & "`both'"=="" {
-	display as result _newline "Nenhum tipo de registro escolhido: obtendo arquivo de pessoas da PNAD"
-	loc register = "pes"
-}
+if "`english'" != "" local lang "_en"
 
 /*	Opcoes de compatibilizacao */
 
@@ -32,383 +14,277 @@ if "`ncomp'"~="" {
 	display as result _newline "Obtendo microdados não compatibilizados"
 }
 
-
 * se não escolheu nenhuma compatibilização, default = noncompatible
 if "`ncomp'"=="" & "`comp81'"=="" & "`comp92'"=="" {
 	local ncomp = "ncomp"
 	display as result _newline "Nenhuma opção de compatibilização escolhida: obtendo microdados não compatibilizados"
 }
 
-/* Faz o matching entre os anos escolhidos e as bases de dados originais */
-qui foreach ano in `years' {
-	while "`*'" ~= "" {
-
-		/* se formato anos 1981, 1982, 1984 */
-		loc base = substr("`original'",-8,2) // por exemplo: PNAD81BR.TXT
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc base`ano'pes = "`original'"
-			loc base`ano'dom = "`original'"
-			noi di "`base`ano'pes'"
-			noi di "`base`ano'dom'"
-			macro shift
-			continue
-		}
-
-		/* se formato anos 1983, 1988 */
-		loc base = substr("`original'",-9,2) // por exemplo: PND83RM4.DAT
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc base`ano'pes = "`original'"
-			loc base`ano'dom = "`original'"
-			noi di "`base`ano'pes'"
-			noi di "`base`ano'dom'"
-			macro shift
-			continue
-		}
-
-		/* se formato anos 1985, 1986 */
-		loc base = substr("`original'",-7,3) // por exemplo: PNAD1985.DAT
-		loc base = "1`base'"
-		if "`base'" == "`ano'" {
-			loc base`ano'pes = "`original'"
-			loc base`ano'dom = "`original'"
-			noi di "`base`ano'pes'"
-			noi di "`base`ano'dom'"
-			macro shift
-			continue
-		}		
-
-		/* se formato anos 1987, 1989, 1990 */
-		loc base = substr("`original'",-8,3) // por exemplo: PND1989N.DAT
-		loc base = "1`base'"
-		if "`base'" == "`ano'" {
-			loc base`ano'pes = "`original'"
-			loc base`ano'dom = "`original'"
-			noi di "`base`ano'pes'"
-			noi di "`base`ano'dom'"
-			macro shift
-			continue
-		}			
-
-		/* se formato anos 1992, 1993, 1995 */
-		loc base = substr("`original'",-6,2)  // por exemplo: DOM93.DAT
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc tipo = substr("`original'",-9,3)
-			loc tipo = lower("`tipo'")
-			if "`tipo'" == "pes" & "`pes'"~="" {
-				loc base`ano'pes = "`original'"
-				noi di "`base`ano'pes'"
-				macro shift
-				continue
-			}
-			if "`tipo'" == "dom" & "`dom'"~="" {
-				loc base`ano'dom = "`original'"
-				noi di "`base`ano'dom'"
-				macro shift
-				continue
-			}
-		}
-		
-		/* se formato 1996 */
-		loc base = substr("`original'",-8,2) // por exemplo: D96BR.TXT
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc tipo = substr("`original'",-9,1)
-			loc tipo = lower("`tipo'")
-			if "`tipo'" == "d" loc tipo = "dom"
-			else if "`tipo'" == "p" loc tipo = "pes"
-			else loc tipo = ""
-			if "`tipo'" == "pes" & "`pes'"~="" {
-				loc base`ano'pes = "`original'."
-				noi di "`base`ano'pes'"
-				macro shift
-				continue
-			}
-			if "`tipo'" == "dom" & "`dom'"~="" {
-				loc base`ano'dom = "`original'."
-				noi di "`base`ano'dom'"
-				macro shift
-				continue
-			}
-		}
-
-		/* se formato 1997 */
-		loc base = substr("`original'",-2,2) // por exemplo: Domicilios97
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc tipo = substr("`original'",-9,2)
-			loc tipo = lower("`tipo'")
-			if "`tipo'" == "ic" loc tipo = "dom" // tipo == ic, pois Domicilios e Pessoas tem número de letras diferentes
-			else if "`tipo'" == "pe" loc tipo = "pes"
-			else loc tipo = ""
-			if "`tipo'" == "pes" & "`pes'"~="" {
-				loc base`ano'pes = "`original'."
-				noi di "`base`ano'pes'"
-				macro shift
-				continue
-			}
-			if "`tipo'" == "dom" & "`dom'"~="" {
-				loc base`ano'dom = "`original'."
-				noi di "`base`ano'dom'"
-				macro shift
-				continue
-			}
-		}
-
-		/* se formato 1998 e 1999 */
-		loc base = substr("`original'",-6,2) // por exemplo: Domicilio98.TXT Pessoa98.TXT
-		loc base = "19`base'"
-		if "`base'" == "`ano'" {
-			loc tipo = substr("`original'",-12,3)
-			loc tipo = lower("`tipo'")
-			if "`tipo'" == "ici" loc tipo = "dom" // tipo == ici, pois Domicilio e Pessoa tem número de letras diferentes
-			else if "`tipo'" == "pes" loc tipo = "pes"
-			else loc tipo = ""
-			if "`tipo'" == "pes" & "`pes'"~="" {
-				loc base`ano'pes = "`original'"
-				noi di "`base`ano'pes'"
-				macro shift
-				continue
-			}
-			if "`tipo'" == "dom" & "`dom'"~="" {
-				loc base`ano'dom = "`original'"
-				noi di "`base`ano'dom'"
-				macro shift
-				continue
-			}
-		}
-		macro shift
-	}
-}
-
-
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_pnad, years(`years') original(`original') register(`register') `ncomp' `comp81' `comp92' `english'
+local name "`pes'`dom'`both'"
+
+/* Abrindo bases no Stata e salvando em arquivos temporários com formato ".dta" */
+display as input "Anos selecionados: `years'"
+
+if "`name'"=="pes" di _newline as result "Gerando bases de pessoas ..."
+else if "`name'" == "dom" {
+	di _newline as result "Gerando bases de domicílios ..."
+}
+	
+foreach ano in `years'{
+	
+	if `ano' <= 1990 & "`comp92'"~="" {
+		display as error "Opção 'comp92' não se aplica à decada de 1980"
+		exit, clear
+	}
+		
+	/* Caso seja both, roda para os dois e mergeia */
+	if "`both'" != ""{
+		tempfile base_pes
+		datazoom_pnad, years(`ano') original(`original') pes `ncomp' `comp81' `comp92'
+			
+		save `base_pes', replace
+			
+		datazoom_pnad, years(`ano') original(`original') dom `ncomp' `comp81' `comp92'
+			
+		merge 1:m id_dom using `base_pes', nogen keep(match)
+	}
+	else{
+		
+				/* 
+		Match entre ano/registro e nome do arquivo
+										*/
+										
+		grab_name, ano(`ano') name(`name')
+		
+		local file_name = r(base`ano'`name')
+		
+			/*
+		Carregamento dos dados
+							*/
+		
+		tempfile base
+		
+		/* 83 e 88 vêm quebrados em 8 arquivos */
+		foreach file in `file_name'{
+			
+			load_pnad, file("`file'") original("`original'") dict_name("pnad`ano'`name'`lang'")
+			
+			cap append using `base'
+			
+			save `base', replace
+		}
+		
+		local id `pes'`dom'`both'
+		local comp `ncomp'`comp81'`comp92'
+		
+		treat_pnad, ano(`ano') base("`base'") id(`id') comp(`comp')
+	}
+		
+	if "`saving'" != ""{
+			
+		cd `saving'
+			
+		local id `pes'`dom'`both'
+			
+		local suffix = cond("`ncomp'" != "", "", "_`comp81'`comp92'")
+		
+		local suffix = cond("`both'" != "", "`suffix'", "`id'`suffix'")
+		
+		save pnad`ano'`suffix', replace	
+	}
+}
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)' - compatível com a última versão dos microdados divulgados em 13/03/2020"
 
 end
 
-program load_pnad
-syntax, years(numlist) original(string) register(string) [ncomp comp81 comp92 english]
+program grab_name, rclass /* retorna um local como r(file_name) */
+syntax, ano(int) name(string)
 
-if "`english'" != "" local lang "_en"
-
-loc q = 0 // vai indicar se pes já foi realizado
-foreach name of local register {
-	if "`name'"=="pes" di _newline as result "Gerando bases de pessoas ..."
-	else {
-		di _newline as result "Gerando bases de domicílios ..."
-		loc q = 1
-	}
+if `ano' == 1981 | `ano' == 1982{
 	
-	tokenize `years'                            // converte `anos' em `*' = `1', `2', `3', ...
-	/* Abrindo bases no Stata e salvando em arquivos temporários com formato ".dta" */
-	display as input "Anos selecionados: `*'"
+	/* por exemplo: PNAD81BR.TXT */
+	local digitos = substr("`ano'", 3, 2)
+	local file_name PNAD`digitos'BR.TXT
+	
+}
+else if `ano' == 1984{
+	
+	/* por exemplo: PNAD81BR.DAT */
+	local digitos = substr("`ano'", 3, 2)
+	local file_name PNAD`digitos'BR.DAT
+	
+}
+else if `ano' == 1983 | `ano' == 1988{
+	
+	// por exemplo: PND83RM1.DAT, RM2, RM3, ..., RM8
+	local digitos = substr("`ano'", 3, 2)
+	local file_name ""
+	forvalues i = 1/8{
+	local file_name "`file_name' PND`digitos'RM`i'.DAT"
+	}
+}	
+else if `ano' == 1985 | `ano' == 1986{
+	
+	// por exemplo: PNAD1985.DAT
+	local file_name PNAD`ano'.DAT
+	
+}
+else if `ano' == 1987 | `ano' == 1989 | `ano' == 1990{
+	
+	// por exemplo: PND1989N.DAT
+	local file_name PND`ano'N.DAT
+	
+}
+else if `ano' == 1992 | `ano' == 1993 | `ano' == 1995{
+	
+	// por exemplo: DOM93.DAT
+	local digitos = substr("`ano'", 3, 2)
+	local prefix = cond("`name'" == "dom", "DOM", "PES")
+	local file_name `prefix'`digitos'.DAT
+	
+}
+else if `ano' == 1996{
+	
+	// por exemplo: D96BR.TXT
+	local digitos = substr("`ano'", 3, 2)
+	local prefix = cond("`name'" == "dom", "D", "P")
+	local file_name `prefix'`digitos'BR.txt
+	
+}
+else if `ano' == 1997{
+	
+	// por exemplo: Domicilios97., sem extensão
+	local digitos = substr("`ano'", 3, 2)
+	local prefix = cond("`name'" == "dom", "Domicilios", "Pessoas")
+	local file_name `prefix'`digitos'.
+	
+}
+else if `ano' == 1998 | `ano' == 1999{
+	
+	// por exemplo: Domicilio98.TXT Pessoa98.TXT
+	local digitos = substr("`ano'", 3, 2)
+	local prefix = cond("`name'" == "dom", "domicilio", "pessoa")
+	local file_name `prefix'`digitos'.txt	
+}
+else if `ano' >= 2001{
+		
+	local prefix = cond("`name'" == "dom", "DOM", "PES")
+	local file_name `prefix'`ano'.txt
+}
+else{
+	di as error "`ano': Ano inválido" _newline "`ano': Invalid year"
+}
+return local base`ano'`name' `file_name'
 
-	while "`*'" != "" {
-		if `1' <= 1990 & "`comp92'"~="" {
-			display as error "Opção 'comp92' não se aplica à decada de 1980"
-			exit, clear
-		}
-		if `1' <= 1990 {                                     // Se tem ano até 1990
-			display as input "Extraindo `1'..."
+end
+
+program load_pnad
+syntax, file(string) original(string) dict_name(string)
+
+	tempfile dic
+
+	findfile dict.dta
+
+	read_compdct, compdct("`r(fn)'") dict_name("`dict_name'") out("`dic'")
 			
+	cap infile using `dic', using("`original'/`file'") clear
+	if _rc == 601{
+	di as error "`original'/`file'" _newline "Erro na leitura do arquivo" _newline "Failed to read data"
+	exit 601
+	}
+
+end
+
+program treat_pnad
+syntax, ano(int) base(string) id(string) comp(string)
+
+if `ano' <= 1990 {                                     // Se tem ano até 1990
+
+	/* Parte específica ao período de 1981 a 1990:
+	 Até 1990 domicílios e pessoas são registrados no mesmo arquivo.
+	 Nesse mesmo período, não há variável de ano da pesquisa         */
+
+	gen int ano = `ano'                                 // gera variável de ano
+	lab var ano "ano da pesquisa"
+
+	* variavel de identificacao do domicilio
+	if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
+	else egen id_dom = concat(ano v0101)
+	lab var id_dom "identificação do domicílio"
+
+	if "`id'"=="pes" {
+		keep if v0100 == 3                  // mantém somente pessoas
+		sort id_dom v0305 v0306, stable
+		by id_dom: gen ordem = _n
+		lab var ordem "número de ordem do morador"
+	}
+	else keep if v0100 == 1                                // mantém somente domicílios
+
+	/* Fim da parte específica a 1981-90 */
+
+	if "`comp'" == "comp81"{
+
+		/* contrói renda domiciliar compatível com anos 90 e 2000 */
+		if "`id'"=="dom" {
+			preserve
+						
 			tempfile dic
 
 			findfile dict.dta
 
-			read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
-			
-			qui cap infile using `dic', using("`base`1'`name''") clear
-			
-			/* Parte específica ao período de 1981 a 1990:
-			 Até 1990 domicílios e pessoas são registrados no mesmo arquivo.
-			 Nesse mesmo período, não há variável de ano da pesquisa         */
-
-			gen int ano = `1'                                 // gera variável de ano
-			lab var ano "ano da pesquisa"
-
-			* variavel de identificacao do domicilio
-			if `1'==1983 | `1'==1990 egen id_dom = concat(ano v0102 v0103)
-			else egen id_dom = concat(ano v0101)
-			lab var id_dom "identificação do domicílio"
-
-			if "`name'"=="pes" {
-				keep if v0100 == 3                  // mantém somente pessoas
-				sort id_dom v0305 v0306, stable
-				by id_dom: gen ordem = _n
-				lab var ordem "número de ordem do morador"
-			}
-			else keep if v0100 == 1                                // mantém somente domicílios
-
-			/* Fim da parte específica a 1981-90 */
-
-			if "`ncomp'" ~= "" {
-				tempfile pnad`1'`name'
-				if "`both'"=="" save pnad`1'`name', replace				// salva base final sem compatibilizar e sem merge
-				else { 
-					if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-					else {
-						merge 1:m id_dom using `pnad`1'pes', nogen	keep(match)	
-						save pnad`1', replace								// salva base final com merge
-					}
-				}
-			}
-			else {
-				if "`comp81'"~="" {
-
-					/* contrói renda domiciliar compatível com anos 90 e 2000 */
-					if "`name'"=="dom" {
-						preserve
+			read_compdct, compdct("`r(fn)'") dict_name("pnad`ano'pes`lang'") out("`dic'")
 						
-						tempfile dic
+			qui cap infile using `dic', using("`base'") clear
+			keep if v0100 == 3                  // mantém somente pessoas
+			g ano = `ano'
+			if `ano'==1983 | `ano'==1990 egen id_dom = concat(ano v0102 v0103)
+			else egen id_dom = concat(ano v0101)	
 
-						findfile dict.dta
+			tempvar aux1 aux2
+			g `aux2' = v0602 if v0305<6
+			if `ano'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
+			else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
+			bys id_dom: egen renda_domB = total(`aux2')
+			replace renda_domB = . if `aux1'>0
+			bys id_dom: keep if _n==1
+			keep id_dom renda_domB
+			tempfile rdom
+			save `rdom', replace
 
-						read_compdct, compdct("`r(fn)'") dict_name("pnad`1'pes`lang'") out("`dic'")
-						
-						qui cap infile using `dic', using("`base`1'pes'") clear
-						keep if v0100 == 3                  // mantém somente pessoas
-						g ano = `1'
-						if `1'==1983 | `1'==1990 egen id_dom = concat(ano v0102 v0103)
-						else egen id_dom = concat(ano v0101)	
-
-						tempvar aux1 aux2
-						g `aux2' = v0602 if v0305<6
-						if `1'<=1984 bys id_dom: egen `aux1' = total(`aux2'==9999999)						// identifica se alguma renda é ignorada, pois
-						else bys id_dom: egen `aux1' = total(`aux2'>=999999998 & `aux2'~=.)					// nesse caso, a renda domiciliar será missing
-						bys id_dom: egen renda_domB = total(`aux2')
-						replace renda_domB = . if `aux1'>0
-						bys id_dom: keep if _n==1
-						keep id_dom renda_domB
-						tempfile rdom
-						save `rdom', replace
-
-						restore
-						merge 1:1 id_dom using `rdom', nogen
-					}
-					cap drop v0101
-
-					compat_`name'_1981a1990_para_81		// compatibiliza
-
-					tempfile pnad`1'`name'
-					if "`both'"=="" save pnad`1'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-					else {
-						if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`1'pes', nogen keep(match)	
-							save pnad`1'_comp81, replace								// salva base final com merge
-						}
-					}
-				}
-			}
-			clear
-			macro shift                                       // vai para o próximo ano.
+			restore
+			merge 1:1 id_dom using `rdom', nogen
 		}
-		else {                                               // Se não tem ano até 1990...
-			if `1' <= 2001 {                                  // ... e tem ano até 2001
-				display as input "Extraindo `1'..."
-				
-				tempfile dic
+		cap drop v0101
 
-				findfile dict.dta
-
-				read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
-				
-				qui cap infile using `dic', using("`original'/`name'`1'.txt") clear
-
-				if `1'==2001 egen id_dom = concat(v0101 v0102 v0103)
-				else egen id_dom = concat(v0101 uf v0102 v0103)
-				lab var id_dom "identificação do domicílio"
-				
-				if "`ncomp'" ~= "" {
-					tempfile pnad`1'`name'
-					if "`both'"=="" save pnad`1'`name', replace				// salva base final sem compatibilizar e sem merge
-					else {
-						if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`1'pes', nogen	keep(match)	
-							save pnad`1', replace								// salva base final com merge
-						}
-					}
-				}
-				else { 
-					if "`comp81'"~="" compat_`name'_1992a2001_para_81
-					else compat_`name'_1992a2001_para_92
-					
-					tempfile pnad`1'`name'
-					if "`both'"=="" {
-						if "`comp81'"~="" save pnad`1'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-						else save pnad`1'`name'_comp92, replace
-					}
-					else {
-						if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`1'pes', nogen keep(match)	
-							if "`comp81'"~="" save pnad`1'_comp81, replace								// salva base final com merge
-							else save pnad`1'_comp92, replace
-						}
-					}
-				}
-				clear
-				macro shift
-			}
-			else {                                            // Se só restam anos >= 2002
-				display as input "Extraindo `1'..."
-				
-				tempfile dic
-
-				findfile dict.dta
-
-				read_compdct, compdct("`r(fn)'") dict_name("pnad`1'`name'`lang'") out("`dic'")
-				
-				qui cap infile using `dic', using("`original'/`name'`1'.txt") clear
-			
-				egen id_dom = concat(v0101 v0102 v0103)
-				lab var id_dom "identificação do domicílio"
-				
-				if "`ncomp'" ~= "" 	{ 
-					tempfile pnad`1'`name'
-					if "`both'"=="" save pnad`1'`name', replace				// salva base final sem compatibilizar e sem merge
-					else {
-						if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`1'pes', nogen keep(match)	
-							save pnad`1', replace								// salva base final com merge
-						}
-					}
-				}
-				else {
-					if "`comp81'"~="" compat_`name'_2002a2009_para_81
-					else compat_`name'_2002a2009_para_92
-					
-					tempfile pnad`1'`name'
-					if "`both'"=="" {
-						if "`comp81'"~="" save pnad`1'`name'_comp81, replace				// salva base final após compatibilizar mas sem merge
-						else save pnad`1'`name'_comp92, replace
-					}
-					else {
-						if "`name'"=="pes" save `pnad`1'`name'', replace	// salva base temporária de pessoas p/ merge posterior
-						else {
-							merge 1:m id_dom using `pnad`1'pes', nogen keep(match)	
-							if "`comp81'"~="" save pnad`1'_comp81, replace								// salva base final com merge
-							else save pnad`1'_comp92, replace
-						}
-					}
-				}
-				clear
-				macro shift
-			}
-		}
+		compat_`id'_1981a1990_para_81		// compatibiliza				
+		// salva base final após compatibilizar mas sem merge
 	}
 }
+		
+else if `ano' <= 2001 {                                  // ... se tem ano até 2001
+	if `ano'==2001 egen id_dom = concat(v0101 v0102 v0103)
+	else egen id_dom = concat(v0101 uf v0102 v0103)
+	lab var id_dom "identificação do domicílio"
+				
+	if "`comp'" == "comp81" compat_`id'_1992a2001_para_81
+	else compat_`id'_1992a2001_para_92
+}
 
-end
+else if `ano' >= 2002 {                                            // Se só restam anos >= 2002
+	display as input "Extraindo `ano'..."
+			
+	egen id_dom = concat(v0101 v0102 v0103)
+	lab var id_dom "identificação do domicílio"
+				
+	if "`comp'" == "comp81" compat_`id'_2002a2009_para_81
+	else compat_`id'_2002a2009_para_92
+}
+		
+end				
 
 ************************************************************
 **************compat_dom_1981a1990_para_81.ado**************
