@@ -619,7 +619,7 @@ forvalues i = 1/`: word count `trs''{
 	
 	use `base', clear
 	
-	gen long cod_item_aux = int(V9001/100) /* Variável identificadora dos bens
+	qui gen long cod_item_aux = int(V9001/100) /* Variável identificadora dos bens
 										Os tradutores omitem os últimos 2 dígitos */
 	
 	/* Códigos para padronizar os gastos (deflator, peso, anualização)
@@ -629,10 +629,9 @@ forvalues i = 1/`: word count `trs''{
 	
 	gen valor_anual_def = .
 	
-	variavel_gastos, tr(`tr') // Ajusta a variável de gastos seguindo as memórias de cálculo
+	qui variavel_gastos, tr(`tr') variaveis_ID(`variaveis_ID') // Ajusta a variável de gastos seguindo as memórias de cálculo
 							// e mantém só as variáveis necessárias
 	
-	keep `variaveis_ID' cod_item_aux valor_anual_def
 	
 	save `base', replace
 }
@@ -643,6 +642,8 @@ append using `temps'
 save `gastos', replace	
 
 tempfile despesas
+
+local j = 0
 
 /* Identificação dos gastos */
 forvalues i = 1/`: word count `sel''{
@@ -681,17 +682,24 @@ forvalues i = 1/`: word count `sel''{
 	}
 	else if _rc != 0 exit _rc
 	
-	cap label valor_anual_def "Rendimento com `item'"
-	cap label valor_tot "Despesa com `item' - Total"
-	cap label valor_cr "Despesa com `item' - A prazo ou crédito"
-	cap label valor_nm "Despesa com `item' - Não monetária"
+	local j = `j' + 1 // Conta apenas as iterações que funcionam
 	
-	cap rename valor_anual_def `nome'
-	cap rename valor_tot `nome'_tot
-	cap rename valor_cr `nome'_cr
-	cap rename valor_nm `nome'_nm
+	local nome: word `i' of `nomes'
 	
-	if `i' > 1 qui merge 1:1 `variaveis_ID' using `despesas', nogen
+	if "`tipo'" == "RE"{
+		label variable valor_anual_def "Rendimento com `item'"
+		rename valor_anual_def `nome'
+	}
+	else{
+		label variable valor_tot "Despesa com `item' - Total"
+		label variable valor_cr "Despesa com `item' - A prazo ou crédito"
+		label variable valor_nm "Despesa com `item' - Não monetária"
+		rename valor_tot `nome'_tot
+		rename valor_cr `nome'_cr
+		rename valor_nm `nome'_nm
+	}
+
+	if `j' > 1 qui merge 1:1 `variaveis_ID' using `despesas', nogen
 	
 	qui save `despesas', replace
 }
@@ -746,7 +754,8 @@ if "`var_patrimonial'" != ""{
 	qui save `base_final', replace
 }
 
-gen urbano = .
+qui{
+	gen urbano = .
 
 local estratos_capital /*
 	*/ 1101/1102 1201 1301/1306 1401/1402 1501/1503 1601/1602 1701 /*
@@ -776,25 +785,26 @@ local estratos_rural /*
 	*/ 4125/4135 4218/4226 4325/4335 /*
 	*/ 5010/5013 5113/5118 5218/5225 5307/5308
 
-gen capital = .
-foreach n of numlist `estratos_capital'{
-	replace capital = 1 if ESTRATO_POF == `n'
-}
+	gen capital = .
+	foreach n of numlist `estratos_capital'{
+		replace capital = 1 if ESTRATO_POF == `n'
+	}
 
-foreach n of numlist `estratos_capital' `estratos_restoRM' `estratos_restoUF'{
-	replace urbano = 1 if ESTRATO_POF == `n'
-}
+	foreach n of numlist `estratos_capital' `estratos_restoRM' `estratos_restoUF'{
+		replace urbano = 1 if ESTRATO_POF == `n'
+	}
 
-foreach n of numlist `estratos_rural'{
-	replace capital = 0 if ESTRATO_POF == `n'
-}	
+	foreach n of numlist `estratos_rural'{
+		replace capital = 0 if ESTRATO_POF == `n'
+	}	
 	
-lab var urbano "1 area urbana; 0 area rural"	
+	lab var urbano "1 area urbana; 0 area rural"
+}	
 	
 end
 
 program variavel_gastos
-syntax, tr(string)
+syntax, tr(string) variaveis_ID(string)
 
 /* Tabela de Despesa Geral */
 
@@ -837,6 +847,11 @@ if "`tr'" == "tr2" | "`tr'" == "tr3" | "`tr'" == "tr4"{ // Registros de despesa
 	gen valor_cr = valor_anual_def if V9002 >= 3 | V9002 <= 6
 	gen valor_nm = valor_anual_def if V9002 >= 7 & V9002 <= 11
 	rename valor_anual_def valor_tot
+	
+	keep `variaveis_ID' cod_item_aux valor_tot valor_cr valor_nm
+}
+else{
+	keep `variaveis_ID' cod_item_aux valor_anual_def
 }
 
 end
