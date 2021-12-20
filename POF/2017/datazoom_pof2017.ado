@@ -629,7 +629,8 @@ forvalues i = 1/`: word count `trs''{
 	
 	gen valor_anual_def = .
 	
-	variavel_gastos, tr(`tr')
+	variavel_gastos, tr(`tr') // Ajusta a variável de gastos seguindo as memórias de cálculo
+							// e mantém só as variáveis necessárias
 	
 	keep `variaveis_ID' cod_item_aux valor_anual_def
 	
@@ -664,20 +665,31 @@ forvalues i = 1/`: word count `sel''{
 		keep if item == 1
 	}	
 	
+	local tipo = substr("`nome'", 3, 2) // v_DA_xx -> DA, v_RE_xx -> RE
+	
+	local vars = cond( /*
+				*/ "`tipo'" == "RE", /*
+				*/ "valor_anual_def", /*
+				*/ "valor_tot valor_cr valor_nm" /*
+				*/)
+	
 	/* Agregação */
-	cap collapse (sum) valor_anual_def, by(`variaveis_ID')
+	cap collapse (sum) `vars', by(`variaveis_ID')
 	if _rc == 2000{
 		di as error "Sem observações para `item' a esse nível de id"				
 		continue
 	}
 	else if _rc != 0 exit _rc
 	
-	local tipo = substr("`nome'", 3, 2) // v_DA_xx -> DA, v_RE_xx -> RE
+	cap label valor_anual_def "Rendimento com `item'"
+	cap label valor_tot "Despesa com `item' - Total"
+	cap label valor_cr "Despesa com `item' - A prazo ou crédito"
+	cap label valor_nm "Despesa com `item' - Não monetária"
 	
-	if "`tipo'" != "RE" label var valor_anual_def "Despesa com `item'"
-	else label var valor_anual_def "Rendimento com `item'"
-	
-	rename valor_anual_def `nome'
+	cap rename valor_anual_def `nome'
+	cap rename valor_tot `nome'_tot
+	cap rename valor_cr `nome'_cr
+	cap rename valor_nm `nome'_nm
 	
 	if `i' > 1 qui merge 1:1 `variaveis_ID' using `despesas', nogen
 	
@@ -817,6 +829,14 @@ if "`tr'" == "tr6"{ // Rendimento do Trabalho
 if "`tr'" == "tr7"{ // Outros Rendimentos
 	replace valor_anual_def = V8500_DEFLA * V9011 * FATOR_ANUALIZACAO if QUADRO == 54
 	replace valor_anual_def = V8500_DEFLA * FATOR_ANUALIZACAO if QUADRO != 54
+}
+
+* Variáveis separadas das despesas por forma de pagamento
+
+if "`tr'" == "tr2" | "`tr'" == "tr3" | "`tr'" == "tr4"{ // Registros de despesa
+	gen valor_cr = valor_anual_def if V9002 >= 3 | V9002 <= 6
+	gen valor_nm = valor_anual_def if V9002 >= 7 & V9002 <= 11
+	rename valor_anual_def valor_tot
 }
 
 end
