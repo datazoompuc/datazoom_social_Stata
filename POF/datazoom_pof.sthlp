@@ -19,18 +19,18 @@
 {title:Title}
 
 {p 4 4 2}
-{cmd:datazoom_pof}{it:(ano)} {hline 2} Acesso aos microdados da POF
+{cmd:datazoom_pof} {hline 2} Acesso aos microdados da POF
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {cmd:datazoom_pofstd_}{it:ano} [, {it:options} {it:std_options}]
+{p 8 8 2} {cmd:datazoom_pof1995} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_pofsel_}{it:ano} [, {it:options} {it:sel_options}]
+{p 8 8 2} {cmd:datazoom_pof2002} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_poftrs_}{it:ano} [, {it:options} {it:trs_options}]
+{p 8 8 2} {cmd:datazoom_pof2008} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 4 4 2} Onde {it:ano} pode ser 95, 02, 08 ou 17
+{p 8 8 2} {cmd:datazoom_pof2017} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr: options}
@@ -42,10 +42,11 @@
 {p2colreset}{...}
 
 {synoptset 20 tabbed}{...}
-{synopthdr: std_options}
+{synopthdr: trs_options}
 {synoptline}
-{syntab:Bases Padronizadas}
-{synopt:{opt id(string)}} nível de identificação {p_end}
+{syntab:Tipos de Registro}
+{synopt:{opt trs(string)}} tipos de registro {p_end}
+{synoptline}
 {p2colreset}{...}
 
 {synoptset 20 tabbed}{...}
@@ -53,15 +54,15 @@
 {synoptline}
 {syntab:Gastos Selecionados}
 {synopt:{opt id(string)}} nível de identificação {p_end}
-{synopt:{opt lista(string asis)}} lista de itens {p_end}
+{synopt:{opt sel(string)}} lista de itens selecionados {p_end}
 {p2colreset}{...}
 
 {synoptset 20 tabbed}{...}
-{synopthdr: trs_options}
+{synopthdr: std_options}
 {synoptline}
-{syntab:Tipos de Registro}
-{synopt:{opt trs(string)}} tipos de registro {p_end}
-{synoptline}
+{syntab:Bases Padronizadas}
+{synopt:{opt id(string)}} nível de identificação {p_end}
+{synopt:{opt std}} indica que se quer bases padronizadas {p_end}
 {p2colreset}{...}
 {p 4 6 2}
 
@@ -71,20 +72,29 @@ Digite {cmd:db datazoom_pof} para utilizar via caixa de diálogo.
 {title:Description}
 
 {p 4 4 2}
-Para cada ano, há três comandos da forma {cmd:datazoom_pof}{it:(ano)}. Recomenda-se fortemente utilizar via caixa de diálogo.
+Cada função {cmd:datazoom_pof}{it:(ano)} tem 3 modos de atuação. Recomenda-se fortemente utilizar via caixa de diálogo.
 
 {p 4 4 2}
-{cmd: datazoom_pofstd_}{it:ano} gera uma base padronizada da POF.
+O modo de {bf:Tipos de Registro} produz as bases de dados originais em formato Stata sem manipulações
+ de variáveis, para os Tipos de Registro desejados. Ele é acessado simplesmente indicando manualmente
+ os {opt trs} desejados.
+
+{p 4 4 2}
+O modo de {bf:Gastos Selecionados} permite criar uma base de dados personalizada, com as variáveis
+ relacionadas aos itens escolhidos pelo próprio usuário. Esse modo é utilizado quando é fornecida
+ uma lista de bens na opção {opt sel}.
+
+{p 4 4 2}
+O modo de {bf:Bases Padronizadas} gera uma base padronizada da POF.
 Esta base contém variáveis de gasto/aquisição para uma cesta de consumo pré-definida com itens agredados, 
-seguindo uma classificação disponibilizada pelo IBGE. Essa função não está disponível para a POF 2017/18.
+seguindo uma classificação disponibilizada pelo IBGE. Basta indicar a opção {opt std}.
 
 {p 4 4 2}
-{cmd: datazoom_pofsel_}{it:ano} permite criar uma base de dados personalizada, com as variáveis
- relacionadas aos itens escolhidos pelo próprio usuário. Não disponível para 2017.
-	
-{p 4 4 2}
-{cmd: datazoom_poftrs_}{it:ano} produz as bases de dados originais em formato Stata sem manipulações
- de variáveis, para os Tipos de Registro desejados.
+No caso de 2017, a opção de Bases Padronizadas se tornou subordinada à de Gastos Selecionados: ela apenas
+ executa a função de Gastos Selecionados utilizando uma cesta de bens específica. Todas as identificações
+ de bens vêm dos tradutores de Alimentação, Despesa Geral e de Rendimentos na documentação da POF. Os tradutores
+ fornecem agregações de bens, que reproduzimos, e a cesta dos Gastos Selecionados é construída tomando sempre
+ o agrupamento mais desagregado existente para cada bem.
 	
 {p 4 4 2}
 Os dois primeiros comandos permitem ao usuário a escolha do nível de agregação das informações de gasto/aquisição: 
@@ -97,39 +107,19 @@ janeiro de 2003, no caso da POF 2002/03; e para janeiro de 2009, no caso da POF 
 {p 4 4 2}
 Todas podem ser executadas em caixa de diálogo pelo comando {cmd: db datazoom_pof}
 
-{title: Bases Padronizadas}
+{title: Tipos de Registro}
 
 {p 4 4 2}
-{cmd:datazoom_pofstd_}{it:ano} extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
+Extrai registros da POF em formato Stata a partir dos microdados originais do IBGE.
 		
-{p 4 4 2}
-Nesta base padronizada, o gasto em itens semelhantes são agregados em um únicoitem. Por exemplo, gastos em qualquer tipo de arroz, 
-feijão e outros são unificados sob gastos em Cereais, Leguminosas e Oleaginosas. As agregações seguem a documentação da POF 
-(consulte "Tradutores"). Todas as agregações existentes naquele documento são incorporadas na base final. O usuário não pode escolher 
-quais itens incluir nem especificar agregações de itens diferentes das existentes. Todos os valores são anualizados e deflacionados para setembro/1996.
-		  
-{p 4 4 2}
-Cada gasto está atrelado a um determinado nível de identificação (domicílio, unidade de consumo ou indivíduo). Ao escolher o nível de identificação, 
-o programa computa o gasto para o nível escolhido, somando o gasto individual dentro do nível, quando for o caso. Em particular, quando o nível de 
-identificação é o indivíduo, o gasto com itens associados à unidade de consumo ou domicílio são desconsiderados. Caso haja interesse nesses gastos
-em uma base de indivíduos, execute o programa para cada nível de identificação e utilize o comando merge para juntar as bases.
-	 
-{p 4 4 2}
-Vale lembrar que as variáveis de rendimento também possuem níveis de identificação, assim como os gastos. As variáveis de rendimento (renda bruta monetária, 
-renda bruta não monetária e renda total) são correspondentes ao rendimento bruto mensal do domicílio ou da unidade de consumo (para registros de unidade 
-de consumo e pessoas).
- 
-{p 4 4 2}
-A base final, sob qualquer nível de identificação, contém todas as variáveis de características do domicílio; e se Indivíduo for escolhido, as variáveis 
-relacionadas às características individuais são incorporadas.
-	
-{p 4 4 2}
-Para a construção de estimativas, é necessário o uso do fator de expansão 2 como fator de ponderação. Para mais informações ver {help weight}.	
+{p 4 4 2} 
+Os microdados da POF são separados em Tipos de Registro, diferentes em cada edição. Pode-se selecionar 
+os registros desejados para ler os dados via caixa de diálogo.
 
 {title: Gastos Selecionados}
 
 {p 4 4 2}
-{cmd:datazoom_pofsel_}{it:ano} extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
+Extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2}
 Em {opt lista} o usuário define os itens que deseja incluir em sua cesta. Como cada item possui um nome específico
@@ -148,17 +138,39 @@ indivíduo. O mesmo vale para variáveis de rendimento.
 	contém todas as variáveis de características do domicílio; e se Indivíduo for escolhido, as variáveis relacionadas às características 
 	individuais são incorporadas.
 
-{p 4 4 2} Para a construção de estimativas, é necessário o uso do fator de expansão 2 como fator de ponderação.
-Para mais informações ver {help weight}.
+{p 4 4 2} Para a construção de estimativas, é necessário utilizar um fator de expansão ou peso amostral presente entre as variáveis.
 
-{title: Tipos de Registro}
+{title: Bases Padronizadas}
 
 {p 4 4 2}
-{cmd:datazoom_poftrs_}{it:ano} extrai registros da POF em formato Stata a partir dos microdados originais do IBGE.
+Extrai e constrói uma base de dados padronizada da POF a partir dos microdados originais do IBGE
 		
-{p 4 4 2} 
-Os microdados da POF são separados em Tipos de Registro, diferentes em cada edição. Pode-se selecionar 
-os registros desejados para ler os dados via caixa de diálogo.
+{p 4 4 2}
+Nesta base padronizada, o gasto em itens semelhantes são agregados em um único item. Por exemplo, gastos em qualquer tipo de arroz, 
+feijão e outros são unificados sob gastos em Cereais, Leguminosas e Oleaginosas. As agregações seguem a documentação da POF 
+(consulte "Tradutores"). Todas as agregações existentes naquele documento são incorporadas na base final. O usuário não pode escolher 
+quais itens incluir nem especificar agregações de itens diferentes das existentes.
+		  
+{p 4 4 2}
+Cada gasto está atrelado a um determinado nível de identificação (domicílio, unidade de consumo ou indivíduo). Ao escolher o nível de identificação, 
+o programa computa o gasto para o nível escolhido, somando o gasto individual dentro do nível, quando for o caso. Em particular, quando o nível de 
+identificação é o indivíduo, o gasto com itens associados à unidade de consumo ou domicílio são desconsiderados. Caso haja interesse nesses gastos
+em uma base de indivíduos, execute o programa para cada nível de identificação e utilize o comando merge para juntar as bases.
+	 
+{p 4 4 2}
+Vale lembrar que as variáveis de rendimento também possuem níveis de identificação, assim como os gastos. As variáveis de rendimento (renda bruta monetária, 
+renda bruta não monetária e renda total) são correspondentes ao rendimento bruto mensal do domicílio ou da unidade de consumo (para registros de unidade 
+de consumo e pessoas).
+ 
+{p 4 4 2}
+A base final, sob qualquer nível de identificação, contém todas as variáveis de características do domicílio; e se Indivíduo for escolhido, as variáveis 
+relacionadas às características individuais são incorporadas.
+	
+{p 4 4 2} Para a construção de estimativas, é necessário utilizar um fator de expansão ou peso amostral presente entre as variáveis.
+
+{p 4 4 2}
+Para 2017, são calculadas a Renda Não Monetária e a Variação Patrimonial seguindo um algoritmo presente na pasta de Memórias de Cálculo da
+ documentação do IBGE.	
 	
 {marker options}{...}
 {title:Options}
@@ -172,12 +184,14 @@ os registros desejados para ler os dados via caixa de diálogo.
 {phang}
 {opt saving(string)}  indica o caminho da pasta onde devem ser salvas as bases de dados
         produzidas pelo programa.
-		
-{dlgtab:Bases Padronizadas}
+
 {phang}
-{opt id(string)}  especifica o nível de identificação para o qual o gasto deve se referir. São três opções: 
-domicílio ({opt dom}), unidade de consumo ({opt uc}) e indivíduo ({opt pess}). De acordo com a definição do IBGE, uma unidade de consumo é um 
-conjunto de moradores do domicílio (que pode ter apenas um morador) que compartilham da mesma fonte de alimentos.
+{opt english}  labels das variáveis em inglês
+
+{dlgtab:Tipos de Registro}
+
+{phang}
+{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usuário deseja obter.
 
 {dlgtab:Gastos Selecionados}
 {phang}
@@ -187,42 +201,46 @@ conjunto de moradores do domicílio (que pode ter apenas um morador) que compart
 	conjunto de moradores do domicílio (que pode ter apenas um morador) que compartilham da mesma fonte de alimentos.
 
 {phang}
-{opt lista(string asis)}  estabelece os itens para os quais os gastos devem ser computados e incluídos na base final.
- Pode contar variáveis de rendimento também.	
+{opt sel(string)}  opção que define o modo de Gastos Selecionados. estabelece os itens para os quais os gastos devem ser
+ computados e incluídos na base final. Pode contar variáveis de rendimento também.	
 
-{dlgtab:Tipos de Registro}
+{dlgtab:Bases Padronizadas}
+{phang}
+{opt id(string)}  especifica o nível de identificação para o qual o gasto deve se referir. São três opções: 
+domicílio ({opt dom}), unidade de consumo ({opt uc}) e indivíduo ({opt pess}). De acordo com a definição do IBGE, uma unidade de consumo é um 
+conjunto de moradores do domicílio (que pode ter apenas um morador) que compartilham da mesma fonte de alimentos.
 
 {phang}
-{opt trs(string)}  especifica o(s) tipo(s) de registro(s) que o usuário deseja obter.
+{opt std}  opção que define o modo de Bases Padronizadas.
 
 {marker examples}{...}
 {title:Examples}
 
-{p 8 6 2}. datazoom_pofstd_95, id(uc pess ) original("~/mydata") saving("~/mydata")
+{p 8 6 2}. datazoom_pof1995, id(uc pess ) original("~/mydata") saving("~/mydata") std
 
 {p 6 6 2}
 O comando acima produz duas bases de dados padronizadas para 1995, sendo uma para a unidade de consumo e outra para o indivíduo.
 
-{p 8 6 2}. datazoom_pofsel_02, id(uc) original("~/mydata") saving("~/mydata") lista(frutas farinha_de_trigo açúcar_refinado)
+{p 8 6 2}. datazoom_pof2002, id(uc) original("~/mydata") saving("~/mydata") sel(frutas farinha_de_trigo açúcar_refinado)
 
 {p 6 6 2}
 Para gastos selecionados de 2002, contém gastos anualizados em frutas, farinha de trigo e açúcar refinado para unidades de consumo.
 
 
-{p 8 6 2}. datazoom_pofsel_95, id(pess) original("~/mydata") saving("~/mydata") lista(frutas farinha_de_trigo açúcar_refinado)
+{p 8 6 2}. datazoom_pof1995, id(pess) original("~/mydata") saving("~/mydata") sel(frutas farinha_de_trigo açúcar_refinado)
 
 {p 6 6 2}
 como os gastos registrados na caderneta de poupança são para a unidade de consumo, o comando é inválido, 
 já que o nível de identificação escolhido foi "pess", ou seja, para indivíduos.
 
-{p 8 6 2}. datazoom_pofsel_08, id(dom) original("~/mydata") saving("~/mydata") lista(Feijao Cenoura Roupa_de_crianca Transferencia)
+{p 8 6 2}. datazoom_pof2008, id(dom) original("~/mydata") saving("~/mydata") sel(Feijao Cenoura Roupa_de_crianca Transferencia)
 
 {p 6 6 2}
 base final contém gastos anualizados de 2008 com feijão, cenoura e roupa de criança, além de rendimentos recebidos 
 de transferências (aponsentadorias, pensões, bolsas de estudo, transfências transitórias). Todos os valores são agregados 
 ao nível do domicílio, portanto, os rendimentos, por exemplo, que são individuais, são somados dentre de cada domicílio. 
 
-{p 8 6 2}.datazoom_poftrs_17, trs(tr1 tr6 tr7) original("~/mydata") saving("~/mydada")
+{p 8 6 2}.datazoom_pof2017, trs(tr1 tr6 tr7) original("~/mydata") saving("~/mydada")
 
 {p 6 6 2}
 A execução do exemplo acima gera três bases de dados de 2017, uma para cada tipo de registro especificado 

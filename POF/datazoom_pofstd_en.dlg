@@ -5,23 +5,23 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 355 175
 
-DIALOG main, label("POF - Bases Padronizadas")
+DIALOG main, label("POF - Standard Databases")
 BEGIN
 
-GROUPBOX bases_padrao 5 10 340 70, label("Tipo de Identificação")
+GROUPBOX bases_padrao 5 10 340 70, label("Type of Identification")
 	
-	CHECKBOX  ch_dom   +40 	+30 200 ., label("Domicílio")
-    CHECKBOX  ch_uc    +80   @ 200 ., label("Unidade de Consumo")
-    CHECKBOX  ch_pess  +130   @ 200 ., label("Pessoas") 
+	CHECKBOX  ch_dom   +40 	+30 200 ., label("Household")
+    CHECKBOX  ch_uc    +80   @ 200 ., label("Family")
+    CHECKBOX  ch_pess  +130   @ 200 ., label("Individual") 
 
-GROUPBOX opc_dic 5 +45 340 60, label("Bases de Dados")
+GROUPBOX opc_dic 5 +45 340 60, label("Data files")
 	
-	BUTTON   tx_base     45 +25 110  ., label("Dados originais ... ") onpush(script dados)
+	BUTTON   tx_base     45 +25 110  ., label("Original data ... ") onpush(script dados)
 	*FILE   fl_base     5 +20 320 ., label("Search ...") dir
-	BUTTON   tx_salvabase +150 @ 110  ., label("Salvando...") onpush(script salvando)
+	BUTTON   tx_salvabase +150 @ 110  ., label("Saving ...") onpush(script salvando)
 	*FILE   fl_salvabase 5 +20 320 ., label("Search ...") dir
 	
-TEXT     credit     10   +45  340    ., label("PUC-Rio - Departamento de Economia") right  
+TEXT     credit     10   +45  340    ., label("PUC-Rio - Department of Economics") right  
 
 	
 END
@@ -29,7 +29,7 @@ END
 OK ok1,      label("OK")
 SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pofstd_17")
+HELP hlp1,   view("help datazoom_pof")
 RESET res1
 
 SCRIPT PREINIT_SCRIPT
