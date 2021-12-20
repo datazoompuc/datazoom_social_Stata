@@ -97,7 +97,7 @@ No caso de 2017, a opção de Bases Padronizadas se tornou subordinada à de Gas
  o agrupamento mais desagregado existente para cada bem.
 	
 {p 4 4 2}
-Os dois primeiros comandos permitem ao usuário a escolha do nível de agregação das informações de gasto/aquisição: 
+Os dois últimos modos permitem ao usuário a escolha do nível de agregação das informações de gasto/aquisição: 
  Domicílio, Unidade de Consumo e Indivíduo. Note que alguns itens e informações não são válidas para todos os níveis.
  
 {p 4 4 2}
@@ -122,7 +122,7 @@ os registros desejados para ler os dados via caixa de diálogo.
 Extrai e contrói bases de dados personalizadas em formato Stata a partir dos microdados originais do IBGE.
 		
 {p 4 4 2}
-Em {opt lista} o usuário define os itens que deseja incluir em sua cesta. Como cada item possui um nome específico
+Em {opt sel} o usuário define os itens que deseja incluir em sua cesta. Como cada item possui um nome específico
  pré-definido que deve ser inserido para incluí-lo na lista, recomenda-se fortemente o uso deste comando via caixa de diálogo, 
  por meio da qual pode-se observar todos os itens disponíveis por categoria (Alimentação, Outros gastos e Rendimentos).
  
