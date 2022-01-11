@@ -10,9 +10,9 @@ BEGIN
 
 GROUPBOX bases_padrao 5 10 340 70, label("Type of Identification")
 	
-	CHECKBOX  ch_dom   +40 	+30 200 ., label("Household")
-    CHECKBOX  ch_uc    +80   @ 200 ., label("Family")
-    CHECKBOX  ch_pess  +130   @ 200 ., label("Individual") 
+	CHECKBOX  ch_dom   +60 	+30 200 ., label("Household")
+    CHECKBOX  ch_uc    +90   @ 200 ., label("Family")
+    CHECKBOX  ch_pess  +60   @ 200 ., label("Individual") 
 
 GROUPBOX opc_dic 5 +45 340 60, label("Data files")
 	
@@ -20,8 +20,10 @@ GROUPBOX opc_dic 5 +45 340 60, label("Data files")
 	*FILE   fl_base     5 +20 320 ., label("Search ...") dir
 	BUTTON   tx_salvabase +150 @ 110  ., label("Saving ...") onpush(script salvando)
 	*FILE   fl_salvabase 5 +20 320 ., label("Search ...") dir
-	
-TEXT     credit     10   +45  340    ., label("PUC-Rio - Department of Economics") right  
+
+CHECKBOX	eng     10  +45 200 ., label("Labels in English") option(english)
+
+TEXT     credit     120   @  220    ., label("PUC-Rio - Department of Economics") right  
 
 	
 END
@@ -83,6 +85,7 @@ PROGRAM command
 			put ") "
 			put saidadata " "
 			put saidasalvando
+			option main.eng
 	   endoptions
 	   stata
 	END
