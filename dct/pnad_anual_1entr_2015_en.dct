@@ -220,7 +220,7 @@ _column(504)	byte	V50131	%1f    	"   ... received partnership, copyright income 
 _column(505)	long	V501311	%8f    	"   Partnership, copyright income 	"
 _column(513)	byte	V5001A	%1f    	"   Received BPC-LOAS 	"
 _column(514)	long	V5001A2	%8f    	"   Income received from BPC-LOAS 	"
-_column(522)	byte	V5002A	%1f    	"   Received bolsa família 	"
+_column(522)	byte	V5002A	%1f    	"   Received bolsa famÃ­lia 	"
 _column(523)	long	V5002A2	%8f    	"   Income from bolsa familia 	"
 _column(531)	byte	V5003A	%1f    	"   Received another social program  	"
 _column(532)	long	V5003A2	%8f    	"   Income from other social program 	"
