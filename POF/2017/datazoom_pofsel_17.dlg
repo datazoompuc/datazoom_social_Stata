@@ -61,6 +61,8 @@ GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Bases de Dados")
 	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais ...") onpush(script dados)
 	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando ...") onpush(script salvando)
 
+CHECKBOX	eng     10  355 200 ., label("Labels em inglês") option(english)
+
 TEXT     credit     10   360  490    ., label("PUC-Rio - Departamento de Economia") right  
 	
 END
@@ -576,6 +578,7 @@ BEGIN
 		put ") "
 		put saidadata " "
 		put saidasalvando
+		option main.eng
    endoptions
    stata
 END
