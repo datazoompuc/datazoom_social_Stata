@@ -80,7 +80,7 @@ _column(210)	byte	v2119	%1f	"member (18+) lost weight due to lack of money (last
 _column(211)	byte	v2120	%1f	"frequency member (18+) lost weight due to lack of money (last 3 mts)"
 _column(212)	byte	v2121	%1f	"member (18+) didn't eat due to lack of money (last 3 mts)"
 _column(213)	byte	v2123	%1f	"hh member between ages 0 and 17"
-_column(214)	byte	v2124	%1f	"member (17 or younger) didn´t eat healthy food due to lack of money (last 3 mts)"
+_column(214)	byte	v2124	%1f	"member (17 or younger) didnÂ´t eat healthy food due to lack of money (last 3 mts)"
 _column(215)	byte	v2126	%1f	"member (17-) ate less than enough due to lack of money (last 3 mts)"
 _column(216)	byte	v2128	%1f	"member (17-) ate small portion due to lack of money (last 3 mts)"
 _column(217)	byte	v2130	%1f	"member (17-) didn't eat due to lack of money (last 3 mts)"

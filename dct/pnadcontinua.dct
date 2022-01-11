@@ -1,219 +1,221 @@
 dictionary {
-_column(1) int Ano %4f "Ano de referência "
-_column(5) str2 Trimestre %1f "Trimestre de referência "
-_column(6) int UF %2f "Unidade da Federação "
-_column(8) int Capital %2f "Município da Capital "
-_column(10) int RM_RIDE %2f "Reg. Metr. e Reg. Adm. Int. Des. "
-_column(12) long UPA %9f "Unidade Primária de Amostragem "
-_column(21) long Estrato %7f "Estrato "
-_column(28) int V1008 %2f "Número de seleção do domicílio "
-_column(30) int V1014 %2f "Painel "
-_column(32) byte V1016 %1f "Número da entrevista no domicílio "
-_column(33) byte V1022 %1f "Tipo de situação da região "
-_column(34) byte V1023 %1f "Tipo de área "
-_column(35) float V1027 %15f "Peso SEM pós estratificação "
-_column(50) float V1028 %15f "Peso COM pós estratificação "
-_column(65) long V1029 %9f "Projeção da população "
-_column(74) int posest %3f "Domínios de projeção "
-_column(77) int V2001 %2f "Número de pessoas no domicílio "
-_column(79) int V2003 %2f "Número de ordem "
-_column(81) int V2005 %2f "Condição no domicílio "
-_column(83) byte V2007 %1f "Sexo "
-_column(84) int V2008 %2f "Dia de nascimento "
-_column(86) int V20081 %2f "Mês de nascimento "
-_column(88) int V20082 %4f "Ano de nascimento "
-_column(92) int V2009 %3f "Idade na data de referência "
-_column(95) byte V2010 %1f "Cor ou raça "
-_column(96) byte V3001 %1f "Sabe ler e escrever "
-_column(97) byte V3002 %1f "Frequenta escola "
-_column(98) byte V3002A %1f "A escola que ... frequenta é de "
-_column(99) int V3003 %2f "Qual é o curso que frequenta "
-_column(101) int V3003A %2f "Qual é o curso que frequenta "
-_column(103) byte V3004 %1f "Duração deste curso que requenta "
-_column(104) byte V3005 %1f "Curso que frequenta é seriado "
-_column(105) byte V3005A %1f "Curso que freq é organizado em: "
-_column(106) int V3006 %2f "Qual é o ano/série que frequenta "
-_column(108) byte V3006A %1f "Qual é a etapa que frequenta "
-_column(109) byte V3007 %1f "Concluiu outro curso de graduação "
-_column(110) byte V3008 %1f "Anteriormente frequentou escola "
-_column(111) int V3009 %2f "Curso mais elevado que frequentou "
-_column(113) int V3009A %2f "Curso mais elevado que frequentou "
-_column(115) byte V3010 %1f "Duração do curso que frequentou "
-_column(116) byte V3011 %1f "Curso quefrequentou era seriado "
-_column(117) byte V3011A %1f "Curso que freq é organizado em: "
-_column(118) byte V3012 %1f "Aprovado na prim. série do curso "
-_column(119) int V3013 %2f "Último ano/série que concluiu "
-_column(121) byte V3013A %1f "Qual é a etapa que frequentou "
-_column(122) byte V3013B %1f "Cursou os anos iniciais deste curso "
-_column(123) byte V3014 %1f "Concluiu o curso que frequentou "
-_column(124) byte V4001 %1f "Trabalhou 1 hr em ativ. remunerd. "
-_column(125) byte V4002 %1f "Trabalhou 1 hr em produtos etc... "
-_column(126) byte V4003 %1f "Fez algum bico pelo menos de 1 hr "
-_column(127) byte V4004 %1f "Ajudou sem receber no domic. 1 hr "
-_column(128) byte V4005 %1f "Afastado trabalho remunerado "
-_column(129) byte V4006 %1f "Motivo de estar afastado "
-_column(130) byte V4006A %1f "Motivo de estar afastado "
-_column(131) byte V4007 %1f "Durante afastameno recebia pagam. "
-_column(132) byte V4008 %1f "Quanto tempo que estava afastado "
-_column(133) int V40081 %2f "Tempo de afastamenento até 1 ano "
-_column(135) int V40082 %2f "Tempo de afastamen. de 1 a 2 anos "
-_column(137) int V40083 %2f "Tempo de afastamen. mais d 2 anos "
-_column(139) byte V4009 %1f "Quantos trabalhos tinhana semana "
-_column(140) int V4010 %4f "Ocupação no trab. principal "
-_column(144) byte V4012 %1f "Posição na ocupação "
-_column(145) byte V40121 %1f "Tipo trabalhador não remunerado "
-_column(146) long V4013 %5f "Atividade no trab. principal "
-_column(151) byte V40132 %1f "Seção da atividade "
-_column(152) byte V40132A %1f "Seção da atividade "
-_column(153) byte V4014 %1f "Esse trabalho era na área "
-_column(154) byte V4015 %1f "Teve ajuda de pelo menos um trabalhador não remunerado "
-_column(155) byte V40151 %1f "Qnts trabalhadores não remunerados "
-_column(156) byte V401511 %1f "1 a 5 trabalhadores não remunerados "
-_column(157) double V401512 %2f "6 a 10 trabalhadores não remunerados "
-_column(159) byte V4016 %1f "Qnts empregados trabalhavam nesse negócio/empresa"
-_column(160) byte V40161 %1f "1 a 5 empregados "
-_column(161) int V40162 %2f "6 a 10 empregados "
-_column(163) int V40163 %2f "11 a 50 empregados "
-_column(165) byte V4017 %1f "Tinha pelo menos um sócio que trab. nesse negócio/empresa"
-_column(166) byte V40171 %1f "Quantos sócios "
-_column(167) byte V401711 %1f "1 a 5 sócios "
-_column(168) byte V4018 %1f "Qnts pessoas trabalhavam nesse negócio/empresa "
-_column(169) byte V40181 %1f "1 a 5pessoas "
-_column(170) int V40182 %2f "6 a 10pessoas "
-_column(172) int V40183 %2f "11 a 50pessoas "
-_column(174) byte V4019 %1f "Negócio/empresa registrado no CNPJ"
-_column(175) byte V4020 %1f "Em que tipo de local funcionava esse negócio/empresa"
-_column(176) byte V4021 %1f "Exercia o trabalho em estabelecimento desse negócio/empresa"
-_column(177) byte V4022 %1f "Onde exercia normalmente esse trabalho"
-_column(178) byte V4024 %1f "Serv. domést. em mais de 1 domic. "
-_column(179) byte V4025 %1f "Contratado como empreg. temporário"
-_column(180) byte V4026 %1f "Era contratado somente por pessoa responsável pelo negócio "
-_column(181) byte V4027 %1f "Era contratado somente por intermediário "
-_column(182) byte V4028 %1f "Servidor público estatutário "
-_column(183) byte V4029 %1f "Carteira de trabalho assinada "
-_column(184) byte V4032 %1f "Contribuinte de instit. d previd. "
-_column(185) byte V4033 %1f "Rendimento habitual var. auxil. "
-_column(186) byte V40331 %1f "Rendimento habitual em dinheiro "
-_column(187) byte V403311 %1f "Faixa do valor do rendimento hab. "
-_column(188) long V403312 %8f "Valor do rend. hab. em dinheiro "
-_column(196) byte V40332 %1f "Rendimento habitual em produtos "
-_column(197) byte V403321 %1f "Faixa do valor do rendimento hab. "
-_column(198) long V403322 %8f "Valor do rend. hab. em produtos "
-_column(206) byte V40333 %1f "Rendimento habitual em benefícios "
-_column(207) byte V403331 %1f "Tipo rend. habitual em benefícios "
-_column(208) byte V4034 %1f "Rendimento efetivo var. auxil. "
-_column(209) byte V40341 %1f "Rendimento efetivo em dinheiro "
-_column(210) byte V403411 %1f "Faixa do valor do rendimento efe. "
-_column(211) long V403412 %8f "Valor do rend. efe. em dinheiro "
-_column(219) byte V40342 %1f "Rendimento efetivo em produtos "
-_column(220) byte V403421 %1f "Faixa do valor do rendimento efe. "
-_column(221) long V403422 %8f "Valor do rend. efe. em produtos "
-_column(229) int V4039 %3f "Hrs habituais no trab. princ. "
-_column(232) int V4039C %3f "Hrs efetivas no trab. princ. "
-_column(235) byte V4040 %1f "Tempo que estava nesse trabalho "
-_column(236) int V40401 %2f "De 1 mês a menos de 1 ano "
-_column(238) int V40402 %2f "De 1 ano a menos de 2 anos "
-_column(240) int V40403 %2f "De 2 anos ou mais tempo "
-_column(242) int V4041 %4f "Ocupação no trab. secundário "
-_column(246) byte V4043 %1f "Posição na ocupação "
-_column(247) byte V40431 %1f "Tipo trabalhador não remunerado "
-_column(248) long V4044 %5f "Atividade no trab. secundário "
-_column(253) byte V4045 %1f "Esse trabalho era na área "
-_column(254) byte V4046 %1f "Negócio/empresa registrado no CNPJ"
-_column(255) byte V4047 %1f "Servidor público estatutário "
-_column(256) byte V4048 %1f "Carteira de trabalho assinada "
-_column(257) byte V4049 %1f "Contribuinte de instit. d previd. "
-_column(258) byte V4050 %1f "Rendimento habitual var. auxil. "
-_column(259) byte V40501 %1f "Rendimento habitual em dinheiro "
-_column(260) byte V405011 %1f "Faixa do valor do rendimento hab. "
-_column(261) long V405012 %8f "Valor do rend. hab. em dinheiro "
-_column(269) byte V40502 %1f "Rendimento habitual em produtos "
-_column(270) byte V405021 %1f "Faixa do valor do rendimento hab. "
-_column(271) long V405022 %8f "Valor do rend. hab. em produtos "
-_column(279) byte V40503 %1f "Rendimento habitual em benefícios "
-_column(280) byte V405031 %1f "Tipo rend. habitual em benefícios "
-_column(281) byte V4051 %1f "Rendimento efetivo var. auxil. "
-_column(282) byte V40511 %1f "Rendimento efetivo em dinheiro "
-_column(283) byte V405111 %1f "Faixa do valor do rendimento efe. "
-_column(284) long V405112 %8f "Valor do rend. efe. em dinheiro "
-_column(292) byte V40512 %1f "Rendimento efetivo em produtos "
-_column(293) byte V405121 %1f "Faixa do valor do rendimento efe. "
-_column(294) long V405122 %8f "Valor do rend. efe. em produtos "
-_column(302) int V4056 %3f "Hrs habituais no trab. secun. "
-_column(305) int V4056C %3f "Hrs efetivas no trab. secun. "
-_column(308) byte V4057 %1f "Contribuinte de instit. d previd. "
-_column(309) byte V4058 %1f "Rendimento habitual var. auxil. "
-_column(310) byte V40581 %1f "Rendimento habitual em dinheiro "
-_column(311) byte V405811 %1f "Faixa do valor do rendimento hab. "
-_column(312) long V405812 %8f "Valor do rend. hab. em dinheiro "
-_column(320) byte V40582 %1f "Rendimento habitual em produtos "
-_column(321) byte V405821 %1f "Faixa do valor do rendimento hab. "
-_column(322) long V405822 %8f "Valor do rend. hab. em produtos "
-_column(330) byte V40583 %1f "Rendimento habitual em benefícios "
-_column(331) byte V405831 %1f "Tipo rend. habitual em benefícios "
-_column(332) byte V40584 %1f "Não remunerado "
-_column(333) byte V4059 %1f "Rendimento efetivo var. auxil. "
-_column(334) byte V40591 %1f "Rendimento efetivo em dinheiro "
-_column(335) byte V405911 %1f "Faixa do valor do rendimento efe. "
-_column(336) long V405912 %8f "Valor do rend. efe. em dinheiro "
-_column(344) byte V40592 %1f "Rendimento efetivo em produtos "
-_column(345) byte V405921 %1f "Faixa do valor do rendimento efe. "
-_column(346) long V405922 %8f "Valor do rend. efe. em produtos "
-_column(354) int V4062 %3f "Hrs habituais no(s) outro(s) trab."
-_column(357) int V4062C %3f "Hrs efetivas no(s) outro(s) trab ."
-_column(360) byte V4063 %1f "Gostaria trabalhar + hrs efetivas "
-_column(361) byte V4063A %1f "Gostaria trabalhar + hrs habituais"
-_column(362) byte V4064 %1f "Dispon. trabalhar + hrs efetivas "
-_column(363) byte V4064A %1f "Dispon. trabalhar + hrs habituais "
-_column(364) byte V4071 %1f "Providência p/ conseg. trab.(30d) "
-_column(365) int V4072 %2f "Principal provid. p/conseg. trab. "
-_column(367) byte V4072A %1f "Principal provid. p/conseg. trab. "
-_column(368) byte V4073 %1f "Gostaria de ter trabalhado "
-_column(369) byte V4074 %1f "Motivo de não ter tomado provid. "
-_column(370) int V4074A %2f "Motivo de não ter tomado provid. "
-_column(372) byte V4075A %1f "Tempo em que irá começar o trab. "
-_column(373) int V4075A1 %2f "Meses em que irá começar o trab. "
-_column(375) byte V4076 %1f "Tempo tentando conseguir trabalho "
-_column(376) int V40761 %2f "Tempo tentando trab. 1 mes-1 ano "
-_column(378) int V40762 %2f "Tempo tentando trab. 1 ano-2 anos "
-_column(380) int V40763 %2f "Tempo tentando trab. + de 2 anos "
-_column(382) byte V4077 %1f "Poderia ter começado a trabalhar "
-_column(383) byte V4078 %1f "Motivo p/ñ querer/começar a trab. "
-_column(384) byte V4078A %1f "Motivo p /ñ querer/começar a trab. "
-_column(385) byte V4082 %1f "Trab por pelo menos 1 hora em 1 ano"
-_column(386) int VD2002 %2f "Condição no domicílio "
-_column(388) int VD2003 %2f "Número de componentes do domic. "
-_column(390) byte VD2004 %1f "Espécie da unidade doméstica"
-_column(391) byte VD3004 %1f "Nível de instrução mais elevado alcançado (5 anos ou mais de idade) "
-_column(392) int VD3005 %2f "Anos de estudo (5 anos ou mais de idade) para fundamental de 9 anos "
-_column(394) byte VD3006 %1f "Grupamento de anos de estudo (pessoas de 5 anos ou mais de idade) para fundamental de 9 anos "
-_column(395) byte VD4001 %1f "Condição em relação força d trab. "
-_column(396) byte VD4002 %1f "Condição de ocupação "
-_column(397) byte VD4003 %1f "Força de trabalho potencial "
-_column(398) byte VD4004 %1f "Subocupação por insuficiên. de hrs efet"
-_column(399) byte VD4004A %1f "Subocupação por insuficiên. de hrs hab"
-_column(400) byte VD4005 %1f "Pessoas desalentadas "
-_column(401) byte VD4007 %1f "Posição na ocupação trab. princ. "
-_column(402) byte VD4008 %1f "Posição na ocupação trab. princ. "
-_column(403) int VD4009 %2f "Posição na ocupação trab. princ. "
-_column(405) int VD4010 %2f "Grupamen. d ativid. trab. princ. "
-_column(407) int VD4011 %2f "Grupamen. ocupacion. trab. Princ. "
-_column(409) byte VD4012 %1f "Contrib. instit. previd. qq trab. "
-_column(410) byte VD4013 %1f "Faixa hrs habituais em todos trab. "
-_column(411) byte VD4014 %1f "Faixa hrs efetivas em todos trab. "
-_column(412) byte VD4015 %1f "Tipo d remuneração trab. princ. "
-_column(413) long VD4016 %8f "Rendim. habitual trab. princ. "
-_column(421) long VD4017 %8f "Rendim. efetivo trab. princ. "
-_column(429) byte VD4018 %1f "Tipo d remuneração em qq trabalho "
-_column(430) long VD4019 %8f "Rendim. habitual qq trabalho "
-_column(438) long VD4020 %8f "Rendim. efetivo qq trabalho "
-_column(446) byte VD4023 %1f "Pq ñ proc./ñ gost./ñ disp.p/trab. "
-_column(447) byte VD4030 %1f "Pq ñ proc./ñ gost./ñ disp.p/trab. "
-_column(448) int VD4031 %3f "Hrs habituais em todos trab. "
-_column(451) int VD4032 %3f "Hrs efetivas no trab. princ. "
-_column(454) int VD4033 %3f "Hrs efetivas no trab. secun. "
-_column(457) int VD4034 %3f "Hrs efetivas no(s) outro(s) trab ."
-_column(460) int VD4035 %3f "Hrs efetivas em todos trab. "
-_column(463) byte VD4036 %1f "Faixa hrs habituais trab. princ. "
-_column(464) byte VD4037 %1f "Faixa hrs efetivas trab. princ. "
+_column(1) int Ano %4f `"Ano de referência"'
+_column(5) byte Trimestre %1f `"Trimestre de referência"'
+_column(6) byte UF %2f `"Unidade da Federação"'
+_column(8) byte Capital %2f `"Município da Capital"'
+_column(10) byte RM_RIDE %2f `"Região Metropolitana e Região Administrativa Integrada de Desenvolvimento"'
+_column(12) long UPA %9f `"Unidade Primária de Amostragem (UPA)"'
+_column(21) long Estrato %7f `""'
+_column(28) byte V1008 %2f `"Número de seleção do domicílio"'
+_column(30) byte V1014 %2f `"Painel"'
+_column(32) byte V1016 %1f `"Número da entrevista no domicílio"'
+_column(33) byte V1022 %1f `"Situação do domicílio"'
+_column(34) byte V1023 %1f `"Tipo de área"'
+_column(35) float V1027 %6.8f `"Peso do domicílio e das pessoas sem calibração pela projeção da população"'
+_column(50) float V1028 %6.8f `"Peso do domicílio e das pessoas com calibração pela projeção da população"'
+_column(65) long V1029 %9f `"Projeção da população por níveis geográficos"'
+_column(74) long V1033 %9f `"Projeção da população por sexo e idade"'
+_column(83) int posest %3f `"Domínios de projeção geográficos"'
+_column(86) int posest_sxi %3f `"Domínios de projeção por sexo e idade"'
+_column(89) byte V2001 %2f `"Número de pessoas no domicílio"'
+_column(91) byte V2003 %2f `"Número de ordem"'
+_column(93) byte V2005 %2f `"Condição no domicílio"'
+_column(95) byte V2007 %1f `"Sexo"'
+_column(96) byte V2008 %2f `"Dia de nascimento"'
+_column(98) byte V20081 %2f `"Mês de nascimento"'
+_column(100) int V20082 %4f `"Ano de nascimento"'
+_column(104) int V2009 %3f `"Idade do morador na data de referência"'
+_column(107) byte V2010 %1f `"Cor ou raça"'
+_column(108) byte V3001 %1f `"... sabe ler e escrever?"'
+_column(109) byte V3002 %1f `"... frequenta escola?"'
+_column(110) byte V3002A %1f `"A escola que ... frequenta é de"'
+_column(111) byte V3003 %2f `"Qual é o curso que ... frequenta?"'
+_column(113) byte V3003A %2f `"Qual é o curso que ... frequenta?"'
+_column(115) byte V3004 %1f `"A duração deste curso que ... frequenta é de:"'
+_column(116) byte V3005 %1f `"Este curso que ... frequenta é seriado?"'
+_column(117) byte V3005A %1f `"Esse curso que .... frequenta é organizado em:"'
+_column(118) byte V3006 %2f `"Qual é o ano/série/semestre que ... frequenta?"'
+_column(120) byte V3006A %1f `"Qual é a etapa do ensino fundamental que ... frequenta?"'
+_column(121) byte V3007 %1f `"... já concluiu algum outro curso de graduação?"'
+_column(122) byte V3008 %1f `"Anteriormente ... frequentou escola?"'
+_column(123) byte V3009 %2f `"Qual foi o curso mais elevado que ... frequentou anteriormente?"'
+_column(125) byte V3009A %2f `"Qual foi o curso mais elevado que ... frequentou anteriormente?"'
+_column(127) byte V3010 %1f `"A duração deste curso que ... frequentou anteriormente era de:"'
+_column(128) byte V3011 %1f `"Este curso que ... frequentou anteriormente era seriado?"'
+_column(129) byte V3011A %1f `"Esse curso que .... frequentou era organizado em:"'
+_column(130) byte V3012 %1f `"... concluiu com aprovação, pelo menos a primeira série deste curso que frequentou anteriormente?"'
+_column(131) byte V3013 %2f `"Qual foi o último ano/série/semestre que ... concluiu com aprovação, neste curso que frequentou anteriormente"'
+_column(133) byte V3013A %1f `"Qual foi a etapa de ensino fundamental que ... frequentou?"'
+_column(134) byte V3013B %1f `"... Concluiu os anos iniciais deste curso que frequentou anteriormente?"'
+_column(135) byte V3014 %1f `"... concluiu este curso que frequentou anteriormente"'
+_column(136) byte V4001 %1f `"Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em dinheiro?"'
+_column(137) byte V4002 %1f `"Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em produtos, mercadorias, moradia, alimentação, etc.?"'
+_column(138) byte V4003 %1f `"Na semana de ... a ... (semana de referência), ... fez algum bico ou trabalhou em alguma atividade ocasional remunerada durante pelo menos 1 hora?"'
+_column(139) byte V4004 %1f `"Na semana de ... a ... (semana de referência), ... ajudou durante pelo menos 1 hora, sem receber pagamento, no trabalho remunerado de algum morador do domicílio ou de parente?"'
+_column(140) byte V4005 %1f `"Na semana de ... a ... (semana de referência), ... tinha algum trabalho remunerado do qual estava temporariamente afastado?"'
+_column(141) byte V4006 %1f `"Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?"'
+_column(142) byte V4006A %1f `"Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?"'
+_column(143) byte V4007 %1f `"Durante o tempo de afastamento, ... continuou a receber ao menos uma parte do pagamento?"'
+_column(144) byte V4008 %1f `"Em .../.../...(último dia da semana de referência), fazia quanto tempo que ... estava afastado desse trabalho?"'
+_column(145) byte V40081 %2f `"Tempo que estava afastado (De 1 mês a menos de 1 ano)"'
+_column(147) byte V40082 %2f `"Tempo que estava afastado (De 1 ano a menos de 2 anos)"'
+_column(149) byte V40083 %2f `"Tempo que estava afastado (de 02 anos a 98 anos)"'
+_column(151) byte V4009 %1f `"Quantos trabalhos ... tinha na semana de ... a ... (semana de referência ?"'
+_column(152) int V4010 %4f `"Código da ocupação (cargo ou função)"'
+_column(156) byte V4012 %1f `"Nesse trabalho, ... era:"'
+_column(157) byte V40121 %1f `"Trabalhador não remunerado"'
+_column(158) long V4013 %5f `"Código da principal atividade desse negócio/empresa"'
+_column(163) byte V40132 %1f `"Qual a seção da atividade?"'
+_column(164) byte V40132A %1f `"Qual a seção da atividade?"'
+_column(165) byte V4014 %1f `"Esse trabalho era na área:"'
+_column(166) byte V4015 %1f `"Na semana de ... a ... (semana de referência), ... teve ajuda, nesse trabalho, de pelo menos um trabalhador não remunerado que era membro do domicílio ou parente?"'
+_column(167) byte V40151 %1f `"Quantos trabalhadores não remunerados ?"'
+_column(168) byte V401511 %1f `"1 a 5 trabalhadores não remunerados"'
+_column(169) byte V401512 %2f `"6 a 10 trabalhadores não remunerados"'
+_column(171) byte V4016 %1f `"Na semana de ... a ... (semana de referência), quantos empregados trabalhavam nesse negócio/empresa que ... tinha ?"'
+_column(172) byte V40161 %1f `"1 a 5 empregados"'
+_column(173) byte V40162 %2f `"6 a 10 empregados"'
+_column(175) byte V40163 %2f `"11 a 50 empregados"'
+_column(177) byte V4017 %1f `"Na semana de ... a ... (semana de  referência), ... tinha pelo menos um sócio que trabalhava nesse negócio/empresa ?"'
+_column(178) byte V40171 %1f `"Quantos?"'
+_column(179) byte V401711 %1f `"1 a 5 sócios"'
+_column(180) byte V4018 %1f `"Na semana de ... a ... (semana de referência), contando com ... , quantas pessoas trabalhavam nesse negócio/empresa ?"'
+_column(181) byte V40181 %1f `"1 a 5 pessoas"'
+_column(182) byte V40182 %2f `"6 a 10 pessoas"'
+_column(184) byte V40183 %2f `"11 a 50 pessoas"'
+_column(186) byte V4019 %1f `"Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?"'
+_column(187) byte V4020 %1f `"Em que tipo de local funcionava esse negócio/empresa ?"'
+_column(188) byte V4021 %1f `"... exercia normalmente o trabalho em estabelecimento desse negócio/empresa ?"'
+_column(189) byte V4022 %1f `"Então onde ... exercia normalmente esse trabalho ?"'
+_column(190) byte V4024 %1f `"No período de ... a ... (período de referência de 30 dias) ... prestava serviço doméstico em mais de um domicílio ?"'
+_column(191) byte V4025 %1f `"Nesse trabalho, ... era contratado(a) como empregado temporário ?"'
+_column(192) byte V4026 %1f `"Na semana de ... a ... (semana de referência), ... era contratado(a) somente por pessoa responsável pelo negócio/empresa em que trabalhava ?"'
+_column(193) byte V4027 %1f `"Na semana de ... a ... (semana de referência) era contratado(a) somente por intermediário (empresa empreiteira, empreiteiro, "gato", etc.) ?"'
+_column(194) byte V4028 %1f `"Nesse trabalho, ... era servidor público estatutário (federal, estadual ou municipal) ?"'
+_column(195) byte V4029 %1f `"Nesse trabalho, ... tinha carteira de trabalho assinada ?"'
+_column(196) byte V4032 %1f `"Era contribuinte de instituto de previdência por esse trabalho ?"'
+_column(197) byte V4033 %1f `"Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente nesse trabalho? (variável auxiliar)"'
+_column(198) byte V40331 %1f `"Recebia/fazia normalmente nesse trabalho rendimento/retirada em dinheiro?"'
+_column(199) byte V403311 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(200) long V403312 %8f `"Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho ? (valor em dinheiro)"'
+_column(208) byte V40332 %1f `"Recebia/fazia normalmente nesse trabalho rendimento/retirada em produtos e mercadorias ?"'
+_column(209) byte V403321 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(210) long V403322 %8f `"Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho ? (valor estimado dos produtos ou mercadorias)"'
+_column(218) byte V40333 %1f `"Recebia/fazia normalmente nesse trabalho rendimento/retirada somente em benefícios ?"'
+_column(219) byte V403331 %1f `"Tipo de rendimento/retirada  em benefícios que recebia/fazia nesse trabalho"'
+_column(220) byte V4034 %1f `"Qual foi o rendimento bruto que ... recebeu/fez  nesse trabalho, no mês de referência? (variável auxiliar)"'
+_column(221) byte V40341 %1f `"Recebeu/fez nesse trabalho rendimento/retirada em dinheiro no mês de referência"'
+_column(222) byte V403411 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(223) long V403412 %8f `"Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência ? (valor em dinheiro)"'
+_column(231) byte V40342 %1f `"Recebeu/fez nesse trabalho no mês de referencia, rendimento/retirada em produtos e mercadorias"'
+_column(232) byte V403421 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(233) long V403422 %8f `"Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência ? (valor estimado dos produtos ou mercadorias)"'
+_column(241) int V4039 %3f `"Quantas horas ... trabalhava normalmente, por semana, nesse trabalho principal?"'
+_column(244) int V4039C %3f `"Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho principal?"'
+_column(247) byte V4040 %1f `"Até o dia ... (último dia da semana de referência) fazia quanto tempo que ... estava nesse trabalho ?"'
+_column(248) byte V40401 %2f `"Fazia quanto tempo que estava nesse trabalho (de 1 mês a menos de 1 ano)"'
+_column(250) byte V40402 %2f `"Fazia quanto tempo que estava nesse trabalho (de 1 ano a menos de 2 anos)"'
+_column(252) byte V40403 %2f `"Fazia quanto tempo estava nesse trabalho (2 anos ou mais)"'
+_column(254) int V4041 %4f `"Código da ocupação (cargo ou função)"'
+_column(258) byte V4043 %1f `"Nesse trabalho secundário, ... era"'
+_column(259) byte V40431 %1f `"Trabalhador familiar não remunerado"'
+_column(260) long V4044 %5f `"Código da principal atividade desse negócio/empresa"'
+_column(265) byte V4045 %1f `"Esse trabalho era na área"'
+_column(266) byte V4046 %1f `"Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?"'
+_column(267) byte V4047 %1f `"Nesse trabalho secundário era funcionário público estatutário (federal, estadual ou municipal)?"'
+_column(268) byte V4048 %1f `"Nesse trabalho secundário tinha carteira de trabalho assinada?"'
+_column(269) byte V4049 %1f `"Era contribuinte de instituto de previdência por esse trabalho secundário?"'
+_column(270) byte V4050 %1f `"Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente nesse trabalho secundário? (variável auxiliar)"'
+_column(271) byte V40501 %1f `"Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em dinheiro"'
+_column(272) byte V405011 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(273) long V405012 %8f `"Valor em dinheiro do rendimento mensal que recebia normalmente nesse trabalho secundário"'
+_column(281) byte V40502 %1f `"Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em produtos e mercadorias"'
+_column(282) byte V405021 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(283) long V405022 %8f `"Valor estimado dos produtos e mercadorias que recebia normalmente nesse trabalho secundário"'
+_column(291) byte V40503 %1f `"Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada somente em benefícios"'
+_column(292) byte V405031 %1f `"Tipo de rendimento/retirada  em benefícios que recebia/fazia nesse trabalho secundário"'
+_column(293) byte V4051 %1f `"Qual foi o rendimento bruto que ... recebeu/fez  nesse trabalho secundário, no mês de referência? (variável auxiliar)"'
+_column(294) byte V40511 %1f `"Recebeu/fez nesse trabalho secundário rendimento/retirada em dinheiro no mês de referência"'
+_column(295) byte V405111 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(296) long V405112 %8f `"Valor em dinheiro do rendimento mensal que recebeu nesse trabalho secundário no mês de referência"'
+_column(304) byte V40512 %1f `"Recebeu/fez nesse trabalho secundário no mês de referencia, rendimento/retirada em produtos e mercadorias"'
+_column(305) byte V405121 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(306) long V405122 %8f `"Valor estimado dos produtos e mercadorias que recebia recebeu nesse trabalho secundário no mês de referência"'
+_column(314) int V4056 %3f `"Quantas horas ... trabalhava normalmente, por semana, nesse trabalho secundário?"'
+_column(317) int V4056C %3f `"Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho secundário?"'
+_column(320) byte V4057 %1f `"Era contribuinte de instituto de previdência por esse(s) outro(s) trabalho(s)?"'
+_column(321) byte V4058 %1f `"Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente nesse(s) outro(s) trabalho(s)? (variável auxiliar)"'
+_column(322) byte V40581 %1f `"Recebia/fazia normalmente nesse(s) outro(s) trabalho(s)  rendimento/retirada em dinheiro"'
+_column(323) byte V405811 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(324) long V405812 %8f `"Valor em dinheiro do rendimento mensal que recebia normalmente nesse(s) outro(s) trabalho(s)"'
+_column(332) byte V40582 %1f `"Recebia/fazia normalmente nesse(s) outro(s) trabalho(s)  rendimento/retirada em produtos e mercadorias"'
+_column(333) byte V405821 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(334) long V405822 %8f `"Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s)"'
+_column(342) byte V40583 %1f `"Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada somente em benefícios"'
+_column(343) byte V405831 %1f `"Tipo de rendimento/retirada  em benefícios que recebia/fazia nesse(s) outro(s) trabalho(s)"'
+_column(344) byte V40584 %1f `"Não remunerado nesse(s) outro(s) trabalho(s)"'
+_column(345) byte V4059 %1f `"Qual foi o rendimento bruto que ... recebeu/fez  nesse(s) outro(s) trabalho(s), no mês de referência? (variável auxiliar)"'
+_column(346) byte V40591 %1f `"Recebeu/fez nesse(s) outro(s) trabalho(s) rendimento/retirada em dinheiro no mês de referência"'
+_column(347) byte V405911 %1f `"Número da faixa do rendimento/retirada em dinheiro"'
+_column(348) long V405912 %8f `"Valor em dinheiro do rendimento mensal que recebeu nesse(s) outro(s) trabalho(s) no mês de referência"'
+_column(356) byte V40592 %1f `"Recebeu/fez nesse(s) outro(s) trabalhos no mês de referencia, rendimento/retirada em produtos e mercadorias"'
+_column(357) byte V405921 %1f `"Número da faixa do rendimento/retirada em produtos e mercadorias"'
+_column(358) long V405922 %8f `"Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s) no mês de referência"'
+_column(366) int V4062 %3f `"Quantas horas ... trabalhava normalmente, por semana, nesse(s) outro(s) trabalho(s)?"'
+_column(369) int V4062C %3f `"Quantas horas ... trabalhou efetivamente na semana de referência nesses outros trabalhos?"'
+_column(372) byte V4063 %1f `"... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?"'
+_column(373) byte V4063A %1f `"... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?"'
+_column(374) byte V4064 %1f `"No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?"'
+_column(375) byte V4064A %1f `"No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava  no(s) trabalho(s) que tinha na semana de referência?"'
+_column(376) byte V4071 %1f `"No período de ... a ... (período de referência de 30 dias), ... Tomou alguma providência para conseguir trabalho, seja um emprego ou um negócio próprio?"'
+_column(377) byte V4072 %2f `"No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?"'
+_column(379) byte V4072A %1f `"No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?"'
+_column(380) byte V4073 %1f `"Embora não tenha tomado providência para conseguir trabalho, gostaria de ter trabalhado na semana de ... a ... (semana de referência) ?"'
+_column(381) byte V4074 %1f `"Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de  ... a ... (período de referência de 30 dias)?"'
+_column(382) byte V4074A %2f `"Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de  ... a ... (período de referência de 30 dias)?"'
+_column(384) byte V4075A %1f `"Quanto tempo depois de ... (último dia da semana de referência) irá começar esse trabalho que conseguiu?"'
+_column(385) byte V4075A1 %2f `"Número de meses para começar o trabalho que conseguiu"'
+_column(387) byte V4076 %1f `"Até o dia ... (último dia da semana de referência), fazia quanto tempo que ... estava sem qualquer trabalho e tentando conseguir trabalho?"'
+_column(388) byte V40761 %2f `"fazia quanto tempo que vinha procurando trabalho (de 1 mês a menos de 1 ano)"'
+_column(390) byte V40762 %2f `"fazia quanto tempo que vinha procurando trabalho (de 1 ano a menos de 2 anos)"'
+_column(392) byte V40763 %2f `"fazia quanto tempo vinha procurando trabalho (2 anos ou mais)"'
+_column(394) byte V4077 %1f `"Se tivesse conseguido um trabalho, ... poderia ter começado a trabalhar na semana de ... a ... (semana de referência)?"'
+_column(395) byte V4078 %1f `"Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de  ... a ... (semana de referência)?"'
+_column(396) byte V4078A %1f `"Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de  ... a ... (semana de referência)?"'
+_column(397) byte V4082 %1f `"No período de captação de 358 dias, ... trabalhou por pelo menos 1 hora?"'
+_column(398) byte VD2002 %2f `"Condição no domicílio"'
+_column(400) byte VD2003 %2f `"Número de componentes do domicílio (exclusive as pessoas cuja condição no domicílio era pensionista, empregado doméstico ou parente do empregado doméstico)"'
+_column(402) byte VD2004 %1f `"Espécie da unidade doméstica"'
+_column(403) byte VD3004 %1f `"Nível de instrução mais elevado alcançado (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental -  SISTEMA DE 9 ANOS"'
+_column(404) byte VD3005 %2f `"Anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS"'
+_column(406) byte VD3006 %1f `"Grupos de anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental  - SISTEMA DE 9 ANOS"'
+_column(407) byte VD4001 %1f `"Condição em relação à força de trabalho na semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(408) byte VD4002 %1f `"Condição de ocupação na semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(409) byte VD4003 %1f `"Força de trabalho potencial para pessoas de 14 anos ou mais de idade"'
+_column(410) byte VD4004 %1f `"Subocupação por insuficiência de horas efetivamente trabalhadas em todos os trabalhos"'
+_column(411) byte VD4004A %1f `"Subocupação por insuficiência de horas habitualmente trabalhadas em todos os trabalhos"'
+_column(412) byte VD4005 %1f `"Pessoas desalentadas na semana de referência"'
+_column(413) byte VD4007 %1f `"Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(414) byte VD4008 %1f `"Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade (com subcategorias de empregados)"'
+_column(415) byte VD4009 %2f `"Posição na ocupação e categoria do emprego do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(417) byte VD4010 %2f `"Grupamentos de atividade principal do empreendimento do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(419) byte VD4011 %2f `"Grupamentos ocupacionais do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(421) byte VD4012 %1f `"Contribuição para instituto de previdência em qualquer trabalho da semana de referência para pessoas de 14 anos ou mais de idade"'
+_column(422) byte VD4013 %1f `"Faixa das horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade"'
+_column(423) byte VD4014 %1f `"Faixa das horas efetivamente trabalhadas na semana de referência em todos os trabalhos  para pessoas de 14 anos ou mais de idade"'
+_column(424) byte VD4015 %1f `"Tipo de remuneração habitualmente recebida no trabalho principal para pessoas de 14 anos ou mais de idade"'
+_column(425) long VD4016 %8f `"Rendimento mensal habitual do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)"'
+_column(433) long VD4017 %8f `"Rendimento mensal efetivo do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)"'
+_column(441) byte VD4018 %1f `"Tipo de remuneração habitualmente recebida em todos os trabalhos para pessoas de 14 anos ou mais de idade"'
+_column(442) long VD4019 %8f `"Rendimento mensal habitual de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)"'
+_column(450) long VD4020 %8f `"Rendimento mensal efetivo de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)"'
+_column(458) byte VD4023 %1f `"Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho"'
+_column(459) byte VD4030 %1f `"Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho"'
+_column(460) int VD4031 %3f `"Horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade"'
+_column(463) int VD4032 %3f `"Horas efetivamente trabalhadas na semana de referência no trabalho principal para pessoas de 14 anos ou mais de idade"'
+_column(466) int VD4033 %3f `"Horas efetivamente trabalhadas na semana de referência no trabalho secundário para pessoas de 14 anos ou mais de idade"'
+_column(469) int VD4034 %3f `"Horas efetivamente trabalhadas na semana de referência nos outros trabalhos para pessoas de 14 anos ou mais de idade"'
+_column(472) int VD4035 %3f `"Horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade"'
+_column(475) byte VD4036 %1f `"Faixa das horas habitualmente trabalhadas por semana no trabalho principal para pessoas de 14 anos ou mais de idade"'
+_column(476) byte VD4037 %1f `"Faixa das horas efetivamente trabalhadas na semana de referência no trabalho principal  para pessoas de 14 anos ou mais de idade"'
 }
