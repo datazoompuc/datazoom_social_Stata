@@ -9,7 +9,7 @@
 
 O DataZoom Social Stata `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE: Censo Demográfico, Pesquisa Nacional por Amostra de Domicílios, Pesquisa Mensal do Emprego, Pesquisa de Orçamentos Familiares e Pesquisa de Economia Informal Urbana.
 
-# Conteúdo
+## Conteúdo
 1. [Instalação](#instalacao)
 2. [Sintaxe](#syntax)
 3. [Caixa de Diálogo](#caixa)
