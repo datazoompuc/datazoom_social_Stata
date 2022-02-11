@@ -9,7 +9,13 @@
 
 O DataZoom Social Stata `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE: Censo Demográfico, Pesquisa Nacional por Amostra de Domicílios, Pesquisa Mensal do Emprego, Pesquisa de Orçamentos Familiares e Pesquisa de Economia Informal Urbana.
 
-## Instalação
+# Table of contents
+1. [Instalação](#instalacao)
+2. [Sintaxe](#syntax)
+    1. [Sub paragraph](#subparagraph1)
+3. [Another paragraph](#paragraph2)
+
+## Instalação <a name="instalacao"></a>
 
 Digite o código abaixo na linha de comando do Stata para baixar e instalar os arquivos referente ao pacote DataZoom Social 
 
@@ -17,7 +23,7 @@ Digite o código abaixo na linha de comando do Stata para baixar e instalar os a
 net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") force
 ```
 
-## Syntax
+## Syntax <a name="syntax"></a>
 
 A syntax do pacote pode ser resumida como:
 
@@ -200,3 +206,124 @@ Para `registertype(...)` há 7 tipos de registros, numerados conforme a document
 ___Atenção:___ Para a POF 2017-2018, Bases Padronizadas e Gastos Selecionados não estão disponíveis.
 
 As funções da POF podem ser utilizada diretamente. Ver `h datazoom_pofXXXX` com `XXXX`igual ao ano de interesse.
+
+## Programas auxiliares (dicionários)
+
+A maioria dos programas do pacote se deparam com dados originais
+armazenados em formato .txt, que precisam de dicionários – formato .dct
+no Stata – para serem lidos. A consequência é um volume de dicionários
+que supera o limite de 100 arquivos permitido para um pacote do Stata
+poder ser instalado. Por isso, os dicionários individuais são
+compactados em um arquivo .dta único, que é lido dentro de cada
+programa. Ambas as funções usadas para isso são definidas no arquivo
+read\_compdct.ado.
+
+O primeiro programa definido nesse arquivo é `write_compdct`, que pode
+ser usado como a seguir: após rodar o arquivo .ado para definir a
+função, basta usar o código
+
+    write_compdct, folder("/pasta com os dicionários") saving("/caminho/dict.dta")
+
+A função então lê todos os arquivos .dct presentes na pasta, e junta
+todos no arquivo dict.dta, com cada dicionário identificado por uma
+variável com seu nome.
+
+Para transformar esse arquivo compactado novamente do dicionário
+original, se usa o programa `read_compdct`:
+
+    read_compdct, compdct("dict.dta") dict_name("dic original") out("dic extraído.dct")
+
+que extrai o “dic original” do arquivo dict.dta e o salva para “dic
+extraído.dct”. Como exemplo, veja o uso dessa função no programa
+`datazoom_pnadcontinua`
+
+    tempfile dic // Arquivo temporário onde o .dct extraído será salvo
+
+    findfile dict.dta // Acha o arquivo dict.dta salvo pela instalação
+                      // do pacote na pasta /ado/, e armazena o caminho
+                      // até ele na macro r(fn)
+
+    read_compdct, compdct("`r(fn)'") dict_name("pnadcontinua`lang'") out("`dic'")
+      // Lê o dicionário compactado dict.dta, extrai o dicionário pnadcontinua
+      // (ou pnadcontinua_en, `lang` é vazio ou "_en"), e salva o arquivo final
+      // na tempfile dic, que é usada para ler os dados
+
+Para a nossa organização interna, cada pasta correspondente a um
+programa armazena os dicionários na sub-pasta /dct/. Todos esses
+dicionários são também armazenados juntos na pasta /dct/ diretamente,
+que é usada para gerar o dict.dta através do `write_compdct`. Note que
+nenhum arquivo .dct é efetivamente listado no arquivo
+datazoom\_social.pkg, e portanto, não são instalados no computador do
+usuário. Apenas o arquivo dict.dta é enviado.
+
+## Estrutura dos programas
+
+As funções do pacote, em geral, seguem o seguinte esqueleto
+
+    program datazoom_exemplo
+    syntax, original(string) ... // Função principal, que será executada pelas
+                                 // caixas de diálogo ou pelo datazoom_social
+
+    ...
+
+    load_exemplo, opções // Programa de leitura dos dados definido em seguida
+
+    ...
+
+    (Carregamento dos dados)
+
+    treat_exemplo // Eventuais tratamentos de dados
+
+    ...  
+      
+    save  
+
+    end
+
+    program load_exemplo
+
+    ...
+
+    end
+
+    program treat_exemplo
+
+    ...
+
+    end
+
+**Carregamento dos dados:** Como exemplo, vejamos um trecho do programa
+da PNS
+
+    program load_pns
+    syntax, original(str) year(integer) [english] 
+
+    if "`english'" != "" local lang "_en"
+
+    tempfile dic (*)
+
+    findfile dict.dta (*)
+
+    read_compdct, compdct("`r(fn)'") dict_name("pns`year'`lang'") out("`dic'") (*)
+
+    qui infile using `dic', using(PNS_`year'.txt) clear
+
+    end
+
+As linhas marcadas com (\*) apenas extraem o dicionário necessário para
+ler os dados, como explicado na seção anterior. Vendo as opções do
+programa, o `load_pns` recebe a pasta que armazena os dados brutos, o
+ano escolhido, e a opção de labels em inglês, que faz com que o
+dicionário pns20xx\_en seja lido ao invés do pns20xx.
+
+A primeira linha dentro dessa função está na maioria dos programas do
+pacote: quando o usuário escolhe a opção english, um local de mesmo nome
+é salvo, armazenado a string “english”. Como todos os dicionários em
+inglês são armazenados com sufixo \_en, essa linha diz que, caso essa
+macro english não seja vazia – que só ocorre quando o usuário escolhe
+essa opção –, é criado o local lang com a string "\_en", que serve de
+sufixo para o nome do dicionário a ser lido.
+
+O centro dessa função de load está na linha de infile, que usa o
+dicionário extraído para ler o arquivo de dados brutos, e o carrega para
+a memória do Stata.
