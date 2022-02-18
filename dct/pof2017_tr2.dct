@@ -25,5 +25,6 @@ _column(97)	byte	FATOR_ANUALIZACAO	%2f	"Identifica o número utilizado para anua
 _column(99)	double	PESO	%14.8f	"Identifica o fator de expansão atribuído ao domicílio pertencente a uma UPA"
 _column(113)	double	PESO_FINAL	%14.8f	"Identifica o fator de expansão (peso)"
 _column(127)	double	RENDA_TOTAL	%10.2f	"Valor em reais (R$)"
+_column(137)	long	V9004	%5f	"Código do local de aquisição"
 }
 

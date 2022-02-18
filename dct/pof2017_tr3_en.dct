@@ -17,5 +17,10 @@ _column(67)	byte	FATOR_ANUALIZACAO	%2f	"identifies the number used to annualize 
 _column(69)	double	PESO	%14.8f	"expansion factor"
 _column(83)	double	PESO_FINAL	%14.8f	"expansion factor"
 _column(97)	double	RENDA_TOTAL	%10.2f	" amount in reais (R$)"
+_column(107)	long	V9005		%9.3f	 "amount acquired. applicable only to food and drink."
+_column(116)	long	V9007		%4f	 "code for unit of measurement. applicable only to food and drink."
+_column(120)	long	V9009		%5f	 "code for weight or volume refering to the unit of measurement. applicable only to food and drink."
+_column(125)	long	QTD_FINAL		%9.3f	 "final amoung in kilograms (Kg)"
+_column(134)	long	V9004	%5f	"code for place of acquisition"
 }
 

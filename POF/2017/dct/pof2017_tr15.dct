@@ -22,5 +22,6 @@ _column(74)		byte	FATOR_ANUALIZACAO	%2f	"Identifica o número utilizado para anu
 _column(76)		long	PESO		%14.8f	"Identifica o fator de expansão atribuído ao domicílio pertencente a uma UPA (unidade primária de amostragem). A cada domicílio corresponde um fator de expansão, o qual é também atribuído para as unidades de consumo do respectivo domicílio. "
 _column(90)		long	PESO_FINAL	%14.8f	"Identifica o fator de expansão (peso) ajustado às estimativas populacionais para 15 janeiro de 2018, segundo cada Unidade da Federação e pós estratos definidos. Este fator ajustado é atribuído a cada domicílio de uma UPA (unidade primária de amostragem) da amostra selecionada e também deve ser aplicado para cada Unidade de Consumo existente no Domicílio. Nesta pesquisa, os domicílios pertencentes à uma mesma UPA tem o mesmo fator de expansão ajustado (peso final). Este fator deve ser utilizado para efeito do cálculo das estimativas pontuais a partir dos dados da pesquisa."
 _column(104)		double	RENDA_TOTAL	%10.2f	"Valor em reais (R$)"
+_column(114)	long	V9004	%5f	"Código do local de aquisição"
 }
 

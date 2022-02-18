@@ -34,5 +34,7 @@ _column(128)	byte	FATOR_ANUALIZACAO	%1f	"Identifica o número"
 _column(129)	double	PESO	%14.8f	"Identifica o fator de expansão"
 _column(143)	double	PESO_FINAL	%14.8f	"Identifica o fator de expansão"
 _column(157)	double	RENDA_TOTAL	%10.2f	" Valor em reais (R$)"
+_column(167)	int	V53011	%4f	"Código da ocupação."
+_column(171)	long	V54061	%5f	"Código da principal atividade exercida no trabalho."
 }
 
