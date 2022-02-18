@@ -22,5 +22,6 @@ _column(74)		byte	FATOR_ANUALIZACAO	%2f	"identifies the number used to annualize
 _column(76)		long	PESO		%14.8f	"expansion factor"
 _column(90)		long	PESO_FINAL	%14.8f	"expansion factor"
 _column(104)		double	RENDA_TOTAL	%10.2f	"amount in reais (R$)"
+_column(114)	long	V9004	%5f	"code for place of acquisition"
 }
 

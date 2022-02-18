@@ -36,5 +36,6 @@ _column(49)		byte	V0220		%1f	"is there paving on the street where this domicile 
 _column(50)		byte	V0221		%1f	"the postal distribution service for this domicile is carried out:"
 _column(51)		long	PESO		%14.8f			 "expansion factor "
 _column(65)		long	PESO_FINAL		%14.8f			 "expansion factor"
+_column(79)		byte	V6199		%1f			 "Food security condition at the household"
 }
 

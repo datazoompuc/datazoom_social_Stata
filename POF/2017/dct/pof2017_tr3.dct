@@ -21,5 +21,6 @@ _column(107)	long	V9005		%9.3f	 "Quantidade do produto adquirido. Aplicável ape
 _column(116)	long	V9007		%4f	 "Código da Unidade de Medida pela qual o produto foi adquirido. Aplicável apenas para Alimentos e Bebidas. "
 _column(120)	long	V9009		%5f	 "Código do Peso ou Volume referente a Unidade de Medida pela qual o produto foi adquirido. Aplicável apenas para Alimentos e Bebidas."
 _column(125)	long	QTD_FINAL		%9.3f	 "Quantidade final em Kilogramas (Kg)"
+_column(134)	long	V9004	%5f	"Código do local de aquisição"
 }
 
