@@ -25,5 +25,6 @@ _column(97)	byte	FATOR_ANUALIZACAO	%2f	"identifies the number used to annualize 
 _column(99)	double	PESO	%14.8f	"expansion factor attributed to the household pertencente a uma UPA"
 _column(113)	double	PESO_FINAL	%14.8f	"expansion factor"
 _column(127)	double	RENDA_TOTAL	%10.2f	"amount in reais (R$)"
+_column(137)	long	V9004	%5f	"code for place of acquisition"
 }
 

@@ -29,23 +29,20 @@ local y`1' = ""
 foreach year in `years'{
 	foreach trim in 01 02 03 04 {
 		local file_name "PNADC_`trim'`year'"
+			
 		
-		if `year' == 2016 | `year' == 2017 | `year' == 2018 | (`year' == 2015 & `trim' == 4) | (`year' == 2019 & `trim' == 1){
-				local file_name "`file_name'_20190729"
-			}	
-		
-		di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
-				cap infile using "`dic'", using("`original'/`file_name'.txt") clear
-				if _rc == 0 {
-						qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
-						qui destring hous_id, replace
-						qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-						qui destring ind_id, replace
-						tempfile PNADC_`trim'`year'
-						save "`PNADC_`trim'`year''", replace
-				}
-				else continue, break
-		}
+	di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
+			cap infile using "`dic'", using("`original'/`file_name'.txt") clear
+			if _rc == 0 {
+					qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
+					qui destring hous_id, replace
+					qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
+					qui destring ind_id, replace
+					tempfile PNADC_`trim'`year'
+					save "`PNADC_`trim'`year''", replace
+			}
+			else continue, break
+	}
 }	
 
 if _rc==901 exit	

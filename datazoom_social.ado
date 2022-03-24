@@ -4,18 +4,18 @@
 * version 1.0
 
 program define datazoom_social
-syntax, research(str) source(str) save(str) date(numlist) [state(str)] [record(str)] /*
-*/	[datatype(str)] [identification(str)] [list(str)] [registertype(str)] /* Opções da POF */     /*
+syntax, survey(str) source(str) save(str) date(numlist) [state(str)] [record(str)] /*
+*/	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF 
 */	[language(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92] /* Opções gerais */
 
 
-if "`research'" == "pns" {
+if "`survey'" == "pns" {
 	datazoom_pns, original(`source') saving(`save') year(`date') `language'
 }
 
 
 
-if "`research'" == "censo" {
+if "`survey'" == "censo" {
 	if "`pes'" == "" & "`fam'" == "" & "`dom'" == "" & "`both'" == "" & "`all'" == "" {
 		display "É necessário escolher um Tipo de Registro: Pessoas, Domicílios ou Ambos"
 	}
@@ -59,12 +59,12 @@ if "`research'" == "censo" {
 
 
 
-if "`research'" == "pnadcontinua_anual" {  /* Para pnad continua anual ficar atendo ao construir a caixa de diálogo para a opção do ano */
+if "`survey'" == "pnadcontinua_anual" {  /* Para pnad continua anual ficar atendo ao construir a caixa de diálogo para a opção do ano */
 	datazoom_pnadcont_anual, years(`date') original(`source') saving(`save') `language'
 }
 
 
-if "`research'" == "pnadcontinua" {
+if "`survey'" == "pnadcontinua" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
 		datazoom_pnadcontinua, years(`date') original(`source') saving(`save') nid `language'
 	}
@@ -83,7 +83,7 @@ if "`research'" == "pnadcontinua" {
 
 
 
-if "`research'" == "pnad" { /* ncomp comp81 comp92 */ 
+if "`survey'" == "pnad" { /* ncomp comp81 comp92 */ 
 	if "`comp81'" == "" & "`comp92'" == "" {
 		if "`pes'" == "" & "`dom'" == "" & "`both'" == "" {
 			display "É necessário escolher um tipo de registro: Pessoas, Domicílios ou Ambos"
@@ -132,13 +132,13 @@ if "`research'" == "pnad" { /* ncomp comp81 comp92 */
 
 
 
-if "`research'" == "pnad_covid" {
+if "`survey'" == "pnad_covid" {
 	datazoom_pnad_covid, months(`date') original(`source') saving(`save') `language'
 }
 
 
 
-if "`research'" == "pmenova" {
+if "`survey'" == "pmenova" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
 		datazoom_pmenova, years(`date') original(`source') saving(`save') nid `language'
 	}
@@ -158,7 +158,7 @@ if "`research'" == "pmenova" {
 
 
 
-if "`research'" == "pmeantiga" {
+if "`survey'" == "pmeantiga" {
 	if "`nid'" == "" & "`idbas'" == "" & "`idrs'" == "" {
 		datazoom_pmeantiga, years(`date') original(`source') saving(`save') nid `language'
 	}
@@ -177,13 +177,13 @@ if "`research'" == "pmeantiga" {
 
 
 
-if "`research'" == "ecinf" {
+if "`survey'" == "ecinf" {
 	datazoom_ecinf, year(`date') tipo(`record') original(`source') saving(`save') `language'
 }
 
 
 
-if "`research'" == "pof"{
+if "`survey'" == "pof"{
 	ano = substr("`date'",-2,2)
 	
 	

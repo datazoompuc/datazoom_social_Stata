@@ -23,5 +23,6 @@ _column(75)	byte	FATOR_ANUALIZACAO	%2f	"Identifica o número utilizado para anua
 _column(77)	double	PESO	%14.8f	"Identifica o fator de expansão"
 _column(91)	double	PESO_FINAL	%14.8f	"Identifica o fator de expansão"
 _column(105)	double	RENDA_TOTAL	%10.2f	" Valor em reais (R$)"
+_column(115)	long	V9004	%5f	"Código do local de aquisição"
 }
 

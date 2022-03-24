@@ -546,7 +546,7 @@ qui foreach aa in `years' {
 
 	use `PME`aa'P'
 	merge m:1 ano mes uf v102 v103 using `PME`aa'D', keep(match) keepus(v0106 v0109 v0110 v0112) nogen
-	findfile paineisPMEantiga.dta
+	findfile paineis_pmeantiga.dta
 	merge m:1 ano mes v0106 using `"`r(fn)'"', keep(match) keepus(painel npesq) nogen
     lab var painel "painel da pesquisa"
 	lab var npesq "número da pesquisa"
