@@ -1,6 +1,15 @@
 program datazoom_pof2017
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
+if "`sel'" != ""{
+	di as error "Selected expenditures option unavaliable for POF 2017"
+	exit
+}
+if "`std'" != ""{
+	di as error "Standardized databases option unavaliable for POF 2017"
+	exit
+}
+
 if `: word count `id'' > 1{
 	foreach type in `id'{
 		datazoom_pof2017, id(`type') original(`original') saving(`saving') std `english'
