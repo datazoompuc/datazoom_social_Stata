@@ -10,7 +10,7 @@ BEGIN
 	RADIO  ck1995  +5 20 100 25, first label("1995/96")  option(datazoom_pof1995)
 	RADIO  ck2002  +100   20 100 25, middle label("2002/03")  option(datazoom_pof2002)
 	RADIO  ck2008  +100   20 100 25, middle label("2008/09")  option(datazoom_pof2008)
-	RADIO  ck2017  +100   20 100 25, last label("2017/19")  option(datazoom_pof2017)
+	RADIO  ck2017  +100   20 100 25, last label("2017/18")  option(datazoom_pof2017)
 
 	BUTTON btn_bp 25 75 120 25, label("Bases Padronizadas") onpush(program carregachild_bp)
 	BUTTON btn_gs +170 @   @  @, label("Gastos Selecionados") onpush(program carregachild_gs)
@@ -80,19 +80,19 @@ PROGRAM carregachild_gs
 PROGRAM carregachild_bp
    BEGIN
 	if main.ck1995{
-      		put "db datazoom_pofstd_95"
+      		put "db datazoom_pofstd, message(1995)"
 		stata
 	}
 	if main.ck2002{
-      		put "db datazoom_pofstd_02"
+      		put "db datazoom_pofstd, message(2002)"
 		stata
 	}
 	if main.ck2008{
-      		put "db datazoom_pofstd_08"
+      		put "db datazoom_pofstd, message(2008)"
 		stata
 	}
 	if main.ck2017{
-      		put "db datazoom_pofstd_17"
+      		put "db datazoom_pofstd, message(2017)"
 		stata
 	}
    END

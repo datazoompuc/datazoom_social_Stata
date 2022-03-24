@@ -5,7 +5,7 @@
 
 program define datazoom_social
 syntax, survey(str) source(str) save(str) date(numlist) [state(str)] [record(str)] /*
-*/	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF */     /*
+*/	[datatype(str)] [identification(str)] [list(str asis)] [registertype(str)] /* Opções da POF 
 */	[language(str)] [comp pes fam dom both all nid idbas idrs ncomp comp81 comp92] /* Opções gerais */
 
 
@@ -192,13 +192,13 @@ if "`survey'" == "pof"{
 	}
 	else {
 		if "`datatype'" == "std" {
-			datazoom_pof`datatype'_`ano', id(`identification') original(`source') saving(`save') `language'
+			datazoom_pof`date', id(`identification') original(`source') saving(`save') std `language'
 		}
 		else if "`datatype'" == "sel" {
-			datazoom_pof`datatype'_`ano', id(`identification') lista(`list') original(`source') saving(`save') `language'
+			datazoom_pof`date', id(`identification') sel(`list') original(`source') saving(`save') `language'
 		}
 		else if "`datatype'" == "trs" {
-			datazoom_pof`datatype'_`ano', trs(`registertype') original(`source') saving(`save') `language'
+			datazoom_pof`date', trs(`registertype') original(`source') saving(`save') `language'
 		}
 	}
 }

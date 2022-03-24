@@ -546,13 +546,13 @@ PROGRAM atualizaListas
    
 PROGRAM command
 BEGIN
-   put "datazoom_pofsel_95 "
+   put "datazoom_pof1995 "
    beginoptions
 		/*Parte da syntax: tipo de extração*/
 		put "id("
 		option radio(main rd_dom rd_uc rd_pess)
 		/*Parte da syntax: lista de agregados*/
-		put ") lista("
+		put ") sel("
 		put listaNomes
 		put ") "
 		put saidadata " "

@@ -24,36 +24,21 @@
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 8 2} {cmd:datazoom_pofstd_}{it:year} [, {it:options} {it:std_options}]
+{p 8 8 2} {cmd:datazoom_pof1995} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_pofsel_}{it:year} [, {it:options} {it:sel_options}]
+{p 8 8 2} {cmd:datazoom_pof2002} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 8 8 2} {cmd:datazoom_poftrs_}{it:year} [, {it:options} {it:trs_options}]
+{p 8 8 2} {cmd:datazoom_pof2008} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
-{p 4 4 2} Where {it:year} can be 95, 02, 08 or 17
+{p 8 8 2} {cmd:datazoom_pof2017} [, {it:options} {it:trs_options} {it:sel_options} {it:std_options}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr: options}
 {synoptline}
 {syntab:Input}
-{synopt:{opt original(str)}} path to original microdata {p_end}
-{synopt:{opt saving(str)}} path where databases will be saved {p_end}
+{synopt:{opt original(string)}} path to original microdata {p_end}
+{synopt:{opt saving(string)}} path where databases will be saved {p_end}
 {synopt:{opt english}} variable labels in English {p_end}
-{p2colreset}{...}
-
-{synoptset 20 tabbed}{...}
-{synopthdr: std_options}
-{synoptline}
-{syntab:Stardardized Databases}
-{synopt:{opt id(string)}} identification level {p_end}
-{p2colreset}{...}
-
-{synoptset 20 tabbed}{...}
-{synopthdr: sel_options}
-{synoptline}
-{syntab:Selected Expenditures}
-{synopt:{opt id(string)}} identification level {p_end}
-{synopt:{opt lista(string asis)}} list of items {p_end}
 {p2colreset}{...}
 
 {synoptset 20 tabbed}{...}
@@ -63,6 +48,22 @@
 {synopt:{opt trs(string)}} registers {p_end}
 {synoptline}
 {p2colreset}{...}
+
+{synoptset 20 tabbed}{...}
+{synopthdr: sel_options}
+{synoptline}
+{syntab:Selected Expenditures}
+{synopt:{opt id(string)}} identification level {p_end}
+{synopt:{opt sel(string asis)}} list of selected items {p_end}
+{p2colreset}{...}
+
+{synoptset 20 tabbed}{...}
+{synopthdr: std_options}
+{synoptline}
+{syntab:Stardardized Databases}
+{synopt:{opt id(string)}} identification level {p_end}
+{synopt:{opt std}} enables standardized database mode {p_end}
+{p2colreset}{...}
 {p 4 6 2}
 
 Use command {cmd:db datazoom_pof_en} to access through dialog box.
@@ -71,25 +72,24 @@ Use command {cmd:db datazoom_pof_en} to access through dialog box.
 {title:Description}
 
 {p 4 4 2}
-For each year, there are three commands of the form {cmd:datazoom_pof}{it:(ano)}. It's highly recommended 
+Each {cmd:datazoom_pof}{it:(ano)} function has 3 modes of operation. It's highly recommended 
 to use them via the dialog box.
 
 {p 4 4 2}
-{cmd: datazoom_pofstd_}{it:ano} generates a standardized POF database.
-This database contains expenditure/aquisition variables for a predetermined consumption basket, 
-which aggregates individual items, following the IBGE consumption documentation. This function 
-is not avaliable for the 2017/18 POF.
+The {bf: Types of Register} mode produces the original databases in Stata format, with no 
+variable manipulation, for the chosen types of register.
 
 {p 4 4 2}
-{cmd: datazoom_pofsel_}{it:ano} creates a custom database, with variable pertaining to 
-user-chosen items. Não disponível para 2017. Not avaliable for the 2017/18 POF.
-	
+The {bf: Selected Expenditures} mode creates a custom database, with variable pertaining to 
+user-chosen items. 
+
 {p 4 4 2}
-{cmd: datazoom_poftrs_}{it:ano} produces the original databases in Stata format, with no 
-variable manipulation, for the chosen types of register.
-	
+The {bf: Standardized Databases} mode generates a standardized POF database.
+This database contains expenditure/aquisition variables for a predetermined consumption basket, 
+which aggregates individual items, following the IBGE consumption documentation.
+		
 {p 4 4 2}
-The first two programs allow the user to choose the level at which the data are to be aggregated: household, 
+The last two programs allow the user to choose the level at which the data are to be aggregated: household, 
 	consumption unit (family) or individual. Some types of register are not compatible with all
 	levels. 
 	
@@ -99,6 +99,42 @@ september 1996, for the 1995/96 POF; to january 2003, for the 2002/03; and to ja
 
 {p 4 4 2}
 All can used reached in dialog box format through {cmd: db datazoom_pof_en}
+
+{title: Types of Register}
+
+{p 4 4 2}
+Reads POF databases for the chosen registers from the original microdata.
+		
+{p 4 4 2} 
+POF microdata is split into Types of Register, that may be different between years. The desired Types of 
+Register may be chosen via the dialog box.
+
+{title: Selected Expenditures}
+
+{p 4 4 2}
+Extracts and builds custom Stata databases from the original POF microdata.
+		
+{p 4 4 2}
+The desired list of items is defined by the user in {opt sel}. As each item carries
+ a specific, predefined name, it is stronly recommended
+that the program is used through its dialog box, which allows the user to see all available 
+items by category (Food, Other Expenditures and Income).
+
+{p 4 4 2} The expenditures in each chosen item is aggregated to the desired identification level: 
+household, consumption unit (family) or individual. The same occurs with income-related variables. All values are annualized and deflated to January 2009. 
+The income variables (gross monetary income, gross non-monetary income and total income) corresponds to the household monthly gross
+income or to the consumption unity monthly gross income. 
+It is worth noting that each expenditure corresponds to a determined identification level.
+Therefore, it is not possible to obtain for an individual the expenditures on items associated 
+with the consumption unit and household. In this case, run the program
+for each identification level and then use the command {help merge} to aggregate the databases.
+ 
+{p 4 4 2} The final database, under any identification level, contains all variables pertaining 
+household characteristics. If Consumption Unit is chosen, variables pertaining
+life conditions are added. Finally, if Individual is chosen, variables pertaining individual characteristics are added.
+
+{p 4 4 2} To construct estimates, a sample weights variable should be used.
+
 
 {title: Standardized Databases}
 
@@ -112,8 +148,7 @@ rice, bean and others are unified under expenditures on cereals, pulses and oils
 This aggregation follows IBGE POF documentation ("Tradutores"). All existing aggregations
  in that document are incorporated in the final database.
 The user cannot choose which items to include in the database nor specify aggregations 
-different from the predetermined ones. All values are annualized and
-deflated to January 2009.
+different from the predetermined ones.
 
 {p 4 4 2}
 It is worth noting that each expenditure corresponds to a determined identification 
@@ -138,43 +173,7 @@ pertaining household characteristics. If Consumption Unit is chosen, variables p
 life conditions are added. Finally, if Individual is chosen, variables pertaining individual
  characteristics are added.
 	
-{p 4 4 2}
-To construct estimates, the expansion factor 2 must be used as a sampling {help weight}.
-
-{title: Selected Expenditures}
-
-{p 4 4 2}
-{cmd:datazoom_pofsel_}{it:ano} extracts and builds custom Stata databases from the original POF microdata.
-		
-{p 4 4 2}
-Em {opt lista} The desired list of items is defined by the user in {opt lista}. As each item carries
- a specific, predefined name, it is stronly recommended
-that the program is used through its dialog box, which allows the user to see all available 
-items by category (Food, Other Expenditures and Income).
-
-{p 4 4 2} The expenditures in each chosen item is aggregated to the desired identification level: 
-household, consumption unit (family) or individual. The same occurs with income-related variables. All values are annualized and deflated to January 2009. 
-The income variables (gross monetary income, gross non-monetary income and total income) corresponds to the household monthly gross
-income or to the consumption unity monthly gross income. 
-It is worth noting that each expenditure corresponds to a determined identification level.
-Therefore, it is not possible to obtain for an individual the expenditures on items associated 
-with the consumption unit and household. In this case, run the program
-for each identification level and then use the command {help merge} to aggregate the databases.
- 
-{p 4 4 2} The final database, under any identification level, contains all variables pertaining 
-household characteristics. If Consumption Unit is chosen, variables pertaining
-life conditions are added. Finally, if Individual is chosen, variables pertaining individual characteristics are added.
-
-{p 4 4 2} To construct estimates, the expansion factor 2 must be used as a sampling {help weight}.
-
-{title: Types of Register}
-
-{p 4 4 2}
-{cmd:datazoom_poftrs_}{it:ano} reads POF databases for the chosen registers from the original microdata.
-		
-{p 4 4 2} 
-POF microdata is split into Types of Register, that may be different between years. The desired Types of 
-Register may be chosen via the dialog box.
+{p 4 4 2} To construct estimates, a sample weights variable should be used.
 	
 {marker options}{...}
 {title:Options}
@@ -184,16 +183,16 @@ Register may be chosen via the dialog box.
 {opt original(string)}  indicates the folder path to the original microdata. 
 All files must be located in the same folder so that the program functions properly.
 
-
 {phang}
 {opt saving(string)}  indicates the folder path where the new databases are to be saved.
-		
-{dlgtab:Standardized Databases}
+
 {phang}
-{opt id(string)}  specifies the identification type for which the expenditures are to be computed: household {opt dom}, 
-	consumption unit ({opt uc}) or individual ({opt pess}). As defined by IBGE, a consumption unit
-	is a set of household residents (which may consist of only one person, in case a household has
-	only one resident) whose food derives from the same source.
+{opt english}  variable labels in English
+
+{dlgtab:Types of Register}
+
+{phang}
+{opt trs(string)}  specifies the chosen register codes.
 
 {dlgtab:Selected Expenditures}
 {phang}
@@ -203,24 +202,29 @@ All files must be located in the same folder so that the program functions prope
 	only one resident) whose food derives from the same source.
 	
 {phang}
-{opt lista(string asis)}  indicates which items on which expenditures will be 
+{opt sel(string)}  indicates which items on which expenditures will be 
 included in the final database. May also contain income-related variables.
-
-{dlgtab:Types of Register}
+		
+{dlgtab:Standardized Databases}
+{phang}
+{opt id(string)}  specifies the identification type for which the expenditures are to be computed: household {opt dom}, 
+	consumption unit ({opt uc}) or individual ({opt pess}). As defined by IBGE, a consumption unit
+	is a set of household residents (which may consist of only one person, in case a household has
+	only one resident) whose food derives from the same source.
 
 {phang}
-{opt trs(string)}  specifies the chosen register codes.
+{opt std}  enables the Standardized Databases mode.
 
 {marker examples}{...}
 {title:Examples}
 
-{p 8 6 2}. datazoom_pofstd_95, id(uc pess ) original("~/mydata") saving("~/mydata") english
+{p 8 6 2}. datazoom_pof1995, id(uc pess ) original("~/mydata") saving("~/mydata") std english
 
 {p 6 6 2}
 Produces two standardized databases for 1995, one at the consumption unit level, and 
 another at the individual level. Variable labels are provided in English.
 
-{p 8 6 2}.datazoom_poftrs_17, trs(tr1 tr6 tr7) original("~/mydata") saving("~/mydada")
+{p 8 6 2}.datazoom_pof2017, trs(tr1 tr6 tr7) original("~/mydata") saving("~/mydada")
 
 {p 6 6 2}
 Creates three databases for 2017, one for each Type of Register 

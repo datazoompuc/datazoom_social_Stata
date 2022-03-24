@@ -5,30 +5,33 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 355 175
 
-DIALOG main, label("POF 2002-2003 - Standard Databases")
+DIALOG main, label("POF - Bases Padronizadas")
 BEGIN
 
-GROUPBOX bases_padrao 5 10 340 70, label("Identification Type")
+GROUPBOX bases_padrao 5 10 340 70, label("Tipo de Identificação")
 	
-	CHECKBOX  ch_dom   +45 	+30 200 ., label("Household")
-    CHECKBOX  ch_uc    +100   @ 200 ., label("Family")
-    CHECKBOX  ch_pess  +80   @ 200 ., label("Individual") 
+	CHECKBOX  ch_dom   +40 	+30 200 ., label("Domicílio")
+    CHECKBOX  ch_uc    +80   @ 200 ., label("Unidade de Consumo")
+    CHECKBOX  ch_pess  +130   @ 200 ., label("Pessoas") 
 
-GROUPBOX opc_dic 5 +45 340 60, label("Orignal and Final Data Files")
+GROUPBOX opc_dic 5 +45 340 60, label("Bases de Dados")
 	
-	BUTTON   tx_base     45 +25 110  ., label("Data... ") onpush(script dados)
-	BUTTON   tx_salvabase +150 @ 110  ., label("Saving...") onpush(script salvando)
-
-	CHECKBOX	eng     10  +40 200 ., label("Labels in English") option(english)
+	BUTTON   tx_base     45 +25 110  ., label("Dados originais ... ") onpush(script dados)
+	*FILE   fl_base     5 +20 320 ., label("Search ...") dir
+	BUTTON   tx_salvabase +150 @ 110  ., label("Salvando...") onpush(script salvando)
+	*FILE   fl_salvabase 5 +20 320 ., label("Search ...") dir
 	
-TEXT     credit     10   +45  340    ., label("PUC-Rio - Department of Economics") right  
+CHECKBOX	eng     10  +45 200 ., label("Labels em inglês") option(english)
 
+TEXT     credit     120   @  220    ., label("PUC-Rio - Departamento de Economia") right  
+
+	
 END
 
 OK ok1,      label("OK")
-SUBMIT sb1
+SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pofstd_02")
+HELP hlp1,   view("help datazoom_pof")
 RESET res1
 
 SCRIPT PREINIT_SCRIPT
@@ -48,14 +51,14 @@ SCRIPT POSTINIT_SCRIPT
 SCRIPT dados
 BEGIN
 	create CHILD datazoom_datafolder AS data
-	data.settitle "POF 2002-03 original data file(s)"
+	data.settitle "Arquivos de dados originais - POF"
 	data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
 	create CHILD datazoom_finalfolder AS dic
-	dic.settitle "POF 2002-03 final data folder"
+	dic.settitle "Novas bases - POF"
 	dic.setExitString saidasalvando
 END
 
@@ -73,12 +76,12 @@ PROGRAM command
 		put "." nomeDialog ".lista_tipos.setvalue" `"""' lista_tipos "pess " `"""'
 		stata hidden immediate
 		}
-	put "datazoom_pofstd_02 "
+	put "datazoom_pof" __MESSAGE
 		beginoptions
 			/*Parte da syntax: tipo de extração*/
-			put "id("
+			put "std id("
 			put lista_tipos
-			/*Parte da syntax: caminho microdados e dicionarios*/
+			/*Parte da syntax: caminho microdados*/
 			put ") "
 			put saidadata " "
 			put saidasalvando

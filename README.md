@@ -213,11 +213,11 @@ __datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(sel) i
 
 __datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) registertype(...)*
 
-Para `registertype(...)` há 7 tipos de registros, numerados conforme a documentação do IBGE. Utilizar Caixa de Diálogo para ver opções.
+Para `registertype(...)`, há diferentes tipos de registro a depender do ano, numerados conforme a documentação do IBGE. Utilizar Caixa de Diálogo para ver opções.
+
+As funções da POF podem ser utilizada diretamente. Ver `help datazoom_pof`.
 
 ___Atenção:___ Para a POF 2017-2018, Bases Padronizadas e Gastos Selecionados não estão disponíveis.
-
-As funções da POF podem ser utilizada diretamente. Ver `h datazoom_pofXXXX` com `XXXX`igual ao ano de interesse.
 
 ## Programas auxiliares (dicionários) <a name="aux"></a>
 
