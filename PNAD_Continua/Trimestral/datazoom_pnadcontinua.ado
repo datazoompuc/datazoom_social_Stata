@@ -87,13 +87,14 @@ foreach aa in `years' {
 	}
 }
 
-**********
-*junta paineis 
+******************************
+* Junta paineis 
+******************************
  	*Combinações
 
 *tokenize `years'
 foreach aa in `years' {
-	foreach pa in 1 2 3 4 5 6 7 8{
+	foreach pa in 1 2 3 4 5 6 7 8 9{ // é necessário peridiocamente atualizar números (1 a 9)
 		use PNADC`aa', clear
 		keep if V1014 == `pa'
 		tempfile PNADC_Painel`pa'temp`aa'
@@ -102,7 +103,7 @@ foreach aa in `years' {
 }
 
 
-foreach pa in 1 2 3 4 5 6 7 8{
+foreach pa in 1 2 3 4 5 6 7 8 9{  // é necessário peridiocamente atualizar números (1 a 9)
 	foreach aa in `years' {
 		append using `PNADC_Painel`pa'temp`aa''
 		keep if V1014 == `pa'
@@ -112,7 +113,7 @@ foreach pa in 1 2 3 4 5 6 7 8{
 }
 
 global panels = ""
-forvalues pa = 1(1)8{
+forvalues pa = 1(1)9{   // é necessário peridiocamente atualizar números (1 a 9)
 	use `PNADC_Painel`pa'', clear
 	qui count
 	if r(N) != 0 { 
@@ -132,7 +133,7 @@ if "`nid'" == ""{
 
 }
 
-di _newline "Esta versão do pacote datazoom_pnadcontinua é compatí­vel com a última versão dos microdados da PNAD Contínua divulgados em 08/02/2021"
+di _newline "Esta versão do função datazoom_pnadcontinua é compatível com a última versão dos microdados da PNAD Contínua Trimestral divulgados em 24/02/2022"
 di _newline "As bases de dados foram salvas em `c(pwd)'"
 
 end
