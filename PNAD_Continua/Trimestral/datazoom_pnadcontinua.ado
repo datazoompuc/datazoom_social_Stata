@@ -21,6 +21,8 @@ findfile dict.dta
 
 read_compdct, compdct("`r(fn)'") dict_name("pnadcontinua`lang'") out("`dic'")
 
+use "`compdct'", clear
+
 /* Extração dos arquivos */
 tokenize `years'
 
