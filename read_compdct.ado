@@ -35,7 +35,7 @@ end
 program read_compdct
 syntax, compdct(string) dict_name(string) [out(string)]
 
-use `compdct', clear
+use "`compdct'", clear
 
 qui keep if dct == "`dict_name'"
 * mantém só as linhas referentes ao dct desejado
