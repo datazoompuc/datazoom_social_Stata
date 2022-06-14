@@ -26,7 +26,8 @@ GROUPBOX caixaAnos 20 20 140 400, label("Year(s)")
    CHECKBOX	   ck20185 @ +20 120	   ., label("2018_visit5")  option(20185)
    CHECKBOX	   ck20191 @ +20 120	   ., label("2019_visit1")  option(20191)
    CHECKBOX	   ck20192 @ +20 120	   ., label("2019_visit2")  option(20192)
-   CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visit5")  option(20195)   
+   CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visit5")  option(20195)  
+   CHECKBOX	   ck20205 @ +20 120	   ., label("2020_visit5")  option(20205) 
    
 GROUPBOX caixaDicionários 160 160 140 120, label("Databases")
 
@@ -77,7 +78,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20185 main.ck20191 main.ck20192 main.ck20195
+			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20185 main.ck20191 main.ck20192 main.ck20195 main.ck20205
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
