@@ -257,6 +257,6 @@ foreach year in `years' {
 
 
 	
-di _newline "Esta versão do pacote datazoom_pnadcont_anual é compatível com a última versão dos microdados divulgado pelo IBGE em 16/07/2020"
+di _newline "Esta versão do pacote datazoom_pnadcont_anual é compatível com a última versão dos microdados divulgado pelo IBGE em 10/06/2022"
 di _newline " As bases de dados foram salvas na pasta `c(pwd)'"
 end
