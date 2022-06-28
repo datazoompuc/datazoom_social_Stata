@@ -1,5 +1,5 @@
 dictionary{
-  _column(1) int Ano    %4f "Ano de referência "
+_column(1) int Ano    %4f "Ano de referência "
   _column(5) byte Trimestre  %1f "Trimestre de referencia "
   _column(6) byte UF    %2f  "Unidade da Federação "
   _column(8) byte Capital    %2f  "Município da Capital "
