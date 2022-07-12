@@ -4744,12 +4744,12 @@ foreach var in v4111 v4112 v0408 v0409 v0410 v4011 v0411 v0412 v4735 v6502 v4740
 
 
 /* K. SUPLEMENTOS */
-cap drop /* programas sociais */ v1801 -v1804 /* saude/ mobilidade fisica */ v1701-v1409 // 2003
+/*cap drop /* programas sociais */ v1801 -v1804 /* saude/ mobilidade fisica */ v1701-v1409 // 2003
 cap drop /* educacao */ v1901 -v1910 // 2004
 cap drop /* internet */ v2201 -v2223 // 2005
 cap drop /* educacao */ v1901-v1912 /* trabalho 5-17 */  v2301-v2312	// 2006
 cap drop /* EJA e educ profissional */ v2500-v2656	// 2007
 cap drop /* tabagismo */ v2701-v2791 SELEC PESPET v2801-v2814 /* internet */ v2201-v22006 /* saude, mobilidade */ v1701-v1417 // 2008
-cap drop /* vitimizacao */ v2901-v2929
+cap drop /* vitimizacao */ v2901-v2929*/
 
 end
