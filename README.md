@@ -68,13 +68,13 @@ As opções `survey(...)`, `source(...)`, `save(...)` e `date(...)` são mandat�
 
 ### PNS <a name="pns"></a>
 
-__datazom_social, survey(pns)__ *source(...) save(...) date(...)*
+__datazoom_social, survey(pns)__ *source(...) save(...) date(...)*
 
 Os anos disponíveis para a PNS são 2013 e 2019. A função da PNS pode ser utilizada diretamente. Ver `h datazoom_pns`
 
 ### Censo Demográfico <a name="censo"></a>
 
-__datazom_social, survey(censo)__ *source(...) save(...) date(...) state(...)* [*ops*]
+__datazoom_social, survey(censo)__ *source(...) save(...) date(...) state(...)* [*ops*]
 
 Os anos disponíveis para o Censo são 1970, 1980, 1991, 2000 e 2010. Na opção de estado, pode ser colocado a sigla de quantos estados desejar para leitura de dados - ex.: `state(AP MS AM)`. Ainda há as seguintes opções:
 
@@ -91,7 +91,7 @@ A função do Censo pode ser utilizada diretamente. Ver `h datazoom_censo`
 
 ### PNAD Contínua (PNADC) - Divulgação Anual <a name="pnad_anual"></a>
 
-__datazom_social, survey(pnadcontinua_anual)__ *source(...) save(...) date(...)*
+__datazoom_social, survey(pnadcontinua_anual)__ *source(...) save(...) date(...)*
 
 Essa função compatibiliza os microdados referente a visita domiciliar específica de um ano. Os anos disponíveis para a PNADC Anual são de 2012 a 2019. A função da PNADC Anual pode ser utilizada diretamente. Ver `h datazoom_pnadcont_anual`
 
@@ -100,7 +100,7 @@ ___Atenção:___ Na opção `source(...)` deve conter o caminho específico do a
 
 ### PNAD Contínua (PNADC) - Divulgação Trimestral <a name="pnad_cont"></a>
 
-__datazom_social, survey(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
+__datazoom_social, survey(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PNADC Trimestral são de 2012 a 2021 (primeiro trimestre para este último ano). Para criação do painél, há as seguintes opções:
 
@@ -115,7 +115,7 @@ Para criação do painel, os arquivos de microdados de todos os trimestres dos a
 
 ### PNAD <a name="pnad"></a>
 
-__datazom_social, survey(pnad)__ *source(...) save(...) date(...)* [*ops*]
+__datazoom_social, survey(pnad)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PNAD são de 1981 a 2015, quando foi descontinuada. Ainda há as seguintes opções:
 
@@ -133,14 +133,14 @@ A função da PNAD pode ser utilizada diretamente. Ver `h datazoom_pnad`
 
 ### PNAD Covid <a name="pnad_covid"></a>
 
-__datazom_social, survey(pnad_covid)__ *source(...) save(...) date(...)*
+__datazoom_social, survey(pnad_covid)__ *source(...) save(...) date(...)*
 
 Os períodos disponíveis para a PNAD Covid são de Maio até Novembro de 2020. A função da PNAD Covid pode ser utilizada diretamente. Ver `h datazoom_pnad_covid`
 
 
 ### PME Nova <a name="pme_nova"></a>
 
-__datazom_social, survey(pmenova)__ *source(...) save(...) date(...)* [*ops*]
+__datazoom_social, survey(pmenova)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PME são de 2002 a 2016. Para criação do painel, há as seguintes opções:
 
@@ -155,7 +155,7 @@ Para criação do painel, os arquivos de microdados de todos os meses dos anos d
 
 ### PME Antiga <a name="pme_antiga"></a>
 
-__datazom_social, survey(pmeantiga)__ *source(...) save(...) date(...)* [*ops*]
+__datazoom_social, survey(pmeantiga)__ *source(...) save(...) date(...)* [*ops*]
 
 Os anos disponíveis para a PME são de 1991 a 2001. Para criação do painel, há as seguintes opções:
 
@@ -170,7 +170,7 @@ Para criação do painel, os arquivos de microdados de todos os meses dos anos d
 
 ### ECINF <a name="ecinf"></a>
 
-__datazom_social, survey(ecinf)__ *source(...) save(...) date(...) record(...)*
+__datazoom_social, survey(ecinf)__ *source(...) save(...) date(...) record(...)*
 
 A ECINF está disponível para os anos de 1997 e 2003. O *input* `record(...)`deve ser preenchido com o Tipo de Registro:
 
@@ -189,13 +189,13 @@ A função da ECINF pode ser utilizada diretamente. Ver `h datazoom_ecinf`
 
 ### POF <a name="pof"></a>
 
-__datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(...)* [*ops*]
+__datazoom_social, survey(pof)__ *source(...) save(...) date(...) datatype(...)* [*ops*]
 
 Os anos disponíveis para POF são 1995, 2002, 2008 e 2017. O *input* `datatype(...)` deve ser preenchido com o tipo de dado que o usuário deseja extrair: Bases Padronizadas `datatype(std)`, Gastos Selecionados `datatype(sel)` e Tipos de Registro `datatype(trs)`. Para cada Tipo de Dado escolhido, há opções específicas:
 
 * Bases Padronizadas:
 
-__datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) identification(...)*
+__datazoom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) identification(...)*
 
 | `identification`              | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
@@ -205,13 +205,13 @@ __datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) i
 
 * Gastos Selecionados:
 
-__datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(sel) identification(...) list(...)*
+__datazoom_social, survey(pof)__ *source(...) save(...) date(...) datatype(sel) identification(...) list(...)*
 
 `identification(...)` possui as mesmas opções do tópico anterior. Para `identification(...)` utilizar a Caixa de Diálogo para ver opções.
 
 * Tipos de Registro
 
-__datazom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) registertype(...)*
+__datazoom_social, survey(pof)__ *source(...) save(...) date(...) datatype(std) registertype(...)*
 
 Para `registertype(...)`, há diferentes tipos de registro a depender do ano, numerados conforme a documentação do IBGE. Utilizar Caixa de Diálogo para ver opções.
 
