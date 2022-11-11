@@ -7,7 +7,7 @@ POSITION . . 350 315
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 140 260, label("Ano(s)")
+GROUPBOX caixaAnos 20 20 140 300, label("Ano(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 120    ., label("2013")  option(2013)
