@@ -19,6 +19,7 @@ GROUPBOX caixaAnos 20 20 140 260, label("Ano(s)")
    CHECKBOX	   ck2019 @ +24 120	   ., label("2019")  option(2019)
    CHECKBOX	   ck2020 @ +24 120	   ., label("2020")  option(2020)
    CHECKBOX	   ck2021 @ +24 120	   ., label("2021")  option(2021)
+   CHECKBOX	   ck2022 @ +24 120	   ., label("2022")  option(2022)
    
 GROUPBOX caixaDicionários 160 20 140 260, label("Bases de Dados")
 
