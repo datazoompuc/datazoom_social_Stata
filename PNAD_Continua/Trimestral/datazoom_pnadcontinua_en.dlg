@@ -2,14 +2,14 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 320
+POSITION . . 350 350
 
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 140 260, label("Year(s)")
+GROUPBOX caixaAnos 20 20 100 300, label("Year(s)")
 
-   CHECKBOX    ck2012 +14 +20 120  ., label("2012")  option(2012)
+   CHECKBOX    ck2012 +14 +24 120  ., label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 120    ., label("2013")  option(2013)
    CHECKBOX    ck2014 @ +24 120    ., label("2014")  option(2014)
    CHECKBOX    ck2015 @ +24 120    ., label("2015")  option(2015)
@@ -19,21 +19,22 @@ GROUPBOX caixaAnos 20 20 140 260, label("Year(s)")
    CHECKBOX	   ck2019 @ +24 120	   ., label("2019")  option(2019)
    CHECKBOX	   ck2020 @ +24 120	   ., label("2020")  option(2020)
    CHECKBOX	   ck2021 @ +24 120	   ., label("2021")  option(2021)
+   CHECKBOX	   ck2022 @ +24 120	   ., label("2022")  option(2022)
    
-GROUPBOX caixaDicionários 160 20 140 260, label("Databases")
+GROUPBOX caixaDicionários 160 20 140 118, label("Databases")
 
 	BUTTON	fldados 	+20 +35 100 ., label("Original Files...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
-GROUPBOX caixaid 160 120 140 100, label("Individual Identification")
+GROUPBOX caixaid 160 150 140 116, label("Individual Identification")
 
-	RADIO	nid     +10 +22 150 ., first label("No Identification") option(nid)
+	RADIO	nid     +10 +30 150 ., first label("No Identification") option(nid)
 	RADIO	idbas	+0 +22 150 ., middle label("Basic") option(idbas)
 	RADIO	idrs	+0 +22 150 ., last label("Advanced") option(idrs)
 
-	CHECKBOX	eng     170  232 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     170  280 200 24, label("Labels in English") option(english)
 	
-TEXT     credit     0   285 340    ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     0   326 340    ., label("PUC-Rio - Department of Economics") right
 
 END
 
@@ -75,7 +76,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck2016 main.ck2017 main.ck2018 main.ck2019 main.ck2020 main.ck2021
+			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck2016 main.ck2017 main.ck2018 main.ck2019 main.ck2020 main.ck2021 main.ck2022
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
