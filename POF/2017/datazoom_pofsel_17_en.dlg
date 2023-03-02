@@ -247,8 +247,8 @@ Outros_tuberculos_raizes
 Açúcares_e_derivados
 Açúcar_refinado
 Açúcar_cristal
-Acucar_Light_e_Diet
-Outros_Acucares_Derivados
+Açúcar_Light_e_Diet
+Outros_Açúcares_Derivados
 Legumes_e_verduras
 Tomate
 Cebola
@@ -257,13 +257,13 @@ Outros_legumes_verduras
 Frutas
 Banana
 Laranja
-Maça
+Maçã
 Outras_frutas
 Carnes_vísceras_e_pescados
 Carne_de_boi_de_primeira
 Carne_de_boi_de_segunda
 Carne_de_suíno
-Carnes_e_peixes_industrializados
+Carnes_peixes_industrializados
 Pescados_frescos
 Outros_carnes_visc_pescados
 Aves_e_ovos
@@ -275,7 +275,7 @@ Leites_e_derivados
 Leite_de_vaca
 Leite_em_pó
 Queijos
-Leites_Light_e_Diet
+Leite_Light_e_Diet
 Leites_derivados_Orgânicos
 Outros_leites_derivados
 Panificados
@@ -418,7 +418,7 @@ Serviços_e_taxas
 Energia_elétrica
 Telefone_fixo
 Telefone_celular
-Pacote_de_telefone
+Pacote_de_telefone_tv_internet
 Gás_doméstico
 Água_e_esgoto
 Outros_servicos_e_taxas
@@ -460,7 +460,7 @@ Material_de_tratamento
 Outras_assistencia_saude
 Educação
 Cursos_regulares
-Curso_superior
+Cursos_superiores
 Outros_cursos_e_atividades
 Livros_didaticos_e_revistas_tec
 Artigos_escolares
@@ -474,7 +474,7 @@ Outras_recreacao_cultura
 Fumo
 Serviços_pessoais
 Cabeleireiro
-Manicuro_e_pedicuro
+Manicure_e_pedicure
 Consertos_de_artigos_pessoais
 Outras_servicos_pessoais
 Despesas_diversas
