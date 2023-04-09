@@ -24,7 +24,7 @@ BEGIN
 	TEXTBOX txb_pme    	 	+158 @ @ @, label("Monthly Employment Survey - 1990 to 2015") center
 	TEXTBOX txb_pnad     		+158 @ @ @, label("National Household Sample Survey - 2001 to 2015") center
 	
-    	TEXTBOX txb_pncon			10 175 140 ., label("Continuous PNAD - 2012 to 2022") center
+    	TEXTBOX txb_pncon			10 175 140 ., label("Continuous PNAD - 2012 to 2023") center
 	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
 	TEXTBOX txb_pns   			+158 @ @ @, label("National Survey of Health - 2013 and 2019") center
 	TEXTBOX txb_pof 			+158 @ @ @, label("Consumer Expenditure Survey - 1995 to 2018") center
