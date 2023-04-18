@@ -2,20 +2,20 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 460
+POSITION . . 350 500
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 120 434, label("Ano(s)")
+GROUPBOX caixaAnos 20 20 120 460, label("Ano(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012_visita1")  option(2012)
    CHECKBOX    ck2013 @ +20 120    ., label("2013_visita1")  option(2013)
    CHECKBOX    ck2014 @ +20 120    ., label("2014_visita1")  option(2014)
    CHECKBOX    ck2015 @ +20 120    ., label("2015_visita1")  option(2015)
    CHECKBOX	   ck20161 @ +20 120	   ., label("2016_visita1")  option(20161)
-   CHECKBOX	   ck20162 @ +20 120	   ., label("2016_visita2")  option(20162)
-   CHECKBOX	   ck20164 @ +20 120	   ., label("2016_visita4")  option(20164)
+   CHECKBOX	   ck20162 @ +20 120	   ., label("2016_sup_educ")  option(20162)
+   CHECKBOX	   ck20164 @ +20 120	   ., label("2016_sup_tic")  option(20164)
    CHECKBOX	   ck20165 @ +20 120	   ., label("2016_visita5")  option(20165)
    CHECKBOX	   ck20171 @ +20 120	   ., label("2017_visita1")  option(20171)
    CHECKBOX	   ck20172 @ +20 120	   ., label("2017_visita2")  option(20172)
@@ -28,6 +28,7 @@ GROUPBOX caixaAnos 20 20 120 434, label("Ano(s)")
    CHECKBOX	   ck20192 @ +20 120	   ., label("2019_visita2")  option(20192)
    CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visita5")  option(20195)
    CHECKBOX	   ck20205 @ +20 120	   ., label("2020_visita5")  option(20205)
+   CHECKBOX	   ck20214 @ +20 120	   ., label("2021_sup_seg")  option(20214)
    CHECKBOX	   ck20215 @ +20 120	   ., label("2021_visita5")  option(20215)
 
 GROUPBOX caixaDicionários 160 160 140 120, label("Base de Dados")
@@ -37,7 +38,7 @@ GROUPBOX caixaDicionários 160 160 140 120, label("Base de Dados")
 
 	CHECKBOX	eng     170  40 200 ., label("Labels em inglês") option(english)
 
-TEXT     credit     0   430  340    ., label("PUC-Rio - Departmento de Economia") right
+TEXT     credit     0   480  345    ., label("PUC-Rio - Departmento de Economia") right
 
 
 END
@@ -80,7 +81,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20185 main.ck20191 main.ck20192 main.ck20195 main.ck20205 main.ck20215
+			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20185 main.ck20191 main.ck20192 main.ck20195 main.ck20205 main.ck20214 main.ck20215
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "

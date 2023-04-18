@@ -43,6 +43,7 @@ tempfile dic_19_1
 tempfile dic_19_5
 tempfile dic_20_5
 tempfile dic_21_5
+tempfile dic_21_seg
 
 findfile dict.dta
 
@@ -62,9 +63,10 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2019`lang'") o
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2019`lang'") out("`dic_19_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2020`lang'") out("`dic_20_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2021`lang'") out("`dic_21_5'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_seg`lang'") out("`dic_21_seg'")
 
 /* Extraindo dos arquivos */
-*tokenize `years'
+tokenize `years'
 
 	
 foreach year in `years' {
@@ -124,7 +126,7 @@ foreach year in `years' {
 		*cap infile using "`dic_17_2'", using("`original'/PNADC_022016_educacao.txt") clear // due to change on arquive name
 		cap infile using "`dic_17_2'", using("`original'/PNADC_2016_trimestre2.txt") clear
 		if _rc == 0 {
-					save PNADC_anual_2016_educ, replace
+					save PNADC_anual_2016_visita2, replace
 					}
 				else continue, break
 					}					
@@ -133,7 +135,7 @@ foreach year in `years' {
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
 		cap infile using "`dic_17_4'", using("`original'/PNADC_042016_tic.txt") clear
 		if _rc == 0 {
-					save PNADC_anual_2016_tic, replace
+					save PNADC_anual_2016_visita4, replace
 					}
 				else continue, break
 					}
@@ -265,6 +267,18 @@ foreach year in `years' {
 		cap infile using "`dic_21_5'", using("`original'/PNADC_2021_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2021_visita5, replace
+					}
+				else continue, break
+					}					
+	}
+display "Oi"
+		if `year' == 20214 {
+		display "Oi gente"
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		cap infile using "`dic_21_seg'", using("`original'/PNADC_2021_trimestre4.txt") clear 
+		display "Oi gente, tudo bem?"
+		if _rc == 0 {
+					save PNADC_anual_2021_seg, replace
 					}
 				else continue, break
 					}					
