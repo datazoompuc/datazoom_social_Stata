@@ -66,7 +66,7 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2021`lang'") o
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_seg`lang'") out("`dic_21_seg'")
 
 /* Extraindo dos arquivos */
-tokenize `years'
+*tokenize `years'
 
 	
 foreach year in `years' {
@@ -270,13 +270,11 @@ foreach year in `years' {
 					}
 				else continue, break
 					}					
-	}
-display "Oi"
-		if `year' == 20214 {
-		display "Oi gente"
+
+	if `year' == 20214 {
+		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_seg'", using("`original'/PNADC_2021_trimestre4.txt") clear 
-		display "Oi gente, tudo bem?"
+		cap infile using "`dic_21_seg'", using("`original'/PNADC_2021_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2021_seg, replace
 					}
