@@ -1,4 +1,5 @@
 program datazoom_pof1995
+	datazoom_message
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 if "`sel'" != "" & "`id'" != "pess"{

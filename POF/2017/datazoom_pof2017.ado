@@ -1,4 +1,5 @@
 program datazoom_pof2017
+	datazoom_message
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 * Caso mais de uma id seja selecionada, executa várias vezes a função

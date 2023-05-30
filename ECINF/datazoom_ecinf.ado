@@ -4,6 +4,7 @@
 * VERSION 1.0
 
 program define datazoom_ecinf
+	datazoom_message
 
 syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
 

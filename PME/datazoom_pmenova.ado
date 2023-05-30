@@ -3,6 +3,7 @@
 ******************************************************
 * VERSION 1.3
 program define datazoom_pmenova
+	datazoom_message
 
 syntax, years(numlist) original(str) saving(str) [nid idbas idrs english]
 

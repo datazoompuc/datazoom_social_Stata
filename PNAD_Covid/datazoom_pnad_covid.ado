@@ -4,6 +4,7 @@
 * version 1.0
 
 program define datazoom_pnad_covid
+	datazoom_message
 
 syntax, months(numlist) original(str) saving(str)
 

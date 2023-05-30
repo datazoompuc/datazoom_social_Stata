@@ -3,6 +3,7 @@
 ******************************************************
 * version 1.4
 program define datazoom_pnad
+	datazoom_message
 
 syntax, years(numlist) original(str) [saving(str)] [pes dom both ncomp comp81 comp92 english]
 

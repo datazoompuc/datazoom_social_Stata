@@ -1,6 +1,7 @@
 * VERSION 2.2
 
 program datazoom_pns
+	datazoom_message
 syntax, original(str) [saving(str)] year(integer) [english]
 
 cd "`original'"

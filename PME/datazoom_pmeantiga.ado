@@ -3,6 +3,7 @@
 *					datazoom_pmeantiga.ado				 *
 ******************************************************
 program define datazoom_pmeantiga
+	datazoom_message
 
 syntax, years(numlist) original(str) saving(str) [nid idbas idrs english]
 

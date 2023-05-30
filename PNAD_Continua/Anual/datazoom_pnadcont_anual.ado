@@ -3,7 +3,7 @@
 ******************************************************
 * version 1.0
 program define datazoom_pnadcont_anual
-
+	datazoom_message
 syntax, years(str) original(str) saving(str) [english]
 
 if "`english'" != "" local lang "_en"
