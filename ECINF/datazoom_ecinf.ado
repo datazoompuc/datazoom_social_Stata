@@ -4,7 +4,6 @@
 * VERSION 1.0
 
 program define datazoom_ecinf
-	datazoom_message
 
 syntax, year(numlist) original(str) saving(str) tipo(str) [merged english]
 
@@ -50,5 +49,7 @@ while "`*'" != "" {
 	macro shift
 	loc n = `n' + 1
 }
+
+datazoom_message
 
 end

@@ -3,7 +3,6 @@
 ******************************************************
 * version 1.4
 program define datazoom_censo
-	datazoom_message
 
 syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
 
@@ -5431,5 +5430,7 @@ drop v3444
 /* OUTRAS */
 rename v7301 peso_pess
 order ano UF regiao munic id_dom ordem
+
+datazoom_message
 
 end

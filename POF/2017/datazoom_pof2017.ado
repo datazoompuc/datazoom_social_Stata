@@ -1,5 +1,4 @@
 program datazoom_pof2017
-	datazoom_message
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 * Caso mais de uma id seja selecionada, executa várias vezes a função
@@ -1199,5 +1198,7 @@ local faltantes_pess Alimentos_preparados Aves_e_ovos Açúcares_e_derivados Beb
 if "`id'" == "pess" local gastos_selecionados: list gastos_selecionados - faltantes_pess
 	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
+
+datazoom_message
 
 end

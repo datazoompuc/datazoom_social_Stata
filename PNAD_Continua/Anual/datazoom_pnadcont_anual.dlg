@@ -83,7 +83,7 @@ BEGIN
 
 SCRIPT hlink1
 BEGIN 
-   winexec open "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/PNADC_Pesquisas_Suplementares_Anuais_20221221.pdf"
+   open "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/PNADC_Pesquisas_Suplementares_Anuais_20221221.pdf"
    END
 
 PROGRAM command

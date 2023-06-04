@@ -1,5 +1,4 @@
 program datazoom_pof2008
-	datazoom_message
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 if "`sel'" != "" & "`id'" != "pess"{
@@ -717,5 +716,7 @@ if "`id'" == "pess" {
 
 	merge 1:1 `variaveis_ID' using `tr2', nogen keep(match)
 }
+
+datazoom_message
 
 end

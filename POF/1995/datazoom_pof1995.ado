@@ -1,5 +1,4 @@
 program datazoom_pof1995
-	datazoom_message
 syntax, [trs(string)] [id(string)] [sel(string)] [std] original(string) saving(string) [english]
 
 if "`sel'" != "" & "`id'" != "pess"{
@@ -959,5 +958,7 @@ di as input "Merge com base de domicílios"
 	
 if "`id'" == "dom" merge 1:1 `variaveis_ID' using `base', nogen // A base na memória é a de dom, que é mergeada com a `base' de gastos selecionados
 else merge 1:n v0040 v0050 v0060 v0065 using `base', nogen
+
+datazoom_message
 
 end

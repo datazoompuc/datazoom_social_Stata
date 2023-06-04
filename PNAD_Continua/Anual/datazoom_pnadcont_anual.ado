@@ -3,7 +3,7 @@
 ******************************************************
 * version 1.0
 program define datazoom_pnadcont_anual
-	datazoom_message
+
 syntax, years(str) original(str) saving(str) [english]
 
 if "`english'" != "" local lang "_en"
@@ -332,4 +332,6 @@ foreach year in `years' {
 	
 di _newline "Esta versão do pacote datazoom_pnadcont_anual é compatível com a última versão dos microdados divulgado pelo IBGE em 10/06/2022"
 di _newline " As bases de dados foram salvas na pasta `c(pwd)'"
+
+datazoom_message
 end

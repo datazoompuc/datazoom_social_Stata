@@ -1,7 +1,6 @@
 * VERSION 2.2
 
 program datazoom_pns
-	datazoom_message
 syntax, original(str) [saving(str)] year(integer) [english]
 
 cd "`original'"
@@ -56,5 +55,7 @@ else if `year' == 2019{
 local url `url'`complemento'
 di _newline "Downloading from `url'. This may take a few minutes" 
 unzipfile `url', replace
+
+datazoom_message
 
 end
