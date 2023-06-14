@@ -50,4 +50,6 @@ while "`*'" != "" {
 	loc n = `n' + 1
 }
 
+datazoom_message
+
 end

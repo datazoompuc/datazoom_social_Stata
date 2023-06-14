@@ -203,6 +203,6 @@ if "`survey'" == "pof"{
 	}
 }
 
-
+datazoom_message
 
 end

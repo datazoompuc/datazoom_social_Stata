@@ -1199,4 +1199,6 @@ if "`id'" == "pess" local gastos_selecionados: list gastos_selecionados - faltan
 	
 pofsel_17, id(`id') sel(`gastos_selecionados') trs(`trs') temps(`temps') original(`original') `english'
 
+datazoom_message
+
 end

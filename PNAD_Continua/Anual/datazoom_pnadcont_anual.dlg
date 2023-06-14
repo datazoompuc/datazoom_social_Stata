@@ -2,49 +2,52 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 600
+POSITION . . 470 400
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 120 560, label("Ano(s)")
+GROUPBOX caixaVisitas 20 20 120 360, label("Visita(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012_visita1")  option(2012)
    CHECKBOX    ck2013 @ +20 120    ., label("2013_visita1")  option(2013)
    CHECKBOX    ck2014 @ +20 120    ., label("2014_visita1")  option(2014)
    CHECKBOX    ck2015 @ +20 120    ., label("2015_visita1")  option(2015)
    CHECKBOX	   ck20161 @ +20 120	   ., label("2016_visita1")  option(20161)
-   CHECKBOX	   ck20162 @ +20 120	   ., label("2016_trimestre2")  option(20162)
-   CHECKBOX	   ck20164 @ +20 120	   ., label("2016_trimestre4")  option(20164)
    CHECKBOX	   ck20165 @ +20 120	   ., label("2016_visita5")  option(20165)
    CHECKBOX	   ck20171 @ +20 120	   ., label("2017_visita1")  option(20171)
-   CHECKBOX	   ck20172 @ +20 120	   ., label("2017_trimestre2")  option(20172)
-   CHECKBOX	   ck20174 @ +20 120	   ., label("2017_trimestre4")  option(20174)
    CHECKBOX	   ck20175 @ +20 120	   ., label("2017_visita5")  option(20175)
    CHECKBOX	   ck20181 @ +20 120	   ., label("2018_visita1")  option(20181)
-   CHECKBOX	   ck20182 @ +20 120	   ., label("2018_trimestre2")  option(20182)
-   CHECKBOX	   ck20184 @ +20 120	   ., label("2018_trimestre4")  option(20184)
    CHECKBOX	   ck20185 @ +20 120	   ., label("2018_visita5")  option(20185)
    CHECKBOX	   ck20191 @ +20 120	   ., label("2019_visita1")  option(20191)
-   CHECKBOX	   ck20192 @ +20 120	   ., label("2019_trimestre2")  option(20192)
-   CHECKBOX	   ck20193 @ +20 120	   ., label("2019_trimestre3")  option(20193)
-   CHECKBOX	   ck20194 @ +20 120	   ., label("2019_trimestre4")  option(20194)
    CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visita5")  option(20195)
    CHECKBOX	   ck20202 @ +20 120	   ., label("2020_visita2")  option(20202)
    CHECKBOX	   ck20205 @ +20 120	   ., label("2020_visita5")  option(20205)
    CHECKBOX	   ck20212 @ +20 120	   ., label("2021_visita2")  option(20212)
-   CHECKBOX	   ck20214 @ +20 120	   ., label("2021_trimestre4")  option(20214)
    CHECKBOX	   ck20215 @ +20 120	   ., label("2021_visita5")  option(20215)
 
-GROUPBOX caixaDicionários 160 160 140 120, label("Base de Dados")
+GROUPBOX caixaTrimestres 160 20 120 240, label("Trimestre(s)")
+
+   CHECKBOX	   ck20162 +14 +20 120	   ., label("2016_trimestre2")  option(20162)
+   CHECKBOX	   ck20164 @ +20 120	   ., label("2016_trimestre4")  option(20164)
+   CHECKBOX	   ck20172 @ +20 120	   ., label("2017_trimestre2")  option(20172)
+   CHECKBOX	   ck20174 @ +20 120	   ., label("2017_trimestre4")  option(20174)
+   CHECKBOX	   ck20182 @ +20 120	   ., label("2018_trimestre2")  option(20182)
+   CHECKBOX	   ck20184 @ +20 120	   ., label("2018_trimestre4")  option(20184)
+   CHECKBOX	   ck20192 @ +20 120	   ., label("2019_trimestre2")  option(20192)
+   CHECKBOX	   ck20193 @ +20 120	   ., label("2019_trimestre3")  option(20193)
+   CHECKBOX	   ck20194 @ +20 120	   ., label("2019_trimestre4")  option(20194)
+   CHECKBOX	   ck20214 @ +20 120	   ., label("2021_trimestre4")  option(20214)
+
+GROUPBOX caixaDicionários 300 160 140 120, label("Base de Dados")
 
 	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
-   HLINK hlink1 +0 +80 140 ., label("Guia Suplementos IBGE") onpush(script hlink1)
+   HLINK hlink1 +0 +80 140 ., label("Guia Suplementos IBGE") onpush(program hlink1)
 
-	CHECKBOX	eng     170  40 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     300  40 200 ., label("Labels em inglês") option(english)
 
-TEXT     credit     0   580  345    ., label("PUC-Rio - Departmento de Economia") right
+TEXT     credit     0   380  450    ., label("PUC-Rio - Departmento de Economia") right
 
 
 END
@@ -81,9 +84,10 @@ BEGIN
 	dic.setExitString saidasalvando
 	END
 
-SCRIPT hlink1
-BEGIN 
-   winexec open "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/PNADC_Pesquisas_Suplementares_Anuais_20221221.pdf"
+PROGRAM hlink1
+	BEGIN
+		put "datazoom_link"
+		stata
    END
 
 PROGRAM command

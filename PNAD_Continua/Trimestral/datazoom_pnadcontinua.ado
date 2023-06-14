@@ -653,6 +653,8 @@ syntax, temps(string)
 	replace painel=`pa_name'
 	save PNAD_painel_`pa_name'_rs, replace
 	}
+
+	datazoom_message
 	
 end
 

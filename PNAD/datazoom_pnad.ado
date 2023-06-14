@@ -4752,4 +4752,6 @@ cap drop /* EJA e educ profissional */ v2500-v2656	// 2007
 cap drop /* tabagismo */ v2701-v2791 SELEC PESPET v2801-v2814 /* internet */ v2201-v22006 /* saude, mobilidade */ v1701-v1417 // 2008
 cap drop /* vitimizacao */ v2901-v2929*/
 
+datazoom_message
+
 end

@@ -1192,4 +1192,5 @@ syntax, temps(string)
 		drop __* back forw
 		save PME_Painel_`pa_name'_rs, replace
 	}
+	datazoom_message
 end

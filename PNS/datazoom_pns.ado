@@ -56,4 +56,6 @@ local url `url'`complemento'
 di _newline "Downloading from `url'. This may take a few minutes" 
 unzipfile `url', replace
 
+datazoom_message
+
 end
