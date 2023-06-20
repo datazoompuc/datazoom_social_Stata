@@ -24,6 +24,8 @@ f datazoom_social.ado
 f datazoom_social.dlg
 f datazoom_social.pkg 
 f datazoom_social.sthlp
+f datazoom_message.ado
+f datazoom_link.ado
 
 f Censo/compat_censo00dom.ado
 f Censo/compat_censo00pess.ado
