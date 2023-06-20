@@ -1,3 +1,6 @@
+v 3
+d DataZoom Social - Leitura de microdados
+d DataZoom, PUC-Rio
 f datazoom_datafolder.dlg
 f datazoom_datafolder_en.dlg
 f datazoom_finalfolder.dlg
@@ -7,6 +10,8 @@ f datazoom_social.dlg
 f datazoom_social_en.dlg
 f datazoom_social.pkg 
 f datazoom_social.sthlp
+f datazoom_message.ado
+f datazoom_link.ado
 F dict.dta
 f read_compdct.ado
 f Censo/datazoom_censo.ado
