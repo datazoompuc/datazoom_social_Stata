@@ -56,7 +56,7 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2015`lang'") o
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2016`lang'") out("`dic_16_1'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2016`lang'") out("`dic_16_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2017`lang'") out("`dic_17_1'")
-read_compdct, compdct("`masterdict'") dict_name("pnad_anual_2tri_2016a2019`lang'") out("`dic_17_2'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_2tri_2016a2022`lang'") out("`dic_17_2'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2017`lang'") out("`dic_17_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2018`lang'") out("`dic_18_1'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2018`lang'") out("`dic_18_5'")
@@ -326,8 +326,18 @@ foreach year in `years' {
 					}
 				else continue, break
 					}					
-	}
 
+	*************************************2022*********************************
+	if `year' == 20222 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		cap infile using "`dic_17_2'", using("`original'/PNADC_2022_trimestre2.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2022_trimestre2, replace
+					}
+				else continue, break
+					}									
+	}
 
 	
 di _newline "Esta versão do pacote datazoom_pnadcont_anual é compatível com a última versão dos microdados divulgado pelo IBGE em 10/06/2022"
