@@ -93,7 +93,9 @@ A função do Censo pode ser utilizada diretamente. Ver `h datazoom_censo`
 
 __datazoom_social, survey(pnadcontinua_anual)__ *source(...) save(...) date(...)*
 
-Essa função compatibiliza os microdados referente a visita domiciliar específica de um ano. Os anos disponíveis para a PNADC Anual são de 2012 a 2019. A função da PNADC Anual pode ser utilizada diretamente. Ver `h datazoom_pnadcont_anual`
+Essa função compatibiliza os microdados referente a visita domiciliar específica de um ano. Os anos disponíveis para a PNADC Anual são de 2012 a 2023. A função da PNADC Anual pode ser utilizada diretamente. Ver `h datazoom_pnadcont_anual`
+
+__Importante:__ As Pesquisas Suplementares Anuais estão inclusas em suas respectivas visitas ou trimestres. Para localizá-las, acesse: https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/PNADC_Pesquisas_Suplementares_Anuais_20230616.pdf
 
 ___Atenção:___ Na opção `source(...)` deve conter o caminho específico do arquivo com os microdados
 
@@ -102,7 +104,7 @@ ___Atenção:___ Na opção `source(...)` deve conter o caminho específico do a
 
 __datazoom_social, survey(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
 
-Os anos disponíveis para a PNADC Trimestral são de 2012 a 2021 (primeiro trimestre para este último ano). Para criação do painél, há as seguintes opções:
+Os anos disponíveis para a PNADC Trimestral são de 2012 a 2023 Para criação do painél, há as seguintes opções:
 
 | Ops               | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
