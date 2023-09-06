@@ -104,7 +104,7 @@ ___Atenção:___ Na opção `source(...)` deve conter o caminho específico do a
 
 __datazoom_social, survey(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
 
-Os anos disponíveis para a PNADC Trimestral são de 2012 a 2023 Para criação do painél, há as seguintes opções:
+Os anos disponíveis para a PNADC Trimestral são de 2012 a 2023 Para criação do painel, há as seguintes opções:
 
 | Ops               | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
@@ -223,7 +223,7 @@ ___Atenção:___ Para a POF 2017-2018, Bases Padronizadas e Gastos Selecionados 
 
 ## Programas auxiliares (dicionários) <a name="aux"></a>
 
-A maioria dos programas do pacote se deparam com dados originais
+A maioria dos programas do pacote se depara com dados originais
 armazenados em formato *.txt*, que precisam de dicionários – formato *.dct*
 no Stata – para serem lidos. A consequência é um volume de dicionários
 que supera o limite de 100 arquivos permitido para um pacote do Stata
