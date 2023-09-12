@@ -2,7 +2,9 @@
 
 # DataZoom Social Stata:
 
+For the English version, click on the Shield below:
 <!-- badges: start -->
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README_en.md)
 <!-- badges: end -->
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.jpg" align="left" width="100" hspace="10" vspace="6"></a>
@@ -104,7 +106,7 @@ ___Atenção:___ Na opção `source(...)` deve conter o caminho específico do a
 
 __datazoom_social, survey(pnadcontinua)__ *source(...) save(...) date(...)* [*ops*]
 
-Os anos disponíveis para a PNADC Trimestral são de 2012 a 2023 Para criação do painél, há as seguintes opções:
+Os anos disponíveis para a PNADC Trimestral são de 2012 a 2023 Para criação do painel, há as seguintes opções:
 
 | Ops               | Descrição                                                               |
 |-------------------|-------------------------------------------------------------------------|
@@ -223,7 +225,7 @@ ___Atenção:___ Para a POF 2017-2018, Bases Padronizadas e Gastos Selecionados 
 
 ## Programas auxiliares (dicionários) <a name="aux"></a>
 
-A maioria dos programas do pacote se deparam com dados originais
+A maioria dos programas do pacote se depara com dados originais
 armazenados em formato *.txt*, que precisam de dicionários – formato *.dct*
 no Stata – para serem lidos. A consequência é um volume de dicionários
 que supera o limite de 100 arquivos permitido para um pacote do Stata
