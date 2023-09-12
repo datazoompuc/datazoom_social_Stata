@@ -4,7 +4,7 @@
 
 For the English version, click on the Shield below:
 <!-- badges: start -->
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README_en.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/README_en.md)
 <!-- badges: end -->
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.jpg" align="left" width="100" hspace="10" vspace="6"></a>
