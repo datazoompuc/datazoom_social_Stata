@@ -7,7 +7,7 @@ POSITION . . 470 400
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaVisitas 20 20 120 360, label("Visita(s)")
+GROUPBOX caixaVisitas 20 20 110 350, label("Visita(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012_visita1")  option(2012)
    CHECKBOX    ck2013 @ +20 120    ., label("2013_visita1")  option(2013)
@@ -26,7 +26,7 @@ GROUPBOX caixaVisitas 20 20 120 360, label("Visita(s)")
    CHECKBOX	   ck20212 @ +20 120	   ., label("2021_visita2")  option(20212)
    CHECKBOX	   ck20215 @ +20 120	   ., label("2021_visita5")  option(20215)
 
-GROUPBOX caixaTrimestres 160 20 120 270, label("Trimestre(s)")
+GROUPBOX caixaTrimestres 150 20 130 270, label("Trimestre(s)")
 
    CHECKBOX	   ck20162 +14 +20 120	   ., label("2016_trimestre2")  option(20162)
    CHECKBOX	   ck20164 @ +20 120	   ., label("2016_trimestre4")  option(20164)
@@ -41,13 +41,13 @@ GROUPBOX caixaTrimestres 160 20 120 270, label("Trimestre(s)")
    CHECKBOX	   ck20222 @ +20 120	   ., label("2022_trimestre2")  option(20222)
    CHECKBOX	   ck20223 @ +20 120	   ., label("2022_trimestre3")  option(20223)
 
-GROUPBOX caixaDicionários 300 160 140 120, label("Base de Dados")
+GROUPBOX caixaDicionários 300 50 120 100, label("Base de Dados")
 
-	BUTTON	fldados 	+20 +35 100 ., label("Dados originais...") onpush(script dados) 
+	BUTTON	fldados 	+10 +25 100 ., label("Dados originais...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
-   HLINK hlink1 +0 +80 140 ., label("Guia Suplementos IBGE") onpush(program hlink1)
+   HLINK hlink1 -8 +50 160 ., label("Guia Suplementos IBGE") onpush(program hlink1)
 
-	CHECKBOX	eng     300  40 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     300  20 200 ., label("Labels em inglês") option(english)
 
 TEXT     credit     0   380  450    ., label("PUC-Rio - Departmento de Economia") right
 
