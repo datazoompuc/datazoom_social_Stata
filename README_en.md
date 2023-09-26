@@ -9,7 +9,7 @@ For the Portuguese Version, click on the Shield below:
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.jpg" align="left" width="100" hspace="10" vspace="6"></a>
 
-DataZoom Social Stata `datazoom_social` is a package that enables compatibility with microdata from surveys conducted by the Brazilian Institute of Geography and Statistics (IBGE). With this package, it is possible to read all household surveys conducted by IBGE: Demographic Census, National Household Sample Survey (PNAD), Monthly Employment Survey (PME), Household Expenditure Survey (POF), and Urban Informal Economy Survey (ECINF).
+DataZoom Social Stata `datazoom_social` is a package that enables compatibility with microdata from surveys conducted by the Brazilian Institute of Geography and Statistics (IBGE). With this package, it is possible to read all household surveys conducted by IBGE: Population Census, National Household Sample Survey (PNAD and Continuous PNAD), Monthly Employment Survey (PME), Consumer Expenditure Survey (POF), and Urban Informal Economy Survey (ECINF).
 
 ## Contents
 1. [Installation](#installation)
