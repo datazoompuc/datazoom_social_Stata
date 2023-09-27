@@ -316,99 +316,125 @@ Outras_alimentacao_fora_Dom
 
 LIST nomes_despesas
    BEGIN
-:: :: Habitação
-:: :: :: Aluguel
-:: :: :: :: Aluguel monetário
-:: :: :: :: Aluguel não monetário
-:: :: :: Condomínio
-:: :: :: Serviços e taxas
-:: :: :: :: Energia elétrica
-:: :: :: :: Telefone fixo
-:: :: :: :: Telefone celular
-:: :: :: :: Pacote de telefone,
-:: :: :: :: Gás doméstico
-:: :: :: :: Água e esgoto
-:: :: :: :: Outros (serviços e taxas)
-:: :: :: Manutenção do lar
-:: :: :: Artigos de limpeza
-:: :: :: Mobiliários e artigos do lar
-:: :: :: Eletrodomésticos
-:: :: :: Consertos de artigos do lar
-:: :: Vestuário
-:: :: :: Roupa de homem
-:: :: :: Roupa de mulher
-:: :: :: Roupa de criança
-:: :: :: Calçados e apetrechos
-:: :: :: Jóias e bijuterias
-:: :: :: Tecidos e armarinhos
-:: :: Transporte
-:: :: :: Urbano
-:: :: ::  Gasolina - veículo próprio
-:: :: ::  Álcool - veículo próprio
-:: :: :: Manutenção e acessórios
-:: :: ::  Aquisição de veículos
-:: :: :: Viagens esporádicas
-:: :: :: Outras (transporte)
-:: :: Higiene e cuidados pessoais
-:: :: :: Perfume
-:: :: :: Produtos para cabelo
-:: :: :: Sabonete
-:: :: :: Instrumentos e produtos de uso pessoal
-:: :: Assistência à saúde
-:: :: :: Remédios
-:: :: :: Plano/Seguro saúde
-:: :: :: Consulta e tratamento dentário
-:: :: :: Consulta médica
-:: :: :: Tratamento médico e ambulatorial
-:: :: :: Serviços de cirurgia
-:: :: :: Hospitalização
-:: :: :: Exames diversos
-:: :: :: Material de tratamento
-:: :: :: Outras (assistência à saúde)
-:: :: Educação
-:: :: :: Cursos regulares
-:: :: :: Curso superior
-:: :: :: Outros cursos e atividades
-:: :: :: Livros didáticos e revistas técnicas
-:: :: :: Artigos escolares
-:: :: :: Outras (educação)
-:: :: Recreação e cultura
-:: :: :: Brinquedos e jogos
-:: :: :: Celular e acessórios
-:: :: :: Periódicos livros e revistas não didáticos
-:: :: :: Recreações e esportes
-:: :: :: Outras (recreação e cultura)
-:: :: Fumo
-:: :: Serviços pessoais
-:: :: :: Cabeleireiro
-:: :: :: Manicuro e pedicuro
-:: :: :: Consertos de artigos pessoais
-:: :: :: Outras (serviços pessoais)
-:: :: Despesas diversas
-:: :: :: Jogos e apostas
-:: :: :: Comunicação
-:: :: :: Cerimônias e festas
-:: :: :: Serviços profissionais
-:: :: :: Imóveis de uso ocasional
-:: :: :: Outras (despesas diversas)
-:: :: Outras despesas correntes
-:: :: :: Impostos
-:: :: :: Contribuições trabalhistas
-:: :: :: Serviços bancários
-:: :: :: Pensões mesadas e doações
-:: :: :: Previdência privada
-:: :: :: Outras (outras despesas correntes)
-:: :: Aumento do ativo
+:: Despesa Total
+:: :: Despesas Correntes
+:: :: :: Despesas de Consumo
+:: :: :: :: Assistência à saúde
+:: :: :: :: :: Remédios
+:: :: :: :: :: Plano/Seguro saúde
+:: :: :: :: :: Consulta e tratamento dentário
+:: :: :: :: :: Consulta médica
+:: :: :: :: :: Tratamento médico e ambulatorial
+:: :: :: :: :: Serviços de cirurgia
+:: :: :: :: :: Hospitalização
+:: :: :: :: :: Exames diversos
+:: :: :: :: :: Material de tratamento
+:: :: :: :: :: Outras (assistência à saúde)
+:: :: :: Despesas de consumo
+:: :: :: Outras despesas correntes
+:: :: :: :: Impostos
+:: :: :: :: Contribuições trabalhistas
+:: :: :: :: Serviços bancários
+:: :: :: :: Pensões mesadas e doações
+:: :: :: :: Previdência privada
+:: :: :: :: Outras (outras despesas correntes)
+:: :: :: :: Habitação
+:: :: :: :: :: Aluguel
+:: :: :: :: :: :: Aluguel monetário
+:: :: :: :: :: :: Aluguel não monetário
+:: :: :: :: :: Condomínio
+:: :: :: :: :: Serviços e taxas
+:: :: :: :: :: :: Energia elétrica
+:: :: :: :: :: :: Telefone fixo
+:: :: :: :: :: :: Telefone celular
+:: :: :: :: :: :: Pacote de telefone,
+:: :: :: :: :: :: Gás doméstico
+:: :: :: :: :: :: Água e esgoto
+:: :: :: :: :: :: Outros (serviços e taxas)
+:: :: :: :: :: Manutenção do lar
+:: :: :: :: :: Artigos de limpeza
+:: :: :: :: :: Mobiliários e artigos do lar
+:: :: :: :: :: Eletrodomésticos
+:: :: :: :: :: Consertos de artigos do lar
+:: :: :: :: Vestuário
+:: :: :: :: :: Roupa de homem
+:: :: :: :: :: Roupa de mulher
+:: :: :: :: :: Roupa de criança
+:: :: :: :: :: Calçados e apetrechos
+:: :: :: :: :: Jóias e bijuterias
+:: :: :: :: :: Tecidos e armarinhos
+:: :: :: :: Transporte
+:: :: :: :: :: Transporte Urbano
+:: :: :: :: :: Gasolina - veículo próprio
+:: :: :: :: :: Álcool - veículo próprio
+:: :: :: :: :: Manutenção e acessórios
+:: :: :: :: :: Aquisição de veículos
+:: :: :: :: :: Viagens esporádicas
+:: :: :: :: :: Outras (transporte)
+:: :: :: :: Higiene e cuidados pessoais
+:: :: :: :: :: Perfume
+:: :: :: :: :: Produtos para cabelo
+:: :: :: :: :: Sabonete
+:: :: :: :: :: Instrumentos e produtos de uso pessoal
+:: :: :: :: Educação
+:: :: :: :: :: Cursos regulares
+:: :: :: :: :: Curso superior
+:: :: :: :: :: Outros cursos e atividades
+:: :: :: :: :: Livros didáticos e revistas técnicas
+:: :: :: :: :: Artigos escolares
+:: :: :: :: :: Outras (educação)
+:: :: :: :: Recreação e cultura
+:: :: :: :: :: Brinquedos e jogos
+:: :: :: :: :: Celular e acessórios
+:: :: :: :: :: Periódicos livros e revistas não didáticos
+:: :: :: :: :: Recreações e esportes
+:: :: :: :: :: Outras (recreação e cultura)
+:: :: :: :: Fumo
+:: :: :: :: Serviços pessoais
+:: :: :: :: :: Cabeleireiro
+:: :: :: :: :: Manicuro e pedicuro
+:: :: :: :: :: Consertos de artigos pessoais
+:: :: :: :: :: Outras (serviços pessoais)
+:: :: :: :: Despesas diversas
+:: :: :: :: :: Jogos e apostas
+:: :: :: :: :: Comunicação
+:: :: :: :: :: Cerimônias e festas
+:: :: :: :: :: Serviços profissionais
+:: :: :: :: :: Imóveis de uso ocasional
+:: :: :: :: :: Outras (despesas diversas)
+:: :: Aumento do Ativo
 :: :: :: Imóvel (aquisição)
 :: :: :: Imóvel (reforma)
 :: :: :: Outros investimentos
-:: :: Diminuição do passivo
+:: :: Diminuição do Passivo
 :: :: :: Empréstimo
 :: :: :: Prestação de imóvel
    END
 
 LIST nomes_despesas2
    BEGIN
+Despesa_Total
+Despesas_Correntes
+Despesas_de_Consumo
+Assistência_à_saúde
+Remédios
+Plano_seguro_saude
+Consulta_e_tratamento_dentário
+Consulta_médica
+Tratamento_médico_e_ambulatoria
+Serviços_de_cirurgia
+Hospitalização
+Exames_diversos
+Material_de_tratamento
+Outras_assistencia_saude
+Despesas_de_consumo
+Outras_despesas_correntes
+Impostos
+Contribuições_trabalhistas
+Serviços_bancários
+Pensões_mesadas_e_doações
+Previdência_privada
+Outras_outras_desp_correntes
 Habitação
 Aluguel
 Aluguel_monetário
@@ -447,17 +473,6 @@ Perfume
 Produtos_para_cabelo
 Sabonete
 Instrumentos_produt_uso_pessoal
-Assistência_à_saúde
-Remédios
-Plano_seguro_saude
-Consulta_e_tratamento_dentário
-Consulta_médica
-Tratamento_médico_e_ambulatoria
-Serviços_de_cirurgia
-Hospitalização
-Exames_diversos
-Material_de_tratamento
-Outras_assistencia_saude
 Educação
 Cursos_regulares
 Cursos_superiores
@@ -485,12 +500,6 @@ Serviços_profissionais
 Imóveis_de_uso_ocasional
 Outras_despesas_diversas
 Outras_despesas_correntes
-Impostos
-Contribuições_trabalhistas
-Serviços_bancários
-Pensões_mesadas_e_doações
-Previdência_privada
-Outras_outras_desp_correntes
 Aumento_do_ativo
 Imóvel_aquisição
 Imóvel_reforma
@@ -502,15 +511,15 @@ Prestação_de_imóvel
    
 LIST nomes_rendas
    BEGIN
-:: :: Rendimento total
-:: :: :: Rendimento do trabalho
+:: :: Rendimento Total
+:: :: :: Rendimento do Trabalho
 :: :: :: :: Empregado
 :: :: :: :: Empregador
 :: :: :: :: Conta_própria
 :: :: :: Transferência
 :: :: :: :: Aposentadoria e pensão do INSS
 :: :: :: :: Aposentadoria e pensão da previdência pública
-:: :: :: :: Aposentadoria e pensão da_previdência privada
+:: :: :: :: Aposentadoria e pensão da previdência privada
 :: :: :: :: Programas sociais federais
 :: :: :: :: Pensão alimentícia mesada ou doação
 :: :: :: :: Outras transferências
@@ -523,7 +532,7 @@ LIST nomes_rendas
 LIST nomes_rendas2
    BEGIN
 Rendimento_Total
-Rendimento_do_trabalho
+Rendimento_do_Trabalho
 Empregado
 Empregador
 Conta_própria
