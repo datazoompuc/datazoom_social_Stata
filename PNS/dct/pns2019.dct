@@ -606,7 +606,7 @@ dictionary {
   _column(831) byte Q018014 %1f "Não fumar"
   _column(832) byte Q018015 %1f "Não beber em excesso"
   _column(833) byte Q018016 %1f "Fazer o acompanhamento regular com profissional de saúde"
-  _column(834) byte Q018017 %1f "Fazer uso de acupuntura, plantas medicinais e fitoterapia, homeopatia, meditação, yoga, tai chi chuan, liang gong ou alguma outra prática integrativa e complementar" outra prática integrativa e complementar"
+  _column(834) byte Q018017 %1f "Fazer uso de acupuntura, plantas medicinais e fitoterapia, homeopatia, meditação, yoga, tai chi chuan, liang gong ou alguma outra prática integrativa e complementar"
   _column(835) byte Q01910 %1f "Foi pedido exame de sangue?"
   _column(836) byte Q019101 %1f "Realizou o exame de sangue?"
   _column(837) byte Q01911 %1f "Foi pedido exame de urina?"
@@ -722,8 +722,6 @@ dictionary {
   _column(955) byte Q07710 %1f "Algum dos aerossóis (bombinha) para asma (ou bronquite asmática) foi obtido em serviço público de saúde?"
   _column(956) byte Q07711 %1f "O(A) Sr(a) pagou algum valor pelos aerossóis (bombinha) para asma?"
   _column(957) byte Q078 %1f "Em geral, em que grau a asma limita as suas atividades habituais (tais como trabalhar, realizar afazeres domésticos, etc.)?"
-
-
   _column(958) byte Q079 %1f "Algum médico já lhe deu o diagnóstico de artrite ou reumatismo?"
   _column(959) byte Q080 %2f "Que idade o(a) Sr(a) tinha no primeiro diagnóstico de artrite ou reumatismo?"
   _column(961) byte Q08107 %1f "Recomendação para praticar atividade física regularmente"
@@ -1063,7 +1061,6 @@ dictionary {
   _column(1352) double W00201 %5.1f "Altura - 1ª medição (em cm) (3 inteiros e 1 casa decimal)"
   _column(1357) double W00202 %5.1f "Altura - 2ª medição (em cm) (3 inteiros e 1 casa decimal)"
   _column(1362) double W00203 %5.1f "Altura - Final (em cm) (3 inteiros e 1 casa decimal)"
-
   _column(1367) double V0028 %14.8f "Peso do domicílio e dos moradores sem calibração"
   _column(1381) double V0029 %14.8f "Peso do morador selecionado sem calibração"
   _column(1395) double V0030 %17.8f "Peso do morador selecionado para antropometria sem calibração"
@@ -1089,6 +1086,6 @@ dictionary {
   _column(1538) byte VDM001 %1f "Faixa de tempo gasta por dia no desloc. casa-trabalho"
   _column(1539) byte VDP001 %1f "Tipo de cigarro industrializado comprado"
   _column(1540) byte VDR001 %1f "Método contraceptivo mais eficaz que faz uso"
-  _column(1541) long VDDATA %8f "Data de geração do arquivo de microdados."
+  _column(1541) long VDDATA %8f "Data de geração do arquivo de microdados"
  
 }
