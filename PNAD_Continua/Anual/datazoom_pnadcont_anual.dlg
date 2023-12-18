@@ -7,7 +7,7 @@ POSITION . . 470 400
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaVisitas 20 20 110 350, label("Visita(s)")
+GROUPBOX caixaVisitas 20 20 110 370, label("Visita(s)")
 
    CHECKBOX    ck2012 +14 +20 120  ., label("2012_visita1")  option(2012)
    CHECKBOX    ck2013 @ +20 120    ., label("2013_visita1")  option(2013)
@@ -25,6 +25,7 @@ GROUPBOX caixaVisitas 20 20 110 350, label("Visita(s)")
    CHECKBOX	   ck20205 @ +20 120	   ., label("2020_visita5")  option(20205)
    CHECKBOX	   ck20212 @ +20 120	   ., label("2021_visita2")  option(20212)
    CHECKBOX	   ck20215 @ +20 120	   ., label("2021_visita5")  option(20215)
+   CHECKBOX	   ck20225 @ +20 120	   ., label("2022_visita5")  option(20225)
 
 GROUPBOX caixaTrimestres 150 20 130 270, label("Trimestre(s)")
 
@@ -98,7 +99,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20184 main.ck20185 main.ck20191 main.ck20192 main.ck20193 main.ck20194 main.ck20195 main.ck20202 main.ck20205 main.ck20212 main.ck20214 main.ck20215 main.ck20222 main.ck20223
+			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck20161 main.ck20162 main.ck20164 main.ck20165 main.ck20171 main.ck20172 main.ck20174 main.ck20175 main.ck20181 main.ck20182 main.ck20184 main.ck20185 main.ck20191 main.ck20192 main.ck20193 main.ck20194 main.ck20195 main.ck20202 main.ck20205 main.ck20212 main.ck20214 main.ck20215 main.ck20222 main.ck20223 main.ck20225
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "

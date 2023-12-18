@@ -46,6 +46,7 @@ tempfile dic_20_5
 tempfile dic_21_2
 tempfile dic_21_5
 tempfile dic_21_4
+tempfile dic_22_5
 
 findfile dict.dta
 
@@ -67,6 +68,7 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_2entr_2020e2021`lang
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2020`lang'") out("`dic_20_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2021`lang'") out("`dic_21_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_4tri_2016a2021`lang'") out("`dic_21_4'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2022`lang'") out("`dic_22_5'")
 
 /* Extraindo dos arquivos */
 *tokenize `years'
@@ -343,6 +345,16 @@ foreach year in `years' {
 		cap infile using "`dic_19_3'", using("`original'/PNADC_2022_trimestre3.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_trimestre3, replace
+					}
+				else continue, break
+					}	
+
+	if `year' == 20225 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		cap infile using "`dic_22_5'", using("`original'/PNADC_2022_visita5.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2022_visita5, replace
 					}
 				else continue, break
 					}					
