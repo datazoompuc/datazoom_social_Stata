@@ -68,7 +68,7 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2019`lang'") o
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_2entr_2020e2021`lang'") out("`dic_20_2'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2020`lang'") out("`dic_20_5'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2021`lang'") out("`dic_21_5'")
-read_compdct, compdct("`masterdict'") dict_name("pnad_anual_4tri_2016a2021`lang'") out("`dic_21_4'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_4tri_2016a2022`lang'") out("`dic_21_4'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2022`lang'") out("`dic_22_1'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2022`lang'") out("`dic_22_5'")
 
@@ -370,7 +370,17 @@ foreach year in `years' {
 					save PNADC_anual_2022_visita1, replace
 					}
 				else continue, break
-					}					
+					}
+
+	if `year' == 20224 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		cap infile using "`dic_21_4'", using("`original'/PNADC_2022_trimestre4.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2022_trimestre4, replace
+					}
+				else continue, break
+					}		
 
 	}
 
