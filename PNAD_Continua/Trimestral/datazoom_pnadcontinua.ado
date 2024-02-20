@@ -94,7 +94,7 @@ foreach aa in `years' {
 
 *tokenize `years'
 foreach aa in `years' {
-	foreach pa in 1 2 3 4 5 6 7 8 9{ // é necessário peridiocamente atualizar números (1 a 9)
+	foreach pa in 1 2 3 4 5 6 7 8 9 10{ // é necessário peridiocamente atualizar números (1 a 9)
 		use PNADC`aa', clear
 		keep if V1014 == `pa'
 		tempfile PNADC_Painel`pa'temp`aa'
@@ -103,7 +103,7 @@ foreach aa in `years' {
 }
 
 
-foreach pa in 1 2 3 4 5 6 7 8 9{  // é necessário peridiocamente atualizar números (1 a 9)
+foreach pa in 1 2 3 4 5 6 7 8 9 10{  // é necessário peridiocamente atualizar números (1 a 9)
 	foreach aa in `years' {
 		append using `PNADC_Painel`pa'temp`aa''
 		keep if V1014 == `pa'
@@ -113,7 +113,7 @@ foreach pa in 1 2 3 4 5 6 7 8 9{  // é necessário peridiocamente atualizar nú
 }
 
 global panels = ""
-forvalues pa = 1(1)9{   // é necessário peridiocamente atualizar números (1 a 9)
+forvalues pa = 1(1)10{   // é necessário peridiocamente atualizar números (1 a 9)
 	use `PNADC_Painel`pa'', clear
 	qui count
 	if r(N) != 0 { 
