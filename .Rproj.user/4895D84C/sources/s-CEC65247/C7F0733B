@@ -1,26 +1,26 @@
 {
-    "id": "C35AB091",
+    "id": "C7F0733B",
     "path": "~/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct/pnad_anual_5entr_2019.dct",
     "project_path": "PNAD_Continua/Anual/dct/pnad_anual_5entr_2019.dct",
     "type": "text",
-    "hash": "726624205",
+    "hash": "3051985584",
     "contents": "",
     "dirty": false,
-    "created": 1718421780959.0,
+    "created": 1718507317755.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "391,0",
-        "scrollLine": "357"
+        "cursorPosition": "315,93",
+        "scrollLine": "338"
     },
     "folds": "",
-    "lastKnownWriteTime": 1718506795,
+    "lastKnownWriteTime": 1718507550,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1718506796000,
+    "last_content_update": 1718507550317,
     "read_only": false,
     "read_only_alternatives": []
 }

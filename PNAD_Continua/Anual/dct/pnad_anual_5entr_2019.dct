@@ -310,29 +310,10 @@ _column(655)  byte  S060287      %1f    "Fez tarefas domésticas como cuidar dos
 _column(656)  byte  S060288      %1f    "Fez outras tarefas domésticas "
 _column(657)  byte  S06029      %1f    "Fez alguma tarefa doméstica em domicílio de parente "
 _column(658)  byte  S06030      %3f    "Qual foi o total de horas que dedicou às atividades de cuidados de pessoas e/ou afazeres domésticos "
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 _column(661)  byte VD2002      %2f      "Condição no domicílio "
 _column(663)  byte VD2003      %2f      "Número de componentes do domic."
 _column(665)  byte VD2004      %1f      "Espécie da unidade doméstica"
 _column(666)  byte VD2006      %2f      "Faixas etárias utilizadas no processo de calibração"
-
 _column(668)  byte VD3004      %1f      "Nível de instrução mais elevado alcançado (5 anos ou mais de idade) "
 _column(669)  byte VD3005      %2f      "Anos de estudo (5 anos ou mais de idade) para fundamental de 9 anos "
 _column(671)  byte VD3006      %1f      "Grupamento de anos de estudo (pessoas de 5 anos ou mais de idade) para fundamental de 9 anos "
