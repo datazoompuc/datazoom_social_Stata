@@ -3,7 +3,7 @@
     "path": "~/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct/pnad_anual_5entr_2018.dct",
     "project_path": "PNAD_Continua/Anual/dct/pnad_anual_5entr_2018.dct",
     "type": "text",
-    "hash": "726624205",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1718384852153.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "389,11",
-        "scrollLine": "378"
+        "cursorPosition": "391,0",
+        "scrollLine": "357"
     },
     "folds": "",
     "lastKnownWriteTime": 1718421703,
