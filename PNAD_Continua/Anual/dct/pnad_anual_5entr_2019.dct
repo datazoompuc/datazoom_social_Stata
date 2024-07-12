@@ -39,8 +39,6 @@ _column(120)	byte V3010      %1f    "Duração do curso que frequentou "
 _column(121)	byte V3011A      %1f    "Curso que freq é organizado em: "
 _column(122)	byte V3012      %1f    "Aprovado na prim. série do curso "
 _column(123)	byte V3013      %2f    "Último ano/série que concluiu "
-
-
 _column(125)  byte V3013A      %1f      "Qual é a etapa que frequentou "
 _column(126)  byte V3013B      %1f      "Cursou os anos iniciais deste curso "
 _column(127)  byte V3014      %1f      "Concluiu o curso que frequentou "
