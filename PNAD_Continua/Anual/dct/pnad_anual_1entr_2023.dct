@@ -192,7 +192,6 @@ _column(442) byte V5007A %1f "Recebeu aluguel e arrendamento"
 _column(443) long V5007A2 %8f "Rend recebido aluguel e arrendamento"
 _column(451) byte V5008A %1f "Recebeu outros rendimentos (bolsa de estudos, rendimento de poupanca, aplic finan, etc.)"
 _column(452) long V5008A2 %8f "Rend recebido de outros rendimentos (bolsa de estudos, rendimento de poupanca, aplic finan, etc.)"
-
 _column(460) byte VD2002 %2f "Condicao no domicilio"
 _column(462) int VD2003 %2f "Numero de componentes do domic."
 _column(464) byte VD2004 %1f "Especie da unidade domestica"
