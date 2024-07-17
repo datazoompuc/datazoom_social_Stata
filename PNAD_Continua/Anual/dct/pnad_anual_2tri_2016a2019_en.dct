@@ -1,6 +1,6 @@
 dictionary {
 _column(1)	int	Ano	%4f	"Year	"
-_column(5)	str2	Trimestre	%1f	"Quarter	"
+_column(5)	byte	Trimestre	%1f	"Quarter	"
 _column(6)	int	UF	%2f	"State	"
 _column(8)	int	Capital	%2f	"Capital	"
 _column(10)	int	RM_RIDE	%2f	"Metropolitan Region	"

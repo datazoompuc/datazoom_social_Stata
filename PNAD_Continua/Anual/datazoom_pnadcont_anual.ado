@@ -81,7 +81,7 @@ foreach year in `years' {
 	if `year' == 2012 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_14_1'", using("`original'/PNADC_2012_visita1.txt") clear
+		infile using "`dic_14_1'", using("`original'/PNADC_2012_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2012_visita1, replace
 					}
@@ -91,7 +91,7 @@ foreach year in `years' {
 	if `year' == 2013 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_14_1'", using("`original'/PNADC_2013_visita1.txt") clear
+		infile using "`dic_14_1'", using("`original'/PNADC_2013_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2013_visita1, replace
 					}
@@ -101,7 +101,7 @@ foreach year in `years' {
 	if `year' == 2014 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_14_1'", using("`original'/PNADC_2014_visita1.txt") clear
+		infile using "`dic_14_1'", using("`original'/PNADC_2014_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2014_visita1, replace
 					}
@@ -111,7 +111,7 @@ foreach year in `years' {
 	if `year' == 2015 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_15_1'", using("`original'/PNADC_2015_visita1.txt") clear
+		infile using "`dic_15_1'", using("`original'/PNADC_2015_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2015_visita1, replace
 					}
@@ -121,7 +121,7 @@ foreach year in `years' {
 	if `year' == 20161 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_16_1'", using("`original'/PNADC_2016_visita1.txt") clear
+		infile using "`dic_16_1'", using("`original'/PNADC_2016_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2016_visita1, replace
 					}
@@ -131,7 +131,7 @@ foreach year in `years' {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
 		*cap infile using "`dic_17_2'", using("`original'/PNADC_022016_educacao.txt") clear // due to change on arquive name
-		cap infile using "`dic_17_2'", using("`original'/PNADC_2016_trimestre2.txt") clear
+		infile using "`dic_17_2'", using("`original'/PNADC_2016_trimestre2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2016_trimestre2, replace
 					}
@@ -140,7 +140,7 @@ foreach year in `years' {
 		if `year' == 20164 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2016_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2016_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2016_trimestre4, replace
 					}
@@ -149,7 +149,7 @@ foreach year in `years' {
 		if `year' == 20165 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_16_5'", using("`original'/PNADC_2016_visita5.txt") clear
+		infile using "`dic_16_5'", using("`original'/PNADC_2016_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2016_visita5, replace
 					}
@@ -159,7 +159,7 @@ foreach year in `years' {
 	if `year' == 20171 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_17_1'", using("`original'/PNADC_2017_visita1.txt") clear
+		infile using "`dic_17_1'", using("`original'/PNADC_2017_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2017_visita1, replace
 					}
@@ -169,7 +169,7 @@ foreach year in `years' {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
 		*cap infile using "`dic_17_2'", using("`original'/PNADC_022017_educacao.txt") clear // due to change on arquive name
-		cap infile using "`dic_17_2'", using("`original'/PNADC_2017_trimestre2.txt") clear
+		infile using "`dic_17_2'", using("`original'/PNADC_2017_trimestre2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2017_trimestre2, replace
 					}
@@ -178,7 +178,7 @@ foreach year in `years' {
 		if `year' == 20174 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2017_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2017_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2017_trimestre4, replace
 					}
@@ -187,7 +187,7 @@ foreach year in `years' {
 		if `year' == 20175 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_17_5'", using("`original'/PNADC_2017_visita5.txt") clear
+		infile using "`dic_17_5'", using("`original'/PNADC_2017_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2017_visita5, replace
 					}
@@ -197,7 +197,7 @@ foreach year in `years' {
 	if `year' == 20181 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_18_1'", using("`original'/PNADC_2018_visita1.txt") clear
+		infile using "`dic_18_1'", using("`original'/PNADC_2018_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2018_visita1, replace
 					}
@@ -207,7 +207,7 @@ foreach year in `years' {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
 		*cap infile using "`dic_17_2'", using("`original'/PNADC_022018_educacao.txt") clear // due to change on arquive name
-		cap infile using "`dic_17_2'", using("`original'/PNADC_2018_trimestre2.txt") clear
+		infile using "`dic_17_2'", using("`original'/PNADC_2018_trimestre2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2018_trimestre2, replace
 					}
@@ -216,7 +216,7 @@ foreach year in `years' {
 		if `year' == 20184 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2018_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2018_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2018_trimestre4, replace
 					}
@@ -225,7 +225,7 @@ foreach year in `years' {
 		if `year' == 20185 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_18_5'", using("`original'/PNADC_2018_visita5.txt") clear
+		infile using "`dic_18_5'", using("`original'/PNADC_2018_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2018_visita5, replace
 					}
@@ -235,7 +235,7 @@ foreach year in `years' {
 	if `year' == 20191 {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_19_1'", using("`original'/PNADC_2019_visita1.txt") clear
+		infile using "`dic_19_1'", using("`original'/PNADC_2019_visita1.txt") clear
 				if _rc == 0 {
 					save PNADC_anual_2019_visita1, replace
 					}
@@ -245,7 +245,7 @@ foreach year in `years' {
 	
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
 		*cap infile using "`dic_17_2'", using("`original'/PNADC_022019_educacao.txt") clear // due to change on arquive name
-		cap infile using "`dic_17_2'", using("`original'/PNADC_2019_trimestre2.txt") clear
+		infile using "`dic_17_2'", using("`original'/PNADC_2019_trimestre2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2019_trimestre2, replace
 					}
@@ -254,7 +254,7 @@ foreach year in `years' {
 	if `year' == 20193 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_19_3'", using("`original'/PNADC_2019_trimestre3.txt") clear
+		infile using "`dic_19_3'", using("`original'/PNADC_2019_trimestre3.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2019_trimestre3, replace
 					}
@@ -263,7 +263,7 @@ foreach year in `years' {
 	if `year' == 20194 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2019_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2019_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2019_trimestre4, replace
 					}
@@ -272,7 +272,7 @@ foreach year in `years' {
 		if `year' == 20195 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_19_5'", using("`original'/PNADC_2019_visita5.txt") clear
+		infile using "`dic_19_5'", using("`original'/PNADC_2019_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2019_visita5, replace
 					}
@@ -284,7 +284,7 @@ foreach year in `years' {
 	if `year' == 20202 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_20_2'", using("`original'/PNADC_2020_visita2.txt") clear
+		infile using "`dic_20_2'", using("`original'/PNADC_2020_visita2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2020_visita2, replace
 					}
@@ -293,7 +293,7 @@ foreach year in `years' {
 	if `year' == 20205 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_20_5'", using("`original'/PNADC_2020_visita5.txt") clear
+		infile using "`dic_20_5'", using("`original'/PNADC_2020_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2020_visita5, replace
 					}
@@ -305,7 +305,7 @@ foreach year in `years' {
 		if `year' == 20212 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_20_2'", using("`original'/PNADC_2021_visita2.txt") clear
+		infile using "`dic_20_2'", using("`original'/PNADC_2021_visita2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2021_visita2, replace
 					}
@@ -315,7 +315,7 @@ foreach year in `years' {
 	if `year' == 20215 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_5'", using("`original'/PNADC_2021_visita5.txt") clear
+		infile using "`dic_21_5'", using("`original'/PNADC_2021_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2021_visita5, replace
 					}
@@ -324,7 +324,7 @@ foreach year in `years' {
 	if `year' == 20214 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2021_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2021_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2021_trimestre4, replace
 					}
@@ -335,7 +335,7 @@ foreach year in `years' {
 	if `year' == 20222 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_17_2'", using("`original'/PNADC_2022_trimestre2.txt") clear
+		infile using "`dic_17_2'", using("`original'/PNADC_2022_trimestre2.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_trimestre2, replace
 					}
@@ -345,7 +345,7 @@ foreach year in `years' {
 	if `year' == 20223 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_19_3'", using("`original'/PNADC_2022_trimestre3.txt") clear
+		infile using "`dic_19_3'", using("`original'/PNADC_2022_trimestre3.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_trimestre3, replace
 					}
@@ -355,7 +355,7 @@ foreach year in `years' {
 	if `year' == 20225 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_22_5'", using("`original'/PNADC_2022_visita5.txt") clear
+		infile using "`dic_22_5'", using("`original'/PNADC_2022_visita5.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_visita5, replace
 					}
@@ -365,7 +365,7 @@ foreach year in `years' {
 	if `year' == 20221 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_22_1'", using("`original'/PNADC_2022_visita1.txt") clear
+		infile using "`dic_22_1'", using("`original'/PNADC_2022_visita1.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_visita1, replace
 					}
@@ -375,7 +375,7 @@ foreach year in `years' {
 	if `year' == 20224 {
 		
 		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		cap infile using "`dic_21_4'", using("`original'/PNADC_2022_trimestre4.txt") clear
+		infile using "`dic_21_4'", using("`original'/PNADC_2022_trimestre4.txt") clear
 		if _rc == 0 {
 					save PNADC_anual_2022_trimestre4, replace
 					}
