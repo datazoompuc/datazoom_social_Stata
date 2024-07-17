@@ -48,6 +48,8 @@ tempfile dic_21_5
 tempfile dic_21_4
 tempfile dic_22_1
 tempfile dic_22_5
+tempfile dic_23_1
+tempfile dic_23_v1
 
 findfile dict.dta
 
@@ -71,6 +73,8 @@ read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2021`lang'") o
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_4tri_2016a2022`lang'") out("`dic_21_4'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2022`lang'") out("`dic_22_1'")
 read_compdct, compdct("`masterdict'") dict_name("pnad_anual_5entr_2022`lang'") out("`dic_22_5'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1tri_2023`lang'") out("`dic_23_1'")
+read_compdct, compdct("`masterdict'") dict_name("pnad_anual_1entr_2023`lang'") out("`dic_23_v1'")
 
 /* Extraindo dos arquivos */
 *tokenize `years'
@@ -382,8 +386,50 @@ foreach year in `years' {
 				else continue, break
 					}		
 
-	}
+	*************************************2023*********************************
+	if `year' == 20231 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		infile using "`dic_23_1'", using("`original'/PNADC_2023_trimestre1.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2023_trimestre1, replace
+					}
+				else continue, break
+					}		
+	
+	if `year' == 20232 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		infile using "`dic_17_2'", using("`original'/PNADC_2023_trimestre2.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2023_trimestre2, replace
+					}
+				else continue, break
+					}
 
+	if `year' == 20234 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		infile using "`dic_21_4'", using("`original'/PNADC_2023_trimestre4.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2023_trimestre4, replace
+					}
+				else continue, break
+					}		
+
+	}
+	
+	if `year' == 2023v1 {
+		
+		di as input "Extraindo arquivo PNADC_anual_`year'..."
+		infile using "`dic_23_v1'", using("`original'/PNADC_2023_visita1.txt") clear
+		if _rc == 0 {
+					save PNADC_anual_2023_visita1, replace
+					}
+				else continue, break
+					}
+	
+	}
 	
 di _newline "Esta versão do pacote datazoom_pnadcont_anual é compatível com a última versão dos microdados divulgado pelo IBGE em 10/06/2022"
 di _newline " As bases de dados foram salvas na pasta `c(pwd)'"

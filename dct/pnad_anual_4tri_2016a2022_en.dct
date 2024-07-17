@@ -807,8 +807,8 @@ dictionary {
   _column(1296) byte SD10014 %1f "The last time_your HOME_was stolen, what_was taken? Vehicle items"
   _column(1297) byte SD10015 %1f "The last time_your HOME_was stolen, what_was taken? Clothing, bags, and backpacks"
   _column(1298) byte SD10016 %1f "The last time_your HOME_was stolen, what_was taken? Others"
-  _column(4299) long V1037 %9f "Population projection by geographical levels (selected resident - individuals aged 15 or older)"
-  _column(4308) long V1038 %9f "Population projection by sex and age (selected resident - individuals aged 15 or older)"
-  _column(4317) float V1035 %15f "Weight of the selected resident"
-  _column(4332) float V1036 %15f "Weight of the selected resident"
+  _column(4314) long V1037 %9f "Population projection by geographical levels (selected resident - individuals aged 15 or older)"
+  _column(4323) long V1038 %9f "Population projection by sex and age (selected resident - individuals aged 15 or older)"
+  _column(4332) float V1035 %15f "Weight of the selected resident"
+  _column(4347) float V1036 %15f "Weight of the selected resident"
 }

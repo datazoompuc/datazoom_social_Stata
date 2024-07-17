@@ -810,8 +810,8 @@ dictionary {
   _column(1296) byte SD10014 %1f "Na última vez em que_foi furtado, o que foi(ram) levado(s)? Itens de veículo"
   _column(1297) byte SD10015 %1f "Na última vez em que_foi furtado, o que foi(ram) levado(s)? Vestuário, bolsas e mochilas"
   _column(1298) byte SD10016 %1f "Na última vez em que_foi furtado, o que foi(ram) levado(s)? Outros"
-  _column(4299) long V1037 %9f "Projeção da população por níveis geográficos (morador selecionado - pessoas de 15 anos ou mais)"
-  _column(4308) long V1038 %9f "Projeção da população por sexo e idade (morador selecionado - pessoas de 15 anos ou mais)"
-  _column(4317) float V1035 %15f "Peso do morador selecionado"
-  _column(4332) float V1036 %15f "Peso do morador selecionado"
+  _column(4314) long V1037 %9f "Projeção da população por níveis geográficos (morador selecionado - pessoas de 15 anos ou mais)"
+  _column(4323) long V1038 %9f "Projeção da população por sexo e idade (morador selecionado - pessoas de 15 anos ou mais)"
+  _column(4332) float V1035 %15f "Peso do morador selecionado"
+  _column(4347) float V1036 %15f "Peso do morador selecionado"
 }
