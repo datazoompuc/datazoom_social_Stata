@@ -1,4 +1,8 @@
 dictionary {	
+* Dicionário da divulgação anual
+* 2012 a 2014
+* Visita 1
+* https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2012_a_2014_visita1_20220224.txt
 _column(1)	int	Ano	%4f		"Year	"
 _column(5)	byte	Trimestre	%1f		"Quarter	"
 _column(6)	int	UF	%2f		"State	"
