@@ -34,9 +34,9 @@ foreach survey in `years' {
 	
 	// sufixos: 2015_tri_1 -> tri_1 e 2021_vis_5 -> vis_5
 	
-	local year = substr(`survey', 1, 4) // ano no início da string
+	local year = substr("`survey'", 1, 4) // ano no início da string
 	
-	local suffix = substr(`survey', 6, .) // resto
+	local suffix = substr("`survey'", 6, .) // resto
 	
 	* Nome do arquivo de dados
 	* Sempre PNADC_YYYY_visitaX.txt ou PNADC_YYYY_trimestreX.txt
@@ -53,8 +53,8 @@ foreach survey in `years' {
 	if regexm("`suffix'", "tri") == 1 {
 		local dic "pnad_anual_`suffix'`lang'"
 	}
-	else if `year' <= 2014 & "`suffix'" == "vis_1" {
-		local dic "pnad_anual_2012_a_2014_vis_1`lang'"
+	else if `year' <= 2014 & "`suffix'" == "vis1" {
+		local dic "pnad_anual_2012a2014_vis1`lang'"
 	}
 	else {
 		local dic "pnad_anual_`year'_`suffix'`lang'"
@@ -64,23 +64,25 @@ foreach survey in `years' {
 	
 	tempfile dict_file
 	
-	read_compdct, compdct("`masterdict'") dict_name("`dic'") out("dict_file'")
+	read_compdct, compdct("`masterdict'") dict_name("`dic'") out("`dict_file'")
 	
 	* Lendo o arquivo
 	
 	di as input "Extraindo arquivo da PNAD Contínua Anual `year' `suffix'"
+
+	qui infile using "`dict_file'", using("`original'/`file_name'") clear
 	
-		di as input "Extraindo arquivo PNADC_anual_`year'..."
-		infile using "`dict_file'", using("`original'/`file_name'") clear
-				if _rc == 0 {
-					save pnad_anual_`year'_`suffix'`lang', replace
-					}
-				else continue, break
-					}
-	
+	if _rc == 0 {
+		save pnad_anual_`year'_`suffix'`lang', replace
 	}
+	else continue, break
+	
+	save pnad_anual_`year'_`suffix'`lang', replace
+	
+}
 	
 di _newline " As bases de dados foram salvas na pasta `c(pwd)'"
 
-datazoom_message
+	datazoom_message
+
 end

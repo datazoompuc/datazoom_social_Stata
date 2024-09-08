@@ -1,5 +1,4 @@
 dictionary {
-* comentario
 _column(1) int	Ano      %4f    "Ano de referência "  
 _column(5) byte	Trimestre      %1f    "Trimestre de referência "  
 _column(6) byte	UF      %2f    "Unidade da Federação "  
