@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-For the Portuguese Version, click on the Shield below:
+para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
 [![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
 
@@ -51,10 +51,10 @@ The buttons below link to the function help files. They are best viewed on Stata
 
 |       |        |       |       |
 |:-----:|:------:|:-----:|:-----:|
-| <a href = "Censo/datazoom_censo.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> Censo </font>  &nbsp;&nbsp; <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | [<kbd> <br> &nbsp;&nbsp; <font size = 3> ECINF </font> &nbsp;&nbsp; <br><br> </kbd>][ecinf] <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | [<kbd> <br> &nbsp;&nbsp; <font size = 3> PME </font> &nbsp;&nbsp; <br><br> </kbd>][pme] <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | [<kbd> <br> &nbsp;&nbsp; <font size = 3> PNAD </font> &nbsp;&nbsp; <br><br> </kbd>][pnad] <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small> |
-| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 a 2023 </small> | <a href = "#pnad-covid"> <kbd> <br> &nbsp; <font size = 3> PNAD Covid </font> &nbsp; <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | [<kbd> <br> &nbsp;&nbsp; <font size = 3> PNS </font> &nbsp;&nbsp; <br><br> </kbd>][pns] <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | [<kbd> <br> &nbsp;&nbsp; <font size = 3> POF </font> &nbsp;&nbsp; <br><br> </kbd>][pof] <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
+| <a href = "Censo/datazoom_censo_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> Censo </font>  &nbsp;&nbsp; <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | <a href = "ECINF/datazoom_ecinf_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> ECINF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "PME/datazoom_pme_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PME </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "PNAD/datazoom_pnad_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNAD </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small> |
+| <a href = "PNAD_Continua/Trimestral/datazoom_pnadcontinua_en.sthlp"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 a 2023 </small> | <a href = "PNAD_Covid/datazoom_pnad_covid_en.sthlp"> <kbd> <br> &nbsp; <font size = 3> PNAD Covid </font> &nbsp; <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "PNS/datazoom_pns_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNS </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "POF/datazoom_pof_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> POF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
 
-<a href = "#créditos">![Static Badge](https://img.shields.io/badge/Cr%C3%A9ditos%20-%20Departamento%20de%20Economia%20PUC%20Rio%20-%20blue) </a> <a href = "#créditos"> ![Static Badge](https://img.shields.io/badge/Cita%C3%A7%C3%A3o%20-%20green) </a>
+<a href = "#credits">![Static Badge](https://img.shields.io/badge/Credits%20-%20PUC%20Rio%20Department%20of%20Economics%20-%20blue) </a> <a href = "#credits"> ![Static Badge](https://img.shields.io/badge/Citation%20-%20green) </a>
 
 ## Programas Auxiliares (Dicionários)
 
