@@ -78,7 +78,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck2016 main.ck2017 main.ck2018 main.ck2019 main.ck2020 main.ck2021 main.ck2022 main.ck2023
+			option main.ck2012 main.ck2013 main.ck2014 main.ck2015 main.ck2016 main.ck2017 main.ck2018 main.ck2019 main.ck2020 main.ck2021 main.ck2022 main.ck2023 main.ck2024
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
