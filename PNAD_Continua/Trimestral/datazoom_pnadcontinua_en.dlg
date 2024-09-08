@@ -2,12 +2,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 350
+POSITION . . 350 380
 
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 10 100 320, label("Year(s)")
+GROUPBOX caixaAnos 20 10 100 340, label("Year(s)")
 
    CHECKBOX    ck2012 +14 +24 120  ., label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 120    ., label("2013")  option(2013)
@@ -21,6 +21,7 @@ GROUPBOX caixaAnos 20 10 100 320, label("Year(s)")
    CHECKBOX	   ck2021 @ +24 120	   ., label("2021")  option(2021)
    CHECKBOX	   ck2022 @ +24 120	   ., label("2022")  option(2022) 
    CHECKBOX	   ck2023 @ +24 120	   ., label("2023")  option(2023)
+   CHECKBOX	   ck2024 @ +24 120	   ., label("2024")  option(2024)
 
 GROUPBOX caixaDicionários 160 10 140 118, label("Databases")
 
@@ -35,7 +36,7 @@ GROUPBOX caixaid 160 140 160 116, label("Individual Identification")
 
 	CHECKBOX	eng     170  280 200 24, label("Labels in English") option(english)
 	
-TEXT     credit     0   326 340    ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     0   350 340    ., label("PUC-Rio - Department of Economics") right
 
 END
 

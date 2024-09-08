@@ -2,45 +2,51 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 470 400
+POSITION . . 470 440
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaVisitas 20 20 110 350, label("Visit(s)")
+GROUPBOX caixaVisitas 20 20 110 410, label("Visit(s)")
 
-   CHECKBOX    ck2012 +14 +20 120  ., label("2012_visit1")  option(2012)
-   CHECKBOX    ck2013 @ +20 120    ., label("2013_visit1")  option(2013)
-   CHECKBOX    ck2014 @ +20 120    ., label("2014_visit1")  option(2014)
-   CHECKBOX    ck2015 @ +20 120    ., label("2015_visit1")  option(2015)
-   CHECKBOX	   ck20161 @ +20 120	   ., label("2016_visit1")  option(20161)
-   CHECKBOX	   ck20165 @ +20 120	   ., label("2016_visit5")  option(20165)
-   CHECKBOX	   ck20171 @ +20 120	   ., label("2017_visit1")  option(20171)
-   CHECKBOX	   ck20175 @ +20 120	   ., label("2017_visit5")  option(20175)
-   CHECKBOX	   ck20181 @ +20 120	   ., label("2018_visit1")  option(20181)
-   CHECKBOX	   ck20185 @ +20 120	   ., label("2018_visit5")  option(20185)
-   CHECKBOX	   ck20191 @ +20 120	   ., label("2019_visit1")  option(20191)
-   CHECKBOX	   ck20195 @ +20 120	   ., label("2019_visit5")  option(20195)
-   CHECKBOX	   ck20202 @ +20 120	   ., label("2020_visit2")  option(20202)
-   CHECKBOX	   ck20205 @ +20 120	   ., label("2020_visit5")  option(20205)
-   CHECKBOX	   ck20212 @ +20 120	   ., label("2021_visit2")  option(20212)
-   CHECKBOX	   ck20215 @ +20 120	   ., label("2021_visit5")  option(20215)
+   CHECKBOX    ck2012_vis1 +14 +20 120  ., label("2012 Visit 1")  option(2012_vis1)
+   CHECKBOX    ck2013_vis1 @ +20 120    ., label("2013 Visit 1")  option(2013_vis1)
+   CHECKBOX    ck2014_vis1 @ +20 120    ., label("2014 Visit 1")  option(2014_vis1)
+   CHECKBOX    ck2015_vis1 @ +20 120    ., label("2015 Visit 1")  option(2015_vis1)
+   CHECKBOX	   ck2016_vis1 @ +20 120	   ., label("2016 Visit 1")  option(2016_vis1)
+   CHECKBOX	   ck2016_vis5 @ +20 120	   ., label("2016 Visit 5")  option(2016_vis5)
+   CHECKBOX	   ck2017_vis1 @ +20 120	   ., label("2017 Visit 1")  option(2017_vis1)
+   CHECKBOX	   ck2017_vis5 @ +20 120	   ., label("2017 Visit 5")  option(2017_vis5)
+   CHECKBOX	   ck2018_vis1 @ +20 120	   ., label("2018 Visit 1")  option(2018_vis1)
+   CHECKBOX	   ck2018_vis5 @ +20 120	   ., label("2018 Visit 5")  option(2018_vis5)
+   CHECKBOX	   ck2019_vis1 @ +20 120	   ., label("2019 Visit 1")  option(2019_vis1)
+   CHECKBOX	   ck2019_vis5 @ +20 120	   ., label("2019 Visit 5")  option(2019_vis5)
+   CHECKBOX	   ck2020_vis2 @ +20 120	   ., label("2020 Visit 2")  option(2020_vis2)
+   CHECKBOX	   ck2020_vis5 @ +20 120	   ., label("2020 Visit 5")  option(2020_vis5)
+   CHECKBOX	   ck2021_vis2 @ +20 120	   ., label("2021 Visit 2")  option(2021_vis2)
+   CHECKBOX	   ck2021_vis5 @ +20 120	   ., label("2021 Visit 5")  option(2021_vis5)
+   CHECKBOX	   ck2022_vis1 @ +20 120	   ., label("2022 Visit 1")  option(2022_vis1) 
+   CHECKBOX	   ck2022_vis5 @ +20 120	   ., label("2022 Visit 5")  option(2022_vis5)
+   CHECKBOX	   ck2023_vis1 @ +20 120	   ., label("2023 Visit 1")  option(2023_vis1)
 
-GROUPBOX caixaTrimestres 150 20 130 290, label("Trimester(s)")
+GROUPBOX caixaTrimestres 150 20 130 360, label("Trimester(s)")
 
-   CHECKBOX	   ck20162 +14 +20 120	   ., label("2016_trimester2")  option(20162)
-   CHECKBOX	   ck20164 @ +20 120	   ., label("2016_trimester4")  option(20164)
-   CHECKBOX	   ck20172 @ +20 120	   ., label("2017_trimester2")  option(20172)
-   CHECKBOX	   ck20174 @ +20 120	   ., label("2017_trimester4")  option(20174)
-   CHECKBOX	   ck20182 @ +20 120	   ., label("2018_trimester2")  option(20182)
-   CHECKBOX	   ck20184 @ +20 120	   ., label("2018_trimester4")  option(20184)
-   CHECKBOX	   ck20192 @ +20 120	   ., label("2019_trimester2")  option(20192)
-   CHECKBOX	   ck20193 @ +20 120	   ., label("2019_trimester3")  option(20193)
-   CHECKBOX	   ck20194 @ +20 120	   ., label("2019_trimester4")  option(20194)
-   CHECKBOX	   ck20214 @ +20 120	   ., label("2021_trimester4")  option(20214)
-   CHECKBOX	   ck20222 @ +20 120	   ., label("2022_trimester2")  option(20222)
-   CHECKBOX	   ck20223 @ +20 120	   ., label("2022_trimester3")  option(20223)
-   CHECKBOX	   ck20224 @ +20 120	   ., label("2022_trimester4")  option(20224)
+   CHECKBOX	   ck2016_tri2 +14 +20 120	   ., label("2016 Trimester 2")  option(2016_tri2)
+   CHECKBOX	   ck2016_tri4 @ +20 120	   ., label("2016 Trimester 4")  option(2016_tri4)
+   CHECKBOX	   ck2017_tri2 @ +20 120	   ., label("2017 Trimester 2")  option(2017_tri2)
+   CHECKBOX	   ck2017_tri4 @ +20 120	   ., label("2017 Trimester 4")  option(2017_tri4)
+   CHECKBOX	   ck2018_tri2 @ +20 120	   ., label("2018 Trimester 2")  option(2018_tri2)
+   CHECKBOX	   ck2018_tri4 @ +20 120	   ., label("2018 Trimester 4")  option(2018_tri4)
+   CHECKBOX	   ck2019_tri2 @ +20 120	   ., label("2019 Trimester 2")  option(2019_tri2)
+   CHECKBOX	   ck2019_tri3 @ +20 120	   ., label("2019 Trimester 3")  option(2019_tri3)
+   CHECKBOX	   ck2019_tri4 @ +20 120	   ., label("2019 Trimester 4")  option(2019_tri4)
+   CHECKBOX	   ck2021_tri4 @ +20 120	   ., label("2021 Trimester 4")  option(2021_tri4)
+   CHECKBOX	   ck2022_tri2 @ +20 120	   ., label("2022 Trimester 2")  option(2022_tri2)
+   CHECKBOX	   ck2022_tri3 @ +20 120	   ., label("2022 Trimester 3")  option(2022_tri3)
+   CHECKBOX	   ck2022_tri4 @ +20 120	   ., label("2022 Trimester 4")  option(2022_tri4)
+   CHECKBOX	   ck2023_tri1 @ +20 120	   ., label("2023 Trimester 1")  option(2023_tri1)
+   CHECKBOX    ck2023_tri2 @ +20 120	   ., label("2023 Trimester 2")  option(2023_tri2)
+   CHECKBOX    ck2023_tri4 @ +20 120	   ., label("2023 Trimester 4")  option(2023_tri4)
 
    
 GROUPBOX caixaDicionários 300 50 120 100, label("Databases")
@@ -51,7 +57,7 @@ GROUPBOX caixaDicionários 300 50 120 100, label("Databases")
 
 	CHECKBOX	eng      300  20 200 ., label("Labels in English") option(english)
 	
-TEXT     credit     0   380  450    ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     0  420 450  ., label("PUC-Rio - Department of Economics") right
 
 END
 
