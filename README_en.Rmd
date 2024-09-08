@@ -2,10 +2,9 @@
 output: github_document
 ---
 
-For the English version, click on the Shield below:
+For the Portuguese Version, click on the Shield below:
 <!-- badges: start -->
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README_en.md)
-<!-- badges: end -->
+[![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.jpg" align="left" width="100" hspace="10" vspace="6"></a>
 
@@ -31,24 +30,24 @@ knitr::opts_chunk$set(
 ![Followers](https://img.shields.io/github/followers/datazoompuc?style=flat)
 <!-- badges: end -->
 
-O `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE, compatibilizar os Censos Demográficos de diferentes anos, gerar identificação dos indivíduos da PNAD Contínua, e muito mais.
+The `datazoom_social` package reads and processes microdata from IBGE surveys. We read all IBGE household surveys into Stata format, as well as making different Census instances compatible, generating individual identification for the Continuous PNAD, and much more.
 
-## Instalação <a name="instalacao"></a>
+## Installation <a name="instalacao"></a>
 
-Digite o código abaixo na linha de comando do Stata para baixar e instalar a versão mais recente do pacote
+Enter the code below in the Stata command line to download and install the latest version of the package
 
 ```
 net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") force
 ```
 
-## Uso
+## Usage
 
-Todas as funções do pacote podem ser usadas pelas caixas de diálogo. Para acessá-las, digite o comando
+All of our functions can be used through interactive dialog boxes. To access them, type
 ```
 db datazoom_social
 ```
 
-Clique nos botões abaixo para ir à helpfile de cada função. Elas são melhor visualizadas abrindo no Stata, com `help função`.
+The buttons below link to the function help files. They are best viewed on Stata, with command `help function`.
 
 |       |        |       |       |
 |:-----:|:------:|:-----:|:-----:|
@@ -59,65 +58,46 @@ Clique nos botões abaixo para ir à helpfile de cada função. Elas são melhor
 
 ## Programas Auxiliares (Dicionários)
 
-A maioria dos programas do pacote lidam com dados originais
-armazenados em formato *.txt*, que precisam de dicionários – formato *.dct*
-no Stata – para serem lidos. A consequência é um volume de dicionários
-que supera o limite de 100 arquivos permitido para um pacote do Stata
-poder ser instalado. Por isso, os dicionários individuais são
-compactados em um arquivo *.dta* único, que é lido dentro de cada
-programa. Ambas as funções usadas para isso são definidas no arquivo
-*read\_compdct.ado*.
+Most of the package programs encounter original data stored in *.txt* format, which requires dictionaries – *.dct* format in Stata – to be read. The result is a volume of dictionaries that exceeds the 100-file limit allowed for a Stata package to be installed. Therefore, individual dictionaries are compressed into a single *.dta* file, read within each program. Both functions are defined in the file *read_compdct.ado*.
 
-O primeiro programa definido nesse arquivo é `write_compdct`, que pode
-ser usado como a seguir: após rodar o arquivo *.ado* para definir a
-função, basta usar o código
+The first program defined in this file is `write_compdct`, which can be used as follows: after running the *.ado* file to define the function, simply use the code:
 
-    write_compdct, folder("/pasta com os dicionários") saving("/caminho/dict.dta")
+    write_compdct, folder("/folder with dictionaries") saving("/path/dict.dta")
 
-A função então lê todos os arquivos *.dct* presentes na pasta, e junta
-todos no arquivo *dict.dta*, com cada dicionário identificado por uma
-variável com seu nome.
+The function then reads all *.dct* files present in the folder and combines them into the *dict.dta* file, with each dictionary identified by a variable with its name.
 
-Para transformar esse arquivo compactado novamente do dicionário
-original, se usa o programa `read_compdct`:
+To transform this compressed file back into the original dictionary, we reccomend using the `read_compdct` program:
 
-    read_compdct, compdct("dict.dta") dict_name("dic original") out("dic extraído.dct")
+    read_compdct, compdct("dict.dta") dict_name("original_dict") out("extracted_dict.dct")
 
-que extrai o *“dic original”* do arquivo *dict.dta* e o salva para *“dic extraído.dct”*.
-Como exemplo, veja o uso dessa função no programa
-`datazoom_pnadcontinua`
+which extracts the *original_dict* from the *dict.dta* file and saves it as *extracted_dict.dct*. 
+As an example, see the use of this function in the `datazoom_pnadcontinua` program:
 
-    tempfile dic // Arquivo temporário onde o .dct extraído será salvo
+    tempfile dic // Temporary file where the extracted .dct will be saved
 
-    findfile dict.dta // Acha o arquivo dict.dta salvo pela instalação
-                      // do pacote na pasta /ado/, e armazena o caminho
-                      // até ele na macro r(fn)
+    findfile dict.dta // Finds the dict.dta file saved by the package installation
+                      // in the /ado/ folder and stores the path to it in the r(fn) 
+                      //macro.
 
     read_compdct, compdct("`r(fn)'") dict_name("pnadcontinua`lang'") out("`dic'")
-      // Lê o dicionário compactado dict.dta, extrai o dicionário pnadcontinua
-      // (ou pnadcontinua_en, `lang` é vazio ou "_en"), e salva o arquivo final
-      // na tempfile dic, que é usada para ler os dados
+      // Reads the compacted dict.dta dictionary, extracts the pnadcontinua 
+      // dictionary (or pnadcontinua_en, `lang` is empty or "_en"), and saves the 
+      // final file in the tempfile dic, which is used to read the data.
 
-Para a nossa organização interna, cada pasta correspondente a um
-programa armazena os dicionários na sub-pasta */dct/*. Todos esses
-dicionários são também armazenados juntos na pasta */dct/* diretamente,
-que é usada para gerar o *dict.dta* através do `write_compdct`. Note que
-nenhum arquivo *.dct* é efetivamente listado no arquivo
-*datazoom\_social.pkg*, e portanto, não são instalados no computador do
-usuário. Apenas o arquivo *dict.dta* é enviado.
+For our internal organization, each folder corresponding to a program stores the dictionaries in the */dct/* sub-folder. All these dictionaries are also stored together in the */dct/* folder directly, which is used to generate the *dict.dta* file using `write_compdct`. Note that no *.dct* files are actually listed in the *datazoom\_social.pkg* file, and therefore, they are not installed on the user's computer. Only the *dict.dta* file is sent.
 
-Periodicamente, na manutenção do pacote, temos que rodar a do-file `atualizacao_dict.do` e seguir as instruções.
+The automated do-file `atualizacao_dict.do` is used to update `dict.dta`.
 
-## Créditos
+## Credits
 
-O [Data Zoom](https://www.econ.puc-rio.br/datazoom/) é desenvolvido por uma equipe do Departamento de Economia da Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)
+[Data Zoom](https://www.econ.puc-rio.br/datazoom/)is developed by a team at the PUC-Rio Department of Economics.
 
-Para citar o pacote `datazoom_social`, utilize:
+To cite package `datazoom_social`, use:
 
 > Data Zoom (2023). Data Zoom: Simplifying Access To Brazilian Microdata.  
 > https://www.econ.puc-rio.br/datazoom/english/index.html
 
-Ou, em formato BibTeX:
+Or in BibTeX format:
 
 ``` 
 @Unpublished{DataZoom2023,
