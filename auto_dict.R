@@ -165,3 +165,24 @@ auto_dict(
   file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Trimestral/dct", "pnadcontinua.dct"),
   FALSE
 )
+
+auto_dict(
+  dicts$original[16],
+  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2020_vis5_en.dct"),
+  TRUE,
+  api_key
+)
+
+auto_dict(
+  dicts$original[17],
+  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2021_vis5_en.dct"),
+  TRUE,
+  api_key
+)
+
+auto_dict(
+  dicts$original[18],
+  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2022_vis5_en.dct"),
+  TRUE,
+  api_key
+)
