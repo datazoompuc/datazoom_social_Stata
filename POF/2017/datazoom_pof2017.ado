@@ -816,7 +816,7 @@ if "`tr'" == "tr5"{ // Aluguel Estimado
 if "`tr'" == "tr2"{ // Despesa Coletiva
 	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
 					*/ if QUADRO == 10 | QUADRO == 19
-	replace valor_anual_def = V8000_DEFLA * V9011 * FATOR_ANUALIZACAO /*
+	replace valor_anual_def = V8000_DEFLA * FATOR_ANUALIZACAO /*
 					*/ if QUADRO != 10 & QUADRO != 19
 	gen inss_anual = V1904_DEFLA * V9011 * FATOR_ANUALIZACAO				
 }
