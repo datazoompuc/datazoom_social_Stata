@@ -1,6 +1,7 @@
 library(readxl)
 library(stringr)
 library(tidyverse)
+library(tidyr)
 
 #Importando o dicionario
 dicionario_das_variaveis_PNAD_Continua_microdados <- 
@@ -18,6 +19,7 @@ dic_pnadc$Valor <- as.numeric(dic_pnadc$Valor)
 dic_pnadc <- dic_pnadc %>% filter(!is.na(Valor))
 
 #Juntando as colunas Valor e Label
+dic_pnadc <- dic_pnadc %>% mutate(Label = paste0("\"", Label, "\""))
 dic_pnadc <- dic_pnadc %>% mutate(Label = str_c(Valor, Label, sep = " "))
 dic_pnadc <- dic_pnadc %>% select(Variavel, Label)
 
@@ -25,5 +27,7 @@ dic_pnadc <- dic_pnadc %>% select(Variavel, Label)
 dic_pnadc <- dic_pnadc %>% group_by(Variavel) %>%                    
   summarise(Label = paste(Label, collapse = " "))
 
-
-
+dic_pnadc <- dic_pnadc %>% mutate(Variavel = paste0("label_", Variavel, sep = ""))
+dic_pnadc <- dic_pnadc %>% mutate(Label = str_c(Variavel, Label, sep = " "))
+dic_pnadc <- dic_pnadc %>% mutate(Label = paste0("label define ", Label, sep = " "))
+dic_pnadc <- dic_pnadc %>% select(Label)
