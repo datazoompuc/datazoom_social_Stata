@@ -49,7 +49,7 @@ qui while "`*'" != "" {
 			foreach UF in MG PE RJ RS SP {
 				append using `PME`UF'mes'
 			}
-			tempfile `PME`1'`mm'D'
+			tempfile PME`1'`mm'D
 			save `PME`1'`mm'D'
 			clear
 		}
