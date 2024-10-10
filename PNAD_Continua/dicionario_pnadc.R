@@ -1,4 +1,5 @@
 library(readxl)
+library(stringr)
 library(tidyverse)
 
 #Importando o dicionario
@@ -15,3 +16,14 @@ dic_pnadc <- dic_pnadc %>% filter(!is.na(Valor) | !is.na(Label))
 #Deixando apenas numeros discretos na coluna Valor
 dic_pnadc$Valor <- as.numeric(dic_pnadc$Valor)
 dic_pnadc <- dic_pnadc %>% filter(!is.na(Valor))
+
+#Juntando as colunas Valor e Label
+dic_pnadc <- dic_pnadc %>% mutate(Label = str_c(Valor, Label, sep = " "))
+dic_pnadc <- dic_pnadc %>% select(Variavel, Label)
+
+#Concatenando cada categoria de Variavel
+dic_pnadc <- dic_pnadc %>% group_by(Variavel) %>%                    
+  summarise(Label = paste(Label, collapse = " "))
+
+
+
