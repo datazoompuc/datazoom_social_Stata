@@ -31,3 +31,4 @@ dic_pnadc <- dic_pnadc %>% mutate(Variavel = paste0("label_", Variavel, sep = ""
 dic_pnadc <- dic_pnadc %>% mutate(Label = str_c(Variavel, Label, sep = " "))
 dic_pnadc <- dic_pnadc %>% mutate(Label = paste0("label define ", Label, sep = " "))
 dic_pnadc <- dic_pnadc %>% select(Label)
+writeLines(dic_pnadc$Label, "bbbb.txt")
