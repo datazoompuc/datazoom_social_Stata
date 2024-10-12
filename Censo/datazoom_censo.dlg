@@ -1,23 +1,23 @@
 * VERSION 1.4
 
 VERSION 10.0
-POSITION . . 515 420
+POSITION . . 545 420
 
 DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    
-   GROUPBOX caixayear 10 30 105 125, label("Ano(s)")
-   CHECKBOX	chk70     +20 +20 100 ., label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
+   GROUPBOX caixayear 10 30 115 125, label("Ano(s)")
+   CHECKBOX	chk70     +5 +20 100 ., label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
    CHECKBOX	chk80     @  +20 100 ., label("1980")  onclickon(script c80on) onclickoff(program c80off) option(1980)
    CHECKBOX	chk91     @  +20 100 ., label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
    
-   BUTTON fldata      10 +35  105     ., label("Dados...") onpush(script dados)
-   BUTTON fldict      10 +25  105     ., label("Salvando...") onpush(script salvando)
+   BUTTON fldata      10 +35  115     ., label("Dados...") onpush(script dados)
+   BUTTON fldict      10 +25  115     ., label("Salvando...") onpush(script salvando)
    
-   GROUPBOX caixaarq 10 +30 105 125, label("Tipo de Registro") 
+   GROUPBOX caixaarq 10 +30 115 125, label("Tipo de Registro") 
    RADIO	pes     +10 +20 100 ., first 	label("Pessoas") onclickon(script peson) option(pes) 
    RADIO	dom		+0 +20 100 ., middle 	label("Domicílios") onclickon(script domon) option(dom) 
    RADIO	fam		+0 +20 100 ., middle 	label("Famílias") onclickon(script famon) option(fam) 
@@ -25,52 +25,52 @@ BEGIN
    RADIO	all		+0 +20 100 ., last 		label("Todos merged") onclickon(script allon) option(all) 
  
  
-   GROUPBOX caixaCompatibility 10 +30 105 45, label("Compatibilidade")
+   GROUPBOX caixaCompatibility 10 +30 115 45, label("Compatibilidade")
       CHECKBOX chkcomp    +10  +20  430   ., label("Opção ativada") option(comp)
 
-   TEXT instrUF       140    5  350   ., label("Selecione estados e/ou regiões:")
-	  CHECKBOX chkregN   130   30  160 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
+   TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
+	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
 	  CHECKBOX chkAC   +5  +22  200   ., label("Acre") onclickoff(script nemtudoN) option(AC)
       CHECKBOX chkAP    @  +25  200   ., label("Amapá") onclickoff(script nemtudoN) option(AP)
       CHECKBOX chkAM    @  +25  200   ., label("Amazonas") onclickoff(script nemtudoN) option(AM)
-      CHECKBOX chkPA  +70  -50  200   ., label("Pará") onclickoff(script nemtudoN) option(PA)
+      CHECKBOX chkPA  +85  -50  200   ., label("Pará") onclickoff(script nemtudoN) option(PA)
       CHECKBOX chkRO    @  +25  200   ., label("Rondônia") onclickoff(script nemtudoN) option(RO)
       CHECKBOX chkRR    @  +25  200   ., label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -70  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+      CHECKBOX chkTO  -85  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
 
-   CHECKBOX chkregNE  130  +45  160 183, label("Nordeste") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
+   CHECKBOX chkregNE  140  +45  175 183, label("Nordeste") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
       CHECKBOX chkBA    @  +25  200   ., label("Bahia") onclickoff(script nemtudoNE) option(BA)
       CHECKBOX chkCE    @  +25  200   ., label("Ceará") onclickoff(script nemtudoNE) option(CE)
       CHECKBOX chkMA    @  +25  200   ., label("Maranhão") onclickoff(script nemtudoNE) option(MA)
       CHECKBOX chkRN    @  +25  200   ., label("Rio Grande do Norte") onclickoff(script nemtudoNE) option(RN)
       CHECKBOX chkFN    @  +25  200   ., label("F. de Noronha (1970)") onclickoff(script nemtudoNE) option(FN)
-      CHECKBOX chkPB  +70  -125  200   ., label("Paraíba") onclickoff(script nemtudoNE) option(PB)
+      CHECKBOX chkPB  +80  -125  200   ., label("Paraíba") onclickoff(script nemtudoNE) option(PB)
       CHECKBOX chkPE    @  +25  200   ., label("Pernambuco") onclickoff(script nemtudoNE) option(PE)
       CHECKBOX chkPI    @  +25  200   ., label("Piauí") onclickoff(script nemtudoNE) option(PI)
       CHECKBOX chkSE    @  +25  200   ., label("Sergipe") onclickoff(script nemtudoNE) option(SE)
 
-   CHECKBOX chkregSE  310   30  190  90, label("Sudeste") onclickon(script marcatudoSE) onclickoff(script desmarcatudoSE) groupbox
+   CHECKBOX chkregSE  330   30  205  90, label("Sudeste") onclickon(script marcatudoSE) onclickoff(script desmarcatudoSE) groupbox
       CHECKBOX chkES   +5  +18  200   ., label("Espírito Santo") onclickoff(script nemtudoSE) option(ES)
       CHECKBOX chkMG    @  +23  200   ., label("Minas Gerais") onclickoff(script nemtudoSE) option(MG)
-      CHECKBOX chkRJ  +85  -23  200   ., label("Rio de Janeiro") onclickoff(script nemtudoSE) option(RJ)
+      CHECKBOX chkRJ  +100  -23  200   ., label("Rio de Janeiro") onclickoff(script nemtudoSE) option(RJ)
       CHECKBOX chkSP    @  +23  200   ., label("São Paulo") onclickoff(script nemtudoSE) option(SP)
-      CHECKBOX chkGB  -85  +23  200   ., label("Guanabara (1970)") onclickoff(script nemtudoSE) option(GB)
+      CHECKBOX chkGB  -100  +23  200   ., label("Guanabara (1970)") onclickoff(script nemtudoSE) option(GB)
 
-   CHECKBOX chkregS   310  +40  190  90,label("Sul") onclickon(script marcatudoS) onclickoff(script desmarcatudoS) groupbox
+   CHECKBOX chkregS   330  +40  205  90,label("Sul") onclickon(script marcatudoS) onclickoff(script desmarcatudoS) groupbox
       CHECKBOX chkPR   +5  +18  200   ., label("Paraná") onclickoff(script nemtudoS) option(PR)
       CHECKBOX chkSC  @   +22 200   ., label("Santa Catarina") onclickoff(script nemtudoS) option(SC)
       CHECKBOX chkRS  @  +22  200   ., label("Rio Grande do Sul") onclickoff(script nemtudoS) option(RS)
 
-   CHECKBOX chkregCO  310  +40  190 119, label("Centro-Oeste") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
+   CHECKBOX chkregCO  330  +40  205 119, label("Centro-Oeste") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
       CHECKBOX chkGO   +5  +18  200   ., label("Goiás") onclickoff(script nemtudoCO) option(GO)
       CHECKBOX chkMT    @  +23  200   ., label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
       CHECKBOX chkDF    @  +23  200   ., label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
       CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2010)") onclickoff(script nemtudoCO) option(MS)
 
-	CHECKBOX	eng     135  365 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     145  365 200 ., label("Labels em inglês") option(english)
 
-	TEXT     credit     20   395  480    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     credit     30   395  480    ., label("PUC-Rio - Departamento de Economia") right  
 
 END
 

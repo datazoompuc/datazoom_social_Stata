@@ -35,7 +35,7 @@ BEGIN
       CHECKBOX chkPA  +85  -50  200   ., label("Pará") onclickoff(script nemtudoN) option(PA)
       CHECKBOX chkRO    @  +25  200   ., label("Rondônia") onclickoff(script nemtudoN) option(RO)
       CHECKBOX chkRR    @  +25  200   ., label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -75  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+      CHECKBOX chkTO  -85  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
 
    CHECKBOX chkregNE  130  +45  175 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
