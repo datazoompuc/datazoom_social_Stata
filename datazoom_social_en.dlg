@@ -7,7 +7,7 @@ DIALOG main, label("Datazoom Social")
 BEGIN
 	
 	TEXT tx_eng  10   3 250 25, label("Para a caixa de diálogo em português, clique") left
-	HLINK hl_eng 252 5 240 20, label("aqui") left onpush(script child_pt)
+	HLINK hl_eng 252 3 240 20, label("aqui") left onpush(script child_pt)
 	
 	BUTTON btn_censo 		20 45 120 25, label("Censo") onpush(script child_censo)
 	BUTTON btn_ecinf 		+158 @   @  @, label("ECINF") onpush(script child_ecinf)
