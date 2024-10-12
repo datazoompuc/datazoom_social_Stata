@@ -3,7 +3,7 @@
 VERSION 10.0
 POSITION . . 515 420
 
-DIALOG main, label("CENSO") tabtitle("Main")
+DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    

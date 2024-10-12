@@ -3,7 +3,7 @@
 VERSION 10.0
 POSITION . . 540 420
 
-DIALOG main, label("Censo - Access to Stata format microdata files") tabtitle("Main")
+DIALOG main, label("Census") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    

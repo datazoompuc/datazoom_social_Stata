@@ -4,7 +4,7 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 420 280
 
-DIALOG main, label("PNAD COVID19") tabtitle("Main")
+DIALOG main, label("Covid PNAD") tabtitle("Main")
 BEGIN
 ******************************************************************************   
 GROUPBOX caixaAnos 20 20 190 220, label("Month")
