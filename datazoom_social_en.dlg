@@ -34,7 +34,7 @@ BEGIN
 	FRAME fr_pme  			+158 @  @   @
 	FRAME fr_pnad  			+158 @  @   @
 	
-	FRAME fr_pncon   		0   135 160 105
+	FRAME fr_pncon   		0   138 160 105
 	FRAME fr_pncov  		+158 @  @   @
 	FRAME fr_pns  			+158 @  @   @
 	FRAME fr_pof  			+158 @  @   @
