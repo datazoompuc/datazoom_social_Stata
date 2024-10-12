@@ -3,12 +3,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 320 364
+POSITION . . 340 364
 
 DIALOG main, label("PNAD") tabtitle("Main")
 BEGIN
 
-GROUPBOX caixaPeriodo 10 25 140 303, label("Escolha um Periodo ...")
+GROUPBOX caixaPeriodo 10 25 145 310, label("Escolha um Periodo ...")
 
    RADIO    rad8190 20 +20 120    .,                           ///
       first label("1981 a 1990")                              ///
@@ -22,7 +22,7 @@ GROUPBOX caixaPeriodo 10 25 140 303, label("Escolha um Periodo ...")
       last label("2002 a 2015")                               ///
       onclickon(script mostra0209)
 
-   TEXT     instr1     +0   +30  130    ., label("... e selecione o(s) ano(s)") left
+   TEXT     instr1     +0   +30  130    ., label("...e selecione o(s) ano(s)") left
 
    CHECKBOX    ck80 20 140 120    ., label("Todos") onclickon(script marcatudo80) onclickoff(script desmarcatudo80)
    CHECKBOX    ck1981 20 +24 120    ., label("1981") onclickon(program ad1981) onclickoff(program rm1981)
@@ -59,27 +59,27 @@ GROUPBOX caixaPeriodo 10 25 140 303, label("Escolha um Periodo ...")
    CHECKBOX    ck2014 +56 +0 120    ., label("2014") onclickon(program ad2014) onclickoff(program rm2014)
    CHECKBOX    ck2015 20 +24 120    ., label("2015") onclickon(program ad2015) onclickoff(program rm2015)
 
-GROUPBOX caixaBase 165 25 140 80, label("Bases de dados")
+GROUPBOX caixaBase 170 25 155 80, label("Bases de dados")
 
     BUTTON  fldata    +17 +18 100     ., label("Dados Originais...") onpush(script dadosoriginais)
     BUTTON  fldata1    +0 +30 100     ., label("Salvando...") onpush(script dadosfinais)
 
-GROUPBOX caixaarq 165 +40 140 84, label("Tipo de Registro") 
+GROUPBOX caixaarq 170 +40 155 89, label("Tipo de Registro") 
 
 	RADIO	pes 	 +10 +21 100 .,  first 	label("Pessoas") 	option(pes) 
 	RADIO	dom	 	 +0 +21 100 .,   middle	label("Domicílios")  	option(dom) 
 	RADIO	both 	 +0 +21 100 .,   last	label("Ambos Merged")  	option(both) 
 
-GROUPBOX caixaid 165 +35 140 94, label("Compatibilidade")
+GROUPBOX caixaid 170 +35 155 94, label("Compatibilidade")
 
 	RADIO	ncomp       +10 +22 120 ., 	first	label("Não-compatível")  option(ncomp)
 	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatível anos 1980") option(comp81)
 	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatível anos 1990") option(comp92)
 
-	CHECKBOX	eng     20  329 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     20  336 200 ., label("Labels em inglês") option(english)
 
-TEXT     credit     160   305  140    ., label("PUC-Rio - Departamento") right
-TEXT     credi2     160   320  140    ., label("de Economia") right
+TEXT     credit     165   305  140    ., label("PUC-Rio - Departamento") right
+TEXT     credi2     165   320  140    ., label("de Economia") right
 TEXT     notes2     5   5  300    ., label("Arquivos de dados originais") left
 		
 END
