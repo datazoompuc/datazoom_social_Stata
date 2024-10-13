@@ -10,9 +10,9 @@ BEGIN
 
 GROUPBOX bases_padrao 5 10 340 70, label("Tipo de Identificação")
 	
-	CHECKBOX  ch_dom   +40 	+30 200 ., label("Domicílio")
-    CHECKBOX  ch_uc    +80   @ 200 ., label("Unidade de Consumo")
-    CHECKBOX  ch_pess  +130   @ 200 ., label("Pessoas") 
+	CHECKBOX  ch_dom   +35 	+30 200 ., label("Domicílio")
+    CHECKBOX  ch_uc    +76   @ 200 ., label("Unidade de Consumo")
+    CHECKBOX  ch_pess  +140   @ 200 ., label("Pessoas") 
 
 GROUPBOX opc_dic 5 +45 340 60, label("Bases de Dados")
 	
