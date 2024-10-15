@@ -1,7 +1,7 @@
 VERSION 2.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 634 265
+POSITION . . 644 265
 
 DIALOG main, label("Datazoom Social")
 BEGIN
@@ -9,32 +9,32 @@ BEGIN
 	TEXT tx_eng  10   3 250 25, label("Para a caixa de diálogo em português, clique") left
 	HLINK hl_eng 252 3 240 20, label("aqui") left onpush(script child_pt)
 	
-	BUTTON btn_censo 		20 45 120 25, label("Censo") onpush(script child_censo)
+	BUTTON btn_censo 		25 45 120 25, label("Censo") onpush(script child_censo)
 	BUTTON btn_ecinf 		+158 @   @  @, label("ECINF") onpush(script child_ecinf)
 	BUTTON btn_pme 			+158 @   @  @, label("PME") onpush(script child_pme)
 	BUTTON btn_pnad 		+158 @   @  @, label("PNAD") onpush(script child_pnad)
 	
-	BUTTON btn_pncon 		20 150 120 25, label("PNAD Contínua") onpush(script child_pnad_continua)
+	BUTTON btn_pncon 		25 150 120 25, label("PNAD Contínua") onpush(script child_pnad_continua)
 	BUTTON btn_pncov 		+158 @   @  @, label("PNAD Covid") onpush(script child_pnad_covid)
 	BUTTON btn_pns 			+158 @   @  @, label("PNS") onpush(script child_pns)
 	BUTTON btn_pof 			+158 @   @  @, label("POF") onpush(script child_pof)
 	
-	TEXTBOX txb_censo    		10 75 140 45, label("Census - 1970 to 2010") center
+	TEXTBOX txb_censo    		15 75 140 45, label("Census - 1970 to 2010") center
 	TEXTBOX txb_ecinf    		+158 @ @ @, label("Urban Informal Economy - 1997 and 2003") center
 	TEXTBOX txb_pme    	 	+158 @ @ @, label("Monthly Employment Survey - 1990 to 2015") center
 	TEXTBOX txb_pnad     		+158 @ @ @, label("National Household Sample Survey - 2001 to 2015") center
 	
-    	TEXTBOX txb_pncon			10 180 140 40, label("Continuous PNAD - 2012 to 2023") center
+    	TEXTBOX txb_pncon			15 180 140 40, label("Continuous PNAD - 2012 to 2023") center
 	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
 	TEXTBOX txb_pns   			+158 @ @ @, label("National Survey of Health - 2013 and 2019") center
 	TEXTBOX txb_pof 			+158 @ @ @, label("Consumer Expenditure Survey - 1995 to 2018") center
 	
-	FRAME fr_censo   		0   30 160 110
+	FRAME fr_censo   		5   30 160 110
 	FRAME fr_ecinf  		+158 @  @   @
 	FRAME fr_pme  			+158 @  @   @
 	FRAME fr_pnad  			+158 @  @   @
 	
-	FRAME fr_pncon   		0   138 160 105
+	FRAME fr_pncon   		5   138 160 105
 	FRAME fr_pncov  		+158 @  @   @
 	FRAME fr_pns  			+158 @  @   @
 	FRAME fr_pof  			+158 @  @   @
