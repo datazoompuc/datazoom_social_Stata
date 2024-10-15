@@ -3,12 +3,11 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 415 365
-
-DIALOG main, label("POF 2002-2003 - Bases Originais em formato STATA") tabtitle("Main")
+POSITION . . 445 365
+DIALOG main, label("POF 2002-2003 - TRs") tabtitle("Main")
 BEGIN
 
-GROUPBOX trs 0 5 410 260, label("Tipos de Registros")
+GROUPBOX trs 5 5 435 260, label("Tipos de Registros")
 
 	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - Domicílios") option(tr1)
 	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Pessoas") option(tr2)
@@ -17,23 +16,23 @@ GROUPBOX trs 0 5 410 260, label("Tipos de Registros")
 	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - Despesa de 90 dias") option(tr5)
 	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - Despesa de 12 meses") option(tr6)
 	CHECKBOX ch_tr7    @ +30 @ @, label("TR_7 - Outras Despesas") option(tr7)
-	CHECKBOX ch_tr8  +180  25 210 @, label("TR_8 - Despesas c/ Serviços Domésticos") option(tr8)
+	CHECKBOX ch_tr8  +180  25 235 @, label("TR_8 - Despesas c/ Serviços Domésticos") option(tr8)
 	CHECKBOX ch_tr9   @ +30 @ @, label("TR_9 - Caderneta de Despesa Coletiva") option(tr9)
 	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Despesa Individual") option(tr10)
 	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Despesas com Veículos") option(tr11)
 	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Rendimentos e Deduções") option(tr12)
 	CHECKBOX ch_tr13   @ +30 @ @, label("TR_13 - Outros Rendimentos") option(tr13)
 	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Medicamentos e Assit.Saúde") option(tr14)
-	CHECKBOX ch_all  130 +30 140 20, label("Seleciona todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
+	CHECKBOX ch_all  150 +30 140 20, label("Seleciona todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
 
-GROUPBOX opc_dic 0 275 410 50, label("Bases de Dados")
+GROUPBOX opc_dic 5 275 435 50, label("Bases de Dados")
 	
-	BUTTON   fl_base     75 +20 90 ., label("Dados originais...") onpush(script dados)
+	BUTTON   fl_base     75 +20 130 ., label("Dados originais...") onpush(script dados)
 	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
 
-	CHECKBOX	eng     10  335 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     10  345 150 ., label("Labels em inglês") option(english)
 
-	TEXT     credit     5   340  400    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     credit     200   345  240    ., label("PUC-Rio - Departamento de Economia") right  
 
 
 END

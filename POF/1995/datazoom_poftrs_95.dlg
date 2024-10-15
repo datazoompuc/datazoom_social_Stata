@@ -1,11 +1,13 @@
+* VERSION 1.2
+
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 410 325
+POSITION . . 425 325
 DIALOG main, label ("POF 1995-96 - TRs") tabtitle("Main")
 BEGIN
 
-GROUPBOX trs 0 5 405 230, label("Tipos de Registro")
+GROUPBOX trs 5 5 415 230, label("Tipos de Registro")
 
 	CHECKBOX ch_tr1  +15 +20 200 20, label("TR_1 - Domicilios") option(tr1)
 	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Pessoas") option(tr2)
@@ -13,24 +15,24 @@ GROUPBOX trs 0 5 405 230, label("Tipos de Registro")
 	CHECKBOX ch_tr4    @ +30 @ @, label("TR_4 - Despesa de 6 meses") option(tr4)
 	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - Bens duráveis") option(tr5)
 	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - Outras despesas") option(tr6)
-	CHECKBOX ch_tr7  +175 20 210 @, label("TR_7 - Serviços domésticos") option(tr7)
+	CHECKBOX ch_tr7  +175 20 230 @, label("TR_7 - Serviços domésticos") option(tr7)
 	CHECKBOX ch_tr8    @ +30 @ @, label("TR_8 - Caderneta de despesa coletiva") option(tr8)
 	CHECKBOX ch_tr9    @ +30 @ @, label("TR_9 - Despesa individual") option(tr9)
 	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Despesa com veículos") option(tr10)
 	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Rendimentos e deduções") option(tr11)
 	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Outros rendimentos") option(tr12)
-	CHECKBOX ch_all    130 +30 140 20, label("Seleciona todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
+	CHECKBOX ch_all    150 +30 140 20, label("Seleciona todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
 	
-GROUPBOX opc_dic 0 240 375 50, label("Bases de dados")
+GROUPBOX opc_dic 5 240 415 50, label("Bases de dados")
 	
 *	TEXT   tx_base     10 +20 310  ., label("Select or insert the data and dictionaries folder (same for both)")
-	BUTTON   fl_base     60 +20 90 ., label("Dados originais...") onpush(script dados)
+	BUTTON   fl_base     60 +20 130 ., label("Dados originais...") onpush(script dados)
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
-	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
+	BUTTON   fl_salvabase +190 @ 90 ., label("Salvando...") onpush(script salvando)
 
-	CHECKBOX	eng     10  300 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     10  305 150 ., label("Labels em inglês") option(english)
 
-TEXT     credit     5   305  370    ., label("PUC-Rio - Departamento de Economia") right
+TEXT     credit     200   305  220    ., label("PUC-Rio - Departamento de Economia") right
 
 END
 

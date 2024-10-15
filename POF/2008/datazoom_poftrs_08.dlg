@@ -3,12 +3,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 430 380
+POSITION . . 445 380
 
-DIALOG main, label("POF 2008-2009 - Bases Originais em formato STATA") tabtitle("Main")
+DIALOG main, label("POF 2008-2009 - TRs") tabtitle("Main")
 BEGIN
 
-GROUPBOX trs 0 5 420 290, label("Tipos de Registros")
+GROUPBOX trs 5 5 435 290, label("Tipos de Registros")
 
 	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - Domicílio") option(tr1)
 	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Pessoas") option(tr2)
@@ -18,7 +18,7 @@ GROUPBOX trs 0 5 420 290, label("Tipos de Registros")
 	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - Despesa de 90 dias") option(tr6)
 	CHECKBOX ch_tr7    @ +30 @ @, label("TR_7 - Despesa de 12 meses") option(tr7)
 	CHECKBOX ch_tr8    @ +30 @ @, label("TR_8 - Outros Gastos") option(tr8)
-	CHECKBOX ch_tr9  +180  20 220 @, label("TR_9 - Despesas c/ Serviços Domésticos") option(tr9)
+	CHECKBOX ch_tr9  +180  20 255 @, label("TR_9 - Despesas c/ Serviços Domésticos") option(tr9)
 	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Aluguel estimado") option(tr10)
 	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Caderneta de Despesa Coletiva") option(tr11)
 	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Despesa Individual") option(tr12)
@@ -26,18 +26,18 @@ GROUPBOX trs 0 5 420 290, label("Tipos de Registros")
 	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Rendimentos e Deduções") option(tr14)
 	CHECKBOX ch_tr15   @ +30 @ @, label("TR_15 - Outros Rendimentos") option(tr15)
 	CHECKBOX ch_tr16   @ +30 @ @, label("TR_16 - Consumo Alimentar") option(tr16)
-	CHECKBOX ch_all  130 +30 140 20, label("Selecione todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
+	CHECKBOX ch_all  150 +30 140 20, label("Selecione todos") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
 
-GROUPBOX opc_dic 0 300 420 50, label("Bases de Dados")
+GROUPBOX opc_dic 5 300 435 50, label("Bases de Dados")
 	
 *	TEXT   tx_base     10 +20 310  ., label("Select or insert the data and dictionaries folder (same for both)")
-	BUTTON   fl_base     75 +20 90 ., label("Dados originais...") onpush(script dados)
+	BUTTON   fl_base     75 +20 130 ., label("Dados originais...") onpush(script dados)
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
 	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
 
-	CHECKBOX	eng     10  355 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
 
-	TEXT     credit     5   360  400    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     credit     200   360  240    ., label("PUC-Rio - Departamento de Economia") right  
 
 
 END

@@ -63,7 +63,7 @@ GROUPBOX opc_dic 5 264 295 85, label("Bases de Dados")
 
 CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
 
-TEXT     credit     185   360  350    ., label("PUC-Rio - Departamento de Economia") right  
+TEXT     credit     215   360  320    ., label("PUC-Rio - Departamento de Economia") right  
 
 END
 
