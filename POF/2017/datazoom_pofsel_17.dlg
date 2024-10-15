@@ -47,7 +47,7 @@ GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
 	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e ...")
 	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
-	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimetos: Selecione um item e ...")
+	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e ...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
 	BUTTON  btn_ch   +108 +60 150 ., label("... clique para adicioná-lo") onpush(program atualizaListas)
