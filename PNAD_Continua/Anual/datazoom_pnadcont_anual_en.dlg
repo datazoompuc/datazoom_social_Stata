@@ -51,8 +51,8 @@ GROUPBOX caixaTrimestres 150 20 130 360, label("Trimester(s)")
    
 GROUPBOX caixaDicionários 300 50 120 100, label("Databases")
 
-	BUTTON	fldados 	+10 +25 100 ., label("Original Files ...") onpush(script dados) 
-	BUTTON	flsalvando  @ +35 100 ., label("Saving ...") onpush(script salvando) 
+	BUTTON	fldados 	+10 +25 100 ., label("Original files...") onpush(script dados) 
+	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 	HLINK hlink1 -8 +50 140 ., label("IBGE Supplements' Guide") onpush(program hlink1)
 
 	CHECKBOX	eng      300  20 200 ., label("Labels in English") option(english)

@@ -25,9 +25,9 @@ GROUPBOX caixaAnos 5 10 155 190, label("Year(s)")
    CHECKBOX    ck2015 @ +24 120    ., label("2015")  option(2015)
    CHECKBOX    ck2016 +50 30  45   .,label("2016")  option(2016)
   
-GROUPBOX caixaDicionários 165 10 260 77, label("Original and Final Databases")
+GROUPBOX caixaDicionários 165 10 260 77, label("Databases")
 
-	BUTTON	fldados 	+20 +30 100 ., label("Data...") onpush(script dados) 
+	BUTTON	fldados 	+20 +30 100 ., label("Original files...") onpush(script dados) 
 	BUTTON	flsalvando  +120 @ 100 ., label("Saving...") onpush(script salvando) 
 	
 GROUPBOX caixaid 165 98 260 102, label("Individual Identification")

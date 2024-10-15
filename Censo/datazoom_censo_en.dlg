@@ -3,7 +3,7 @@
 VERSION 10.0
 POSITION . . 540 420
 
-DIALOG main, label("Census") tabtitle("Main")
+DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    
@@ -14,7 +14,7 @@ BEGIN
    CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
    
-   BUTTON fldata      10 +35  105     ., label("Data...") onpush(script dados)
+   BUTTON fldata      10 +35  105     ., label("Original files...") onpush(script dados)
    BUTTON fldict      10 +25  105     ., label("Saving...") onpush(script salvando)
    
   GROUPBOX caixaarq 10 +30 105 125, label("Type of Register") 

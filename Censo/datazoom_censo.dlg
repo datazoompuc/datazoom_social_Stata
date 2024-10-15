@@ -14,7 +14,7 @@ BEGIN
    CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
    
-   BUTTON fldata      10 +35  115     ., label("Dados...") onpush(script dados)
+   BUTTON fldata      10 +35  115     ., label("Dados originais...") onpush(script dados)
    BUTTON fldict      10 +25  115     ., label("Salvando...") onpush(script salvando)
    
    GROUPBOX caixaarq 10 +30 115 125, label("Tipo de Registro") 

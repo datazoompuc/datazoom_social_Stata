@@ -61,7 +61,7 @@ GROUPBOX caixaPeriodo 10 25 145 310, label("Escolha um Periodo ...")
 
 GROUPBOX caixaBase 170 25 155 80, label("Bases de dados")
 
-    BUTTON  fldata    +17 +18 100     ., label("Dados Originais...") onpush(script dadosoriginais)
+    BUTTON  fldata    +17 +18 100     ., label("Dados originais...") onpush(script dadosoriginais)
     BUTTON  fldata1    +0 +30 100     ., label("Salvando...") onpush(script dadosfinais)
 
 GROUPBOX caixaarq 170 +40 155 89, label("Tipo de Registro") 

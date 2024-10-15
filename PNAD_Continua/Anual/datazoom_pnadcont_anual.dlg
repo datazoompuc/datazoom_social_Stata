@@ -48,10 +48,10 @@ GROUPBOX caixaTrimestres 150 20 130 360, label("Trimestre(s)")
    CHECKBOX    ck2023_tri2 @ +20 120	   ., label("2023 trimestre 2")  option(2023_tri2)
    CHECKBOX    ck2023_tri4 @ +20 120	   ., label("2023 trimestre 4")  option(2023_tri4)
    
-GROUPBOX caixaDicionários 300 50 120 100, label("Base de Dados")
+GROUPBOX caixaDicionários 300 50 120 100, label("Bases de Dados")
 
-	BUTTON	fldados 	+10 +25 100 ., label("Dados originais ...") onpush(script dados) 
-	BUTTON	flsalvando  @ +35 100 ., label("Salvando ...") onpush(script salvando) 
+	BUTTON	fldados 	+10 +25 100 ., label("Dados originais...") onpush(script dados) 
+	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
    HLINK hlink1 -8 +50 160 ., label("Guia Suplementos IBGE") onpush(program hlink1)
 
 	CHECKBOX	eng     300  20 200 ., label("Labels em inglês") option(english)
