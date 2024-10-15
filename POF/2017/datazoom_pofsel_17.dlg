@@ -5,7 +5,7 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 540 385
 
-DIALOG main, label("POF 2017-2018 - Gastos Selecionados")
+DIALOG main, label("POF 2017-18 - Gastos Selecionados")
 BEGIN
 
 DEFINE ps_opc_extr_x 0
@@ -58,8 +58,8 @@ GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 	
 GROUPBOX opc_dic 5 264 295 85, label("Bases de Dados")
 	
-	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais ...") onpush(script dados)
-	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando ...") onpush(script salvando)
+	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais...") onpush(script dados)
+	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando...") onpush(script salvando)
 
 CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
 

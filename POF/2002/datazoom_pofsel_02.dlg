@@ -5,7 +5,7 @@ SYNCHRONOUS_ONLY
 
 POSITION . . 540 385
 
-DIALOG main, label("POF 2002-2003 - Gastos Selecionados")
+DIALOG main, label("POF 2002-03 - Gastos Selecionados")
 BEGIN
 
 DEFINE ps_opc_extr_x 0
@@ -43,14 +43,14 @@ GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
 	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
 	
-	TEXT        agr_ali         20 ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e ...")
+	TEXT        agr_ali         20 ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e...")
 	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
-	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e ...")
+	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e...")
 	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
-	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e ...")
+	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +108 +60 150 ., label("... clique para adicioná-lo") onpush(program atualizaListas)
+	BUTTON  btn_ch   +108 +60 150 ., label("...clique para adicioná-lo") onpush(program atualizaListas)
 	
 GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 
@@ -58,8 +58,8 @@ GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 	
 GROUPBOX opc_dic 5 ps_opc_dic_y 295 85, label("Bases de Dados")
 	
-	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais ...") onpush(script dados)
-	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando ...") onpush(script salvando)
+	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais...") onpush(script dados)
+	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando...") onpush(script salvando)
 
 CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
 

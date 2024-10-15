@@ -4,7 +4,7 @@ VERSION 10.0
 SYNCHRONOUS_ONLY
 
 POSITION . . 445 365
-DIALOG main, label("POF 2002-2003 - TRs") tabtitle("Main")
+DIALOG main, label("POF 2002-03 - TRs") tabtitle("Main")
 BEGIN
 
 GROUPBOX trs 5 5 435 260, label("Tipos de Registros")

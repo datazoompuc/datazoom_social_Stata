@@ -3,7 +3,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 355 175
+POSITION . . 350 175
 
 DIALOG main, label("POF - Bases Padronizadas")
 BEGIN
@@ -16,7 +16,7 @@ GROUPBOX bases_padrao 5 10 340 70, label("Tipo de Identificação")
 
 GROUPBOX opc_dic 5 +45 340 60, label("Bases de Dados")
 	
-	BUTTON   tx_base     45 +25 110  ., label("Dados originais ... ") onpush(script dados)
+	BUTTON   tx_base     45 +25 110  ., label("Dados originais... ") onpush(script dados)
 	*FILE   fl_base     5 +20 320 ., label("Search ...") dir
 	BUTTON   tx_salvabase +150 @ 110  ., label("Salvando...") onpush(script salvando)
 	*FILE   fl_salvabase 5 +20 320 ., label("Search ...") dir
