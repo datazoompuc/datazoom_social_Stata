@@ -242,9 +242,9 @@ foreach ano in `years' {
 				capture infile using `dic', using("`original'/AMO80.UF`suf'.txt") clear
 				if _rc == 601 {
 				/* Abrindo arquivo se em formato dbf           */
-					qui use "`original'/CD80DOM`codUF'.dta", clear
+					qui import dbase "`original'/CD80DOM`codUF'.dbf", clear
 					qui rename contadom ndom
-					qui merge 1:m uf munic ndom using "`original'/CD80PES`codUF'.dta", nogen keep(match) 
+					qui merge 1:m uf munic ndom using "`original'/CD80PES`codUF'.dbf", nogen keep(match) 
 					
 			
 					/* Renomeando as variáveis */
