@@ -241,16 +241,18 @@ foreach ano in `years' {
 				
 				capture infile using `dic', using("`original'/AMO80.UF`suf'.txt") clear
 				if _rc == 601 {
-				/* Abrindo arquivo se em formato dbf           */
-					qui tempfile step_to_merge
-					qui import dbase "`original'\CD80PES`codUF'.dbf", nogen keep(match)
-					qui rename *, lower
-					qui rename contadom ndom
-					save `step_to_merge', replace
+				/* Abrindo arquivo se em formato dbf */
 					qui import dbase "`original'\CD80DOM`codUF'.dbf", clear
 					qui rename *, lower
-					qui rename contadom ndom
-					qui merge 1:m uf munic ndom using step_to_merge
+					
+					/* Definindo um arquivo temporário */
+					tempfile step_to_merge
+					qui import dbase "`original'\CD80PES`codUF'.dbf", clear
+					qui rename *, lower
+					qui save `step_to_merge', replace
+					
+					/* Merge de fato */
+					qui merge m:1 uf munic ndom using `step_to_merge', nogen keep(match)
 			
 					/* Renomeando as variáveis */
 					// Arquivo em formato dbf não contém as variáveis distrito(v6), número de ordem(v500), situação da pessoa (v598) e uf do mun que morava anteriormente (v518)
