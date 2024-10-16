@@ -241,14 +241,15 @@ foreach ano in `years' {
 				
 				capture infile using `dic', using("`original'/AMO80.UF`suf'.txt") clear
 				if _rc == 601 {
-				/* Abrindo arquivo se em formato dbf */
-					qui import dbase "`original'\CD80DOM`codUF'.dbf", clear
+				/* Abrindo arquivo se em formato dbf */					
+					qui import dbase "`original'\CD80PES`codUF'.dbf", clear
 					qui rename *, lower
 					
 					/* Definindo um arquivo temporário */
 					tempfile step_to_merge
-					qui import dbase "`original'\CD80PES`codUF'.dbf", clear
+					qui import dbase "`original'\CD80DOM`codUF'.dbf", clear
 					qui rename *, lower
+					qui rename contadom ndom
 					qui save `step_to_merge', replace
 					
 					/* Merge de fato */
