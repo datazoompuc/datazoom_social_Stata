@@ -2,12 +2,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 420 280
+POSITION . . 365 270
 
-DIALOG main, label("PNAD COVID19") tabtitle("Main")
+DIALOG main, label("PNAD Covid") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaAnos 20 20 190 220, label("Month")
+GROUPBOX caixaAnos 5 20 190 220, label("Month")
 
    CHECKBOX    ck05 +14 +20 210  ., label("May/2020")  option(05)
    CHECKBOX    ck06 @ +24 210    ., label("June/2020")  option(06)
@@ -17,14 +17,14 @@ GROUPBOX caixaAnos 20 20 190 220, label("Month")
    CHECKBOX    ck10 @ +24 210    ., label("October/2020")  option(10)
    CHECKBOX    ck11 @ +24 210    ., label("November/2020")  option(11)
 
-GROUPBOX caixaDicionários 210 60 190 130, label("Database")
+GROUPBOX caixaDicionários 200 65 160 130, label("Databases")
 
-	BUTTON	fldados 	+45 +35 100 ., label("Original data...") onpush(script dados) 
+	BUTTON	fldados 	+30 +35 100 ., label("Original files...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
-	CHECKBOX	eng     34  250 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     5  250 110 ., label("Labels in English") option(english)
 	
-TEXT     credit     0   250 410    ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     120   250 240    ., label("PUC-Rio - Department of Economics") right
 
 
 END

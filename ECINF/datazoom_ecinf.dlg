@@ -20,7 +20,7 @@ GROUPBOX caixaBase 5 +50 135 100, label("Bases de Dados")
     BUTTON  fl_salvabase    +0 +35 100     ., label("Salvando...") onpush(script salvando)
 
 
-GROUPBOX trs +140 5 160 170, label("Tipos de Registros")
+GROUPBOX trs +145 5 160 170, label("Tipos de Registros")
 
 	CHECKBOX ch_tr1  +10 +20 130 20, label("Domicílios") option(domicilios)
 	CHECKBOX ch_tr2    @ +20 @ @, label("Moradores") option(moradores)	
@@ -32,7 +32,7 @@ GROUPBOX trs +140 5 160 170, label("Tipos de Registros")
 
 	CHECKBOX	eng     5  180 200 ., label("Labels em inglês") option(english)
 
-	TEXT     credit     5   200  310    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     credit     15   210  310    ., label("PUC-Rio - Departamento de Economia") right  
 END
 
 SCRIPT PREINIT_SCRIPT

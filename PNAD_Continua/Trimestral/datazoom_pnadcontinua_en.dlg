@@ -25,7 +25,7 @@ GROUPBOX caixaAnos 20 10 100 340, label("Year(s)")
 
 GROUPBOX caixaDicionários 160 10 140 118, label("Databases")
 
-	BUTTON	fldados 	+20 +35 100 ., label("Original Files...") onpush(script dados) 
+	BUTTON	fldados 	+20 +35 100 ., label("Original files...") onpush(script dados) 
 	BUTTON	flsalvando  @ +35 100 ., label("Saving...") onpush(script salvando) 
 
 GROUPBOX caixaid 160 140 160 116, label("Individual Identification")

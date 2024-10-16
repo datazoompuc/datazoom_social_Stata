@@ -61,8 +61,8 @@ GROUPBOX caixaPeriodo 10 25 140 303, label("Choose a time period...")
 
 GROUPBOX caixaBase 165 25 140 80, label("Databases")
 
-    BUTTON  fldata    +17 +18 100     ., label("Original files") onpush(script dadosoriginais)
-    BUTTON  fldata1    +0 +30 100     ., label("Save to") onpush(script dadosfinais)
+    BUTTON  fldata    +17 +18 100     ., label("Original files...") onpush(script dadosoriginais)
+    BUTTON  fldata1    +0 +30 100     ., label("Saving...") onpush(script dadosfinais)
 
 GROUPBOX caixaarq 165 +40 140 84, label("Type of Register") 
 

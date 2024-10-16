@@ -3,39 +3,39 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 380 365
+POSITION . . 400 365
 
-DIALOG main, label("POF 2002-2003 - TRs") tabtitle("Main")
+DIALOG main, label("POF 2002-03 - TRs") tabtitle("Main")
 BEGIN
 
-GROUPBOX trs 0 5 375 260, label("Types of Register")
+GROUPBOX trs 5 5 390 260, label("Types of Register")
 
-	CHECKBOX ch_tr1  +15 +20 180 20, label("TR_1 - Households") option(tr1)
+	CHECKBOX ch_tr1  +5 +20 180 20, label("TR_1 - Households") option(tr1)
 	CHECKBOX ch_tr2    @ +30 @ @, label("TR_2 - Individuals") option(tr2)
 	CHECKBOX ch_tr3    @ +30 @ @, label("TR_3 - Life Conditions") option(tr3)
 	CHECKBOX ch_tr4    @ +30 @ @, label("TR_4 - Durable Goods") option(tr4)
 	CHECKBOX ch_tr5    @ +30 @ @, label("TR_5 - 90-days Expenditures") option(tr5)
 	CHECKBOX ch_tr6    @ +30 @ @, label("TR_6 - 12-months Expenditures") option(tr6)
 	CHECKBOX ch_tr7    @ +30 @ @, label("TR_7 - Other Expenditures") option(tr7)
-	CHECKBOX ch_tr8  +180  25 @ @, label("TR_8 - Household Services") option(tr8)
+	CHECKBOX ch_tr8  195  25 190 @, label("TR_8 - Household Services") option(tr8)
 	CHECKBOX ch_tr9   @ +30 @ @, label("TR_9 - Expenditure Booklet") option(tr9)
 	CHECKBOX ch_tr10   @ +30 @ @, label("TR_10 - Individual Expenditures") option(tr10)
 	CHECKBOX ch_tr11   @ +30 @ @, label("TR_11 - Vehicles Expenditures") option(tr11)
 	CHECKBOX ch_tr12   @ +30 @ @, label("TR_12 - Income and Deductions") option(tr12)
 	CHECKBOX ch_tr13   @ +30 @ @, label("TR_13 - Other Incomes") option(tr13)
 	CHECKBOX ch_tr14   @ +30 @ @, label("TR_14 - Health Care") option(tr14)
-	CHECKBOX ch_all  130 +30 140 20, label("Select all TRs.") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
+	CHECKBOX ch_all  130 +30 140 20, label("Select all") onclickon(script seleciona_todos) onclickoff(script desmarca_todos)
 
-GROUPBOX opc_dic 0 275 375 50, label("Original and Final Data folders")
+GROUPBOX opc_dic 5 275 390 50, label("Databases")
 	
 *	TEXT   tx_base     10 +20 310  ., label("Select or insert the data and dictionaries folder (same for both)")
-	BUTTON   fl_base     60 +20 90 ., label("Data...") onpush(script dados)
+	BUTTON   fl_base     70 +20 90 ., label("Original files...") onpush(script dados)
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
 	BUTTON   fl_salvabase +170 @ 90 ., label("Saving...") onpush(script salvando)
 
-	CHECKBOX	eng     10  335 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     5  345 150 ., label("Labels in English") option(english)
 
-	TEXT     credit     5   340  370    ., label("PUC-Rio - Department of Economics") right  
+	TEXT     credit     160   345  235    ., label("PUC-Rio - Department of Economics") right  
 
 
 END

@@ -3,7 +3,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 505 385
+POSITION . . 540 385
 
 DIALOG main, label("POF 1995-96 - Gastos Selecionados")
 BEGIN
@@ -31,40 +31,40 @@ DEFINE ps_fl_salvabase 5
 DEFINE ps_tx_base 10
 DEFINE ps_tx_salvabase 10
 
-GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Tipo de Identificação")
+GROUPBOX opc_extr 5 ps_opc_extr_y 295 65, label("Tipo de Identificação")
 
-	RADIO   rd_dom     +5 +25 100 ., first label("Domicílio") option(dom)
-	RADIO   rd_uc       +65 @   150 ., middle label("Unidade de Consumo") option(uc)
-	RADIO   rd_pess     +125 @  100 ., last label("Pessoas") option(pess)
+	RADIO   rd_dom     +7 +25 100 ., first label("Domicílio") option(dom)
+	RADIO   rd_uc       +82 @   150 ., middle label("Unidade de Consumo") option(uc)
+	RADIO   rd_pess     +142 @  100 ., last label("Pessoas") option(pess)
 	
-GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Adicione itens à cesta")
+GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	
 	RADIO rd_ali +15 +20 . ., label("Alimentação") onclickon(script habilita_ali) first
 	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
 	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
 	
-	TEXT        agr_ali         ps_agr_ali_x ps_agr_ali_y 230 ., label("Itens em Alimentacao: Selecione um item e ...")
+	TEXT        agr_ali         20 ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e...")
 	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
-	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e ...")
+	TEXT        agr_desp        @ ps_agr_ali_y 230 ., label("Outros Gastos: Selecione um item e...")
 	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
-	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e ...")
+	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +85 +60 150 ., label("... clique para adicioná-lo") onpush(program atualizaListas)
+	BUTTON  btn_ch   +108 +60 150 ., label("...clique para adicioná-lo") onpush(program atualizaListas)
 	
-GROUPBOX agr_ad ps_agr_ad_x ps_agr_ad_y 230 345, label("Itens Selecionados")
+GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 
 	TEXTBOX txb_agradd +10 +20 210 310, label("") left
 	
-GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Bases de Dados")
+GROUPBOX opc_dic 5 264 295 85, label("Bases de Dados")
 	
 	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais...") onpush(script dados)
 	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando...") onpush(script salvando)
 
-	CHECKBOX	eng     10  355 200 ., label("Labels em inglês") option(english)
+CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
 
-TEXT     credit     10   360  490    ., label("PUC-Rio - Departamento de Economia") right  
-	
+TEXT     credit     215   360  320    ., label("PUC-Rio - Departamento de Economia") right  
+
 END
 
 OK ok1,      label("OK")
