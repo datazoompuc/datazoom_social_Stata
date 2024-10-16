@@ -38,6 +38,10 @@ foreach year in `years'{
 					qui destring hous_id, replace
 					qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
 					qui destring ind_id, replace
+					
+					// adding value labels
+					pnadc_value_labels`lang'
+					
 					tempfile PNADC_`trim'`year'
 					save "`PNADC_`trim'`year''", replace
 			}
