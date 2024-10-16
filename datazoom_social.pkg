@@ -48,6 +48,8 @@ f PNAD/datazoom_pnad.sthlp
 f PNAD/datazoom_pnad_en.sthlp
 f PNAD_Continua/datazoom_pnad_continua.dlg
 f PNAD_Continua/datazoom_pnad_continua_en.dlg
+f PNAD_Continua/pnadc_value_labels.ado
+f PNAD_Continua/pnadc_value_labels_en.ado
 f PNAD_Continua/Anual/datazoom_pnadcont_anual.ado
 f PNAD_Continua/Anual/datazoom_pnadcont_anual.dlg
 f PNAD_Continua/Anual/datazoom_pnadcont_anual_en.dlg

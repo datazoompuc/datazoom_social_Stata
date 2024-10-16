@@ -72,6 +72,9 @@ foreach survey in `years' {
 
 	qui infile using "`dict_file'", using("`original'/`file_name'") clear
 	
+	// adding value labels
+	pnadc_value_labels`lang'
+	
 	if _rc == 0 {
 		save pnad_anual_`year'_`suffix'`lang', replace
 	}
