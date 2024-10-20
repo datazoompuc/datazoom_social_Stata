@@ -281,7 +281,7 @@ else if `ano' >= 2002 {                                            // Se só res
 	lab var id_dom "identificação do domicílio"
 				
 	if "`comp'" == "comp81" compat_`id'_2002a2009_para_81
-	else compat_`id'_2002a2009_para_92
+	else if "`comp'" == "comp92" compat_`id'_2002a2009_para_92
 }
 		
 end				
