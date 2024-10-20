@@ -103,7 +103,7 @@ qui while "`*'" != "" {
 
 			read_compdct, compdct("`r(fn)'") dict_name("pme_2001_dom`lang'") out("`dic'")
 			
-			infile using `dic', using("`original'/PME2001`UF'D.txt") clear
+			infile using `dic', using("`original'/PME2001`UF'.txt") clear
 			compress
 			save `PME`UF'', replace
 			clear
@@ -241,7 +241,7 @@ qui while "`*'" != "" {
 
 			read_compdct, compdct("`r(fn)'") dict_name("pme_2001_pes`lang'") out("`dic'")
 		
-			infile using `dic', using("`original'/PME2001`UF'P.txt") clear
+			infile using `dic', using("`original'/PME2001`UF'.txt") clear
 			/*Correção de leitura da base de pessoas de 2001: a base de dados agrupa 
 			na mesma linha do domícilio todos os respectivos indivíduos. Essa correção
 			reorganiza a base de forma a ler cada indíviduo junto com seu domícilio por
