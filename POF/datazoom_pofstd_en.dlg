@@ -3,7 +3,7 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 355 175
+POSITION . . 350 175
 
 DIALOG main, label("POF - Standard Databases")
 BEGIN
@@ -11,14 +11,14 @@ BEGIN
 GROUPBOX bases_padrao 5 10 340 70, label("Type of Identification")
 	
 	CHECKBOX  ch_dom   +60 	+30 200 ., label("Household")
-    CHECKBOX  ch_uc    +90   @ 200 ., label("Family")
-    CHECKBOX  ch_pess  +60   @ 200 ., label("Individual") 
+    CHECKBOX  ch_uc    +88   @ 200 ., label("Family")
+    CHECKBOX  ch_pess  +63   @ 200 ., label("Individual") 
 
-GROUPBOX opc_dic 5 +45 340 60, label("Data files")
+GROUPBOX opc_dic 5 +45 340 60, label("Databases")
 	
-	BUTTON   tx_base     45 +25 110  ., label("Original data ... ") onpush(script dados)
+	BUTTON   tx_base     45 +25 110  ., label("Original files... ") onpush(script dados)
 	*FILE   fl_base     5 +20 320 ., label("Search ...") dir
-	BUTTON   tx_salvabase +150 @ 110  ., label("Saving ...") onpush(script salvando)
+	BUTTON   tx_salvabase +150 @ 110  ., label("Saving...") onpush(script salvando)
 	*FILE   fl_salvabase 5 +20 320 ., label("Search ...") dir
 
 CHECKBOX	eng     10  +45 200 ., label("Labels in English") option(english)

@@ -1,22 +1,22 @@
 VERSION 11.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 350 170
+POSITION . . 315 150
 
 DIALOG main, label("PNS") tabtitle("Main")
 BEGIN
 
-GROUPBOX caixaBase 25 15 150 105, label("Data set")
-	BUTTON  fl_base    		+25 +25 100 25, label("Original data...") onpush(script dados)
+GROUPBOX caixaBase 5 15 150 105, label("Databases")
+	BUTTON  fl_base    		+25 +25 100 25, label("Original files...") onpush(script dados)
     BUTTON  fl_salvabase    @   +40 100 25, label("Saving...")        onpush(script salvando)
 
-GROUPBOX caixaAnos 175 15 150 73, label("Year(s)")
+GROUPBOX caixaAnos 160 15 150 73, label("Year(s)")
 	RADIO  ck2013  +25 +20 100 25, first label("2013")  option(2013)
 	RADIO  ck2019  @   +20 100 25, last label("2019")  option(2019)
 
-	CHECKBOX	eng     185  95 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     180  95 200 ., label("Labels in English") option(english)
 
-TEXT credit 15 130 300 15, label("PUC-Rio - Department of Economics") left
+TEXT credit 5 130 300 15, label("PUC-Rio - Department of Economics") left
 
 END
 

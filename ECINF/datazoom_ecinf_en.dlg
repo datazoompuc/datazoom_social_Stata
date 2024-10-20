@@ -17,11 +17,11 @@ GROUPBOX caixaanos 5 5 135 50, label("Year")
 GROUPBOX caixaBase 5 +50 135 100, label("Databases")
 
     BUTTON  fl_base    		+17 +26 100     ., label("Original files...") onpush(script dados)
-    BUTTON  fl_salvabase    	+0 +35 100     ., label("Final databases...") onpush(script salvando)
+    BUTTON  fl_salvabase    	+0 +35 100     ., label("Saving...") onpush(script salvando)
 
 *CHECKBOX chmerge 20 +35 135 30, label("Merge Databases") option(merged) onclickon(script marca) onclickoff(script desmarca)
 
-GROUPBOX trs +140 5 160 170, label("Types of Register")
+GROUPBOX trs +145 5 160 170, label("Types of Register")
 
 	CHECKBOX ch_tr1  	+10 +20 130 20, label("Domicílios") option(domicilios)
 	CHECKBOX ch_tr2    	@ +20 @ @, label("Moradores") option(moradores)	
@@ -33,7 +33,7 @@ GROUPBOX trs +140 5 160 170, label("Types of Register")
 
 	CHECKBOX	eng     5  180 200 ., label("Labels in English") option(english)
 
-	TEXT     credit     	5   200  310    ., label("PUC-Rio - Department of Economics") right  
+	TEXT     credit     	15   210  310    ., label("PUC-Rio - Department of Economics") right  
 
 END
 

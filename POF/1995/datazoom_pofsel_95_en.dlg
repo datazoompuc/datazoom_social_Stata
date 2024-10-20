@@ -3,9 +3,9 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 505 385
+POSITION . . 510 385
 
-DIALOG main, label("POF 1995-96 - Selected Expenditure")
+DIALOG main, label("POF 1995-96 - Selected Expenditures")
 BEGIN
 
 DEFINE ps_opc_extr_x 0
@@ -31,39 +31,39 @@ DEFINE ps_fl_salvabase 5
 DEFINE ps_tx_base 10
 DEFINE ps_tx_salvabase 10
 
-GROUPBOX opc_extr ps_opc_extr_x ps_opc_extr_y 265 65, label("Identification type")
+GROUPBOX opc_extr 5 ps_opc_extr_y 265 65, label("Identification type")
 
-	RADIO   rd_dom     +15 +20 100 ., first label("Household") option(dom)
+	RADIO   rd_dom     +15 +25 100 ., first label("Household") option(dom)
 	RADIO   rd_uc       +90 @   150 ., middle label("Family") option(uc)
-	RADIO   rd_pess     +70 @  100 ., last label("Individual") option(pess)
+	RADIO   rd_pess     +70 @  100 ., last label("Individuals") option(pess)
 	
-GROUPBOX opc_agr ps_opc_agr_x ps_opc_agr_y 265 183, label("Add item to the basket")
+GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	
 	RADIO rd_ali +15 +20 . ., label("Food") onclickon(script habilita_ali) first
-	RADIO rd_des +60  @ 120 ., label("Other Expenditures") onclickon(script habilita_desp) middle
-	RADIO rd_ren +130 @ 55 ., label("Income") onclickon(script habilita_ren) last
+	RADIO rd_des +55  @ 120 ., label("Other Expenditures") onclickon(script habilita_desp) middle
+	RADIO rd_ren +125 @ 60 ., label("Income") onclickon(script habilita_ren) last
 	
-	TEXT        agr_ali         ps_agr_ali_x ps_agr_ali_y 180 ., label("Food items:")
-	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
+	TEXT        agr_ali         10 ps_agr_ali_y 180 ., label("Food items:")
+	COMBOBOX	cb_alimentos    @  +20 250 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
 	TEXT        agr_desp        @ ps_agr_ali_y 180 ., label("Other expenditures items:")
-	COMBOBOX	cb_despesas     @  +20 255 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
+	COMBOBOX	cb_despesas     @  +20 250 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
 	TEXT        agr_ren         @ ps_agr_ali_y 180 ., label("Income items:")
-	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
+	COMBOBOX	cb_rendas       @  +20 250 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +85 +60 120 ., label("... click to add the item") onpush(program atualizaListas)
+	BUTTON  btn_ch   110 +60 150 ., label("...click to add item") onpush(program atualizaListas)
 	
-GROUPBOX agr_ad ps_agr_ad_x ps_agr_ad_y 230 345, label("Items Selected")
+GROUPBOX agr_ad 275 ps_agr_ad_y 230 345, label("Selected Items")
 
 	TEXTBOX txb_agradd +10 +20 210 315, label("") left
 	
-GROUPBOX opc_dic ps_opc_dic_x ps_opc_dic_y 265 85, label("Original and Final Data Files")
+GROUPBOX opc_dic 5 ps_opc_dic_y 265 85, label("Databases")
 	
-	BUTTON   tx_base     ps_tx_base +35 110  ., label("Data...") onpush(script dados)
-	BUTTON   tx_salvabase +130 @ 110  ., label("Saving...") onpush(script salvando)
+	BUTTON   tx_base     20 +35 110  ., label("Original files...") onpush(script dados)
+	BUTTON   tx_salvabase +125 @ 110  ., label("Saving...") onpush(script salvando)
 
-	CHECKBOX	eng     10  355 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     5  365 150 ., label("Labels in English") option(english)
 
-TEXT     credit     10   360  490    ., label("PUC-Rio - Department of Economics") right  
+TEXT     credit     160   365  345    ., label("PUC-Rio - Department of Economics") right  
 	
 END
 
