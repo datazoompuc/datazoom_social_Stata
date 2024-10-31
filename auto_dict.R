@@ -63,16 +63,19 @@ auto_dict <- function(original, output, eng, api_key = "") {
   names <- dct[, 2]
 
   # comprimento
-  length <- dct[, 3] %>%
+  length_num <- dct[, 3] %>%
     str_extract("\\d+") %>%
+    as.numeric()
+  
+  length <- length_num %>%
     sprintf("%%%sf", .)
 
   # agora os data types
 
   types <- dplyr::case_when(
-    length <= 2 ~ "byte",
-    length <= 4 ~ "int",
-    length <= 9 ~ "long",
+    length_num <= 2 ~ "byte",
+    length_num <= 4 ~ "int",
+    length_num <= 9 ~ "long",
     .default = "float"
   )
 
@@ -118,32 +121,32 @@ dicts <- tibble::tribble(
   ~ output, ~ original,
   # por visita
   # visita 1
-  "pnad_anual_2012a2014_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2012_a_2014_visita1_20220224.txt",
-  "pnad_anual_2015_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2015_visita1_20220224.txt",
-  "pnad_anual_2016_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2016_visita1_20220224.txt",
-  "pnad_anual_2017_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2017_visita1_20220224.txt",
-  "pnad_anual_2018_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2018_visita1_20220224.txt",
-  "pnad_anual_2019_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2019_visita1_20230811.txt",
-  "pnad_anual_2022_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2022_visita1_20231129.txt",
-  "pnad_anual_2023_vis1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2023_visita1_20240621.txt",
+  "pnad_anual_2012a2014_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2012_a_2014_visita1_20220224.txt",
+  "pnad_anual_2015_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2015_visita1_20220224.txt",
+  "pnad_anual_2016_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2016_visita1_20220224.txt",
+  "pnad_anual_2017_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2017_visita1_20220224.txt",
+  "pnad_anual_2018_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2018_visita1_20220224.txt",
+  "pnad_anual_2019_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2019_visita1_20230811.txt",
+  "pnad_anual_2022_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2022_visita1_20231129.txt",
+  "pnad_anual_2023_vis1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_1/Documentacao/input_PNADC_2023_visita1_20240621.txt",
   # visita 2
-  "pnad_anual_2020_vis2.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2020_visita2_20231130.txt",
-  "pnad_anual_2021_vis2.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2021_visita2_20231130.txt",
-  "pnad_anual_2023_vis2.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2023_visita2.txt",
+  "pnad_anual_2020_vis2", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2020_visita2_20231130.txt",
+  "pnad_anual_2021_vis2", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2021_visita2_20231130.txt",
+  "pnad_anual_2023_vis2", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_2/Documentacao/input_PNADC_2023_visita2.txt",
   # visita 5
-  "pnad_anual_2016_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2016_visita5_20231222.txt",
-  "pnad_anual_2017_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2017_visita5_20231222.txt",
-  "pnad_anual_2018_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2018_visita5_20231222.txt",
-  "pnad_anual_2019_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2019_visita5_20231222.txt",
-  "pnad_anual_2020_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2020_visita5_20220224.txt",
-  "pnad_anual_2021_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2021_visita5.txt",
-  "pnad_anual_2022_vis5.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2022_visita5_20231222.txt",
+  "pnad_anual_2016_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2016_visita5_20231222.txt",
+  "pnad_anual_2017_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2017_visita5_20231222.txt",
+  "pnad_anual_2018_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2018_visita5_20231222.txt",
+  "pnad_anual_2019_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2019_visita5_20231222.txt",
+  "pnad_anual_2020_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2020_visita5_20220224.txt",
+  "pnad_anual_2021_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2021_visita5.txt",
+  "pnad_anual_2022_vis5", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Visita/Visita_5/Documentacao/input_PNADC_2022_visita5_20231222.txt",
   # por trimestre
   # trimestre 1
-  "pnad_anual_tri1.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_1/Documentacao/input_PNADC_trimestre1.txt",
-  "pnad_anual_tri2.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_2/Documentacao/input_PNADC_trimestre2_20221221.txt",
-  "pnad_anual_tri3.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_3/Documentacao/input_PNADC_trimestre3_20230707.txt",
-  "pnad_anual_tri4.dct", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_4/Documentacao/input_PNADC_trimestre4_20240425.txt"
+  "pnad_anual_tri1", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_1/Documentacao/input_PNADC_trimestre1.txt",
+  "pnad_anual_tri2", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_2/Documentacao/input_PNADC_trimestre2_20221221.txt",
+  "pnad_anual_tri3", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_3/Documentacao/input_PNADC_trimestre3_20230707.txt",
+  "pnad_anual_tri4", "https://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre/Trimestre_4/Documentacao/input_PNADC_trimestre4_20240425.txt"
 )
 
 purrr::map2(
@@ -152,8 +155,21 @@ purrr::map2(
     message(out)
     auto_dict(
       orig,
-      file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", out),
+      file.path("C:/Users/igorr/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", paste0(out, ".dct")),
       FALSE
+    )
+  }
+)
+
+purrr::map2(
+  dicts$original, dicts$output,
+  function(orig, out) {
+    message(out)
+    auto_dict(
+      orig,
+      file.path("C:/Users/igorr/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", paste0(out, "_en.dct")),
+      TRUE,
+      "2596c3aa-985a-4d9c-b714-48a726a68e23:fx"
     )
   }
 )
@@ -161,28 +177,14 @@ purrr::map2(
 # PNAD Trimestral
 
 auto_dict(
-  "C:/Users/User/Downloads/input_PNADC_trimestral.txt",
-  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Trimestral/dct", "pnadcontinua.dct"),
+  "C:/Users/igorr/Downloads/input_PNADC_trimestral.txt",
+  file.path("C:/Users/igorr/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Trimestral/dct", "pnadcontinua.dct"),
   FALSE
 )
 
 auto_dict(
-  dicts$original[16],
-  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2020_vis5_en.dct"),
+  "C:/Users/igorr/Downloads/input_PNADC_trimestral.txt",
+  file.path("C:/Users/igorr/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Trimestral/dct", "pnadcontinua_en.dct"),
   TRUE,
-  api_key
-)
-
-auto_dict(
-  dicts$original[17],
-  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2021_vis5_en.dct"),
-  TRUE,
-  api_key
-)
-
-auto_dict(
-  dicts$original[18],
-  file.path("C:/Users/User/Documents/GitHub/datazoom_social_Stata/PNAD_Continua/Anual/dct", "pnad_anual_2022_vis5_en.dct"),
-  TRUE,
-  api_key
+  "2596c3aa-985a-4d9c-b714-48a726a68e23:fx"
 )

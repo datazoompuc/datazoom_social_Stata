@@ -271,7 +271,7 @@ else if `ano' <= 2001 {                                  // ... se tem ano até 
 	lab var id_dom "identificação do domicílio"
 				
 	if "`comp'" == "comp81" compat_`id'_1992a2001_para_81
-	else compat_`id'_1992a2001_para_92
+	else if "`comp'" == "comp92" compat_`id'_1992a2001_para_92
 }
 
 else if `ano' >= 2002 {                                            // Se só restam anos >= 2002
