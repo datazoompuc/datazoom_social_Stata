@@ -2856,7 +2856,7 @@ rename v0649 qtos_empregados
 *                   2 - Seis ou mais
 
 rename v0650 previd_B
-recode previd_B ( 1 = 1) (2 3 = 0)
+recode previd_B (1 2 = 1) (3 = 0) 
 * previd = 1-Sim
 *          0-Não
 
