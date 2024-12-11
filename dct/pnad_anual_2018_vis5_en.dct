@@ -269,7 +269,7 @@ _column(0568)	byte	S060061	%2f	"How long you were away (From 1 month to less tha
 _column(0570)	int	S06007	%4f	"Occupation"
 _column(0574)	byte	S06009	%1f	"In this work, ... was:"
 _column(0575)	byte	S060091	%1f	"Unpaid workers"
-_column(0576)	float	S06010	%NAf	"Activity"
+_column(0576)	long	S06010	%5f	"Activity"
 _column(0581)	byte	S06012	%1f	"Usual income var. aux."
 _column(0582)	byte	S060121	%1f	"Usual cash income"
 _column(0583)	long	S0601212	%8f	"Amount of income in cash"

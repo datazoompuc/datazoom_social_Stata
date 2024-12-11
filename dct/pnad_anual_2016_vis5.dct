@@ -246,7 +246,7 @@ _column(0540)	byte	S060061	%2f	"Quanto tempo que estava afastado (De 1 mês a me
 _column(0542)	int	S06007	%4f	"Ocupação"
 _column(0546)	byte	S06009	%1f	"Nesse trabalho, ... era:"
 _column(0547)	byte	S060091	%1f	"Trabalhador não remunerado"
-_column(0548)	float	S06010	%NAf	"Atividade"
+_column(0548)	long	S06010	%5f	"Atividade"
 _column(0553)	byte	S06012	%1f	"Rendimento habitual var. auxil."
 _column(0554)	byte	S060121	%1f	"Rendimento habitual em dinheiro"
 _column(0555)	long	S0601212	%8f	"Valor do rend. hab. em dinheiro"
