@@ -36,8 +36,7 @@ foreach year in `years'{
 			if _rc == 0 {
 					qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
 					qui destring hous_id, replace
-					qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-					qui destring ind_id, replace
+			
 					
 					// adding value labels
 					pnadc_value_labels`lang'
@@ -653,7 +652,7 @@ syntax, temps(string)
 	replace idind = "" if p201 ==.
 	*replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 	lab var idind "identificacao do individuo"
-	drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
+	drop __* back forw hous_id id_dom id_chefe n_p_aux n_p p201
 	replace painel=`pa_name'
 	save PNAD_painel_`pa_name'_rs, replace
 	}
