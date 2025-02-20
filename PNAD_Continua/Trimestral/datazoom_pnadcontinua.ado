@@ -25,6 +25,11 @@ read_compdct, compdct("`r(fn)'") dict_name("pnadcontinua`lang'") out("`dic'")
 tokenize `years'
 
 local y`1' = ""
+
+local panel_list "" // armazena paineis
+	
+local max_painel = 0
+local min_painel = 0
 	
 foreach year in `years'{
 	foreach trim in 01 02 03 04 {
@@ -36,8 +41,18 @@ foreach year in `years'{
 			if _rc == 0 {
 					qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
 					qui destring hous_id, replace
-					qui capture egen ind_id = concat(UPA V1008 V1014 V2003), format(%16.0g)
-					qui destring ind_id, replace
+					
+					qui summ V1014
+					
+					local min_trim = r(min) // menor valor de v1014 naquele momento
+					local max_trim = r(max) // maior valor de v1014 naquele momento
+					
+					if `max_trim' > `max_painel'  {
+					    local max_painel = `max_trim'
+					}
+					if `min_trim' < `min_painel' {
+					    local min_painel = `min_trim'
+					}
 					
 					// adding value labels
 					pnadc_value_labels`lang'
@@ -98,7 +113,7 @@ foreach aa in `years' {
 
 *tokenize `years'
 foreach aa in `years' {
-	foreach pa in 1 2 3 4 5 6 7 8 9 10 11{ // é necessário peridiocamente atualizar números (1 a 9)
+	forvalues pa = `min_painel'/`max_painel'{    
 		use PNADC`aa', clear
 		keep if V1014 == `pa'
 		tempfile PNADC_Painel`pa'temp`aa'
@@ -106,8 +121,7 @@ foreach aa in `years' {
 	}
 }
 
-
-foreach pa in 1 2 3 4 5 6 7 8 9 10 11{  // é necessário peridiocamente atualizar números (1 a 9)
+forvalues pa = `min_painel'/`max_painel'{  
 	foreach aa in `years' {
 		append using `PNADC_Painel`pa'temp`aa''
 		keep if V1014 == `pa'
@@ -117,7 +131,7 @@ foreach pa in 1 2 3 4 5 6 7 8 9 10 11{  // é necessário peridiocamente atualiz
 }
 
 global panels = ""
-forvalues pa = 1(1)11{   // é necessário peridiocamente atualizar números (1 a 9)
+forvalues pa = `min_painel'/`max_painel'{   
 	use `PNADC_Painel`pa'', clear
 	qui count
 	if r(N) != 0 { 
@@ -257,7 +271,7 @@ syntax, temps(string)
 		replace idind = "" if p201 ==.
 		replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 		lab var idind "identificacao do individuo"
-		drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
+		drop __* back forw hous_id id_dom id_chefe n_p_aux n_p p201
 		replace painel=`pa_name'
 		save PNAD_painel_`pa_name'_basic, replace
 	}
@@ -653,7 +667,7 @@ syntax, temps(string)
 	replace idind = "" if p201 ==.
 	*replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 	lab var idind "identificacao do individuo"
-	drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
+	drop __* back forw hous_id id_dom id_chefe n_p_aux n_p p201
 	replace painel=`pa_name'
 	save PNAD_painel_`pa_name'_rs, replace
 	}
