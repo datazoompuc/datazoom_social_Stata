@@ -113,7 +113,7 @@ foreach aa in `years' {
 
 *tokenize `years'
 foreach aa in `years' {
-	foreach pa in `min_painel'/`max_painel'{    
+	forvalues pa = `min_painel'/`max_painel'{    
 		use PNADC`aa', clear
 		keep if V1014 == `pa'
 		tempfile PNADC_Painel`pa'temp`aa'
@@ -121,7 +121,7 @@ foreach aa in `years' {
 	}
 }
 
-foreach pa in `min_painel'/`max_painel'{  
+forvalues pa = `min_painel'/`max_painel'{  
 	foreach aa in `years' {
 		append using `PNADC_Painel`pa'temp`aa''
 		keep if V1014 == `pa'
@@ -271,7 +271,7 @@ syntax, temps(string)
 		replace idind = "" if p201 ==.
 		replace idind = "" if V2008==99 | V20081==99 | V20082==9999
 		lab var idind "identificacao do individuo"
-		drop __* back forw hous_id ind_id id_dom id_chefe n_p_aux n_p p201
+		drop __* back forw hous_id id_dom id_chefe n_p_aux n_p p201
 		replace painel=`pa_name'
 		save PNAD_painel_`pa_name'_basic, replace
 	}
