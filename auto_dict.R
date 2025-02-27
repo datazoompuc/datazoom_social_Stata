@@ -98,7 +98,7 @@ auto_dict <- function(original, output, eng, api_key = "") {
           )
           
           cat("Time for a break!\n")
-          Sys.sleep(5)
+          Sys.sleep(10)
           
           return(res)
           
