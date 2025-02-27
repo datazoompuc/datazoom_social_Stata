@@ -21,7 +21,7 @@ library(stringr)
 auto_dict <- function(original, output, eng, api_key = "") {
   # Lendo o dicionário
 
-  dct <- readLines(original, encoding = "latin1")
+  dct <- readLines(original, encoding = "latin1", warn = FALSE)
 
   # Removendo linhas estranhas
   # mantendo apenas o que começa com @
@@ -84,12 +84,27 @@ auto_dict <- function(original, output, eng, api_key = "") {
   if (eng) {
     deeplr::usage2(auth_key = api_key)
 
-    desc <- deeplr::translate2(
-      text = desc,
-      source_lang = "PT",
-      target_lang = "EN",
-      auth_key = api_key
-    )
+    desc <- purrr::map(
+        
+        # Splitting the data into batches of 10 rows
+        split(desc, ceiling(seq_along(desc) / 5)),
+        function(x) {
+          
+          res <- deeplr::translate2(
+            text = x,
+            source_lang = "PT",
+            target_lang = "EN",
+            auth_key = api_key
+          )
+          
+          cat("Time for a break!\n")
+          Sys.sleep(5)
+          
+          return(res)
+          
+        }
+      ) %>%
+      unlist()
   }
 
   # acrescento aspas
