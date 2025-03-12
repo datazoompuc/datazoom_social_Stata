@@ -66,7 +66,7 @@ auto_dict <- function(original, output, eng, api_key = "") {
   length_num <- dct[, 3] %>%
     str_extract("\\d+") %>%
     as.numeric()
-  
+
   length <- length_num %>%
     sprintf("%%%sf", .)
 
@@ -85,30 +85,30 @@ auto_dict <- function(original, output, eng, api_key = "") {
     deeplr::usage2(auth_key = api_key)
 
     desc <- purrr::map(
-        
+
         # Splitting the data into batches of 10 rows
         split(desc, ceiling(seq_along(desc) / 5)),
         function(x) {
-          
+
           res <- deeplr::translate2(
             text = x,
             source_lang = "PT",
             target_lang = "EN",
             auth_key = api_key
           )
-          
+
           cat("Time for a break!\n")
           Sys.sleep(10)
-          
+
           return(res)
-          
+
         }
       ) %>%
       unlist()
   }
 
   # acrescento aspas
-  desc <- sprintf("\"%s\"", desc)
+  desc <- sprintf("`\"%s\"'", desc)
 
   # montando o dicionário
 

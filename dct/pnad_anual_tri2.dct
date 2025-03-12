@@ -252,9 +252,9 @@ _column(0524)	byte	S12013	%1f	"O(A) Dr.(a) é o(a) principal médico(a) (mais re
 _column(0525)	byte	S12014	%1f	"Quando a criança necessita de uma consulta de rotina, você vai ao(à) Dr.(a) antes de ir a outro serviço de saúde?"
 _column(0526)	byte	S12015	%1f	"Quandoa criança tem um novo problema de saúde, você vai ao(à) Dr.(a) antes de ir a outro serviço de saúde?"
 _column(0527)	byte	S12016	%1f	"Quando o “serviço de saúde” está aberto e a criança fica doente, alguém deste local o/a atende no mesmo dia?"
-_column(0528)	byte	S12017	%1f	"É fácil marcar hora para uma consulta de rotina da criança no "serviço de saúde”?"
-_column(0529)	byte	S12018	%1f	"Quando você chega ao “serviço de saúde”, você tem que esperar mais de 30 minutos para que a criança consulte com Dr.(a) (sem considerar a triagem ou o acolhimento)?"
-_column(0530)	byte	S12019	%1f	"Quando você vai ao “serviço de saúde”, é sempre Dr.(a) que atende a criança todas as vezes?"
+_column(0528)	byte	S12017	%1f	`"É fácil marcar hora para uma consulta de rotina da criança no "serviço de saúde”?"'
+_column(0529)	byte	S12018	%1f	`"Quando você chega ao “serviço de saúde”, você tem que esperar mais de 30 minutos para que a criança consulte com Dr.(a) (sem considerar a triagem ou o acolhimento)?"'
+_column(0530)	byte	S12019	%1f	`"Quando você vai ao “serviço de saúde”, é sempre Dr.(a) que atende a criança todas as vezes?"'
 _column(0531)	byte	S12020	%1f	"Se você tiver uma pergunta, consegue telefonar e falar com Dr.(a)?"
 _column(0532)	byte	S12021	%1f	"Você se sente à vontade contando as suas preocupações ou problemas com a criança ao(à) Dr.(a)?"
 _column(0533)	byte	S12022	%1f	"O(A) Dr.(a) conhece todo o histórico médico (de saúde) da criança?"

@@ -251,10 +251,10 @@ _column(0523)	byte	S12012	%1f	"Is the doctor the one who knows the child best as
 _column(0524)	byte	S12013	%1f	"Is the doctor the main doctor (most responsible) for the child's health care?"
 _column(0525)	byte	S12014	%1f	"When your child needs a routine appointment, do you go to the doctor before going to another health service?"
 _column(0526)	byte	S12015	%1f	"When a child has a new health problem, do you go to the doctor before going to another health service?"
-_column(0527)	byte	S12016	%1f	"When the "health service" is open and the child gets sick, does anyone from that place see him/her the same day?"
-_column(0528)	byte	S12017	%1f	"Is it easy to make an appointment for your child's routine visit to the "health service"?"
+_column(0527)	byte	S12016	%1f	`"When the "health service" is open and the child gets sick, does anyone from that place see him/her the same day?"'
+_column(0528)	byte	S12017	%1f	`"Is it easy to make an appointment for your child's routine visit to the "health service"?"'
 _column(0529)	byte	S12018	%1f	"When you arrive at the "health service", do you have to wait more than 30 minutes for the child to see a doctor (without considering the triage or reception)?"
-_column(0530)	byte	S12019	%1f	"When you go to the "health service", is it always the doctor who sees the child every time?"
+_column(0530)	byte	S12019	%1f	`"When you go to the "health service", is it always the doctor who sees the child every time?"'
 _column(0531)	byte	S12020	%1f	"If you have a question, can you call and speak to the doctor?"
 _column(0532)	byte	S12021	%1f	"Do you feel comfortable telling the doctor about your concerns or problems with the child?"
 _column(0533)	byte	S12022	%1f	"Does the doctor know the child's entire medical history?"
