@@ -955,13 +955,31 @@ foreach ano in `years' {
 			}
 		}
 	}
-}
+
+	else if `ano' == 2022 {
+	
+	if "`fam'" != "" {
+						di as err "Opção Família não disponível para o ano `ano'"
+						exit
+		}
+	
+	}
+
+
+	
+	}
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
 di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016 e Censo 2000 divulgados em 08/09/2017."
 
+	
+
 end
+
+
+
+
 
 program define compat_censo00dom
 
@@ -3386,7 +3404,7 @@ recode v6224 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
 	8000140 8000180 8000646 8000678 8000686 8000694 8000690 8000706 8000748 ///
-	8000736 8000834 8000768 8000788 8000800 8000894 8000716 = 83 "Africa - outros")	///
+	8000736 8000834 8000768 8000728 8000788 8000800 8000894 8000716 = 83 "Africa - outros")	///
 	(8000818=82 "Egito") ///
 	(8000032=30 "Argentina") ///
 	(8000124=32 "Canadá") ///
