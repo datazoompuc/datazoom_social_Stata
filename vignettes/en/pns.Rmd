@@ -1,0 +1,15 @@
+---
+title: "PNS"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The National Health Survey, PNS, is a sample survey conducted by IBGE in 2013 in order to investigate household characteristics and aspects of resident’s health. The research has focused on chronic non-communicable diseases, lifestyles and access to health care. The sample of PNS covered 80,281 households with 205,546 individuals.
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/sociais/saude/9160-pesquisa-nacional-de-saude.html?=&t=microdados)
+

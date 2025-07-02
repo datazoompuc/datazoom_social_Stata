@@ -1,0 +1,15 @@
+---
+title: "PNS"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A PNS é uma pesquisa amostral realizada pelo IBGE em 2013 e em 2019 com o objetivo de investigar as características do domicílio e aspectos relativos à saúde dos moradores. A pesquisa tem enfoque em doenças crônicas não transmissíveis, estilos de vida e acesso ao atendimento médico. A amostra da PNS cobria 80.281 domicílios com 205.546 indivíduos.
+
+### Arquivos de apoio
+
+  - [Microdados e documentação](https://www.ibge.gov.br/estatisticas/sociais/saude/9160-pesquisa-nacional-de-saude.html?=&t=microdados)
+

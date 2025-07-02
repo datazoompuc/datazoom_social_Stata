@@ -47,14 +47,56 @@ All of our functions can be used through interactive dialog boxes. To access the
 db datazoom_social
 ```
 
-The buttons below link to the function help files. They are best viewed on Stata, with command `help function`.
+Across all of our functions, the original microdata must be saved in your computer for them to work. Our [YouTube channel](https://www.youtube.com/@datazoom9654/videos) has tutorials explaining how to use our package.
+
+Click on the buttons below for additional information on each survey.
 
 |       |        |       |       |
 |:-----:|:------:|:-----:|:-----:|
-| <a href = "Censo/datazoom_censo_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> Censo </font>  &nbsp;&nbsp; <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2010 </small> | <a href = "ECINF/datazoom_ecinf_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> ECINF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "PME/datazoom_pme_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PME </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> | <a href = "PNAD/datazoom_pnad_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNAD </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 2001 to 2015 </small> |
-| <a href = "PNAD_Continua/Trimestral/datazoom_pnadcontinua_en.sthlp"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> Continuous PNAD </small> <br> <small> 2012 to 2023 </small> | <a href = "PNAD_Covid/datazoom_pnad_covid_en.sthlp"> <kbd> <br> &nbsp; <font size = 3> PNAD Covid </font> &nbsp; <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "PNS/datazoom_pns_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNS </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> National Health Survey </small> <br> <small> 2013 and 2019 </small> | <a href = "POF/datazoom_pof_en.sthlp"> <kbd> <br> &nbsp;&nbsp; <font size = 3> POF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Consumer Expenditure Survey </small> <br> <small> 1995 to 2018 </small> |
+| <a href = "#censo"> <kbd> <br> &nbsp;&nbsp; <font size = 3> Censo </font>  &nbsp;&nbsp; <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2010 </small> | <a href = "#ecinf"> <kbd> <br> &nbsp;&nbsp; <font size = 3> ECINF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "#pme"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PME </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> | <a href = "#pnad"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNAD </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 2001 to 2015 </small> |
+| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> Continuous PNAD </small> <br> <small> 2012 to 2023 </small> | <a href = "#pnad-covid"> <kbd> <br> &nbsp; <font size = 3> PNAD Covid </font> &nbsp; <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br> &nbsp;&nbsp; <font size = 3> PNS </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> National Health Survey </small> <br> <small> 2013 and 2019 </small> | <a href = "#pof"> <kbd> <br> &nbsp;&nbsp; <font size = 3> POF </font> &nbsp;&nbsp; <br><br> </kbd> </a> <br><br> <small> Consumer Expenditure Survey </small> <br> <small> 1995 to 2018 </small> |
 
 <a href = "#credits">![Static Badge](https://img.shields.io/badge/Credits%20-%20PUC%20Rio%20Department%20of%20Economics%20-%20blue) </a> <a href = "#credits"> ![Static Badge](https://img.shields.io/badge/Citation%20-%20green) </a>
+
+## Censo
+
+```{r child = "vignettes/en/censo.Rmd"}
+```
+
+## ECINF
+
+```{r child = "vignettes/en/ecinf.Rmd"}
+```
+
+## PME
+
+```{r child = "vignettes/en/pme.Rmd"}
+```
+
+## PNAD
+
+```{r child = "vignettes/en/pnad.Rmd"}
+```
+
+## PNAD Contínua
+
+```{r child = "vignettes/en/pnadc.Rmd"}
+```
+
+## PNAD Covid
+
+```{r child = "vignettes/en/pnad_covid.Rmd"}
+```
+
+## PNS
+
+```{r child = "vignettes/en/pns.Rmd"}
+```
+
+## POF
+
+```{r child = "vignettes/en/pof.Rmd"}
+```
 
 ## Auxiliary Programs (Dictionaries)
 

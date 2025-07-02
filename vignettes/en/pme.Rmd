@@ -1,0 +1,48 @@
+---
+title: "PME"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+PME, the Brazilian Monthly Employment Survey, is a sample survey conducted monthly by IBGE since 1980 in six metropolitan areas: Belo Horizonte, Porto Alegre, Recife, Rio de Janeiro, Salvador and São Paulo. The survey collects labor and income information from the population. PME is mainly used to compute the main unemployment index in the country (until 2014). It is the only IBGE survey in longitudinal format. Households are visited for two periods of four consecutive months, eight months apart from each other. In March 2014, PME's sample consisted of 33,809 households with 95,122 individuals.
+
+There are two versions of PME, traditionally called by PME Antiga (old PME) and PME Nova (new PME). The PME Antiga is the original survey. In 2002, this survey underwent a major change in design, giving rise to the PME Nova, with a significantly larger questionnaire and differences in the definition of labor market participation, as well as in the rotation scheme of the samples. Until the end of 2002, the two methodologies were taken to the field. In December 2002, PME Antiga was closed down and replaced by PME Nova.
+
+PME is a panel survey, in which each household is interviewed 8 times over a 16-months period (the household is surveyed for 4 consecutive months, out for 8, and then returns for another 4 months of interviews). Households are correctly identified throughout all eight interviews. However, PME does not assign the same identification number to each individual in the household across interviews. To reduce attrition related to this problem, each Data Zoom package offers two identification algorithms based on [Ribas and Soares (2008)](https://repositorio.ipea.gov.br/handle/11058/1522). The algorithms differ essentially according to the number of characteristics checked in order to identify the same individual across interviews.
+
+PME Nova was discontinued in February 2016 and replaced by the PNAD Contínua, a quarterly survey started in the first quarter of 2012. The two surveys coexisted between 2012 and 2016.
+
+### Microdata
+
+PME Antiga microdata files are separated by month, metropolitan area and type of register (individual and household). PME Nova contains a single file for each month including individual and household information for all metropolitan areas.
+
+For PME Nova (March 2002 onwards), all microdata and documentation are available from [IBGE’s website](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9183-pesquisa-mensal-de-emprego-antiga-metodologia.html?=&t=microdados). For information on how to acquire other waves, [click here](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
+
+### Supporting files
+
+  - [Microdata and documentation: PME Nova](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9183-pesquisa-mensal-de-emprego-antiga-metodologia.html?=&t=microdados)
+  - [Ribas and Soares (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
+
+<details>
+<summary> In English: </summary>
+
+  - PME Antiga dictionaries: 1991 to 2000
+    - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_dom_en.pdf), [Individuals](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_pess_en.pdf)
+  - PME Antiga dictionaries: 2001
+    - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_dom_en.pdf), [Individuals](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_pess_en.pdf)
+  - [PME Nova dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova_en.xls)
+  
+</details>
+
+<details>
+<summary> In Portuguese: </summary>
+
+  - [PME Antiga dictionary: 1991 to 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000.pdf)
+  - [PME Antiga dictionary: 2001](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001.pdf)
+  - [PME Nova dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova.xls)
+  
+</details>
+

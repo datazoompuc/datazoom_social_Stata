@@ -1,0 +1,53 @@
+---
+title: "PNAD"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+PNAD, the Brazilian National Household Sample Survey, is a survey conducted annually by IBGE since 1981. PNAD investigates several characteristics of the population such as household composition, education, labor, income and fertility. Moreover, almost every year, there is an investigation of an additional topic, such as education, health, professional training and food security. PNAD's sample in 2012 consisted of 147,203 households, with 362,451 individuals.
+
+### Microdata
+
+Until 1990, there was only one file for both household and individual characteristics. Since 1992, there is one file for each type of record.
+
+Our package applies to all surveys starting in 1981. From 2001 onward, all microdata and documentation are available from [IBGE’s website](https://www.ibge.gov.br/estatisticas/sociais/populacao/9127-pesquisa-nacional-por-amostra-de-domicilios.html?=&t=microdados). For information on how to acquire other rounds, [click here](https://loja.ibge.gov.br/catalogsearch/result/?q=pnad).
+
+Because of changes made over the years, the same information may not be available every year and/or may not have been collected in the same way. Specifically, there was a major reformulation of the survey in 1992, when labor activities were redefined, together with the questionnaire itself, leading to changes in the names of variables.
+
+Data Zoom offers two options to manipulate the variables in order to standardize information over time. The first option aims to adapt variables from the 1990s and 2000s to those from the 1980s. This implies, for instance, that variables created after 1990 - such as all variables related to child labor - are excluded in the process. With this option, variable names are not those suggested by the original dictionary, so that a new dictionary is provided for download.
+
+The second option attempts to only reconcile variables from 1992 to 2012. In this case, there are relatively few changes during the period. Therefore, we keep the original names of all variables that did not change or remained reasonably stable. A new dictionary is also provided. The document [Making PNADs compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao_en.pdf) explains all the procedures adopted in the process.
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/sociais/populacao/9127-pesquisa-nacional-por-amostra-de-domicilios.html?=&t=microdados)
+  - [Compatibilized dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_compatibilizado.xlsx)
+
+<details>
+<summary> In English: </summary>
+
+  - [Making PNADs compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao_en.pdf)
+  - Dicionaries for the 1980s
+    - [1981](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1981_en.pdf), [1982](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1982_en.pdf), [1983](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1983_en.pdf), [1984](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1984_en.pdf), [1985](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1985_en.pdf), [1986](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1986_en.pdf), [1987](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1987_en.pdf), [1988](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1988_en.pdf), [1989](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1989_en.pdf)
+  - Dicionaries for the 1990s
+    - [1990](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1990_en.pdf), [1992-1995 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_dom_en.pdf), [1992-1995 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_pess_en.pdf), [1996 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_pess_en.pdf), [1996-1997 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_1997_dom_en.pdf), [1997 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1997_pess_en.pdf), [1998 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_pess_en.pdf), [1998-1999 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_1999_dom_en.pdf), [1999 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1999_pess_en.pdf)
+  - [Dicionary for 2000-2012 (Households)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_dom_en.xlsx)
+  - [Dicionary for 2000-2012 (Individuals)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_pess_en.xlsx)  
+  
+</details>
+
+<details>
+<summary> In Portuguese: </summary>
+
+  - [Making PNADs compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao.pdf)
+  - Dicionaries for the 1980s
+    - [1981](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1981.pdf), [1982](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1982.pdf), [1983](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1983.pdf), [1984](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1984.pdf), [1985](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1985.pdf), [1986](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1986.pdf), [1987](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1987.pdf), [1988](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1988.pdf), [1989](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1989.pdf)
+  - Dicionaries for the 1990s
+    - [1990](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1990.pdf), [1992-1995 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_dom.pdf), [1992-1995 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_pess.pdf), [1996 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_pess.pdf), [1996-1997 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_1997_dom.pdf), [1997 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1997_pess.pdf), [1998 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_pess.pdf), [1998-1999 (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_1999_dom.pdf), [1999 (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1999_pess.pdf)
+  - [Dicionary for 2000-2012 (Households)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_dom.xlsx)
+  - [Dicionary for 2000-2012 (Individuals)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_pess.xlsx)  
+  
+</details>

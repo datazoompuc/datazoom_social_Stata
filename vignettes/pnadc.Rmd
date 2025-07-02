@@ -1,0 +1,23 @@
+---
+title: "PNAD Contínua"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A Pesquisa Nacional por Amostra de Domicílios Contínua, PNAD Contínua, é uma pesquisa realizada pelo IBGE com o objetivo de produzir continuamente informações sobre mercado de trabalho, associadas a características demográficas e educacionais. Periodicamente, são analisados temas adicionais permanentes, como trabalho infantil e outras formas de trabalho, fecundidade e migração, e suplementares, selecionados segundo necessidade, relativos ao desenvolvimento socioeconômico do país.
+
+A pesquisa fornece informações mensais para um conjunto restrito de indicadores relativos à força de trabalho, trimestral para os indicadores de força de trabalho, anual para temas permanentes e adicionais sobre força e trabalho e variável para temas suplementares. As informações mensais são representativas apenas em nível nacional e as demais têm representatividade para os níveis geográficos: Brasil, Grandes Regiões, Unidades da Federação, 20 Regiões Metropolitanas que contêm Municípios das Capitais, Municípios das Capitais e Região Integrada de Desenvolvimento da Grande Teresina.
+
+A cada trimestre, são investigados cerca de 211.000 domicílios inseridos em aproximadamente 16.000 setores censitários de 3.500 municípios.
+
+Nosso pacote oferece a opção de criar um painel, ou seja, entrevistas de um mesmo domicílio em diferentes visitas (trimestres). Esse painel é feito como na PME e tem duas opções: uma identificação simples e uma usando a [metodologia Ribas Soares](https://www.puc-rio.br/ensinopesq/ccpg/pibic/relatorio_resumo2020/download/relatorios/CCS/ECO/ECO-Maria%20Mittelbach.pdf).
+
+### Arquivos de apoio
+
+  - [Microdados e documentação](https://www.ibge.gov.br/estatisticas/multidominio/condicoes-de-vida-desigualdade-e-pobreza/17270-pnad-continua.html?=&t=microdados)
+  - [Relatório sobre algoritmo de identificação de painel](https://www.puc-rio.br/ensinopesq/ccpg/pibic/relatorio_resumo2020/download/relatorios/CCS/ECO/ECO-Maria%20Mittelbach.pdf)
+
+

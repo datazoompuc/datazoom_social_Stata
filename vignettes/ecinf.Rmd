@@ -1,0 +1,34 @@
+---
+title: "ECINF"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A ECINF, Economia Informal Urbana, é uma pesquisa amostral realizada pelo IBGE em 1997 e 2003 em todo o país, com o objetivo de investigar o setor informal, considerando trabalhadores por conta própria e empregadores com até cinco empregados. O principal interesse da pesquisa são as características da unidade produtiva, tais como o local de funcionamento, o tipo de clientela, se fez investimento no último ano e o tempo de duração do negócio. A amostra da ECINF de 2003 cobria 54.595 domicílios com 195.504 indivíduos.
+
+### Microdados
+
+Devido à grande variedade de vários temas investigados, há diversos arquivos de microdados para cada ano da pesquisa. Para utilizar o pacote, o usuário deve possuir os microdados referentes aos anos de interesse, os quais não são fornecidos pelo Data Zoom. Para obter informações a respeito de como adquirir os microdados e os demais arquivos, [clique aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads).
+
+### Arquivos de apoio
+
+  - [Microdados e documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
+
+<details>
+<summary> Em português: </summary>
+
+  - [Dicionário ECINF 1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
+  - [Dicionário ECINF 2003](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003.xls)
+  
+</details>
+
+<details>
+<summary> Em inglês: </summary>
+
+  - [Dicionário ECINF 1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
+  - [Dicionário ECINF 2003](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003_en.xlsx)
+  
+</details>
