@@ -250,7 +250,7 @@ Em português:
 </summary>
 
 - [Dicionário PME Antiga: 1991 a
-  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000.pdf)
+  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
 - [Dicionário PME Antiga:
   2001](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001.pdf)
 - [Dicionário PME
@@ -263,8 +263,8 @@ Em inglês:
 </summary>
 
 - Dicionários PME Antiga: 1991 a 2000
-  - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_dom_en.pdf),
-    [Pessoas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_pess_en.pdf)
+  - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
+    [Pessoas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_pess_en.pdf)
 - Dicionários PME Antiga: 2001
   - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_dom_en.pdf),
     [Pessoas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_pess_en.pdf)

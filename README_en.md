@@ -256,8 +256,8 @@ In English:
 </summary>
 
 - PME Antiga dictionaries: 1991 to 2000
-  - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_dom_en.pdf),
-    [Individuals](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_pess_en.pdf)
+  - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
+    [Individuals](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_pess_en.pdf)
 - PME Antiga dictionaries: 2001
   - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_dom_en.pdf),
     [Individuals](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_pess_en.pdf)
@@ -271,7 +271,7 @@ In Portuguese:
 </summary>
 
 - [PME Antiga dictionary: 1991 to
-  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000.pdf)
+  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
 - [PME Antiga dictionary:
   2001](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001.pdf)
 - [PME Nova
