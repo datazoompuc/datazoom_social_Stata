@@ -47,13 +47,79 @@ melhor visualizadas abrindo no Stata, com `help função`.
 
 |                                                                                                                                                                                                                   |                                                                                                                                                                                                  |                                                                                                                                                                                              |                                                                                                                                                                                                     |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|            <a href = "Censo/datazoom_censo.sthlp"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small>             | <a href = "ECINF/datazoom_ecinf.sthlp"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "PME/datazoom_pme.sthlp"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> |          <a href = "PNAD/datazoom_pnad.sthlp"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small>           |
+|                      <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small>                       | <a href = "ECINF/datazoom_ecinf.sthlp"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "PME/datazoom_pme.sthlp"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> |          <a href = "PNAD/datazoom_pnad.sthlp"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small>           |
 | <a href = "PNAD_Continua/Trimestral/datazoom_pnadcontinua.sthlp"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 a 2023 </small> |     <a href = "PNAD_Covid/datazoom_pnad_covid.sthlp"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small>     | <a href = "PNS/datazoom_pns.sthlp"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "POF/datazoom_pof.sthlp"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
 
 <a href = "#créditos">![Static
 Badge](https://img.shields.io/badge/Cr%C3%A9ditos%20-%20Departamento%20de%20Economia%20PUC%20Rio%20-%20blue)
 </a> <a href = "#créditos"> ![Static
 Badge](https://img.shields.io/badge/Cita%C3%A7%C3%A3o%20-%20green) </a>
+
+## Censo
+
+### Sobre
+
+O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada
+dez anos, na qual todos os domicílios do território brasileiro são
+visitados. O Censo fornece uma contagem da população e recolhe
+informações básicas dos moradores, como idade e gênero.
+
+Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com
+uma grande amostra aleatória dos domicílios, na qual investiga
+características sociodemográficas dos moradores (como escolaridade e
+rendimentos), características físicas do local de residência (material
+das paredes, existência de água encanada, etc.) e posse de bens (como
+geladeira e automóvel). No Censo de 2010, tal amostra cobria 6,2 milhões
+de domicílios com 20,6 milhões de indivíduos.
+
+### Microdados
+
+As informações coletadas pelos Censos podem ser acessadas pelo público
+por meio dos microdados. Em cada ano, os arquivos de microdados são
+separados por Unidade da Federação (estado). Até 1991, para cada estado,
+havia um único arquivo contendo os microdados referentes a domicílios e
+pessoas. A partir de 2000, as informações de domicílios e pessoas foram
+separadas em dois arquivos distintos, disponíveis [neste
+link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados).
+
+O Data Zoom permite a leitura dos microdados por meio do programa Stata
+para os Censos de 1970, 1980, 1991, 2000 e 2010, gerando bases de dados
+no formato do programa (formato `.dta`). Todas as variáveis originais
+seguem os nomes sugeridos pelo IBGE em seu dicionário. Para utilizar o
+pacote, o usuário deve obter os microdados referentes aos anos de
+interesse, não fornecidos pelo Data Zoom. O IBGE disponibiliza
+gratuitamente para download os microdados e a documentação para o Censo
+2010. Nesta pesquisa, os microdados para 14 municípios sofreram
+correção, sendo disponibilizados dois novos arquivos para as observações
+revistas na página de microdados. Para obter informações a respeito de
+como adquirir os microdados para outros anos, [clique
+aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
+
+O IBGE fez diversas alterações metodológicas entre um Censo e outro.
+Desta forma, algumas variáveis não estão disponíveis em todos os anos
+e/ou podem não ter sido coletadas da mesma forma em anos diferentes. O
+Data Zoom disponibiliza uma opção para compatibilizar as variáveis, com
+o intuito de uniformizar as informações ao longo do tempo. Neste caso,
+as variáveis da base de dados compatibilizada não possuem os nomes
+sugeridos pelo dicionário original, sendo um novo dicionário
+disponibilizado para download. O documento [Compatibilização dos
+Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
+explica todos os procedimentos adotados pelo programa.
+
+### Arquivos de apoio
+
+- [Compatibilização dos
+  Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
+- [Dicionário
+  compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)
+- [Dicionário Censo
+  1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
+- [Dicionário Censo
+  1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
+- [Dicionário Censo
+  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
+- [Dicionário Censo
+  2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
 
 ## Programas Auxiliares (Dicionários)
 
