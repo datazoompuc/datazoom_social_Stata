@@ -3,11 +3,9 @@ title: "Censo"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-### Sobre
 
 O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada dez anos, na qual todos os domicílios do território brasileiro são visitados. O Censo fornece uma contagem da população e recolhe informações básicas dos moradores, como idade e gênero.
 
@@ -15,18 +13,35 @@ Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com uma gran
 
 ### Microdados
 
-As informações coletadas pelos Censos podem ser acessadas pelo público por meio dos microdados. Em cada ano, os arquivos de microdados são separados por Unidade da Federação (estado). Até 1991, para cada estado, havia um único arquivo contendo os microdados referentes a domicílios e pessoas. A partir de 2000, as informações de domicílios e pessoas foram separadas em dois arquivos distintos, disponíveis [neste link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados).
+Em cada ano, os arquivos de microdados são separados por Unidade da Federação (estado). Até 1991, para cada estado, havia um único arquivo contendo os microdados referentes a domicílios e pessoas. A partir de 2000, as informações de domicílios e pessoas foram separadas em dois arquivos distintos, disponíveis [neste link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados).
 
-O Data Zoom permite a leitura dos microdados por meio do programa Stata para os Censos de 1970, 1980, 1991, 2000 e 2010, gerando bases de dados no formato do programa (formato `.dta`). Todas as variáveis originais seguem os nomes sugeridos pelo IBGE em seu dicionário. Para utilizar o pacote, o usuário deve obter os microdados referentes aos anos de interesse, não fornecidos pelo Data Zoom. O IBGE disponibiliza gratuitamente para download os microdados e a documentação para o Censo 2010. Nesta pesquisa, os microdados para 14 municípios sofreram correção, sendo disponibilizados dois novos arquivos para as observações revistas na página de microdados. Para obter informações a respeito de como adquirir os microdados para outros anos, [clique aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
+O IBGE disponibiliza gratuitamente para download os microdados e a documentação para o Censo 2010. Nesta pesquisa, os microdados para 14 municípios sofreram correção, sendo disponibilizados dois novos arquivos para as observações revistas na página de microdados. Para obter informações a respeito de como adquirir os microdados para outros anos, [clique aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
 
-O IBGE fez diversas alterações metodológicas entre um Censo e outro. Desta forma, algumas variáveis não estão disponíveis em todos os anos e/ou podem não ter sido coletadas da mesma forma em anos diferentes. O Data Zoom disponibiliza uma opção para compatibilizar as variáveis, com o intuito de uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original, sendo um novo dicionário disponibilizado para download. O documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) explica todos os procedimentos adotados pelo programa.
+O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, algumas variáveis não estão disponíveis em todos os anos e/ou podem não ter sido coletadas da mesma forma em anos diferentes. O Data Zoom disponibiliza uma opção para compatibilizar as variáveis, com o intuito de uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original, sendo um novo dicionário disponibilizado para download. O documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) explica todos os procedimentos adotados pelo programa.
 
 ### Arquivos de apoio
 
+  - [Microdados e documentação: Censos 2000 e 2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+  - [Dicionário compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)  
+
+<details>
+<summary> Em português: </summary>
+
   - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
-  - [Dicionário compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)
+  - [Dicionário Censo 1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970.pdf)
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
-  - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
-  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
+  
+</details>
 
+<details>
+<summary> Em inglês: </summary>
+
+  - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao_en.pdf)
+  - [Dicionário Censo 1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970_en.pdf)
+  - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980_en.pdf)
+  - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
+  - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
+  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)  
+  
+</details>

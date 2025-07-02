@@ -1,0 +1,45 @@
+---
+title: "PME"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A PME é uma pesquisa amostral realizada mensalmente pelo IBGE desde 1980, em seis regiões metropolitanas do Brasil: Belo Horizonte, Porto Alegre, Recife, Rio de Janeiro, Salvador e São Paulo. Essa pesquisa investiga características de trabalho e rendimento da população e fornece dados em painel, ou seja, entrevista o mesmo domicílio seguidas vezes. A amostra da PME de outubro de 2014 cobria 34.307 domicílios com 96.138 indivíduos.
+
+Há duas versões da PME, tradicionalmente chamadas de PME Antiga e PME Nova. Em 2002, houve uma grande reformulação da pesquisa, dando origem à PME-Nova. Essa reformulação ampliou significativamente o questionário, alterando principalmente o conceito de trabalho e o esquema de rotação da amostra. Até o fim de 2002, ambas as metodologias foram levadas a campo pelo IBGE. Em dezembro de 2002, a PME Antiga foi descontinuada e substituída definitivamente pela PME-Nova.
+
+A PME é uma pesquisa em painel, na qual cada domicílio é entrevistado oito vezes ao longo de 16 meses (entrevistado quatro meses consecutivos, ausente por oito meses e volta a ser entrevistado outros quatro meses). Apesar de identificar corretamente o mesmo domicílio nas oito entrevistas, a PME não atribui o mesmo número de identificação a cada membro do domicílio em todas as entrevistas. Para corrigir esse problema, o Data Zoom oferece duas opções de identificação dos indivíduos baseadas nos algoritmos propostos por [Ribas e Soares (2008)](https://repositorio.ipea.gov.br/handle/11058/1522). A diferença entre os algoritmos reside basicamente no número de características checadas para identificar a mesma pessoa ao longo das entrevistas.
+
+### Microdados
+
+Os arquivos de microdados da PME Antiga são organizados por mês, região metropolitana e tipo de registro (domicílios e pessoas). A PME Nova possui um único arquivo por mês, contendo os microdados para os indivíduos de todas as regiões metropolitanas (não há, portanto, arquivo de domicílios).
+
+O IBGE disponibiliza gratuitamente para download os microdados e toda a documentação da PME Nova (março de 2002 em diante) [neste link](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9183-pesquisa-mensal-de-emprego-antiga-metodologia.html?=&t=microdados). Para obter informações a respeito de como adquirir os microdados para a PME Antiga, [clique aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
+
+### Arquivos de apoio
+
+  - [Microdados e documentação: PME Nova](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9183-pesquisa-mensal-de-emprego-antiga-metodologia.html?=&t=microdados)
+  - [Ribas e Soares (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
+
+<details>
+<summary> Em português: </summary>
+
+  - [Dicionário PME Antiga: 1991 a 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000.pdf)
+  - [Dicionário PME Antiga: 2001](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001.pdf)
+  - [Dicionário PME Nova](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova.xls)
+  
+</details>
+
+<details>
+<summary> Em inglês: </summary>
+
+  - Dicionários PME Antiga: 1991 a 2000
+    - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_dom_en.pdf), [Pessoas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pnad_antiga_1991_2000_pess_en.pdf)
+  - Dicionários PME Antiga: 2001
+    - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_dom_en.pdf), [Pessoas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_2001_pess_en.pdf)
+  - [Dicionário PME Nova](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova_en.xls)
+  
+</details>

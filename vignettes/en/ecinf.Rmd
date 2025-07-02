@@ -1,0 +1,34 @@
+---
+title: "ECINF"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ECINF, the Urban Informal Economy survey, is a sample survey that was conducted by IBGE in 1997 and 2003 to investigate the informal sector in Brazil, characterized by self-employed workers and employers running a business with up to five employees. The main interest of this survey are businesses' characteristics, such as operating location (whether it operates in a store, in a motorized vehicle etc.), type of clientele, investments made in the previous year, age of the business, etc. In 2003, ECINF's sample covered 54,595 households, with a total of 195,504 individuals.
+
+### Microdata
+
+Due to the large number of topics investigated, there are several microdata files in each year. For information on how to acquire the microdata and other files, [click here](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads).
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
+
+</details>
+
+<details>
+<summary> In English: </summary>
+
+  - [ECINF 1997 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
+  - [ECINF 2003 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003_en.xlsx)
+  
+</details>
+
+<details>
+<summary> In Portuguese: </summary>
+
+  - [ECINF 1997 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
+  - [ECINF 2003 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003.xls)

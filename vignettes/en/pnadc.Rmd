@@ -1,0 +1,23 @@
+---
+title: "PNAD Contínua"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The Continuous National Household Sample Survey, PNAD Contínua, is a survey conducted by IBGE in order to continuously produce information on the labor market, tied to demographic and educational characteristics. Periodically, the survey analyzes permanent additional topics, such as child labor and other forms of work, fertility and migration, and supplementary topics about the socioeconomic development of the country.
+
+The survey provides monthly information to a restricted set of labor force indicators (quarterly for workforce indicators; annually for permanent and additional topics on workforce; and variable intervals to additional topics). The monthly data is representative only at national level and the rest are representative at the following geographical level: Brazil, Major Regions, Federative Units, 20 metropolitan areas that contain the Capital Municipalities, municipalities of the Capital Region and the Developed integrated region of Greater Teresina.
+
+Each quarter, about 211,000 households are interviewed, covering approximately 16,000 census sectors of 3,500 municipalities. Selected households are interviewed for five consecutive semesters; the households are visited every three months. Therefore a survey of panel data is generated. Progressively, Continuous PNAD replaced job statistics obtained from the Monthly Employment Survey, PME, and Brazilian National Household Sample Survey, PNAD.
+
+Our package offers the option to create a panel, i.e., same household survey in different visits (quarters). This panel is made as PME panels and have two options: a simple identification or using [Ribas and Soares](https://www.puc-rio.br/ensinopesq/ccpg/pibic/relatorio_resumo2020/download/relatorios/CCS/ECO/ECO-Maria%20Mittelbach.pdf) methodology.
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/multidominio/condicoes-de-vida-desigualdade-e-pobreza/17270-pnad-continua.html?=&t=microdados)
+  - [Report on the panel identification algorithm (in Portuguese)](https://www.puc-rio.br/ensinopesq/ccpg/pibic/relatorio_resumo2020/download/relatorios/CCS/ECO/ECO-Maria%20Mittelbach.pdf)
+
+

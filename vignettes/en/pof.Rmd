@@ -1,0 +1,39 @@
+---
+title: "POF"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+POF, the Brazilian Consumer Expenditure Survey, is a household survey conducted by IBGE in order to investigate the pattern of consumption and expenditure of the Brazilian population. Households are followed for 12 months. This survey is conducted every six or seven years starting in 1988 and covers the entire national territory. Among other uses, POF data serves as input for the construction of consumption baskets used to estimate IBGE consumer price indexes: IPCA (the main consumer price index in Brazil) and INPC.
+
+POF provides information on individuals (age, level of education and income) and households (such as existence of sewage, walls, vehicles) and different records for each type of expenditure for each household and individual. The type of record depends on the expenditure frequency and whether the expenditure is computed at the household or the individual level. The frequency and level in which expenditures are recorded are defined by IBGE before the interview occurs. Expenditure on food, for example, is collected through a booklet filled out daily at the households for seven days. Meanwhile, expenditure on hairdressing services is recorded individually and refers to a period of 90 days.
+
+### Microdata
+
+There are distinct files for household and individual characteristics, possession of durable goods, as well as for each type of expenditure. Our package can read data from the POF editions of 1995-96, 2002-03, 2008-09, and 2017-18. For each, we offer three tools three tools. The first one reads POF microdata files into Stata without any data manipulation. The second tool generates a “standard” database which contains annualized expenditures per household (or consumer unit, i.e. family, or individual) in all items, where the items are aggregated according to the IBGE document "Tradutores". For the two most recent rounds, in addition to the total amount of expenditure, two variables are generated: one measuring the total of expenditures paid with credit and the other measuring the total of expenditures paid in kind (donations etc.). Finally, the third tool allows the user to create her own consumption basket and obtain its expenditure value. In this case, it is possible to obtain expenditures in a more disaggregated level than those obtained from the standard database.
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
+
+<details>
+<summary> In English: </summary>
+
+  - POF 1995-96
+    - [Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)
+  - POF 2002-03
+    - [Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_2002_en.pdf)
+    - [Survey description](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/descricao_2002_en.pdf)
+    - [Variable description](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/variaveis_2002_en.xls)
+  - POF 2008-09
+    - [Survey description](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/descricao_2008_en.pdf)
+    - [Variable description](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/variaveis_2008_en.xls)
+    - [Translator for food item codes](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_alimentos_2008_en.pdf)
+    - [Translator for expense codes](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_despesas_2008_en.pdf)
+    - [Translator for income codes](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_renda_2008_en.pdf)
+  
+</details>
+

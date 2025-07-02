@@ -1,0 +1,17 @@
+---
+title: "PNAD Covid"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The PNAD-Covid aims to monitor the estimated number of individuals with symptoms associated with flu-like illness, typical of Covid-19, and its impacts on the Brazilian labor market.
+
+PNAD-Covid survey comprises interviews performed monthly. The survey contemplates questions about the occurrence of the major symptoms of COVID-19 in all residents of the household. For those who have any symptoms, the survey asks what they did to relieve the symptoms; if they sought medical care; and the type of health facility sought. Additionally, questions are questions about labor and income.
+
+### Supporting files
+
+  - [Microdata and documentation](https://www.ibge.gov.br/estatisticas/sociais/trabalho/27946-divulgacao-semanal-pnadcovid1.html?=&t=microdados)
+

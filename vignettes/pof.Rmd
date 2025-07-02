@@ -1,0 +1,40 @@
+---
+title: "POF"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A POF é uma pesquisa amostral realizada pelo IBGE com o objetivo de investigar o padrão de consumo e gastos da população brasileira, na qual os domicílios são acompanhados por doze meses. A pesquisa é realizada a cada seis-sete anos desde 1995 (sua primeira versão foi lançada em 1988) e abrange todo o território nacional. O principal uso dos dados da POF é a construção das cestas de consumo dos índices de preços ao consumidor do IBGE - IPCA e INPC.
+
+A POF contém informações sobre as pessoas (idade, nível de instrução e rendimentos), os domicílios (existência de esgoto sanitário, paredes, veículos) e registros diferentes para cada tipo de gasto realizado. Cada tipo depende da periodicidade da realização do gasto e a quem o gasto é atribuído, se ao domicílio ou ao indivíduo. Tanto a periodicidade quanto a atribuição são definidas pelo IBGE antes da entrevista. O gasto com alimentos, por exemplo, é coletado por meio de uma caderneta preenchida diariamente pelo domicílio durante sete dias. Por sua vez, o gasto com serviço de cabeleireiro é registrado individualmente para um período de 90 dias.
+
+### Microdados
+
+A POF produz diversos tipos de registro. Existem arquivos de dados organizados por características do domicílio, características das pessoas e de acordo com o inventário de bens duráveis. Além disso, há um arquivo para cada tipo de gasto. O IBGE disponibiliza gratuitamente para download os microdados e toda a documentação para as versões 1987-88, 1995-96, 2002-03, 2008-09 e 2017-18. Para obtenção dos microdados, [clique aqui](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados).
+
+O Data Zoom oferece programas separados para as POFs de 1995-96, 2002-03, 2008-09 e 2017-18. Cada pacote contém três ferramentas. A primeira faz a leitura dos microdados para cada tipo de registro no Stata sem qualquer manipulação dos dados. A segunda ferramenta gera uma base de dados padronizada, contendo os gastos anualizados por domicílio (ou unidade de consumo ou indivíduo) para todos os itens investigados, onde os itens foram agregados de acordo com o documento “Tradutores” do IBGE. Para as duas versões mais recentes, além do valor total dos gastos, duas variáveis são geradas: uma indicando o valor desse gasto realizado por meio de crédito e outra medindo o valor da aquisição realizada por meios não monetários (como doações). Finalmente, a terceira ferramenta permite que o usuário crie sua própria cesta de consumo. Neste caso, é possível obter o valor do gasto anualizado em itens um pouco mais desagregados do que os existentes na base padrão.
+
+### Arquivos de apoio
+
+  - [Microdados e documentação](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
+
+<details>
+<summary> Em inglês: </summary>
+
+  - POF 1995-96
+    - [Dicionário](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)
+  - POF 2002-03
+    - [Dicionário](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_2002_en.pdf)
+    - [Descrição da pesquisa](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/descricao_2002_en.pdf)
+    - [Descrição das variáveis](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/variaveis_2002_en.xls)
+  - POF 2008-09
+    - [Descrição da pesquisa](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/descricao_2008_en.pdf)
+    - [Descrição das variáveis](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/variaveis_2008_en.xls)
+    - [Tradutor de alimentos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_alimentos_2008_en.pdf)
+    - [Tradutor de despesas](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_despesas_2008_en.pdf)
+    - [Tradutor de rendimentos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/tradutor_renda_2008_en.pdf)
+  
+</details>

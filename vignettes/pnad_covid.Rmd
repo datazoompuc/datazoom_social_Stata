@@ -1,0 +1,19 @@
+---
+title: "PNAD Covid"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A PNAD Covid objetiva monitorar tanto o número estimado de indivíduos com sintomas associados à síndrome gripal, típicos da COVID-19, quanto os impactos da pandemia no mercado de trabalho brasileiro.
+
+A coleta da PNAD Covid, iniciada no dia 4 de maio de 2020, consiste em entrevistas realizadas por telefone em cerca de 193 mil domicílios por mês em todo o Brasil. Primeiramente, pergunta-se sobre a ocorrência dos principais sintomas da COVID-19 no período de referência da pesquisa, em todos os moradores do domicílio. Para aqueles que apresentaram algum sintoma, perguntam-se o que foi feito para o alívio dos sintomas; se buscaram por atendimento médico; e o tipo de estabelecimento de saúde procurado. Posteriormente, perguntam-se sobre questões de trabalho e rendimentos.
+
+A pesquisa fornece informações semanais para alguns indicadores, em nível nacional, e divulgações mensais para um conjunto mais amplo de indicadores, por Unidades da Federação.
+
+### Arquivos de apoio
+
+  - [Microdados e documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/27946-divulgacao-semanal-pnadcovid1.html?=&t=microdados)
+
