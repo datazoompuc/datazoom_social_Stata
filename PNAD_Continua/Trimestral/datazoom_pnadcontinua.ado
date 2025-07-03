@@ -89,9 +89,9 @@ loc caminhoprin = c(pwd)
 
 * juntando os trimestres de cada ano
 foreach aa in `years' {	
-	use `PNADC_01`aa'', clear
+	use "`PNADC_01`aa''", clear
 	foreach trim in 02 03 04 {
-		capture append using `PNADC_`trim'`aa''
+		capture append using "`PNADC_`trim'`aa''"
 		if _rc != 0 {
 			continue, break	
 		}
@@ -123,7 +123,7 @@ foreach aa in `years' {
 
 forvalues pa = `min_painel'/`max_painel'{  
 	foreach aa in `years' {
-		append using `PNADC_Painel`pa'temp`aa''
+		append using "`PNADC_Painel`pa'temp`aa''"
 		keep if V1014 == `pa'
 	}
 	tempfile PNADC_Painel`pa'	
@@ -132,7 +132,7 @@ forvalues pa = `min_painel'/`max_painel'{
 
 global panels = ""
 forvalues pa = `min_painel'/`max_painel'{   
-	use `PNADC_Painel`pa'', clear
+	use "`PNADC_Painel`pa''", clear
 	qui count
 	if r(N) != 0 { 
 		global panels = "$panels `pa'" /* Coleta os paineis existentes */
