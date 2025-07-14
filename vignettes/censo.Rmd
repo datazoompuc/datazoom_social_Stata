@@ -31,6 +31,8 @@ O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, al
   - [Dicionário Censo 1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970.pdf)
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
+  - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
+  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)  
   
 </details>
 
@@ -42,6 +44,6 @@ O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, al
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980_en.pdf)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
   - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
-  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)  
+  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)
   
 </details>

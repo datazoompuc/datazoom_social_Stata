@@ -144,6 +144,10 @@ In Portuguese:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
 - [Censo 1991
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
+- [Censo 2000
+  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
+- [Censo 2010
+  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
 
 </details>
 

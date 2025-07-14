@@ -121,6 +121,10 @@ Em português:
   1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
 - [Dicionário Censo
   1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
+- [Dicionário Censo
+  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
+- [Dicionário Censo
+  2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
 
 </details>
 <details>
