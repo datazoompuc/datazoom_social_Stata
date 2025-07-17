@@ -839,7 +839,7 @@ foreach ano in `years' {
 
 
 					/* Compatibiliza, se especificado */
-	            	if "`comp'" != "" {
+	            			if "`comp'" != "" {
 						compat_censo10pess
 
 						/* Áreas Mínimas Comparáveis */
@@ -906,7 +906,7 @@ foreach ano in `years' {
 					lab var munic "municipality codes without DV (6 digits)"
 
 					/* Compatibiliza, se especificado */
-	            	if "`comp'" != "" {
+	            			if "`comp'" != "" {
 						compat_censo10dom
 
 						/* Áreas Mínimas Comparáveis */
@@ -1129,7 +1129,7 @@ g tipo_esc_san_B = v0211
 *                 4 - Vala
 *                 5 - Rio, lago ou mar
 *                 6 - Outro 
-lab var tipo_esc_san "tipo de escoadouro - desagregado"
+lab var tipo_esc_san_B "tipo de escoadouro - desagregado"
 
 recode v0211 (5 6 = 4) // 1 a 4 mantidos
 rename v0211 tipo_esc_san
@@ -1173,7 +1173,7 @@ rename v0215 gelad_ou_fre
 recode v0217 (2=0) // (1=1)
 rename v0217 lavaroupa
 * lavaroupa = 0 - não tem	
-*			= 1 - tem
+* 		1 - tem
 
 recode v0219 (2=0) // (1=1)
 rename v0219 telefone
@@ -1211,11 +1211,11 @@ recode v7616 (999999 = .)
 rename v7616 renda_dom
 drop v7617	// em salarios minimos
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NÃO SERIA agosto/2010?
 g double deflator = .515004440
 g conversor = 1
 
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NÃO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -1700,13 +1700,13 @@ rename v0440 afast_trab_sem
 recode v0442 (2=0) // (1=1)
 rename v0442 nao_remun
 replace nao_remun = 1 if v0441==1 & nao_remun==.
-* nao_remunerado = 0 - não
+* nao_remun = 0 - não
 *                  1 - sim
 drop v0441
 
 recode v0443 (2=0) // (1=1)
 rename v0443 trab_proprio_cons
-* prod_alim_cons_proprio = 0 - não
+* trab_proprio_cons = 0 - não
 *                          1 - sim
 
 recode v0444 (1=0) (2=1)
@@ -1733,7 +1733,7 @@ replace pos_ocup_sem = 2 if v0448==1
 *				  3 - Empregado sem carteira
 *				  4 - Trabalhador doméstico com carteira
 *				  5 - Trabalhador doméstico sem carteira
-*				  6 - Conta - própria
+*				  6 - Conta-própria
 *				  7 - Empregador
 *				  8 - Não remunerado
 *                 9 - Trabalhador na produção para o próprio consumo
@@ -1765,8 +1765,8 @@ rename v4276 mun_trab
 recode v4512 (0 999000 999999=.)
 rename v4512 rend_ocup_prin
 
-*	recode v4513 (0 999000 999999=.)
-*	rename v4513 rend_tot_prin
+*	recode v4513 (0 999000 999999=.) // POR QUE NÃO APAGAR?
+*	rename v4513 rend_tot_prin // POR QUE NÃO APAGAR?
 
 replace v4514 = . if rend_ocup_prin==.
 rename v4514 rend_prin_sm
@@ -1813,10 +1813,10 @@ lab var rend_fam "renda familiar"
 
 drop  ESTR ESTRP
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.515004440
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010"  // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
