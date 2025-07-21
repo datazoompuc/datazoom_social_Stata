@@ -2898,8 +2898,8 @@ rename v0653 horas_trabprin
 * providencia para conseguir trabalho
 recode v0654 (2 = 0)
 rename v0654 tomou_prov
-*tom_prov_trab = 1 - sim
-*                0 - não
+*tomou_prov = 1 - sim
+*             0 - não
 
 drop v0655
 
@@ -2908,12 +2908,12 @@ drop v0656 v0657 v0658 v0659
 rename v6591 rend_outras_fontes
 lab var rend_outras_fontes "rendimento de outras fontes"
 
-* trabalha no minicípio 
+* trabalha no município 
 recode v0660 (1 2 = 1) (3/5 = 0) (else = .)
 rename v0660 mun_trab
 lab var mun_trab "trabalha no município em que reside"
 * mun_trab 	= 1 - sim
-*			= 0 - não
+*		= 0 - não
 
 drop v6602 v6604 v6606 v0661 v0662 v5110 v5120 v6900 v6910 v6920 v6940
 
@@ -2930,8 +2930,8 @@ rename v6643 filhos_vivos
 rename v0665 sexo_ult_nasc_v
 
 recode sexo_ult_nasc_v (2 = 0 )
-* sexo_ult_nasc_v_B = 1 - masculino
-*                     0 - feminino
+* sexo_ult_nasc_v = 1 - masculino
+*                   0 - feminino
 
 rename v6660 idade_ult_nasc_v
 drop v0669 
@@ -2943,10 +2943,10 @@ rename v6800 filhos_tot
 
 drop v6664 v0667 v0668 v6681 v6682 
 	
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */  NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
