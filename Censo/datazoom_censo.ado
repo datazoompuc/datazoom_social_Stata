@@ -1891,9 +1891,9 @@ lab var sit_setor_C "situação do domicílio - urbano/rural"
 
 rename v4001 especie
 recode especie (1 2 = 0) (5 = 1) (6 = 2)
-*especie_B = 0 - particular permanente 
-*            1 - particular improvisado
-*            2 - coletivo
+*especie = 0 - particular permanente 
+*          1 - particular improvisado
+*          2 - coletivo
 
 /* C.3. MATERIAL DAS PAREDES */
 recode v0202 (2 4 = 1) (3 = 2) (5 = 3) (6 = 4) (7 = 5) (8 = 6) (9 = .)
@@ -1902,7 +1902,7 @@ rename v0202 paredes
 *        	= 2   Madeira aparelhada
 *        	= 3   Taipa não revestida
 *       	= 4   Material aproveitado
-*   	    = 5   Palha
+*   	    	= 5   Palha
 *	        = 6   Outro
 
 
@@ -2032,8 +2032,8 @@ drop abast_agua_B
 
 rename v0209 agua_canal
 *agua_canal = 1 - Canalizada em pelo menos um cômodo
-*              2 - Canalizada só na propriedade ou terreno
-*              3 - Não canalizada
+*             2 - Canalizada só na propriedade ou terreno
+*             3 - Não canalizada
 
 
 /* C.9. DESTINO DO LIXO */
@@ -2049,14 +2049,14 @@ rename v0210 dest_lixo
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 rename v0211 ilum_eletr
 recode ilum_eletr (1 2 =1) (3 = 0)
-*ilum_eletr	 = 0 - Não
-*              1 - Sim
+*ilum_eletr = 0 - Não
+*             1 - Sim
 
 
 rename v0212 medidor_el
 recode medidor_el (1 2 = 1) (3 = 0)
 *medidor_el = 1 - Tem
-*			  0 - Não tem
+*		0 - Não tem
 
 
 
@@ -2086,7 +2086,7 @@ drop v0217
 recode v0218 (2=0)
 rename v0218 telefone
 *telefone = 0 - Não
-*            1 - Sim
+*           1 - Sim
 
 rename v0219 microcomp
 recode microcomp (2 = 0)
@@ -2114,11 +2114,11 @@ rename v6529 renda_dom
 
 drop v6530 v6531 v6532
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
 
-lab var deflator "deflator - referência: 08/2010"
+lab var deflator "deflator - referência: 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -2201,7 +2201,7 @@ recode 	cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 *				12	Individual em domicílio coletivo
 
 g cond_dom_B = cond_dom
-recode cond_dom_B (8 = 6) (10 = 8) (11 = 9) (12 = 10) (5 6 = 5) (9 = 7)
+recode cond_dom_B (8 = 6) (10 = 8) (11 = 9) (12 = 10) (5 6 7 = 5) (9 = 7)
 lab var cond_dom_B "condição no domicílio B"
 *cond_dom_B = 1	- pessoa responsável
 *				  2	- cônjuge, companheiro
@@ -2220,7 +2220,7 @@ rename v6037 idade_meses
 rename v6040 idade_presumida
 recode idade_presumida (2 = 1) (1 = 0)
 *idade_presumida =   0-	Não
-*					 1- Sim
+*			1- Sim
 
 drop v6033	
 	
@@ -2235,7 +2235,7 @@ rename v0606 raca
 	
 g racaB = raca
 recode racaB (5 = 4)
-lab var racaB "cor ou raça (indigenous=mulatto)"
+lab var racaB "cor ou raça (indigenous=mulatto)" // POR QUE ESTA EM INGLES?
 *	raca =  1 -Branca
 *			2 - Preta
 *			3 - Amarela
@@ -2304,24 +2304,24 @@ rename v0617 def_mental
 recode v0618 (2 3 = 0), copy g(sempre_morou)
 lab var sempre_morou "sempre morou neste município"
 * sempre_morou = 1 - sim
-*				= 0 - nao
+*		= 0 - nao
 
 rename v0618 nasceu_mun
 recode nasceu_mun (1 2 = 1) (3 = 0)
 	*nasceu_mun = 1- Sim
-	*			  0- Não
+	*		0- Não
 rename v0619 nasceu_UF
 recode nasceu_UF (1 2 = 1) (3 = 0)
 replace nasceu_UF = 1 if nasceu_mun==1
 	*nasceu_UF = 1- Sim
-	*			  0- Não
+	*		0- Não
 
 rename v0620 nacionalidade 
 recode nacionalidade (1 = 0) (2 = 1) (3 = 2)
 replace nacionalidade = 0 if nasceu_UF==1
 * nacionalidade = 0- Brasileiro nato
-	*				  1- Naturalizado brasileiro
-	*				  2- Estrangeiro
+	*		1- Naturalizado brasileiro
+	*		2- Estrangeiro
 	
 rename v0621 ano_fix_res
 	*ano em que fixou residência no Brasil
@@ -2497,7 +2497,7 @@ rename v0624 anos_mor_mun
 replace v0623 = idade if v0623==. & anos_mor_mun~=.
 rename v0623 anos_mor_UF
 
-* tempo de moradia em 1970 só vale para quem não nasceu no município.
+* tempo de moradia em 1970 só vale para quem não nasceu no município. // MAS DO JEITO QUE ESTÁ CONSTRUÍDO, INCLUI QUEM NASCEU, POIS A VARIÁVEL ACIMA INCLUI IDADE
 g t_mor_UF_70 = anos_mor_UF
 g t_mor_mun_70 = anos_mor_mun
 recode t_mor_UF_70 t_mor_mun_70 (7/10=6) (11/max=7)
@@ -2596,8 +2596,8 @@ drop v6266 v0625 v0626
 
 rename v0627 alfabetizado
 recode alfabetizado (2 = 0)
-	*alfabetizadoB = 1 - Sim
-	*				 0 - Não
+	*alfabetizado = 1 - Sim
+	*		 0 - Não
 	
 ** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
 
@@ -2605,13 +2605,13 @@ recode v0628 (1 2=1 "sim") (3 4 =0 "nao"), g(freq_escola)
 replace freq_escola = 0 if v0629<=3		// 	desconsidera creche e pre-escola para compatibilizar com todos
 lab var freq_escola "frequenta escola"
 *freq_escola = 1 - Sim
-*			   0 - Não
+*		0 - Não
 
 g freq_escolaB = freq_escola
 replace freq_escolaB = 1 if v0629==2 | v0629==3	// 	inclui pre-escola
-lab var freq_escolaB "frequenta escola - inclui pre-school"
+lab var freq_escolaB "frequenta escola - inclui pre-escola"
 *freq_escolaB = 1 - Sim
-*				0 - Não
+*		0 - Não
 
 * rede de ensino
 recode v0628 (1 = 1) (2 = 0) (else=.) 
@@ -2716,8 +2716,8 @@ recode v0636 (2 3 = 0)
 replace v0636 = . if freq_escolaB==0	
 rename v0636 mun_escola
 lab var mun_escola "estuda no município em que reside?"
-* mun_esc 	= 1 - sim
-*			= 0 - não
+* mun_escola 	= 1 - sim
+*		= 0 - não
 
 recode v6352 (140/226 321 322 347 380 = 3) ///
 		 (421 641/727 813 = 4) ///
@@ -2728,12 +2728,12 @@ recode v6352 (140/226 321 322 347 380 = 3) ///
 		 (341 420 422 482 483 540/544 761 810/812 814/862 085 = 9), g(cursos_c1)
 lab var cursos_c1 "curso superior concluído"
 * cursos_c1	=	3	ciências humanas
-*				4	ciências biológicas
-*				5	ciências exatas
-*				6	ciências agrárias
-*				7	ciências sociais
-*				8	militar
-*				9	outros cursos
+*			4	ciências biológicas
+*			5	ciências exatas
+*			6	ciências agrárias
+*			7	ciências sociais
+*			8	militar
+*			9	outros cursos
 		 
 recode v6352 (140/146 = 1) ///
 		 (210/226 = 2) ///
@@ -2752,7 +2752,7 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				5	Engenharia, Produção e Construção
 *				6	Agricultura e Veterinária
 *				7	Saúde e Bem-Estar Social    
-*				8	serviÃ§os
+*				8	serviços
 *				9	Outros
 
 rename v6352 curso_concl	// COMP SO PARA CURSO SUPERIOR
@@ -2772,7 +2772,7 @@ recode v0637 ( 2 3 = 0)
 rename v0637 vive_conjuge
 lab var vive_conjuge "se a pessoa vive com o cônjuge"
 * vive_conjuge = 0 - Não
-*				 1 - Sim
+*		 1 - Sim
 
 drop v0638
 
@@ -2798,12 +2798,12 @@ drop v0639 v0640
 rename v0641 trab_rem_sem
 recode trab_rem_sem (2 = 0)
 * trab_rem_sem = 1 - Sim
-*				 0 - Não
+*		 0 - Não
 
 rename v0642 afast_trab_sem
 recode afast_trab_sem (2 = 0)
 * afast_trab_sem = 1 - Sim
-*				   0 - Não
+*			0 - Não
 
 * OBS: não perfeitamente compatível com 2000 por conta de mudanças nas questões.
 * Em 2000, sao duas questoes, uma referente a aprendiz/estagiário e outra sobre
@@ -2812,18 +2812,18 @@ recode afast_trab_sem (2 = 0)
 rename v0643 nao_remun
 recode nao_remun (2 = 0)	
 * nao_remun = 1 - Sim
-*			 0 - Não
+*		0 - Não
 	
 rename v0644 trab_proprio_cons
 recode trab_proprio_cons (2 = 0)
 * trab_proprio_cons = 1 - Sim
-*					 0 - Não
+*			0 - Não
 
 recode v0645 (1 = 0) (2 = 1)
 rename v0645 mais_de_um_trab
 lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
-*			   	   1 - Sim
+*			1 - Sim
 
 rename v6461 ocup2010
 rename v6471 ativ2010	
@@ -2839,13 +2839,13 @@ replace pos_ocup_sem = 4 if v6940==1
 replace pos_ocup_sem = 5 if v6940==2
 
 * pos_ocup_sem  = 1 - Empregado com carteira
-*				  2 - Militar e Funcionário Públicos
-*				  3 - Empregado sem carteira
-*				  4 - Trabalhador doméstico com carteira
-*				  5 - Trabalhador doméstico sem carteira
-*				  6 - Conta - própria
-*				  7 - Empregador
-*				  8 - Não remunerado
+*		  2 - Militar e Funcionário Públicos
+*		  3 - Empregado sem carteira
+*		  4 - Trabalhador doméstico com carteira
+*		  5 - Trabalhador doméstico sem carteira
+*		  6 - Conta - própria
+*		  7 - Empregador
+*		  8 - Não remunerado
 *                 9 - Trabalhador na produção para o próprio consumo
 
 
