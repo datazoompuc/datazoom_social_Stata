@@ -1628,8 +1628,8 @@ recode  v4354 (2 = .)	///
 		  (520/582 = 5) ///
 		  (620/641 = 6) ///
 		  (720/762 = 7) ///
-		  (810/863 = 8) ///
-		  (085 097 = 9), g(cursos_c2)
+		  (863 = 8) ///
+		  (810/862 085 097 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
 *				2	Artes, Humanidades e Letras
@@ -2742,8 +2742,8 @@ recode v6352 (140/146 = 1) ///
 		 (520/582 623 = 5) ///
 		 (620/622 624 641 = 6) ///
 		 (720/762 = 7) ///
-		 (810/863 = 8) ///
-		 (085 = 9), g(cursos_c2)
+		 (863 = 8) ///
+		 (810/862 085 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
 *				2	Artes, Humanidades e Letras
@@ -2752,7 +2752,7 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				5	Engenharia, Produção e Construção
 *				6	Agricultura e Veterinária
 *				7	Saúde e Bem-Estar Social    
-*				8	serviços
+*				8	militar
 *				9	Outros
 
 rename v6352 curso_concl	// COMP SO PARA CURSO SUPERIOR
@@ -3498,7 +3498,7 @@ if `p'==1 {
 
 	recode v047 (3 =2) (2 =3) (5 =4) (0 6=.)
 	rename v047 trab_semana
-	* cond_ativ_sem = 1 - só ocupação habitual
+	* trab_semana = 1 - só ocupação habitual
 	*                 2 - habitual e outra
 	*                 3 - só outra
 	*                 4 - outros
@@ -4001,9 +4001,9 @@ if `p'==1 {
 
 	recode v516 (9=.)
 	replace v516 = idade if (v516 == 8) & (idade <= 5)
-	replace v516 = 6     if (v516 == 8) & (idade <= 9) // irrelevante: & (idade > 5)
-	replace v516 = 7     if (v516 == 8) & (idade != .) // irrelevante: & (idade > 9)
-	replace v516 = . if v516==8
+	replace v516 = 6     if (v516 == 8) & (idade <= 9) // irrelevante: & (idade > 5) // NAO SERIA NECESSARIO COMPLEMENTAR COM >5 E <=9?
+	replace v516 = 7     if (v516 == 8) & (idade != .) // irrelevante: & (idade > 9) // NAO SERIA NECESSARIO COMPLEMENTAR COM >9 E !=.?
+	replace v516 = . if v516==8 // AQUI SERIA TER NASCIDO NA UF MAS NAO TER INFO DE IDADE? NAO SERIA MELHOR COLOCAR (v516 == 8) & (idade == .)?
 	rename v516 t_mor_UF_80
 	
 	* t_mor_UF_80 =  0 - menos de 1 ano
@@ -4025,10 +4025,10 @@ if `p'==1 {
 	rename v518 mun_mor_ant
 	label var mun_mor_ant "Município onde morava ant (se migrou nos últ 10 anos)"
 
-	recode v515 (1 = 0) (3 = 1)  (8 9 = .)
+	recode v515 (3 = 0) (8 9 = .) //  (1 = 1)
 	rename v515 sit_mun_ant
-	* sit_mun_ant = 0 zona urbana
-	*               1 zona rural
+	* sit_mun_ant = 1 zona urbana
+	*               0 zona rural
 
 	*** Onde morava há 5 anos:
 	* Este quesito não foi investigado em 1980.
@@ -4041,7 +4041,7 @@ if `p'==1 {
 	*                1 - sim
 
 	gen freq_escola = 0     if idade >= 5
-	replace freq_escola = 1 if (idade >= 5) & (v521 ~= 0) // frequenta curso seriado
+	replace freq_escola = 1 if (idade >= 5) & (v521 ~= 0) & (v521 ~= 9) // frequenta curso seriado
 	* frequenta curso não seriado, exceto pre-escola, supletivo por rádio ou TV e pre-vestibular:
 	replace freq_escola = 1 if (idade >= 5) & ((v522>=2 & v522<=4) | v522==8)
 	lab var freq_escola "frequenta escola"
@@ -4217,7 +4217,7 @@ if `p'==1 {
 	*             8 afazeres domésticos
 	*             9 sem ocupação
 
-	recode cond_ativ (0 2=1) (3/9 =0), copy g(pea)
+	recode cond_ativ (0/2=1) (3/9 =0), copy g(pea)
 	lab var pea "população economicamente ativa"
 	* pea	= 1 economicamente ativo
 	*         0 inativo
@@ -4293,7 +4293,7 @@ if `p'==1 {
 
 	recode v534 (2 4 6 = 1) (8=0) (9=.)
 	rename v534 previd_A
-	* previd = 0 não
+	* previd_A = 0 não
 	*          1 sim
 
 	recode v535 (9=.)
@@ -4323,7 +4323,7 @@ if `p'==1 {
 	*                4 - de 40 a 48 horas
 	*                5 - 49 horas ou mais
 	
-	* trabalha no minicípio  - compativel com 2010 apenas
+	* trabalha no município
 	recode v527 (0 = 1) (1100007/max = 0)
 	replace v527 = . if hrs_oc_hab==.
 	rename v527 mun_trab
@@ -4332,14 +4332,14 @@ if `p'==1 {
 	*			= 0 - não
 
 
-	*** Ocupação na semana -- comparável com 2000:
+	*** Ocupação na semana -- comparável com 1970:
 	recode v541 (6 4 =4) (5=.)
 	rename v541 trab_semana
-	* trab_semana = 1 só trabalho habitual
-	*               2 trabalho habitual e outros
-	*               3 só trabalho diferente do habitual
+	* trab_semana = 1 só ocupação habitual
+	*               2 habitual e outra
+	*               3 só outra
 	*               4 outros
-
+ 
 	drop v542
 	drop v544
 	drop v545 trab_ult_12m
@@ -4408,7 +4408,7 @@ if `p'==1 {
 	rename v610 rend_aposent
 	rename v611 rend_aluguel
 	rename v612 rend_doa_pen
-	egen rend_total = rowtotal(rend_ocup_hab rend_outras_ocup rend_aposent rend_aluguel rend_doa_pen v613)
+	egen rend_total = rowtotal(rend_ocup_hab rend_outras_ocup rend_aposent rend_aluguel rend_doa_pen v613) // NAO INCLUI RENDIMENTO EM MERCADORIAS E PRODUTOS MESMO? A V608...
 	lab var rend_total "renda total"
 	by id_muni distrito id_dom num_fam: ///
 		egen rend_fam = total(rend_total*(v504>= 1 & v504<= 6))
