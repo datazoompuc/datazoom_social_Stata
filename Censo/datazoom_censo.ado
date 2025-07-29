@@ -2114,7 +2114,7 @@ rename v6529 renda_dom
 
 drop v6530 v6531 v6532
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ NAO SERIA AGOSTO/2010?
+/* DEFLACIONANDO RENDAS:  */ NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
 
@@ -2943,7 +2943,7 @@ rename v6800 filhos_tot
 
 drop v6664 v0667 v0668 v6681 v6682 
 	
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */  NAO SERIA AGOSTO/2010?
+/* DEFLACIONANDO RENDAS:  */  NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
 lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
@@ -3126,7 +3126,7 @@ if `d'==1 {
 	*             1 - tem
 
 	recode v019 (0 . = .) (2=0) // (1=1)
-	rename v019 automov_part
+	rename v019 automov_part // NAO FAZ MAIS SENTIDO COMPATIBILIZAR SOMENTE COMO AUTOMOVEL TEM/NAO TEM DO QUE COMO PARTICULAR, JA QUE NO DICIONARIO ORIGINAL NAO FALA ISSO?
 	* automov_part = 0 - não tem
 	*                1 - tem
 
@@ -3213,7 +3213,7 @@ if `p'==1 {
 
 	*** Nacionalidade e naturalidade
 	gen nasceu_mun = 0
-	replace nasceu_mun = 1 if v031 == .
+	replace nasceu_mun = 1 if v031 == . // NO DICIONARIO, v031 e v032 (tempo de residencia na UF e no municipio), 0 é considerado nao aplicavel. nao seria mais adequado usar o 0 & a v032?
 	label var nasceu_mun "Nasceu neste município"
 	* nasceu_mun = 0 - não
 	*              1 - sim
@@ -3300,7 +3300,7 @@ if `p'==1 {
 	recode v034 (2 8 9 = 0) (1=1) (else=.)
 	rename v034	sit_mun_ant
 	* sit_mun_ant = 1 zona urbana
-	*               2 zona rural
+	*               0 zona rural
 
 	*** Onde morava há 5 anos:
 	* Este quesito não foi investigado em 1970.
@@ -3315,8 +3315,8 @@ if `p'==1 {
 	recode v036 (0=.) (2=0) // (1=1)
 	rename v036 freq_escola
 	lab var freq_escola "frequenta escola"
-	* freq_escolaB = 0 - não
-	*                1 - sim
+	* freq_escola = 0 - não
+	*               1 - sim
 
 	gen anos_estudo = 0             if (idade >= 5) & (v038 == 5)
 	replace anos_estudo = 0         if (v037 == 9) // alfabetização de adultos
@@ -3410,7 +3410,7 @@ if `p'==1 {
 	recode v043 (0=8) (1=6) (2=3) (3=4) (4=7) (5=5) (6=0) (7=1) (nonmissing = .)
 	replace v043 = 2 if v044 == 924 & v045 == 933 // duas condições dizem o mesmo:
 												  // procura trabalho pela 1a vez
-	rename v043 cond_ativB
+	rename v043 cond_ativB // NO DICIONARIO SO TEM cond_ativ, NAO TEM cond_ativB. AJUSTAR O NOME AQUI?!
 	* cond_ativ = 1 trabalha/procurando trabalho - já trabalhou
 	*             2 procurando trabalho - nunca trabalhou
 	*             3 aposentado ou pensionista
@@ -3527,11 +3527,11 @@ if `p'==1 {
 	* mun_trab 	= 1 - sim
 	*			= 0 - não
 
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */  // NAO SERIA AGOSTO/2010?
 	g double deflator = 0.000015185/10^8
 	g double conversor = 2750000000000
 	
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_total rend_fam {
@@ -3601,7 +3601,7 @@ foreach n of global x {
 
 if `d'==1 {
 	/* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
-	* gerando totais de homens e mulheres nas famílias e nos domicílios
+	* gerando totais de homens e mulheres nos domicílios
 	* v501 == 1 representa sexo masculino; == 3 feminino
 	by id_muni distrito id_dom: egen n_homem_dom = total(v501==1)
 	by id_muni distrito id_dom: egen n_mulher_dom = total(v501==3)
@@ -3643,7 +3643,7 @@ if `d'==1 {
 	*        	= 2   Madeira aparelhada
 	*        	= 3   Taipa não revestida
 	*       	= 4   Material aproveitado
-	*   	    = 5   Palha
+	*   	    	= 5   Palha
 	*	        = 6   Outro
 
 
@@ -3717,8 +3717,8 @@ if `d'==1 {
 	recode v208 (3 8 = 0) (9 = .) // (1=1)
 	rename v208 sanitario_ex
 	label var sanitario_ex "acesso exclusivo a instalação sanitária"
-	* inst_san_exc = 0 - não tem acesso a inst san exclusiva
-	*                1 - tem acesso a inst sanitária exclusiva
+	* sanitario_ex = 0 - não tem acesso a instalação san exclusiva
+	*                1 - tem acesso a instalação sanitária exclusiva
 
 
 	/* C.9. DESTINO DO LIXO */
@@ -3752,23 +3752,14 @@ if `d'==1 {
 	*         1 - tem
 
 	recode v215 (2=1) (3=2) (4=3) (5/7 = 4) (8=0) (9=.) // (1=1)
-	rename v215 comb_cozinha
-	* comb_cozinha = 1 - gás
+	rename v215 comb_fogao
+	* comb_fogao = 1 - gás
 	*                2 - lenha
 	*                3 - carvão
 	*                4 - outro
 	*                0 - não tem fogão nem fogareiro
 
-	gen comb_fogao = comb_cozinha
-	replace comb_fogao = 0 if fogao == 0
-	lab var comb_fogao "combustível utilizado no fogão"
-	* comb_fogao = 1 - gás
-	*              2 - lenha
-	*              3 - carvão
-	*              4 - outro
-	*              0 - não tem fogão
-
-	recode v216 (8=0) (9=.) // (1=1)
+	recode v216 (8=0) (9=.) // (1=1) 
 	rename v216 telefone
 	* telefone = 0 - não tem
 	*            1 - tem
@@ -3820,11 +3811,11 @@ if `d'==1 {
 	drop v204 v211 
 
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 	
 	g double deflator = 0.000033234/10^7
 	g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	g aluguel_def = (aluguel/conversor)/deflator
@@ -4427,11 +4418,11 @@ if `p'==1 {
 	lab var renda_dom "renda domiciliar"
 	drop v608 v613  v680 v540 v682 v681
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 	
 	cap g double deflator = 0.000033234/10^7
 	cap g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_ocup_hab rend_outras_ocup rend_total rend_fam renda_dom {
@@ -4653,8 +4644,8 @@ label var fogao_ou_fog "fogão ou fogareiro"
 *                1 - tem
 
 recode v0210 (2 4 = 1) (3=2) (5=3) (6=4) // 0 e 1 mantidos
-rename v0210 comb_cozinha
-* comb_cozinha = 1 - gás
+rename v0210 comb_fogao
+* comb_fogao = 1 - gás
 *                2 - lenha
 *                3 - carvão
 *                4 - outro
@@ -4722,11 +4713,11 @@ rename v2012 renda_dom
 
 drop v2013 v2014
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.000038883
 g double conversor = 2750000
 
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -5385,10 +5376,10 @@ lab var pea "população economicamente ativa"
 * pea	= 1 economicamente ativo
 *         0 inativo
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.000038883
 g double conversor = 2750000
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_hab rend_outras_ocup rend_outras_fontes rend_total rend_fam  {
