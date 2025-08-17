@@ -4971,7 +4971,7 @@ recode v0316 (1/29 99 = .)	///
 * 92 = Síria 
 * 93 = Turquia 
 * 94 = Ásia - outros 
-* 95 = Australis
+* 95 = Australia
 * 96 = Oceania
 label var pais_nascim "País de nascimento - códigos 1970"
 * pais_nascim = 30-98 país estrangeiro especificado
@@ -5027,7 +5027,7 @@ label var UF_mor_ant "UF onde morava anteriormente (se migrou nos últ 10 anos)"
 
 drop v3191
 
-recode v0320 (9=.) (2=0) // (1=1)
+recode v0320 (9=.) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0320 sit_mun_ant
 * sit_mun_ant = 1 zona urbana
 *               0 zona rural
@@ -5061,7 +5061,7 @@ rename v0321 UF_mor5anos
 label var UF_mor5anos "UF onde morava há 5 anos"
 * UF_mor5anos = 11-53 código de UF em que morava
 
-recode v0322 (2=0) (9=.) // (1=1)
+recode v0322 (2=0) (9=.) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 replace v0322 =. if pais_mor5anos~=.
 rename v0322 sit_dom5anos
 label var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
@@ -5069,7 +5069,7 @@ label var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
 *                0 zona rural
 
 /* D.8. EDUCAÇÃO */
-recode v0323 (2=0) // (1=1)
+recode v0323 (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0323 alfabetizado
 * alfabetizado = 0 - não
 *                1 - sim
@@ -5085,7 +5085,7 @@ lab var freq_escolaB "frequenta escola - inclui pré-escola"
 
 
 * Anos de estudo - cálculo do IBGE
-recode v3241 (20 = .) (17=16) (30 = 0) // 20 é "indefinido"; lim em 16 pois é máximo em 1970
+recode v3241 (20 = .) (17=16) (30 = 0) // 20 é "indefinido"; lim em 16 pois é máximo em 1970  // no dicionario, tem opcao 31 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3241 anos_estudo
 * anos_estudo = 0      - Sem instrução ou menos de 1 ano
 *               1 a 15 - Número de anos
@@ -5198,7 +5198,7 @@ rename v0329 curso_concl	// COMP SO PARA CURSO SUPERIOR
 
 /* D.9. SITUAÇÃO CONJUGAL */
 
-recode v0330 (2 = 0)
+recode v0330 (2 = 0)  // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0330 teve_conjuge
 * teve_conjuge = 0 não
 *              = 1 sim
@@ -5336,23 +5336,23 @@ lab var hrs_todas_oc "horas de trabalho p/semana em todas as ocupações"
 
 drop v0354 v0355
 
-recode v0356 (0 9999999=.)
+recode v0356 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0356 rend_ocup_hab
 
-recode v0357 (0 9999999=.)
+recode v0357 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0357 rend_outras_ocup
 
-recode v0360 (9999999=.)
-recode v0361 (9999999=.)
+recode v0360 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
+recode v0361 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 egen rend_outras_fontes = rowtotal(v0360 v0361)
 lab var rend_outras_fontes "rendimento de outras fontes"
 
-recode v3561 (99999999=.) // rendimento total tem 1 dígito a mais
+recode v3561 (99999999=.) // rendimento total tem 1 dígito a mais // no dicionario, tem opcao 99999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3561 rend_total
 lab var rend_total "total de rendimentos"
 
 * renda familiar
-replace v3045 = . if v3045>99999999
+replace v3045 = . if v3045>99999999 // no dicionario, tem opcao 999999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3045 rend_fam
 
 drop v0360 v0361 v3562 v3563 v3564 v3574 v3604 v3614
@@ -5416,17 +5416,17 @@ rename v0342 f_nasc_m_mul
 foreach var in filhos_tot filhos_hom filhos_mul filhos_nasc_vivos f_nasc_v_hom ///
 	f_nasc_v_mul filhos_vivos f_vivos_hom f_vivos_mul filhos_nasc_mortos ///
 	f_nasc_m_hom f_nasc_m_mul {
-		replace `var'=. if `var'==99
+		replace `var'=. if `var'==99 // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
 }
 
 
-recode v0343 (7 = .) (9 = .) (2=0) // (1=1)
+recode v0343 (7 = .) (9 = .) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0343 sexo_ult_nasc_v
 * sexo_ult_nasc_v = 0 feminino
 *                 = 1 masculino
 
 recode v3443 (99 = .)
-rename v3443 idade_ult_nasc_v
+rename v3443 idade_ult_nasc_v // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
 drop v3444
 
 /* OUTRAS */
