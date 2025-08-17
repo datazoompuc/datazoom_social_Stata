@@ -1079,8 +1079,8 @@ rename v0205 cond_ocup_C
 
 
 recode v0206 (2 3 = 0) // (1=1)
-rename v0206 terr_proprio
-* terr_proprio = 0 - não
+rename v0206 terreno_prop
+* terreno_prop = 0 - não
 *                1 - sim
 
 
@@ -4494,7 +4494,7 @@ gen sit_setor_C = sit_setor_B
 recode sit_setor_C (1 2 = 1) (3 4 = 0)
 lab var  sit_setor_C "situação do domicílio - urbano/rural"
 * sit_setor_C = 1 - Urbana
-*               2 - Rural
+*               0 - Rural
 
 /* C.2. ESPÉCIE */
 recode v0201 (1=0) (2=1) (3=2)
