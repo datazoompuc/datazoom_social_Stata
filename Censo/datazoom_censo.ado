@@ -2187,7 +2187,7 @@ recode sexo (2 =0)
 rename v0502 cond_dom
 recode 	cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 	(12 = 6) (14 13 7 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
-*condicao_dom = 1	pessoa responsável
+*cond_dom = 1	pessoa responsável
 *				2	cônjuge, companheiro
 *				3	filho, enteado
 *				4	pai, mãe, sogro
@@ -4831,6 +4831,7 @@ recode cond_fam_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10) // 1 a 4 mantidos
 *               9 - Parente do(a) empregado(a) doméstico(a)
 *              10 - Individual em domicílio coletivo
 
+recode v0304 (2=0) (3=1) (4=2) (5=3) (6=4) (7=5) // 1 mantido
 rename v0304 num_fam
 
 * tipo de familia
@@ -4864,7 +4865,7 @@ lab var racaB "cor ou raça (indígena=pardo)"
 
 /* D.5. RELIGIÃO */
 recode v0310 (11=1) (21/30 = 2) (31/41 45 = 3) (61=4) (62 63 = 5) (75 76 77 79 = 6) ///
-             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .)
+             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .) // 19 nao tem no dicionario: confirmar tabulacao.
 rename v0310 religiao
 * religiao = 0 - sem religião
 *            1 - católica
@@ -4901,7 +4902,7 @@ label var sempre_morou "Sempre morou neste município"
 
 recode v0312 (1=0) (2=1) (3=2)
 rename v0312 onde_morou
-* sitmorou_mun = 0 só na zona urbana
+* onde_morou = 0 só na zona urbana
 *                1 só na zona rural
 *                2 nas zonas urbana e rural
 
