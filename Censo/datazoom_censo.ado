@@ -2127,23 +2127,22 @@ program define compat_censo22pess
 
 /* B. IDENTIFICAÇÃO  */
 
-rename v0001 UF
-drop v0002
-rename v0300 id_dom
-rename v5020 num_fam
-rename v5060 n_pes_fam
-rename v1001 regiao
-drop v0011 v1002 v1003 v1004
-rename v0010 peso_pess
+rename v* UF
+rename v* id_dom
+rename v* num_fam // verificar se disponivel familia
+rename v* n_pes_fam // verificar se disponivel familia
+rename v* regiao
+drop v*
+rename v* peso_pess
 
-sort UF munic id_dom num_fam
-by UF munic id_dom: egen n_homem_dom = total(v0601==1)
-by UF munic id_dom: egen n_mulher_dom = total(v0601==2)
+sort UF munic id_dom num_fam // verificar se disponivel familia
+by UF munic id_dom: egen n_homem_dom = total(v*==1) // v0204
+by UF munic id_dom: egen n_mulher_dom = total(v*==2)  // v0204
 lab var n_homem_dom "numero de homens no domicilio"
-lab var n_mulher_dom "numero deo mulheres no domicilio"
+lab var n_mulher_dom "numero de mulheres no domicilio"
 
-by UF munic id_dom num_fam: egen n_homem_fam = total(v0601==1)
-by UF munic id_dom num_fam: egen n_mulher_fam = total(v0601==2)
+by UF munic id_dom num_fam: egen n_homem_fam = total(v*==1) // verificar se disponivel familia // v0204
+by UF munic id_dom num_fam: egen n_mulher_fam = total(v*==2) // verificar se disponivel familia // v0204
 lab var n_homem_fam "numero de homens na familia" 
 lab var n_mulher_fam "numero de mulheres na familia"
 
@@ -2151,86 +2150,93 @@ lab var n_mulher_fam "numero de mulheres na familia"
 
 /* C.1. SITUAÇÃO */
 
-recode v1006 (2=0)
-rename v1006 sit_setor_C
+recode v* (1/3=1) (4/8=0) // v1005
+rename v* sit_setor_C  // v1005
 lab var sit_setor_C "situação do domicílio - urbano/rural"
+* sit_setor_C = 1 - urbano
+*               0 - rural
 
 /* D. OUTRAS VARIÁVEIS DE PESSOAS */
 
-rename v0504 ordem
+rename v* ordem // verificar se disponivel familia
 
 /* D.1. SEXO */
-rename v0601 sexo
-recode sexo (2 =0)
-*sexo = 0 - Feminino
-*    	1 - Masculino
+
+rename v* sexo // v0204
+recode sexo (2=0)
+* sexo = 0 - Feminino
+*    	 1 - Masculino
 
 /* D.2. CONDIÇÃO NA FAMÍLIA E NO DOMICÍLIO  */
-rename v0502 cond_dom
-recode 	cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
-	(12 = 6) (14 13 7 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
-*condicao_dom = 1	pessoa responsável
-*				2	cônjuge, companheiro
-*				3	filho, enteado
-*				4	pai, mãe, sogro
-*				5	neto, bisneto
-*				6	irmão, irmã
-*				7	outro parente
-*				8	Agregado
-*				9	pensionista
-*				10	Empregado doméstico
-*				11	Parente do empregado doméstico
-*				12	Individual em domicílio coletivo
+
+rename v* cond_dom // v0206
+recode cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
+	(12 = 6) (7 13 14 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
+lab var cond_dom_B "condição no domicílio B"
+* condicao_dom = 1	pessoa responsável
+*				 2	cônjuge, companheiro
+*				 3	filho, enteado
+*				 4	pai, mãe, sogro
+*				 5	neto, bisneto
+*				 6	irmão, irmã
+*				 7	outro parente
+*				 8	Agregado
+*				 9	pensionista
+*				 10	Empregado doméstico
+*				 11	Parente do empregado doméstico
+*				 12	Individual em domicílio coletivo
 
 g cond_dom_B = cond_dom
-recode cond_dom_B (8 = 6) (10 = 8) (11 = 9) (12 = 10) (5 6 = 5) (9 = 7)
+recode cond_dom_B (6 7 = 5) (8 = 6) (9 = 7) (10 = 8) (11 = 9) (12 = 10)
 lab var cond_dom_B "condição no domicílio B"
-*cond_dom_B = 1	- pessoa responsável
-*				  2	- cônjuge, companheiro
-*				  3	- filho, enteado
-*				  4	- pai, mãe, sogro
-*				  5	- outro parente
-*				  6	- agregado
-*				  7	- hóspede, pensionista
-*				  8	- Empregado doméstico
-*				  9	- Parente do empregado doméstico
-*				  10 - Individual em domicílio coletivo
+* cond_dom_B = 1 - pessoa responsável
+*			   2 - cônjuge, companheiro
+*			   3 - filho, enteado
+*			   4 - pai, mãe, sogro
+*			   5 - outro parente
+*			   6 - agregado
+*			   7 - hóspede, pensionista
+*			   8 - Empregado doméstico
+*			   9 - Parente do empregado doméstico
+*			   10 - Individual em domicílio coletivo
 
 /* D.3. IDADE */
-rename v6036 idade
-rename v6037 idade_meses
-rename v6040 idade_presumida
-recode idade_presumida (2 = 1) (1 = 0)
-*idade_presumida =   0-	Não
-*					 1- Sim
 
-drop v6033	
+rename v* idade
+rename v* idade_meses
+rename v* idade_presumida
+recode idade_presumida (2 = 1) (1 = 0) // ajustar de acordo com a existencia e valor da variavel
+* idade_presumida = 0 -	Não
+*					1 - Sim
+
+drop v
 	
 /* D.4. COR OU RACA */
-recode v0606 (9=.)
-rename v0606 raca
-*	raca = 1 -Branca
-*			2 - Preta
-*			3 - Amarela
-*			4 - Parda
-*			5 - Indígena
-	
+
+recode v* (9=.) // v0401
+rename v* raca // v0401
+* raca = 1 - Branca
+*		 2 - Preta
+*		 3 - Amarela
+*		 4 - Parda
+*		 5 - Indígena
+lab var raca "cor ou raça"
+
 g racaB = raca
 recode racaB (5 = 4)
 lab var racaB "cor ou raça (indigenous=mulatto)"
-*	raca =  1 -Branca
-*			2 - Preta
-*			3 - Amarela
-*			4 - Parda
-
+* raca =  1 - Branca
+*		  2 - Preta
+*		  3 - Amarela
+*		  4 - Parda
 	
-drop v0613	
+drop v*
 
 /* D.5 RELIGIÃO */
-replace v6121 = int(v6121/10) // dois primeiros dígitos = religião com os códs de 1991
-recode v6121 (11/19 =1) (21/28 = 2) (31/48 = 3) (61=4) (62 63 64= 5) (74 75 76 78 79 = 6) ///
-             (71=7) (30 49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .)
-rename v6121 religiao
+replace v* = int(v6121/10) // dois primeiros dígitos = religião com os códs de 1991 // VERIFICAR PERMANENCIA DA CODIFICACAO
+recode v* (11/19 = 1) (21/28 = 2) (31/48 = 3) (61 = 4) (62 63 64 = 5) (74 75 76 78 79 = 6) ///
+             (71 = 7) (12 13 19 30 49 51 52 53 59 81 82 83 84 = 8) (85 86 89 99 = .)
+rename v* religiao
 * religiao = 0 - sem religião
 *            1 - católica
 *            2 - evangélica tradicional
@@ -2250,71 +2256,74 @@ lab var religiao_B "religião B - mais agregada"
 *              3 - espírita
 *              4 - outra
 
-	
 /* D.6. DEFICIÊNCIAS FÍSICA E MENTAL */
 
-*legenda: dif_x = dificuldade em fazer o movimento "x"
+* legenda: dif_x = dificuldade em fazer o movimento "x"
 
-recode v0614 (9= .)
-rename v0614 dif_enxergar
-	*dif_enxergar = 1- Sim, não consegue de modo algum
-	*				2- Sim, grande dificuldade
-	*				3- Sim, alguma dificuldade
-	*				4- Não, nenhuma dificuldade
+recode v* (9= .) // v1001
+rename v* dif_enxergar // v1001
+* dif_enxergar = 1 - Sim, não consegue de modo algum
+*				 2 - Sim, grande dificuldade
+*				 3 - Sim, alguma dificuldade
+*				 4 - Não, nenhuma dificuldade
 	
-recode v0615 (9= .)
-rename v0615 dif_ouvir
-	*dif_ouvir = 1- Sim, não consegue de modo algum
-	*			 2- Sim, grande dificuldade
-	*			 3- Sim, alguma dificuldade
-	*			 4- Não, nenhuma dificuldade
+recode v* (9= .) // v1002
+rename v* dif_ouvir // v1002
+* dif_ouvir = 1 - Sim, não consegue de modo algum
+*			  2 - Sim, grande dificuldade
+*			  3 - Sim, alguma dificuldade
+*			  4 - Não, nenhuma dificuldade
 	
-recode v0616 (9= .)
-rename v0616 dif_caminhar
-	*dif_caminhar = 1- Sim, não consegue de modo algum
-	*			 2- Sim, grande dificuldade
-	*			 3- Sim, alguma dificuldade
-	*			 4- Não, nenhuma dificuldade
+recode v* (9= .) // v1003
+rename v* dif_caminhar // v1003
+* dif_caminhar = 1 - Sim, não consegue de modo algum
+*			 	 2 - Sim, grande dificuldade
+*			 	 3 - Sim, alguma dificuldade
+*				 4 - Não, nenhuma dificuldade
 
-recode v0617 (2=0) (9= .) // 1=1
-rename v0617 def_mental
-	*def_mental = 1 - Sim
-	*			  0 - Não
+recode v* (1/3=1) (4=0) (9= .) // v1005
+rename v* def_mental // v1005
+* def_mental = 1 - Sim
+*			   0 - Não
 
 /* D.7. NATURALIDADE E MIGRAÇÃO  */
 
-recode v0618 (2 3 = 0), copy g(sempre_morou)
+g sempre_morou = 1 if v* == 1 & v** == 2 // v1101 == 1 & v1102 == 2
+replace sempre_morou = 0 if v* != 1 | v** == 1
 lab var sempre_morou "sempre morou neste município"
 * sempre_morou = 1 - sim
-*				= 0 - nao
+*				 0 - nao
 
-rename v0618 nasceu_mun
-recode nasceu_mun (1 2 = 1) (3 = 0)
-	*nasceu_mun = 1- Sim
-	*			  0- Não
-rename v0619 nasceu_UF
-recode nasceu_UF (1 2 = 1) (3 = 0)
-replace nasceu_UF = 1 if nasceu_mun==1
-	*nasceu_UF = 1- Sim
-	*			  0- Não
+rename v* nasceu_mun // v1101
+recode nasceu_mun (1 = 1) (2 3 = 0)
+lab var nasceu_mun "nasceu neste município"
+* nasceu_mun = 1 - Sim
+*			   0 - Não
 
-rename v0620 nacionalidade 
+rename v* nasceu_UF // g nasceu_UF = 1 if v1101 == 2 & v11011 == UF provavel combinacao de UF com v11011
+recode nasceu_UF (1 2 = 1) (3 = 0) // replace nasceu_UF = 0 if (v1101 == 2 & v11011 != UF) | v1101 == 3
+replace nasceu_UF = 1 if nasceu_mun == 1
+lab var nasceu_mun "nasceu nesta UF"
+* nasceu_UF = 1 - Sim
+*			  0 - Não
+
+rename v* nacionalidade // v1103
 recode nacionalidade (1 = 0) (2 = 1) (3 = 2)
-replace nacionalidade = 0 if nasceu_UF==1
-* nacionalidade = 0- Brasileiro nato
-	*				  1- Naturalizado brasileiro
-	*				  2- Estrangeiro
+replace nacionalidade = 0 if nasceu_UF == 1
+* nacionalidade = 0 - Brasileiro nato
+*				  1 - Naturalizado brasileiro
+*				  2 - Estrangeiro
 	
-rename v0621 ano_fix_res
-	*ano em que fixou residência no Brasil
+rename v* ano_fix_res // v1104
+* ano em que fixou residência no Brasil
 
-drop v0622
+drop v*
 
-replace v6222 = floor(v6222/10^5)
-replace v6222 = . if v6222>53
-rename v6222 UF_nascim
+*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
+*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
+rename v* UF_nascim // v11011
 
-recode v6224 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11013 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -2389,16 +2398,16 @@ label var pais_nascim "País de nascimento - códigos 1970"
 * pra saber se nos anos anteriores o equívoco foi cometido. Isso vale para todas os itens 
 * desta seção, quando aplicável.
 
-drop v6224
+drop v*
 
-replace v6252 = floor(v6252/10^5)
-replace v6252 = . if v6252>53
-rename v6252 UF_mor_ant
+*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
+*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
+rename v* UF_mor_ant // v11061
 
-replace v6254 = . if v6254>5400000 
-rename v6254 mun_mor_ant
+*replace v* = . if v*>5400000 // nao me parece que va ser necessario. verificar e apagar
+rename v* mun_mor_ant // v11062
 
-recode v6256 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11063 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -2469,38 +2478,43 @@ recode v6256 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8
 	(8000583 8000242 8000584 8000090 8000296 8000520 8000554 8000585 ///
 		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor_ant)
 label var pais_mor_ant "País onde morava anteriormente (se migrou nos últ 10 anos)"
-drop v6256
 
-rename v0624 anos_mor_mun
+drop v*
+
+rename v* anos_mor_mun // v1105
+
 * Em 2010, ha discernimento entre quem nasceu e sempre morou na UF e quem nasceu mas
 * nem sempre morou, sendo que apenas os últimos respondem ha qto tempo moram na UF sem 
 * interrupção. Então, para compatibilizar, para quem nasceu e sempre morou, o tempo de 
 * moradia é a idade
-replace v0623 = idade if v0623==. & anos_mor_mun~=.
-rename v0623 anos_mor_UF
+
+replace anos_mor_mun = idade if anos_mor_mun == . & sempre_morou == 1
+
+*replace v0623 = idade if v0623==. & anos_mor_mun~=. // em 2022 nao pergunta explicitamente o tempo morando na UF, entao a nao ser que ibge crie var derivada, nao da pra replicar => apagar
+*rename v0623 anos_mor_UF
 
 * tempo de moradia em 1970 só vale para quem não nasceu no município.
-g t_mor_UF_70 = anos_mor_UF
+*g t_mor_UF_70 = anos_mor_UF // verificar para apagar
 g t_mor_mun_70 = anos_mor_mun
-recode t_mor_UF_70 t_mor_mun_70 (7/10=6) (11/max=7)
-lab var t_mor_UF_70 "tempo de moradia na UF - grupos de 1970"
+recode /*t_mor_UF_70*/ t_mor_mun_70 (7/10=6) (11/max=7) // verificar para apagar
+*lab var t_mor_UF_70 "tempo de moradia na UF - grupos de 1970" // verificar para apagar
 lab var t_mor_mun_70 "tempo de moradia no municipio - grupos de 1970"
 
 * De 1980 em diante, podemos montar a variavel de tempo de moradia incluindo
 * pessoas que nasceram mas nem sempre moraram no municipio em que residem
-recode anos_mor_UF (7/9 =6) (10/max =7), g(t_mor_UF_80)
-recode anos_mor_mun (7/9 =6) (10/max =7), g(t_mor_mun_80)
-lab var t_mor_UF_80 "tempo de moradia na UF - grupos de 1980"
+*recode anos_mor_UF (7/9 = 6) (10/max = 7), g(t_mor_UF_80) // verificar para apagar
+recode anos_mor_mun (7/9 = 6) (10/max = 7), g(t_mor_mun_80)
+*lab var t_mor_UF_80 "tempo de moradia na UF - grupos de 1980" // verificar para apagar
 lab var t_mor_mun_80 "tempo de moradia no municipio - grupos de 1980"
 
-replace v6262 = floor(v6262/10^5)
-replace v6262 = . if v6262>53
-rename v6262 UF_mor5anos
+replace v* = floor(v*/10^5) // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+replace v* = . if v*>53 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+rename v* UF_mor5anos // v11071 
 
-replace v6264 = . if v6264>5400000 
-rename v6264 mun_mor5anos
+replace v* = . if v*>5400000 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+rename v* mun_mor5anos // v11072
 
-recode v6266 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///  // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES // v11073
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -2572,70 +2586,65 @@ recode v6266 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8
 		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor5anos)
 label var pais_mor5anos "País onde morava há 5 anos"
 
-drop v6266 v0625 v0626 
+drop v*
 
 /* D.8. EDUCACÃO */
 
-rename v0627 alfabetizado
+rename v* alfabetizado // v1201
 recode alfabetizado (2 = 0)
-	*alfabetizadoB = 1 - Sim
-	*				 0 - Não
+* alfabetizado = 1 - Sim
+*				 0 - Não
 	
 ** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
 
-recode v0628 (1 2=1 "sim") (3 4 =0 "nao"), g(freq_escola)
-replace freq_escola = 0 if v0629<=3		// 	desconsidera creche e pre-escola para compatibilizar com todos
+recode v* (1 = 1 "sim") (2 3 = 0 "nao"), g(freq_escola) //v1202
+replace freq_escola = 0 if v*<=2		// v1203	desconsidera creche e pre-escola para compatibilizar com todos
 lab var freq_escola "frequenta escola"
-*freq_escola = 1 - Sim
-*			   0 - Não
+* freq_escola = 1 - Sim
+*			    0 - Não
 
 g freq_escolaB = freq_escola
-replace freq_escolaB = 1 if v0629==2 | v0629==3	// 	inclui pre-escola
-lab var freq_escolaB "frequenta escola - inclui pre-school"
-*freq_escolaB = 1 - Sim
-*				0 - Não
-
-* rede de ensino
-recode v0628 (1 = 1) (2 = 0) (else=.) 
-rename v0628 rede_freq
-lab var rede_freq "rede de ensino da escola"
-* rede_freq = 0 - particular
-*             1 - pública
+replace freq_escolaB = 1 if v*==2 // v1203	inclui pre-escola
+lab var freq_escolaB "frequenta escola - inclui pre-escola"
+* freq_escolaB = 1 - Sim
+*				 0 - Não
 
 * Como há diversas definições para a frequencia a escola, a variavel abaixo deve
-* ser utilizada conjuntamente com a frequencia
-recode v0629 (6 = 7) (7 = 8) (10 11 12 = 13) (9 = 12) (8 = 10)		
-replace v0629 = 6 if v0629==5 & v0630==10
-replace v0629 = 9 if v0629==8 & v0631==5
-rename v0629 curso_freq
+* ser utilizada conjuntamente com a serie que frequenta
+* em 2022, nao tem opção de Classe de Alfabetização nem Pré-vestibular
+
+recode v* (3 = 4) (4 = 5) (5 = 7) (6 = 8) (7 = 10) (8 = 12) (9 10 11 = 13)	// v1203
+replace v* = 6 if v*==5 & v**==10 // v1203 ; v1203 == 4 & v1204 == 10
+replace v* = 9 if v*==8 & v**==5 // v1203 ; v1203 == 6 & v1205 == 10
+rename v* curso_freq
 * curso_freq = 1  - Creche
-*             2  - Pré-escolar
-*             3  - Classe de alfabetização
-*             4  - Alfabetização de adultos
-*             5  - Ensino fundamental ou 1º grau - regular seriado
-*             6  - Ensino fundamental ou 1º grau - regular não-seriado
-*             7  - Supletivo - Ensino fundamental ou 1º grau
-*             8  - Ensino médio ou 2º grau - regular seriado
-*             9  - Ensino médio ou 2º grau - regular não-seriado
-*             10 - Supletivo - Ensino médio ou 2º grau
-*			  11 - Pré-vestibular
-*             12 - Superior - graduação
-*             13 - Superior - mestrado ou doutorado
+*              2  - Pré-escolar
+*              3  - Classe de alfabetização
+*              4  - Alfabetização de adultos
+*              5  - Ensino fundamental ou 1º grau - regular seriado
+*              6  - Ensino fundamental ou 1º grau - regular não-seriado
+*              7  - Supletivo - Ensino fundamental ou 1º grau
+*              8  - Ensino médio ou 2º grau - regular seriado
+*              9  - Ensino médio ou 2º grau - regular não-seriado
+*              10 - Supletivo - Ensino médio ou 2º grau
+*			   11 - Pré-vestibular
+*              12 - Superior - graduação
+*              13 - Superior - mestrado ou doutorado
 
-rename v0630 serie_freq
-recode serie_freq (1 2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9 = 8) (10 = 9)
-replace serie_freq = v0631 if serie_freq==. & v0631~=5
-replace serie_freq = 9 if serie_freq==. & v0631 ==5
-
-*serie_freq = 1 - Primeira série/ano
-*			  2 - Segunda série
-*			  3 - Terceira série
-*			  4 - Quarta série
-*			  5 - Quinta série
-*			  6 - Sexta série
-*			  7 - Sétima série
-* 			  8-  Oitava série
-*			  9 - Não seriado
+rename v* serie_freq // v1204
+recode serie_freq (9 = 8) (10 = 9)
+replace serie_freq = v* if serie_freq==. & v* < 9 // v1205
+replace serie_freq = 8 if serie_freq==. & v* == 9 // v1205
+replace serie_freq = 9 if serie_freq==. & v* == 10 // v1205
+* serie_freq = 1 - Primeira série/ano
+*			   2 - Segunda série
+*			   3 - Terceira série
+*			   4 - Quarta série
+*			   5 - Quinta série
+*			   6 - Sexta série
+*			   7 - Sétima série
+* 			   8 - Oitava série
+*			   9 - Não seriado
 	
 * grupos de anos de estudo
 g anos_estudoC = .
@@ -2656,33 +2665,61 @@ replace anos_estudoC = 3 if curso_freq==12		// superior de graduacao
 replace anos_estudoC = 4 if curso_freq==13		// mestrado ou doutorado
 
 * para ficar compativel com 2000, nao podemos recuperar a informacao abaixo
-*replace anos_estudoC = 4 if v0632==1	// ja concluiu curso superior de graduacao
+*replace anos_estudoC = 4 if v*==1	// v1206 ja concluiu curso superior de graduacao
 
 * para quem nao frequenta escola
-replace anos_estudoC = 0 if v0633<=2	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
-replace anos_estudoC = 0 if v0633==5	// 1a-3a serie/1o-4o ano do 1o. grau ou fundamental 
-replace anos_estudoC = 0 if v0633==3 & v0634==2		// antigo primario sem conclusao
-replace anos_estudoC = 0 if v0633==8 & v0634==2		// supletivo 1o.grau/fundamental sem conclusao
 
-replace anos_estudoC = 1 if v0633==3 & v0634==1		// antigo primario com conclusao
-replace anos_estudoC = 1 if v0633==4 & v0634==2		// antigo ginasio sem conclusao
-replace anos_estudoC = 1 if v0633==6	// 5a serie/6o ano do 1o.grau ou fundamental
-replace anos_estudoC = 1 if v0633==7 & v0634==2		// 6a-8a serie/7o-9o ano 1o.grau ou fundamental sem conclusao
+* não tem pré-vestibular
+recode v* (5 6 7 = 5) (8 = 7) (9 10 = 8) (11 = 10) (12 = 12) (13/15 = 13)	// v1207
+replace v* = 6 if v*== & v**== // v1207 ; (v1207 == 5 | v1207 == 6 | v1207 == 7) & (v1209 == 11 | v1210 == 11)
+replace v* = 9 if v*== & v**== // v1207 ; (v1207 == 9 | v1207 == 10) & v1210 == 11
+rename v* 
+* curso_frequentou = 1  - Creche
+*              		 2  - Pré-escolar
+*              		 3  - Classe de alfabetização
+*              		 4  - Alfabetização de adultos
+*              		 5  - Ensino fundamental ou 1º grau - regular seriado
+*              		 6  - Ensino fundamental ou 1º grau - regular não-seriado
+*              		 7  - Supletivo - Ensino fundamental ou 1º grau
+*              		 8  - Ensino médio ou 2º grau - regular seriado
+*             		 9  - Ensino médio ou 2º grau - regular não-seriado
+*             		 10 - Supletivo - Ensino médio ou 2º grau
+*			  		 11 - Pré-vestibular
+*             		 12 - Superior - graduação
+*             		 13 - Superior - mestrado ou doutorado
 
-replace anos_estudoC = 2 if v0633==4 & v0634==1		// antigo ginasio com conclusao
-replace anos_estudoC = 2 if v0633==7 & v0634==1		// 6a-8a serie/7o-9o ano 1o.grau ou fundamental com conclusao
-replace anos_estudoC = 2 if v0633==8 & v0634==1		// supletivo 1o.grau/fundamental com conclusao
+rename v* serie_frequentou // v1209
+recode serie_frequentou (1 = .) (2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9/10 = 8) (11 = 9)
+replace v* = v* - 1 // v1210
+recode v* (0 = .) (9 = 8) (10 = 9)
+replace serie_frequentou = v* if serie_frequentou==. // v1210
+* serie_frequentou = 1 - Primeira série/ano
+*			  		 2 - Segunda série
+*			  		 3 - Terceira série
+*			  		 4 - Quarta série
+*			  		 5 - Quinta série
+*			  		 6 - Sexta série
+*			  		 7 - Sétima série
+* 			  		 8 - Oitava série
+*			  		 9 - Não seriado
 
-replace anos_estudoC = 2 if v0633==9 & v0634==2		// antigo cientifico/classico/medio 2o.ciclo sem conclusao
-replace anos_estudoC = 2 if v0633==10 & v0634==2		// regular/supletivo ensino medio sem conclusao
+replace anos_estudoC = 0 if curso_frequentou<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
+replace anos_estudoC = 0 if curso_frequentou==5 & serie_frequentou<4 // 1a-3a serie/1o-4o ano do 1o. grau ou fundamental 
+replace anos_estudoC = 0 if curso_frequentou==6 & v* == 2 // v1211 antigo primario sem conclusao
+replace anos_estudoC = 0 if curso_frequentou==7 & v* == 2 // v1211 supletivo 1o.grau/fundamental sem conclusao
 
-replace anos_estudoC = 3 if v0633==9 & v0634==1		// antigo cientifico/classico/medio 2o.ciclo com conclusao
-replace anos_estudoC = 3 if v0633==10 & v0634==1		// regular/supletivo ensino medio com conclusao
+replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 & v* == 1 // v1211 ensino fundamental ate 7a serie com conclusao
 
-replace anos_estudoC = 3 if v0633==11 & v0634==2		// superior de graduacao sem conclusao
+replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & v* == 1 // v1211 ensino fundamental com conclusao
+replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & v* == 1 // v1211 fundamental nao seriado ou supletivo com conclusao
+replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==2	// v1211 ensino medio sem conclusao
 
-replace anos_estudoC = 4 if v0633==11 & v0634==1		// superior de graduacao com conclusao
-replace anos_estudoC = 4 if v0633==12 & v0633<=14		// especializacao/mestrado/doutorado 
+replace anos_estudoC = 3 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==1	// v1211 antigo cientifico/classico/medio 2o.ciclo com conclusao
+
+replace anos_estudoC = 3 if curso_frequentou==12 & v*==2		// v1211 superior de graduacao sem conclusao
+
+replace anos_estudoC = 4 if curso_frequentou==12 & v1211==1		// superior de graduacao com conclusao
+replace anos_estudoC = 4 if curso_frequentou==13		// especializacao/mestrado/doutorado 
 
 * anos_estudoC = 0 – sem instrução ou menos de 4 anos de estudo (primário incompleto)
 *                1 – de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
@@ -2691,17 +2728,17 @@ replace anos_estudoC = 4 if v0633==12 & v0633<=14		// especializacao/mestrado/do
 *			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
 lab var anos_estudoC "grupos de anos de escolaridade"
 
-drop v0631 v0632 curso_freq serie_freq
+drop v* curso_freq serie_freq
 
 * Estuda no município em que reside?
-recode v0636 (2 3 = 0)
-replace v0636 = . if freq_escolaB==0	
-rename v0636 mun_escola
+recode v* (2 3 = 0) // v1301
+replace v* = . if freq_escolaB==0 // v1301
+rename v* mun_escola // v1301
 lab var mun_escola "estuda no município em que reside?"
-* mun_esc 	= 1 - sim
-*			= 0 - não
+* mun_escola = 1 - sim
+*			   0 - não
 
-recode v6352 (140/226 321 322 347 380 = 3) ///
+recode v* (140/226 321 322 347 380 = 3) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
 		 (421 641/727 813 = 4) ///
 		 (440/481 520/525 581 582 = 5) ///
 		 (620/624 = 6) ///
@@ -2717,7 +2754,7 @@ lab var cursos_c1 "curso superior concluído"
 *				8	militar
 *				9	outros cursos
 		 
-recode v6352 (140/146 = 1) ///
+recode v* (140/146 = 1) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
 		 (210/226 = 2) ///
 		 (310/346 347 380 = 3) ///
 		 (420/483 = 4) ///
@@ -2737,9 +2774,9 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				8	serviÃ§os
 *				9	Outros
 
-rename v6352 curso_concl	// COMP SO PARA CURSO SUPERIOR
+rename v* curso_concl	// COMP SO PARA CURSO SUPERIOR  // v1212
 
-drop v0633 v0634 v0635 v6400 v6354 v6356 v6362 v6364 v6366
+drop v*
 
 /* D.9. SITUAÇÃO CONJUGAL */
 
@@ -2939,7 +2976,7 @@ foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total ren
 
 /* D.12. OUTRAS INFORMAÇÕES */
  
-drop v0670 v0671 v0604 v0605 v5080 v5030- v5130
+drop v*
 
 order ano UF regiao munic id_dom ordem
 
