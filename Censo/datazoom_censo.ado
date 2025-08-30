@@ -2781,82 +2781,87 @@ drop v*
 /* D.9. SITUAÇÃO CONJUGAL */
 
 * teve conjuge
-recode v0637 (1 2 = 1) (3=0), g(teve_conjuge)
+recode v* (1 2 = 1) (3 = 0), g(teve_conjuge) // v0601
 label var teve_conjuge "vive ou já viveu com cônjuge"
 * teve_conjuge = 0 - não
 *                1 - sim
 
 * vive com o cônjuge?
-recode v0637 ( 2 3 = 0)
-rename v0637 vive_conjuge
+recode v* (2 3 = 0) // v0601
+rename v* vive_conjuge
 lab var vive_conjuge "se a pessoa vive com o cônjuge"
 * vive_conjuge = 0 - Não
 *				 1 - Sim
 
-drop v0638
+drop v*
 
-gen estado_conj = v0639 if vive_conjuge == 1
-replace estado_conj = 5 if teve_conjuge == 0
-replace estado_conj = v0640 + 5 if (teve_conjuge == 1 & vive_conjuge == 0 & v0640 >= 2 & v0640 <= 4)
-replace estado_conj = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj == .)
-label var estado_conj "estado conjugal"
-* estado_conj = 1 casamento civil e religioso
+/* Em 2022, não tem a pergunta de estado civil, apenas a natureza da união. Vamos criar uma variável derivada que
+agrupa as opções 6 a 9 em "outras situações". Aprovando essa mudança, implementamos esse "estado_conj_B" também
+para os outros anos de Censo. */
+
+gen estado_conj_B = v* if vive_conjuge == 1 // v0603 para mulher e v0605 para homem. verificar se terá de criar as condicionais ou se variável divulgada será derivada e combinando as informações
+replace estado_conj_B = 5 if teve_conjuge == 0
+replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj == .)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
 *               2 só casamento civil
 *               3 só casamento religioso
 *               4 união consensual
 *               5 solteiro
-*               6 separado(a)
-*               7 desquitado(a)/separado(a) judicialmente
-*               8 divorciado(a)
-*               9 viúvo(a)
-drop v0639 v0640
+*               6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 
+drop v*
 
-/* D.10. RENDA E ATIVIDADE ECONÔMICA */
+/* D.10.1 TRABALHO */
 
-rename v0641 trab_rem_sem
-recode trab_rem_sem (2 = 0)
+gen trab_rem_sem = 1 if v* == 1 | v** == 1 | v*** == 1 // v14011 == 1 | v14012 == 1 | v14013 == 1
+replace trab_rem_sem = 0 if trab_rem_sem == . & | v*** == 2 // v14013 == 2
 * trab_rem_sem = 1 - Sim
 *				 0 - Não
 
-rename v0642 afast_trab_sem
+/* Em 2022, a pergunta se ajudou sem pagamento algum morador do domicílio ou parente veio antes da de estar afastado de trabalho remunerado.
+Mesmo assim, estou usando igualmente, mas vale discutir. */
+rename v* afast_trab_sem // v14015
 recode afast_trab_sem (2 = 0)
 * afast_trab_sem = 1 - Sim
 *				   0 - Não
 
 * OBS: não perfeitamente compatível com 2000 por conta de mudanças nas questões.
 * Em 2000, sao duas questoes, uma referente a aprendiz/estagiário e outra sobre
-* ajuda sem remuneração a morador em atividade de extração e cultivo; em 2010, é
-* uma pergunta genérica sobre ajuda sem remuneração a morador do domicílio
-rename v0643 nao_remun
+* ajuda sem remuneração a morador em atividade de extração e cultivo; em 2010 e 2022,
+* é uma pergunta genérica sobre ajuda sem remuneração a morador do domicílio
+rename v* nao_remun // v14014
 recode nao_remun (2 = 0)	
 * nao_remun = 1 - Sim
-*			 0 - Não
+*			  0 - Não
 	
-rename v0644 trab_proprio_cons
+rename v* trab_proprio_cons // v14016
 recode trab_proprio_cons (2 = 0)
 * trab_proprio_cons = 1 - Sim
-*					 0 - Não
+*					  0 - Não
 
-recode v0645 (1 = 0) (2 = 1)
-rename v0645 mais_de_um_trab
+recode v* (1 = 0) (2 3 = 1) // v1402
+rename v* mais_de_um_trab // v1402
 lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
-*			   	   1 - Sim
+*			   	    1 - Sim
 
-rename v6461 ocup2010
-rename v6471 ativ2010	
+rename v* ocup2010 // v14031
+rename v* ativ2010	// v14041
 
-rename v6462 ocup2000
-rename v6472 ativ2000
+rename v* ocup2000 // v14032
+rename v* ativ2000 // v14042
 
-* OBS: a variável abaixo é uma mistura das existentes em 2000 e 2010.
-* Posição na Ocupação
-recode v6930 (4 = 6) (5 = 7) (6 = 8) (7 = 9)
-rename v6930 pos_ocup_sem 
-replace pos_ocup_sem = 4 if v6940==1
-replace pos_ocup_sem = 5 if v6940==2
-
+* Posição na Ocupação // Verificar se virá uma variável derivada composta de informações de mais de uma variável na divulgação
+gen pos_ocup_sem = 1 if v* == 3 & v** == 1 // v1405 == 3 & v1406 == 1
+replace pos_ocup_sem = 2 if v* == 2 | v* == 4 | (v* == 5 & v** == 1) | (v* == 6 & v** == 1) // v1405 == 2 | v1405 == 4 | (v1405 == 5 & v1406 == 1) | (v1405 == 6 & v1406 == 1)
+replace pos_ocup_sem = 3 if v* == 3 & v** == 2 // v1405 == 3 & v1406 == 2
+replace pos_ocup_sem = 4 if v* == 1 & v** == 1 // v1405 == 1 & v1406 == 1
+replace pos_ocup_sem = 5 if v* == 1 & v** == 2 // v1405 == 1 & v1406 == 2
+replace pos_ocup_sem = 6 if v* == 8 // v1405 == 8
+replace pos_ocup_sem = 7 if v* == 7 // v1405 == 7
+replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
+replace pos_ocup_sem = 8 if v* == 9 // v1405 == 9
 * pos_ocup_sem  = 1 - Empregado com carteira
 *				  2 - Militar e Funcionário Públicos
 *				  3 - Empregado sem carteira
@@ -2868,111 +2873,102 @@ replace pos_ocup_sem = 5 if v6940==2
 *                 9 - Trabalhador na produção para o próprio consumo
 
 
-drop v0648 
+drop v* // v1405 v1406 v1407
 
-rename v0649 qtos_empregados
-* qtos_empregados = 1 - Um a cinco empregados
-*                   2 - Seis ou mais
+rename v* previd_B // v1408
+recode previd_B (2 = 0) 
+* previd = 1 - Sim
+*          0 - Não
 
-rename v0650 previd_B
-recode previd_B (1 2 = 1) (3 = 0) 
-* previd = 1-Sim
-*          0-Não
+drop v*
 
-drop v0651 
+* providência para conseguir trabalho
+recode v* (2 = 0) // v1409
+rename v* tomou_prov // v1409
+lab var tomou_prov "tomou providências para conseguir trabalho"
+* tom_prov = 1 - sim
+*            0 - não
 
-replace	v6511=. if v6511==0
-rename v6511 rend_ocup_prin
-*rendimento bruto trabalho principal
-
-drop v6513
-
-replace v6514 = . if rend_ocup_prin==.
-rename v6514 rend_prin_sm
-*rendimento salarios minimos trabalho principal
-
-replace v6521=. if v6521==0
-rename v6521 rend_outras_ocup
-*rendimento bruto nos demais trabalhos
-
-rename v6524 rend_outras_sm
-*rendimento em salarios mínimos nos demais trabalhos
-
-drop v6525 v6526
-
-rename v6527 rend_total
-
-rename v6528 rend_total_sm
-
-* renda familiar
-replace v5070 = v5070*n_pes_fam
-rename v5070 rend_fam
-lab var rend_fam "renda familiar"
-
-drop v6530 v6532 v0652 v6529 v6531
-
-* horas trabalhadas no trabalho principal
-rename v0653 horas_trabprin
-
-* providencia para conseguir trabalho
-recode v0654 (2 = 0)
-rename v0654 tomou_prov
-*tom_prov_trab = 1 - sim
-*                0 - não
-
-drop v0655
-
-drop v0656 v0657 v0658 v0659
-
-rename v6591 rend_outras_fontes
-lab var rend_outras_fontes "rendimento de outras fontes"
-
-* trabalha no minicípio 
-recode v0660 (1 2 = 1) (3/5 = 0) (else = .)
-rename v0660 mun_trab
+* trabalha no município 
+recode v* (1 2 = 1) (3/5 = 0) (else = .) // v1501
+rename v* mun_trab // v1501
 lab var mun_trab "trabalha no município em que reside"
 * mun_trab 	= 1 - sim
-*			= 0 - não
+*			  0 - não
 
-drop v6602 v6604 v6606 v0661 v0662 v5110 v5120 v6900 v6910 v6920 v6940
+drop v*
+
+/* D.10.2 RENDIMENTOS */
+
+/* Há uma distinção em 2022, em que é perguntado rendimento do trabalho principal somente para quem tinha 1 trabalho e para quem tinha mais trabalhos, 
+é perguntado o rendimento total desses trabalhos. Precisamos definir como compatibilizar essa informação. Sugestão: nos demais anos, somar trabalho
+principal com outras ocupacoes e criar rend_todos_trab e aplicar para 2000 e 2010. No entanto, mesmo o rendimento do trabalho principal não irá 
+representar a mesma coisa caso as pessoas tenham mais de um trabalho. Podemos disponibilizar essa variável igual, não disponibilizá-la para 2022 ou 
+disponibilizar outra com essa distinção e aplicar para 2000 e 2010. */
+
+replace	v* = . if v* == 0 // v14111
+rename v* rend_ocup_prin // v14111
+* rendimento bruto trabalho principal
+
+drop v*
+
+replace v* = . if rend_ocup_prin==.
+rename v* rend_prin_sm
+* rendimento salarios minimos trabalho principal
+
+replace v* = . if v* == 0 // v14121
+rename v* rend_todos_trab // v14121
+replace rend_todos_trab = rend_ocup_prin if rend_todos_trab == . & mais_de_um_trab == 0
+* rendimento bruto todos trabalhos
+
+rename v* rend_todos_trab_sm
+replace rend_todos_trab_sm = rend_prin_sm if rend_todos_trab_sm == . & mais_de_um_trab == 0
+* rendimento em salarios mínimos em todos os trabalhos
+
+drop v*
+
+* em anos anteriores já disponibilizava a total pronta, ver se em 2022 também
+rename v* rend_total
+
+rename v* rend_total_sm
+
+* renda familiar
+replace v* = v**n_pes_fam
+rename v* rend_fam
+lab var rend_fam "renda familiar"
+
+drop v*
+
+rename v* rend_outras_fontes // v14131
+lab var rend_outras_fontes "rendimento de outras fontes"
+
+drop v*
 
 /* D.11. FECUNDIDADE */
 
-drop v0663 
-rename v6631 f_nasc_v_hom
-rename v6632 f_nasc_v_mul
-rename v6633 filhos_nasc_vivos
-drop v0664
-rename v6641 f_vivos_hom
-rename v6642 f_vivos_mul
-rename v6643 filhos_vivos
-rename v0665 sexo_ult_nasc_v
+drop v*
+rename v* f_nasc_v_hom // v08011
+rename v* f_nasc_v_mul // v08012
+rename v* filhos_nasc_vivos
+drop v*
+rename v* f_vivos_hom // v08021
+rename v* f_vivos_mul // v08022
+rename v* filhos_vivos
 
-recode sexo_ult_nasc_v (2 = 0 )
-* sexo_ult_nasc_v_B = 1 - masculino
-*                     0 - feminino
+rename v* idade_ult_nasc_v // v0830
 
-rename v6660 idade_ult_nasc_v
-drop v0669 
-rename v6691 f_nasc_m_hom
-rename v6692 f_nasc_m_mul
-rename v6693 filhos_nasc_mortos
-rename v6800 filhos_tot
-
-
-drop v6664 v0667 v0668 v6681 v6682 
+drop v*
 	
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
-g double deflator = 1
-g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"
+/* DEFLACIONANDO RENDAS: referência = TBD */
+g double deflator = **
+g conversor = **
+lab var deflator "deflator de rendimentos - base TBD"
 lab var conversor "conversor de moedas"
 
-foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
+foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fontes {
 		g `var'_def = (`var'/conversor)/deflator
 		lab var `var'_def "`var' deflacionada"
 }
-
 
 /* D.12. OUTRAS INFORMAÇÕES */
  
