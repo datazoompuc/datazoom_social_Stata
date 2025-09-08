@@ -54,6 +54,7 @@ local suf1980  =  `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ 
 local suf1991  = `"U11 U12 U13 U14 U15 U16 U17 "" U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 "" "P35 P36" U41 U42 U43 U50 U51 U52 U53"'
 local suf2000  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"'
+local suf2022  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"' // CHECAR MUDANCAS
 
 foreach ano in `years' {
 	if `ano' == 1970 {
@@ -955,6 +956,150 @@ foreach ano in `years' {
 			}
 		}
 	}
+
+**************
+* CENSO 2022 *
+**************
+else if `ano' == 2022 {
+// PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
+// NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
+		if "`fam'" != "" {
+						di as err "Opção Família não disponível para o ano `ano'"
+						exit
+						}
+		
+		foreach UF in `ufs' {
+			/* Achando posição da UF nas listas: */
+			local pos = 1
+			while word(`"`nomesUFs'"', `pos') != "`UF'" {
+				local pos = `pos' + 1
+			}
+
+			/* Loop para todos os arquivos da UF                              */
+			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			tokenize `suf2022'
+			local sufixos = "``pos''"
+			/* Mesmo para o código */
+			tokenize `codUFs'
+			local codUF = "``pos''"
+			foreach suf in `sufixos' {
+				if "`pes'"~="" {
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+															
+					/* Abrindo arquivo principal */
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Pessoas_`suf'.txt") clear // VERIFICAR NOME E EXTENSAO DO ARQUIVO ORIGINAL
+										
+					gen ano = 2022
+					lab var ano "ano da pesquisa"
+
+					* Deixando a variável v0002 com 5 dígitos
+					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+					replace v0002="....." if v0002=="."
+					*Criando a variável munic
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+
+					/* Compatibiliza, se especificado */
+	            	if "`comp'" != "" {
+						compat_censo22pess
+
+						/* Áreas Mínimas Comparáveis */
+						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
+						sort munic
+						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+					}
+					tempfile CENSO22_`UF'_pes_`suf'
+					save `CENSO22_`UF'_pes_`suf'', replace
+				}
+				if "`dom'"~="" | "`both'"~="" {
+					/* Agora os domicílios */
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+															
+					/* Abrindo arquivo principal */
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Domicilios_`suf'.txt") clear // VERIFICAR NOME E EXTENSAO DO ARQUIVO ORIGINAL
+									
+					gen ano = 2022
+					lab var ano "ano da pesquisa"
+
+					* Deixando a variável v0002 com 5 dígitos
+					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+					replace v0002="....." if v0002=="."
+					*Criando a variável munic
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+
+					/* Compatibiliza, se especificado */
+	            	if "`comp'" != "" {
+						compat_censo22dom
+
+						/* Áreas Mínimas Comparáveis */
+						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
+						sort munic
+						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+	            	}
+					tempfile CENSO22_`UF'_dom_`suf'
+					save `CENSO22_`UF'_dom_`suf'', replace
+				}
+				if "`comp'"~="" loc var = "id_dom"
+				else loc var = "v0300" // VARIAVEL DE CONTROLE - VERIFICAL O NUMERO NO NOVO CENSO
+				if "`both'"~="" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					merge m:1 `var' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
+					/* Se não for o primeiro arquivo, junta com o anterior */
+					if "`suf'" != word(`"`sufixos'"', 1) {
+						if "`comp'"~= "" append using CENSO22_`UF'_comp
+						else append using CENSO22_`UF'
+					}
+					if "`comp'"~= "" save CENSO22_`UF'_comp, replace
+					else save CENSO22_`UF', replace
+				}
+				else {
+					if "`pes'"~="" {
+						use `CENSO22_`UF'_pes_`suf'', clear
+						/* Se não for o primeiro arquivo, junta com o anterior */
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`comp'"~= "" append using CENSO22_`UF'_pes_comp
+							else append using CENSO22_`UF'_pes
+						}
+						if "`comp'"~="" save CENSO22_`UF'_pes_comp, replace
+						else save CENSO22_`UF'_pes, replace
+					}
+					else {
+						use `CENSO22_`UF'_dom_`suf'', clear
+						/* Se não for o primeiro arquivo, junta com o anterior */
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`comp'"~= "" append using CENSO22_`UF'_dom_comp
+							else append using CENSO22_`UF'_dom
+						}
+						if "`comp'"~="" save CENSO22_`UF'_dom_comp, replace
+						else save CENSO22_`UF'_dom, replace
+					}
+				}
+			}
+		}
+	}
+
+**************
+* CENSO 2022 *
+**************
 }
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
