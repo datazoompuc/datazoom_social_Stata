@@ -2064,15 +2064,13 @@ recode especie (1 = 0) (5 = 1) (6 = 2)
 *           2 - coletivo
 
 /* C.3. MATERIAL DAS PAREDES */
-recode v (2 = 1) (4 = 2) (5 = 4) (7 = .) *v0302 // (3 = 3) (6 = 6)
-* NAO TEMOS PALHA EM 2022 - Agrupamos palha a outro nos demais anos para compatibilizar ou criamos uma variavel adicional paredes_B para isso?
-rename v paredes *v0302
-* paredes 	= 1   Alvenaria
+recode v (2 = 1) (4 = 2) (5 = 4) (6 = 5) (7 = .) *v0302 // (1 = 1) (3 = 3)
+rename v paredes_B *v0302
+* paredes_B	= 1   Alvenaria
 *        	= 2   Madeira aparelhada
 *        	= 3   Taipa não revestida
 *       	= 4   Material aproveitado
-*   	    = 5   Palha
-*	        = 6   Outro
+*   	    = 5   Outro
 
 
 /* C.4.	MATERIAL DA COBERTURA */
@@ -2214,16 +2212,13 @@ rename v agua_canal *v0307
 
 
 /* C.9. DESTINO DO LIXO */
-rename v dest_lixo *v0313
-recode dest_lixo (6=7)
-// NAO TEM JOGADO EM RIO, LAGO OU MAR. A OPCAO E "JOGADO EM TERRENO BALDIO, ENCOSTA OU ÁREA PÚBLICA" - VER SE DEIXAMOS ASSIM OU CRIAMOS UMA DERIVADA MAIS AGREGADA COM OS "JOGADOS EM ALGUM LUGAR"
-* dest_lixo = 1 - Coletado por serviço de limpeza
-*             2 - Colocado em caçamba de serviço de limpeza
-*             3 - Queimado(na propriedade)
-*             4 - Enterrado(na propriedade)
-*             5 - Jogado em terreno baldio ou logradouro
-*             6 - Jogado em rio, lago ou mar
-*             7 - Tem outro destino
+rename v dest_lixo_B *v0313
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
 
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 
@@ -2946,7 +2941,7 @@ para os outros anos de Censo. */
 
 gen estado_conj_B = v* if vive_conjuge == 1 // v0603 para mulher e v0605 para homem. verificar se terá de criar as condicionais ou se variável divulgada será derivada e combinando as informações
 replace estado_conj_B = 5 if teve_conjuge == 0
-replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj == .)
+replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj_B == .)
 label var estado_conj_B "estado conjugal B - mais agregado"
 * estado_conj_B = 1 casamento civil e religioso
 *               2 só casamento civil
@@ -3005,8 +3000,8 @@ replace pos_ocup_sem = 4 if v* == 1 & v** == 1 // v1405 == 1 & v1406 == 1
 replace pos_ocup_sem = 5 if v* == 1 & v** == 2 // v1405 == 1 & v1406 == 2
 replace pos_ocup_sem = 6 if v* == 8 // v1405 == 8
 replace pos_ocup_sem = 7 if v* == 7 // v1405 == 7
-replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
 replace pos_ocup_sem = 8 if v* == 9 // v1405 == 9
+replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
 * pos_ocup_sem  = 1 - Empregado com carteira
 *				  2 - Militar e Funcionário Públicos
 *				  3 - Empregado sem carteira
