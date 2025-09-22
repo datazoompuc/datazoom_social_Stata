@@ -2911,7 +2911,7 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				5	Engenharia, Produção e Construção
 *				6	Agricultura e Veterinária
 *				7	Saúde e Bem-Estar Social    
-*				8	serviÃ§os
+*				8	serviços
 *				9	Outros
 
 rename v* curso_concl	// COMP SO PARA CURSO SUPERIOR  // v1212
@@ -2935,10 +2935,6 @@ lab var vive_conjuge "se a pessoa vive com o cônjuge"
 
 drop v*
 
-/* Em 2022, não tem a pergunta de estado civil, apenas a natureza da união. Vamos criar uma variável derivada que
-agrupa as opções 6 a 9 em "outras situações". Aprovando essa mudança, implementamos esse "estado_conj_B" também
-para os outros anos de Censo. */
-
 gen estado_conj_B = v* if vive_conjuge == 1 // v0603 para mulher e v0605 para homem. verificar se terá de criar as condicionais ou se variável divulgada será derivada e combinando as informações
 replace estado_conj_B = 5 if teve_conjuge == 0
 replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj_B == .)
@@ -2959,8 +2955,9 @@ replace trab_rem_sem = 0 if trab_rem_sem == . & | v*** == 2 // v14013 == 2
 * trab_rem_sem = 1 - Sim
 *				 0 - Não
 
-/* Em 2022, a pergunta se ajudou sem pagamento algum morador do domicílio ou parente veio antes da de estar afastado de trabalho remunerado.
-Mesmo assim, estou usando igualmente, mas vale discutir. */
+/* Atenção! Em 2022, a pergunta se ajudou sem pagamento algum morador do domicílio ou parente veio antes da de estar afastado de trabalho remunerado.
+Vamos disponibilizar sob mesmo nome, pois a pergunta é igual, mas cuidado ao comparar os anos, pois o fluxo pode afetar a quantidade de pessoas que
+aparece em cada categoria. */
 rename v* afast_trab_sem // v14015
 recode afast_trab_sem (2 = 0)
 * afast_trab_sem = 1 - Sim
@@ -3041,10 +3038,10 @@ drop v*
 /* D.10.2 RENDIMENTOS */
 
 /* Há uma distinção em 2022, em que é perguntado rendimento do trabalho principal somente para quem tinha 1 trabalho e para quem tinha mais trabalhos, 
-é perguntado o rendimento total desses trabalhos. Precisamos definir como compatibilizar essa informação. Sugestão: nos demais anos, somar trabalho
-principal com outras ocupacoes e criar rend_todos_trab e aplicar para 2000 e 2010. No entanto, mesmo o rendimento do trabalho principal não irá 
-representar a mesma coisa caso as pessoas tenham mais de um trabalho. Podemos disponibilizar essa variável igual, não disponibilizá-la para 2022 ou 
-disponibilizar outra com essa distinção e aplicar para 2000 e 2010. */
+é perguntado o rendimento total desses trabalhos.
+Vamos disponibilizar o rendimento do trabalho principal, mas note que ela irá representar a mesma coisa entre os anos apenas para quem tem apenas 1 trabalho.
+Vamos também disponibilizar uma nova variável, rendimento de todos os trabalhos, somando trabalho principal com outras ocupações sob nome rend_todos_trab,
+aplicando também para 2000 e 2010. */
 
 replace	v* = . if v* == 0 // v14111
 rename v* rend_ocup_prin // v14111
