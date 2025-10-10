@@ -1428,6 +1428,7 @@ rename v0415 sempre_morou
 recode v0417 (2=0) // (1=1)
 replace v0417 = 1 if sempre_morou == 1 // originalmente é missing
 rename v0417 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 * nasceu_mun = 0 - não
 *              1 - sim
 
@@ -1845,12 +1846,18 @@ rename v4632 f_vivos_mul
 rename v4671 f_nasc_m_hom
 rename v4672 f_nasc_m_mul
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
+
 recode v0464 (2=0) // (1=1)
 rename v0464 sexo_ult_nasc_v
 * sexo_ult_nas_v = 0 - feminino
 *                  1 - masculino
 replace v4654=. if v4654==99
 rename v4654 idade_ult_nasc_v
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 
 /* PESO E OUTRAS */
 rename P001 peso_pess
@@ -2307,6 +2314,7 @@ lab var sempre_morou "sempre morou neste município"
 *		= 0 - nao
 
 rename v0618 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 recode nasceu_mun (1 2 = 1) (3 = 0)
 	*nasceu_mun = 1- Sim
 	*		0- Não
@@ -2929,6 +2937,9 @@ rename v6642 f_vivos_mul
 rename v6643 filhos_vivos
 rename v0665 sexo_ult_nasc_v
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
 recode sexo_ult_nasc_v (2 = 0 )
 * sexo_ult_nasc_v = 1 - masculino
 *                   0 - feminino
@@ -2940,6 +2951,9 @@ rename v6692 f_nasc_m_mul
 rename v6693 filhos_nasc_mortos
 rename v6800 filhos_tot
 
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 drop v6664 v0667 v0668 v6681 v6682 
 	
@@ -3980,6 +3994,7 @@ if `p'==1 {
 	
 	recode v513 (8 = 0)		// 1=1
 	rename v513 nasceu_mun
+	label var nasceu_mun "Nasceu neste município"
 	* nasceu_mun = 0 - não
 	*              1 - sim
 
@@ -4354,6 +4369,9 @@ if `p'==1 {
 	rename v550 f_nasc_v_hom
 	recode v551 (98 99 = .)
 	rename v551 f_nasc_v_mul
+	
+	label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+	label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
 
 	replace filhos_nasc_vivos =. if f_nasc_v_hom==. | f_nasc_v_mul==.
 	
@@ -4364,6 +4382,9 @@ if `p'==1 {
 	rename v552 f_nasc_m_hom
 	recode v553 (98 99 = .)
 	rename v553 f_nasc_m_mul
+	
+	label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+	label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 	replace filhos_nasc_mortos =. if f_nasc_m_hom==. | f_nasc_m_mul==.
 	
@@ -4391,6 +4412,8 @@ if `p'==1 {
 	
 	recode v570 (999 = .)
 	rename v570 idade_ult_nasc_v
+
+	label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 
 	rename v604 peso_pess
 
@@ -4912,6 +4935,7 @@ drop v0313
 *** Nacionalidade e naturalidade
 recode v0314 (3=0) (2=1) // (1=1)
 rename v0314 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 * nasceu_mun = 0 não
 *              1 sim
 
@@ -5403,6 +5427,9 @@ rename v3354 filhos_nasc_vivos
 rename v3355 f_nasc_v_hom
 rename v3356 f_nasc_v_mul
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
 rename v3360 filhos_vivos
 rename v3361 f_vivos_hom
 rename v3362 f_vivos_mul
@@ -5412,6 +5439,9 @@ drop v0335 v0336 v0337 v0338 v0339 v0340
 rename v3357 filhos_nasc_mortos
 rename v0341 f_nasc_m_hom
 rename v0342 f_nasc_m_mul
+
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 foreach var in filhos_tot filhos_hom filhos_mul filhos_nasc_vivos f_nasc_v_hom ///
 	f_nasc_v_mul filhos_vivos f_vivos_hom f_vivos_mul filhos_nasc_mortos ///
@@ -5427,6 +5457,7 @@ rename v0343 sexo_ult_nasc_v
 
 recode v3443 (99 = .)
 rename v3443 idade_ult_nasc_v // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 drop v3444
 
 /* OUTRAS */
