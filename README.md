@@ -28,6 +28,11 @@ de todas as pesquisas domiciliares realizadas pelo IBGE, compatibilizar
 os Censos Demográficos de diferentes anos, gerar identificação dos
 indivíduos da PNAD Contínua, e muito mais.
 
+Obs: Esse pacote **não** faz o download de microdados, e é necessário
+ter os microdados que se deseja ler já baixados para utilizar esse
+pacote. Os dados estão disponíveis no site do
+[IBGE](https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html).
+
 ## Instalação <a name="instalacao"></a>
 
 Digite o código abaixo na linha de comando do Stata para baixar e
@@ -42,17 +47,17 @@ Para acessá-las, digite o comando
 
     db datazoom_social
 
-Para usar os nossas funções, os microdados originais devem estar salvos
+Para usar as nossas funções, os microdados originais devem estar salvos
 no seu computador. Temos tutoriais de como usar o pacote em nosso [canal
 do YouTube](https://www.youtube.com/@datazoom9654/videos).
 
 Clique nos botões abaixo para ver informações adicionais sobre cada
 pesquisa.
 
-|                                                                                                                                                                             |                                                                                                                                                                              |                                                                                                                                                                            |                                                                                                                                                                                   |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|   <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small>    | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> |           <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small>           |
-| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 a 2023 </small> |       <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small>        | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
+|  |  |  |  |
+|:--:|:--:|:--:|:--:|
+| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small> |
+| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 em diante </small> | <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
 
 <a href = "#créditos">![Static
 Badge](https://img.shields.io/badge/Cr%C3%A9ditos%20-%20Departamento%20de%20Economia%20PUC%20Rio%20-%20blue)
@@ -62,49 +67,55 @@ Badge](https://img.shields.io/badge/Cita%C3%A7%C3%A3o%20-%20green) </a>
 ## Censo
 
 O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada
-dez anos, na qual todos os domicílios do território brasileiro são
+dez anos, em que todos os domicílios do território brasileiro são
 visitados. O Censo fornece uma contagem da população e recolhe
 informações básicas dos moradores, como idade e gênero.
 
-Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com
-uma grande amostra aleatória dos domicílios, na qual investiga
-características sociodemográficas dos moradores (como escolaridade e
-rendimentos), características físicas do local de residência (material
-das paredes, existência de água encanada, etc.) e posse de bens (como
-geladeira e automóvel). No Censo de 2010, tal amostra cobria 6,2 milhões
-de domicílios com 20,6 milhões de indivíduos.
+O pacote do Data Zoom trata os microdados da amostra do Censo: o IBGE
+realiza uma entrevista mais detalhada com uma grande amostra
+representativa dos domicílios brasileiros. O questionário da amostra
+explora temas como características sociodemográficas dos moradores -
+como escolaridade e rendimentos -, características físicas do local de
+residência - material das paredes, existência de água encanada, etc. - e
+posse de bens - como geladeira e automóvel. No Censo de 2010, a amostra
+foi de 6,2 milhões de domicílios, o que abrange 20,6 milhões de
+indivíduos.
 
-### Microdados
-
-Em cada ano, os arquivos de microdados são separados por Unidade da
-Federação (estado). Até 1991, para cada estado, havia um único arquivo
-contendo os microdados referentes a domicílios e pessoas. A partir de
-2000, as informações de domicílios e pessoas foram separadas em dois
-arquivos distintos, disponíveis [neste
-link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados).
-
-O IBGE disponibiliza gratuitamente para download os microdados e a
-documentação para o Censo 2010. Nesta pesquisa, os microdados para 14
-municípios sofreram correção, sendo disponibilizados dois novos arquivos
-para as observações revistas na página de microdados. Para obter
-informações a respeito de como adquirir os microdados para outros anos,
-[clique aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
-
-O IBGE fez diversas alterações metodológicas entre os Censos. Desta
-forma, algumas variáveis não estão disponíveis em todos os anos e/ou
-podem não ter sido coletadas da mesma forma em anos diferentes. O Data
-Zoom disponibiliza uma opção para compatibilizar as variáveis, com o
-intuito de uniformizar as informações ao longo do tempo. Neste caso, as
-variáveis da base de dados compatibilizada não possuem os nomes
-sugeridos pelo dicionário original, sendo um novo dicionário
-disponibilizado para download. O documento [Compatibilização dos
+Há diferenças nos questionários da amostra ao longo dos anos. Por isso,
+diversas variáveis não estão disponíveis em todos os anos ou têm opções
+diferentes em diferentes anos. O Data Zoom oferece a compatibilização de
+variáveis, elaborada pelo Data Zoom. Além das variáveis originais, são
+entregues variáveis compatibilizadas, que procuram uniformizar as
+informações ao longo do tempo. Neste caso, as variáveis da base de dados
+compatibilizada não possuem os nomes sugeridos pelo dicionário original.
+Acesse o documento [Compatibilização dos
 Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
-explica todos os procedimentos adotados pelo programa.
+para conhecer toda a metodologia de compatibilização.
+
+### Acesso aos Microdados
+
+Para utilizar o pacote do Data Zoom no Stata, você deve baixar os
+arquivos de microdados para o seu computador. O IBGE disponibiliza
+gratuitamente para download os microdados e a documentação para os
+Censos de 2010, 2000, 1991, 1980 e 1970. Encontre os arquivos [neste
+link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads).
+Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com
+dados de 14 municípios que sofreram reponderação posteriormente.
+
+Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de
+1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para
+compra. Nesta mudança, o formato em que os dados são disponibilizados
+também mudou. O Data Zoom terá que ajustar seus códigos para esse novo
+formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para
+os dados no formato antigo. Atualizaremos este documento quando a versão
+do pacote flexível ao novo formato estiver disponível.
 
 ### Arquivos de apoio
 
-- [Microdados e documentação: Censos 2000 e
+- [Microdados e documentação referente a
   2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+- [Microdados e documentação referente a
+  1970-2000](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads)
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)
 
