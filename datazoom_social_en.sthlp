@@ -8,6 +8,7 @@
 {viewerjumpto "Options" "datazoom_social##options"}{...}
 {viewerjumpto "Remarks" "datazoom_social##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_social##examples"}{...}
+{p 8 8 2} {it:Para a versão em português}, {help datazoom_social}
 
 {title:Title}
 
