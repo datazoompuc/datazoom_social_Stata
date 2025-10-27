@@ -2,6 +2,7 @@
 Para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
 [![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
+<!-- badges: end -->
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.png" align="left" width="100" hspace="10" vspace="6"></a>
 
@@ -26,6 +27,12 @@ surveys. We read all IBGE household surveys into Stata format, as well
 as making different Census instances compatible, generating individual
 identification for the Continuous PNAD, and much more.
 
+Note: This package does **not** download microdata. You must have the
+microdata you want to read already downloaded in order to use this
+package. The data are available on the
+[IBGE](https://www.ibge.gov.br/en/statistics/downloads-statistics.html?lang=en-GB)
+website.
+
 ## Installation <a name="instalacao"></a>
 
 Enter the code below in the Stata command line to download and install
@@ -47,10 +54,10 @@ explaining how to use our package.
 
 Click on the buttons below for additional information on each survey.
 
-|                                                                                                                                                                                |                                                                                                                                                                              |                                                                                                                                                                            |                                                                                                                                                                              |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|    <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2010 </small>    | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> |         <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 2001 to 2015 </small>          |
-| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> Continuous PNAD </small> <br> <small> 2012 to 2023 </small> |       <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small>        |  <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> National Health Survey </small> <br> <small> 2013 and 2019 </small>  | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Consumer Expenditure Survey </small> <br> <small> 1995 to 2018 </small> |
+|  |  |  |  |
+|:--:|:--:|:--:|:--:|
+| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 2001 to 2015 </small> |
+| <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> Continuous PNAD </small> <br> <small> 2012 to present </small> | <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> National Health Survey </small> <br> <small> 2013 and 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Consumer Expenditure Survey </small> <br> <small> 1995 to 2018 </small> |
 
 <a href = "#credits">![Static
 Badge](https://img.shields.io/badge/Credits%20-%20PUC%20Rio%20Department%20of%20Economics%20-%20blue)
