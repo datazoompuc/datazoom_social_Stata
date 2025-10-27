@@ -115,9 +115,6 @@ PROGRAM command
 			put "years("
 			option main.ck2012_vis1 main.ck2013_vis1 main.ck2014_vis1 main.ck2015_vis1 main.ck2016_vis1 main.ck2017_vis1 main.ck2018_vis1 main.ck2019_vis1 main.ck2022_vis1 main.ck2023_vis1 main.ck2024_vis1 main.ck2016_vis5 main.ck2017_vis5 main.ck2018_vis5 main.ck2019_vis5 main.ck2020_vis5 main.ck2021_vis5 main.ck2022_vis5 main.ck2023_vis5 main.ck2024_vis5 main.ck2020_vis2 main.ck2021_vis2 main.ck2023_vis2 main.ck2024_vis2 main.ck2016_tri2 main.ck2016_tri4 main.ck2017_tri2 main.ck2017_tri4 main.ck2018_tri2 main.ck2018_tri4 main.ck2019_tri2 main.ck2019_tri3 main.ck2019_tri4 main.ck2021_tri4 main.ck2022_tri2 main.ck2022_tri3 main.ck2022_tri4 main.ck2023_tri1 main.ck2023_tri2 main.ck2023_tri4 main.ck2024_tri2 main.ck2024_tri3 main.ck2024_tri4
 			put ") "
-			put ") "
-			put ") "
-			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
 			put saidasalvando
