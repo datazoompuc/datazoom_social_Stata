@@ -1,0 +1,1100 @@
+﻿
+<!DOCTYPE HTML>
+
+<html lang="pt-BR">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="preconnect" crossorigin="crossorigin" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-285486-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-285486-1');
+    
+            gtag('config', 'UA-285486-76', {'groups':'ibgelabs'});
+        
+</script>
+<!-- Fim de Google Analytics -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5ND2WBQ');</script>
+<!-- End Google Tag Manager -->    
+	
+<!-- Icons -->
+<link rel="apple-touch-icon" sizes="57x57" href="/templates/novo_portal_base/imagens/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/templates/novo_portal_base/imagens/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/templates/novo_portal_base/imagens/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/templates/novo_portal_base/imagens/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/templates/novo_portal_base/imagens/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/templates/novo_portal_base/imagens/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/templates/novo_portal_base/imagens/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/templates/novo_portal_base/imagens/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/templates/novo_portal_base/imagens/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/templates/novo_portal_base/imagens/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/templates/novo_portal_base/imagens/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/templates/novo_portal_base/imagens/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/templates/novo_portal_base/imagens/icons/favicon-16x16.png">
+<link rel="manifest" href="/templates/novo_portal_base/imagens/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#00427E">
+<meta name="msapplication-TileImage" content="/templates/novo_portal_base/imagens/icons/ms-icon-144x144.png">
+<meta name="theme-color" content="#00427E">
+
+<!-- IBGE -->
+<!--<link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">-->      
+<!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/grid.css">
+
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/estilos.min.css?v=1">
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/menu.min.css?v=1">
+
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/estilos_contraste.css?v=1">
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/menu_contraste.css?v=1">
+<link rel="stylesheet" type="text/css" href="/templates/novo_portal_base/css/modulos_contraste.css?v=1">
+
+
+<!-- JS -->
+<script src="/media/util/jquery-3.4.1.min.js"></script>
+<script src="/media/util/tool.js"></script>
+
+
+
+	<!-- Joomla head elements -->
+    <base href="https://www.ibge.gov.br/" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>IBGE | Portal do IBGE  | IBGE</title>
+	<link href="https://www.ibge.gov.br/" rel="canonical" />
+	<script type="application/json" class="joomla-script-options new">{"csrf.token":"de32c5fbb43b3625053d6f6592117d7c","system.paths":{"root":"","base":""}}</script>
+	<script src="https://www.ibge.gov.br/templates/novo_portal_base/js/gtranslate/dwf.js" data-gt-orig-url="/" data-gt-orig-domain="4.ibge.gov.br" data-gt-widget-id="461" defer="defer" type="text/javascript"></script>
+	<script type="text/javascript">
+window.gtranslateSettings = window.gtranslateSettings || {};window.gtranslateSettings['461'] = {"default_language":"pt","languages":["ar","bg","zh-CN","hr","cs","da","nl","fi","fr","de","el","hi","it","ja","ko","no","pl","pt","ro","ru","es","sv","ca","tl","iw","id","lv","lt","sr","sk","sl","uk","vi","sq","et","gl","hu","mt","th","tr","fa","af","ms","sw","ga","cy","be","is","mk","yi","hy","az","eu","ka","ht","ur","bn","bs","ceb","eo","gu","ha","hmn","ig","jw","kn","km","lo","la","mi","mr","mn","ne","pa","so","ta","te","yo","zu","my","ny","kk","mg","ml","si","st","su","tg","uz","am","co","haw","ku","ky","lb","ps","sm","gd","sn","sd","fy","xh"],"url_structure":"none","wrapper_selector":"#gt-wrapper-461","globe_size":60,"flag_size":24,"flag_style":"2d","custom_domains":null,"float_switcher_open_direction":"top","switcher_open_direction":"bottom","native_language_names":1,"add_new_line":1,"select_language_label":"Select Language","detect_browser_language":0,"custom_css":"","alt_flags":{"pt":"brazil"},"switcher_horizontal_position":"inline","switcher_vertical_position":"inline","horizontal_position":"inline","vertical_position":"inline","flags_location":"https:\/\/www.ibge.gov.br\/media\/mod_gtranslate\/flags\/"};
+	</script>
+	<meta name="Description" content="O Instituto Brasileiro de Geografia e Estatistica - IBGE é o principal provedor de informações geográficas e estatísticas do Brasil.">
+      
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ND2WBQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- INÍCIO DA BARRA DO GOVERNO -->
+<!-- <iframe src="/includes/barragov.php" frameborder="0" style="width: 100%; height: 44px; margin: 0; padding: 0;"></iframe> -->
+<div class="barra-do-governo" style="position: relative;z-index: 10000000;">
+	    <style>
+        div.barra-body {
+            margin: 0;
+            padding: 0;
+            height: 44px;
+        }
+    </style>
+    
+    <div class="barra-body">
+
+        <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+        <ul id="menu-barra-temp" style="list-style:none;">
+            <li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
+                <a href="https://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a>
+            </li>
+        </ul>
+        </div>
+        <!-- Barra Brasil-->
+        <script defer="defer" src="https://www.ibge.gov.br/includes/barraBrasil.js" type="text/javascript"></script>
+            
+    </div>
+ 
+</div>
+<!-- FIM DA BARRA DO GOVERNO -->
+
+<header>
+	<div class="envolve_logo desktop-only">	
+		<div class="largura-maxima">
+			<div class="pure-g">
+				<div class="pure-u-md-1-6 pure-u-1">
+					<a href="/pt/inicio.html">
+						<img src="/templates/novo_portal_base/imagens/logo_mobile.png" class="logo" alt="Logo do IBGE">
+					</a>
+				</div>
+				<div class="header__menu--auxiliar pure-u-md-5-6 pure-u-1">		
+
+					<a class="link-contraste" id="setConstrast">
+						<span class="fas fa-adjust" aria-hidden="true"></span>
+						<span class="sr-only">Mudar para o modo de alto contraste</span>
+					</a>	
+
+					<div class="mod-languages">
+
+	<ul class="lang-inline">
+					
+			<li  class="lang-active" dir="rtl">
+						<a href="/?lang=pt-BR">
+												<img src="/templates/novo_portal_base/imagens/pt_br.png" alt="Português" title="Português" />
+										</a>
+			</li>
+							
+			<li  dir="rtl">
+						<a href="/en/home-eng.html?lang=en-GB">
+												<img src="/templates/novo_portal_base/imagens/en.png" alt="English" title="English" />
+										</a>
+			</li>
+				</ul>
+
+</div>
+		
+
+					<div class="gtranslate_wrapper" id="gt-wrapper-461"></div>					<!--<div class="icon_menu_secundario" id="btn-hcontrast"><img src="/templates/novo_portal_base/imagens/icon-contraste.png" alt=""></div>-->
+				</div> 
+			</div>
+			<div class="nav-container pure-g">
+					<div class="pure-u-1">
+						<a id="nav-toggle" onclick='$(".envolve_menu--principal").toggle(); $(this).toggleClass("active");jQuery("html").toggleClass("noscroll");'>&#9776;</a>
+						<h1>Instituto Brasileiro de Geografia e Estatística</h1>
+						
+						<div id="busca" class="envolve_busca">						
+							<div class="search header__busca">
+								<form action="/busca.html" method="get" class="form-inline mod-busca-ibge">
+									<label style="font-size: 0;" for="mod-search-searchword">Buscar</label><input name="searchword" id="mod-search-searchword" maxlength="200"  type="search" class="header__busca--campo inputbox search-query" placeholder="Buscar" value="" /> <button class="button btn btn-primary header__busca--btn" aria-label="Buscar" onclick="this.form.searchword.focus();"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15"><path class="cls-1" d="M16.3,14.32l-3.84-3.84a5.79,5.79,0,0,0,.88-3.06,5.92,5.92,0,1,0-5.92,5.92,5.79,5.79,0,0,0,3.06-.88l3.84,3.84a.71.71,0,0,0,1,0l1-1A.71.71,0,0,0,16.3,14.32Zm-8.88-3a3.95,3.95,0,1,1,3.95-3.95A4,4,0,0,1,7.42,11.37Z" transform="translate(-1.5 -1.5)"/></svg></button>								</form>
+							</div>
+						</div>	
+					</nav>
+				</div>	
+			</div>	
+		</div>	
+	</div>  	
+	
+	<div class="envolve_logo mobile-only">	
+		<div class="largura-maxima">
+			<div class="pure-g">
+				<div class="pure-u-md-1-6 pure-u-1">
+					<a class="logo-mobile" href="/pt/inicio.html" >
+						<img src="/templates/novo_portal_base/imagens/logo_mobile.png" class="logo" alt="Logo do IBGE">
+					</a>
+				</div>
+				<div class="header__menu--auxiliar pure-u-md-5-6 pure-u-1">		
+					<div class="mod-languages">
+
+	<ul class="lang-inline">
+					
+			<li  class="lang-active" dir="rtl">
+						<a href="/?lang=pt-BR">
+												<img src="/templates/novo_portal_base/imagens/pt_br.png" alt="Português" title="Português" />
+										</a>
+			</li>
+							
+			<li  dir="rtl">
+						<a href="/en/home-eng.html?lang=en-GB">
+												<img src="/templates/novo_portal_base/imagens/en.png" alt="English" title="English" />
+										</a>
+			</li>
+				</ul>
+
+</div>
+							
+					<div class="gtranslate_wrapper" id="gt-wrapper-461"></div>					<!--<div class="icon_menu_secundario" id="btn-hcontrast"><img src="/templates/novo_portal_base/imagens/icon-contraste.png" alt=""></div>-->
+				</div> 
+			</div>
+			<div class="nav-container pure-g">
+					<div class="pure-u-1">
+						<a id="nav-toggle" onclick='$(".envolve_menu--principal").toggle(); $(this).toggleClass("active");jQuery("html").toggleClass("noscroll");'>&#9776;</a>
+						<h2>Instituto Brasileiro de Geografia e Estatística</h2>
+						
+						<div id="busca" class="envolve_busca">						
+							<div id="btn__busca--mobile" class='mobile-only'>
+								<svg id='lupa' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15"><path class="cls-1" d="M16.3,14.32l-3.84-3.84a5.79,5.79,0,0,0,.88-3.06,5.92,5.92,0,1,0-5.92,5.92,5.79,5.79,0,0,0,3.06-.88l3.84,3.84a.71.71,0,0,0,1,0l1-1A.71.71,0,0,0,16.3,14.32Zm-8.88-3a3.95,3.95,0,1,1,3.95-3.95A4,4,0,0,1,7.42,11.37Z" transform="translate(-1.5 -1.5)"></path></svg>
+								<svg id='fechar' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+							
+							</div>
+							<div class="search header__busca">
+								<form action="/busca.html" method="get" class="form-inline mod-busca-ibge">
+									<label style="font-size: 0;" for="mod-search-searchword">Buscar</label><input name="searchword" id="mod-search-searchword" maxlength="200"  type="search" class="header__busca--campo inputbox search-query" placeholder="Buscar" value="" /> <button class="button btn btn-primary header__busca--btn" aria-label="Buscar" onclick="this.form.searchword.focus();"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15"><path class="cls-1" d="M16.3,14.32l-3.84-3.84a5.79,5.79,0,0,0,.88-3.06,5.92,5.92,0,1,0-5.92,5.92,5.79,5.79,0,0,0,3.06-.88l3.84,3.84a.71.71,0,0,0,1,0l1-1A.71.71,0,0,0,16.3,14.32Zm-8.88-3a3.95,3.95,0,1,1,3.95-3.95A4,4,0,0,1,7.42,11.37Z" transform="translate(-1.5 -1.5)"/></svg></button>								</form>
+							</div>
+						</div>	
+					</nav>
+				</div>	
+			</div>	
+		</div>	
+	</div>    
+
+    <div class="envolve_menu--principal">		
+		<nav id="menu_principal" class="header__menu--principal">
+			<div id="titulo_menu_mobile" class="mobile-only"> <span></span></div>
+			
+<ul class="nav menu top-level-menu">
+
+<li idMenu="1" class="parent nvcls_"><span class="nav-header ">Estatísticas</span><ul class="nav-child"><li idMenu="2" class="parent nvcls_"><span class="nav-header ">Sociais</span><ul class="nav-child"><li idMenu="3" class=" nvcls_"><a href="/estatisticas/sociais/populacao.html" class="header " target="_self" >População</a></li><li idMenu="4" class=" nvcls_"><a href="/estatisticas/sociais/trabalho.html" class="header " target="_self" >Trabalho</a></li><li idMenu="5" class=" nvcls_"><a href="/estatisticas/sociais/educacao.html" class="header " target="_self" >Educação</a></li><li idMenu="6" class=" nvcls_"><a href="/estatisticas/sociais/saude.html" class="header " target="_self" >Saúde</a></li><li idMenu="7" class=" nvcls_"><a href="/estatisticas/sociais/habitacao.html" class="header " target="_self" >Habitação</a></li><li idMenu="8" class=" nvcls_"><a href="/estatisticas/sociais/rendimento-despesa-e-consumo.html" class="header " target="_self" > Rendimento, despesa e consumo</a></li><li idMenu="9" class=" nvcls_"><a href="/estatisticas/sociais/administracao-publica-e-participacao-politica.html" class="header " target="_self" >Administração pública e participação político-social</a></li><li idMenu="10" class=" nvcls_"><a href="/estatisticas/sociais/justica-e-seguranca.html" class="header " target="_self" >Justiça e segurança</a></li><li idMenu="11" class=" nvcls_"><a href="/estatisticas/sociais/protecao-social.html" class="header " target="_self" >Proteção social</a></ul></li><li idMenu="12" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Econômicas</span><ul class="nav-child"><li idMenu="13" class=" nvcls_"><a href="/estatisticas/economicas/agricultura-e-pecuaria.html" class="header " target="_self" >Agricultura, pecuária e outros</a></li><li idMenu="14" class=" nvcls_"><a href="/estatisticas/economicas/industria.html" class="header " target="_self" >Indústria e Construção</a></li><li idMenu="15" class=" nvcls_"><a href="/estatisticas/economicas/comercio.html" class="header " target="_self" >Comércio</a></li><li idMenu="16" class=" nvcls_"><a href="/estatisticas/economicas/servicos.html" class="header " target="_self" >Serviços</a></li><li idMenu="17" class=" nvcls_"><a href="/estatisticas/economicas/precos-e-custos.html" class="header " target="_self" >Preços e custos</a></li><li idMenu="18" class=" nvcls_"><a href="/estatisticas/economicas/setor-informal.html" class="header " target="_self" >Setor informal</a></li><li idMenu="19" class=" nvcls_"><a href="/estatisticas/economicas/contas-nacionais.html" class="header " target="_self" >Contas nacionais</a></li><li idMenu="20" class=" nvcls_"><a href="/estatisticas/economicas/financas-publicas.html" class="header " target="_self" >Finanças públicas</a></li><li idMenu="21" class=" nvcls_"><a href="/estatisticas/economicas/outras-estatisticas-economicas.html" class="header " target="_self" >Outras estatísticas econômicas </a></ul></li><li idMenu="22" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Multidomínio</span><ul class="nav-child"><li idMenu="23" class=" nvcls_"><a href="/estatisticas/multidominio/condicoes-de-vida-desigualdade-e-pobreza.html" class="header " target="_self" >Condições de vida, desigualdade e pobreza</a></li><li idMenu="24" class=" nvcls_"><a href="/estatisticas/multidominio/ciencia-tecnologia-e-inovacao.html" class="header " target="_self" >Ciência, Tecnologia e Inovação</a></li><li idMenu="25" class=" nvcls_"><a href="/estatisticas/multidominio/empreendedorismo.html" class="header " target="_self" >Empreendedorismo </a></li><li idMenu="26" class=" nvcls_"><a href="/estatisticas/multidominio/genero.html" class="header " target="_self" >Gênero</a></li><li idMenu="27" class=" nvcls_"><a href="/estatisticas/multidominio/cultura-recreacao-e-esporte.html" class="header " target="_self" >Cultura, recreação e esporte</a></li><li idMenu="28" class=" nvcls_"><a href="/estatisticas/multidominio/turismo.html" class="header " target="_self" >Turismo</a></li><li idMenu="29" class=" nvcls_"><a href="/estatisticas/multidominio/meio-ambiente.html" class="header " target="_self" >Meio ambiente</a></ul></li><li idMenu="30" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Documentos técnicos</span><ul class="nav-child"><li idMenu="31" class=" nvcls_"><a href="/estatisticas/metodos-e-classificacoes/classificacoes-e-listas-estatisticas.html" class="header " target="_self" >Classificações e listas</a></li><li idMenu="32" class=" nvcls_"><a href="/estatisticas/metodos-e-classificacoes/outros-documentos.html" class="header " target="_self" >Outros documentos</a></ul></li><li idMenu="33" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Investigações Experimentais</span><ul class="nav-child"><li idMenu="34" class=" nvcls_"><a href="/estatisticas/investigacoes-experimentais/estatisticas-experimentais.html" class="header " target="_self" >Estatísticas Experimentais</a></ul></li><li idMenu="35" class=" nvcls_"><a href="/estatisticas/todos-os-produtos-estatisticas.html" class="header " target="_self" >Todas as Pesquisas e Estudos</a></li><li idMenu="36" class=" nvcls_"><a href="/estatisticas/downloads-estatisticas.html" class="header " target="_self" >Downloads</a></ul></li><li idMenu="37" class="parent nvcls_"><span class="nav-header ">Geociências</span><ul class="nav-child"><li idMenu="38" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Organização do território</span><ul class="nav-child"><li idMenu="39" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/estrutura-territorial.html" class="header " target="_self" >Estrutura territorial</a></li><li idMenu="40" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/malhas-territoriais.html" class="header " target="_self" >Malhas territoriais</a></li><li idMenu="41" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/divisao-regional.html" class="header " target="_self" >Divisão regional</a></li><li idMenu="42" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/analises-do-territorio.html" class="header " target="_self" >Análises do território</a></li><li idMenu="43" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/tipologias-do-territorio.html" class="header " target="_self" >Tipologias do território</a></li><li idMenu="44" class=" nvcls_"><a href="/geociencias/organizacao-do-territorio/redes-e-fluxos-geograficos.html" class="header " target="_self" >Redes e fluxos geográficos</a></ul></li><li idMenu="45" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Posicionamento geodésico</span><ul class="nav-child"><li idMenu="46" class=" nvcls_"><a href="/geociencias/informacoes-sobre-posicionamento-geodesico/rede-geodesica.html" class="header " target="_self" >Redes Geodésicas</a></li><li idMenu="47" class=" nvcls_"><a href="/geociencias/informacoes-sobre-posicionamento-geodesico/sirgas.html" class="header " target="_self" >SIRGAS</a></li><li idMenu="48" class=" nvcls_"><a href="/geociencias/informacoes-sobre-posicionamento-geodesico/servicos-para-posicionamento-geodesico.html" class="header " target="_self" >Serviços para posicionamento geodésico</a></ul></li><li idMenu="49" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Atlas</span><ul class="nav-child"><li idMenu="50" class=" nvcls_"><a href="/geociencias/atlas/nacional.html" class="header " target="_self" >Nacional</a></li><li idMenu="51" class=" nvcls_"><a href="/geociencias/atlas/tematicos.html" class="header " target="_self" >Temáticos</a></ul></li><li idMenu="52" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Modelos digitais de superfície</span><ul class="nav-child"><li idMenu="53" class=" nvcls_"><a href="/geociencias/modelos-digitais-de-superficie/modelos-digitais-de-superficie.html" class="header " target="_self" >Modelos digitais de superfície </a></ul></li><li idMenu="54" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Cartas e Mapas</span><ul class="nav-child"><li idMenu="55" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/bases-cartograficas-continuas.html" class="header " target="_self" >Bases cartográficas contínuas</a></li><li idMenu="56" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/folhas-topograficas.html" class="header " target="_self" >Folhas topográficas</a></li><li idMenu="57" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/mapas-regionais.html" class="header " target="_self" >Mapas regionais</a></li><li idMenu="58" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/mapas-estaduais.html" class="header " target="_self" >Mapas estaduais</a></li><li idMenu="59" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/mapas-municipais.html" class="header " target="_self" >Mapas municipais</a></li><li idMenu="60" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/mapas-estatisticos.html" class="header " target="_self" >Mapas estatísticos</a></li><li idMenu="61" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/informacoes-ambientais.html" class="header " target="_self" >Brasil: Informações ambientais</a></li><li idMenu="62" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/mapas-de-referencia.html" class="header " target="_self" >Brasil: Mapas de referência</a></li><li idMenu="63" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/sociedade-e-economia.html" class="header " target="_self" >Brasil: Sociedade e economia</a></li><li idMenu="64" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/redes-geograficas.html" class="header " target="_self" >Brasil: Redes geográficas</a></li><li idMenu="65" class=" nvcls_"><a href="/geociencias/cartas-e-mapas/brasil-redes-geodesicas.html" class="header " target="_self" >Brasil: Redes geodésicas</a></ul></li><li idMenu="66" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Imagens do território</span><ul class="nav-child"><li idMenu="67" class=" nvcls_"><a href="/geociencias/imagens-do-territorio/imagens-corrigidas.html" class="header " target="_self" >Imagens corrigidas</a></ul></li><li idMenu="68" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Informações ambientais</span><ul class="nav-child"><li idMenu="69" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/estatisticas-e-indicadores-ambientais.html" class="header " target="_self" >Estatísticas e Indicadores Ambientais</a></li><li idMenu="70" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/estudos-ambientais.html" class="header " target="_self" >Estudos ambientais</a></li><li idMenu="71" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/cobertura-e-uso-da-terra.html" class="header " target="_self" >Cobertura e uso da terra</a></li><li idMenu="72" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/biodiversidade.html" class="header " target="_self" >Biodiversidade</a></li><li idMenu="73" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/climatologia.html" class="header " target="_self" >Climatologia</a></li><li idMenu="74" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/geologia.html" class="header " target="_self" >Geologia</a></li><li idMenu="75" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/geomorfologia.html" class="header " target="_self" >Geomorfologia</a></li><li idMenu="76" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/pedologia.html" class="header " target="_self" >Pedologia</a></li><li idMenu="77" class=" nvcls_"><a href="/geociencias/informacoes-ambientais/vegetacao.html" class="header " target="_self" >Vegetação</a></ul></li><li idMenu="78" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Métodos e documentos de referência</span><ul class="nav-child"><li idMenu="79" class=" nvcls_"><a href="/geociencias/metodos-e-outros-documentos-de-referencia/normas.html" class="header " target="_self" >Normas</a></li><li idMenu="80" class=" nvcls_"><a href="/geociencias/metodos-e-outros-documentos-de-referencia/revista-e-manuais-tecnicos.html" class="header " target="_self" >Revista e manuais técnicos</a></li><li idMenu="81" class=" nvcls_"><a href="/geociencias/metodos-e-outros-documentos-de-referencia/vocabulario-e-glossarios.html" class="header " target="_self" >Vocabulário e glossários</a></li><li idMenu="82" class=" nvcls_"><a href="/geociencias/metodos-e-outros-documentos-de-referencia/outros-documentos-tecnicos-geo.html" class="header " target="_self" >Outros documentos técnicos</a></ul></li><li idMenu="83" class="parent nvcls_subgrupo"><span class="nav-header subgrupo">Investigações Experimentais</span><ul class="nav-child"><li idMenu="84" class=" nvcls_"><a href="/geociencias/investigacoes-experimentais-geo/informacoes-geocientificas-experimentais.html" class="header " target="_self" >Informações Geocientíficas Experimentais</a></ul></li><li idMenu="85" class=" nvcls_"><a href="/geociencias/todos-os-produtos-geociencias.html" class="header " target="_self" >Todos os Produtos</a></li><li idMenu="86" class=" nvcls_"><a href="/geociencias/downloads-geociencias.html" class="header " target="_self" >Downloads</a></ul></li><li idMenu="87" class=" nvcls_"><a href="/indicadores.html?view=default" class="header " target="_self" >Painel de Indicadores</a></li><li idMenu="88" class=" nvcls_"><a href="/cidades-e-estados.html?view=municipio" class="header " target="_self" >Cidades e Estados</a></li><li idMenu="89" class="parent nvcls_"><span class="nav-header ">Nossos Sites</span><ul class="nav-child"><li idMenu="90" class=" nvcls__blank"><a href="http://agenciadenoticias.ibge.gov.br/" class="header _blank" target="_blank" rel="noopener">Agência de Notícias</a></li><li idMenu="91" class=" nvcls__blank"><a href="http://biblioteca.ibge.gov.br/" class="header _blank" target="_blank" rel="noopener">Biblioteca</a></li><li idMenu="92" class=" nvcls_pure-menu-link"><a href="http://respondendo.ibge.gov.br/" class="header pure-menu-link" target="_blank" rel="noopener">Respondendo</a></li><li idMenu="93" class=" nvcls_pure-menu-link"><a href="https://sidra.ibge.gov.br/" class="header pure-menu-link" target="_blank" rel="noopener">Sidra</a></li><li idMenu="94" class=" nvcls_pure-menu-link"><a href="https://portaldemapas.ibge.gov.br/portal.php" class="header pure-menu-link" target="_blank" rel="noopener">Portal de Mapas</a></li><li idMenu="95" class=" nvcls_pure-menu-link"><a href="https://cidades.ibge.gov.br/" class="header pure-menu-link" target="_blank" rel="noopener">Cidades@</a></li><li idMenu="96" class=" nvcls_"><a href="https://educa.ibge.gov.br" class="header " target="_blank" rel="noopener">IBGEeduca</a></li><li idMenu="97" class=" nvcls_"><a href="https://atlasescolar.ibge.gov.br/" class="header " target="_blank" rel="noopener">Atlas Geográfico Escolar</a></li><li idMenu="98" class=" nvcls_"><a href="/portal-nossos-sites/nossos-sites.html" class="header " target="_self" >Outros Sites</a></ul></li><li idMenu="99" class=" nvcls_"><a href="/calendario-de-divulgacoes-novoportal.html?view=mensal" class="header " target="_self" >Próximas Divulgações</a></li><li idMenu="100" class=" nvcls_"><a href="https://www.gov.br/pt-br/orgaos/fundacao-instituto-brasileiro-de-geografia-e-estatistica" class="header " target="_blank" rel="noopener">Serviços</a><li idMenu="102" class="parent nvcls_"><span class="nav-header ">Acesso à Informação</span><ul class="nav-child"><li idMenu="103" class=" nvcls_not-parent"><a href="/acesso-informacao/institucional/o-ibge.html" class="header not-parent" target="_self" >Institucional</a><li idMenu="118" class=" nvcls_not-parent"><a href="/acesso-informacao/acoes-e-programas.html" class="header not-parent" target="_self" >Ações e Programas</a><li idMenu="133" class=" nvcls_"><a href="/acesso-informacao/participacao-social.html" class="header " target="_self" >Participação Social</a><li idMenu="135" class=" nvcls_"><a href="/acesso-informacao/auditorias.html" class="header " target="_self" >Auditorias</a></li><li idMenu="136" class=" nvcls_"><a href="/acesso-informacao/convenios.html" class="header " target="_self" >Convênios e Transferências</a></li><li idMenu="137" class=" nvcls_"><a href="/acesso-informacao/receita-despesas.html" class="header " target="_self" >Receitas e Despesas</a></li><li idMenu="138" class=" nvcls_not-parent"><a href="/acesso-informacao/licitacoes-e-contratos.html" class="header not-parent" target="_self" >Licitações e Contratos</a><li idMenu="145" class=" nvcls_"><a href="/acesso-informacao/recursos-humanos.html" class="header " target="_self" >Servidores</a></li><li idMenu="146" class=" nvcls_"><a href="/acesso-informacao/informacoes-classificadas.html" class="header " target="_self" >Informações Classificadas</a></li><li idMenu="147" class=" nvcls_"><a href="/acesso-informacao/termos-de-execucao-descentralizada.html" class="header " target="_self" >Termos de Execução Descentralizada</a></li><li idMenu="148" class=" nvcls_"><a href="/acesso-informacao/acordos-de-cooperacao-tecnica.html" class="header " target="_self" >Acordos de Cooperação Técnica</a></li><li idMenu="149" class=" nvcls_"><a href="/acesso-informacao/protocolos-de-intencoes.html" class="header " target="_self" >Protocolos de Intenções</a></li><li idMenu="150" class=" nvcls_"><a href="/acesso-informacao/atendimento.html" class="header " target="_self" >Serviço de Informação ao Cidadão (SIC)</a></li><li idMenu="151" class=" nvcls_"><a href="/acesso-informacao/transparencia-e-prestacao-de-contas.html" class="header " target="_self" >Transparência e Prestação de Contas</a></li><li idMenu="152" class=" nvcls_"><a href="/acesso-informacao/perguntas-frequentes.html" class="header " target="_self" >Perguntas Frequentes</a></li><li idMenu="153" class=" nvcls_"><a href="/acesso-informacao/dados-abertos.html" class="header " target="_self" >Dados Abertos</a></li><li idMenu="154" class=" nvcls_"><a href="/acesso-informacao/tratamento-de-dados-pessoais.html" class="header " target="_self" >Tratamento de Dados Pessoais</a></li><li idMenu="155" class=" nvcls_"><a href="/acesso-informacao/atos-normativos.html" class="header " target="_self" >Atos Normativos</a></li><li idMenu="156" class=" nvcls_"><a href="/acesso-informacao/sala-de-acesso-a-dados-restritos.html" class="header " target="_self" >Sala de Acesso a Dados Restritos</a></li><li idMenu="157" class=" nvcls_"><a href="/acesso-informacao/estatisticas.html" class="header " target="_self" >Estatísticas</a></li><li idMenu="158" class="parent nvcls_"><a href="/acesso-informacao/cpnu.html" class="header " target="_self" >Concurso Público Nacional Unificado - 2024</a><ul class="nav-child"><li idMenu="159" class=" nvcls_"><a href="/acesso-informacao/cpnu/terceira-etapa.html" class="header " target="_self" >Terceira etapa do CPNU: exclusiva para o cargo de pesquisador</a></li><li idMenu="160" class=" nvcls_"><a href="/acesso-informacao/cpnu/duvidas-gerais.html" class="header " target="_self" >Dúvidas gerais</a></li><li idMenu="161" class=" nvcls_"><a href="/acesso-informacao/cpnu/convocacao.html" class="header " target="_self" >Convocação</a></li><li idMenu="162" class=" nvcls_"><a href="/acesso-informacao/cpnu/1a-convocacao.html" class="header " target="_self" >1ª Convocação</a></li></ul>
+		</nav>
+	</div>        
+</header> 
+
+<!-- Inicio conteudo -->
+    <main class="conteudo pure-g">      
+
+        <!-- Exibicao erro servico -->
+        <div id="container-erro-servico" class="erro-servico">
+            <div class="largura-maxima">
+                <p class="erro-servico-label">Nossos serviços estão apresentando instabilidade no momento. Algumas informações podem não estar disponíveis.</p>
+                <div id="descricao-erro"></div>
+            </div>
+        </div>
+    
+
+
+                        <section class=" pure-u-1 ">
+                    <div id="indicadores-section" class="indicadores-section">
+    <div class="largura-maxima">
+        <div class="indicadores-slider">
+            <ul class="indicadores-list" data-slide="0">
+                <li> 
+                
+<div id=''>
+<a class="popclock-home" href="https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html" target="_blank" rel="noopener">
+        <div class="indicador-icon pop-clock"></div>
+        <div class="indicador-info">
+            <h6 class="indicador-title">População<small>Estimativas da População 2025<span class="dado-periodo"></span></small></h6>
+            <p class="indicador-value" >213.421.037</p>
+            <p class="indicador-text" ></p>
+            <p class="indicador-text" style="font-size: 11px; color: #656565;">Data de Referência: 01.07.2025</p>
+        </div>
+    </a>
+</div>                        <div data-ref="1" class="id7060" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#ipca">
+                                <div id="icone-7060" class="indicador-icon etiqueta"></div>
+                                <div class="indicador-info" id="nome-7060">
+                                    <h6 class="indicador-title">Inflação<small>IPCA<span class='dado-periodo'>Mensal</span></small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-7060">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-7060">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="2" class="id5932" data-divulgacao="trimestral">
+                            
+                                                        <a href="/indicadores#variacao-do-pib">
+                                <div id="icone-5932" class="indicador-icon dinheiro"></div>
+                                <div class="indicador-info" id="nome-5932">
+                                    <h6 class="indicador-title">PIB<small>SCNT<span class='dado-periodo'>Acumulado 4 trimestres</span></small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-5932">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-5932">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="3" class="id4094" data-divulgacao="trimestral">
+                            
+                                                        <a href="/indicadores#desemprego">
+                                <div id="icone-4094" class="indicador-icon mala"></div>
+                                <div class="indicador-info" id="nome-4094">
+                                    <h6 class="indicador-title">Desemprego<small>PNAD Contínua</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-4094">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-4094">---</p>
+                                </div>
+                            </a>
+                        </div>
+                </li><li>                        <div data-ref="4" class="id1736" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#inpc">
+                                <div id="icone-1736" class="indicador-icon etiqueta"></div>
+                                <div class="indicador-info" id="nome-1736">
+                                    <h6 class="indicador-title">Inflação<small>INPC</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-1736">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-1736">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="5" class="id3065" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#ipca-15">
+                                <div id="icone-3065" class="indicador-icon etiqueta"></div>
+                                <div class="indicador-info" id="nome-3065">
+                                    <h6 class="indicador-title">Inflação<small>IPCA-15</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-3065">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-3065">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="6" class="id6903" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#ipp">
+                                <div id="icone-6903" class="indicador-icon industria"></div>
+                                <div class="indicador-info" id="nome-6903">
+                                    <h6 class="indicador-title">Preços - Produtor<small>IPP</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-6903">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-6903">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="7" class="id1737" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#ipca">
+                                <div id="icone-1737" class="indicador-icon etiqueta"></div>
+                                <div class="indicador-info" id="nome-1737">
+                                    <h6 class="indicador-title">Inflação<small>IPCA<span class='dado-periodo'>Acumulado 12 meses</span></small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-1737">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-1737">---</p>
+                                </div>
+                            </a>
+                        </div>
+                </li><li>                        <div data-ref="8" class="id8888" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#industria">
+                                <div id="icone-8888" class="indicador-icon industria"></div>
+                                <div class="indicador-info" id="nome-8888">
+                                    <h6 class="indicador-title">Indústria<small>PIM-PF</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-8888">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-8888">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="9" class="id8880" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#comercio">
+                                <div id="icone-8880" class="indicador-icon carrinho"></div>
+                                <div class="indicador-info" id="nome-8880">
+                                    <h6 class="indicador-title">Comércio<small>PMC</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-8880">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-8880">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="10" class="id5906" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#servicos">
+                                <div id="icone-5906" class="indicador-icon headphone"></div>
+                                <div class="indicador-info" id="nome-5906">
+                                    <h6 class="indicador-title">Serviços<small>PMS</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-5906">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-5906">---</p>
+                                </div>
+                            </a>
+                        </div>
+                                        <div data-ref="11" class="id2296" data-divulgacao="mensal">
+                            
+                                                        <a href="/indicadores#custo-do-m2">
+                                <div id="icone-2296" class="indicador-icon tijolos"></div>
+                                <div class="indicador-info" id="nome-2296">
+                                    <h6 class="indicador-title">Construção<small>SINAPI</small></h6>
+                                    <p class="indicador-value" id="ultimo_valor_dado-2296">---</p>
+                                    <p class="indicador-text" id="ultimo_valor_periodo-2296">---</p>
+                                </div>
+                            </a>
+                        </div>
+                 
+                </li>   
+            </ul>
+        </div>
+        <div class="indicadores-controls">                
+            <a class="lSPrev"></a>
+            <a class="lSNext"></a>
+        </div>
+    </div>
+    
+    <div class="largura-maxima center">
+                <a href="/indicadores.html" class="btn-outros-indicadores">Outros indicadores</a>
+    </div>
+    <div class="load-chart"><div class="spinner"></div></div>
+</div>
+
+<div class="home"> 
+    <div>
+        <div class="pure-g container">
+            <section id="main_column" class="pure-u-1">
+                
+
+<div class="largura-maxima">
+	<div id="section_bannerstopo" data-origin="main_column">
+		<!--<div class="panorama-destaque" style="background-image: url(/templates/novo_portal_base/imagens/banner-pof.png);">
+			<a class="item" href="https://www.ibge.gov.br/pof2024" target="_blank" rel="noopener" style="z-index: 1000;">
+							
+			</a>
+		</div>
+
+		<div class="panorama-destaque" style="background-image: url(/templates/novo_portal_base/imagens/banner-triplo-portal.jpg);">
+			<a class="item" href="https://eventos.ibge.gov.br/triplo-forum/apresentacao" target="_blank" rel="noopener" style="z-index: 1000;">
+							
+			</a>
+		</div>-->
+
+		<div class="panorama-destaque" style="background-image: url(https://www.ibge.gov.br/templates/novo_portal_base/imagens/banner-singed-programa-nacional.png);">
+			<a class="item" href="https://www.ibge.gov.br/singed-programa-nacional/apresentacao-programa.html" target="_blank" rel="noopener" style="z-index: 1000;">
+				<img src="https://www.ibge.gov.br/templates/novo_portal_base/imagens/banner-singed-programa-nacional.png" alt="">			
+			</a>
+		</div>
+		<div class="banners-topo">    
+					<div class="banner-topo">
+				<a class="item" href="https://eventos.ibge.gov.br/conferencia-soberania-nacional/inicio" target="_blank" rel="noopener">
+					<div class="image-banner-topo" style="background-image: url(/images/novoportal/banners/banner-confest-2025-high.png); background-color: #004f77;"></div>
+					<div class="text-banner-topo">
+						<h3>Conferência Nacional dos Agentes Produtores e Usuários de Dados - CONFEST/CONFEGE</h3>
+						<p>Acesse aqui</p>					</div>					
+				</a>
+			</div>
+					<div class="banner-topo">
+				<a class="item" href="https://censo2022.ibge.gov.br/panorama/" target="_blank" rel="noopener">
+					<div class="image-banner-topo" style="background-image: url(/images/novoportal/banners/banner-panorama-pequeno.png); background-color: #2c2725;"></div>
+					<div class="text-banner-topo">
+						<h3>Panorama Censo 2022</h3>
+						<p>Tudo o que você precisa saber sobre os resultados do Censo 2022</p>					</div>					
+				</a>
+			</div>
+					<div class="banner-topo">
+				<a class="item" href="https://www.ibge.gov.br/acesso-informacao/cpnu.html" target="_blank" rel="noopener">
+					<div class="image-banner-topo" style="background-image: url(/images/novoportal/banners/cpnu.png); background-color: #f9f9f9;"></div>
+					<div class="text-banner-topo">
+						<h3>CPNU</h3>
+						<p>Informações para os aprovados no Concurso Público Nacional Unificado</p>					</div>					
+				</a>
+			</div>
+					<div class="banner-topo">
+				<a class="item" href="https://www.ibge.gov.br/peers/" target="_blank" rel="noopener">
+					<div class="image-banner-topo" style="background-image: url(/images/novoportal/banners/icon-peers.png); background-color: #1480c1;"></div>
+					<div class="text-banner-topo">
+						<h3>Pesquisa Especial sobre as Enchentes de 2024 no Rio Grande do Sul</h3>
+						<p>Salve o número do IBGE, atenda a ligação e participe!</p>					</div>					
+				</a>
+			</div>
+				</div>
+	</div>  
+</div>  
+
+
+<div class="largura-maxima pure-g"><div class="pure-u-1 pure-u-md-2-3"><div id="section_noticias" data-origin="main_column"><h3><a href="https://agenciadenoticias.ibge.gov.br/" target="_blank">AGÊNCIA DE NOTÍCIAS</a></h3><ul class="pure-g"><li class="tipo-n pure-u-1 pure-u-md-1-2"><a href="//agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2012-agencia-de-noticias/noticias/44905-medida-provisoria-autoriza-a-ampliacao-excepcional-do-prazo-maximo-de-vigencia-dos-contratos-dos-apm-e-scq.html" title="Medida provisória autoriza a ampliação excepcional do prazo máximo de vigência dos contratos dos APM e SCQ" target="_blank" rel="noopener"><div style="background-image: url(/images/agenciadenoticias/ibge/_Comunicado-Presidencia.jpg)"><p class="data-destaque"><span class="home-noticia-data">01/11/2025</span><span class="home-noticia-tipo">Notícia</span></p><h3 class="">Medida provisória autoriza a ampliação excepcional do prazo máximo de vigência dos contratos dos APM e SCQ</h3></div></a></li><li class="tipo-n pure-u-1 pure-u-md-1-2"><a href="//agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2012-agencia-de-noticias/noticias/44899-ibge-divulgara-em-aracaju-se-resultados-do-censo-2022-nupcialidade-e-familia.html" title="IBGE divulgará, em Aracaju (SE), resultados do Censo 2022: Nupcialidade e Família" target="_blank" rel="noopener"><div style="background-image: url(/images/agenciadenoticias/ibge/2025_10/Agncia-Intranet_875x485px_Nupcialidade-e-Famlia_01.jpg)"><p class="data-destaque"><span class="home-noticia-data">31/10/2025</span><span class="home-noticia-tipo">Notícia</span></p><h3 class="">IBGE divulgará, em Aracaju (SE), resultados do Censo 2022: Nupcialidade e Família</h3></div></a></li><li class="tipo-n pure-u-1 pure-u-md-1-2"><a href="//agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2012-agencia-de-noticias/noticias/44891-estadic-2024-tres-estados-nao-tem-canal-de-denuncias-de-violacao-de-direitos-raciais.html" title="ESTADIC 2024: Três estados não têm canal de denúncias de violação de direitos raciais" target="_blank" rel="noopener"><div style="background-image: url(/images/agenciadenoticias/estatisticas_sociais/2025_10/Estadic_HOME_FernandoFrazao-AgnciaBrasil.jpg)"><p class="data-destaque"><span class="home-noticia-data">31/10/2025</span><span class="home-noticia-tipo">Notícia</span></p><h3 class="">ESTADIC 2024: Três estados não têm canal de denúncias de violação de direitos raciais</h3></div></a></li><li class="tipo-n pure-u-1 pure-u-md-1-2"><a href="//agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2012-agencia-de-noticias/noticias/44892-munic-2024-evento-climatico-afetou-mais-de-90-dos-municipios-do-rio-grande-do-sul.html" title="MUNIC 2024: evento climático afetou mais de 90% dos municípios do Rio Grande do Sul" target="_blank" rel="noopener"><div style="background-image: url(/images/agenciadenoticias/estatisticas_economicas/2025_10/MUNIC-HOME-BrunoPeres-AgBrasil.png)"><p class="data-destaque"><span class="home-noticia-data">31/10/2025</span><span class="home-noticia-tipo">Notícia</span></p><h3 class="">MUNIC 2024: evento climático afetou mais de 90% dos municípios do Rio Grande do Sul</h3></div></a></li></ul><div class="center"><a class="link-vertodos" href="https://agenciadenoticias.ibge.gov.br/" target="_blank"><i class="fa fa-caret-right"></i>Ver todos</a></div></div></div><div class="pure-u-1 pure-u-md-1-3"><div id="section_por_dentro" data-origin="main_column"><h3><a href="/ibge-digital.html?filter_tag=0">IBGE Digital</a></h3><ul class='pure-g'><li class="tipo-ad youtube pure-u-1"><a href="/ibge-digital/44887-assista-ao-vivo-ibge-apresenta-resultados-regionais-do-censo-2022-etnias-e-linguas-indigenas" title="Assista ao vivo, IBGE apresenta resultados regionais do Censo 2022: Etnias e Línguas Indígenas"><div style="background-image: url(/images/agencia_digital/2025_04/Youtube_1920x1080px_Etnias_Lnguas_reviso2_02.jpg)"><p class="data-destaque"></p><h3 class="">Assista ao vivo, IBGE apresenta resultados regionais do Censo 2022: Etnias e Línguas Indígenas</h3></div></a></li><li class="tipo-ad youtube pure-u-1"><a href="/ibge-digital/44883-assista-ao-vivo-a-coletiva-dos-resultados-da-munic-estadic-2024" title="Assista ao vivo à coletiva dos resultados da MUNIC/ESTADIC 2024"><div style="background-image: url(/images/agenciadenoticias/ibge/2025_10/munic-home.jpg)"><p class="data-destaque"></p><h3 class="">Assista ao vivo à coletiva dos resultados da MUNIC/ESTADIC 2024</h3></div></a></li></ul><div class="center"><a class="link-vertodos" href="/ibge-digital.html?filter_tag=0"><i class="fa fa-caret-right"></i>Ver todos</a></div></div></div></div><div id="section_comunicados" data-origin="main_column"><div class="largura-maxima"><h2>Comunicados</h2><ul class='comunicados-list'><li><div class="tipo-d pure-u-1"><a href="/novo-portal-destaques.html?destaque=44869" title="IBGE divulgará, em 10 de dezembro, a pesquisa Estatísticas do Registro Civil 2024"><span class="calendario-data">28/10/2025</span><div><p class="calendario-nome">IBGE divulgará, em 10 de dezembro, a pesquisa Estatísticas do Registro Civil 2024</p></div> </a></div></li><li><div class="tipo-d pure-u-1"><a href="/novo-portal-destaques.html?destaque=44861" title="O IBGE divulgará, em 27 de novembro, Censo Demográfico 2022: Características urbanísticas do entorno dos domicílios nas Favelas e Comunidades Urbanas"><span class="calendario-data">24/10/2025</span><div><p class="calendario-nome">O IBGE divulgará, em 27 de novembro, Censo Demográfico 2022: Características urbanísticas do entorno dos domicílios nas Favelas e Comunidades Urbanas</p></div> </a></div></li><li><div class="tipo-d pure-u-1"><a href="/novo-portal-destaques.html?destaque=44853" title="IBGE divulgará, em 25 de novembro, a Investigação Geocientífica Experimental "Domínios e Regiões Naturais Terrestres dos Biomas do Brasil: Uma proposta de regionalização natural""><span class="calendario-data">24/10/2025</span><div><p class="calendario-nome">IBGE divulgará, em 25 de novembro, a Investigação Geocientífica Experimental "Domínios e Regiões Naturais Terrestres dos Biomas do Brasil: Uma proposta de regionalização natural"</p></div> </a></div></li><li><div class="tipo-d pure-u-1"><a href="/novo-portal-destaques.html?destaque=44852" title="IBGE divulgará, em 24 de novembro,  Censo Demográfico 2022: Localidades do Brasil"><span class="calendario-data">24/10/2025</span><div><p class="calendario-nome">IBGE divulgará, em 24 de novembro,  Censo Demográfico 2022: Localidades do Brasil</p></div> </a></div></li></ul><div class="center"><a class="link-vertodos" href="/novo-portal-destaques.html"><i class="fa fa-caret-right"></i>Ver todos</a></div></div></div></div>
+                    
+        <div id="section_quickfacts" class="quick__facts quick-facts-home" data-origin="left_column">
+            <div class="largura-maxima pure-g">	
+            
+                <div class="imagem RO pure-u-1 pure-u-md-1-2" aria-label="Porto Velho" style="background-image:url('/images/novoportal/static/capitais/110020.jpg')">
+                    <div class="quickfacts-pin">
+                        <p class="quickfacts-pin-capital">Porto Velho</p>
+                        <p class="quickfacts-pin-uf">Rondônia</p>
+                    </div>
+                </div>
+                <div class="container-informacao  pure-u-1 pure-u-md-1-2">
+                    <a class="link-title" href="/cidades-e-estados" id="cidades-estados-link" target="_blank" rel="noopener">
+                        <h2>Cidades e Estados</h2>
+                    </a>
+                    <form class="quick-facts-formulario" action="/cidades-e-estados">
+                    <!-- <form class="quick-facts-formulario" id="quick-facts-formulario"  action="/cidades-e-estados"> -->
+                        <div class="clear"></div>
+                        <div id="divInputMunicipios" class="pure-u-1">
+                            <label for='nomeAreaTerritorialHome'></label>
+                            <select class="" name="c" id="nomeAreaTerritorialHome" onchange="trocaEstado(this)">
+                            <option disabled selected>Selecione...</option>
+                            <option data-uf="ac" data-mun="" class="uf" value="12" >Acre - 12</option><option data-uf="ac" data-mun="rio-branco" class="municipio" value="1200401" >Rio Branco ( AC ) - 1200401</option><option data-uf="al" data-mun="" class="uf" value="27" >Alagoas - 27</option><option data-uf="al" data-mun="maceio" class="municipio" value="2704302" >Maceió ( AL ) - 2704302</option><option data-uf="ap" data-mun="" class="uf" value="16" >Amapá - 16</option><option data-uf="ap" data-mun="macapa" class="municipio" value="1600303" >Macapá ( AP ) - 1600303</option><option data-uf="am" data-mun="" class="uf" value="13" >Amazonas - 13</option><option data-uf="am" data-mun="manaus" class="municipio" value="1302603" >Manaus ( AM ) - 1302603</option><option data-uf="ba" data-mun="" class="uf" value="29" >Bahia - 29</option><option data-uf="ba" data-mun="salvador" class="municipio" value="2927408" >Salvador ( BA ) - 2927408</option><option data-uf="ce" data-mun="" class="uf" value="23" >Ceará - 23</option><option data-uf="ce" data-mun="fortaleza" class="municipio" value="2304400" >Fortaleza ( CE ) - 2304400</option><option data-uf="df" data-mun="" class="uf" value="53" >Distrito Federal - 53</option><option data-uf="df" data-mun="brasilia" class="municipio" value="5300108" >Brasília ( DF ) - 5300108</option><option data-uf="es" data-mun="" class="uf" value="32" >Espírito Santo - 32</option><option data-uf="es" data-mun="vitoria" class="municipio" value="3205309" >Vitória ( ES ) - 3205309</option><option data-uf="go" data-mun="" class="uf" value="52" >Goiás - 52</option><option data-uf="go" data-mun="goiania" class="municipio" value="5208707" >Goiânia ( GO ) - 5208707</option><option data-uf="ma" data-mun="" class="uf" value="21" >Maranhão - 21</option><option data-uf="ma" data-mun="sao-luis" class="municipio" value="2111300" >São Luís ( MA ) - 2111300</option><option data-uf="mt" data-mun="" class="uf" value="51" >Mato Grosso - 51</option><option data-uf="mt" data-mun="cuiaba" class="municipio" value="5103403" >Cuiabá ( MT ) - 5103403</option><option data-uf="ms" data-mun="" class="uf" value="50" >Mato Grosso do Sul - 50</option><option data-uf="ms" data-mun="campo-grande" class="municipio" value="5002704" >Campo Grande ( MS ) - 5002704</option><option data-uf="mg" data-mun="" class="uf" value="31" >Minas Gerais - 31</option><option data-uf="mg" data-mun="belo-horizonte" class="municipio" value="3106200" >Belo Horizonte ( MG ) - 3106200</option><option data-uf="pa" data-mun="" class="uf" value="15" >Pará - 15</option><option data-uf="pa" data-mun="belem" class="municipio" value="1501402" >Belém ( PA ) - 1501402</option><option data-uf="pb" data-mun="" class="uf" value="25" >Paraíba - 25</option><option data-uf="pb" data-mun="joao-pessoa" class="municipio" value="2507507" >João Pessoa ( PB ) - 2507507</option><option data-uf="pr" data-mun="" class="uf" value="41" >Paraná - 41</option><option data-uf="pr" data-mun="curitiba" class="municipio" value="4106902" >Curitiba ( PR ) - 4106902</option><option data-uf="pe" data-mun="" class="uf" value="26" >Pernambuco - 26</option><option data-uf="pe" data-mun="recife" class="municipio" value="2611606" >Recife ( PE ) - 2611606</option><option data-uf="pi" data-mun="" class="uf" value="22" >Piauí - 22</option><option data-uf="pi" data-mun="teresina" class="municipio" value="2211001" >Teresina ( PI ) - 2211001</option><option data-uf="rj" data-mun="" class="uf" value="33" >Rio de Janeiro - 33</option><option data-uf="rj" data-mun="rio-de-janeiro" class="municipio" value="3304557" >Rio de Janeiro ( RJ ) - 3304557</option><option data-uf="rn" data-mun="" class="uf" value="24" >Rio Grande do Norte - 24</option><option data-uf="rn" data-mun="natal" class="municipio" value="2408102" >Natal ( RN ) - 2408102</option><option data-uf="rs" data-mun="" class="uf" value="43" >Rio Grande do Sul - 43</option><option data-uf="rs" data-mun="porto-alegre" class="municipio" value="4314902" >Porto Alegre ( RS ) - 4314902</option><option data-uf="ro" data-mun="" class="uf" value="11" >Rondônia - 11</option><option data-uf="ro" data-mun="porto-velho" class="municipio" value="1100205" >Porto Velho ( RO ) - 1100205</option><option data-uf="rr" data-mun="" class="uf" value="14" >Roraima - 14</option><option data-uf="rr" data-mun="boa-vista" class="municipio" value="1400100" >Boa Vista ( RR ) - 1400100</option><option data-uf="sc" data-mun="" class="uf" value="42" >Santa Catarina - 42</option><option data-uf="sc" data-mun="florianopolis" class="municipio" value="4205407" >Florianópolis ( SC ) - 4205407</option><option data-uf="sp" data-mun="" class="uf" value="35" >São Paulo - 35</option><option data-uf="sp" data-mun="sao-paulo" class="municipio" value="3550308" >São Paulo ( SP ) - 3550308</option><option data-uf="se" data-mun="" class="uf" value="28" >Sergipe - 28</option><option data-uf="se" data-mun="aracaju" class="municipio" value="2800308" >Aracaju ( SE ) - 2800308</option><option data-uf="to" data-mun="" class="uf" value="17" >Tocantins - 17</option><option data-uf="to" data-mun="palmas" class="municipio" value="1721000" >Palmas ( TO ) - 1721000</option>                            </select>
+                        </div>
+                    </form>
+                                    <div class="informacao">
+                        <div class="icon"><img aria-hidden="true" alt="MOD_QUICK_FACTS_POPESTIMADA" src="/templates/novo_portal_base/imagens/population-blue.svg"></div>
+                        <div class="texto">
+                            <p class="titulo">População residente [2022]</p>
+                                                            <p class="dado">460.434 pessoas</p>                    
+                                                        
+                        </div>
+                    </div>
+                                    <div class="informacao">
+                        <div class="icon"><img aria-hidden="true" alt="MOD_QUICK_FACTS_AREA" src="/templates/novo_portal_base/imagens/pin.svg"></div>
+                        <div class="texto">
+                            <p class="titulo">Área Territorial [2024]</p>
+                                                            <p class="dado">34.091,146 km²</p>
+                                                        
+                        </div>
+                    </div>
+                                <div class="informacao">
+                    <div class="icon"><img alt="Código Municipal" src="/templates/novo_portal_base/imagens/code.svg"></div>
+                    <div class="texto">
+                        <p class="titulo">Código Municipal</p>
+                        <p id="codmun" class="dado">1100205</p>
+                    </div>
+                </div>
+                
+                <div class="center">
+                    <a id="cidades-estados-link-bottom" href="/cidades-e-estados.html?c=1100205" class="botao-home">Saiba mais</a>
+                </div>
+
+            </div>
+        </div>
+
+
+<link rel="stylesheet" type="text/css" href="/media/jui/css/chosen.css?2a5ea54a27a5a49a8d285b717a097632">
+<script src="/media/jui/js/chosen.jquery.min.js"></script>
+
+<div id="section_banners" data-origin="right_column">
+	<div class="banners">
+		<a class="link-title">
+			<!-- href=/portal-nossos-sites/nossos-sites.html> -->
+			<h2 class='nossos-sites'>Nossos sites</h2>
+		</a>
+		<div class="largura-maxima">
+			<div class="weblinks">
+									<div class="banner-home">
+						<a href="https://respondendo.ibge.gov.br" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/destaques/respondendo.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">Respondendo</p><p><span>Espaço para o informante do IBGE tirar dúvidas e verificar a identidade do entrevistador</span></p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://censo2022.ibge.gov.br/" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/logo-censo2022-nossos_sites.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">Censo 2022</p><p>Censo Demográfico do Brasil</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://sidra.ibge.gov.br" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/lateral-sidra.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">SIDRA</p><p>Pesquise e consuma os dados do IBGE</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://atlasescolar.ibge.gov.br/" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/icone-atlas.jpg" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">Atlas Geográfico Escolar</p><p>Informações geográficas, estatísticas e cartográficas sobre o Brasil e o mundo</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://educa.ibge.gov.br" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/lateral-educa.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">IBGEeduca</p><p>Para crianças, jovens e professores</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://loja.ibge.gov.br/" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/lateral-loja.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">Loja</p><p>Livros e outros produtos para venda e download</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://odsbrasil.gov.br/" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/icon-ods.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">ODS</p><p>Indicadores Brasileiros para os Objetivos de Desenvolvimento Sustentável</p></p></div></a>					</div>
+									<div class="banner-home">
+						<a href="https://www.ence.ibge.gov.br/" target="_blank" rel="noopener"><div class="banner-image"><img src="/images/novoportal/static/icones/ence.png" alt="imagem banner"/></div><div class="banner-text"><p class="banner-title notranslate">ENCE</p><p>Escola Nacional de Ciências Estatísticas</p></p></div></a>					</div>
+							</div>
+		</div>
+		<p style="width:100%;display:flex;"><a class="link-vertodos banners" href=/portal-nossos-sites/nossos-sites.html><i class="fa fa-caret-right"></i>Ver todos</a></p>
+	</div>
+</div>
+
+    <div id="section_calendario"  class="conteudo__calendario" data-origin="left_column">
+        <div class="largura-maxima">
+
+                        <a class="link-title">
+                <!-- href=/calendario-de-divulgacoes-novoportal.html> -->
+                <i class="far fa-calendar" aria-hidden="true"></i>	
+                <h2>Próximas divulgações</h2>
+            </a>   
+
+            <div class="calendario-section">
+                <div class="largura-maxima">   
+                    <div class="calendario-slider">    
+                        <div class="calendario-list" data-slide="0">
+                            
+                                <div data-ref="0" class="id00">
+
+                                    
+                                    <a href="/estatisticas/economicas/industria/9294-pesquisa-industrial-mensal-producao-fisica-brasil.html">
+                                        <span class='calendario-data'>04/11/2025</span><div><p class='calendario-sigla'>PIM-PF</p><p class='calendario-nome'>Pesquisa Industrial Mensal: Produção Física - Brasil</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="1" class="id01">
+
+                                    
+                                    <a href="/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html">
+                                        <span class='calendario-data'>04/11/2025</span><div><p class='calendario-sigla'></p><p class='calendario-nome'>Censo Demográfico 2022: Nomes no Brasil</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="2" class="id02">
+
+                                    
+                                    <a href="/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html">
+                                        <span class='calendario-data'>05/11/2025</span><div><p class='calendario-sigla'></p><p class='calendario-nome'>Censo Demográfico 2022: Nupcialidade e Família: Resultados preliminares da amostra</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="3" class="id03">
+
+                                    
+                                    <a href="/estatisticas/economicas/industria/9052-sistema-de-contas-nacionais-brasil.html">
+                                        <span class='calendario-data'>06/11/2025</span><div><p class='calendario-sigla'>SCN</p><p class='calendario-nome'>Sistema de Contas Nacionais: Brasil</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="4" class="id04">
+
+                                    
+                                    <a href="/estatisticas/economicas/precos-e-custos/9282-indice-de-precos-ao-produtor-industrias-extrativas-e-de-transformacao.html">
+                                        <span class='calendario-data'>07/11/2025</span><div><p class='calendario-sigla'>IPP</p><p class='calendario-nome'>Índice de Preços ao Produtor - Indústrias Extrativas e de Transformação</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="5" class="id05">
+
+                                    
+                                    <a href="/estatisticas/sociais/educacao/10586-pesquisa-de-informacoes-basicas-municipais.html">
+                                        <span class='calendario-data'>07/11/2025</span><div><p class='calendario-sigla'>MUNIC</p><p class='calendario-nome'>Pesquisa de Informações Básicas Municipais: Suplemento de segurança alimentar e nutricional</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="6" class="id06">
+
+                                    
+                                    <a href="/estatisticas/sociais/educacao/16770-pesquisa-de-informacoes-basicas-estaduais.html">
+                                        <span class='calendario-data'>07/11/2025</span><div><p class='calendario-sigla'>ESTADIC</p><p class='calendario-nome'>Pesquisa de Informações Básicas Estaduais: Suplemento de segurança alimentar e nutricional</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                            
+                                <div data-ref="7" class="id07">
+
+                                    
+                                    <a href="/estatisticas/economicas/precos-e-custos/9256-indice-nacional-de-precos-ao-consumidor-amplo.html">
+                                        <span class='calendario-data'>11/11/2025</span><div><p class='calendario-sigla'>IPCA</p><p class='calendario-nome'>Índice Nacional de Preços ao Consumidor Amplo</p></div> 
+                                    </a>
+
+                                                                    </div>
+
+                                     	
+                        </div> 
+                    </div>
+                    <div class="calendario-controls">   
+                        <a class="lSPrev"></a>
+                        <a class="lSNext"></a>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <a class="botao-home" href=/calendario-de-divulgacoes-novoportal.html>Calendário Completo</a>    
+                </div>      
+            </div>
+        </div>
+    </div>    
+
+
+
+<div id="section_videos" data-origin="right_column">
+	<div class="largura-maxima">
+
+		<a class="link-title">
+			<!-- href="/videos.html">	 -->
+			<h2>IBGE Explica</h2>
+		</a>	
+
+		<div style="display:flex;">
+
+			<div class="quadro-video">
+				<a href="/videos.html?pagina=1&lista=explica&video=944F0paMei0">	
+					<div class="image-video">
+						<div class="image-container"><img src="https://www.ibge.gov.br//templates/novo_portal_base/imagens/youtube/explica-pof.jpg" alt=""></div>
+						<p class="title"><strong>POF</strong><br/>Quanto o brasileiro gasta e com o quê • IBGE Explica</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="quadro-video-lista">
+				<div class="quadro-video_sub">
+					<a href="/videos.html?pagina=1&lista=explica&video=OymHhJp7QaA">	
+						<div class="image-video">
+						<div class="image-container"><img src="https://www.ibge.gov.br//templates/novo_portal_base/imagens/youtube/explica-fecundidade.jpg" alt=""></div>
+							<p class="title"><strong>Taxa de Fecundidade</strong><br/>Fecundidade no Brasil • IBGE Explica</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="quadro-video_sub">
+					<a href="/videos.html?pagina=1&lista=explica&video=lVjPv33T0hk">	
+						<div class="image-video">
+						<div class="image-container"><img src="https://www.ibge.gov.br//templates/novo_portal_base/imagens/youtube/explica-pib.jpg" alt=""></div>
+							<p class="title"><strong>PIB</strong><br/>PIB: o que é, para que serve e como é calculado • IBGE Explica</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="quadro-video_sub">
+					<a href="/videos.html?pagina=1&lista=explica&video=JVcDZOlIMBk">	
+						<div class="image-video">
+						<div class="image-container"><img src="https://www.ibge.gov.br//templates/novo_portal_base/imagens/youtube/explica-ipca-inpc.jpg" alt=""></div>
+							<p class="title"><strong>IPCA / INPC</strong><br/>O que é inflação • IBGE Explica IPCA e INPC</p>
+						</div>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="center"><a class="link-vertodos botao-home" href="/videos.html">Mais Vídeos</a></div>
+	</div>
+</div>
+<div id="section_erramos" data-origin="main_column"><div class="largura-maxima"><h2>Erramos</h2><ul class='pure-g'><li><div class="tipo-e pure-u-1"><a href="/novo-portal-erramos.html#44900" title="Erro de calendário na divulgação: “Áreas Protegidas na Amazônia Legal: um retrato ambiental e estatístico”"><span class="calendario-data">31/10/2025</span><div><p class="calendario-nome">Erro de calendário na divulgação: “Áreas Protegidas na Amazônia Legal: um retrato ambiental e estatístico”</p></div> </a></div></li><li><div class="tipo-e pure-u-1"><a href="/novo-portal-erramos.html#44864" title="Substituição da publicação Censo Demográfico 2022: Etnias e línguas indígenas: Principais características sociodemográficas: Resultados do universo"><span class="calendario-data">25/10/2025</span><div><p class="calendario-nome">Substituição da publicação Censo Demográfico 2022: Etnias e línguas indígenas: Principais características sociodemográficas: Resultados do universo</p></div> </a></div></li><li><div class="tipo-e pure-u-1"><a href="/novo-portal-erramos.html#44841" title="Erro de calendário na divulgação "Território e Meio Ambiente: Estatísticas por Macrorregiões Hidrográficas""><span class="calendario-data">23/10/2025</span><div><p class="calendario-nome">Erro de calendário na divulgação "Território e Meio Ambiente: Estatísticas por Macrorregiões Hidrográficas"</p></div> </a></div></li><li><div class="tipo-e pure-u-1"><a href="/novo-portal-erramos.html#44840" title="Erro de calendário na divulgação "BDiA - Banco de Dados e Informações Ambientais""><span class="calendario-data">23/10/2025</span><div><p class="calendario-nome">Erro de calendário na divulgação "BDiA - Banco de Dados e Informações Ambientais"</p></div> </a></div></li></ul><div class="center"><a class="link-vertodos" href="/novo-portal-erramos.html"><i class="fa fa-caret-right"></i>Ver todos</a></div></div></div>
+
+            </section>
+        </div>
+    </div>
+
+    <div id="container_mobile"></div>
+</div>
+
+<script src="/media/util/lightSlider/js/lightslider.min.js" type="text/javascript"></script>
+<script src="/templates/novo_portal_base/js/home.js?v=2035" type="text/javascript"></script>
+
+
+ 
+
+<script>
+    
+    $('document').ready(function(){
+        if ($("#mensagemManutencao").length > 1) {
+            //$("#mensagemManutencao").not(":last").remove(); 
+        } 
+    });
+</script>
+                </section>
+            
+                    
+    </main>
+<!-- Fim conteudo -->
+
+<!----- INÍCIO DO RODAPÉ --- -->   
+<footer class="rodape">
+	<div class="largura-maxima">     
+		<div id="rodape" class="pure-u-1 pure-u-md-1">
+
+		
+		<div class="rodape-links">		
+			<div class="accordion-mobile footer__links">
+				<span class="texto--branco">MAIS INFORMAÇÕES</span>
+				<ul>
+					<li>
+						<a href="/novo-portal-estatisticas-do-site.html">Estatísticas de Acesso ao Site</a>
+					</li>
+					<li>
+						<a href="https://www.ibge.gov.br/acesso-informacao/acoes-e-programas/pesquisa-de-avaliacao-de-servicos.html">Pesquisa de Avaliação de Serviços</a>
+					</li>
+					<li>
+						<a href="https://www.ibge.gov.br/acesso-informacao/transparencia-e-prestacao-de-contas.html" rel="noopener" target="_blank">Transparência e Prestação de Contas</a>
+					</li>
+					<li>
+						<a href="http://www.comprasnet.gov.br/" rel="noopener" target="_blank">Editais e Licitações</a>
+					</li>
+					<li>
+						<a href="/acesso-informacao/institucional/trabalhe-conosco.html">Trabalhe Conosco</a>
+					</li>
+					<li>
+						<a href="/links-ibge.html">Links</a>
+					</li>
+				</ul>
+				<div class="footer__links redes-sociais desktop-only">
+					<span class="texto--branco">REDES SOCIAIS</span>
+					<div class="social-media">
+<ul>
+    <li class="social-icon facebook">
+        <a href="http://www.facebook.com/ibgeoficial" aria-label="Facebook IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M301.6,151.2c15.6,0,36.3,0,36.3,0V97c0,0-21.8,0-51.4,0c-29.6,0-68.1,19-68.1,74.2c0,10.3,0,25.4,0,43   h-49.1v56.1h49.1c0,69.9,0,146,0,146h21.8h17.3H277c0,0,0-78.8,0-146h48.8l8.1-56.1H277c0-18.4,0-31.8,0-35.7   C277,160.1,286,151.2,301.6,151.2z" fill="#ffffff"/>                                    
+                </g>
+            </g></svg>
+        </a>
+    </li>
+
+    <li class="social-icon instagram">
+        <a href="https://instagram.com/ibgeoficial" aria-label="Instagram IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M257.2,128.6c40.8,0,45.6,0.1,61.8,0.9c14.9,0.6,22.9,3.2,28.3,5.3c7.1,2.8,12.2,6.2,17.5,11.6     c5.3,5.4,8.7,10.6,11.5,17.8c2.1,5.5,4.5,13.7,5.3,28.9c0.8,16.4,0.9,21.3,0.9,62.8s-0.1,46.4-0.9,62.8     c-0.6,15.1-3.1,23.4-5.3,28.9c-2.8,7.2-6.1,12.4-11.5,17.8c-5.3,5.4-10.4,8.8-17.5,11.6c-5.4,2.2-13.5,4.7-28.3,5.3     c-16.1,0.8-21,0.9-61.8,0.9s-45.6-0.1-61.8-0.9c-14.9-0.6-22.9-3.2-28.3-5.3c-7.1-2.8-12.2-6.2-17.5-11.6s-8.7-10.6-11.5-17.8     c-2.1-5.5-4.5-13.7-5.3-28.9c-0.8-16.4-0.9-21.3-0.9-62.8s0.1-46.4,0.9-62.8c0.6-15.1,3.1-23.4,5.3-28.9     c2.8-7.2,6.1-12.4,11.5-17.8c5.3-5.4,10.4-8.8,17.5-11.6c5.4-2.2,13.5-4.7,28.3-5.3C211.5,128.8,216.4,128.6,257.2,128.6      M257.2,100.6c-41.5,0-46.7,0.2-62.9,1s-27.4,3.4-37.1,7.2c-10.1,4-18.6,9.3-27,18c-8.5,8.7-13.7,17.3-17.6,27.6     c-3.8,9.8-6.4,21.2-7.1,37.7c-0.8,16.5-0.9,21.8-0.9,64s0.2,47.5,0.9,64c0.8,16.5,3.4,27.8,7.1,37.7c3.9,10.2,9.1,18.9,17.6,27.6     s17,14,27,18c9.7,3.9,20.9,6.5,37.1,7.2c16.3,0.8,21.5,1,62.9,1s46.7-0.2,62.9-1c16.2-0.8,27.4-3.4,37.1-7.2     c10.1-4,18.6-9.3,27-18c8.5-8.7,13.7-17.3,17.6-27.6c3.8-9.8,6.4-21.2,7.1-37.7c0.8-16.5,0.9-21.8,0.9-64s-0.2-47.5-0.9-64     c-0.8-16.5-3.4-27.8-7.1-37.7c-3.9-10.2-9.1-18.9-17.6-27.6s-17-14-27-18c-9.7-3.9-20.9-6.5-37.1-7.2     C303.9,100.8,298.6,100.6,257.2,100.6L257.2,100.6z" fill="#ffffff"/>
+
+                    <path class="icon-logo" d="M257.2,176.2c-43.4,0-78.4,35.7-78.4,79.8s35.1,79.8,78.4,79.8s78.4-35.7,78.4-79.8     S300.5,176.2,257.2,176.2z M257.2,307.8c-28.1,0-50.9-23.1-50.9-51.8s22.8-51.8,50.9-51.8s50.9,23.1,50.9,51.8     C308.1,284.7,285.3,307.8,257.2,307.8z" fill="#ffffff"/>
+                    
+                    <ellipse class="icon-logo" cx="338.7" cy="173" fill="#ffffff" rx="18.3" ry="18.6"/>                                    
+                </g>
+            </g></svg>
+        </a>
+    </li>
+
+    <li class="social-icon tiktok">
+        <a href="https://www.tiktok.com/@ibgeoficial" aria-label="TikTok IBGE Oficial" rel="noopener" target="_blank">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path class="st0" d="M388,235.3c-25.7,0.1-50.8-8-71.8-22.9v104.5c0,52.5-42.6,95-95.1,95c-52.5,0-95-42.6-95-95.1s42.6-95,95.1-95 c4.4,0,8.7,0.3,13,0.9v52.6c-23-7.2-47.5,5.5-54.7,28.5c-7.2,23,5.5,47.5,28.5,54.7s47.5-5.5,54.7-28.5c1.3-4.2,2-8.7,2-13.1V112.6	h51.4c0,4.3,0.3,8.7,1.1,13l0,0c3.6,19.3,15,36.3,31.5,46.9c11.6,7.7,25.2,11.8,39.2,11.8V235.3z"/></svg>
+        </a>
+    </li>
+
+    <li class="social-icon twitter">
+        <a href="https://twitter.com/ibgecomunica" aria-label="Twitter IBGE Oficial" rel="noopener" target="_blank">
+        <svg viewBox="0 0 512 512" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Twitter</title><path class="icon-logo" fill="#fff" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"></path></svg>
+        </a>
+    </li>
+
+    <li class="social-icon bluesky">
+        <a href="https://bsky.app/profile/ibgeoficial.bsky.social" aria-label="Bluesky IBGE Oficial" rel="noopener" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                <path class="icon-logo" d="M166.7,135.8c36.2,27.1,75.1,82.2,89.3,111.7,14.3-29.5,53.2-84.6,89.3-111.7,26.1-19.6,68.4-34.7,68.4,13.5s-5.5,80.9-8.8,92.5c-11.3,40.2-52.3,50.5-88.8,44.3,63.8,10.9,80,46.8,45,82.8-66.6,68.3-95.7-17.1-103.1-39-1.4-4-2-5.9-2-4.3,0-1.6-.6.3-2,4.3-7.5,21.9-36.6,107.3-103.1,39-35-36-18.8-71.9,45-82.8-36.5,6.2-77.5-4.1-88.8-44.3-3.2-11.6-8.8-82.9-8.8-92.5,0-48.2,42.3-33.1,68.4-13.5h0Z"/>
+            </svg>
+        </a>
+    </li>
+    
+    <li class="social-icon youtube">
+        <a href="http://www.youtube.com/ibgeoficial" aria-label="Youtube IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M391.1,194.6c-2.3-19.9-7.1-25.7-10.5-28.4c-5.4-4.2-15.2-5.7-28.3-6.6c-21-1.4-56.7-2.3-95.2-2.3    c-38.6,0-74.2,0.8-95.2,2.3c-13.1,0.9-22.9,2.4-28.3,6.6c-3.4,2.7-8.1,8.5-10.5,28.4c-3.4,28.7-3.4,94.1,0,122.8    c2.4,19.9,7.1,25.7,10.5,28.4c5.4,4.2,15.2,5.7,28.3,6.6c21,1.4,56.6,2.3,95.2,2.3c38.6,0,74.2-0.9,95.2-2.3    c13.1-0.9,22.9-2.4,28.3-6.6c3.4-2.6,8.1-8.5,10.5-28.4C394.5,288.7,394.5,223.3,391.1,194.6z M224.1,298.9V213l82.4,42.9    L224.1,298.9z" fill="#ffffff"/>
+                </g>
+            </g></svg>
+        </a>
+    </li>
+    
+    <li class="social-icon whatsapp">
+        <a href="https://whatsapp.com/channel/0029VaoM160JJhzY98Tpge3h" aria-label="Canal do IBGE no Whatsapp" rel="noopener" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                <g>
+                <path class="icon-logo" d="M256,111c-80.1,0-145,64.9-145,145s8.7,56.6,23.7,79.4l-18.7,63.3,65.7-18.2c21.7,13,47.1,20.5,74.3,20.5,80.1,0,145-64.9,145-145s-64.9-144.9-145-144.9ZM335.5,303.7v.2c-1.2,8-5.8,15.1-12.5,19.8-2.5,1.8-5.6,3.6-9.3,5-8.1,3-15.1,3-18.9,2.6-9.4-1.1-23.3-3.9-38.7-11.3-16.6-8-27.2-17.6-35.6-25.4-7.5-6.9-18.6-17.2-28.8-34-6-9.8-10-19.2-12.8-27-2.9-8.4-3.4-17.4-1-25.9.2-.6.4-1.1.5-1.7,2.2-6.7,5.5-11.8,8.4-15.2,2.3-2.9,6-6.3,11.1-7,1.8-.2,4.2-.2,7-.2,1,0,1.8,0,2.7,0,2.4.1,4.8,1,6.6,2.6,0,0,.5.4.9.8,2.4,2.5,8.8,18.8,11.9,27.2,1.8,5.1,2.2,10.6.5,15.8,0,0,0,0,0,.1-2.7,8.3-8.7,12.8-10.9,14.3,4.4,8.1,12.3,20.4,25.7,31.9,11.2,9.7,22.3,15.4,30.6,18.8,1.7.7,3.7.2,5-1.2l15.9-17.9c1-1.1,2.6-1.4,3.9-.8,11.7,5.4,23.5,10.7,35.1,16.1,1.7.8,2.9,2.4,3,4.4.2,2.2.2,4.8-.2,7.9Z"/>
+                </g>
+            </svg>
+        </a>
+    </li>
+</ul>
+</div>
+
+
+
+
+				</div>
+			</div>
+
+			<div>
+				<div class="accordion-mobile footer__links">
+					<span class="texto--branco">ATENDIMENTO</span>
+					<ul>
+						<li><a href="/atendimento.html">Canais de Atendimento</a></li>
+						<li><a href="tel:08007218181">0800 721 8181</a></li>
+						<li><a href="/acesso-informacao/participacao-social/ouvidoria.html" target="_blank">Ouvidoria (denúncias,<br>reclamações, sugestões e elogios)</a></li>
+					</ul>
+				</div>
+				<div class="accordion-mobile footer__links">
+					<span class="texto--branco">APPS IBGE</span>
+					<ul>
+						<li><a href="https://itunes.apple.com/br/app/ibge/id1046974846?mt=8" target="_blank" rel="noopener noreferrer">Baixar para iPhone</a></li>
+						<li><a href="https://play.google.com/store/apps/details?id=br.gov.ibge&hl=pt" target="_blank" rel="noopener noreferrer">Baixar para Android</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="accordion-mobile footer__links">
+				<span class="texto--branco">TRANSPARÊNCIA</span>
+				<ul>
+					<li><a title="Acesso à informação" href="https://www.gov.br/acessoainformacao/pt-br" rel="noopener" target="_blank">Acesso à Informação</a></li>
+					<li><a title="Portal da Transparência" href="http://www.transparencia.gov.br/" rel="noopener" target="_blank">Portal da Transparência</a></li>
+					<!-- <li><a title="IBGE Transparência" href="https://transparenciasda.ibge.gov.br/" rel="noopener" target="_blank">Transparência IBGE</a></li> -->
+				</ul>
+			</div>
+
+			<div class="accordion-mobile footer__links">
+				<span class="texto--branco">PRIVACIDADE</span>
+				<ul>
+					<li><a title="Política de Privacidade e Termo de Uso" href="https://www.ibge.gov.br/acesso-informacao/acoes-e-programas/politica-de-privacidade.html" rel="noopener" target="_blank">Termo de Uso e<br>Política de Privacidade</a></li>
+				</ul>
+			</div>
+
+			<div class="footer__links">
+				<a class="texto--branco" title="ÓRGÃOS DO GOVERNO" href="https://www.gov.br/pt-br/orgaos-do-governo" rel="noopener" target="_blank">ÓRGÃOS DO GOVERNO</a>	
+			</div>
+		</div>
+		
+		<div class="footer__links redes-sociais mobile-only">
+			<span class="texto--branco">REDES SOCIAIS</span>
+			<div class="social-media">
+<ul>
+    <li class="social-icon facebook">
+        <a href="http://www.facebook.com/ibgeoficial" aria-label="Facebook IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M301.6,151.2c15.6,0,36.3,0,36.3,0V97c0,0-21.8,0-51.4,0c-29.6,0-68.1,19-68.1,74.2c0,10.3,0,25.4,0,43   h-49.1v56.1h49.1c0,69.9,0,146,0,146h21.8h17.3H277c0,0,0-78.8,0-146h48.8l8.1-56.1H277c0-18.4,0-31.8,0-35.7   C277,160.1,286,151.2,301.6,151.2z" fill="#ffffff"/>                                    
+                </g>
+            </g></svg>
+        </a>
+    </li>
+
+    <li class="social-icon instagram">
+        <a href="https://instagram.com/ibgeoficial" aria-label="Instagram IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M257.2,128.6c40.8,0,45.6,0.1,61.8,0.9c14.9,0.6,22.9,3.2,28.3,5.3c7.1,2.8,12.2,6.2,17.5,11.6     c5.3,5.4,8.7,10.6,11.5,17.8c2.1,5.5,4.5,13.7,5.3,28.9c0.8,16.4,0.9,21.3,0.9,62.8s-0.1,46.4-0.9,62.8     c-0.6,15.1-3.1,23.4-5.3,28.9c-2.8,7.2-6.1,12.4-11.5,17.8c-5.3,5.4-10.4,8.8-17.5,11.6c-5.4,2.2-13.5,4.7-28.3,5.3     c-16.1,0.8-21,0.9-61.8,0.9s-45.6-0.1-61.8-0.9c-14.9-0.6-22.9-3.2-28.3-5.3c-7.1-2.8-12.2-6.2-17.5-11.6s-8.7-10.6-11.5-17.8     c-2.1-5.5-4.5-13.7-5.3-28.9c-0.8-16.4-0.9-21.3-0.9-62.8s0.1-46.4,0.9-62.8c0.6-15.1,3.1-23.4,5.3-28.9     c2.8-7.2,6.1-12.4,11.5-17.8c5.3-5.4,10.4-8.8,17.5-11.6c5.4-2.2,13.5-4.7,28.3-5.3C211.5,128.8,216.4,128.6,257.2,128.6      M257.2,100.6c-41.5,0-46.7,0.2-62.9,1s-27.4,3.4-37.1,7.2c-10.1,4-18.6,9.3-27,18c-8.5,8.7-13.7,17.3-17.6,27.6     c-3.8,9.8-6.4,21.2-7.1,37.7c-0.8,16.5-0.9,21.8-0.9,64s0.2,47.5,0.9,64c0.8,16.5,3.4,27.8,7.1,37.7c3.9,10.2,9.1,18.9,17.6,27.6     s17,14,27,18c9.7,3.9,20.9,6.5,37.1,7.2c16.3,0.8,21.5,1,62.9,1s46.7-0.2,62.9-1c16.2-0.8,27.4-3.4,37.1-7.2     c10.1-4,18.6-9.3,27-18c8.5-8.7,13.7-17.3,17.6-27.6c3.8-9.8,6.4-21.2,7.1-37.7c0.8-16.5,0.9-21.8,0.9-64s-0.2-47.5-0.9-64     c-0.8-16.5-3.4-27.8-7.1-37.7c-3.9-10.2-9.1-18.9-17.6-27.6s-17-14-27-18c-9.7-3.9-20.9-6.5-37.1-7.2     C303.9,100.8,298.6,100.6,257.2,100.6L257.2,100.6z" fill="#ffffff"/>
+
+                    <path class="icon-logo" d="M257.2,176.2c-43.4,0-78.4,35.7-78.4,79.8s35.1,79.8,78.4,79.8s78.4-35.7,78.4-79.8     S300.5,176.2,257.2,176.2z M257.2,307.8c-28.1,0-50.9-23.1-50.9-51.8s22.8-51.8,50.9-51.8s50.9,23.1,50.9,51.8     C308.1,284.7,285.3,307.8,257.2,307.8z" fill="#ffffff"/>
+                    
+                    <ellipse class="icon-logo" cx="338.7" cy="173" fill="#ffffff" rx="18.3" ry="18.6"/>                                    
+                </g>
+            </g></svg>
+        </a>
+    </li>
+
+    <li class="social-icon tiktok">
+        <a href="https://www.tiktok.com/@ibgeoficial" aria-label="TikTok IBGE Oficial" rel="noopener" target="_blank">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path class="st0" d="M388,235.3c-25.7,0.1-50.8-8-71.8-22.9v104.5c0,52.5-42.6,95-95.1,95c-52.5,0-95-42.6-95-95.1s42.6-95,95.1-95 c4.4,0,8.7,0.3,13,0.9v52.6c-23-7.2-47.5,5.5-54.7,28.5c-7.2,23,5.5,47.5,28.5,54.7s47.5-5.5,54.7-28.5c1.3-4.2,2-8.7,2-13.1V112.6	h51.4c0,4.3,0.3,8.7,1.1,13l0,0c3.6,19.3,15,36.3,31.5,46.9c11.6,7.7,25.2,11.8,39.2,11.8V235.3z"/></svg>
+        </a>
+    </li>
+
+    <li class="social-icon twitter">
+        <a href="https://twitter.com/ibgecomunica" aria-label="Twitter IBGE Oficial" rel="noopener" target="_blank">
+        <svg viewBox="0 0 512 512" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Twitter</title><path class="icon-logo" fill="#fff" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"></path></svg>
+        </a>
+    </li>
+
+    <li class="social-icon bluesky">
+        <a href="https://bsky.app/profile/ibgeoficial.bsky.social" aria-label="Bluesky IBGE Oficial" rel="noopener" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                <path class="icon-logo" d="M166.7,135.8c36.2,27.1,75.1,82.2,89.3,111.7,14.3-29.5,53.2-84.6,89.3-111.7,26.1-19.6,68.4-34.7,68.4,13.5s-5.5,80.9-8.8,92.5c-11.3,40.2-52.3,50.5-88.8,44.3,63.8,10.9,80,46.8,45,82.8-66.6,68.3-95.7-17.1-103.1-39-1.4-4-2-5.9-2-4.3,0-1.6-.6.3-2,4.3-7.5,21.9-36.6,107.3-103.1,39-35-36-18.8-71.9,45-82.8-36.5,6.2-77.5-4.1-88.8-44.3-3.2-11.6-8.8-82.9-8.8-92.5,0-48.2,42.3-33.1,68.4-13.5h0Z"/>
+            </svg>
+        </a>
+    </li>
+    
+    <li class="social-icon youtube">
+        <a href="http://www.youtube.com/ibgeoficial" aria-label="Youtube IBGE Oficial" rel="noopener" target="_blank">
+            <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <!-- <path class="icon-bg" d="M512,256c0,141.4-114.6,256-256,256C114.6,512,0,397.4,0,256C0,114.6,114.6,0,256,0   C397.4,0,512,114.6,512,256z" fill="#b0b0b0"/> -->
+                <g>
+                    <path class="icon-logo" d="M391.1,194.6c-2.3-19.9-7.1-25.7-10.5-28.4c-5.4-4.2-15.2-5.7-28.3-6.6c-21-1.4-56.7-2.3-95.2-2.3    c-38.6,0-74.2,0.8-95.2,2.3c-13.1,0.9-22.9,2.4-28.3,6.6c-3.4,2.7-8.1,8.5-10.5,28.4c-3.4,28.7-3.4,94.1,0,122.8    c2.4,19.9,7.1,25.7,10.5,28.4c5.4,4.2,15.2,5.7,28.3,6.6c21,1.4,56.6,2.3,95.2,2.3c38.6,0,74.2-0.9,95.2-2.3    c13.1-0.9,22.9-2.4,28.3-6.6c3.4-2.6,8.1-8.5,10.5-28.4C394.5,288.7,394.5,223.3,391.1,194.6z M224.1,298.9V213l82.4,42.9    L224.1,298.9z" fill="#ffffff"/>
+                </g>
+            </g></svg>
+        </a>
+    </li>
+    
+    <li class="social-icon whatsapp">
+        <a href="https://whatsapp.com/channel/0029VaoM160JJhzY98Tpge3h" aria-label="Canal do IBGE no Whatsapp" rel="noopener" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                <g>
+                <path class="icon-logo" d="M256,111c-80.1,0-145,64.9-145,145s8.7,56.6,23.7,79.4l-18.7,63.3,65.7-18.2c21.7,13,47.1,20.5,74.3,20.5,80.1,0,145-64.9,145-145s-64.9-144.9-145-144.9ZM335.5,303.7v.2c-1.2,8-5.8,15.1-12.5,19.8-2.5,1.8-5.6,3.6-9.3,5-8.1,3-15.1,3-18.9,2.6-9.4-1.1-23.3-3.9-38.7-11.3-16.6-8-27.2-17.6-35.6-25.4-7.5-6.9-18.6-17.2-28.8-34-6-9.8-10-19.2-12.8-27-2.9-8.4-3.4-17.4-1-25.9.2-.6.4-1.1.5-1.7,2.2-6.7,5.5-11.8,8.4-15.2,2.3-2.9,6-6.3,11.1-7,1.8-.2,4.2-.2,7-.2,1,0,1.8,0,2.7,0,2.4.1,4.8,1,6.6,2.6,0,0,.5.4.9.8,2.4,2.5,8.8,18.8,11.9,27.2,1.8,5.1,2.2,10.6.5,15.8,0,0,0,0,0,.1-2.7,8.3-8.7,12.8-10.9,14.3,4.4,8.1,12.3,20.4,25.7,31.9,11.2,9.7,22.3,15.4,30.6,18.8,1.7.7,3.7.2,5-1.2l15.9-17.9c1-1.1,2.6-1.4,3.9-.8,11.7,5.4,23.5,10.7,35.1,16.1,1.7.8,2.9,2.4,3,4.4.2,2.2.2,4.8-.2,7.9Z"/>
+                </g>
+            </svg>
+        </a>
+    </li>
+</ul>
+</div>
+
+
+
+
+		</div>
+
+		<div class="rodape-outer-links">
+			<div class="pure-u-1">
+				<div id="wrapper-footer" class="footer__banners pure-u-md-3-6">
+					<a class="logo-govbr" href="https://www.gov.br/pt-br" alt="Site do Governo Federal" rel="noopener" target="_blank">
+						<img class="logo-govbr" src="https://www.ibge.gov.br/images/novoportal/govbrNegativa.svg" alt="gov.br">
+					</a>
+					<a class="logo-acesso-footer" href="https://www.gov.br/acessoainformacao/pt-br" alt="Acesso à informação" title="Acesso à informação" rel="noopener" target="_blank">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117 49" height="49" width="117" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><defs><style type="text/css">.a {font: normal bold 11px Open Sans, sans-serif;}</style></defs><circle cx="22" cy="23" r="22" fill="#fff"></circle><path style="stroke: #071d41;stroke-width:9;stroke-linecap:round;" d="m 22,23 v 13"></path><path style="stroke:#fff;stroke-width:4;stroke-linejoin:round;" d="m 4,43 3,-6 4,3 z"></path><circle r="4.5" cy="11" cx="22" fill="#071d41"></circle><g fill="#fff"><text x="47" y="22"><tspan class="a" y="18">Acesso à</tspan><tspan class="a" x="47" y="31">Informação</tspan></text></g></svg>
+					</a>
+					<!--<a class="logo-governo-federal" href="https://www.gov.br/" alt="Governo Federal" title="Governo Federal" rel="noopener" target="_blank">
+						<img alt="Governo Federal" class="img-transparencia" src="/templates/novo_portal_base/imagens/logo-gov.png" />
+					</a>-->
+					<a class="logo-anti-corrupcao" href="https://www.rededecontrole.gov.br/" alt="Participante do Programa Nacional de Prevenção a Corrupção" title="Participante do Programa Nacional de Prevenção a Corrupção" rel="noopener" target="_blank">
+						<img alt="Participante do Programa Nacional de Prevenção a Corrupção" class="img-anti-corrupcao" src="https://www.ibge.gov.br/images/novoportal/corrupcao-nao.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+
+				</div>
+	</div>
+</footer>
+
+
+
+
+
+<script>
+	jQuery('.accordion-mobile span').click(function(evt) {
+		if (jQuery(window).width() < 1024) {
+			jQuery(this).next().toggle("slide");
+			jQuery(this).toggleClass("active");
+		}
+	});
+
+	var baseSticky = 95;
+
+    jQuery(document).ready(function(){
+        var scroll = jQuery(window).scrollTop();
+        changeHeaderScroll(scroll);
+    });
+    
+    jQuery(window).scroll(function() { 
+        var scroll = jQuery(window).scrollTop();
+        changeHeaderScroll(scroll);
+    });
+
+    function changeHeaderScroll(scroll) {
+        if (scroll >= baseSticky) {
+            jQuery("body").addClass("sticky");
+        } else {
+            jQuery("body").removeClass("sticky");
+        }
+    }
+</script>
+
+<!----- FIM DO RODAPÉ --- --><img src='https://cod.ibge.gov.br/qr?d=https://www.ibge.gov.br/' class='qrcodeimg' />
+<script>    
+    var unique_getCod_var = '';
+    
+	function unique_getCodMiniURLQR_main(){
+		var local_url = window.location.toString();
+		if (local_url.indexOf("barragov")<0)
+		{
+			
+			var full_url = 'https://cod.ibge.gov.br/min?js=unique_getCod_var=&u=' + encodeURIComponent(local_url);
+			//unique_getCodMiniURLQR_ajax(full_url,unique_getCodMiniURLQR_AfterFunc);
+		}
+	}
+
+	function unique_getCodMiniURLQR_ajax(url,afterfunction) {
+		//Onde:	url = URL a ser carregada | e afterfunction = fnÃ§Ã£o a ser executada apos o carregamento da url, opcional
+		var headID = document.getElementsByTagName("head")[0];
+		var newScript = document.createElement('script');
+			newScript.type = 'text/javascript';
+			newScript.src = url;
+			newScript.id = 'tempdatascript' + Math.floor(Math.random()*9999999);
+		headID.appendChild(newScript);
+		if(navigator.appName == 'Microsoft Internet Explorer'){
+			newScript.onreadystatechange= function(){ if (this.readyState == 'complete' || this.readyState == 'loaded')afterfunction();}
+		}else{
+			newScript.onload = afterfunction;
+		}
+    }
+    
+	function unique_getCodMiniURLQR_AfterFunc(){
+	    //Matenha esta funcao vazia
+    }
+    
+	unique_getCodMiniURLQR_main();
+</script>
+
+<!-- Menu -->
+<script defer="defer" src="https://www.ibge.gov.br/templates/novo_portal_base/js/menu.js" type="text/javascript"></script>
+
+<!--<script  src="/media/util/questionario.js" type="text/javascript"></script>-->
+
+<!-- Tratamento de erros do serviço -->
+
+<script>
+    var erro_servico = [];
+</script>
+<script defer="defer" src="https://www.ibge.gov.br/templates/novo_portal_base/js/erros.js" type="text/javascript"></script>
+
+<!-- Google analytics -->
+<script defer="defer" src="/media/util/ibgeAnalytics.js" type="text/javascript"></script>
+
+
+<link rel="stylesheet" href="/includes/CEON.cookiebar/cookiebar.css?v=2023">
+<div class="cookie-container" id="cookie-container">
+    <p>Nós utilizamos cookies para melhorar sua experiência de navegação no portal. Para saber mais sobre como tratamos os dados pessoais, consulte nossa <a href="https://www.ibge.gov.br/acesso-informacao/acoes-e-programas/politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade.</a></p>
+    <button class="cookie-btn" id="cookie-btn"> PROSSEGUIR </button>
+</div>
+<script src="/includes/CEON.cookiebar/cookiebar.js?v=2"></script></body>
+</html>
