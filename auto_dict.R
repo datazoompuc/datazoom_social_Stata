@@ -125,7 +125,9 @@ auto_dict <- function(original, output, eng, api_key = "") {
     "}"
   )
 
-  # salvando
-
-  writeLines(dct, output)
+  # salvando (corrigindo acentos)
+  dct <- iconv(dct, from = "latin1", to = "UTF-8")
+  con <- file(output, open = "w", encoding = "UTF-8")
+  writeLines(dct, con, useBytes = TRUE)
+  close(con)
 }
