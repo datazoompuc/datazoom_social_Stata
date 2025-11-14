@@ -1,602 +1,616 @@
 dictionary{
-_column(0001)	int	Ano	%4f	"Ano de referência"
-_column(0005)	byte	Trimestre	%1f	"Trimestre de referência"
-_column(0006)	byte	UF	%2f	"Unidade da Federação"
-_column(0008)	byte	Capital	%2f	"Município da Capital"
-_column(0010)	byte	RM_RIDE	%2f	"Reg. Metr. e Reg. Adm. Int. Des."
-_column(0012)	long	UPA	%9f	"Unidade Primária de Amostragem"
-_column(0021)	long	Estrato	%7f	"Estrato"
-_column(0028)	byte	V1008	%2f	"Número de seleção do domicílio"
-_column(0030)	byte	V1014	%2f	"Painel"
-_column(0032)	byte	V1016	%1f	"Número da entrevista no domicílio"
-_column(0033)	byte	V1022	%1f	"Tipo de situação da região"
-_column(0034)	byte	V1023	%1f	"Tipo de área"
-_column(0035)	float	V1027	%15f	"Peso SEM calibração"
-_column(0050)	float	V1028	%15f	"Peso COM calibração"
-_column(0065)	long	V1029	%9f	"Projeção da população por níveis geográficos"
-_column(0074)	long	V1033	%9f	"Projeção da população por sexo e idade"
-_column(0083)	int	posest	%3f	"Domínios de projeção geográficos"
-_column(0086)	int	posest_sxi	%3f	"Domínios de projeção por sexo e idade"
-_column(0089)	byte	V2001	%2f	"Número de pessoas no domicílio"
-_column(0091)	byte	V2003	%2f	"Número de ordem"
-_column(0093)	byte	V2005	%2f	"Condição no domicílio"
-_column(0095)	byte	V2007	%1f	"Sexo"
-_column(0096)	byte	V2008	%2f	"Dia de nascimento"
-_column(0098)	byte	V20081	%2f	"Mês de nascimento"
-_column(0100)	int	V20082	%4f	"Ano de nascimento"
-_column(0104)	int	V2009	%3f	"Idade na data de referência"
-_column(0107)	byte	V2010	%1f	"Cor ou raça"
-_column(0108)	byte	V3001	%1f	"Sabe ler e escrever"
-_column(0109)	byte	V3002	%1f	"Frequenta escola"
-_column(0110)	byte	V3002A	%1f	"A escola que ... frequenta é de"
-_column(0111)	byte	V3003	%2f	"Qual é o curso que frequenta"
-_column(0113)	byte	V3003A	%2f	"Qual é o curso que frequenta"
-_column(0115)	byte	V3004	%1f	"Duração deste curso que requenta"
-_column(0116)	byte	V3005	%1f	"Curso que frequenta é seriado"
-_column(0117)	byte	V3005A	%1f	"Curso que freq é organizado em:"
-_column(0118)	byte	V3006	%2f	"Qual é o ano/série que frequenta"
-_column(0120)	byte	V3006A	%1f	"Qual é a etapa que frequenta"
-_column(0121)	byte	V3007	%1f	"Concluiu outro curso de graduação"
-_column(0122)	byte	V3008	%1f	"Anteriormente frequentou escola"
-_column(0123)	byte	V3009	%2f	"Curso mais elevado que frequentou"
-_column(0125)	byte	V3009A	%2f	"Curso mais elevado que frequentou"
-_column(0127)	byte	V3010	%1f	"Duração do curso que frequentou"
-_column(0128)	byte	V3011	%1f	"Curso quefrequentou era seriado"
-_column(0129)	byte	V3011A	%1f	"Curso que freq é organizado em:"
-_column(0130)	byte	V3012	%1f	"Aprovado na prim. série do curso"
-_column(0131)	byte	V3013	%2f	"Último ano/série que concluiu"
-_column(0133)	byte	V3013A	%1f	"Qual é a etapa que frequentou"
-_column(0134)	byte	V3013B	%1f	"Cursou os anos iniciais deste curso"
-_column(0135)	byte	V3014	%1f	"Concluiu o curso que frequentou"
-_column(0136)	byte	V4001	%1f	"Trabalhou 1 hr em ativ. remunerd."
-_column(0137)	byte	V4002	%1f	"Trabalhou 1 hr em produtos etc..."
-_column(0138)	byte	V4003	%1f	"Fez algum bico pelo menos de 1 hr"
-_column(0139)	byte	V4004	%1f	"Ajudou sem receber no domic. 1 hr"
-_column(0140)	byte	V4005	%1f	"Afastado trabalho remunerado"
-_column(0141)	byte	V4006	%1f	"Motivo de estar afastado"
-_column(0142)	byte	V4006A	%1f	"Motivo de estar afastado"
-_column(0143)	byte	V4007	%1f	"Durante afastameno recebia pagam."
-_column(0144)	byte	V4008	%1f	"Quanto tempo que estava afastado"
-_column(0145)	byte	V40081	%2f	"Tempo de afastamenento até 1 ano"
-_column(0147)	byte	V40082	%2f	"Tempo de afastamen. de 1 a 2 anos"
-_column(0149)	byte	V40083	%2f	"Tempo de afastamen. mais d 2 anos"
-_column(0151)	byte	V4009	%1f	"Quantos trabalhos tinhana semana"
-_column(0152)	int	V4010	%4f	"Ocupação no trab. principal"
-_column(0156)	byte	V4012	%1f	"Posição na ocupação"
-_column(0157)	byte	V40121	%1f	"Tipo trabalhador não remunerado"
-_column(0158)	long	V4013	%5f	"Atividade no trab. principal"
-_column(0163)	byte	V40132	%1f	"Seção da atividade"
-_column(0164)	byte	V40132A	%1f	"Seção da atividade"
-_column(0165)	byte	V4014	%1f	"Esse trabalho era na área"
-_column(0166)	byte	V4015	%1f	"Teve ajuda de pelo menos um trabalhador não remunerado"
-_column(0167)	byte	V40151	%1f	"Qnts trabalhadores não remunerados"
-_column(0168)	byte	V401511	%1f	"1 a 5 trabalhadores não remunerados"
-_column(0169)	byte	V401512	%2f	"6 a 10 trabalhadores não remunerados"
-_column(0171)	byte	V4016	%1f	"Qnts empregados trabalhavam nesse negócio/empresa"
-_column(0172)	byte	V40161	%1f	"1 a 5 empregados"
-_column(0173)	byte	V40162	%2f	"6 a 10 empregados"
-_column(0175)	byte	V40163	%2f	"11 a 50 empregados"
-_column(0177)	byte	V4017	%1f	"Tinha pelo menos um sócio que trab. nesse negócio/empresa"
-_column(0178)	byte	V40171	%1f	"Quantos sócios"
-_column(0179)	byte	V401711	%1f	"1 a 5 sócios"
-_column(0180)	byte	V4018	%1f	"Qnts pessoas trabalhavam nesse negócio/empresa"
-_column(0181)	byte	V40181	%1f	"1 a 5pessoas"
-_column(0182)	byte	V40182	%2f	"6 a 10pessoas"
-_column(0184)	byte	V40183	%2f	"11 a 50pessoas"
-_column(0186)	byte	V4019	%1f	"Negócio/empresa registrado no CNPJ"
-_column(0187)	byte	V4020	%1f	"Em que tipo de local funcionava esse negócio/empresa"
-_column(0188)	byte	V4021	%1f	"Exercia o trabalho em estabelecimento desse negócio/empresa"
-_column(0189)	byte	V4022	%1f	"Onde exercia normalmente esse trabalho"
-_column(0190)	byte	V4024	%1f	"Serv. domést. em mais de 1 domic."
-_column(0191)	byte	V4025	%1f	"Contratado como empreg. temporário"
-_column(0192)	byte	V4026	%1f	"Era contratado somente por pessoa responsável pelo negócio"
-_column(0193)	byte	V4027	%1f	"Era contratado somente por intermediário"
-_column(0194)	byte	V4028	%1f	"Servidor público estatutário"
-_column(0195)	byte	V4029	%1f	"Carteira de trabalho assinada"
-_column(0196)	byte	V4032	%1f	"Contribuinte de instit. d previd."
-_column(0197)	byte	V4033	%1f	"Rendimento habitual var. auxil."
-_column(0198)	byte	V40331	%1f	"Rendimento habitual em dinheiro"
-_column(0199)	byte	V403311	%1f	"Faixa do valor do rendimento hab."
-_column(0200)	long	V403312	%8f	"Valor do rend. hab. em dinheiro"
-_column(0208)	byte	V40332	%1f	"Rendimento habitual em produtos"
-_column(0209)	byte	V403321	%1f	"Faixa do valor do rendimento hab."
-_column(0210)	long	V403322	%8f	"Valor do rend. hab. em produtos"
-_column(0218)	byte	V40333	%1f	"Rendimento habitual em benefícios"
-_column(0219)	byte	V403331	%1f	"Tipo rend. habitual em benefícios"
-_column(0220)	byte	V4034	%1f	"Rendimento efetivo var. auxil."
-_column(0221)	byte	V40341	%1f	"Rendimento efetivo em dinheiro"
-_column(0222)	byte	V403411	%1f	"Faixa do valor do rendimento efe."
-_column(0223)	long	V403412	%8f	"Valor do rend. efe. em dinheiro"
-_column(0231)	byte	V40342	%1f	"Rendimento efetivo em produtos"
-_column(0232)	byte	V403421	%1f	"Faixa do valor do rendimento efe."
-_column(0233)	long	V403422	%8f	"Valor do rend. efe. em produtos"
-_column(0241)	int	V4039	%3f	"Hrs habituais no trab. princ."
-_column(0244)	int	V4039C	%3f	"Hrs efetivas no trab. princ."
-_column(0247)	byte	V4040	%1f	"Tempo que estava nesse trabalho"
-_column(0248)	byte	V40401	%2f	"De 1 mês a menos de 1 ano"
-_column(0250)	byte	V40402	%2f	"De 1 ano a menos de 2 anos"
-_column(0252)	byte	V40403	%2f	"De 2 anos ou mais tempo"
-_column(0254)	int	V4041	%4f	"Ocupação no trab. secundário"
-_column(0258)	byte	V4043	%1f	"Posição na ocupação"
-_column(0259)	byte	V40431	%1f	"Tipo trabalhador não remunerado"
-_column(0260)	long	V4044	%5f	"Atividade no trab. secundário"
-_column(0265)	byte	V4045	%1f	"Esse trabalho era na área"
-_column(0266)	byte	V4046	%1f	"Negócio/empresa registrado no CNPJ"
-_column(0267)	byte	V4047	%1f	"Servidor público estatutário"
-_column(0268)	byte	V4048	%1f	"Carteira de trabalho assinada"
-_column(0269)	byte	V4049	%1f	"Contribuinte de instit. d previd."
-_column(0270)	byte	V4050	%1f	"Rendimento habitual var. auxil."
-_column(0271)	byte	V40501	%1f	"Rendimento habitual em dinheiro"
-_column(0272)	byte	V405011	%1f	"Faixa do valor do rendimento hab."
-_column(0273)	long	V405012	%8f	"Valor do rend. hab. em dinheiro"
-_column(0281)	byte	V40502	%1f	"Rendimento habitual em produtos"
-_column(0282)	byte	V405021	%1f	"Faixa do valor do rendimento hab."
-_column(0283)	long	V405022	%8f	"Valor do rend. hab. em produtos"
-_column(0291)	byte	V40503	%1f	"Rendimento habitual em benefícios"
-_column(0292)	byte	V405031	%1f	"Tipo rend. habitual em benefícios"
-_column(0293)	byte	V4051	%1f	"Rendimento efetivo var. auxil."
-_column(0294)	byte	V40511	%1f	"Rendimento efetivo em dinheiro"
-_column(0295)	byte	V405111	%1f	"Faixa do valor do rendimento efe."
-_column(0296)	long	V405112	%8f	"Valor do rend. efe. em dinheiro"
-_column(0304)	byte	V40512	%1f	"Rendimento efetivo em produtos"
-_column(0305)	byte	V405121	%1f	"Faixa do valor do rendimento efe."
-_column(0306)	long	V405122	%8f	"Valor do rend. efe. em produtos"
-_column(0314)	int	V4056	%3f	"Hrs habituais no trab. secun."
-_column(0317)	int	V4056C	%3f	"Hrs efetivas no trab. secun."
-_column(0320)	byte	V4057	%1f	"Contribuinte de instit. d previd."
-_column(0321)	byte	V4058	%1f	"Rendimento habitual var. auxil."
-_column(0322)	byte	V40581	%1f	"Rendimento habitual em dinheiro"
-_column(0323)	byte	V405811	%1f	"Faixa do valor do rendimento hab."
-_column(0324)	long	V405812	%8f	"Valor do rend. hab. em dinheiro"
-_column(0332)	byte	V40582	%1f	"Rendimento habitual em produtos"
-_column(0333)	byte	V405821	%1f	"Faixa do valor do rendimento hab."
-_column(0334)	long	V405822	%8f	"Valor do rend. hab. em produtos"
-_column(0342)	byte	V40583	%1f	"Rendimento habitual em benefícios"
-_column(0343)	byte	V405831	%1f	"Tipo rend. habitual em benefícios"
-_column(0344)	byte	V40584	%1f	"Não remunerado"
-_column(0345)	byte	V4059	%1f	"Rendimento efetivo var. auxil."
-_column(0346)	byte	V40591	%1f	"Rendimento efetivo em dinheiro"
-_column(0347)	byte	V405911	%1f	"Faixa do valor do rendimento efe."
-_column(0348)	long	V405912	%8f	"Valor do rend. efe. em dinheiro"
-_column(0356)	byte	V40592	%1f	"Rendimento efetivo em produtos"
-_column(0357)	byte	V405921	%1f	"Faixa do valor do rendimento efe."
-_column(0358)	long	V405922	%8f	"Valor do rend. efe. em produtos"
-_column(0366)	int	V4062	%3f	"Hrs habituais no(s) outro(s) trab."
-_column(0369)	int	V4062C	%3f	"Hrs efetivas no(s) outro(s) trab ."
-_column(0372)	byte	V4063	%1f	"Gostaria trabalhar + hrs efetivas"
-_column(0373)	byte	V4063A	%1f	"Gostaria trabalhar + hrs habituais"
-_column(0374)	byte	V4064	%1f	"Dispon. trabalhar + hrs efetivas"
-_column(0375)	byte	V4064A	%1f	"Dispon. trabalhar + hrs habituais"
-_column(0376)	byte	V4071	%1f	"Providência p/ conseg. trab.(30d)"
-_column(0377)	byte	V4072	%2f	"Principal provid. p/conseg. trab."
-_column(0379)	byte	V4072A	%1f	"Principal provid. p/conseg. trab."
-_column(0380)	byte	V4073	%1f	"Gostaria de ter trabalhado"
-_column(0381)	byte	V4074	%1f	"Motivo de não ter tomado provid."
-_column(0382)	byte	V4074A	%2f	"Motivo de não ter tomado provid."
-_column(0384)	byte	V4075A	%1f	"Tempo em que irá começar o trab."
-_column(0385)	byte	V4075A1	%2f	"Meses em que irá começar o trab."
-_column(0387)	byte	V4076	%1f	"Tempo tentando conseguir trabalho"
-_column(0388)	byte	V40761	%2f	"Tempo tentando trab. 1 mes-1 ano"
-_column(0390)	byte	V40762	%2f	"Tempo tentando trab. 1 ano-2 anos"
-_column(0392)	byte	V40763	%2f	"Tempo tentando trab. + de 2 anos"
-_column(0394)	byte	V4077	%1f	"Poderia ter começado a trabalhar"
-_column(0395)	byte	V4078	%1f	"Motivo p/ñ querer/começar a trab."
-_column(0396)	byte	V4078A	%1f	"Motivo p /ñ querer/começar a trab."
-_column(0397)	byte	V4082	%1f	"Trab por pelo menos 1 hora em 1 ano"
-_column(0398)	byte	VI5001A	%1f	"Recebeu BPC-LOAS"
-_column(0399)	long	VI5001A2	%8f	"Rend recebido de BPC-LOAS"
-_column(0407)	byte	VI5002A	%1f	"Recebeu bolsa família"
-_column(0408)	long	VI5002A2	%8f	"Rend recebido de bolsa familia"
-_column(0416)	byte	VI5003A	%1f	"Recebeu outro prog social"
-_column(0417)	long	VI5003A2	%8f	"Rend recebido de outro prog social"
-_column(0425)	byte	VI5004A	%1f	"Recebeu aposentadoria e pensão"
-_column(0426)	long	VI5004A2	%8f	"Rend recebido de aposentadoria e pensão"
-_column(0434)	byte	VI5005A	%1f	"Recebeu rendimentos de seguro-desemprego, seguro-defeso"
-_column(0435)	long	VI5005A2	%8f	"Rend recebido de seguro-desemprego, seguro-defeso"
-_column(0443)	byte	VI5006A	%1f	"Recebeu pensão alimentícia, doação, etc"
-_column(0444)	long	VI5006A2	%8f	"Rend recebido por pensão alimentícia, doação, etc"
-_column(0452)	byte	VI5007A	%1f	"Recebeu aluguel e arrendamento"
-_column(0453)	long	VI5007A2	%8f	"Rend recebido aluguel e arrendamento"
-_column(0461)	byte	VI5008A	%1f	"Recebeu outros rendimentos (bolsa de estudos, rendimento de poupança, aplic finan, etc.)"
-_column(0462)	long	VI5008A2	%8f	"Rend recebido de outros rendimentos (bolsa de estudos, rendimento de poupança, aplic finan, etc.)"
-_column(0470)	byte	S08001	%1f	"Nos últimos 3 meses alguém fez alguma viagem a trabalho, lazer ou em visita a parentes ou amigos?"
-_column(0471)	byte	S08002	%2f	"Quantas viagens foram feitas?"
-_column(0473)	byte	S08004	%1f	"Qual foi o principal motivo para não ter viajado / não ter viajado para outro destino nos últimos 3 meses?"
-_column(0474)	byte	S08005	%1f	"Principal destino da viagem mais recente"
-_column(0475)	byte	S08006	%1f	"Qual foi o principal destino desta viagem?"
-_column(0476)	byte	S080061	%2f	"Unidade da Federação"
-_column(0478)	long	S080062	%5f	"Município"
-_column(0483)	int	S080063	%3f	"Localidade"
-_column(0486)	int	S08007	%3f	"País"
-_column(0489)	byte	S08008	%2f	"Qual foi o mês de início dessa viagem?"
-_column(0491)	byte	S08009	%1f	"Pernoitou?"
-_column(0492)	int	S080091	%3f	"Quantas noites?"
-_column(0495)	byte	S0801001	%1f	"Morador 1"
-_column(0496)	byte	S0801002	%1f	"Morador 2"
-_column(0497)	byte	S0801003	%1f	"Morador 3"
-_column(0498)	byte	S0801004	%1f	"Morador 4"
-_column(0499)	byte	S0801005	%1f	"Morador 5"
-_column(0500)	byte	S0801006	%1f	"Morador 6"
-_column(0501)	byte	S0801007	%1f	"Morador 7"
-_column(0502)	byte	S0801008	%1f	"Morador 8"
-_column(0503)	byte	S0801009	%1f	"Morador 9"
-_column(0504)	byte	S0801010	%1f	"Morador 10"
-_column(0505)	byte	S0801011	%1f	"Morador 11"
-_column(0506)	byte	S0801012	%1f	"Morador 12"
-_column(0507)	byte	S0801013	%1f	"Morador 13"
-_column(0508)	byte	S0801014	%1f	"Morador 14"
-_column(0509)	byte	S0801015	%1f	"Morador 15"
-_column(0510)	byte	S0801016	%1f	"Morador 16"
-_column(0511)	byte	S0801017	%1f	"Morador 17"
-_column(0512)	byte	S0801018	%1f	"Morador 18"
-_column(0513)	byte	S0801019	%1f	"Morador 19"
-_column(0514)	byte	S0801020	%1f	"Morador 20"
-_column(0515)	byte	S0801021	%1f	"Morador 21"
-_column(0516)	byte	S0801022	%1f	"Morador 22"
-_column(0517)	byte	S0801023	%1f	"Morador 23"
-_column(0518)	byte	S0801024	%1f	"Morador 24"
-_column(0519)	byte	S0801025	%1f	"Morador 25"
-_column(0520)	byte	S0801026	%1f	"Morador 26"
-_column(0521)	byte	S0801027	%1f	"Morador 27"
-_column(0522)	byte	S0801028	%1f	"Morador 28"
-_column(0523)	byte	S0801029	%1f	"Morador 29"
-_column(0524)	byte	S0801030	%1f	"Morador 30"
-_column(0525)	byte	S08011	%1f	"Essa viagem foi por motivo:"
-_column(0526)	byte	S08012	%1f	"Qual o principal motivo pessoal?"
-_column(0527)	byte	S08013	%1f	"Qual tipo de lazer procurou em sua viagem?"
-_column(0528)	byte	S08014	%1f	"Qual o principal motivo profissional?"
-_column(0529)	byte	S08015	%1f	"Qual foi o principal tipo de hospedagem?"
-_column(0530)	byte	S08016	%2f	"Qual foi o principal meio de transporte utilizado para chegar ao destino"
-_column(0532)	byte	S08018	%1f	"Principal destino da segunda viagem"
-_column(0533)	byte	S08019	%1f	"Qual foi o principal destino desta viagem?"
-_column(0534)	byte	S080191	%2f	"Estado"
-_column(0536)	long	S080192	%5f	"Município"
-_column(0541)	int	S080193	%3f	"Localidade"
-_column(0544)	int	S08020	%3f	"País"
-_column(0547)	byte	S08021	%2f	"Qual foi o mês de início dessa viagem?"
-_column(0549)	byte	S08022	%1f	"Pernoitou?"
-_column(0550)	int	S080221	%3f	"Quantas noites?"
-_column(0553)	byte	S0802301	%1f	"Morador 1"
-_column(0554)	byte	S0802302	%1f	"Morador 2"
-_column(0555)	byte	S0802303	%1f	"Morador 3"
-_column(0556)	byte	S0802304	%1f	"Morador 4"
-_column(0557)	byte	S0802305	%1f	"Morador 5"
-_column(0558)	byte	S0802306	%1f	"Morador 6"
-_column(0559)	byte	S0802307	%1f	"Morador 7"
-_column(0560)	byte	S0802308	%1f	"Morador 8"
-_column(0561)	byte	S0802309	%1f	"Morador 9"
-_column(0562)	byte	S0802310	%1f	"Morador 10"
-_column(0563)	byte	S0802311	%1f	"Morador 11"
-_column(0564)	byte	S0802312	%1f	"Morador 12"
-_column(0565)	byte	S0802313	%1f	"Morador 13"
-_column(0566)	byte	S0802314	%1f	"Morador 14"
-_column(0567)	byte	S0802315	%1f	"Morador 15"
-_column(0568)	byte	S0802316	%1f	"Morador 16"
-_column(0569)	byte	S0802317	%1f	"Morador 17"
-_column(0570)	byte	S0802318	%1f	"Morador 18"
-_column(0571)	byte	S0802319	%1f	"Morador 19"
-_column(0572)	byte	S0802320	%1f	"Morador 20"
-_column(0573)	byte	S0802321	%1f	"Morador 21"
-_column(0574)	byte	S0802322	%1f	"Morador 22"
-_column(0575)	byte	S0802323	%1f	"Morador 23"
-_column(0576)	byte	S0802324	%1f	"Morador 24"
-_column(0577)	byte	S0802325	%1f	"Morador 25"
-_column(0578)	byte	S0802326	%1f	"Morador 26"
-_column(0579)	byte	S0802327	%1f	"Morador 27"
-_column(0580)	byte	S0802328	%1f	"Morador 28"
-_column(0581)	byte	S0802329	%1f	"Morador 29"
-_column(0582)	byte	S0802330	%1f	"Morador 30"
-_column(0583)	byte	S08024	%1f	"Essa viagem foi por motivo:"
-_column(0584)	byte	S08025	%1f	"Qual o principal motivo pessoal?"
-_column(0585)	byte	S08026	%1f	"Qual tipo de lazer procurou em sua viagem?"
-_column(0586)	byte	S08027	%1f	"Qual o principal motivo profissional?"
-_column(0587)	byte	S08028	%1f	"Qual foi o principal tipo de hospedagem?"
-_column(0588)	byte	S08029	%2f	"Qual foi o principal meio de transporte utilizado para chegar ao destino"
-_column(0590)	byte	S08031	%1f	"Principal destino da terceira viagem"
-_column(0591)	byte	S08032	%1f	"Qual foi o principal destino desta viagem?"
-_column(0592)	byte	S080321	%2f	"Estado"
-_column(0594)	long	S080322	%5f	"Município"
-_column(0599)	int	S080323	%3f	"Localidade"
-_column(0602)	int	S08033	%3f	"País"
-_column(0605)	byte	S08034	%2f	"Qual foi o mês de início dessa viagem?"
-_column(0607)	byte	S08035	%1f	"Pernoitou?"
-_column(0608)	int	S080351	%3f	"Quantas noites?"
-_column(0611)	byte	S0803601	%1f	"Morador 1"
-_column(0612)	byte	S0803602	%1f	"Morador 2"
-_column(0613)	byte	S0803603	%1f	"Morador 3"
-_column(0614)	byte	S0803604	%1f	"Morador 4"
-_column(0615)	byte	S0803605	%1f	"Morador 5"
-_column(0616)	byte	S0803606	%1f	"Morador 6"
-_column(0617)	byte	S0803607	%1f	"Morador 7"
-_column(0618)	byte	S0803608	%1f	"Morador 8"
-_column(0619)	byte	S0803609	%1f	"Morador 9"
-_column(0620)	byte	S0803610	%1f	"Morador 10"
-_column(0621)	byte	S0803611	%1f	"Morador 11"
-_column(0622)	byte	S0803612	%1f	"Morador 12"
-_column(0623)	byte	S0803613	%1f	"Morador 13"
-_column(0624)	byte	S0803614	%1f	"Morador 14"
-_column(0625)	byte	S0803615	%1f	"Morador 15"
-_column(0626)	byte	S0803616	%1f	"Morador 16"
-_column(0627)	byte	S0803617	%1f	"Morador 17"
-_column(0628)	byte	S0803618	%1f	"Morador 18"
-_column(0629)	byte	S0803619	%1f	"Morador 19"
-_column(0630)	byte	S0803620	%1f	"Morador 20"
-_column(0631)	byte	S0803621	%1f	"Morador 21"
-_column(0632)	byte	S0803622	%1f	"Morador 22"
-_column(0633)	byte	S0803623	%1f	"Morador 23"
-_column(0634)	byte	S0803624	%1f	"Morador 24"
-_column(0635)	byte	S0803625	%1f	"Morador 25"
-_column(0636)	byte	S0803626	%1f	"Morador 26"
-_column(0637)	byte	S0803627	%1f	"Morador 27"
-_column(0638)	byte	S0803628	%1f	"Morador 28"
-_column(0639)	byte	S0803629	%1f	"Morador 29"
-_column(0640)	byte	S0803630	%1f	"Morador 30"
-_column(0641)	byte	S08037	%1f	"Essa viagem foi por motivo:"
-_column(0642)	byte	S08038	%1f	"Qual o principal motivo pessoal?"
-_column(0643)	byte	S08039	%1f	"Qual tipo de lazer procurou em sua viagem?"
-_column(0644)	byte	S08040	%1f	"Qual o principal motivo profissional?"
-_column(0645)	byte	S08041	%1f	"Qual foi o principal tipo de hospedagem?"
-_column(0646)	byte	S08042	%2f	"Qual foi o principal meio de transporte utilizado para chegar ao destino"
-_column(0648)	byte	S08044	%1f	"Principal destino da quarta viagem"
-_column(0649)	byte	S080441	%2f	"Estado"
-_column(0651)	long	S080442	%5f	"Município"
-_column(0656)	int	S0804431	%3f	"Localidade"
-_column(0659)	int	S080444	%3f	"País"
-_column(0662)	byte	S08046	%1f	"Principal destino da quinta viagem"
-_column(0663)	byte	S080461	%2f	"Estado"
-_column(0665)	long	S080462	%5f	"Município"
-_column(0670)	int	S0804631	%3f	"Localidade"
-_column(0673)	byte	S11001	%1f	"Tem dificuldade para enxergar, mesmo usando óculos ou lentes de contato?"
-_column(0674)	byte	S11002	%1f	"Tem dificuldade para ouvir sons, como vozes ou música, mesmo usando aparelhos auditivos?"
-_column(0675)	byte	S11003	%1f	"Tem dificuldade para andar ou subir degraus?"
-_column(0676)	byte	S11004	%1f	"Tem dificuldade para levantar uma garrafa com dois litros de água da cintura até a altura dos olhos?"
-_column(0677)	byte	S11005	%1f	"Tem dificuldade para pegar objetos pequenos ou abrir e fechar recipientes?"
-_column(0678)	byte	S11006	%1f	"Tem dificuldade para aprender? Ou tem dificuldade para lembrar-se das coisas ou se concentrar?"
-_column(0679)	byte	S11007	%1f	"Tem dificuldade para realizar cuidados pessoais, como tomar banho ou se vestir?"
-_column(0680)	byte	S11008	%1f	"Tem dificuldade de se comunicar, para compreender e ser compreendido?"
-_column(0681)	byte	VD2002	%2f	"Condição no domicílio"
-_column(0683)	byte	VD2003	%2f	"Número de componentes do domic."
-_column(0685)	byte	VD2004	%1f	"Espécie da unidade doméstica"
-_column(0686)	byte	VD2006	%2f	"Faixas etárias utilizadas no processo de calibração"
-_column(0688)	byte	VD3004	%1f	"Nível de instrução mais elevado alcançado (5 anos ou mais de idade)"
-_column(0689)	byte	VD3005	%2f	"Anos de estudo (5 anos ou mais de idade) para fundamental de 9 anos"
-_column(0691)	byte	VD3006	%1f	"Grupamento de anos de estudo (pessoas de 5 anos ou mais de idade) para fundamental de 9 anos"
-_column(0692)	byte	VD4001	%1f	"Condição em relação força d trab."
-_column(0693)	byte	VD4002	%1f	"Condição de ocupação"
-_column(0694)	byte	VD4003	%1f	"Força de trabalho potencial"
-_column(0695)	byte	VD4004A	%1f	"Subocupação por insuficiên. de hrs hab"
-_column(0696)	byte	VD4005	%1f	"Pessoas desalentadas"
-_column(0697)	byte	VD4007	%1f	"Posição na ocupação trab. princ."
-_column(0698)	byte	VD4008	%1f	"Posição na ocupação trab. princ."
-_column(0699)	byte	VD4009	%2f	"Posição na ocupação trab. princ."
-_column(0701)	byte	VD4010	%2f	"Grupamen. d ativid. trab. princ."
-_column(0703)	byte	VD4011	%2f	"Grupamen. ocupacion. trab. Princ."
-_column(0705)	byte	VD4012	%1f	"Contrib. instit. previd. qq trab."
-_column(0706)	byte	VD4013	%1f	"Faixa hrs habituais em todos trab."
-_column(0707)	byte	VD4014	%1f	"Faixa hrs efetivas em todos trab."
-_column(0708)	byte	VD4015	%1f	"Tipo d remuneração trab. princ."
-_column(0709)	long	VD4016	%8f	"Rendim. habitual trab. princ."
-_column(0717)	long	VD4017	%8f	"Rendim. efetivo trab. princ."
-_column(0725)	byte	VD4018	%1f	"Tipo d remuneração em qq trabalho"
-_column(0726)	long	VD4019	%8f	"Rendim. habitual qq trabalho"
-_column(0734)	long	VD4020	%8f	"Rendim. efetivo qq trabalho"
-_column(0742)	byte	VD4023	%1f	"Pq ñ proc./ñ gost./ñ disp.p/trab."
-_column(0743)	byte	VD4030	%1f	"Pq ñ proc./ñ gost./ñ disp.p/trab."
-_column(0744)	int	VD4031	%3f	"Hrs habituais em todos trab."
-_column(0747)	int	VD4032	%3f	"Hrs efetivas no trab. princ."
-_column(0750)	int	VD4033	%3f	"Hrs efetivas no trab. secun."
-_column(0753)	int	VD4034	%3f	"Hrs efetivas no(s) outro(s) trab ."
-_column(0756)	int	VD4035	%3f	"Hrs efetivas em todos trab."
-_column(0759)	byte	VD4036	%1f	"Faixa hrs habituais trab. princ."
-_column(0760)	byte	VD4037	%1f	"Faixa hrs efetivas trab. princ."
-_column(0761)	long	VDI4046	%8f	"Rendim. habitual tds fontes"
-_column(0769)	long	VDI4047	%8f	"Rend efetivo de progr sociais, seguro-desemprego, etc"
-_column(0777)	long	VDI4048	%8f	"Rend efetivo recebido de outras fontes"
-_column(0785)	long	VDI4052	%8f	"Rendim. habitual tds fontes  com ticket"
-_column(0793)	long	VDI5007	%8f	"Rend habitual domiciliar"
-_column(0801)	long	VDI5008	%8f	"Rend habitual domiciliar per capita"
-_column(0809)	byte	VDI5009	%1f	"Faixa de rend habital domiciliar per capita"
-_column(0810)	long	VDI5010	%8f	"Rend habitual domiciliar"
-_column(0818)	long	VDI5011	%8f	"Rend habitual domiciliar per capita"
-_column(0826)	byte	VDI5012	%1f	"Faixa de rend habitual domiciliar per capita"
-_column(0827)	float	V1028001	%15f	"Peso REPLICADO 1"
-_column(0842)	float	V1028002	%15f	"Peso REPLICADO 2"
-_column(0857)	float	V1028003	%15f	"Peso REPLICADO 3"
-_column(0872)	float	V1028004	%15f	"Peso REPLICADO 4"
-_column(0887)	float	V1028005	%15f	"Peso REPLICADO 5"
-_column(0902)	float	V1028006	%15f	"Peso REPLICADO 6"
-_column(0917)	float	V1028007	%15f	"Peso REPLICADO 7"
-_column(0932)	float	V1028008	%15f	"Peso REPLICADO 8"
-_column(0947)	float	V1028009	%15f	"Peso REPLICADO 9"
-_column(0962)	float	V1028010	%15f	"Peso REPLICADO 10"
-_column(0977)	float	V1028011	%15f	"Peso REPLICADO 11"
-_column(0992)	float	V1028012	%15f	"Peso REPLICADO 12"
-_column(1007)	float	V1028013	%15f	"Peso REPLICADO 13"
-_column(1022)	float	V1028014	%15f	"Peso REPLICADO 14"
-_column(1037)	float	V1028015	%15f	"Peso REPLICADO 15"
-_column(1052)	float	V1028016	%15f	"Peso REPLICADO 16"
-_column(1067)	float	V1028017	%15f	"Peso REPLICADO 17"
-_column(1082)	float	V1028018	%15f	"Peso REPLICADO 18"
-_column(1097)	float	V1028019	%15f	"Peso REPLICADO 19"
-_column(1112)	float	V1028020	%15f	"Peso REPLICADO 20"
-_column(1127)	float	V1028021	%15f	"Peso REPLICADO 21"
-_column(1142)	float	V1028022	%15f	"Peso REPLICADO 22"
-_column(1157)	float	V1028023	%15f	"Peso REPLICADO 23"
-_column(1172)	float	V1028024	%15f	"Peso REPLICADO 24"
-_column(1187)	float	V1028025	%15f	"Peso REPLICADO 25"
-_column(1202)	float	V1028026	%15f	"Peso REPLICADO 26"
-_column(1217)	float	V1028027	%15f	"Peso REPLICADO 27"
-_column(1232)	float	V1028028	%15f	"Peso REPLICADO 28"
-_column(1247)	float	V1028029	%15f	"Peso REPLICADO 29"
-_column(1262)	float	V1028030	%15f	"Peso REPLICADO 30"
-_column(1277)	float	V1028031	%15f	"Peso REPLICADO 31"
-_column(1292)	float	V1028032	%15f	"Peso REPLICADO 32"
-_column(1307)	float	V1028033	%15f	"Peso REPLICADO 33"
-_column(1322)	float	V1028034	%15f	"Peso REPLICADO 34"
-_column(1337)	float	V1028035	%15f	"Peso REPLICADO 35"
-_column(1352)	float	V1028036	%15f	"Peso REPLICADO 36"
-_column(1367)	float	V1028037	%15f	"Peso REPLICADO 37"
-_column(1382)	float	V1028038	%15f	"Peso REPLICADO 38"
-_column(1397)	float	V1028039	%15f	"Peso REPLICADO 39"
-_column(1412)	float	V1028040	%15f	"Peso REPLICADO 40"
-_column(1427)	float	V1028041	%15f	"Peso REPLICADO 41"
-_column(1442)	float	V1028042	%15f	"Peso REPLICADO 42"
-_column(1457)	float	V1028043	%15f	"Peso REPLICADO 43"
-_column(1472)	float	V1028044	%15f	"Peso REPLICADO 44"
-_column(1487)	float	V1028045	%15f	"Peso REPLICADO 45"
-_column(1502)	float	V1028046	%15f	"Peso REPLICADO 46"
-_column(1517)	float	V1028047	%15f	"Peso REPLICADO 47"
-_column(1532)	float	V1028048	%15f	"Peso REPLICADO 48"
-_column(1547)	float	V1028049	%15f	"Peso REPLICADO 49"
-_column(1562)	float	V1028050	%15f	"Peso REPLICADO 50"
-_column(1577)	float	V1028051	%15f	"Peso REPLICADO 51"
-_column(1592)	float	V1028052	%15f	"Peso REPLICADO 52"
-_column(1607)	float	V1028053	%15f	"Peso REPLICADO 53"
-_column(1622)	float	V1028054	%15f	"Peso REPLICADO 54"
-_column(1637)	float	V1028055	%15f	"Peso REPLICADO 55"
-_column(1652)	float	V1028056	%15f	"Peso REPLICADO 56"
-_column(1667)	float	V1028057	%15f	"Peso REPLICADO 57"
-_column(1682)	float	V1028058	%15f	"Peso REPLICADO 58"
-_column(1697)	float	V1028059	%15f	"Peso REPLICADO 59"
-_column(1712)	float	V1028060	%15f	"Peso REPLICADO 60"
-_column(1727)	float	V1028061	%15f	"Peso REPLICADO 61"
-_column(1742)	float	V1028062	%15f	"Peso REPLICADO 62"
-_column(1757)	float	V1028063	%15f	"Peso REPLICADO 63"
-_column(1772)	float	V1028064	%15f	"Peso REPLICADO 64"
-_column(1787)	float	V1028065	%15f	"Peso REPLICADO 65"
-_column(1802)	float	V1028066	%15f	"Peso REPLICADO 66"
-_column(1817)	float	V1028067	%15f	"Peso REPLICADO 67"
-_column(1832)	float	V1028068	%15f	"Peso REPLICADO 68"
-_column(1847)	float	V1028069	%15f	"Peso REPLICADO 69"
-_column(1862)	float	V1028070	%15f	"Peso REPLICADO 70"
-_column(1877)	float	V1028071	%15f	"Peso REPLICADO 71"
-_column(1892)	float	V1028072	%15f	"Peso REPLICADO 72"
-_column(1907)	float	V1028073	%15f	"Peso REPLICADO 73"
-_column(1922)	float	V1028074	%15f	"Peso REPLICADO 74"
-_column(1937)	float	V1028075	%15f	"Peso REPLICADO 75"
-_column(1952)	float	V1028076	%15f	"Peso REPLICADO 76"
-_column(1967)	float	V1028077	%15f	"Peso REPLICADO 77"
-_column(1982)	float	V1028078	%15f	"Peso REPLICADO 78"
-_column(1997)	float	V1028079	%15f	"Peso REPLICADO 79"
-_column(2012)	float	V1028080	%15f	"Peso REPLICADO 80"
-_column(2027)	float	V1028081	%15f	"Peso REPLICADO 81"
-_column(2042)	float	V1028082	%15f	"Peso REPLICADO 82"
-_column(2057)	float	V1028083	%15f	"Peso REPLICADO 83"
-_column(2072)	float	V1028084	%15f	"Peso REPLICADO 84"
-_column(2087)	float	V1028085	%15f	"Peso REPLICADO 85"
-_column(2102)	float	V1028086	%15f	"Peso REPLICADO 86"
-_column(2117)	float	V1028087	%15f	"Peso REPLICADO 87"
-_column(2132)	float	V1028088	%15f	"Peso REPLICADO 88"
-_column(2147)	float	V1028089	%15f	"Peso REPLICADO 89"
-_column(2162)	float	V1028090	%15f	"Peso REPLICADO 90"
-_column(2177)	float	V1028091	%15f	"Peso REPLICADO 91"
-_column(2192)	float	V1028092	%15f	"Peso REPLICADO 92"
-_column(2207)	float	V1028093	%15f	"Peso REPLICADO 93"
-_column(2222)	float	V1028094	%15f	"Peso REPLICADO 94"
-_column(2237)	float	V1028095	%15f	"Peso REPLICADO 95"
-_column(2252)	float	V1028096	%15f	"Peso REPLICADO 96"
-_column(2267)	float	V1028097	%15f	"Peso REPLICADO 97"
-_column(2282)	float	V1028098	%15f	"Peso REPLICADO 98"
-_column(2297)	float	V1028099	%15f	"Peso REPLICADO 99"
-_column(2312)	float	V1028100	%15f	"Peso REPLICADO 100"
-_column(2327)	float	V1028101	%15f	"Peso REPLICADO 101"
-_column(2342)	float	V1028102	%15f	"Peso REPLICADO 102"
-_column(2357)	float	V1028103	%15f	"Peso REPLICADO 103"
-_column(2372)	float	V1028104	%15f	"Peso REPLICADO 104"
-_column(2387)	float	V1028105	%15f	"Peso REPLICADO 105"
-_column(2402)	float	V1028106	%15f	"Peso REPLICADO 106"
-_column(2417)	float	V1028107	%15f	"Peso REPLICADO 107"
-_column(2432)	float	V1028108	%15f	"Peso REPLICADO 108"
-_column(2447)	float	V1028109	%15f	"Peso REPLICADO 109"
-_column(2462)	float	V1028110	%15f	"Peso REPLICADO 110"
-_column(2477)	float	V1028111	%15f	"Peso REPLICADO 111"
-_column(2492)	float	V1028112	%15f	"Peso REPLICADO 112"
-_column(2507)	float	V1028113	%15f	"Peso REPLICADO 113"
-_column(2522)	float	V1028114	%15f	"Peso REPLICADO 114"
-_column(2537)	float	V1028115	%15f	"Peso REPLICADO 115"
-_column(2552)	float	V1028116	%15f	"Peso REPLICADO 116"
-_column(2567)	float	V1028117	%15f	"Peso REPLICADO 117"
-_column(2582)	float	V1028118	%15f	"Peso REPLICADO 118"
-_column(2597)	float	V1028119	%15f	"Peso REPLICADO 119"
-_column(2612)	float	V1028120	%15f	"Peso REPLICADO 120"
-_column(2627)	float	V1028121	%15f	"Peso REPLICADO 121"
-_column(2642)	float	V1028122	%15f	"Peso REPLICADO 122"
-_column(2657)	float	V1028123	%15f	"Peso REPLICADO 123"
-_column(2672)	float	V1028124	%15f	"Peso REPLICADO 124"
-_column(2687)	float	V1028125	%15f	"Peso REPLICADO 125"
-_column(2702)	float	V1028126	%15f	"Peso REPLICADO 126"
-_column(2717)	float	V1028127	%15f	"Peso REPLICADO 127"
-_column(2732)	float	V1028128	%15f	"Peso REPLICADO 128"
-_column(2747)	float	V1028129	%15f	"Peso REPLICADO 129"
-_column(2762)	float	V1028130	%15f	"Peso REPLICADO 130"
-_column(2777)	float	V1028131	%15f	"Peso REPLICADO 131"
-_column(2792)	float	V1028132	%15f	"Peso REPLICADO 132"
-_column(2807)	float	V1028133	%15f	"Peso REPLICADO 133"
-_column(2822)	float	V1028134	%15f	"Peso REPLICADO 134"
-_column(2837)	float	V1028135	%15f	"Peso REPLICADO 135"
-_column(2852)	float	V1028136	%15f	"Peso REPLICADO 136"
-_column(2867)	float	V1028137	%15f	"Peso REPLICADO 137"
-_column(2882)	float	V1028138	%15f	"Peso REPLICADO 138"
-_column(2897)	float	V1028139	%15f	"Peso REPLICADO 139"
-_column(2912)	float	V1028140	%15f	"Peso REPLICADO 140"
-_column(2927)	float	V1028141	%15f	"Peso REPLICADO 141"
-_column(2942)	float	V1028142	%15f	"Peso REPLICADO 142"
-_column(2957)	float	V1028143	%15f	"Peso REPLICADO 143"
-_column(2972)	float	V1028144	%15f	"Peso REPLICADO 144"
-_column(2987)	float	V1028145	%15f	"Peso REPLICADO 145"
-_column(3002)	float	V1028146	%15f	"Peso REPLICADO 146"
-_column(3017)	float	V1028147	%15f	"Peso REPLICADO 147"
-_column(3032)	float	V1028148	%15f	"Peso REPLICADO 148"
-_column(3047)	float	V1028149	%15f	"Peso REPLICADO 149"
-_column(3062)	float	V1028150	%15f	"Peso REPLICADO 150"
-_column(3077)	float	V1028151	%15f	"Peso REPLICADO 151"
-_column(3092)	float	V1028152	%15f	"Peso REPLICADO 152"
-_column(3107)	float	V1028153	%15f	"Peso REPLICADO 153"
-_column(3122)	float	V1028154	%15f	"Peso REPLICADO 154"
-_column(3137)	float	V1028155	%15f	"Peso REPLICADO 155"
-_column(3152)	float	V1028156	%15f	"Peso REPLICADO 156"
-_column(3167)	float	V1028157	%15f	"Peso REPLICADO 157"
-_column(3182)	float	V1028158	%15f	"Peso REPLICADO 158"
-_column(3197)	float	V1028159	%15f	"Peso REPLICADO 159"
-_column(3212)	float	V1028160	%15f	"Peso REPLICADO 160"
-_column(3227)	float	V1028161	%15f	"Peso REPLICADO 161"
-_column(3242)	float	V1028162	%15f	"Peso REPLICADO 162"
-_column(3257)	float	V1028163	%15f	"Peso REPLICADO 163"
-_column(3272)	float	V1028164	%15f	"Peso REPLICADO 164"
-_column(3287)	float	V1028165	%15f	"Peso REPLICADO 165"
-_column(3302)	float	V1028166	%15f	"Peso REPLICADO 166"
-_column(3317)	float	V1028167	%15f	"Peso REPLICADO 167"
-_column(3332)	float	V1028168	%15f	"Peso REPLICADO 168"
-_column(3347)	float	V1028169	%15f	"Peso REPLICADO 169"
-_column(3362)	float	V1028170	%15f	"Peso REPLICADO 170"
-_column(3377)	float	V1028171	%15f	"Peso REPLICADO 171"
-_column(3392)	float	V1028172	%15f	"Peso REPLICADO 172"
-_column(3407)	float	V1028173	%15f	"Peso REPLICADO 173"
-_column(3422)	float	V1028174	%15f	"Peso REPLICADO 174"
-_column(3437)	float	V1028175	%15f	"Peso REPLICADO 175"
-_column(3452)	float	V1028176	%15f	"Peso REPLICADO 176"
-_column(3467)	float	V1028177	%15f	"Peso REPLICADO 177"
-_column(3482)	float	V1028178	%15f	"Peso REPLICADO 178"
-_column(3497)	float	V1028179	%15f	"Peso REPLICADO 179"
-_column(3512)	float	V1028180	%15f	"Peso REPLICADO 180"
-_column(3527)	float	V1028181	%15f	"Peso REPLICADO 181"
-_column(3542)	float	V1028182	%15f	"Peso REPLICADO 182"
-_column(3557)	float	V1028183	%15f	"Peso REPLICADO 183"
-_column(3572)	float	V1028184	%15f	"Peso REPLICADO 184"
-_column(3587)	float	V1028185	%15f	"Peso REPLICADO 185"
-_column(3602)	float	V1028186	%15f	"Peso REPLICADO 186"
-_column(3617)	float	V1028187	%15f	"Peso REPLICADO 187"
-_column(3632)	float	V1028188	%15f	"Peso REPLICADO 188"
-_column(3647)	float	V1028189	%15f	"Peso REPLICADO 189"
-_column(3662)	float	V1028190	%15f	"Peso REPLICADO 190"
-_column(3677)	float	V1028191	%15f	"Peso REPLICADO 191"
-_column(3692)	float	V1028192	%15f	"Peso REPLICADO 192"
-_column(3707)	float	V1028193	%15f	"Peso REPLICADO 193"
-_column(3722)	float	V1028194	%15f	"Peso REPLICADO 194"
-_column(3737)	float	V1028195	%15f	"Peso REPLICADO 195"
-_column(3752)	float	V1028196	%15f	"Peso REPLICADO 196"
-_column(3767)	float	V1028197	%15f	"Peso REPLICADO 197"
-_column(3782)	float	V1028198	%15f	"Peso REPLICADO 198"
-_column(3797)	float	V1028199	%15f	"Peso REPLICADO 199"
-_column(3812)	float	V1028200	%15f	"Peso REPLICADO 200"
+_column(0001)	int	Ano	%4f	`"Ano de referência"'
+_column(0005)	byte	Trimestre	%1f	`"Trimestre de referência"'
+_column(0006)	byte	UF	%2f	`"Unidade da Federação"'
+_column(0008)	byte	Capital	%2f	`"Município da Capital"'
+_column(0010)	byte	RM_RIDE	%2f	`"Reg. Metr. e Reg. Adm. Int. Des."'
+_column(0012)	long	UPA	%9f	`"Unidade Primária de Amostragem"'
+_column(0021)	long	Estrato	%7f	`"Estrato"'
+_column(0028)	byte	V1008	%2f	`"Número de seleção do domicílio"'
+_column(0030)	byte	V1014	%2f	`"Painel"'
+_column(0032)	byte	V1016	%1f	`"Número da entrevista no domicílio"'
+_column(0033)	byte	V1022	%1f	`"Tipo de situação da região"'
+_column(0034)	byte	V1023	%1f	`"Tipo de área"'
+_column(0035)	float	V1027	%15f	`"Peso SEM calibração"'
+_column(0050)	float	V1028	%15f	`"Peso COM calibração"'
+_column(0065)	long	V1029	%9f	`"Projeção da população por níveis geográficos"'
+_column(0074)	long	V1033	%9f	`"Projeção da população por sexo e idade"'
+_column(0083)	int	posest	%3f	`"Domínios de projeção geográficos"'
+_column(0086)	int	posest_sxi	%3f	`"Domínios de projeção por sexo e idade"'
+_column(0089)	byte	V2001	%2f	`"Número de pessoas no domicílio"'
+_column(0091)	byte	V2003	%2f	`"Número de ordem"'
+_column(0093)	byte	V2005	%2f	`"Condição no domicílio"'
+_column(0095)	byte	V2007	%1f	`"Sexo"'
+_column(0096)	byte	V2008	%2f	`"Dia de nascimento"'
+_column(0098)	byte	V20081	%2f	`"Mês de nascimento"'
+_column(0100)	int	V20082	%4f	`"Ano de nascimento"'
+_column(0104)	int	V2009	%3f	`"Idade na data de referência"'
+_column(0107)	byte	V2010	%1f	`"Cor ou raça"'
+_column(0108)	byte	V3001	%1f	`"Sabe ler e escrever"'
+_column(0109)	byte	V3002	%1f	`"Frequenta escola"'
+_column(0110)	byte	V3002A	%1f	`"A escola que ... frequenta é de"'
+_column(0111)	byte	V3003	%2f	`"Qual é o curso que frequenta"'
+_column(0113)	byte	V3003A	%2f	`"Qual é o curso que frequenta"'
+_column(0115)	byte	V3004	%1f	`"Duração deste curso que requenta"'
+_column(0116)	byte	V3005	%1f	`"Curso que frequenta é seriado"'
+_column(0117)	byte	V3005A	%1f	`"Curso que freq é organizado em:"'
+_column(0118)	byte	V3006	%2f	`"Qual é o ano/série que frequenta"'
+_column(0120)	byte	V3006A	%1f	`"Qual é a etapa que frequenta"'
+_column(0121)	byte	V3007	%1f	`"Concluiu outro curso de graduação"'
+_column(0122)	byte	V3008	%1f	`"Anteriormente frequentou escola"'
+_column(0123)	byte	V3009	%2f	`"Curso mais elevado que frequentou"'
+_column(0125)	byte	V3009A	%2f	`"Curso mais elevado que frequentou"'
+_column(0127)	byte	V3010	%1f	`"Duração do curso que frequentou"'
+_column(0128)	byte	V3011	%1f	`"Curso quefrequentou era seriado"'
+_column(0129)	byte	V3011A	%1f	`"Curso que freq é organizado em:"'
+_column(0130)	byte	V3012	%1f	`"Aprovado na prim. série do curso"'
+_column(0131)	byte	V3013	%2f	`"Último ano/série que concluiu"'
+_column(0133)	byte	V3013A	%1f	`"Qual é a etapa que frequentou"'
+_column(0134)	byte	V3013B	%1f	`"Cursou os anos iniciais deste curso"'
+_column(0135)	byte	V3014	%1f	`"Concluiu o curso que frequentou"'
+_column(0136)	byte	V4001	%1f	`"Trabalhou 1 hr em ativ. remunerd."'
+_column(0137)	byte	V4002	%1f	`"Trabalhou 1 hr em produtos etc..."'
+_column(0138)	byte	V4003	%1f	`"Fez algum bico pelo menos de 1 hr"'
+_column(0139)	byte	V4004	%1f	`"Ajudou sem receber no domic. 1 hr"'
+_column(0140)	byte	V4005	%1f	`"Afastado trabalho remunerado"'
+_column(0141)	byte	V4006	%1f	`"Motivo de estar afastado"'
+_column(0142)	byte	V4006A	%1f	`"Motivo de estar afastado"'
+_column(0143)	byte	V4007	%1f	`"Durante afastameno recebia pagam."'
+_column(0144)	byte	V4008	%1f	`"Quanto tempo que estava afastado"'
+_column(0145)	byte	V40081	%2f	`"Tempo de afastamenento até 1 ano"'
+_column(0147)	byte	V40082	%2f	`"Tempo de afastamen. de 1 a 2 anos"'
+_column(0149)	byte	V40083	%2f	`"Tempo de afastamen. mais d 2 anos"'
+_column(0151)	byte	V4009	%1f	`"Quantos trabalhos tinhana semana"'
+_column(0152)	int	V4010	%4f	`"Ocupação no trab. principal"'
+_column(0156)	byte	V4012	%1f	`"Posição na ocupação"'
+_column(0157)	byte	V40121	%1f	`"Tipo trabalhador não remunerado"'
+_column(0158)	long	V4013	%5f	`"Atividade no trab. principal"'
+_column(0163)	byte	V40132	%1f	`"Seção da atividade"'
+_column(0164)	byte	V40132A	%1f	`"Seção da atividade"'
+_column(0165)	byte	V4014	%1f	`"Esse trabalho era na área"'
+_column(0166)	byte	V4015	%1f	`"Teve ajuda de pelo menos um trabalhador não remunerado"'
+_column(0167)	byte	V40151	%1f	`"Qnts trabalhadores não remunerados"'
+_column(0168)	byte	V401511	%1f	`"1 a 5 trabalhadores não remunerados"'
+_column(0169)	byte	V401512	%2f	`"6 a 10 trabalhadores não remunerados"'
+_column(0171)	byte	V4016	%1f	`"Qnts empregados trabalhavam nesse negócio/empresa"'
+_column(0172)	byte	V40161	%1f	`"1 a 5 empregados"'
+_column(0173)	byte	V40162	%2f	`"6 a 10 empregados"'
+_column(0175)	byte	V40163	%2f	`"11 a 50 empregados"'
+_column(0177)	byte	V4017	%1f	`"Tinha pelo menos um sócio que trab. nesse negócio/empresa"'
+_column(0178)	byte	V40171	%1f	`"Quantos sócios"'
+_column(0179)	byte	V401711	%1f	`"1 a 5 sócios"'
+_column(0180)	byte	V4018	%1f	`"Qnts pessoas trabalhavam nesse negócio/empresa"'
+_column(0181)	byte	V40181	%1f	`"1 a 5pessoas"'
+_column(0182)	byte	V40182	%2f	`"6 a 10pessoas"'
+_column(0184)	byte	V40183	%2f	`"11 a 50pessoas"'
+_column(0186)	byte	V4019	%1f	`"Negócio/empresa registrado no CNPJ"'
+_column(0187)	byte	V4020	%1f	`"Em que tipo de local funcionava esse negócio/empresa"'
+_column(0188)	byte	V4021	%1f	`"Exercia o trabalho em estabelecimento desse negócio/empresa"'
+_column(0189)	byte	V4022	%1f	`"Onde exercia normalmente esse trabalho"'
+_column(0190)	byte	V4024	%1f	`"Serv. domést. em mais de 1 domic."'
+_column(0191)	byte	V4025	%1f	`"Contratado como empreg. temporário"'
+_column(0192)	byte	V4026	%1f	`"Era contratado somente por pessoa responsável pelo negócio"'
+_column(0193)	byte	V4027	%1f	`"Era contratado somente por intermediário"'
+_column(0194)	byte	V4028	%1f	`"Servidor público estatutário"'
+_column(0195)	byte	V4029	%1f	`"Carteira de trabalho assinada"'
+_column(0196)	byte	V4032	%1f	`"Contribuinte de instit. d previd."'
+_column(0197)	byte	V4033	%1f	`"Rendimento habitual var. auxil."'
+_column(0198)	byte	V40331	%1f	`"Rendimento habitual em dinheiro"'
+_column(0199)	byte	V403311	%1f	`"Faixa do valor do rendimento hab."'
+_column(0200)	long	V403312	%8f	`"Valor do rend. hab. em dinheiro"'
+_column(0208)	byte	V40332	%1f	`"Rendimento habitual em produtos"'
+_column(0209)	byte	V403321	%1f	`"Faixa do valor do rendimento hab."'
+_column(0210)	long	V403322	%8f	`"Valor do rend. hab. em produtos"'
+_column(0218)	byte	V40333	%1f	`"Rendimento habitual em benefícios"'
+_column(0219)	byte	V403331	%1f	`"Tipo rend. habitual em benefícios"'
+_column(0220)	byte	V4034	%1f	`"Rendimento efetivo var. auxil."'
+_column(0221)	byte	V40341	%1f	`"Rendimento efetivo em dinheiro"'
+_column(0222)	byte	V403411	%1f	`"Faixa do valor do rendimento efe."'
+_column(0223)	long	V403412	%8f	`"Valor do rend. efe. em dinheiro"'
+_column(0231)	byte	V40342	%1f	`"Rendimento efetivo em produtos"'
+_column(0232)	byte	V403421	%1f	`"Faixa do valor do rendimento efe."'
+_column(0233)	long	V403422	%8f	`"Valor do rend. efe. em produtos"'
+_column(0241)	int	V4039	%3f	`"Hrs habituais no trab. princ."'
+_column(0244)	int	V4039C	%3f	`"Hrs efetivas no trab. princ."'
+_column(0247)	byte	V4040	%1f	`"Tempo que estava nesse trabalho"'
+_column(0248)	byte	V40401	%2f	`"De 1 mês a menos de 1 ano"'
+_column(0250)	byte	V40402	%2f	`"De 1 ano a menos de 2 anos"'
+_column(0252)	byte	V40403	%2f	`"De 2 anos ou mais tempo"'
+_column(0254)	int	V4041	%4f	`"Ocupação no trab. secundário"'
+_column(0258)	byte	V4043	%1f	`"Posição na ocupação"'
+_column(0259)	byte	V40431	%1f	`"Tipo trabalhador não remunerado"'
+_column(0260)	long	V4044	%5f	`"Atividade no trab. secundário"'
+_column(0265)	byte	V4045	%1f	`"Esse trabalho era na área"'
+_column(0266)	byte	V4046	%1f	`"Negócio/empresa registrado no CNPJ"'
+_column(0267)	byte	V4047	%1f	`"Servidor público estatutário"'
+_column(0268)	byte	V4048	%1f	`"Carteira de trabalho assinada"'
+_column(0269)	byte	V4049	%1f	`"Contribuinte de instit. d previd."'
+_column(0270)	byte	V4050	%1f	`"Rendimento habitual var. auxil."'
+_column(0271)	byte	V40501	%1f	`"Rendimento habitual em dinheiro"'
+_column(0272)	byte	V405011	%1f	`"Faixa do valor do rendimento hab."'
+_column(0273)	long	V405012	%8f	`"Valor do rend. hab. em dinheiro"'
+_column(0281)	byte	V40502	%1f	`"Rendimento habitual em produtos"'
+_column(0282)	byte	V405021	%1f	`"Faixa do valor do rendimento hab."'
+_column(0283)	long	V405022	%8f	`"Valor do rend. hab. em produtos"'
+_column(0291)	byte	V40503	%1f	`"Rendimento habitual em benefícios"'
+_column(0292)	byte	V405031	%1f	`"Tipo rend. habitual em benefícios"'
+_column(0293)	byte	V4051	%1f	`"Rendimento efetivo var. auxil."'
+_column(0294)	byte	V40511	%1f	`"Rendimento efetivo em dinheiro"'
+_column(0295)	byte	V405111	%1f	`"Faixa do valor do rendimento efe."'
+_column(0296)	long	V405112	%8f	`"Valor do rend. efe. em dinheiro"'
+_column(0304)	byte	V40512	%1f	`"Rendimento efetivo em produtos"'
+_column(0305)	byte	V405121	%1f	`"Faixa do valor do rendimento efe."'
+_column(0306)	long	V405122	%8f	`"Valor do rend. efe. em produtos"'
+_column(0314)	int	V4056	%3f	`"Hrs habituais no trab. secun."'
+_column(0317)	int	V4056C	%3f	`"Hrs efetivas no trab. secun."'
+_column(0320)	byte	V4057	%1f	`"Contribuinte de instit. d previd."'
+_column(0321)	byte	V4058	%1f	`"Rendimento habitual var. auxil."'
+_column(0322)	byte	V40581	%1f	`"Rendimento habitual em dinheiro"'
+_column(0323)	byte	V405811	%1f	`"Faixa do valor do rendimento hab."'
+_column(0324)	long	V405812	%8f	`"Valor do rend. hab. em dinheiro"'
+_column(0332)	byte	V40582	%1f	`"Rendimento habitual em produtos"'
+_column(0333)	byte	V405821	%1f	`"Faixa do valor do rendimento hab."'
+_column(0334)	long	V405822	%8f	`"Valor do rend. hab. em produtos"'
+_column(0342)	byte	V40583	%1f	`"Rendimento habitual em benefícios"'
+_column(0343)	byte	V405831	%1f	`"Tipo rend. habitual em benefícios"'
+_column(0344)	byte	V40584	%1f	`"Não remunerado"'
+_column(0345)	byte	V4059	%1f	`"Rendimento efetivo var. auxil."'
+_column(0346)	byte	V40591	%1f	`"Rendimento efetivo em dinheiro"'
+_column(0347)	byte	V405911	%1f	`"Faixa do valor do rendimento efe."'
+_column(0348)	long	V405912	%8f	`"Valor do rend. efe. em dinheiro"'
+_column(0356)	byte	V40592	%1f	`"Rendimento efetivo em produtos"'
+_column(0357)	byte	V405921	%1f	`"Faixa do valor do rendimento efe."'
+_column(0358)	long	V405922	%8f	`"Valor do rend. efe. em produtos"'
+_column(0366)	int	V4062	%3f	`"Hrs habituais no(s) outro(s) trab."'
+_column(0369)	int	V4062C	%3f	`"Hrs efetivas no(s) outro(s) trab ."'
+_column(0372)	byte	V4063	%1f	`"Gostaria trabalhar + hrs efetivas"'
+_column(0373)	byte	V4063A	%1f	`"Gostaria trabalhar + hrs habituais"'
+_column(0374)	byte	V4064	%1f	`"Dispon. trabalhar + hrs efetivas"'
+_column(0375)	byte	V4064A	%1f	`"Dispon. trabalhar + hrs habituais"'
+_column(0376)	byte	V4071	%1f	`"Providência p/ conseg. trab.(30d)"'
+_column(0377)	byte	V4072	%2f	`"Principal provid. p/conseg. trab."'
+_column(0379)	byte	V4072A	%1f	`"Principal provid. p/conseg. trab."'
+_column(0380)	byte	V4073	%1f	`"Gostaria de ter trabalhado"'
+_column(0381)	byte	V4074	%1f	`"Motivo de não ter tomado provid."'
+_column(0382)	byte	V4074A	%2f	`"Motivo de não ter tomado provid."'
+_column(0384)	byte	V4075A	%1f	`"Tempo em que irá começar o trab."'
+_column(0385)	byte	V4075A1	%2f	`"Meses em que irá começar o trab."'
+_column(0387)	byte	V4076	%1f	`"Tempo tentando conseguir trabalho"'
+_column(0388)	byte	V40761	%2f	`"Tempo tentando trab. 1 mes-1 ano"'
+_column(0390)	byte	V40762	%2f	`"Tempo tentando trab. 1 ano-2 anos"'
+_column(0392)	byte	V40763	%2f	`"Tempo tentando trab. + de 2 anos"'
+_column(0394)	byte	V4077	%1f	`"Poderia ter começado a trabalhar"'
+_column(0395)	byte	V4078	%1f	`"Motivo p/ñ querer/começar a trab."'
+_column(0396)	byte	V4078A	%1f	`"Motivo p /ñ querer/começar a trab."'
+_column(0397)	byte	V4082	%1f	`"Trab por pelo menos 1 hora em 1 ano"'
+_column(0398)	byte	VI5001A	%1f	`"Recebeu BPC-LOAS"'
+_column(0399)	long	VI5001A2	%8f	`"Rend recebido de BPC-LOAS"'
+_column(0407)	byte	VI5002A	%1f	`"Recebeu bolsa família"'
+_column(0408)	long	VI5002A2	%8f	`"Rend recebido de bolsa familia"'
+_column(0416)	byte	VI5003A	%1f	`"Recebeu outro prog social"'
+_column(0417)	long	VI5003A2	%8f	`"Rend recebido de outro prog social"'
+_column(0425)	byte	VI5004A	%1f	`"Recebeu aposentadoria e pensão"'
+_column(0426)	long	VI5004A2	%8f	`"Rend recebido de aposentadoria e pensão"'
+_column(0434)	byte	VI5005A	%1f	`"Recebeu rendimentos de seguro-desemprego, seguro-defeso"'
+_column(0435)	long	VI5005A2	%8f	`"Rend recebido de seguro-desemprego, seguro-defeso"'
+_column(0443)	byte	VI5006A	%1f	`"Recebeu pensão alimentícia, doação, etc"'
+_column(0444)	long	VI5006A2	%8f	`"Rend recebido por pensão alimentícia, doação, etc"'
+_column(0452)	byte	VI5007A	%1f	`"Recebeu aluguel e arrendamento"'
+_column(0453)	long	VI5007A2	%8f	`"Rend recebido aluguel e arrendamento"'
+_column(0461)	byte	VI5008A	%1f	`"Recebeu outros rendimentos (bolsa de estudos, rendimento de poupança, aplic finan, etc.)"'
+_column(0462)	long	VI5008A2	%8f	`"Rend recebido de outros rendimentos (bolsa de estudos, rendimento de poupança, aplic finan, etc.)"'
+_column(0470)	byte	S08001	%1f	`"Nos últimos 3 meses alguém fez alguma viagem a trabalho, lazer ou em visita a parentes ou amigos?"'
+_column(0471)	byte	S08002	%2f	`"Quantas viagens foram feitas?"'
+_column(0473)	byte	S08004	%1f	`"Qual foi o principal motivo para não ter viajado / não ter viajado para outro destino nos últimos 3 meses?"'
+_column(0474)	byte	S08005	%1f	`"Principal destino da viagem mais recente"'
+_column(0475)	byte	S08006	%1f	`"Qual foi o principal destino desta viagem?"'
+_column(0476)	byte	S080061	%2f	`"Unidade da Federação"'
+_column(0478)	long	S080062	%5f	`"Município"'
+_column(0483)	int	S080063	%3f	`"Localidade"'
+_column(0486)	int	S08007	%3f	`"País"'
+_column(0489)	byte	S08008	%2f	`"Qual foi o mês de início dessa viagem?"'
+_column(0491)	byte	S08009	%1f	`"Pernoitou?"'
+_column(0492)	int	S080091	%3f	`"Quantas noites?"'
+_column(0495)	byte	S0801001	%1f	`"Morador 1"'
+_column(0496)	byte	S0801002	%1f	`"Morador 2"'
+_column(0497)	byte	S0801003	%1f	`"Morador 3"'
+_column(0498)	byte	S0801004	%1f	`"Morador 4"'
+_column(0499)	byte	S0801005	%1f	`"Morador 5"'
+_column(0500)	byte	S0801006	%1f	`"Morador 6"'
+_column(0501)	byte	S0801007	%1f	`"Morador 7"'
+_column(0502)	byte	S0801008	%1f	`"Morador 8"'
+_column(0503)	byte	S0801009	%1f	`"Morador 9"'
+_column(0504)	byte	S0801010	%1f	`"Morador 10"'
+_column(0505)	byte	S0801011	%1f	`"Morador 11"'
+_column(0506)	byte	S0801012	%1f	`"Morador 12"'
+_column(0507)	byte	S0801013	%1f	`"Morador 13"'
+_column(0508)	byte	S0801014	%1f	`"Morador 14"'
+_column(0509)	byte	S0801015	%1f	`"Morador 15"'
+_column(0510)	byte	S0801016	%1f	`"Morador 16"'
+_column(0511)	byte	S0801017	%1f	`"Morador 17"'
+_column(0512)	byte	S0801018	%1f	`"Morador 18"'
+_column(0513)	byte	S0801019	%1f	`"Morador 19"'
+_column(0514)	byte	S0801020	%1f	`"Morador 20"'
+_column(0515)	byte	S0801021	%1f	`"Morador 21"'
+_column(0516)	byte	S0801022	%1f	`"Morador 22"'
+_column(0517)	byte	S0801023	%1f	`"Morador 23"'
+_column(0518)	byte	S0801024	%1f	`"Morador 24"'
+_column(0519)	byte	S0801025	%1f	`"Morador 25"'
+_column(0520)	byte	S0801026	%1f	`"Morador 26"'
+_column(0521)	byte	S0801027	%1f	`"Morador 27"'
+_column(0522)	byte	S0801028	%1f	`"Morador 28"'
+_column(0523)	byte	S0801029	%1f	`"Morador 29"'
+_column(0524)	byte	S0801030	%1f	`"Morador 30"'
+_column(0525)	byte	S08011	%1f	`"Essa viagem foi por motivo:"'
+_column(0526)	byte	S08012	%1f	`"Qual o principal motivo pessoal?"'
+_column(0527)	byte	S08013	%1f	`"Qual tipo de lazer procurou em sua viagem?"'
+_column(0528)	byte	S08014	%1f	`"Qual o principal motivo profissional?"'
+_column(0529)	byte	S08015	%1f	`"Qual foi o principal tipo de hospedagem?"'
+_column(0530)	byte	S08016	%2f	`"Qual foi o principal meio de transporte utilizado para chegar ao destino"'
+_column(0532)	byte	S08018	%1f	`"Principal destino da segunda viagem"'
+_column(0533)	byte	S08019	%1f	`"Qual foi o principal destino desta viagem?"'
+_column(0534)	byte	S080191	%2f	`"Estado"'
+_column(0536)	long	S080192	%5f	`"Município"'
+_column(0541)	int	S080193	%3f	`"Localidade"'
+_column(0544)	int	S08020	%3f	`"País"'
+_column(0547)	byte	S08021	%2f	`"Qual foi o mês de início dessa viagem?"'
+_column(0549)	byte	S08022	%1f	`"Pernoitou?"'
+_column(0550)	int	S080221	%3f	`"Quantas noites?"'
+_column(0553)	byte	S0802301	%1f	`"Morador 1"'
+_column(0554)	byte	S0802302	%1f	`"Morador 2"'
+_column(0555)	byte	S0802303	%1f	`"Morador 3"'
+_column(0556)	byte	S0802304	%1f	`"Morador 4"'
+_column(0557)	byte	S0802305	%1f	`"Morador 5"'
+_column(0558)	byte	S0802306	%1f	`"Morador 6"'
+_column(0559)	byte	S0802307	%1f	`"Morador 7"'
+_column(0560)	byte	S0802308	%1f	`"Morador 8"'
+_column(0561)	byte	S0802309	%1f	`"Morador 9"'
+_column(0562)	byte	S0802310	%1f	`"Morador 10"'
+_column(0563)	byte	S0802311	%1f	`"Morador 11"'
+_column(0564)	byte	S0802312	%1f	`"Morador 12"'
+_column(0565)	byte	S0802313	%1f	`"Morador 13"'
+_column(0566)	byte	S0802314	%1f	`"Morador 14"'
+_column(0567)	byte	S0802315	%1f	`"Morador 15"'
+_column(0568)	byte	S0802316	%1f	`"Morador 16"'
+_column(0569)	byte	S0802317	%1f	`"Morador 17"'
+_column(0570)	byte	S0802318	%1f	`"Morador 18"'
+_column(0571)	byte	S0802319	%1f	`"Morador 19"'
+_column(0572)	byte	S0802320	%1f	`"Morador 20"'
+_column(0573)	byte	S0802321	%1f	`"Morador 21"'
+_column(0574)	byte	S0802322	%1f	`"Morador 22"'
+_column(0575)	byte	S0802323	%1f	`"Morador 23"'
+_column(0576)	byte	S0802324	%1f	`"Morador 24"'
+_column(0577)	byte	S0802325	%1f	`"Morador 25"'
+_column(0578)	byte	S0802326	%1f	`"Morador 26"'
+_column(0579)	byte	S0802327	%1f	`"Morador 27"'
+_column(0580)	byte	S0802328	%1f	`"Morador 28"'
+_column(0581)	byte	S0802329	%1f	`"Morador 29"'
+_column(0582)	byte	S0802330	%1f	`"Morador 30"'
+_column(0583)	byte	S08024	%1f	`"Essa viagem foi por motivo:"'
+_column(0584)	byte	S08025	%1f	`"Qual o principal motivo pessoal?"'
+_column(0585)	byte	S08026	%1f	`"Qual tipo de lazer procurou em sua viagem?"'
+_column(0586)	byte	S08027	%1f	`"Qual o principal motivo profissional?"'
+_column(0587)	byte	S08028	%1f	`"Qual foi o principal tipo de hospedagem?"'
+_column(0588)	byte	S08029	%2f	`"Qual foi o principal meio de transporte utilizado para chegar ao destino"'
+_column(0590)	byte	S08031	%1f	`"Principal destino da terceira viagem"'
+_column(0591)	byte	S08032	%1f	`"Qual foi o principal destino desta viagem?"'
+_column(0592)	byte	S080321	%2f	`"Estado"'
+_column(0594)	long	S080322	%5f	`"Município"'
+_column(0599)	int	S080323	%3f	`"Localidade"'
+_column(0602)	int	S08033	%3f	`"País"'
+_column(0605)	byte	S08034	%2f	`"Qual foi o mês de início dessa viagem?"'
+_column(0607)	byte	S08035	%1f	`"Pernoitou?"'
+_column(0608)	int	S080351	%3f	`"Quantas noites?"'
+_column(0611)	byte	S0803601	%1f	`"Morador 1"'
+_column(0612)	byte	S0803602	%1f	`"Morador 2"'
+_column(0613)	byte	S0803603	%1f	`"Morador 3"'
+_column(0614)	byte	S0803604	%1f	`"Morador 4"'
+_column(0615)	byte	S0803605	%1f	`"Morador 5"'
+_column(0616)	byte	S0803606	%1f	`"Morador 6"'
+_column(0617)	byte	S0803607	%1f	`"Morador 7"'
+_column(0618)	byte	S0803608	%1f	`"Morador 8"'
+_column(0619)	byte	S0803609	%1f	`"Morador 9"'
+_column(0620)	byte	S0803610	%1f	`"Morador 10"'
+_column(0621)	byte	S0803611	%1f	`"Morador 11"'
+_column(0622)	byte	S0803612	%1f	`"Morador 12"'
+_column(0623)	byte	S0803613	%1f	`"Morador 13"'
+_column(0624)	byte	S0803614	%1f	`"Morador 14"'
+_column(0625)	byte	S0803615	%1f	`"Morador 15"'
+_column(0626)	byte	S0803616	%1f	`"Morador 16"'
+_column(0627)	byte	S0803617	%1f	`"Morador 17"'
+_column(0628)	byte	S0803618	%1f	`"Morador 18"'
+_column(0629)	byte	S0803619	%1f	`"Morador 19"'
+_column(0630)	byte	S0803620	%1f	`"Morador 20"'
+_column(0631)	byte	S0803621	%1f	`"Morador 21"'
+_column(0632)	byte	S0803622	%1f	`"Morador 22"'
+_column(0633)	byte	S0803623	%1f	`"Morador 23"'
+_column(0634)	byte	S0803624	%1f	`"Morador 24"'
+_column(0635)	byte	S0803625	%1f	`"Morador 25"'
+_column(0636)	byte	S0803626	%1f	`"Morador 26"'
+_column(0637)	byte	S0803627	%1f	`"Morador 27"'
+_column(0638)	byte	S0803628	%1f	`"Morador 28"'
+_column(0639)	byte	S0803629	%1f	`"Morador 29"'
+_column(0640)	byte	S0803630	%1f	`"Morador 30"'
+_column(0641)	byte	S08037	%1f	`"Essa viagem foi por motivo:"'
+_column(0642)	byte	S08038	%1f	`"Qual o principal motivo pessoal?"'
+_column(0643)	byte	S08039	%1f	`"Qual tipo de lazer procurou em sua viagem?"'
+_column(0644)	byte	S08040	%1f	`"Qual o principal motivo profissional?"'
+_column(0645)	byte	S08041	%1f	`"Qual foi o principal tipo de hospedagem?"'
+_column(0646)	byte	S08042	%2f	`"Qual foi o principal meio de transporte utilizado para chegar ao destino"'
+_column(0648)	byte	S08044	%1f	`"Principal destino da quarta viagem"'
+_column(0649)	byte	S080441	%2f	`"Estado"'
+_column(0651)	long	S080442	%5f	`"Município"'
+_column(0656)	int	S0804431	%3f	`"Localidade"'
+_column(0659)	int	S080444	%3f	`"País"'
+_column(0662)	byte	S08046	%1f	`"Principal destino da quinta viagem"'
+_column(0663)	byte	S080461	%2f	`"Estado"'
+_column(0665)	long	S080462	%5f	`"Município"'
+_column(0670)	int	S0804631	%3f	`"Localidade"'
+_column(0673)	byte	S11001	%1f	`"Tem dificuldade para enxergar, mesmo usando óculos ou lentes de contato?"'
+_column(0674)	byte	S11002	%1f	`"Tem dificuldade para ouvir sons, como vozes ou música, mesmo usando aparelhos auditivos?"'
+_column(0675)	byte	S11003	%1f	`"Tem dificuldade para andar ou subir degraus?"'
+_column(0676)	byte	S11004	%1f	`"Tem dificuldade para levantar uma garrafa com dois litros de água da cintura até a altura dos olhos?"'
+_column(0677)	byte	S11005	%1f	`"Tem dificuldade para pegar objetos pequenos ou abrir e fechar recipientes?"'
+_column(0678)	byte	S11006	%1f	`"Tem dificuldade para aprender? Ou tem dificuldade para lembrar-se das coisas ou se concentrar?"'
+_column(0679)	byte	S11007	%1f	`"Tem dificuldade para realizar cuidados pessoais, como tomar banho ou se vestir?"'
+_column(0680)	byte	S11008	%1f	`"Tem dificuldade de se comunicar, para compreender e ser compreendido?"'
+_column(0681)	byte	S14009	%1f	`"No seu trabalho, obteve clientes e prestou serviços por meio de (exclusive venda de produtos)"'
+_column(0682)	byte	S140091	%1f	`"Prestou serviço por meio de: Aplicativo de táxi (99táxi, aplicativo da cooperativa ou prefeitura etc.)?"'
+_column(0683)	byte	S140092	%1f	`"Prestou serviço por meio de: Aplicativo de transporte particular de passageiros diferente de táxi (Uber, 99, outro aplicativo regional/local etc.)?"'
+_column(0684)	byte	S140093	%1f	`"Prestou serviço por meio de: Aplicativo de entrega de comida, produtos etc. (Ifood, Rappi, Loggi, outro aplicativo regional/local etc.)?"'
+_column(0685)	byte	S140094	%1f	`"Prestou serviço por meio de: Aplicativo de prestação de serviços gerais ou profissionais (GetNinjas, Parafuzo, Freelancer, Workana, 99freela etc.)?"'
+_column(0686)	byte	S140111	%1f	`"Nesse trabalho, era o aplicativo que determinava: O valor a ser recebido por cada tarefa realizada ou trabalho entregue?"'
+_column(0687)	byte	S140112	%1f	`"Nesse trabalho, era o aplicativo que determinava: Os clientes a serem atendidos?"'
+_column(0688)	byte	S140113	%1f	`"Nesse trabalho, era o aplicativo que determinava: O prazo para realização da tarefa ou atividade?"'
+_column(0689)	byte	S140114	%1f	`"Nesse trabalho, era o aplicativo que determinava: A forma de recebimento do pagamento?"'
+_column(0690)	byte	S140121	%1f	`"Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Incentivos/bônus, promoções que mudam os preços?"'
+_column(0691)	byte	S140122	%1f	`"Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Ameaças de punições, bloqueios realizados pelo aplicativo/plataforma?"'
+_column(0692)	byte	S140123	%1f	`"Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Turnos, dias sugeridos pelo aplicativo/plataforma?"'
+_column(0693)	byte	S140124	%1f	`"Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Possibilidade de escolha dos dias e horários de forma independente?"'
+_column(0694)	byte	VD2002	%2f	`"Condição no domicílio"'
+_column(0696)	byte	VD2003	%2f	`"Número de componentes do domic."'
+_column(0698)	byte	VD2004	%1f	`"Espécie da unidade doméstica"'
+_column(0699)	byte	VD2006	%2f	`"Faixas etárias utilizadas no processo de calibração"'
+_column(0701)	byte	VD3004	%1f	`"Nível de instrução mais elevado alcançado (5 anos ou mais de idade)"'
+_column(0702)	byte	VD3005	%2f	`"Anos de estudo (5 anos ou mais de idade) para fundamental de 9 anos"'
+_column(0704)	byte	VD3006	%1f	`"Grupamento de anos de estudo (pessoas de 5 anos ou mais de idade) para fundamental de 9 anos"'
+_column(0705)	byte	VD4001	%1f	`"Condição em relação força d trab."'
+_column(0706)	byte	VD4002	%1f	`"Condição de ocupação"'
+_column(0707)	byte	VD4003	%1f	`"Força de trabalho potencial"'
+_column(0708)	byte	VD4004A	%1f	`"Subocupação por insuficiên. de hrs hab"'
+_column(0709)	byte	VD4005	%1f	`"Pessoas desalentadas"'
+_column(0710)	byte	VD4007	%1f	`"Posição na ocupação trab. princ."'
+_column(0711)	byte	VD4008	%1f	`"Posição na ocupação trab. princ."'
+_column(0712)	byte	VD4009	%2f	`"Posição na ocupação trab. princ."'
+_column(0714)	byte	VD4010	%2f	`"Grupamen. d ativid. trab. princ."'
+_column(0716)	byte	VD4011	%2f	`"Grupamen. ocupacion. trab. Princ."'
+_column(0718)	byte	VD4012	%1f	`"Contrib. instit. previd. qq trab."'
+_column(0719)	byte	VD4013	%1f	`"Faixa hrs habituais em todos trab."'
+_column(0720)	byte	VD4014	%1f	`"Faixa hrs efetivas em todos trab."'
+_column(0721)	byte	VD4015	%1f	`"Tipo d remuneração trab. princ."'
+_column(0722)	long	VD4016	%8f	`"Rendim. habitual trab. princ."'
+_column(0730)	long	VD4017	%8f	`"Rendim. efetivo trab. princ."'
+_column(0738)	byte	VD4018	%1f	`"Tipo d remuneração em qq trabalho"'
+_column(0739)	long	VD4019	%8f	`"Rendim. habitual qq trabalho"'
+_column(0747)	long	VD4020	%8f	`"Rendim. efetivo qq trabalho"'
+_column(0755)	byte	VD4023	%1f	`"Pq ñ proc./ñ gost./ñ disp.p/trab."'
+_column(0756)	byte	VD4030	%1f	`"Pq ñ proc./ñ gost./ñ disp.p/trab."'
+_column(0757)	int	VD4031	%3f	`"Hrs habituais em todos trab."'
+_column(0760)	int	VD4032	%3f	`"Hrs efetivas no trab. princ."'
+_column(0763)	int	VD4033	%3f	`"Hrs efetivas no trab. secun."'
+_column(0766)	int	VD4034	%3f	`"Hrs efetivas no(s) outro(s) trab ."'
+_column(0769)	int	VD4035	%3f	`"Hrs efetivas em todos trab."'
+_column(0772)	byte	VD4036	%1f	`"Faixa hrs habituais trab. princ."'
+_column(0773)	byte	VD4037	%1f	`"Faixa hrs efetivas trab. princ."'
+_column(0774)	long	VDI4046	%8f	`"Rendim. habitual tds fontes"'
+_column(0782)	long	VDI4047	%8f	`"Rend efetivo de progr sociais, seguro-desemprego, etc"'
+_column(0790)	long	VDI4048	%8f	`"Rend efetivo recebido de outras fontes"'
+_column(0798)	long	VDI4052	%8f	`"Rendim. habitual tds fontes com ticket"'
+_column(0806)	long	VDI5007	%8f	`"Rend habitual domiciliar"'
+_column(0814)	long	VDI5008	%8f	`"Rend habitual domiciliar per capita"'
+_column(0822)	byte	VDI5009	%1f	`"Faixa de rend habital domiciliar per capita"'
+_column(0823)	long	VDI5010	%8f	`"Rend habitual domiciliar"'
+_column(0831)	long	VDI5011	%8f	`"Rend habitual domiciliar per capita"'
+_column(0839)	byte	VDI5012	%1f	`"Faixa de rend habitual domiciliar per capita"'
+_column(0840)	byte	SD14001	%1f	`"Trabalhador plataformizado no trabalho principal"'
+_column(0841)	float	V1028001	%15f	`"Peso REPLICADO 1"'
+_column(0856)	float	V1028002	%15f	`"Peso REPLICADO 2"'
+_column(0871)	float	V1028003	%15f	`"Peso REPLICADO 3"'
+_column(0886)	float	V1028004	%15f	`"Peso REPLICADO 4"'
+_column(0901)	float	V1028005	%15f	`"Peso REPLICADO 5"'
+_column(0916)	float	V1028006	%15f	`"Peso REPLICADO 6"'
+_column(0931)	float	V1028007	%15f	`"Peso REPLICADO 7"'
+_column(0946)	float	V1028008	%15f	`"Peso REPLICADO 8"'
+_column(0961)	float	V1028009	%15f	`"Peso REPLICADO 9"'
+_column(0976)	float	V1028010	%15f	`"Peso REPLICADO 10"'
+_column(0991)	float	V1028011	%15f	`"Peso REPLICADO 11"'
+_column(1006)	float	V1028012	%15f	`"Peso REPLICADO 12"'
+_column(1021)	float	V1028013	%15f	`"Peso REPLICADO 13"'
+_column(1036)	float	V1028014	%15f	`"Peso REPLICADO 14"'
+_column(1051)	float	V1028015	%15f	`"Peso REPLICADO 15"'
+_column(1066)	float	V1028016	%15f	`"Peso REPLICADO 16"'
+_column(1081)	float	V1028017	%15f	`"Peso REPLICADO 17"'
+_column(1096)	float	V1028018	%15f	`"Peso REPLICADO 18"'
+_column(1111)	float	V1028019	%15f	`"Peso REPLICADO 19"'
+_column(1126)	float	V1028020	%15f	`"Peso REPLICADO 20"'
+_column(1141)	float	V1028021	%15f	`"Peso REPLICADO 21"'
+_column(1156)	float	V1028022	%15f	`"Peso REPLICADO 22"'
+_column(1171)	float	V1028023	%15f	`"Peso REPLICADO 23"'
+_column(1186)	float	V1028024	%15f	`"Peso REPLICADO 24"'
+_column(1201)	float	V1028025	%15f	`"Peso REPLICADO 25"'
+_column(1216)	float	V1028026	%15f	`"Peso REPLICADO 26"'
+_column(1231)	float	V1028027	%15f	`"Peso REPLICADO 27"'
+_column(1246)	float	V1028028	%15f	`"Peso REPLICADO 28"'
+_column(1261)	float	V1028029	%15f	`"Peso REPLICADO 29"'
+_column(1276)	float	V1028030	%15f	`"Peso REPLICADO 30"'
+_column(1291)	float	V1028031	%15f	`"Peso REPLICADO 31"'
+_column(1306)	float	V1028032	%15f	`"Peso REPLICADO 32"'
+_column(1321)	float	V1028033	%15f	`"Peso REPLICADO 33"'
+_column(1336)	float	V1028034	%15f	`"Peso REPLICADO 34"'
+_column(1351)	float	V1028035	%15f	`"Peso REPLICADO 35"'
+_column(1366)	float	V1028036	%15f	`"Peso REPLICADO 36"'
+_column(1381)	float	V1028037	%15f	`"Peso REPLICADO 37"'
+_column(1396)	float	V1028038	%15f	`"Peso REPLICADO 38"'
+_column(1411)	float	V1028039	%15f	`"Peso REPLICADO 39"'
+_column(1426)	float	V1028040	%15f	`"Peso REPLICADO 40"'
+_column(1441)	float	V1028041	%15f	`"Peso REPLICADO 41"'
+_column(1456)	float	V1028042	%15f	`"Peso REPLICADO 42"'
+_column(1471)	float	V1028043	%15f	`"Peso REPLICADO 43"'
+_column(1486)	float	V1028044	%15f	`"Peso REPLICADO 44"'
+_column(1501)	float	V1028045	%15f	`"Peso REPLICADO 45"'
+_column(1516)	float	V1028046	%15f	`"Peso REPLICADO 46"'
+_column(1531)	float	V1028047	%15f	`"Peso REPLICADO 47"'
+_column(1546)	float	V1028048	%15f	`"Peso REPLICADO 48"'
+_column(1561)	float	V1028049	%15f	`"Peso REPLICADO 49"'
+_column(1576)	float	V1028050	%15f	`"Peso REPLICADO 50"'
+_column(1591)	float	V1028051	%15f	`"Peso REPLICADO 51"'
+_column(1606)	float	V1028052	%15f	`"Peso REPLICADO 52"'
+_column(1621)	float	V1028053	%15f	`"Peso REPLICADO 53"'
+_column(1636)	float	V1028054	%15f	`"Peso REPLICADO 54"'
+_column(1651)	float	V1028055	%15f	`"Peso REPLICADO 55"'
+_column(1666)	float	V1028056	%15f	`"Peso REPLICADO 56"'
+_column(1681)	float	V1028057	%15f	`"Peso REPLICADO 57"'
+_column(1696)	float	V1028058	%15f	`"Peso REPLICADO 58"'
+_column(1711)	float	V1028059	%15f	`"Peso REPLICADO 59"'
+_column(1726)	float	V1028060	%15f	`"Peso REPLICADO 60"'
+_column(1741)	float	V1028061	%15f	`"Peso REPLICADO 61"'
+_column(1756)	float	V1028062	%15f	`"Peso REPLICADO 62"'
+_column(1771)	float	V1028063	%15f	`"Peso REPLICADO 63"'
+_column(1786)	float	V1028064	%15f	`"Peso REPLICADO 64"'
+_column(1801)	float	V1028065	%15f	`"Peso REPLICADO 65"'
+_column(1816)	float	V1028066	%15f	`"Peso REPLICADO 66"'
+_column(1831)	float	V1028067	%15f	`"Peso REPLICADO 67"'
+_column(1846)	float	V1028068	%15f	`"Peso REPLICADO 68"'
+_column(1861)	float	V1028069	%15f	`"Peso REPLICADO 69"'
+_column(1876)	float	V1028070	%15f	`"Peso REPLICADO 70"'
+_column(1891)	float	V1028071	%15f	`"Peso REPLICADO 71"'
+_column(1906)	float	V1028072	%15f	`"Peso REPLICADO 72"'
+_column(1921)	float	V1028073	%15f	`"Peso REPLICADO 73"'
+_column(1936)	float	V1028074	%15f	`"Peso REPLICADO 74"'
+_column(1951)	float	V1028075	%15f	`"Peso REPLICADO 75"'
+_column(1966)	float	V1028076	%15f	`"Peso REPLICADO 76"'
+_column(1981)	float	V1028077	%15f	`"Peso REPLICADO 77"'
+_column(1996)	float	V1028078	%15f	`"Peso REPLICADO 78"'
+_column(2011)	float	V1028079	%15f	`"Peso REPLICADO 79"'
+_column(2026)	float	V1028080	%15f	`"Peso REPLICADO 80"'
+_column(2041)	float	V1028081	%15f	`"Peso REPLICADO 81"'
+_column(2056)	float	V1028082	%15f	`"Peso REPLICADO 82"'
+_column(2071)	float	V1028083	%15f	`"Peso REPLICADO 83"'
+_column(2086)	float	V1028084	%15f	`"Peso REPLICADO 84"'
+_column(2101)	float	V1028085	%15f	`"Peso REPLICADO 85"'
+_column(2116)	float	V1028086	%15f	`"Peso REPLICADO 86"'
+_column(2131)	float	V1028087	%15f	`"Peso REPLICADO 87"'
+_column(2146)	float	V1028088	%15f	`"Peso REPLICADO 88"'
+_column(2161)	float	V1028089	%15f	`"Peso REPLICADO 89"'
+_column(2176)	float	V1028090	%15f	`"Peso REPLICADO 90"'
+_column(2191)	float	V1028091	%15f	`"Peso REPLICADO 91"'
+_column(2206)	float	V1028092	%15f	`"Peso REPLICADO 92"'
+_column(2221)	float	V1028093	%15f	`"Peso REPLICADO 93"'
+_column(2236)	float	V1028094	%15f	`"Peso REPLICADO 94"'
+_column(2251)	float	V1028095	%15f	`"Peso REPLICADO 95"'
+_column(2266)	float	V1028096	%15f	`"Peso REPLICADO 96"'
+_column(2281)	float	V1028097	%15f	`"Peso REPLICADO 97"'
+_column(2296)	float	V1028098	%15f	`"Peso REPLICADO 98"'
+_column(2311)	float	V1028099	%15f	`"Peso REPLICADO 99"'
+_column(2326)	float	V1028100	%15f	`"Peso REPLICADO 100"'
+_column(2341)	float	V1028101	%15f	`"Peso REPLICADO 101"'
+_column(2356)	float	V1028102	%15f	`"Peso REPLICADO 102"'
+_column(2371)	float	V1028103	%15f	`"Peso REPLICADO 103"'
+_column(2386)	float	V1028104	%15f	`"Peso REPLICADO 104"'
+_column(2401)	float	V1028105	%15f	`"Peso REPLICADO 105"'
+_column(2416)	float	V1028106	%15f	`"Peso REPLICADO 106"'
+_column(2431)	float	V1028107	%15f	`"Peso REPLICADO 107"'
+_column(2446)	float	V1028108	%15f	`"Peso REPLICADO 108"'
+_column(2461)	float	V1028109	%15f	`"Peso REPLICADO 109"'
+_column(2476)	float	V1028110	%15f	`"Peso REPLICADO 110"'
+_column(2491)	float	V1028111	%15f	`"Peso REPLICADO 111"'
+_column(2506)	float	V1028112	%15f	`"Peso REPLICADO 112"'
+_column(2521)	float	V1028113	%15f	`"Peso REPLICADO 113"'
+_column(2536)	float	V1028114	%15f	`"Peso REPLICADO 114"'
+_column(2551)	float	V1028115	%15f	`"Peso REPLICADO 115"'
+_column(2566)	float	V1028116	%15f	`"Peso REPLICADO 116"'
+_column(2581)	float	V1028117	%15f	`"Peso REPLICADO 117"'
+_column(2596)	float	V1028118	%15f	`"Peso REPLICADO 118"'
+_column(2611)	float	V1028119	%15f	`"Peso REPLICADO 119"'
+_column(2626)	float	V1028120	%15f	`"Peso REPLICADO 120"'
+_column(2641)	float	V1028121	%15f	`"Peso REPLICADO 121"'
+_column(2656)	float	V1028122	%15f	`"Peso REPLICADO 122"'
+_column(2671)	float	V1028123	%15f	`"Peso REPLICADO 123"'
+_column(2686)	float	V1028124	%15f	`"Peso REPLICADO 124"'
+_column(2701)	float	V1028125	%15f	`"Peso REPLICADO 125"'
+_column(2716)	float	V1028126	%15f	`"Peso REPLICADO 126"'
+_column(2731)	float	V1028127	%15f	`"Peso REPLICADO 127"'
+_column(2746)	float	V1028128	%15f	`"Peso REPLICADO 128"'
+_column(2761)	float	V1028129	%15f	`"Peso REPLICADO 129"'
+_column(2776)	float	V1028130	%15f	`"Peso REPLICADO 130"'
+_column(2791)	float	V1028131	%15f	`"Peso REPLICADO 131"'
+_column(2806)	float	V1028132	%15f	`"Peso REPLICADO 132"'
+_column(2821)	float	V1028133	%15f	`"Peso REPLICADO 133"'
+_column(2836)	float	V1028134	%15f	`"Peso REPLICADO 134"'
+_column(2851)	float	V1028135	%15f	`"Peso REPLICADO 135"'
+_column(2866)	float	V1028136	%15f	`"Peso REPLICADO 136"'
+_column(2881)	float	V1028137	%15f	`"Peso REPLICADO 137"'
+_column(2896)	float	V1028138	%15f	`"Peso REPLICADO 138"'
+_column(2911)	float	V1028139	%15f	`"Peso REPLICADO 139"'
+_column(2926)	float	V1028140	%15f	`"Peso REPLICADO 140"'
+_column(2941)	float	V1028141	%15f	`"Peso REPLICADO 141"'
+_column(2956)	float	V1028142	%15f	`"Peso REPLICADO 142"'
+_column(2971)	float	V1028143	%15f	`"Peso REPLICADO 143"'
+_column(2986)	float	V1028144	%15f	`"Peso REPLICADO 144"'
+_column(3001)	float	V1028145	%15f	`"Peso REPLICADO 145"'
+_column(3016)	float	V1028146	%15f	`"Peso REPLICADO 146"'
+_column(3031)	float	V1028147	%15f	`"Peso REPLICADO 147"'
+_column(3046)	float	V1028148	%15f	`"Peso REPLICADO 148"'
+_column(3061)	float	V1028149	%15f	`"Peso REPLICADO 149"'
+_column(3076)	float	V1028150	%15f	`"Peso REPLICADO 150"'
+_column(3091)	float	V1028151	%15f	`"Peso REPLICADO 151"'
+_column(3106)	float	V1028152	%15f	`"Peso REPLICADO 152"'
+_column(3121)	float	V1028153	%15f	`"Peso REPLICADO 153"'
+_column(3136)	float	V1028154	%15f	`"Peso REPLICADO 154"'
+_column(3151)	float	V1028155	%15f	`"Peso REPLICADO 155"'
+_column(3166)	float	V1028156	%15f	`"Peso REPLICADO 156"'
+_column(3181)	float	V1028157	%15f	`"Peso REPLICADO 157"'
+_column(3196)	float	V1028158	%15f	`"Peso REPLICADO 158"'
+_column(3211)	float	V1028159	%15f	`"Peso REPLICADO 159"'
+_column(3226)	float	V1028160	%15f	`"Peso REPLICADO 160"'
+_column(3241)	float	V1028161	%15f	`"Peso REPLICADO 161"'
+_column(3256)	float	V1028162	%15f	`"Peso REPLICADO 162"'
+_column(3271)	float	V1028163	%15f	`"Peso REPLICADO 163"'
+_column(3286)	float	V1028164	%15f	`"Peso REPLICADO 164"'
+_column(3301)	float	V1028165	%15f	`"Peso REPLICADO 165"'
+_column(3316)	float	V1028166	%15f	`"Peso REPLICADO 166"'
+_column(3331)	float	V1028167	%15f	`"Peso REPLICADO 167"'
+_column(3346)	float	V1028168	%15f	`"Peso REPLICADO 168"'
+_column(3361)	float	V1028169	%15f	`"Peso REPLICADO 169"'
+_column(3376)	float	V1028170	%15f	`"Peso REPLICADO 170"'
+_column(3391)	float	V1028171	%15f	`"Peso REPLICADO 171"'
+_column(3406)	float	V1028172	%15f	`"Peso REPLICADO 172"'
+_column(3421)	float	V1028173	%15f	`"Peso REPLICADO 173"'
+_column(3436)	float	V1028174	%15f	`"Peso REPLICADO 174"'
+_column(3451)	float	V1028175	%15f	`"Peso REPLICADO 175"'
+_column(3466)	float	V1028176	%15f	`"Peso REPLICADO 176"'
+_column(3481)	float	V1028177	%15f	`"Peso REPLICADO 177"'
+_column(3496)	float	V1028178	%15f	`"Peso REPLICADO 178"'
+_column(3511)	float	V1028179	%15f	`"Peso REPLICADO 179"'
+_column(3526)	float	V1028180	%15f	`"Peso REPLICADO 180"'
+_column(3541)	float	V1028181	%15f	`"Peso REPLICADO 181"'
+_column(3556)	float	V1028182	%15f	`"Peso REPLICADO 182"'
+_column(3571)	float	V1028183	%15f	`"Peso REPLICADO 183"'
+_column(3586)	float	V1028184	%15f	`"Peso REPLICADO 184"'
+_column(3601)	float	V1028185	%15f	`"Peso REPLICADO 185"'
+_column(3616)	float	V1028186	%15f	`"Peso REPLICADO 186"'
+_column(3631)	float	V1028187	%15f	`"Peso REPLICADO 187"'
+_column(3646)	float	V1028188	%15f	`"Peso REPLICADO 188"'
+_column(3661)	float	V1028189	%15f	`"Peso REPLICADO 189"'
+_column(3676)	float	V1028190	%15f	`"Peso REPLICADO 190"'
+_column(3691)	float	V1028191	%15f	`"Peso REPLICADO 191"'
+_column(3706)	float	V1028192	%15f	`"Peso REPLICADO 192"'
+_column(3721)	float	V1028193	%15f	`"Peso REPLICADO 193"'
+_column(3736)	float	V1028194	%15f	`"Peso REPLICADO 194"'
+_column(3751)	float	V1028195	%15f	`"Peso REPLICADO 195"'
+_column(3766)	float	V1028196	%15f	`"Peso REPLICADO 196"'
+_column(3781)	float	V1028197	%15f	`"Peso REPLICADO 197"'
+_column(3796)	float	V1028198	%15f	`"Peso REPLICADO 198"'
+_column(3811)	float	V1028199	%15f	`"Peso REPLICADO 199"'
+_column(3826)	float	V1028200	%15f	`"Peso REPLICADO 200"'
 }

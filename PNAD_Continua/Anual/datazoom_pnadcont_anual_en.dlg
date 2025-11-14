@@ -2,12 +2,12 @@
 VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 500 400
+POSITION . . 500 500
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
 ******************************************************************************   
-GROUPBOX caixaVisitas 20 20 200 260, label("Visit(s)")
+GROUPBOX caixaVisitas 20 20 200 270, label("Visit(s)")
 
    CHECKBOX    ck2012_vis1 +14 +20 120  ., label("2012 visit 1")  option(2012_vis1)
    CHECKBOX    ck2013_vis1 @ +20 120    ., label("2013 visit 1")  option(2013_vis1)
@@ -20,8 +20,8 @@ GROUPBOX caixaVisitas 20 20 200 260, label("Visit(s)")
    CHECKBOX	   ck2018_vis1 @ +20 120	   ., label("2018 visit 1")  option(2018_vis1)
    CHECKBOX	   ck2018_vis5 @ +20 120	   ., label("2018 visit 5")  option(2018_vis5)
    CHECKBOX	   ck2019_vis1 @ +20 120	   ., label("2019 visit 1")  option(2019_vis1)
-   CHECKBOX	   ck2019_vis5 +95 -200 120	   ., label("2019 visit 5")  option(2019_vis5)
-   CHECKBOX	   ck2020_vis2 @ +20 120	   ., label("2020 visit 2")  option(2020_vis2)
+   CHECKBOX	   ck2019_vis5 @ +20 120	   ., label("2019 visit 5")  option(2019_vis5)
+   CHECKBOX	   ck2020_vis2 +95 -220 120	   ., label("2020 visit 2")  option(2020_vis2)
    CHECKBOX	   ck2020_vis5 @ +20 120	   ., label("2020 visit 5")  option(2020_vis5)
    CHECKBOX	   ck2021_vis2 @ +20 120	   ., label("2021 visit 2")  option(2021_vis2)
    CHECKBOX	   ck2021_vis5 @ +20 120	   ., label("2021 visit 5")  option(2021_vis5)
@@ -30,9 +30,12 @@ GROUPBOX caixaVisitas 20 20 200 260, label("Visit(s)")
    CHECKBOX	   ck2023_vis1 @ +20 120	   ., label("2023 visit 1")  option(2023_vis1)
    CHECKBOX	   ck2023_vis2 @ +20 120	   ., label("2023 visit 2")  option(2023_vis2)
    CHECKBOX	   ck2023_vis5 @ +20 120	   ., label("2023 visit 5")  option(2023_vis5)
-   CHECKBOX	   ck2024_vis1 @ +20 120	   ., label("2024 visit 1")  option(2024_vis1) 
+   CHECKBOX	   ck2024_vis1 @ +20 120	   ., label("2024 visit 1")  option(2024_vis1)
+   CHECKBOX	   ck2024_vis2 @ +20 120	   ., label("2024 visit 2")  option(2024_vis2)
+   CHECKBOX	   ck2024_vis5 @ +20 120	   ., label("2024 visit 5")  option(2024_vis5)
    
-GROUPBOX caixaTrimestres 225 20 130 350, label("Trimester(s)")
+   
+GROUPBOX caixaTrimestres 225 20 130 410, label("Trimester(s)")
 
    CHECKBOX	   ck2016_tri2 +14 +20 120	   ., label("2016 trimester 2")  option(2016_tri2)
    CHECKBOX	   ck2016_tri4 @ +20 120	   ., label("2016 trimester 4")  option(2016_tri4)
@@ -50,6 +53,9 @@ GROUPBOX caixaTrimestres 225 20 130 350, label("Trimester(s)")
    CHECKBOX	   ck2023_tri1 @ +20 120	   ., label("2023 trimester 1")  option(2023_tri1)
    CHECKBOX    ck2023_tri2 @ +20 120	   ., label("2023 trimester 2")  option(2023_tri2)
    CHECKBOX    ck2023_tri4 @ +20 120	   ., label("2023 trimester 4")  option(2023_tri4)
+   CHECKBOX    ck2024_tri2 @ +20 120	   ., label("2024 trimester 2")  option(2024_tri2)
+   CHECKBOX    ck2024_tri3 @ +20 120	   ., label("2024 trimester 3")  option(2024_tri3)
+   CHECKBOX    ck2024_tri4 @ +20 120	   ., label("2024 trimester 4")  option(2024_tri4)
 
    
 GROUPBOX caixaDicionários 360 50 120 100, label("Databases")
@@ -60,7 +66,7 @@ GROUPBOX caixaDicionários 360 50 120 100, label("Databases")
 
 	CHECKBOX	eng      360  30 220 ., label("Labels in English") option(english)
 	
-TEXT     credit     0  380 460  ., label("PUC-Rio - Department of Economics") right
+TEXT     credit     0  480 460  ., label("PUC-Rio - Department of Economics") right
 
 END
 
@@ -76,7 +82,7 @@ SCRIPT PREINIT_SCRIPT
 OK ok1,      label("OK")
 SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pnadcont_anual")
+HELP hlp1,   view("help datazoom_pnadcont_anual_en")
 RESET res1
 
 ******************************************************************************
@@ -108,7 +114,7 @@ PROGRAM command
 		beginoptions
 			/*Parte da syntax: anos a extrair*/
 			put "years("
-			option main.ck2012_vis1 main.ck2013_vis1 main.ck2014_vis1 main.ck2015_vis1 main.ck2016_vis1 main.ck2017_vis1 main.ck2018_vis1 main.ck2019_vis1 main.ck2022_vis1 main.ck2023_vis1 main.ck2016_vis5 main.ck2017_vis5 main.ck2018_vis5 main.ck2019_vis5 main.ck2020_vis5 main.ck2021_vis5 main.ck2022_vis5 main.ck2023_vis5 main.ck2020_vis2 main.ck2021_vis2 main.ck2023_vis2 main.ck2024_vis1 main.ck2016_tri2 main.ck2016_tri4 main.ck2017_tri2 main.ck2017_tri4 main.ck2018_tri2 main.ck2018_tri4 main.ck2019_tri2 main.ck2019_tri3 main.ck2019_tri4 main.ck2021_tri4 main.ck2022_tri2 main.ck2022_tri3 main.ck2022_tri4 main.ck2023_tri1 main.ck2023_tri2 main.ck2023_tri4
+			option main.ck2012_vis1 main.ck2013_vis1 main.ck2014_vis1 main.ck2015_vis1 main.ck2016_vis1 main.ck2017_vis1 main.ck2018_vis1 main.ck2019_vis1 main.ck2022_vis1 main.ck2023_vis1 main.ck2024_vis1 main.ck2016_vis5 main.ck2017_vis5 main.ck2018_vis5 main.ck2019_vis5 main.ck2020_vis5 main.ck2021_vis5 main.ck2022_vis5 main.ck2023_vis5 main.ck2024_vis5 main.ck2020_vis2 main.ck2021_vis2 main.ck2023_vis2 main.ck2024_vis2 main.ck2016_tri2 main.ck2016_tri4 main.ck2017_tri2 main.ck2017_tri4 main.ck2018_tri2 main.ck2018_tri4 main.ck2019_tri2 main.ck2019_tri3 main.ck2019_tri4 main.ck2021_tri4 main.ck2022_tri2 main.ck2022_tri3 main.ck2022_tri4 main.ck2023_tri1 main.ck2023_tri2 main.ck2023_tri4 main.ck2024_tri2 main.ck2024_tri3 main.ck2024_tri4
 			put ") "
 			/*Parte da syntax: base de dados originais*/
 			put saidadata " "
