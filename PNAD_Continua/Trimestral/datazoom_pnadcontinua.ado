@@ -73,26 +73,29 @@ else {
 
 loc caminhoprin = c(pwd)
 
-* juntando os trimestres de cada ano
-foreach aa in `years' {	
-	use `PNADC_01`aa'', clear
-	foreach trim in 02 03 04 {
-		capture append using `PNADC_`trim'`aa''
-		if _rc != 0 {
-			continue, break	
-		}
-	}
-	if "`nid'"~="" {
-		save PNADC_trimestral_`aa' 
-		exit
-	}
-	else {
-		tempfile PNADC`aa'
-		save "PNADC`aa'", replace
-	}
+foreach aa in `years' {    
+    use "``PNADC_01`aa'''", clear // (Nota: use as aspas duplas extras para segurança)
+    foreach trim in 02 03 04 {
+        capture append using "``PNADC_`trim'`aa'''"
+        if _rc != 0 {
+            continue, break    
+        }
+    }
+    
+    // CORREÇÃO: Salva o trimestral se pedir NID, mas NÃO usa exit.
+    if "`nid'" != "" {
+        save "PNADC_trimestral_`aa'.dta", replace
+        // O código vai simplesmente continuar para o próximo ano
+    }
+    else {
+        tempfile PNADC`aa'
+        save "`PNADC`aa''", replace
+    }
 }
 
+// CORREÇÃO: Envolvemos todo o resto do código (painel) neste bloco IF
 if "`nid'" == "" {
+   // ... O resto do código do painel entra aqui ...
 
 ******************************
 * Junta paineis 
@@ -170,7 +173,8 @@ syntax, temps(string)
 		
 	egen aux_id = concat(V1014 id_ind), punct("_")
 		
-	replace id_ind = aux_ind
+    drop id_ind
+	rename aux_id id_ind
 		
 	label var id_ind "Basic identifier"
 }
