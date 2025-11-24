@@ -103,40 +103,50 @@ if "`nid'" == "" {
 
 clear
 
-forvalues pa = 1/`max_panel' { 
+// Inicializa lista para guardar os nomes dos arquivos temporários
+    local painel_temps_para_id "" 
 
-	// tempfile to store all years of this panel
-	tempfile PNADC_Painel`pa'
-	
-	clear
+    forvalues pa = 1/`max_panel' { 
 
-	foreach aa in `years' {
-		use PNADC`aa', clear
-		keep if V1014 == `pa'
-		
-		append using "`PNADC_Painel`pa''"
-		
-		save "`PNADC_Painel`pa''", replace
-	}
-}
+        tempfile PNADC_Painel`pa'
+        local created_panel = 0 // Variável de controle
+        
+        foreach aa in `years' {
+            use "`PNADC`aa''", clear
+            keep if V1014 == `pa'
+            
+            qui count
+            if r(N) > 0 {
+                // CORREÇÃO 1: Só dá append se o arquivo já foi criado antes
+                if `created_panel' == 0 {
+                    save "`PNADC_Painel`pa''", replace
+                    local created_panel = 1
+                }
+                else {
+                    tempfile append_part
+                    save "`append_part'", replace
+                    use "`PNADC_Painel`pa''", clear
+                    append using "`append_part'"
+                    save "`PNADC_Painel`pa''", replace
+                }
+            }
+        }
+        
+        // Se o painel foi criado, adiciona na lista para processar depois
+        if `created_panel' == 1 {
+            local painel_temps_para_id "`painel_temps_para_id' `PNADC_Painel`pa''"
+        }
+    }
 
-forvalues pa = 1/`max_panel' { 
+    // CORREÇÃO 2: Chama o programa passando a lista EXPLICITAMENTE
+    if "`idbas'" != "" {
+         pnadcont_idbas, temps(`painel_temps_para_id')
+    }
+    if "`idrs'" != "" {
+         pnadcont_idrs, temps(`painel_temps_para_id')
+    }
 
-	use "`PNADC_Painel`pa''", clear
-	
-	noi di as result "Executando Identificação"
-	
-	// Roda identificação
-	pnadcont_`idbas'`idrs'
-	
-	cap drop __* // remove tempvars
-	
-	local suffix = substr(`idbas'`idrs', 3, .)
-	
-	// Salva o arquivo
-	save PNAD_painel_`pa'_`suffix', replace
-	
-}
+} // Fecha o if "`nid'" == "" aberto lá em cima
 }
 
 datazoom_message
