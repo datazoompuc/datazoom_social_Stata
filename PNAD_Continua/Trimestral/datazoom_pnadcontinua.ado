@@ -138,7 +138,7 @@ clear
         }
     }
 
-    // CORREÇÃO 2: Chama o programa passando a lista EXPLICITAMENTE
+    
     if "`idbas'" != "" {
          pnadcont_idbas, temps(`painel_temps_para_id')
     }
@@ -163,37 +163,46 @@ end
 program pnadcont_idbas
 syntax, temps(string)
 		
-	// Rodando identificação básica
+	// Loop para processar cada arquivo temporário da lista
+	foreach file in `temps' {
 		
-	egen id_dom = group(UF UPA V1008 V1014)
-	egen id_ind = group(id_dom V2003 V20082 V20081 V2008 V2007)
+		noi di as text "Aplicando ID Básica em: `file'"
+		use "`file'", clear
+		
+		// 1. Criação dos Identificadores Numéricos
+		// Garante que não há lixo de tentativas anteriores
+		cap drop id_dom id_ind
+		
+		egen id_dom = group(UF UPA V1008 V1014)
+		egen id_ind = group(id_dom V2003 V20082 V20081 V2008 V2007)
 
-	// Removendo "gêmeos"
-	// Observações que aparecem mais de uma vez por trimestre
+		// 2. Removendo "gêmeos" (Observações duplicadas no mesmo trimestre)
+		tempvar num_app
+		egen `num_app' = count(V1014), by(id_ind Ano Trimestre)
 		
-	tempvar num_app
+		// Se houver inconsistência (duplicata), anula o ID
+		replace id_ind = . if `num_app' != 1 
 		
-	egen `num_app' = count(V1014), by(id_ind Ano Trimestre) // contando aparições
+		// 3. Convertendo para Identificador Final (Texto: "Painel_ID")
+		tempvar aux_id
+		// Concatena o número do painel (V1014) com o ID gerado
+		egen `aux_id' = concat(V1014 id_ind), punct("_")
 		
-	replace id_ind = . if `num_app' != 1 // em caso de esquisitisses, ID é missing
+		// Substituição segura: deleta o numérico e renomeia a string
+		drop id_ind
+		rename `aux_id' id_ind
 		
-	// Fazendo paste no número do painel antes do código de ID
+		label var id_ind "Basic identifier"
 		
-	tempvar aux_id
-		
-	egen aux_id = concat(V1014 id_ind), punct("_")
-		
-    drop id_ind
-	rename aux_id id_ind
-		
-	label var id_ind "Basic identifier"
-}
+		// Salva o arquivo com as alterações
+		save "`file'", replace
+	}
 
 end
 
 
 /*_______________________________________________________________________*/
-/*___________________Executa a identificação Ribas Soares________________*/
+/*___________________Executa a identificação Avançada________________*/
 /*_______________________________________________________________________*/
 
 program pnadcont_idrs
@@ -201,49 +210,76 @@ syntax, temps(string)
 
 /*Executa a identificação de Ribas & Soares*/
 
-	// Primeiro rodando a identificação básica
-	
-	pnadcont_idbas
+	// 1. Roda a identificação básica primeiro
+	// Passamos a lista 'temps' para garantir que ela processe os arquivos certos
+	pnadcont_idbas, temps("`temps'")
 		
-	qui sum id_ind
+	// 2. Loop para processar a parte avançada em cada arquivo
+	foreach file in `temps' {
 		
-	local max_id = r(max) // para evitar overlap entre ids básicas e avançadas
+		noi di as text "Aplicando ID Ribas-Soares em: `file'"
+		use "`file'", clear
 		
-	// Marcando as observações já emparelhadas
+		// --- Recuperando o Max ID Numérico ---
+		// Como o idbas transformou o id_ind em texto (ex: "1_503"), 
+		// precisamos extrair a parte numérica para calcular o máximo e não sobrepor IDs.
+		tempvar id_num_recuperado
+		gen long `id_num_recuperado' = real(substr(id_ind, strpos(id_ind, "_")+1, .))
 		
-	tempvar quarters_basic matched_basic
+		qui sum `id_num_recuperado'
+		local max_id = r(max) 
 		
-	egen `quarters_basic' = count(V1014), by(id_ind)
 		
-	gen `matched_basic' = (`quarters_basic' == 5)
+		// --- Lógica Ribas & Soares ---
 		
-	// Definindo observações que entram na segunda etapa
+		// Marcando as observações já emparelhadas (sucesso na básica)
+		tempvar quarters_basic matched_basic
+		egen `quarters_basic' = count(V1014), by(id_ind)
+		gen `matched_basic' = (`quarters_basic' == 5)
 		
-	tempvar rs_group
+		// Definindo observações que entram na segunda etapa (Recuperação)
+		tempvar rs_group
+		gen `rs_group' = 0
 		
-	gen `rs_group' = 0
-	replace `rs_group' = 1 if `matched_basic' != 1 & inlist(V2005, 1, 2, 3)
-	replace `rs_group' = 2 if `matched_basic' != 1 & inlist(V2005, 4, 5) & V2009 >= 25
+		// Critérios de recuperação (quem falhou no básico mas tem atributos consistentes)
+		replace `rs_group' = 1 if `matched_basic' != 1 & inlist(V2005, 1, 2, 3)
+		replace `rs_group' = 2 if `matched_basic' != 1 & inlist(V2005, 4, 5) & V2009 >= 25
 		
-	// Rodando a segunda etapa
-	// Sem data exata de nascimento
+		// Recria id_dom temporário (necessário pois variáveis temporárias se perdem no reload)
+		tempvar id_dom_temp
+		egen `id_dom_temp' = group(UF UPA V1008 V1014)
 		
-	egen id_rs = group(id_dom V20081 V2008 V2003 `rs_group')
+		// Gerando o ID Avançado (Numérico)
+		tempvar id_rs_num
+		egen `id_rs_num' = group(`id_dom_temp' V20081 V2008 V2003 `rs_group')
 		
-	replace id_rs = id_rs + `max_id'
+		// Desloca o ID para não colidir com o ID básico existente
+		replace `id_rs_num' = `id_rs_num' + `max_id'
 		
-	replace id_rs = id_ind if missing(id_rs)
 		
-	// Vendo quem foi matcheado novamente
+		// --- Atualizando o id_ind Final ---
 		
-	tempvar quarters_adv matched_adv
+		// O id_ind é texto (Painel_ID). O id_rs_num é número.
+		// Precisamos converter o id_rs_num para o formato texto "Painel_ID" antes de substituir.
 		
-	egen `quarters_adv' = count(V1014), by(id_ind)
+		tempvar id_rs_string
+		egen `id_rs_string' = concat(V1014 `id_rs_num'), punct("_")
 		
-	gen `matched_adv' = (`quarters_adv' == 5)
+		// Se a pessoa foi recuperada pelo método RS (rs_group > 0), atualizamos o ID dela.
+		replace id_ind = `id_rs_string' if `rs_group' > 0 & !missing(`id_rs_num')
+		
+		
+		// --- Verificação Final (Opcional) ---
+		tempvar quarters_adv matched_adv
+		egen `quarters_adv' = count(V1014), by(id_ind)
+		gen `matched_adv' = (`quarters_adv' == 5)
+
+		// Salva o arquivo final
+		save "`file'", replace
+	}
 
 end
 
-********************************************************************
+**************************************************************************
 
 
