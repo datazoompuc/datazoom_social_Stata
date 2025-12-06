@@ -103,7 +103,7 @@ BEGIN
 
 PROGRAM hlink1
 	BEGIN
-		put "datazoom_link_guia_suplementos"
+		put "datazoom_link"
 		stata
    END
 
