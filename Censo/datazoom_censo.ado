@@ -840,7 +840,7 @@ foreach ano in `years' {
 
 
 					/* Compatibiliza, se especificado */
-	            	if "`comp'" != "" {
+	            			if "`comp'" != "" {
 						compat_censo10pess
 
 						/* Áreas Mínimas Comparáveis */
@@ -907,7 +907,7 @@ foreach ano in `years' {
 					lab var munic "municipality codes without DV (6 digits)"
 
 					/* Compatibiliza, se especificado */
-	            	if "`comp'" != "" {
+	            			if "`comp'" != "" {
 						compat_censo10dom
 
 						/* Áreas Mínimas Comparáveis */
@@ -1224,8 +1224,8 @@ rename v0205 cond_ocup_C
 
 
 recode v0206 (2 3 = 0) // (1=1)
-rename v0206 terr_proprio
-* terr_proprio = 0 - não
+rename v0206 terreno_prop
+* terreno_prop = 0 - não
 *                1 - sim
 
 
@@ -1274,7 +1274,7 @@ g tipo_esc_san_B = v0211
 *                 4 - Vala
 *                 5 - Rio, lago ou mar
 *                 6 - Outro 
-lab var tipo_esc_san "tipo de escoadouro - desagregado"
+lab var tipo_esc_san_B "tipo de escoadouro - desagregado"
 
 recode v0211 (5 6 = 4) // 1 a 4 mantidos
 rename v0211 tipo_esc_san
@@ -1318,7 +1318,7 @@ rename v0215 gelad_ou_fre
 recode v0217 (2=0) // (1=1)
 rename v0217 lavaroupa
 * lavaroupa = 0 - não tem	
-*			= 1 - tem
+* 		1 - tem
 
 recode v0219 (2=0) // (1=1)
 rename v0219 telefone
@@ -1356,11 +1356,11 @@ recode v7616 (999999 = .)
 rename v7616 renda_dom
 drop v7617	// em salarios minimos
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NÃO SERIA agosto/2010?
 g double deflator = .515004440
 g conversor = 1
 
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NÃO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -1573,6 +1573,7 @@ rename v0415 sempre_morou
 recode v0417 (2=0) // (1=1)
 replace v0417 = 1 if sempre_morou == 1 // originalmente é missing
 rename v0417 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 * nasceu_mun = 0 - não
 *              1 - sim
 
@@ -1773,8 +1774,8 @@ recode  v4354 (2 = .)	///
 		  (520/582 = 5) ///
 		  (620/641 = 6) ///
 		  (720/762 = 7) ///
-		  (810/863 = 8) ///
-		  (085 097 = 9), g(cursos_c2)
+		  (863 = 8) ///
+		  (810/862 085 097 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
 *				2	Artes, Humanidades e Letras
@@ -1845,13 +1846,13 @@ rename v0440 afast_trab_sem
 recode v0442 (2=0) // (1=1)
 rename v0442 nao_remun
 replace nao_remun = 1 if v0441==1 & nao_remun==.
-* nao_remunerado = 0 - não
+* nao_remun = 0 - não
 *                  1 - sim
 drop v0441
 
 recode v0443 (2=0) // (1=1)
 rename v0443 trab_proprio_cons
-* prod_alim_cons_proprio = 0 - não
+* trab_proprio_cons = 0 - não
 *                          1 - sim
 
 recode v0444 (1=0) (2=1)
@@ -1878,7 +1879,7 @@ replace pos_ocup_sem = 2 if v0448==1
 *				  3 - Empregado sem carteira
 *				  4 - Trabalhador doméstico com carteira
 *				  5 - Trabalhador doméstico sem carteira
-*				  6 - Conta - própria
+*				  6 - Conta-própria
 *				  7 - Empregador
 *				  8 - Não remunerado
 *                 9 - Trabalhador na produção para o próprio consumo
@@ -1910,8 +1911,8 @@ rename v4276 mun_trab
 recode v4512 (0 999000 999999=.)
 rename v4512 rend_ocup_prin
 
-*	recode v4513 (0 999000 999999=.)
-*	rename v4513 rend_tot_prin
+*	recode v4513 (0 999000 999999=.) // POR QUE NÃO APAGAR?
+*	rename v4513 rend_tot_prin // POR QUE NÃO APAGAR?
 
 replace v4514 = . if rend_ocup_prin==.
 rename v4514 rend_prin_sm
@@ -1958,10 +1959,10 @@ lab var rend_fam "renda familiar"
 
 drop  ESTR ESTRP
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.515004440
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010"  // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
@@ -1990,12 +1991,18 @@ rename v4632 f_vivos_mul
 rename v4671 f_nasc_m_hom
 rename v4672 f_nasc_m_mul
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
+
 recode v0464 (2=0) // (1=1)
 rename v0464 sexo_ult_nasc_v
 * sexo_ult_nas_v = 0 - feminino
 *                  1 - masculino
 replace v4654=. if v4654==99
 rename v4654 idade_ult_nasc_v
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 
 /* PESO E OUTRAS */
 rename P001 peso_pess
@@ -3149,9 +3156,9 @@ lab var sit_setor_C "situação do domicílio - urbano/rural"
 
 rename v4001 especie
 recode especie (1 2 = 0) (5 = 1) (6 = 2)
-*especie_B = 0 - particular permanente 
-*            1 - particular improvisado
-*            2 - coletivo
+*especie = 0 - particular permanente 
+*          1 - particular improvisado
+*          2 - coletivo
 
 /* C.3. MATERIAL DAS PAREDES */
 recode v0202 (2 4 = 1) (3 = 2) (5 = 3) (6 = 4) (7 = 5) (8 = 6) (9 = .)
@@ -3160,7 +3167,7 @@ rename v0202 paredes
 *        	= 2   Madeira aparelhada
 *        	= 3   Taipa não revestida
 *       	= 4   Material aproveitado
-*   	    = 5   Palha
+*   	    	= 5   Palha
 *	        = 6   Outro
 
 
@@ -3290,8 +3297,8 @@ drop abast_agua_B
 
 rename v0209 agua_canal
 *agua_canal = 1 - Canalizada em pelo menos um cômodo
-*              2 - Canalizada só na propriedade ou terreno
-*              3 - Não canalizada
+*             2 - Canalizada só na propriedade ou terreno
+*             3 - Não canalizada
 
 
 /* C.9. DESTINO DO LIXO */
@@ -3307,14 +3314,14 @@ rename v0210 dest_lixo
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 rename v0211 ilum_eletr
 recode ilum_eletr (1 2 =1) (3 = 0)
-*ilum_eletr	 = 0 - Não
-*              1 - Sim
+*ilum_eletr = 0 - Não
+*             1 - Sim
 
 
 rename v0212 medidor_el
 recode medidor_el (1 2 = 1) (3 = 0)
 *medidor_el = 1 - Tem
-*			  0 - Não tem
+*		0 - Não tem
 
 
 
@@ -3344,7 +3351,7 @@ drop v0217
 recode v0218 (2=0)
 rename v0218 telefone
 *telefone = 0 - Não
-*            1 - Sim
+*           1 - Sim
 
 rename v0219 microcomp
 recode microcomp (2 = 0)
@@ -3372,11 +3379,11 @@ rename v6529 renda_dom
 
 drop v6530 v6531 v6532
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS:  */ NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
 
-lab var deflator "deflator - referência: 08/2010"
+lab var deflator "deflator - referência: 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -3445,7 +3452,7 @@ recode sexo (2 =0)
 rename v0502 cond_dom
 recode 	cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 	(12 = 6) (14 13 7 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
-*condicao_dom = 1	pessoa responsável
+*cond_dom = 1	pessoa responsável
 *				2	cônjuge, companheiro
 *				3	filho, enteado
 *				4	pai, mãe, sogro
@@ -3459,7 +3466,7 @@ recode 	cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 *				12	Individual em domicílio coletivo
 
 g cond_dom_B = cond_dom
-recode cond_dom_B (8 = 6) (10 = 8) (11 = 9) (12 = 10) (5 6 = 5) (9 = 7)
+recode cond_dom_B (8 = 6) (10 = 8) (11 = 9) (12 = 10) (5 6 7 = 5) (9 = 7)
 lab var cond_dom_B "condição no domicílio B"
 *cond_dom_B = 1	- pessoa responsável
 *				  2	- cônjuge, companheiro
@@ -3478,7 +3485,7 @@ rename v6037 idade_meses
 rename v6040 idade_presumida
 recode idade_presumida (2 = 1) (1 = 0)
 *idade_presumida =   0-	Não
-*					 1- Sim
+*			1- Sim
 
 drop v6033	
 	
@@ -3493,7 +3500,7 @@ rename v0606 raca
 	
 g racaB = raca
 recode racaB (5 = 4)
-lab var racaB "cor ou raça (indigenous=mulatto)"
+lab var racaB "cor ou raça (indigenous=mulatto)" // POR QUE ESTA EM INGLES?
 *	raca =  1 -Branca
 *			2 - Preta
 *			3 - Amarela
@@ -3562,24 +3569,25 @@ rename v0617 def_mental
 recode v0618 (2 3 = 0), copy g(sempre_morou)
 lab var sempre_morou "sempre morou neste município"
 * sempre_morou = 1 - sim
-*				= 0 - nao
+*		= 0 - nao
 
 rename v0618 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 recode nasceu_mun (1 2 = 1) (3 = 0)
 	*nasceu_mun = 1- Sim
-	*			  0- Não
+	*		0- Não
 rename v0619 nasceu_UF
 recode nasceu_UF (1 2 = 1) (3 = 0)
 replace nasceu_UF = 1 if nasceu_mun==1
 	*nasceu_UF = 1- Sim
-	*			  0- Não
+	*		0- Não
 
 rename v0620 nacionalidade 
 recode nacionalidade (1 = 0) (2 = 1) (3 = 2)
 replace nacionalidade = 0 if nasceu_UF==1
 * nacionalidade = 0- Brasileiro nato
-	*				  1- Naturalizado brasileiro
-	*				  2- Estrangeiro
+	*		1- Naturalizado brasileiro
+	*		2- Estrangeiro
 	
 rename v0621 ano_fix_res
 	*ano em que fixou residência no Brasil
@@ -3755,7 +3763,7 @@ rename v0624 anos_mor_mun
 replace v0623 = idade if v0623==. & anos_mor_mun~=.
 rename v0623 anos_mor_UF
 
-* tempo de moradia em 1970 só vale para quem não nasceu no município.
+* tempo de moradia em 1970 só vale para quem não nasceu no município. // MAS DO JEITO QUE ESTÁ CONSTRUÍDO, INCLUI QUEM NASCEU, POIS A VARIÁVEL ACIMA INCLUI IDADE
 g t_mor_UF_70 = anos_mor_UF
 g t_mor_mun_70 = anos_mor_mun
 recode t_mor_UF_70 t_mor_mun_70 (7/10=6) (11/max=7)
@@ -3854,8 +3862,8 @@ drop v6266 v0625 v0626
 
 rename v0627 alfabetizado
 recode alfabetizado (2 = 0)
-	*alfabetizadoB = 1 - Sim
-	*				 0 - Não
+	*alfabetizado = 1 - Sim
+	*		 0 - Não
 	
 ** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
 
@@ -3863,13 +3871,13 @@ recode v0628 (1 2=1 "sim") (3 4 =0 "nao"), g(freq_escola)
 replace freq_escola = 0 if v0629<=3		// 	desconsidera creche e pre-escola para compatibilizar com todos
 lab var freq_escola "frequenta escola"
 *freq_escola = 1 - Sim
-*			   0 - Não
+*		0 - Não
 
 g freq_escolaB = freq_escola
 replace freq_escolaB = 1 if v0629==2 | v0629==3	// 	inclui pre-escola
-lab var freq_escolaB "frequenta escola - inclui pre-school"
+lab var freq_escolaB "frequenta escola - inclui pre-escola"
 *freq_escolaB = 1 - Sim
-*				0 - Não
+*		0 - Não
 
 * rede de ensino
 recode v0628 (1 = 1) (2 = 0) (else=.) 
@@ -3974,8 +3982,8 @@ recode v0636 (2 3 = 0)
 replace v0636 = . if freq_escolaB==0	
 rename v0636 mun_escola
 lab var mun_escola "estuda no município em que reside?"
-* mun_esc 	= 1 - sim
-*			= 0 - não
+* mun_escola 	= 1 - sim
+*		= 0 - não
 
 recode v6352 (140/226 321 322 347 380 = 3) ///
 		 (421 641/727 813 = 4) ///
@@ -3986,12 +3994,12 @@ recode v6352 (140/226 321 322 347 380 = 3) ///
 		 (341 420 422 482 483 540/544 761 810/812 814/862 085 = 9), g(cursos_c1)
 lab var cursos_c1 "curso superior concluído"
 * cursos_c1	=	3	ciências humanas
-*				4	ciências biológicas
-*				5	ciências exatas
-*				6	ciências agrárias
-*				7	ciências sociais
-*				8	militar
-*				9	outros cursos
+*			4	ciências biológicas
+*			5	ciências exatas
+*			6	ciências agrárias
+*			7	ciências sociais
+*			8	militar
+*			9	outros cursos
 		 
 recode v6352 (140/146 = 1) ///
 		 (210/226 = 2) ///
@@ -4000,8 +4008,8 @@ recode v6352 (140/146 = 1) ///
 		 (520/582 623 = 5) ///
 		 (620/622 624 641 = 6) ///
 		 (720/762 = 7) ///
-		 (810/863 = 8) ///
-		 (085 = 9), g(cursos_c2)
+		 (863 = 8) ///
+		 (810/862 085 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
 *				2	Artes, Humanidades e Letras
@@ -4010,7 +4018,7 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				5	Engenharia, Produção e Construção
 *				6	Agricultura e Veterinária
 *				7	Saúde e Bem-Estar Social    
-*				8	serviÃ§os
+*				8	militar
 *				9	Outros
 
 rename v6352 curso_concl	// COMP SO PARA CURSO SUPERIOR
@@ -4030,7 +4038,7 @@ recode v0637 ( 2 3 = 0)
 rename v0637 vive_conjuge
 lab var vive_conjuge "se a pessoa vive com o cônjuge"
 * vive_conjuge = 0 - Não
-*				 1 - Sim
+*		 1 - Sim
 
 drop v0638
 
@@ -4056,12 +4064,12 @@ drop v0639 v0640
 rename v0641 trab_rem_sem
 recode trab_rem_sem (2 = 0)
 * trab_rem_sem = 1 - Sim
-*				 0 - Não
+*		 0 - Não
 
 rename v0642 afast_trab_sem
 recode afast_trab_sem (2 = 0)
 * afast_trab_sem = 1 - Sim
-*				   0 - Não
+*			0 - Não
 
 * OBS: não perfeitamente compatível com 2000 por conta de mudanças nas questões.
 * Em 2000, sao duas questoes, uma referente a aprendiz/estagiário e outra sobre
@@ -4070,18 +4078,18 @@ recode afast_trab_sem (2 = 0)
 rename v0643 nao_remun
 recode nao_remun (2 = 0)	
 * nao_remun = 1 - Sim
-*			 0 - Não
+*		0 - Não
 	
 rename v0644 trab_proprio_cons
 recode trab_proprio_cons (2 = 0)
 * trab_proprio_cons = 1 - Sim
-*					 0 - Não
+*			0 - Não
 
 recode v0645 (1 = 0) (2 = 1)
 rename v0645 mais_de_um_trab
 lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
-*			   	   1 - Sim
+*			1 - Sim
 
 rename v6461 ocup2010
 rename v6471 ativ2010	
@@ -4097,13 +4105,13 @@ replace pos_ocup_sem = 4 if v6940==1
 replace pos_ocup_sem = 5 if v6940==2
 
 * pos_ocup_sem  = 1 - Empregado com carteira
-*				  2 - Militar e Funcionário Públicos
-*				  3 - Empregado sem carteira
-*				  4 - Trabalhador doméstico com carteira
-*				  5 - Trabalhador doméstico sem carteira
-*				  6 - Conta - própria
-*				  7 - Empregador
-*				  8 - Não remunerado
+*		  2 - Militar e Funcionário Públicos
+*		  3 - Empregado sem carteira
+*		  4 - Trabalhador doméstico com carteira
+*		  5 - Trabalhador doméstico sem carteira
+*		  6 - Conta - própria
+*		  7 - Empregador
+*		  8 - Não remunerado
 *                 9 - Trabalhador na produção para o próprio consumo
 
 
@@ -4156,8 +4164,8 @@ rename v0653 horas_trabprin
 * providencia para conseguir trabalho
 recode v0654 (2 = 0)
 rename v0654 tomou_prov
-*tom_prov_trab = 1 - sim
-*                0 - não
+*tomou_prov = 1 - sim
+*             0 - não
 
 drop v0655
 
@@ -4166,12 +4174,12 @@ drop v0656 v0657 v0658 v0659
 rename v6591 rend_outras_fontes
 lab var rend_outras_fontes "rendimento de outras fontes"
 
-* trabalha no minicípio 
+* trabalha no município 
 recode v0660 (1 2 = 1) (3/5 = 0) (else = .)
 rename v0660 mun_trab
 lab var mun_trab "trabalha no município em que reside"
 * mun_trab 	= 1 - sim
-*			= 0 - não
+*		= 0 - não
 
 drop v6602 v6604 v6606 v0661 v0662 v5110 v5120 v6900 v6910 v6920 v6940
 
@@ -4187,9 +4195,12 @@ rename v6642 f_vivos_mul
 rename v6643 filhos_vivos
 rename v0665 sexo_ult_nasc_v
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
 recode sexo_ult_nasc_v (2 = 0 )
-* sexo_ult_nasc_v_B = 1 - masculino
-*                     0 - feminino
+* sexo_ult_nasc_v = 1 - masculino
+*                   0 - feminino
 
 rename v6660 idade_ult_nasc_v
 drop v0669 
@@ -4198,13 +4209,16 @@ rename v6692 f_nasc_m_mul
 rename v6693 filhos_nasc_mortos
 rename v6800 filhos_tot
 
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 drop v6664 v0667 v0668 v6681 v6682 
 	
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS:  */  NAO SERIA AGOSTO/2010?
 g double deflator = 1
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
@@ -4384,7 +4398,7 @@ if `d'==1 {
 	*             1 - tem
 
 	recode v019 (0 . = .) (2=0) // (1=1)
-	rename v019 automov_part
+	rename v019 automov_part // NAO FAZ MAIS SENTIDO COMPATIBILIZAR SOMENTE COMO AUTOMOVEL TEM/NAO TEM DO QUE COMO PARTICULAR, JA QUE NO DICIONARIO ORIGINAL NAO FALA ISSO?
 	* automov_part = 0 - não tem
 	*                1 - tem
 
@@ -4471,7 +4485,7 @@ if `p'==1 {
 
 	*** Nacionalidade e naturalidade
 	gen nasceu_mun = 0
-	replace nasceu_mun = 1 if v031 == .
+	replace nasceu_mun = 1 if v031 == . // NO DICIONARIO, v031 e v032 (tempo de residencia na UF e no municipio), 0 é considerado nao aplicavel. nao seria mais adequado usar o 0 & a v032?
 	label var nasceu_mun "Nasceu neste município"
 	* nasceu_mun = 0 - não
 	*              1 - sim
@@ -4558,7 +4572,7 @@ if `p'==1 {
 	recode v034 (2 8 9 = 0) (1=1) (else=.)
 	rename v034	sit_mun_ant
 	* sit_mun_ant = 1 zona urbana
-	*               2 zona rural
+	*               0 zona rural
 
 	*** Onde morava há 5 anos:
 	* Este quesito não foi investigado em 1970.
@@ -4573,8 +4587,8 @@ if `p'==1 {
 	recode v036 (0=.) (2=0) // (1=1)
 	rename v036 freq_escola
 	lab var freq_escola "frequenta escola"
-	* freq_escolaB = 0 - não
-	*                1 - sim
+	* freq_escola = 0 - não
+	*               1 - sim
 
 	gen anos_estudo = 0             if (idade >= 5) & (v038 == 5)
 	replace anos_estudo = 0         if (v037 == 9) // alfabetização de adultos
@@ -4668,7 +4682,7 @@ if `p'==1 {
 	recode v043 (0=8) (1=6) (2=3) (3=4) (4=7) (5=5) (6=0) (7=1) (nonmissing = .)
 	replace v043 = 2 if v044 == 924 & v045 == 933 // duas condições dizem o mesmo:
 												  // procura trabalho pela 1a vez
-	rename v043 cond_ativB
+	rename v043 cond_ativB // NO DICIONARIO SO TEM cond_ativ, NAO TEM cond_ativB. AJUSTAR O NOME AQUI?!
 	* cond_ativ = 1 trabalha/procurando trabalho - já trabalhou
 	*             2 procurando trabalho - nunca trabalhou
 	*             3 aposentado ou pensionista
@@ -4756,7 +4770,7 @@ if `p'==1 {
 
 	recode v047 (3 =2) (2 =3) (5 =4) (0 6=.)
 	rename v047 trab_semana
-	* cond_ativ_sem = 1 - só ocupação habitual
+	* trab_semana = 1 - só ocupação habitual
 	*                 2 - habitual e outra
 	*                 3 - só outra
 	*                 4 - outros
@@ -4785,11 +4799,11 @@ if `p'==1 {
 	* mun_trab 	= 1 - sim
 	*			= 0 - não
 
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */  // NAO SERIA AGOSTO/2010?
 	g double deflator = 0.000015185/10^8
 	g double conversor = 2750000000000
 	
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_total rend_fam {
@@ -4859,7 +4873,7 @@ foreach n of global x {
 
 if `d'==1 {
 	/* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
-	* gerando totais de homens e mulheres nas famílias e nos domicílios
+	* gerando totais de homens e mulheres nos domicílios
 	* v501 == 1 representa sexo masculino; == 3 feminino
 	by id_muni distrito id_dom: egen n_homem_dom = total(v501==1)
 	by id_muni distrito id_dom: egen n_mulher_dom = total(v501==3)
@@ -4901,7 +4915,7 @@ if `d'==1 {
 	*        	= 2   Madeira aparelhada
 	*        	= 3   Taipa não revestida
 	*       	= 4   Material aproveitado
-	*   	    = 5   Palha
+	*   	    	= 5   Palha
 	*	        = 6   Outro
 
 
@@ -4975,8 +4989,8 @@ if `d'==1 {
 	recode v208 (3 8 = 0) (9 = .) // (1=1)
 	rename v208 sanitario_ex
 	label var sanitario_ex "acesso exclusivo a instalação sanitária"
-	* inst_san_exc = 0 - não tem acesso a inst san exclusiva
-	*                1 - tem acesso a inst sanitária exclusiva
+	* sanitario_ex = 0 - não tem acesso a instalação san exclusiva
+	*                1 - tem acesso a instalação sanitária exclusiva
 
 
 	/* C.9. DESTINO DO LIXO */
@@ -5010,23 +5024,14 @@ if `d'==1 {
 	*         1 - tem
 
 	recode v215 (2=1) (3=2) (4=3) (5/7 = 4) (8=0) (9=.) // (1=1)
-	rename v215 comb_cozinha
-	* comb_cozinha = 1 - gás
+	rename v215 comb_fogao
+	* comb_fogao = 1 - gás
 	*                2 - lenha
 	*                3 - carvão
 	*                4 - outro
 	*                0 - não tem fogão nem fogareiro
 
-	gen comb_fogao = comb_cozinha
-	replace comb_fogao = 0 if fogao == 0
-	lab var comb_fogao "combustível utilizado no fogão"
-	* comb_fogao = 1 - gás
-	*              2 - lenha
-	*              3 - carvão
-	*              4 - outro
-	*              0 - não tem fogão
-
-	recode v216 (8=0) (9=.) // (1=1)
+	recode v216 (8=0) (9=.) // (1=1) 
 	rename v216 telefone
 	* telefone = 0 - não tem
 	*            1 - tem
@@ -5078,11 +5083,11 @@ if `d'==1 {
 	drop v204 v211 
 
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 	
 	g double deflator = 0.000033234/10^7
 	g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	g aluguel_def = (aluguel/conversor)/deflator
@@ -5247,6 +5252,7 @@ if `p'==1 {
 	
 	recode v513 (8 = 0)		// 1=1
 	rename v513 nasceu_mun
+	label var nasceu_mun "Nasceu neste município"
 	* nasceu_mun = 0 - não
 	*              1 - sim
 
@@ -5268,9 +5274,9 @@ if `p'==1 {
 
 	recode v516 (9=.)
 	replace v516 = idade if (v516 == 8) & (idade <= 5)
-	replace v516 = 6     if (v516 == 8) & (idade <= 9) // irrelevante: & (idade > 5)
-	replace v516 = 7     if (v516 == 8) & (idade != .) // irrelevante: & (idade > 9)
-	replace v516 = . if v516==8
+	replace v516 = 6     if (v516 == 8) & (idade <= 9) // irrelevante: & (idade > 5) // NAO SERIA NECESSARIO COMPLEMENTAR COM >5 E <=9?
+	replace v516 = 7     if (v516 == 8) & (idade != .) // irrelevante: & (idade > 9) // NAO SERIA NECESSARIO COMPLEMENTAR COM >9 E !=.?
+	replace v516 = . if v516==8 // AQUI SERIA TER NASCIDO NA UF MAS NAO TER INFO DE IDADE? NAO SERIA MELHOR COLOCAR (v516 == 8) & (idade == .)?
 	rename v516 t_mor_UF_80
 	
 	* t_mor_UF_80 =  0 - menos de 1 ano
@@ -5292,10 +5298,10 @@ if `p'==1 {
 	rename v518 mun_mor_ant
 	label var mun_mor_ant "Município onde morava ant (se migrou nos últ 10 anos)"
 
-	recode v515 (1 = 0) (3 = 1)  (8 9 = .)
+	recode v515 (3 = 0) (8 9 = .) //  (1 = 1)
 	rename v515 sit_mun_ant
-	* sit_mun_ant = 0 zona urbana
-	*               1 zona rural
+	* sit_mun_ant = 1 zona urbana
+	*               0 zona rural
 
 	*** Onde morava há 5 anos:
 	* Este quesito não foi investigado em 1980.
@@ -5308,7 +5314,7 @@ if `p'==1 {
 	*                1 - sim
 
 	gen freq_escola = 0     if idade >= 5
-	replace freq_escola = 1 if (idade >= 5) & (v521 ~= 0) // frequenta curso seriado
+	replace freq_escola = 1 if (idade >= 5) & (v521 ~= 0) & (v521 ~= 9) // frequenta curso seriado
 	* frequenta curso não seriado, exceto pre-escola, supletivo por rádio ou TV e pre-vestibular:
 	replace freq_escola = 1 if (idade >= 5) & ((v522>=2 & v522<=4) | v522==8)
 	lab var freq_escola "frequenta escola"
@@ -5484,7 +5490,7 @@ if `p'==1 {
 	*             8 afazeres domésticos
 	*             9 sem ocupação
 
-	recode cond_ativ (0 2=1) (3/9 =0), copy g(pea)
+	recode cond_ativ (0/2=1) (3/9 =0), copy g(pea)
 	lab var pea "população economicamente ativa"
 	* pea	= 1 economicamente ativo
 	*         0 inativo
@@ -5560,7 +5566,7 @@ if `p'==1 {
 
 	recode v534 (2 4 6 = 1) (8=0) (9=.)
 	rename v534 previd_A
-	* previd = 0 não
+	* previd_A = 0 não
 	*          1 sim
 
 	recode v535 (9=.)
@@ -5590,7 +5596,7 @@ if `p'==1 {
 	*                4 - de 40 a 48 horas
 	*                5 - 49 horas ou mais
 	
-	* trabalha no minicípio  - compativel com 2010 apenas
+	* trabalha no município
 	recode v527 (0 = 1) (1100007/max = 0)
 	replace v527 = . if hrs_oc_hab==.
 	rename v527 mun_trab
@@ -5599,14 +5605,14 @@ if `p'==1 {
 	*			= 0 - não
 
 
-	*** Ocupação na semana -- comparável com 2000:
+	*** Ocupação na semana -- comparável com 1970:
 	recode v541 (6 4 =4) (5=.)
 	rename v541 trab_semana
-	* trab_semana = 1 só trabalho habitual
-	*               2 trabalho habitual e outros
-	*               3 só trabalho diferente do habitual
+	* trab_semana = 1 só ocupação habitual
+	*               2 habitual e outra
+	*               3 só outra
 	*               4 outros
-
+ 
 	drop v542
 	drop v544
 	drop v545 trab_ult_12m
@@ -5621,6 +5627,9 @@ if `p'==1 {
 	rename v550 f_nasc_v_hom
 	recode v551 (98 99 = .)
 	rename v551 f_nasc_v_mul
+	
+	label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+	label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
 
 	replace filhos_nasc_vivos =. if f_nasc_v_hom==. | f_nasc_v_mul==.
 	
@@ -5631,6 +5640,9 @@ if `p'==1 {
 	rename v552 f_nasc_m_hom
 	recode v553 (98 99 = .)
 	rename v553 f_nasc_m_mul
+	
+	label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+	label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 	replace filhos_nasc_mortos =. if f_nasc_m_hom==. | f_nasc_m_mul==.
 	
@@ -5659,6 +5671,8 @@ if `p'==1 {
 	recode v570 (999 = .)
 	rename v570 idade_ult_nasc_v
 
+	label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
+
 	rename v604 peso_pess
 
 	drop  v505 v510 v556 v557
@@ -5675,7 +5689,7 @@ if `p'==1 {
 	rename v610 rend_aposent
 	rename v611 rend_aluguel
 	rename v612 rend_doa_pen
-	egen rend_total = rowtotal(rend_ocup_hab rend_outras_ocup rend_aposent rend_aluguel rend_doa_pen v613)
+	egen rend_total = rowtotal(rend_ocup_hab rend_outras_ocup rend_aposent rend_aluguel rend_doa_pen v613) // NAO INCLUI RENDIMENTO EM MERCADORIAS E PRODUTOS MESMO? A V608...
 	lab var rend_total "renda total"
 	by id_muni distrito id_dom num_fam: ///
 		egen rend_fam = total(rend_total*(v504>= 1 & v504<= 6))
@@ -5685,11 +5699,11 @@ if `p'==1 {
 	lab var renda_dom "renda domiciliar"
 	drop v608 v613  v680 v540 v682 v681
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 	
 	cap g double deflator = 0.000033234/10^7
 	cap g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010"
+	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_ocup_hab rend_outras_ocup rend_total rend_fam renda_dom {
@@ -5761,7 +5775,7 @@ gen sit_setor_C = sit_setor_B
 recode sit_setor_C (1 2 = 1) (3 4 = 0)
 lab var  sit_setor_C "situação do domicílio - urbano/rural"
 * sit_setor_C = 1 - Urbana
-*               2 - Rural
+*               0 - Rural
 
 /* C.2. ESPÉCIE */
 recode v0201 (1=0) (2=1) (3=2)
@@ -5911,8 +5925,8 @@ label var fogao_ou_fog "fogão ou fogareiro"
 *                1 - tem
 
 recode v0210 (2 4 = 1) (3=2) (5=3) (6=4) // 0 e 1 mantidos
-rename v0210 comb_cozinha
-* comb_cozinha = 1 - gás
+rename v0210 comb_fogao
+* comb_fogao = 1 - gás
 *                2 - lenha
 *                3 - carvão
 *                4 - outro
@@ -5980,11 +5994,11 @@ rename v2012 renda_dom
 
 drop v2013 v2014
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.000038883
 g double conversor = 2750000
 
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -6098,6 +6112,7 @@ recode cond_fam_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10) // 1 a 4 mantidos
 *               9 - Parente do(a) empregado(a) doméstico(a)
 *              10 - Individual em domicílio coletivo
 
+recode v0304 (2=0) (3=1) (4=2) (5=3) (6=4) (7=5) // 1 mantido
 rename v0304 num_fam
 
 * tipo de familia
@@ -6131,7 +6146,7 @@ lab var racaB "cor ou raça (indígena=pardo)"
 
 /* D.5. RELIGIÃO */
 recode v0310 (11=1) (21/30 = 2) (31/41 45 = 3) (61=4) (62 63 = 5) (75 76 77 79 = 6) ///
-             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .)
+             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .) // 19 nao tem no dicionario: confirmar tabulacao.
 rename v0310 religiao
 * religiao = 0 - sem religião
 *            1 - católica
@@ -6168,7 +6183,7 @@ label var sempre_morou "Sempre morou neste município"
 
 recode v0312 (1=0) (2=1) (3=2)
 rename v0312 onde_morou
-* sitmorou_mun = 0 só na zona urbana
+* onde_morou = 0 só na zona urbana
 *                1 só na zona rural
 *                2 nas zonas urbana e rural
 
@@ -6178,6 +6193,7 @@ drop v0313
 *** Nacionalidade e naturalidade
 recode v0314 (3=0) (2=1) // (1=1)
 rename v0314 nasceu_mun
+label var nasceu_mun "Nasceu neste município"
 * nasceu_mun = 0 não
 *              1 sim
 
@@ -6237,7 +6253,7 @@ recode v0316 (1/29 99 = .)	///
 * 92 = Síria 
 * 93 = Turquia 
 * 94 = Ásia - outros 
-* 95 = Australis
+* 95 = Australia
 * 96 = Oceania
 label var pais_nascim "País de nascimento - códigos 1970"
 * pais_nascim = 30-98 país estrangeiro especificado
@@ -6293,7 +6309,7 @@ label var UF_mor_ant "UF onde morava anteriormente (se migrou nos últ 10 anos)"
 
 drop v3191
 
-recode v0320 (9=.) (2=0) // (1=1)
+recode v0320 (9=.) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0320 sit_mun_ant
 * sit_mun_ant = 1 zona urbana
 *               0 zona rural
@@ -6327,7 +6343,7 @@ rename v0321 UF_mor5anos
 label var UF_mor5anos "UF onde morava há 5 anos"
 * UF_mor5anos = 11-53 código de UF em que morava
 
-recode v0322 (2=0) (9=.) // (1=1)
+recode v0322 (2=0) (9=.) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 replace v0322 =. if pais_mor5anos~=.
 rename v0322 sit_dom5anos
 label var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
@@ -6335,7 +6351,7 @@ label var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
 *                0 zona rural
 
 /* D.8. EDUCAÇÃO */
-recode v0323 (2=0) // (1=1)
+recode v0323 (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0323 alfabetizado
 * alfabetizado = 0 - não
 *                1 - sim
@@ -6351,7 +6367,7 @@ lab var freq_escolaB "frequenta escola - inclui pré-escola"
 
 
 * Anos de estudo - cálculo do IBGE
-recode v3241 (20 = .) (17=16) (30 = 0) // 20 é "indefinido"; lim em 16 pois é máximo em 1970
+recode v3241 (20 = .) (17=16) (30 = 0) // 20 é "indefinido"; lim em 16 pois é máximo em 1970  // no dicionario, tem opcao 31 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3241 anos_estudo
 * anos_estudo = 0      - Sem instrução ou menos de 1 ano
 *               1 a 15 - Número de anos
@@ -6464,7 +6480,7 @@ rename v0329 curso_concl	// COMP SO PARA CURSO SUPERIOR
 
 /* D.9. SITUAÇÃO CONJUGAL */
 
-recode v0330 (2 = 0)
+recode v0330 (2 = 0)  // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0330 teve_conjuge
 * teve_conjuge = 0 não
 *              = 1 sim
@@ -6602,23 +6618,23 @@ lab var hrs_todas_oc "horas de trabalho p/semana em todas as ocupações"
 
 drop v0354 v0355
 
-recode v0356 (0 9999999=.)
+recode v0356 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0356 rend_ocup_hab
 
-recode v0357 (0 9999999=.)
+recode v0357 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0357 rend_outras_ocup
 
-recode v0360 (9999999=.)
-recode v0361 (9999999=.)
+recode v0360 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
+recode v0361 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 egen rend_outras_fontes = rowtotal(v0360 v0361)
 lab var rend_outras_fontes "rendimento de outras fontes"
 
-recode v3561 (99999999=.) // rendimento total tem 1 dígito a mais
+recode v3561 (99999999=.) // rendimento total tem 1 dígito a mais // no dicionario, tem opcao 99999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3561 rend_total
 lab var rend_total "total de rendimentos"
 
 * renda familiar
-replace v3045 = . if v3045>99999999
+replace v3045 = . if v3045>99999999 // no dicionario, tem opcao 999999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3045 rend_fam
 
 drop v0360 v0361 v3562 v3563 v3564 v3574 v3604 v3614
@@ -6643,10 +6659,10 @@ lab var pea "população economicamente ativa"
 * pea	= 1 economicamente ativo
 *         0 inativo
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.000038883
 g double conversor = 2750000
-lab var deflator "deflator de rendimentos - base 08/2010"
+lab var deflator "deflator de rendimentos - base 08/2010" // NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_hab rend_outras_ocup rend_outras_fontes rend_total rend_fam  {
@@ -6669,6 +6685,9 @@ rename v3354 filhos_nasc_vivos
 rename v3355 f_nasc_v_hom
 rename v3356 f_nasc_v_mul
 
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
 rename v3360 filhos_vivos
 rename v3361 f_vivos_hom
 rename v3362 f_vivos_mul
@@ -6679,20 +6698,24 @@ rename v3357 filhos_nasc_mortos
 rename v0341 f_nasc_m_hom
 rename v0342 f_nasc_m_mul
 
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
+
 foreach var in filhos_tot filhos_hom filhos_mul filhos_nasc_vivos f_nasc_v_hom ///
 	f_nasc_v_mul filhos_vivos f_vivos_hom f_vivos_mul filhos_nasc_mortos ///
 	f_nasc_m_hom f_nasc_m_mul {
-		replace `var'=. if `var'==99
+		replace `var'=. if `var'==99 // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
 }
 
 
-recode v0343 (7 = .) (9 = .) (2=0) // (1=1)
+recode v0343 (7 = .) (9 = .) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0343 sexo_ult_nasc_v
 * sexo_ult_nasc_v = 0 feminino
 *                 = 1 masculino
 
 recode v3443 (99 = .)
-rename v3443 idade_ult_nasc_v
+rename v3443 idade_ult_nasc_v // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 drop v3444
 
 /* OUTRAS */

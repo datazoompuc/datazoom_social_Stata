@@ -33,6 +33,8 @@ knitr::opts_chunk$set(
 
 O `datazoom_social` é um pacote que compatibiliza microdados de pesquisas realizadas pelo IBGE. Com o pacote, é possível fazer a leitura de todas as pesquisas domiciliares realizadas pelo IBGE, compatibilizar os Censos Demográficos de diferentes anos, gerar identificação dos indivíduos da PNAD Contínua, e muito mais.
 
+Obs: Esse pacote **não** faz o download de microdados, e é necessário ter os microdados que se deseja ler já baixados para utilizar esse pacote. Os dados estão disponíveis no site do [IBGE](https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html).
+
 ## Instalação <a name="instalacao"></a>
 
 Digite o código abaixo na linha de comando do Stata para baixar e instalar a versão mais recente do pacote
@@ -48,7 +50,7 @@ Todas as funções do pacote podem ser usadas pelas caixas de diálogo. Para ace
 db datazoom_social
 ```
 
-Para usar os nossas funções, os microdados originais devem estar salvos no seu computador. Temos tutoriais de como usar o pacote em nosso [canal do YouTube](https://www.youtube.com/@datazoom9654/videos).
+Para usar as nossas funções, os microdados originais devem estar salvos no seu computador. Temos tutoriais de como usar o pacote em nosso [canal do YouTube](https://www.youtube.com/@datazoom9654/videos).
 
 Clique nos botões abaixo para ver informações adicionais sobre cada pesquisa.
 

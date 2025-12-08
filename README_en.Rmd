@@ -5,6 +5,7 @@ output: github_document
 Para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
 [![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
+<!-- badges: end -->
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.png" align="left" width="100" hspace="10" vspace="6"></a>
 
@@ -31,6 +32,8 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The `datazoom_social` package reads and processes microdata from IBGE surveys. We read all IBGE household surveys into Stata format, as well as making different Census instances compatible, generating individual identification for the Continuous PNAD, and much more.
+
+Note: This package does **not** download microdata. You must have the microdata you want to read already downloaded in order to use this package. The data are available on the [IBGE](https://www.ibge.gov.br/en/statistics/downloads-statistics.html?lang=en-GB) website.
 
 ## Installation <a name="instalacao"></a>
 

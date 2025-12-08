@@ -8,6 +8,8 @@
 {viewerjumpto "Options" "datazoom_social##options"}{...}
 {viewerjumpto "Remarks" "datazoom_social##remarks"}{...}
 {viewerjumpto "Examples" "datazoom_social##examples"}{...}
+{p 8 8 2} {it:For the English version}, {help datazoom_social_en}
+
 {title:Title}
 
 {phang}
@@ -44,8 +46,8 @@
 {title:Descrição}
 {pstd}
 {cmd:datazoom_social} extrai bases de dados de pesquisas domiciliares do IBGE em formato STATA a partir dos microdados originais, 
-	os quais não são disponibilizados pelo Portal (informações sobre como obter os arquivos originais de dados, 
-	consulte o nosso site http://www.econ.puc-rio.br/datazoom/ ou o site do IBGE www.ibge.gov.br). 
+	os quais não são disponibilizados pelo Data Zoom. Para informações sobre como obter os arquivos originais de dados, 
+	consulte o nosso github "https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README.md#censo" ou o site do IBGE "www.ibge.gov.br" (sugestão: busque pela área de downloads). 
 
 
 {marker options}{...}
@@ -116,7 +118,3 @@ Documentação e exemplos específicos para cada pesquisa:
 {help datazoom_pof2002}  
 {help datazoom_pof1995}   
 {help datazoom_ecinf} 
-
-
-{p} Digite "net from http://www.econ.puc-rio.br/datazoom/portugues" para instalar a versão em português desses pacotes. 
-For the english version, type "net from http://www.econ.puc-rio.br/datazoom/english".

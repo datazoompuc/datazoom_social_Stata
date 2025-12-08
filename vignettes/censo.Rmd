@@ -7,17 +7,17 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada dez anos, na qual todos os domicílios do território brasileiro são visitados. O Censo fornece uma contagem da população e recolhe informações básicas dos moradores, como idade e gênero.
+O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada dez anos, em que todos os domicílios do território brasileiro são visitados. O Censo fornece uma contagem da população e recolhe informações básicas dos moradores, como idade e gênero.
 
 Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com uma grande amostra aleatória dos domicílios, na qual investiga características sociodemográficas dos moradores (como escolaridade e rendimentos), características físicas do local de residência (material das paredes, existência de água encanada, etc.) e posse de bens (como geladeira e automóvel). No Censo de 2022, tal amostra cobria [INSERIR INFORMAÇÃO NOVA] milhões de domicílios com [INSERIR INFORMAÇÃO NOVA] milhões de indivíduos.
 
-### Microdados
+Há diferenças nos questionários da amostra ao longo dos anos. Por isso, diversas variáveis não estão disponíveis em todos os anos ou têm opções diferentes em diferentes anos. O Data Zoom oferece a compatibilização de variáveis, elaborada pelo Data Zoom. Além das variáveis originais, são entregues variáveis compatibilizadas, que procuram uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original. Acesse o documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) para conhecer toda a metodologia de compatibilização.
 
-Em cada ano, os arquivos de microdados são separados por Unidade da Federação (estado). Até 1991, para cada estado, havia um único arquivo contendo os microdados referentes a domicílios e pessoas. A partir de 2000, as informações de domicílios e pessoas foram separadas em dois arquivos distintos, disponíveis [neste link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
+### Acesso aos Microdados
 
-O IBGE disponibiliza gratuitamente para download os microdados e a documentação para os Censos. No Censo 2010, os microdados para 14 municípios sofreram correção, sendo disponibilizados dois novos arquivos para as observações revistas na página de microdados. Para obter informações a respeito dos microdados, [clique aqui](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
+Para utilizar o pacote do Data Zoom no Stata, você deve baixar os arquivos de microdados para o seu computador. O IBGE disponibiliza gratuitamente para download os microdados e a documentação para os Censos de 2010, 2000, 1991, 1980 e 1970. Encontre os arquivos [neste link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads). Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com dados de 14 municípios que sofreram reponderação posteriormente.
 
-O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, algumas variáveis não estão disponíveis em todos os anos e/ou podem não ter sido coletadas da mesma forma em anos diferentes. O Data Zoom disponibiliza uma opção para compatibilizar as variáveis, com o intuito de uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original, sendo um novo dicionário disponibilizado para download. O documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) explica todos os procedimentos adotados pelo programa.
+Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para compra. Nesta mudança, o formato em que os dados são disponibilizados também mudou. O Data Zoom terá que ajustar seus códigos para esse novo formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para os dados no formato antigo. Atualizaremos este documento quando a versão do pacote flexível ao novo formato estiver disponível.
 
 ### Arquivos de apoio
 

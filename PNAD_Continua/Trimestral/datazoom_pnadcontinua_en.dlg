@@ -53,7 +53,7 @@ SCRIPT PREINIT_SCRIPT
 OK ok1,      label("OK")
 SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pnadcontinua")
+HELP hlp1,   view("help datazoom_pnadcontinua_en")
 RESET res1
 
 ******************************************************************************
