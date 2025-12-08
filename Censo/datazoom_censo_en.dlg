@@ -13,7 +13,7 @@ BEGIN
    CHECKBOX	chk91     @  +20 100 ., label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
-
+   CHECKBOX	chk22     @  +20 100 ., label("2022")  onclickon(script c22on) onclickoff(program c22off) option(2022)
    
    BUTTON fldata      10 +35  105     ., label("Original files...") onpush(script dados)
    BUTTON fldict      10 +25  105     ., label("Saving...") onpush(script salvando)
@@ -36,7 +36,7 @@ BEGIN
       CHECKBOX chkPA  +85  -50  200   ., label("Pará") onclickoff(script nemtudoN) option(PA)
       CHECKBOX chkRO    @  +25  200   ., label("Rondônia") onclickoff(script nemtudoN) option(RO)
       CHECKBOX chkRR    @  +25  200   ., label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -85  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+      CHECKBOX chkTO  -85  +25  200   ., label("Tocantins (1991 to 2022)") onclickoff(script nemtudoN) option(TO)
 
    CHECKBOX chkregNE  130  +45  175 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
@@ -66,7 +66,7 @@ BEGIN
       CHECKBOX chkGO   +5  +18  200   ., label("Goiás") onclickoff(script nemtudoCO) option(GO)
       CHECKBOX chkMT    @  +23  200   ., label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
       CHECKBOX chkDF    @  +23  200   ., label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
-      CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2010)") onclickoff(script nemtudoCO) option(MS)
+      CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2022)") onclickoff(script nemtudoCO) option(MS)
 
 	CHECKBOX	eng     135  365 200 ., label("Labels in English") option(english)
 
@@ -120,16 +120,22 @@ BEGIN
 	main.chkMS.enable
 END
 
+SCRIPT c22on // CHECAR SE PRECISARÁ DE ALGUM AJUSTE A MAIS
+BEGIN
+	main.chkTO.enable
+	main.chkMS.enable
+END
+
 PROGRAM c80off
 BEGIN
-	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 	}
 END
 
 PROGRAM	c91off
 BEGIN
-	if main.chk00.isneq(1) & main.chk10.isneq(1) {
+	if main.chk00.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
@@ -137,7 +143,7 @@ END
 
 PROGRAM	c00off
 BEGIN
-	if main.chk91.isneq(1) & main.chk10.isneq(1) {
+	if main.chk91.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
@@ -147,12 +153,19 @@ END
 
 PROGRAM	c10off
 BEGIN
-	if main.chk91.isneq(1) & main.chk00.isneq(1) {
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
 END	
 
+PROGRAM	c22off
+BEGIN
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
+		call main.chkMS.disable
+		call main.chkTO.disable
+	}
+END
 
 SCRIPT dados
 BEGIN
@@ -302,7 +315,7 @@ BEGIN
    put "datazoom_censo"
    beginoptions
       put "years("
-	  option main.chk70 main.chk80 main.chk91 main.chk00 main.chk10
+	  option main.chk70 main.chk80 main.chk91 main.chk00 main.chk10 main.chk22
 	  put ") "
       put "ufs("
       option main.chkRO main.chkAC main.chkAM main.chkRR main.chkPA main.chkAP ///
