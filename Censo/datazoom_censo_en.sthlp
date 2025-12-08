@@ -57,7 +57,7 @@ Use command {cmd:db datazoom_censo_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_censo} extracts and builds Censo databases from the original IBGE microdata. 
-Program can be used for Censo years 1970 to 2010.
+Program can be used for Censo years 1970 to 2022.
 
 {p 4 4 2}
 The program can implement an algorithm to make variables compatible through waves. 
@@ -65,7 +65,7 @@ This is valid for those variables that exist in at least two waves and are not t
 of survey methodology. The procedures applied through that algorithm are documented in "Census - Making variables compatible" 
 disposable for download on the Portal website. In addition, to address the administrative boundaries changes 
 issue, variables identifying consistet areas over time are included in the database. Under this option, 
-noncompatible variables are deleted during the process. Moreover, monetary variables are deflated to August 2010.
+noncompatible variables are deleted during the process. Moreover, monetary variables are deflated to  [VER DE ACORDO COM O PERIODO DE REFERENCIA DO CENSO 2022] 2022.
 
 {p 4 4 2}
 The program generates one database for each federative unit and wave chosen. If necessary, use the
@@ -82,7 +82,7 @@ If only one option {opt pes} {opt fam} {opt dom} is selected, the program will  
 {dlgtab:Input}
 
 {phang} {opt years(numlist)}  specifies the list of waves the user wants to work with. Alternatives are the
-1970, 1980, 1991, 2000 and 2010 waves.
+1970, 1980, 1991, 2000, 2010 and 2022 waves.
 
 {phang} {opt original(str)} indicates the folder path where the user has copied the original data files. Each
  census has at least one file for each state.  All files must be located in the same folder so that the program functions properly.
@@ -158,7 +158,7 @@ work properly after the user rename his data file by adapting it to the one foun
 However, it is possible that the structure of the data used by Data Zoom is different from the structure of 
 the data owned by the user even in the case where apparently there are differences in names only. In this case, 
 the program will not work correctly. To check for possible structural differences, please check the variables dictionary 
-available for download in www.econ.puc-rio.br/datazoom and compare it with the dictionary at hand.
+available for download in https://datazoom.com.br/en/ and compare it with the dictionary at hand.
 
 {phang} - Microdata names list. For 1991 onward, suffix number refers, in general,
  to the IBGE Federative Unit codes.
@@ -199,7 +199,13 @@ available for download in www.econ.puc-rio.br/datazoom and compare it with the d
 
 {phang} - note that 14munic refers to the Census 2000 file redefined by IBGE for 14 municipalities
  
- 
+{phang} 2022
+
+{phang} - prefixes: [INCLUIR QUANDO SOUBER] (for individuals) and [INCLUIR QUANDO SOUBER] (for households)
+
+{phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
+
+
 {title:Author}
 
 {p 4 4 2}
