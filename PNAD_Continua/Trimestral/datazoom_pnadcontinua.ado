@@ -66,7 +66,6 @@ foreach year in `years'{
 
 if _rc==901 exit	
 
-
 ********************************************************************
 *                            Painel                                
 ********************************************************************
@@ -88,16 +87,16 @@ else {
 
 loc caminhoprin = c(pwd)
 
-foreach aa in `years' {    
-    use "`PNADC_01`aa''", clear
-    foreach trim in 02 03 04 {
-        capture append using "``PNADC_`trim'`aa'''"
-        if _rc != 0 {
-            continue, break    
-        }
-    }
-    
- 	if "`nid'"~="" {
+* juntando os trimestres de cada ano
+foreach aa in `years' {	
+	use "`PNADC_01`aa''", clear
+	foreach trim in 02 03 04 {
+		capture append using "`PNADC_`trim'`aa''"
+		if _rc != 0 {
+			continue, break	
+		}
+	}
+	if "`nid'"~="" {
 		save PNADC_trimestral_`aa' 
 		exit
 	}
@@ -106,7 +105,6 @@ foreach aa in `years' {
 		save "PNADC`aa'", replace
 	}
 }
-
 
 ******************************
 * Junta paineis 
@@ -137,7 +135,7 @@ forvalues pa = `min_painel'/`max_painel'{
 	use "`PNADC_Painel`pa''", clear
 	qui count
 	if r(N) != 0 { 
-		global panels = "$panels `pa'" 
+		global panels = "$panels `pa'" /* Coleta os paineis existentes */
 	}
 }
 
@@ -214,7 +212,7 @@ syntax, temps(string)
 
 	// 1. Roda a identificação básica primeiro
 	// Passamos a lista 'temps' para garantir que ela processe os arquivos certos
-	pnadcont_idbas, temps("`temps'")
+	pnadcont_idbas, temps(`temps')
 		
 	// 2. Loop para processar a parte avançada em cada arquivo
 	foreach file in `temps' {
