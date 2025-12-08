@@ -58,7 +58,7 @@ Digite {cmd:db datazoom_censo} para utilizar a função via caixa de diálogo.
 {p 4 4 2}
 {cmd:datazoom_censo} extrai e contrói bases de dados do Censo Demográfico em formato Stata (.dta) a partir
 dos microdados originais, que podem ser obtidos do site do IBGE. O programa pode ser utilizado para
-os anos de 1970 a 2010.
+os anos de 1970 a 2022.
 
 {p 4 4 2}
 Adicionalmente, existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para
@@ -68,7 +68,7 @@ termos metodológicos. O processo de compatibilização está documentado em
 somente as variáveis compatibilizadas permanecem na base de dados final (além das variáveis
 de controle). Além disso, são incorporadas variáveis relacionadas a mudanças geopolíticas ocorridas no 
 período, as chamadas Áreas Mínimas Comparáveis. Finalmente, as variáveis monetárias são deflacionadas 
-para agosto de 2010.
+para [VER DE ACORDO COM O PERIODO DE REFERENCIA DO CENSO 2022] de 2022.
 
 {p 4 4 2}
 O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
@@ -85,7 +85,7 @@ o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicíl
 {dlgtab:Input}
 
 {phang} {opt years(numlist)}  especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para os anos de 1970 a 2010.
+pode ser utilizado para os anos de 1970 a 2022.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. Para
 todos os Censos existem ao menos um arquivo para cada estado. Todos eles devem estar posicionados na mesma pasta 
@@ -167,7 +167,7 @@ deve funcionar corretamente após o usuário renomear seus arquivos de dados ada
 No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
 dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes. Se isso ocorrer, 
 o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 
-variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare com o dicionário em mãos.
+variáveis disponível para download em https://datazoom.com.br/pt/ e compare com o dicionário em mãos.
 
 {phang} - Lista dos nomes dos arquivos de microdados. De 1991 em diante, os números dos sufixos, em geral, referem-se
  aos códigos IBGE de cada estado.
@@ -207,6 +207,12 @@ variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare c
 {phang} - note que 35_outras e 35_RMSP referem-se aos dados para SP
 
 {phang} - note que 14munic refere-se aos dados redefinidos pelo IBGE para 14 municípios
+
+{phang} 2022
+
+{phang} - prefixos: [INCLUIR QUANDO SOBER] (para pessoas) e [INCLUIR QUANDO SOBER] (para domicílios)
+
+{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
  
  
 {title:Author}
