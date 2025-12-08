@@ -26,7 +26,10 @@ tokenize `years'
 
 local y`1' = ""
 
-local max_panel = 0 // para armazenar painel máximo
+local panel_list "" // armazena paineis
+	
+local max_painel = 0
+local min_painel = 0
 	
 foreach year in `years'{
 	foreach trim in 01 02 03 04 {
@@ -36,12 +39,23 @@ foreach year in `years'{
 	di as input "Extraindo arquivo PNADC_`trim'`year'  ..."
 			cap infile using "`dic'", using("`original'/`file_name'.txt") clear
 			if _rc == 0 {
+					qui capture egen hous_id = concat(UPA V1008 V1014), format(%14.0g)
+					qui destring hous_id, replace
+					
+					qui summ V1014
+					
+					local min_trim = r(min) // menor valor de v1014 naquele momento
+					local max_trim = r(max) // maior valor de v1014 naquele momento
+					
+					if `max_trim' > `max_painel'  {
+					    local max_painel = `max_trim'
+					}
+					if `min_trim' < `min_painel' {
+					    local min_painel = `min_trim'
+					}
+					
 					// adding value labels
 					pnadc_value_labels`lang'
-					
-					// detecting highest panel
-					qui sum V1014
-					local max_panel = max(`max_panel', r(max))
 					
 					tempfile PNADC_`trim'`year'
 					save "`PNADC_`trim'`year''", replace
@@ -51,6 +65,7 @@ foreach year in `years'{
 }	
 
 if _rc==901 exit	
+
 
 ********************************************************************
 *                            Painel                                
@@ -74,7 +89,7 @@ else {
 loc caminhoprin = c(pwd)
 
 foreach aa in `years' {    
-    use "``PNADC_01`aa'''", clear // (Nota: use as aspas duplas extras para segurança)
+    use "`PNADC_01`aa''", clear
     foreach trim in 02 03 04 {
         capture append using "``PNADC_`trim'`aa'''"
         if _rc != 0 {
@@ -82,79 +97,66 @@ foreach aa in `years' {
         }
     }
     
-    // CORREÇÃO: Salva o trimestral se pedir NID, mas NÃO usa exit.
-    if "`nid'" != "" {
-        save "PNADC_trimestral_`aa'.dta", replace
-        // O código vai simplesmente continuar para o próximo ano
-    }
-    else {
-        tempfile PNADC`aa'
-        save "`PNADC`aa''", replace
-    }
+ 	if "`nid'"~="" {
+		save PNADC_trimestral_`aa' 
+		exit
+	}
+	else {
+		tempfile PNADC`aa'
+		save "PNADC`aa'", replace
+	}
 }
 
-// CORREÇÃO: Envolvemos todo o resto do código (painel) neste bloco IF
-if "`nid'" == "" {
-   // ... O resto do código do painel entra aqui ...
 
 ******************************
 * Junta paineis 
 ******************************
+ 	*Combinações
 
-clear
-
-// Inicializa lista para guardar os nomes dos arquivos temporários
-    local painel_temps_para_id "" 
-
-    forvalues pa = 1/`max_panel' { 
-
-        tempfile PNADC_Painel`pa'
-        local created_panel = 0 // Variável de controle
-        
-        foreach aa in `years' {
-            use "`PNADC`aa''", clear
-            keep if V1014 == `pa'
-            
-            qui count
-            if r(N) > 0 {
-                // CORREÇÃO 1: Só dá append se o arquivo já foi criado antes
-                if `created_panel' == 0 {
-                    save "`PNADC_Painel`pa''", replace
-                    local created_panel = 1
-                }
-                else {
-                    tempfile append_part
-                    save "`append_part'", replace
-                    use "`PNADC_Painel`pa''", clear
-                    append using "`append_part'"
-                    save "`PNADC_Painel`pa''", replace
-                }
-            }
-        }
-        
-        // Se o painel foi criado, adiciona na lista para processar depois
-        if `created_panel' == 1 {
-            local painel_temps_para_id "`painel_temps_para_id' `PNADC_Painel`pa''"
-        }
-    }
-
-    
-    if "`idbas'" != "" {
-         pnadcont_idbas, temps(`painel_temps_para_id')
-    }
-    if "`idrs'" != "" {
-         pnadcont_idrs, temps(`painel_temps_para_id')
-    }
-
-} // Fecha o if "`nid'" == "" aberto lá em cima
+*tokenize `years'
+foreach aa in `years' {
+	forvalues pa = `min_painel'/`max_painel'{    
+		use PNADC`aa', clear
+		keep if V1014 == `pa'
+		tempfile PNADC_Painel`pa'temp`aa'
+		save "`PNADC_Painel`pa'temp`aa''", replace
+	}
 }
 
-datazoom_message
+forvalues pa = `min_painel'/`max_painel'{  
+	foreach aa in `years' {
+		append using "`PNADC_Painel`pa'temp`aa''"
+		keep if V1014 == `pa'
+	}
+	tempfile PNADC_Painel`pa'	
+	save "`PNADC_Painel`pa''", replace	
+}
 
+global panels = ""
+forvalues pa = `min_painel'/`max_painel'{   
+	use "`PNADC_Painel`pa''", clear
+	qui count
+	if r(N) != 0 { 
+		global panels = "$panels `pa'" 
+	}
+}
+
+display "$panels"
+
+foreach pa in $panels{
+	local painel_temps `painel_temps' `PNADC_Painel`pa''
+}
+
+if "`nid'" == ""{
+
+	pnadcont_`idbas'`idrs', temps(`painel_temps')
+
+}
+
+di _newline "Esta versão do função datazoom_pnadcontinua é compatível com a última versão dos microdados da PNAD Contínua Trimestral divulgados em 24/02/2022"
 di _newline "As bases de dados foram salvas em `c(pwd)'"
 
 end
-
 
 /*_______________________________________________________________________*/
 /*______________________Executa a identificação Básica___________________*/
