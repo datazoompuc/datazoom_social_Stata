@@ -9,19 +9,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada dez anos, na qual todos os domicílios do território brasileiro são visitados. O Censo fornece uma contagem da população e recolhe informações básicas dos moradores, como idade e gênero.
 
-Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com uma grande amostra aleatória dos domicílios, na qual investiga características sociodemográficas dos moradores (como escolaridade e rendimentos), características físicas do local de residência (material das paredes, existência de água encanada, etc.) e posse de bens (como geladeira e automóvel). No Censo de 2010, tal amostra cobria 6,2 milhões de domicílios com 20,6 milhões de indivíduos.
+Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com uma grande amostra aleatória dos domicílios, na qual investiga características sociodemográficas dos moradores (como escolaridade e rendimentos), características físicas do local de residência (material das paredes, existência de água encanada, etc.) e posse de bens (como geladeira e automóvel). No Censo de 2022, tal amostra cobria [INSERIR INFORMAÇÃO NOVA] milhões de domicílios com [INSERIR INFORMAÇÃO NOVA] milhões de indivíduos.
 
 ### Microdados
 
-Em cada ano, os arquivos de microdados são separados por Unidade da Federação (estado). Até 1991, para cada estado, havia um único arquivo contendo os microdados referentes a domicílios e pessoas. A partir de 2000, as informações de domicílios e pessoas foram separadas em dois arquivos distintos, disponíveis [neste link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados).
+Em cada ano, os arquivos de microdados são separados por Unidade da Federação (estado). Até 1991, para cada estado, havia um único arquivo contendo os microdados referentes a domicílios e pessoas. A partir de 2000, as informações de domicílios e pessoas foram separadas em dois arquivos distintos, disponíveis [neste link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
 
-O IBGE disponibiliza gratuitamente para download os microdados e a documentação para o Censo 2010. Nesta pesquisa, os microdados para 14 municípios sofreram correção, sendo disponibilizados dois novos arquivos para as observações revistas na página de microdados. Para obter informações a respeito de como adquirir os microdados para outros anos, [clique aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
+O IBGE disponibiliza gratuitamente para download os microdados e a documentação para os Censos. No Censo 2010, os microdados para 14 municípios sofreram correção, sendo disponibilizados dois novos arquivos para as observações revistas na página de microdados. Para obter informações a respeito dos microdados, [clique aqui](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
 
 O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, algumas variáveis não estão disponíveis em todos os anos e/ou podem não ter sido coletadas da mesma forma em anos diferentes. O Data Zoom disponibiliza uma opção para compatibilizar as variáveis, com o intuito de uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original, sendo um novo dicionário disponibilizado para download. O documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) explica todos os procedimentos adotados pelo programa.
 
 ### Arquivos de apoio
 
-  - [Microdados e documentação: Censos 2000 e 2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+  - [Microdados e documentação: Censos 1970 a 2022](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads)
   - [Dicionário compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)  
 
 <details>
@@ -32,7 +32,8 @@ O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, al
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
   - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
-  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)  
+  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
+- [Dicionário Censo 2022](INCLUIR INFO NOVA)
   
 </details>
 
@@ -45,5 +46,6 @@ O IBGE fez diversas alterações metodológicas entre os Censos. Desta forma, al
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
   - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
   - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)
+- [Dicionário Censo 2022](INCLUIR INFO NOVA)
   
 </details>
