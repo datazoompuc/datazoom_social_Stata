@@ -210,7 +210,7 @@ variáveis disponível para download em https://datazoom.com.br/pt/ e compare co
 
 {phang} 2022
 
-{phang} - prefixos: [INCLUIR QUANDO SOBER] (para pessoas) e [INCLUIR QUANDO SOBER] (para domicílios)
+{phang} - prefixos: [INCLUIR QUANDO SOUBER] (para pessoas) e [INCLUIR QUANDO SOUBER] (para domicílios)
 
 {phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
  
