@@ -54,6 +54,7 @@ local suf1980  =  `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ 
 local suf1991  = `"U11 U12 U13 U14 U15 U16 U17 "" U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 "" "P35 P36" U41 U42 U43 U50 U51 U52 U53"'
 local suf2000  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"'
+local suf2022  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"' // CHECAR MUDANCAS
 
 foreach ano in `years' {
 	if `ano' == 1970 {
@@ -955,6 +956,150 @@ foreach ano in `years' {
 			}
 		}
 	}
+
+**************
+* CENSO 2022 *
+**************
+else if `ano' == 2022 {
+// PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
+// NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
+		if "`fam'" != "" {
+						di as err "Opção Família não disponível para o ano `ano'"
+						exit
+						}
+		
+		foreach UF in `ufs' {
+			/* Achando posição da UF nas listas: */
+			local pos = 1
+			while word(`"`nomesUFs'"', `pos') != "`UF'" {
+				local pos = `pos' + 1
+			}
+
+			/* Loop para todos os arquivos da UF                              */
+			/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+			tokenize `suf2022'
+			local sufixos = "``pos''"
+			/* Mesmo para o código */
+			tokenize `codUFs'
+			local codUF = "``pos''"
+			foreach suf in `sufixos' {
+				if "`pes'"~="" {
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+															
+					/* Abrindo arquivo principal */
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Pessoas_`suf'.txt") clear // VERIFICAR NOME E EXTENSAO DO ARQUIVO ORIGINAL
+										
+					gen ano = 2022
+					lab var ano "ano da pesquisa"
+
+					* Deixando a variável v0002 com 5 dígitos
+					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+					replace v0002="....." if v0002=="."
+					*Criando a variável munic
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+
+					/* Compatibiliza, se especificado */
+	            	if "`comp'" != "" {
+						compat_censo22pess
+
+						/* Áreas Mínimas Comparáveis */
+						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
+						sort munic
+						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+					}
+					tempfile CENSO22_`UF'_pes_`suf'
+					save `CENSO22_`UF'_pes_`suf'', replace
+				}
+				if "`dom'"~="" | "`both'"~="" {
+					/* Agora os domicílios */
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+															
+					/* Abrindo arquivo principal */
+					
+					tempfile dic
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Domicilios_`suf'.txt") clear // VERIFICAR NOME E EXTENSAO DO ARQUIVO ORIGINAL
+									
+					gen ano = 2022
+					lab var ano "ano da pesquisa"
+
+					* Deixando a variável v0002 com 5 dígitos
+					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+					replace v0002="....." if v0002=="."
+					*Criando a variável munic
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+
+					/* Compatibiliza, se especificado */
+	            	if "`comp'" != "" {
+						compat_censo22dom
+
+						/* Áreas Mínimas Comparáveis */
+						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
+						sort munic
+						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+	            	}
+					tempfile CENSO22_`UF'_dom_`suf'
+					save `CENSO22_`UF'_dom_`suf'', replace
+				}
+				if "`comp'"~="" loc var = "id_dom"
+				else loc var = "v0300" // VARIAVEL DE CONTROLE - VERIFICAL O NUMERO NO NOVO CENSO
+				if "`both'"~="" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					merge m:1 `var' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
+					/* Se não for o primeiro arquivo, junta com o anterior */
+					if "`suf'" != word(`"`sufixos'"', 1) {
+						if "`comp'"~= "" append using CENSO22_`UF'_comp
+						else append using CENSO22_`UF'
+					}
+					if "`comp'"~= "" save CENSO22_`UF'_comp, replace
+					else save CENSO22_`UF', replace
+				}
+				else {
+					if "`pes'"~="" {
+						use `CENSO22_`UF'_pes_`suf'', clear
+						/* Se não for o primeiro arquivo, junta com o anterior */
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`comp'"~= "" append using CENSO22_`UF'_pes_comp
+							else append using CENSO22_`UF'_pes
+						}
+						if "`comp'"~="" save CENSO22_`UF'_pes_comp, replace
+						else save CENSO22_`UF'_pes, replace
+					}
+					else {
+						use `CENSO22_`UF'_dom_`suf'', clear
+						/* Se não for o primeiro arquivo, junta com o anterior */
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`comp'"~= "" append using CENSO22_`UF'_dom_comp
+							else append using CENSO22_`UF'_dom
+						}
+						if "`comp'"~="" save CENSO22_`UF'_dom_comp, replace
+						else save CENSO22_`UF'_dom, replace
+					}
+				}
+			}
+		}
+	}
+
+**************
+* CENSO 2022 *
+**************
 }
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
@@ -1867,6 +2012,1119 @@ order ano UF regiao munic id_dom ordem
 
 end
 
+**************
+* CENSO 2022 *
+**************
+program define compat_censo22dom
+
+/* A. ANO */
+* Essa variável é definida antes de chamar este programa.
+
+/* B. IDENTIFICAÇÃO  */
+
+/* B.1. IDENTIFICAÇÃO */
+rename v UF *v0001
+rename v id_dom
+rename v regiao
+drop v
+
+/* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
+rename v n_homem_dom
+rename v n_mulher_dom
+rename v n_pes_dom *v0201
+
+/* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
+
+/* C.1. SITUAÇÃO */
+
+rename v sit_setor *v1005
+lab var sit_setor "situação do domicílio"
+* sit_setor = 	1	Área urbanizada de vila ou cidade
+*				2	Área não urbanizada de vila ou cidade
+*				3	Área urbanizada isolada
+*				4	Rural-extensão urbana
+*				5	Rural - povoado
+*				6	Rural núcleo
+*				7	Rural - outros aglomerados
+*				8	Rural exclusive os aglomerados rurais
+
+g sit_setor_B = sit_setor
+recode sit_setor_B (1 2 = 1) (3=2) (4/7 = 3) (8=4)
+lab var sit_setor_B "situação do domicílio - agregado"
+* sit_setor_B = 1 - Vila ou cidade
+*               2 - Urbana isolada
+*               3 - Aglomerado rural
+*               4 - Rural exclusive os aglomerados
+
+g sit_setor_C = sit_setor_B
+recode sit_setor_C (2=1) (3/4=0)
+lab var sit_setor_C "situação do domicílio - urbano/rural"
+* sit_setor_C = 1 - urbano
+*               0 - rural
+
+/* C.2. ESPÉCIE */
+
+rename v especie *v1011
+recode especie (1 = 0) (5 = 1) (6 = 2)
+* especie = 0 - particular permanente 
+*           1 - particular improvisado
+*           2 - coletivo
+
+/* C.3. MATERIAL DAS PAREDES */
+recode v (2 = 1) (4 = 2) (5 = 4) (6 = 5) (7 = .) *v0302 // (1 = 1) (3 = 3)
+rename v paredes_B *v0302
+* paredes_B	= 1   Alvenaria
+*        	= 2   Madeira aparelhada
+*        	= 3   Taipa não revestida
+*       	= 4   Material aproveitado
+*   	    = 5   Outro
+
+
+/* C.4.	MATERIAL DA COBERTURA */
+
+/* C.5. TIPO */
+* Em 2022, permanece a categoria "maloca" ou "habitação indígena sem paredes". Foi mantida em "casa" por
+* exclusão, pois não se trata de apartamento nem de cômodo.
+
+recode v (11 12 15 = 1) (13 = 2) (14 = 3) (50/max = .) *v1012
+rename v tipo_dom *v1012
+* tipo_dom = 1 - casa ou oca/maloca
+*            2 - apartamento
+*            3 - cômodo
+lab var tipo_dom "tipo do domicílio"
+
+
+g tipo_dom_B = tipo_dom
+recode tipo_dom_B (3 = 2)
+* tipo_dom_B = 1 - casa ou oca/maloca
+*              2 - apartamento ou cômodo
+lab var tipo_dom_B "tipo do domicílio B"
+
+
+/* C.6. CONDIÇÃO DE OCUPAÇÃO E ALUGUEL */
+
+g cond_ocup = v * v0301
+recode cond_ocup (2=1) (3=2) (4=3) (5 6=4) (7=5) 
+* cond_ocup  = 1 - Próprio
+*              2 - Alugado
+*              3 - Cedido por empregador
+*              4 - Cedido de outra forma
+*              5 - Outra Condição
+lab var cond_ocup "condição de ocupação do domicílio"
+
+g cond_ocup_B = cond_ocup 
+recode cond_ocup_B (4=3) (5=4)
+* cond_ocup_B = 1 - próprio
+*               2 - alugado
+*               3 - cedido
+*               4 - outra condição
+lab var cond_ocup_B "condição de ocupação do domicílio B"
+
+rename v cond_ocup_C * v0301
+recode cond_ocup_C (6=5) (7=6) 
+* cond_ocup_C = 1 - Próprio, já pago
+*               2 - Próprio, ainda pagando
+*               3 - Alugado
+*               4 - Cedido por empregador
+*               5 - Cedido de outra forma
+*               6 - Outra Condição
+lab var cond_ocup_B "condição de ocupação do domicílio C"
+
+g dom_pago = 1 if v == 1 *v0301
+replace dom_pago = 0 if v == 2 *v0301
+lab var dom_pago "dummy para domicílio próprio já pago"
+* dom_pago = 0 - Domicílio próprio em aquisição
+*            1 - Domicílio próprio já pago
+ 
+/* C.7. INSTALAÇÕES SANITÁRIAS */
+rename v banheiros_B *v0308
+* banheiros_B = 0 - não tem
+*               1 - 1 banheiro
+*               2 - 2 banheiros
+*               3 - 3 banheiros
+*               4 - 4 banheiros
+*               5 - 5 banheiros
+*               6 - 6 banheiros
+*               7 - 7 banheiros
+*               8 - 8 banheiros
+*               9 - 9 ou mais banheiros
+
+g banheiros = banheiros_B
+replace banheiros = 5 if banheiros >= 5
+lab var banheiros "número de banheiros"
+* banheiros = 0 - não tem
+*			 1 - 1 banheiro
+*			 2 - 2 banheiros
+*            3 - 3 banheiros
+*            4 - 4 banheiros
+*            5 - 5 ou mais banheiros
+drop banheiros_B
+
+rename v sanitario *v0310 v0309 // ESSE AQUI PRECISA VERIFICAR COM CALMA, POIS PODE MUDAR A FORMA QUE A VARIAVEL DISPONIBILIZADA SERA CONSTRUIDA
+recode sanitario (2 = 0)
+replace sanitario = 1 if banheiros > 0 & banheiros ~= .
+* sanitario = 0 - Não
+*             1 - Sim
+
+recode v (1=0) // v0309 v0310 // ESSE AQUI PRECISA VERIFICAR COM CALMA, POIS PODE MUDAR A FORMA QUE A VARIAVEL DISPONIBILIZADA SERA CONSTRUIDA
+rename v sanitario_ex // v0309
+replace sanitario_ex = 1 if banheiros > 0 & banheiros ~= .
+label var sanitario_ex "acesso exclusivo a instalação sanitária"
+* inst_san_exc = 0 - não tem acesso a inst san exclusiva
+*                1 - tem acesso a inst sanitária exclusiva
+
+rename v tipo_esc_san_B *v0311 & v0312 uma eh sobre banheiro outra eh sanitario ou buraco, ver na divulgacao
+recode tipo_esc_san_B (3=2) (4=3) (5=4) (6=5) (7=6)
+* tipo_esc_san_B = 1 - Rede geral de esgoto ou pluvial
+*                  2 - Fossa séptica
+*                  3 - Fossa rudimentar
+*                  4 - Vala
+*                  5 - Rio, lago ou mar
+*                  6 - Outro 
+lab var tipo_esc_san_B "tipo de escoadouro - desagregado"
+
+g tipo_esc_san = tipo_esc_san_B
+recode tipo_esc_san (4 5 6 = 4)
+lab var tipo_esc_san "tipo de escoadouro"
+* tipo_esc_san = 1 - Rede geral de esgoto ou pluvial
+*                2 - Fossa séptica
+*                3 - Fossa rudimentar
+*                4 - Outro
+
+/* C.8. ABASTECIMENTO DE ÁGUA */
+
+rename v abast_agua_B * v0305 v0306 // ver se vao ser disponibilizadas juntas/combinadas as informacoes de ambas variaveis
+recode abast_agua_B (1=1) (2 3 4 = 2) (5/8 = 3)
+* abast_agua_B = 1 - rede geral
+*               2 - poço ou nascente na propriedade
+*               3 - outra
+
+gen abast_agua = 1 if (abast_agua_B == 1) & (v == 1) *v0307
+replace abast_agua = 2 if (abast_agua_B == 1) & ((v == 2) | (v == 3)) *v0307
+replace abast_agua = 3 if (abast_agua_B == 2) & (v == 1) *v0307
+replace abast_agua = 4 if (abast_agua_B == 2) & ((v == 2) | (v == 3)) *v0307
+replace abast_agua = 5 if abast_agua_B == 3
+* abast_agua = 1 - rede geral com canalização interna
+*              2 - rede geral sem canalização interna
+*              3 - poço ou nascente com canalização interna
+*              4 - poço ou nascente sem canalização interna
+*              5 - outra forma
+lab var abast_agua "forma de abastecimento de água"
+drop abast_agua_B
+
+rename v agua_canal *v0307
+* agua_canal = 1 - Canalizada em pelo menos um cômodo
+*              2 - Canalizada só na propriedade ou terreno
+*              3 - Não canalizada
+
+
+/* C.9. DESTINO DO LIXO */
+rename v dest_lixo_B *v0313
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
+
+/* C.10. ILUMINAÇÃO ELÉTRICA */
+
+/* C.11. BENS DE CONSUMO DURÁVEIS */
+rename v lavaroupa * v0314
+recode lavaroupa (2 = 0)
+* lavaroupa = 0 - Nao
+*             1 - Sim
+
+/* C.12. NÚMERO DE CÔMODOS */
+
+rename v tot_comodos * v0303
+rename v tot_dorm * v0304
+
+drop v
+
+/* C.13. RENDA DOMICILIAR */
+
+rename v renda_dom
+
+drop v
+
+/* DEFLACIONANDO RENDAS: referência = TBD */
+g double deflator = 1
+g conversor = 1
+
+lab var deflator "deflator - referência: TBD"
+lab var conversor "conversor de moedas"
+
+g renda_dom_def = (renda_dom/conversor)/deflator
+lab var renda_dom_def "renda_dom deflacionada"
+
+/* C.14. PESO AMOSTRAL */
+rename v peso_dom
+
+/* Variáveis de domicílio não utilizadas */
+
+drop v
+
+end
+ 
+program define compat_censo22pess
+
+/* A. ANO */
+* Essa variável é definida antes de chamar este programa.
+
+/* B. IDENTIFICAÇÃO  */
+
+rename v* UF
+rename v* id_dom
+rename v* num_fam // verificar se disponivel familia
+rename v* n_pes_fam // verificar se disponivel familia
+rename v* regiao
+drop v*
+rename v* peso_pess
+
+sort UF munic id_dom num_fam // verificar se disponivel familia
+by UF munic id_dom: egen n_homem_dom = total(v*==1) // v0204
+by UF munic id_dom: egen n_mulher_dom = total(v*==2)  // v0204
+lab var n_homem_dom "numero de homens no domicilio"
+lab var n_mulher_dom "numero de mulheres no domicilio"
+
+by UF munic id_dom num_fam: egen n_homem_fam = total(v*==1) // verificar se disponivel familia // v0204
+by UF munic id_dom num_fam: egen n_mulher_fam = total(v*==2) // verificar se disponivel familia // v0204
+lab var n_homem_fam "numero de homens na familia" 
+lab var n_mulher_fam "numero de mulheres na familia"
+
+/* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
+
+/* C.1. SITUAÇÃO */
+
+recode v* (1/3=1) (4/8=0) // v1005
+rename v* sit_setor_C  // v1005
+lab var sit_setor_C "situação do domicílio - urbano/rural"
+* sit_setor_C = 1 - urbano
+*               0 - rural
+
+/* D. OUTRAS VARIÁVEIS DE PESSOAS */
+
+rename v* ordem // verificar se disponivel familia
+
+/* D.1. SEXO */
+
+rename v* sexo // v0204
+recode sexo (2=0)
+* sexo = 0 - Feminino
+*    	 1 - Masculino
+
+/* D.2. CONDIÇÃO NA FAMÍLIA E NO DOMICÍLIO  */
+
+rename v* cond_dom // v0206
+recode cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
+	(12 = 6) (7 13 14 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
+lab var cond_dom_B "condição no domicílio B"
+* condicao_dom = 1	pessoa responsável
+*				 2	cônjuge, companheiro
+*				 3	filho, enteado
+*				 4	pai, mãe, sogro
+*				 5	neto, bisneto
+*				 6	irmão, irmã
+*				 7	outro parente
+*				 8	Agregado
+*				 9	pensionista
+*				 10	Empregado doméstico
+*				 11	Parente do empregado doméstico
+*				 12	Individual em domicílio coletivo
+
+g cond_dom_B = cond_dom
+recode cond_dom_B (6 7 = 5) (8 = 6) (9 = 7) (10 = 8) (11 = 9) (12 = 10)
+lab var cond_dom_B "condição no domicílio B"
+* cond_dom_B = 1 - pessoa responsável
+*			   2 - cônjuge, companheiro
+*			   3 - filho, enteado
+*			   4 - pai, mãe, sogro
+*			   5 - outro parente
+*			   6 - agregado
+*			   7 - hóspede, pensionista
+*			   8 - Empregado doméstico
+*			   9 - Parente do empregado doméstico
+*			   10 - Individual em domicílio coletivo
+
+/* D.3. IDADE */
+
+rename v* idade
+rename v* idade_meses
+rename v* idade_presumida
+recode idade_presumida (2 = 1) (1 = 0) // ajustar de acordo com a existencia e valor da variavel
+* idade_presumida = 0 -	Não
+*					1 - Sim
+
+drop v
+	
+/* D.4. COR OU RACA */
+
+recode v* (9=.) // v0401
+rename v* raca // v0401
+* raca = 1 - Branca
+*		 2 - Preta
+*		 3 - Amarela
+*		 4 - Parda
+*		 5 - Indígena
+lab var raca "cor ou raça"
+
+g racaB = raca
+recode racaB (5 = 4)
+lab var racaB "cor ou raça (indigenous=mulatto)"
+* raca =  1 - Branca
+*		  2 - Preta
+*		  3 - Amarela
+*		  4 - Parda
+	
+drop v*
+
+/* D.5 RELIGIÃO */
+replace v* = int(v6121/10) // dois primeiros dígitos = religião com os códs de 1991 // VERIFICAR PERMANENCIA DA CODIFICACAO
+recode v* (11/19 = 1) (21/28 = 2) (31/48 = 3) (61 = 4) (62 63 64 = 5) (74 75 76 78 79 = 6) ///
+             (71 = 7) (12 13 19 30 49 51 52 53 59 81 82 83 84 = 8) (85 86 89 99 = .)
+rename v* religiao
+* religiao = 0 - sem religião
+*            1 - católica
+*            2 - evangélica tradicional
+*            3 - evangélica pentecostal
+*            4 - espírita kardecista
+*            5 - espírita afro-brasileira
+*            6 - religiões orientais
+*            7 - judaica/israelita
+*            8 - outras religiões
+
+gen religiao_B = religiao
+recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
+lab var religiao_B "religião B - mais agregada"
+* religiao_B = 0 - sem religião
+*              1 - católica
+*              2 - evangélica
+*              3 - espírita
+*              4 - outra
+
+/* D.6. DEFICIÊNCIAS FÍSICA E MENTAL */
+
+* legenda: dif_x = dificuldade em fazer o movimento "x"
+
+recode v* (9= .) // v1001
+rename v* dif_enxergar // v1001
+* dif_enxergar = 1 - Sim, não consegue de modo algum
+*				 2 - Sim, grande dificuldade
+*				 3 - Sim, alguma dificuldade
+*				 4 - Não, nenhuma dificuldade
+	
+recode v* (9= .) // v1002
+rename v* dif_ouvir // v1002
+* dif_ouvir = 1 - Sim, não consegue de modo algum
+*			  2 - Sim, grande dificuldade
+*			  3 - Sim, alguma dificuldade
+*			  4 - Não, nenhuma dificuldade
+	
+recode v* (9= .) // v1003
+rename v* dif_caminhar // v1003
+* dif_caminhar = 1 - Sim, não consegue de modo algum
+*			 	 2 - Sim, grande dificuldade
+*			 	 3 - Sim, alguma dificuldade
+*				 4 - Não, nenhuma dificuldade
+
+recode v* (1/3=1) (4=0) (9= .) // v1005
+rename v* def_mental // v1005
+* def_mental = 1 - Sim
+*			   0 - Não
+
+/* D.7. NATURALIDADE E MIGRAÇÃO  */
+
+g sempre_morou = 1 if v* == 1 & v** == 2 // v1101 == 1 & v1102 == 2
+replace sempre_morou = 0 if v* != 1 | v** == 1
+lab var sempre_morou "sempre morou neste município"
+* sempre_morou = 1 - sim
+*				 0 - nao
+
+rename v* nasceu_mun // v1101
+recode nasceu_mun (1 = 1) (2 3 = 0)
+lab var nasceu_mun "nasceu neste município"
+* nasceu_mun = 1 - Sim
+*			   0 - Não
+
+rename v* nasceu_UF // g nasceu_UF = 1 if v1101 == 2 & v11011 == UF provavel combinacao de UF com v11011
+recode nasceu_UF (1 2 = 1) (3 = 0) // replace nasceu_UF = 0 if (v1101 == 2 & v11011 != UF) | v1101 == 3
+replace nasceu_UF = 1 if nasceu_mun == 1
+lab var nasceu_mun "nasceu nesta UF"
+* nasceu_UF = 1 - Sim
+*			  0 - Não
+
+rename v* nacionalidade // v1103
+recode nacionalidade (1 = 0) (2 = 1) (3 = 2)
+replace nacionalidade = 0 if nasceu_UF == 1
+* nacionalidade = 0 - Brasileiro nato
+*				  1 - Naturalizado brasileiro
+*				  2 - Estrangeiro
+	
+rename v* ano_fix_res // v1104
+* ano em que fixou residência no Brasil
+
+drop v*
+
+*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
+*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
+rename v* UF_nascim // v11011
+
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11013 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
+	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
+	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
+	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
+	8000140 8000180 8000646 8000678 8000686 8000694 8000690 8000706 8000748 ///
+	8000736 8000834 8000768 8000788 8000800 8000894 8000716 = 83 "Africa - outros")	///
+	(8000818=82 "Egito") ///
+	(8000032=30 "Argentina") ///
+	(8000124=32 "Canadá") ///
+	(8000192=36 "Cuba") ///
+	(8000218=37 "Equador") ///
+	(8000840=38 "EUA") ///
+	(8000320=39 "Guatemala") ///
+	(8000254=40 "Guiana Francesa") ///
+	(8000328=41 "Guiana Inglesa") ///
+	(8000340=44 "Honduras Britânicas") ///
+	(8000388=45 "Jamaica") ///
+	(8000558=47 "Nicarágua") ///
+	(8000591=48 "Panamá") ///
+	(8000600=49 "Paraguai") ///
+	(8000604=50 "Peru") ///
+	(8000214=51 "República Dominicana") ///
+	(8000222=52 "Salvador") ///
+	(8000740=53 "Suriname") ///
+	(8000858=54 "Uruguai") ///
+	(8000862=55 "Venezuela") ///
+	(8000028 8000044 8000052 8000084 8000068 8000152 8000170 8000188 8000212 ///
+		8000308 8000332 8000484 8000662 8000659 8000670 8000780 = 56 "América - outros") ///
+	(8000276=58 "Alemanha")	///
+	(8000040=59 "Áustria") ///
+	(8000056=60 "Bélgica") ///
+	(8000100=61 "Bulgária") ///
+	(8000208=62 "Dinamarca") ///
+	(8000724=63 "Espanha") ///
+	(8000246=64 "Finlândia") ///
+	(8000250=65 "França") ///
+	(8000826=66 "Grã-Bretanha") ///
+	(8000300=67 "Grécia") ///
+	(8000528=68 "Holanda") ///
+	(8000348=69 "Hungria") ///
+	(8000372=70 "Irlanda (Eire)") ///
+	(8000380=71 "Itália") ///
+	(8000070 8000191 8000705 8000807 8000499 8000688 = 72 "Iugoslávia") ///
+	(8000578=73 "Noruega") ///
+	(8000616=74 "Polônia") ///
+	(8000620=75 "Portugal") ///
+	(8000642=76 "Romênia") ///
+	(8000752=77 "Suécia") ///
+	(8000756=78 "Suíça") ///
+	(8000203 8000703=79 "Tchecoeslovaquia") ///
+	(8000112 8000233 8000428 8000440 8000643 8000804 = 80 "URSS") ///
+	(8000008 8000020 8000352 8000438 8000442 8000470 8000492 8000498 8000674 ///
+		8000336 = 81 "Europa - outros") ///
+	(8000156=84 "China - Continente") ///
+	(8000408=86 "Coréia") ///
+	(8000356=87 "Índia") ///
+	(8000376=88 "Israel") ///
+	(8000392=89 "Japão") ///
+	(8000422=90 "Líbano") ///
+	(8000586=91 "Paquistão") ///
+	(8000760=92 "Síria") ///
+	(8000792=93 "Turquia") ///
+	(8000004 8000682 8000051 8000031 8000048 8000050 8000096 8000064 8000116 ///
+		8000398 8000634 8000196 8000702 8000784 8000608 8000268 8000887 ///
+		8000360 8000364 8000368 8000400 8000414 8000458 8000462 8000104 ///
+		8000496 8000524 8000512 8000417 8000410 8000418 8000144 8000762 ///
+		8000764 8000626 8000795 8000860 8000704 = 94 "Ásia - outros") ///
+	(8000036=95 "Austrália") ///
+	(8000583 8000242 8000584 8000090 8000296 8000520 8000554 8000585 ///
+		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_nascim)
+label var pais_nascim "País de nascimento - códigos 1970"
+* Obs: Em 2010, a Irlanda do Norte possui o mesmo código que os países da Grã-Bretanha. Não dá
+* pra saber se nos anos anteriores o equívoco foi cometido. Isso vale para todas os itens 
+* desta seção, quando aplicável.
+
+drop v*
+
+*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
+*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
+rename v* UF_mor_ant // v11061
+
+*replace v* = . if v*>5400000 // nao me parece que va ser necessario. verificar e apagar
+rename v* mun_mor_ant // v11062
+
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11063 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
+	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
+	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
+	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
+	8000140 8000180 8000646 8000678 8000686 8000694 8000690 8000706 8000748 ///
+	8000736 8000834 8000768 8000788 8000800 8000894 8000716 = 83 "Africa - outros")	///
+	(8000818=82 "Egito") ///
+	(8000032=30 "Argentina") ///
+	(8000124=32 "Canadá") ///
+	(8000192=36 "Cuba") ///
+	(8000218=37 "Equador") ///
+	(8000840=38 "EUA") ///
+	(8000320=39 "Guatemala") ///
+	(8000254=40 "Guiana Francesa") ///
+	(8000328=41 "Guiana Inglesa") ///
+	(8000340=44 "Honduras Britânicas") ///
+	(8000388=45 "Jamaica") ///
+	(8000558=47 "Nicarágua") ///
+	(8000591=48 "Panamá") ///
+	(8000600=49 "Paraguai") ///
+	(8000604=50 "Peru") ///
+	(8000214=51 "República Dominicana") ///
+	(8000222=52 "Salvador") ///
+	(8000740=53 "Suriname") ///
+	(8000858=54 "Uruguai") ///
+	(8000862=55 "Venezuela") ///
+	(8000028 8000044 8000052 8000084 8000068 8000152 8000170 8000188 8000212 ///
+		8000308 8000332 8000484 8000662 8000659 8000670 8000780 = 56 "América - outros") ///
+	(8000276=58 "Alemanha")	///
+	(8000040=59 "Áustria") ///
+	(8000056=60 "Bélgica") ///
+	(8000100=61 "Bulgária") ///
+	(8000208=62 "Dinamarca") ///
+	(8000724=63 "Espanha") ///
+	(8000246=64 "Finlândia") ///
+	(8000250=65 "França") ///
+	(8000826=66 "Grã-Bretanha") ///
+	(8000300=67 "Grécia") ///
+	(8000528=68 "Holanda") ///
+	(8000348=69 "Hungria") ///
+	(8000372=70 "Irlanda (Eire)") ///
+	(8000380=71 "Itália") ///
+	(8000070 8000191 8000705 8000807 8000499 8000688 = 72 "Iugoslávia") ///
+	(8000578=73 "Noruega") ///
+	(8000616=74 "Polônia") ///
+	(8000620=75 "Portugal") ///
+	(8000642=76 "Romênia") ///
+	(8000752=77 "Suécia") ///
+	(8000756=78 "Suíça") ///
+	(8000203 8000703=79 "Tchecoeslovaquia") ///
+	(8000112 8000233 8000428 8000440 8000643 8000804 = 80 "URSS") ///
+	(8000008 8000020 8000352 8000438 8000442 8000470 8000492 8000498 8000674 ///
+		8000336 = 81 "Europa - outros") ///
+	(8000156=84 "China - Continente") ///
+	(8000408=86 "Coréia") ///
+	(8000356=87 "Índia") ///
+	(8000376=88 "Israel") ///
+	(8000392=89 "Japão") ///
+	(8000422=90 "Líbano") ///
+	(8000586=91 "Paquistão") ///
+	(8000760=92 "Síria") ///
+	(8000792=93 "Turquia") ///
+	(8000004 8000682 8000051 8000031 8000048 8000050 8000096 8000064 8000116 ///
+		8000398 8000634 8000196 8000702 8000784 8000608 8000268 8000887 ///
+		8000360 8000364 8000368 8000400 8000414 8000458 8000462 8000104 ///
+		8000496 8000524 8000512 8000417 8000410 8000418 8000144 8000762 ///
+		8000764 8000626 8000795 8000860 8000704 = 94 "Ásia - outros") ///
+	(8000036=95 "Austrália") ///
+	(8000583 8000242 8000584 8000090 8000296 8000520 8000554 8000585 ///
+		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor_ant)
+label var pais_mor_ant "País onde morava anteriormente (se migrou nos últ 10 anos)"
+
+drop v*
+
+rename v* anos_mor_mun // v1105
+
+* Em 2010, ha discernimento entre quem nasceu e sempre morou na UF e quem nasceu mas
+* nem sempre morou, sendo que apenas os últimos respondem ha qto tempo moram na UF sem 
+* interrupção. Então, para compatibilizar, para quem nasceu e sempre morou, o tempo de 
+* moradia é a idade
+
+replace anos_mor_mun = idade if anos_mor_mun == . & sempre_morou == 1
+
+*replace v0623 = idade if v0623==. & anos_mor_mun~=. // em 2022 nao pergunta explicitamente o tempo morando na UF, entao a nao ser que ibge crie var derivada, nao da pra replicar => apagar
+*rename v0623 anos_mor_UF
+
+* tempo de moradia em 1970 só vale para quem não nasceu no município.
+*g t_mor_UF_70 = anos_mor_UF // verificar para apagar
+g t_mor_mun_70 = anos_mor_mun
+recode /*t_mor_UF_70*/ t_mor_mun_70 (7/10=6) (11/max=7) // verificar para apagar
+*lab var t_mor_UF_70 "tempo de moradia na UF - grupos de 1970" // verificar para apagar
+lab var t_mor_mun_70 "tempo de moradia no municipio - grupos de 1970"
+
+* De 1980 em diante, podemos montar a variavel de tempo de moradia incluindo
+* pessoas que nasceram mas nem sempre moraram no municipio em que residem
+*recode anos_mor_UF (7/9 = 6) (10/max = 7), g(t_mor_UF_80) // verificar para apagar
+recode anos_mor_mun (7/9 = 6) (10/max = 7), g(t_mor_mun_80)
+*lab var t_mor_UF_80 "tempo de moradia na UF - grupos de 1980" // verificar para apagar
+lab var t_mor_mun_80 "tempo de moradia no municipio - grupos de 1980"
+
+replace v* = floor(v*/10^5) // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+replace v* = . if v*>53 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+rename v* UF_mor5anos // v11071 
+
+replace v* = . if v*>5400000 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
+rename v* mun_mor5anos // v11072
+
+recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///  // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES // v11073
+	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
+	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
+	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
+	8000140 8000180 8000646 8000678 8000686 8000694 8000690 8000706 8000748 ///
+	8000736 8000834 8000768 8000788 8000800 8000894 8000716 = 83 "Africa - outros")	///
+	(8000818=82 "Egito") ///
+	(8000032=30 "Argentina") ///
+	(8000124=32 "Canadá") ///
+	(8000192=36 "Cuba") ///
+	(8000218=37 "Equador") ///
+	(8000840=38 "EUA") ///
+	(8000320=39 "Guatemala") ///
+	(8000254=40 "Guiana Francesa") ///
+	(8000328=41 "Guiana Inglesa") ///
+	(8000340=44 "Honduras Britânicas") ///
+	(8000388=45 "Jamaica") ///
+	(8000558=47 "Nicarágua") ///
+	(8000591=48 "Panamá") ///
+	(8000600=49 "Paraguai") ///
+	(8000604=50 "Peru") ///
+	(8000214=51 "República Dominicana") ///
+	(8000222=52 "Salvador") ///
+	(8000740=53 "Suriname") ///
+	(8000858=54 "Uruguai") ///
+	(8000862=55 "Venezuela") ///
+	(8000028 8000044 8000052 8000084 8000068 8000152 8000170 8000188 8000212 ///
+		8000308 8000332 8000484 8000662 8000659 8000670 8000780 = 56 "América - outros") ///
+	(8000276=58 "Alemanha")	///
+	(8000040=59 "Áustria") ///
+	(8000056=60 "Bélgica") ///
+	(8000100=61 "Bulgária") ///
+	(8000208=62 "Dinamarca") ///
+	(8000724=63 "Espanha") ///
+	(8000246=64 "Finlândia") ///
+	(8000250=65 "França") ///
+	(8000826=66 "Grã-Bretanha") ///
+	(8000300=67 "Grécia") ///
+	(8000528=68 "Holanda") ///
+	(8000348=69 "Hungria") ///
+	(8000372=70 "Irlanda (Eire)") ///
+	(8000380=71 "Itália") ///
+	(8000070 8000191 8000705 8000807 8000499 8000688 = 72 "Iugoslávia") ///
+	(8000578=73 "Noruega") ///
+	(8000616=74 "Polônia") ///
+	(8000620=75 "Portugal") ///
+	(8000642=76 "Romênia") ///
+	(8000752=77 "Suécia") ///
+	(8000756=78 "Suíça") ///
+	(8000203 8000703=79 "Tchecoeslovaquia") ///
+	(8000112 8000233 8000428 8000440 8000643 8000804 = 80 "URSS") ///
+	(8000008 8000020 8000352 8000438 8000442 8000470 8000492 8000498 8000674 ///
+		8000336 = 81 "Europa - outros") ///
+	(8000156=84 "China - Continente") ///
+	(8000408=86 "Coréia") ///
+	(8000356=87 "Índia") ///
+	(8000376=88 "Israel") ///
+	(8000392=89 "Japão") ///
+	(8000422=90 "Líbano") ///
+	(8000586=91 "Paquistão") ///
+	(8000760=92 "Síria") ///
+	(8000792=93 "Turquia") ///
+	(8000004 8000682 8000051 8000031 8000048 8000050 8000096 8000064 8000116 ///
+		8000398 8000634 8000196 8000702 8000784 8000608 8000268 8000887 ///
+		8000360 8000364 8000368 8000400 8000414 8000458 8000462 8000104 ///
+		8000496 8000524 8000512 8000417 8000410 8000418 8000144 8000762 ///
+		8000764 8000626 8000795 8000860 8000704 = 94 "Ásia - outros") ///
+	(8000036=95 "Austrália") ///
+	(8000583 8000242 8000584 8000090 8000296 8000520 8000554 8000585 ///
+		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor5anos)
+label var pais_mor5anos "País onde morava há 5 anos"
+
+drop v*
+
+/* D.8. EDUCACÃO */
+
+rename v* alfabetizado // v1201
+recode alfabetizado (2 = 0)
+* alfabetizado = 1 - Sim
+*				 0 - Não
+	
+** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
+
+recode v* (1 = 1 "sim") (2 3 = 0 "nao"), g(freq_escola) //v1202
+replace freq_escola = 0 if v*<=2		// v1203	desconsidera creche e pre-escola para compatibilizar com todos
+lab var freq_escola "frequenta escola"
+* freq_escola = 1 - Sim
+*			    0 - Não
+
+g freq_escolaB = freq_escola
+replace freq_escolaB = 1 if v*==2 // v1203	inclui pre-escola
+lab var freq_escolaB "frequenta escola - inclui pre-escola"
+* freq_escolaB = 1 - Sim
+*				 0 - Não
+
+* Como há diversas definições para a frequencia a escola, a variavel abaixo deve
+* ser utilizada conjuntamente com a serie que frequenta
+* em 2022, nao tem opção de Classe de Alfabetização nem Pré-vestibular
+
+recode v* (3 = 4) (4 = 5) (5 = 7) (6 = 8) (7 = 10) (8 = 12) (9 10 11 = 13)	// v1203
+replace v* = 6 if v*==5 & v**==10 // v1203 ; v1203 == 4 & v1204 == 10
+replace v* = 9 if v*==8 & v**==5 // v1203 ; v1203 == 6 & v1205 == 10
+rename v* curso_freq
+* curso_freq = 1  - Creche
+*              2  - Pré-escolar
+*              3  - Classe de alfabetização
+*              4  - Alfabetização de adultos
+*              5  - Ensino fundamental ou 1º grau - regular seriado
+*              6  - Ensino fundamental ou 1º grau - regular não-seriado
+*              7  - Supletivo - Ensino fundamental ou 1º grau
+*              8  - Ensino médio ou 2º grau - regular seriado
+*              9  - Ensino médio ou 2º grau - regular não-seriado
+*              10 - Supletivo - Ensino médio ou 2º grau
+*			   11 - Pré-vestibular
+*              12 - Superior - graduação
+*              13 - Superior - mestrado ou doutorado
+
+rename v* serie_freq // v1204
+recode serie_freq (9 = 8) (10 = 9)
+replace serie_freq = v* if serie_freq==. & v* < 9 // v1205
+replace serie_freq = 8 if serie_freq==. & v* == 9 // v1205
+replace serie_freq = 9 if serie_freq==. & v* == 10 // v1205
+* serie_freq = 1 - Primeira série/ano
+*			   2 - Segunda série
+*			   3 - Terceira série
+*			   4 - Quarta série
+*			   5 - Quinta série
+*			   6 - Sexta série
+*			   7 - Sétima série
+* 			   8 - Oitava série
+*			   9 - Não seriado
+	
+* grupos de anos de estudo
+g anos_estudoC = .
+* para quem frequenta escola
+replace anos_estudoC = 0 if curso_freq<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
+replace anos_estudoC = 0 if curso_freq==6	// fundamental ou 1o grau nao seriado
+replace anos_estudoC = 0 if curso_freq==7	// supletivo fundamental ou 1o grau
+replace anos_estudoC = 0 if curso_freq==5 & serie_freq<=4	// fundamental ou 1o grau seriado - até 4o ano (inclusive)
+
+replace anos_estudoC = 1 if curso_freq==5 & serie_freq>=5 & serie_freq<=8	// fundamental ou 1o grau seriado - 5o a 8o ano
+
+replace anos_estudoC = 2 if curso_freq==8 	// medio ou 2o grau seriado - 1o ano
+replace anos_estudoC = 2 if curso_freq==9	// medio ou 2o grau nao seriado
+replace anos_estudoC = 2 if curso_freq==10	// supletivo medio ou 2o grau
+
+replace anos_estudoC = 3 if curso_freq==12		// superior de graduacao
+
+replace anos_estudoC = 4 if curso_freq==13		// mestrado ou doutorado
+
+* para ficar compativel com 2000, nao podemos recuperar a informacao abaixo
+*replace anos_estudoC = 4 if v*==1	// v1206 ja concluiu curso superior de graduacao
+
+* para quem nao frequenta escola
+
+* não tem pré-vestibular
+recode v* (5 6 7 = 5) (8 = 7) (9 10 = 8) (11 = 10) (12 = 12) (13/15 = 13)	// v1207
+replace v* = 6 if v*== & v**== // v1207 ; (v1207 == 5 | v1207 == 6 | v1207 == 7) & (v1209 == 11 | v1210 == 11)
+replace v* = 9 if v*== & v**== // v1207 ; (v1207 == 9 | v1207 == 10) & v1210 == 11
+rename v* 
+* curso_frequentou = 1  - Creche
+*              		 2  - Pré-escolar
+*              		 3  - Classe de alfabetização
+*              		 4  - Alfabetização de adultos
+*              		 5  - Ensino fundamental ou 1º grau - regular seriado
+*              		 6  - Ensino fundamental ou 1º grau - regular não-seriado
+*              		 7  - Supletivo - Ensino fundamental ou 1º grau
+*              		 8  - Ensino médio ou 2º grau - regular seriado
+*             		 9  - Ensino médio ou 2º grau - regular não-seriado
+*             		 10 - Supletivo - Ensino médio ou 2º grau
+*			  		 11 - Pré-vestibular
+*             		 12 - Superior - graduação
+*             		 13 - Superior - mestrado ou doutorado
+
+rename v* serie_frequentou // v1209
+recode serie_frequentou (1 = .) (2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9/10 = 8) (11 = 9)
+replace v* = v* - 1 // v1210
+recode v* (0 = .) (9 = 8) (10 = 9)
+replace serie_frequentou = v* if serie_frequentou==. // v1210
+* serie_frequentou = 1 - Primeira série/ano
+*			  		 2 - Segunda série
+*			  		 3 - Terceira série
+*			  		 4 - Quarta série
+*			  		 5 - Quinta série
+*			  		 6 - Sexta série
+*			  		 7 - Sétima série
+* 			  		 8 - Oitava série
+*			  		 9 - Não seriado
+
+replace anos_estudoC = 0 if curso_frequentou<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
+replace anos_estudoC = 0 if curso_frequentou==5 & serie_frequentou<4 // 1a-3a serie/1o-4o ano do 1o. grau ou fundamental 
+replace anos_estudoC = 0 if curso_frequentou==6 & v* == 2 // v1211 antigo primario sem conclusao
+replace anos_estudoC = 0 if curso_frequentou==7 & v* == 2 // v1211 supletivo 1o.grau/fundamental sem conclusao
+
+replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 & v* == 1 // v1211 ensino fundamental ate 7a serie com conclusao
+
+replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & v* == 1 // v1211 ensino fundamental com conclusao
+replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & v* == 1 // v1211 fundamental nao seriado ou supletivo com conclusao
+replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==2	// v1211 ensino medio sem conclusao
+
+replace anos_estudoC = 3 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==1	// v1211 antigo cientifico/classico/medio 2o.ciclo com conclusao
+
+replace anos_estudoC = 3 if curso_frequentou==12 & v*==2		// v1211 superior de graduacao sem conclusao
+
+replace anos_estudoC = 4 if curso_frequentou==12 & v1211==1		// superior de graduacao com conclusao
+replace anos_estudoC = 4 if curso_frequentou==13		// especializacao/mestrado/doutorado 
+
+* anos_estudoC = 0 – sem instrução ou menos de 4 anos de estudo (primário incompleto)
+*                1 – de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
+*				 2 – de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
+*			 	 3 – de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
+*			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
+lab var anos_estudoC "grupos de anos de escolaridade"
+
+drop v* curso_freq serie_freq
+
+* Estuda no município em que reside?
+recode v* (2 3 = 0) // v1301
+replace v* = . if freq_escolaB==0 // v1301
+rename v* mun_escola // v1301
+lab var mun_escola "estuda no município em que reside?"
+* mun_escola = 1 - sim
+*			   0 - não
+
+recode v* (140/226 321 322 347 380 = 3) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
+		 (421 641/727 813 = 4) ///
+		 (440/481 520/525 581 582 = 5) ///
+		 (620/624 = 6) ///
+		 (310/314 340 342/346 762 = 7) ///
+		 (863 = 8) ///
+		 (341 420 422 482 483 540/544 761 810/812 814/862 085 = 9), g(cursos_c1)
+lab var cursos_c1 "curso superior concluído"
+* cursos_c1	=	3	ciências humanas
+*				4	ciências biológicas
+*				5	ciências exatas
+*				6	ciências agrárias
+*				7	ciências sociais
+*				8	militar
+*				9	outros cursos
+		 
+recode v* (140/146 = 1) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
+		 (210/226 = 2) ///
+		 (310/346 347 380 = 3) ///
+		 (420/483 = 4) ///
+		 (520/582 623 = 5) ///
+		 (620/622 624 641 = 6) ///
+		 (720/762 = 7) ///
+		 (810/863 = 8) ///
+		 (085 = 9), g(cursos_c2)
+lab var cursos_c2 "curso superior concluído - CONCLA"
+* cursos_c2 =	1	Educação
+*				2	Artes, Humanidades e Letras
+*				3	Ciências Sociais, Administração e Direito
+*				4	Ciências, Matemática e Computação
+*				5	Engenharia, Produção e Construção
+*				6	Agricultura e Veterinária
+*				7	Saúde e Bem-Estar Social    
+*				8	serviços
+*				9	Outros
+
+rename v* curso_concl	// COMP SO PARA CURSO SUPERIOR  // v1212
+
+drop v*
+
+/* D.9. SITUAÇÃO CONJUGAL */
+
+* teve conjuge
+recode v* (1 2 = 1) (3 = 0), g(teve_conjuge) // v0601
+label var teve_conjuge "vive ou já viveu com cônjuge"
+* teve_conjuge = 0 - não
+*                1 - sim
+
+* vive com o cônjuge?
+recode v* (2 3 = 0) // v0601
+rename v* vive_conjuge
+lab var vive_conjuge "se a pessoa vive com o cônjuge"
+* vive_conjuge = 0 - Não
+*				 1 - Sim
+
+drop v*
+
+gen estado_conj_B = v* if vive_conjuge == 1 // v0603 para mulher e v0605 para homem. verificar se terá de criar as condicionais ou se variável divulgada será derivada e combinando as informações
+replace estado_conj_B = 5 if teve_conjuge == 0
+replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj_B == .)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
+*               2 só casamento civil
+*               3 só casamento religioso
+*               4 união consensual
+*               5 solteiro
+*               6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
+
+drop v*
+
+/* D.10.1 TRABALHO */
+
+gen trab_rem_sem = 1 if v* == 1 | v** == 1 | v*** == 1 // v14011 == 1 | v14012 == 1 | v14013 == 1
+replace trab_rem_sem = 0 if trab_rem_sem == . & | v*** == 2 // v14013 == 2
+* trab_rem_sem = 1 - Sim
+*				 0 - Não
+
+/* Atenção! Em 2022, a pergunta se ajudou sem pagamento algum morador do domicílio ou parente veio antes da de estar afastado de trabalho remunerado.
+Vamos disponibilizar sob mesmo nome, pois a pergunta é igual, mas cuidado ao comparar os anos, pois o fluxo pode afetar a quantidade de pessoas que
+aparece em cada categoria. */
+rename v* afast_trab_sem // v14015
+recode afast_trab_sem (2 = 0)
+* afast_trab_sem = 1 - Sim
+*				   0 - Não
+
+* OBS: não perfeitamente compatível com 2000 por conta de mudanças nas questões.
+* Em 2000, sao duas questoes, uma referente a aprendiz/estagiário e outra sobre
+* ajuda sem remuneração a morador em atividade de extração e cultivo; em 2010 e 2022,
+* é uma pergunta genérica sobre ajuda sem remuneração a morador do domicílio
+rename v* nao_remun // v14014
+recode nao_remun (2 = 0)	
+* nao_remun = 1 - Sim
+*			  0 - Não
+	
+rename v* trab_proprio_cons // v14016
+recode trab_proprio_cons (2 = 0)
+* trab_proprio_cons = 1 - Sim
+*					  0 - Não
+
+recode v* (1 = 0) (2 3 = 1) // v1402
+rename v* mais_de_um_trab // v1402
+lab var mais_de_um_trab "tinha mais de um trabalho"
+* mais_de_um_trab = 0 - Não
+*			   	    1 - Sim
+
+rename v* ocup2010 // v14031
+rename v* ativ2010	// v14041
+
+rename v* ocup2000 // v14032
+rename v* ativ2000 // v14042
+
+* Posição na Ocupação // Verificar se virá uma variável derivada composta de informações de mais de uma variável na divulgação
+gen pos_ocup_sem = 1 if v* == 3 & v** == 1 // v1405 == 3 & v1406 == 1
+replace pos_ocup_sem = 2 if v* == 2 | v* == 4 | (v* == 5 & v** == 1) | (v* == 6 & v** == 1) // v1405 == 2 | v1405 == 4 | (v1405 == 5 & v1406 == 1) | (v1405 == 6 & v1406 == 1)
+replace pos_ocup_sem = 3 if v* == 3 & v** == 2 // v1405 == 3 & v1406 == 2
+replace pos_ocup_sem = 4 if v* == 1 & v** == 1 // v1405 == 1 & v1406 == 1
+replace pos_ocup_sem = 5 if v* == 1 & v** == 2 // v1405 == 1 & v1406 == 2
+replace pos_ocup_sem = 6 if v* == 8 // v1405 == 8
+replace pos_ocup_sem = 7 if v* == 7 // v1405 == 7
+replace pos_ocup_sem = 8 if v* == 9 // v1405 == 9
+replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
+* pos_ocup_sem  = 1 - Empregado com carteira
+*				  2 - Militar e Funcionário Públicos
+*				  3 - Empregado sem carteira
+*				  4 - Trabalhador doméstico com carteira
+*				  5 - Trabalhador doméstico sem carteira
+*				  6 - Conta - própria
+*				  7 - Empregador
+*				  8 - Não remunerado
+*                 9 - Trabalhador na produção para o próprio consumo
+
+
+drop v* // v1405 v1406 v1407
+
+rename v* previd_B // v1408
+recode previd_B (2 = 0) 
+* previd = 1 - Sim
+*          0 - Não
+
+drop v*
+
+* providência para conseguir trabalho
+recode v* (2 = 0) // v1409
+rename v* tomou_prov // v1409
+lab var tomou_prov "tomou providências para conseguir trabalho"
+* tom_prov = 1 - sim
+*            0 - não
+
+* trabalha no município 
+recode v* (1 2 = 1) (3/5 = 0) (else = .) // v1501
+rename v* mun_trab // v1501
+lab var mun_trab "trabalha no município em que reside"
+* mun_trab 	= 1 - sim
+*			  0 - não
+
+drop v*
+
+/* D.10.2 RENDIMENTOS */
+
+/* Há uma distinção em 2022, em que é perguntado rendimento do trabalho principal somente para quem tinha 1 trabalho e para quem tinha mais trabalhos, 
+é perguntado o rendimento total desses trabalhos.
+Vamos disponibilizar o rendimento do trabalho principal, mas note que ela irá representar a mesma coisa entre os anos apenas para quem tem apenas 1 trabalho.
+Vamos também disponibilizar uma nova variável, rendimento de todos os trabalhos, somando trabalho principal com outras ocupações sob nome rend_todos_trab,
+aplicando também para 2000 e 2010. */
+
+replace	v* = . if v* == 0 // v14111
+rename v* rend_ocup_prin // v14111
+* rendimento bruto trabalho principal
+
+drop v*
+
+replace v* = . if rend_ocup_prin==.
+rename v* rend_prin_sm
+* rendimento salarios minimos trabalho principal
+
+replace v* = . if v* == 0 // v14121
+rename v* rend_todos_trab // v14121
+replace rend_todos_trab = rend_ocup_prin if rend_todos_trab == . & mais_de_um_trab == 0
+* rendimento bruto todos trabalhos
+
+rename v* rend_todos_trab_sm
+replace rend_todos_trab_sm = rend_prin_sm if rend_todos_trab_sm == . & mais_de_um_trab == 0
+* rendimento em salarios mínimos em todos os trabalhos
+
+drop v*
+
+* em anos anteriores já disponibilizava a total pronta, ver se em 2022 também
+rename v* rend_total
+
+rename v* rend_total_sm
+
+* renda familiar
+replace v* = v**n_pes_fam
+rename v* rend_fam
+lab var rend_fam "renda familiar"
+
+drop v*
+
+rename v* rend_outras_fontes // v14131
+lab var rend_outras_fontes "rendimento de outras fontes"
+
+drop v*
+
+/* D.11. FECUNDIDADE */
+
+drop v*
+rename v* f_nasc_v_hom // v08011
+rename v* f_nasc_v_mul // v08012
+rename v* filhos_nasc_vivos
+drop v*
+rename v* f_vivos_hom // v08021
+rename v* f_vivos_mul // v08022
+rename v* filhos_vivos
+
+rename v* idade_ult_nasc_v // v0830
+
+drop v*
+	
+/* DEFLACIONANDO RENDAS: referência = TBD */
+g double deflator = **
+g conversor = **
+lab var deflator "deflator de rendimentos - base TBD"
+lab var conversor "conversor de moedas"
+
+foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fontes {
+		g `var'_def = (`var'/conversor)/deflator
+		lab var `var'_def "`var' deflacionada"
+}
+
+/* D.12. OUTRAS INFORMAÇÕES */
+ 
+drop v*
+
+order ano UF regiao munic id_dom ordem
+
+end
+
+**************
+* CENSO 2022 *
+**************
 
 program define compat_censo10dom
 

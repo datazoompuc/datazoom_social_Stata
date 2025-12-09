@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 O Censo Demográfico é uma pesquisa realizada pelo IBGE uma vez a cada dez anos, em que todos os domicílios do território brasileiro são visitados. O Censo fornece uma contagem da população e recolhe informações básicas dos moradores, como idade e gênero.
 
-O pacote do Data Zoom trata os microdados da amostra do Censo: o IBGE realiza uma entrevista mais detalhada com uma grande amostra representativa dos domicílios brasileiros. O questionário da amostra explora temas como características sociodemográficas dos moradores - como escolaridade e rendimentos -, características físicas do local de residência - material das paredes, existência de água encanada, etc. - e posse de bens - como geladeira e automóvel. No Censo de 2010, a amostra foi de 6,2 milhões de domicílios, o que abrange 20,6 milhões de indivíduos.
+Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com uma grande amostra aleatória dos domicílios, na qual investiga características sociodemográficas dos moradores (como escolaridade e rendimentos), características físicas do local de residência (material das paredes, existência de água encanada, etc.) e posse de bens (como geladeira e automóvel). No Censo de 2022, tal amostra cobria [INSERIR INFORMAÇÃO NOVA] milhões de domicílios com [INSERIR INFORMAÇÃO NOVA] milhões de indivíduos.
 
 Há diferenças nos questionários da amostra ao longo dos anos. Por isso, diversas variáveis não estão disponíveis em todos os anos ou têm opções diferentes em diferentes anos. O Data Zoom oferece a compatibilização de variáveis, elaborada pelo Data Zoom. Além das variáveis originais, são entregues variáveis compatibilizadas, que procuram uniformizar as informações ao longo do tempo. Neste caso, as variáveis da base de dados compatibilizada não possuem os nomes sugeridos pelo dicionário original. Acesse o documento [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf) para conhecer toda a metodologia de compatibilização.
 
@@ -21,8 +21,7 @@ Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 
 
 ### Arquivos de apoio
 
-  - [Microdados e documentação referente a 2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
-  - [Microdados e documentação referente a 1970-2000](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads)
+  - [Microdados e documentação: Censos 1970 a 2022](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads)
   - [Dicionário compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)  
 
 <details>
@@ -33,7 +32,8 @@ Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
   - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
-  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)  
+  - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
+  - [Dicionário Censo 2022](INCLUIR INFO NOVA)
   
 </details>
 
@@ -46,5 +46,6 @@ Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
   - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
   - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)
+  - [Dicionário Censo 2022](INCLUIR INFO NOVA)
   
 </details>
