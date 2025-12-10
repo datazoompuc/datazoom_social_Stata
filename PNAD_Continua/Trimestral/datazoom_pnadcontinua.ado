@@ -122,28 +122,38 @@ foreach aa in `years' {
 }
 
 forvalues pa = `min_painel'/`max_painel'{  
+	local first = 1
 	foreach aa in `years' {
+	if `first' {
+	    use   "`PNADC_Painel`pa'temp`aa''", clear
+		local first = 0
+		}
+	else {
 		append using "`PNADC_Painel`pa'temp`aa''"
-		keep if V1014 == `pa'
 	}
-	tempfile PNADC_Painel`pa'	
+	keep if V1014 == `pa'
+	}
 	save "`PNADC_Painel`pa''", replace	
 }
 
-global panels = ""
-forvalues pa = `min_painel'/`max_painel'{   
-	use "`PNADC_Painel`pa''", clear
-	qui count
-	if r(N) != 0 { 
-		global panels = "$panels `pa'" /* Coleta os paineis existentes */
-	}
+
+
+global panels ""
+local painel_temps ""
+
+forvalues pa = `min_painel'/`max_painel'{
+    capture confirm file "PNADC_Painel`pa'.dta"
+    if !_rc {
+        use "PNADC_Painel`pa'", clear
+        qui count
+        if r(N) != 0 {
+            global panels "$panels `pa'"
+            local painel_temps `"`painel_temps' "PNADC_Painel`pa'""'
+        }
+    }
 }
 
 display "$panels"
-
-foreach pa in $panels{
-	local painel_temps `painel_temps' `PNADC_Painel`pa''
-}
 
 if "`nid'" == ""{
 
@@ -198,6 +208,10 @@ if _rc {
 		rename `aux_id' id_ind
 		
 		label var id_ind "Basic identifier"
+		
+		capture drop __*
+		order id_ind, after(V2003)
+
 		
 		// Salva o arquivo com as alterações
 		save "`file'", replace
