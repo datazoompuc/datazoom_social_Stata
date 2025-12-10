@@ -169,6 +169,11 @@ syntax, temps(string)
 		noi di as text "Aplicando ID Básica em: `file'"
 		use "`file'", clear
 		
+		capture confirm numeric variable V1014
+if _rc {
+    destring V1014, replace ignore(" ")
+}
+		
 		// 1. Criação dos Identificadores Numéricos
 		// Garante que não há lixo de tentativas anteriores
 		cap drop id_dom id_ind
@@ -219,6 +224,13 @@ syntax, temps(string)
 		
 		noi di as text "Aplicando ID Ribas-Soares em: `file'"
 		use "`file'", clear
+		
+		capture drop __*
+		
+		   capture confirm numeric variable V1014
+    if _rc {
+        destring V1014, replace ignore(" ")
+    }
 		
 		// --- Recuperando o Max ID Numérico ---
 		// Como o idbas transformou o id_ind em texto (ex: "1_503"), 
