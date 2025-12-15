@@ -115,7 +115,7 @@ forvalues pa = `min_painel'/`max_painel'{
         if r(N) != 0 {
             global panels "$panels `pa'"
             * monta lista de arquivos de painel com aspas
-            local painel_temps `"`painel_temps' "PNADC_Painel`pa'""'
+			local painel_temps `painel_temps' PNADC_Painel`pa'
         }
     }
 }
@@ -138,7 +138,7 @@ end
 *                IDENTIFICAÇÃO BÁSICA                
 ******************************************************
 program pnadcont_idbas
-syntax, temps(string)
+syntax, temps(namelist)
 
 local n : word count `temps'
 local i = 1
@@ -163,15 +163,40 @@ foreach file in `temps' {
     egen `num_app' = count(V1014), by(id_ind Ano Trimestre)
     replace id_ind = . if `num_app' != 1 
 
+	noi di as error "DEBUG: antes de criar aux_id"
+	noi list V1014 id_dom id_ind `num_app' in 1/20, abbrev(20)
+
+	noi di as error "DEBUG: tipos"
+	noi describe id_dom id_ind `num_app'
+	
     tempvar aux_id
-    egen `aux_id' = concat(V1014 id_ind), punct("_")
+    egen `aux_id' = concat(V1014 id_ind), punct("")
     drop id_ind
     rename `aux_id' id_ind
+	recast str20 id_ind
 
     label var id_ind "Basic identifier"
 
     capture drop __*
-    order id_ind, after(V2003)
+	
+	* garante que id_ind existe
+	capture confirm variable id_ind
+	if _rc {
+    di as error "ERRO FATAL: id_ind não existe em `file'"
+    exit 459
+	}
+
+	* remove variáveis auxiliares
+	capture drop hous_id
+	capture drop aux_id
+	capture drop num_app
+	capture drop __*
+
+	* organiza
+	order id_dom id_ind, first
+	compress
+
+	save "`file'", replace
 
     * >>> alteração principal: grava o identificador no próprio arquivo do painel
     save "`file'", replace
@@ -184,7 +209,7 @@ end
 *                IDENTIFICAÇÃO AVANÇADA         
 ******************************************************
 program pnadcont_idrs
-syntax, temps(string)
+syntax, temps(namelist)
 
 * primeiro gera a identificação básica
 pnadcont_idbas, temps(`temps')
@@ -227,8 +252,9 @@ foreach file in `temps' {
     replace `id_rs_num' = `id_rs_num' + `max_id'
 
     tempvar id_rs_string
-    egen `id_rs_string' = concat(V1014 `id_rs_num'), punct("_")
+    egen `id_rs_string' = concat(V1014 `id_rs_num'), punct("")
     replace id_ind = `id_rs_string' if `rs_group' > 0 & !missing(`id_rs_num')
+	recast str20 id_ind
 
     tempvar quarters_adv matched_adv
     egen `quarters_adv' = count(V1014), by(id_ind)
