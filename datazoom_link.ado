@@ -4,5 +4,9 @@
 * version 1.0
 
 program define datazoom_link
-	di `"{browse "https://drive.google.com/file/d/1bP8HtXvHi56qgSXyH-jyvD8HoVURHvZX/view?usp=drive_link"}"'
+	di `"{browse "https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/PNAD%20Contínua/PNADC_Pesquisas_Suplementares_Anuais_20251119.pdf"}"'
+end
+
+program define datazoom_link_en
+	di `"{browse "https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Continuous%20PNAD/PNADC_Annual_Supplements_Guide_20251119.pdf"}"'
 end

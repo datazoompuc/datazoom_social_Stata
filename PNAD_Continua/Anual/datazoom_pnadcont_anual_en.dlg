@@ -104,7 +104,7 @@ BEGIN
 
 PROGRAM hlink1
 	BEGIN
-		put "datazoom_link"
+		put "datazoom_link_en"
 		stata
    END
 
