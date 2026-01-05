@@ -203,7 +203,7 @@ In Portuguese:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
 - [ECINF 2003
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003.xls)
-
+</details>
 ## PME
 
 PME, the Brazilian Monthly Employment Survey, is a sample survey
