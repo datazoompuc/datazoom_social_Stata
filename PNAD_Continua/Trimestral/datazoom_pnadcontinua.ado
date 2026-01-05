@@ -160,20 +160,16 @@ foreach file in `temps' {
     egen id_ind = group(id_dom V2003 V20082 V20081 V2008 V2007)
 
     tempvar num_app
-    egen `num_app' = count(V1014), by(id_ind Ano Trimestre)
-    replace id_ind = . if `num_app' != 1 
+	gen int `num_app' = .
+	bys id_ind Ano Trimestre: replace `num_app' = _N if !missing(id_ind)
+	replace id_ind = . if `num_app' != 1 & !missing(`num_app')
+
 
 	noi di as error "DEBUG: antes de criar aux_id"
 	noi list V1014 id_dom id_ind `num_app' in 1/20, abbrev(20)
 
 	noi di as error "DEBUG: tipos"
 	noi describe id_dom id_ind `num_app'
-	
-    tempvar aux_id
-    egen `aux_id' = concat(V1014 id_ind), punct("")
-    drop id_ind
-    rename `aux_id' id_ind
-	recast str20 id_ind
 
     label var id_ind "Basic identifier"
 
@@ -198,8 +194,6 @@ foreach file in `temps' {
 
 	save "`file'", replace
 
-    * >>> alteração principal: grava o identificador no próprio arquivo do painel
-    save "`file'", replace
 }
 
 end
@@ -230,34 +224,39 @@ foreach file in `temps' {
     capture confirm numeric variable V1014
     if _rc destring V1014, replace ignore(" ")
 
-    tempvar id_num_recuperado
-    gen long `id_num_recuperado' = real(substr(id_ind, strpos(id_ind, "_")+1, .))
-    qui sum `id_num_recuperado'
-    local max_id = r(max)
+    quietly summarize id_ind if !missing(id_ind), meanonly
+	local max_id = r(max)
+	if missing(`max_id') local max_id = 0
+
 
     tempvar quarters_basic matched_basic
     egen `quarters_basic' = count(V1014), by(id_ind)
     gen `matched_basic' = (`quarters_basic' == 5)
 
+	replace `matched_basic' = 0 if missing(id_ind)
+	
     tempvar rs_group
     gen `rs_group' = 0
     replace `rs_group' = 1 if `matched_basic' != 1 & inlist(V2005, 1, 2, 3)
     replace `rs_group' = 2 if `matched_basic' != 1 & inlist(V2005, 4, 5) & V2009 >= 25
 
-    tempvar id_dom_temp
-    egen `id_dom_temp' = group(UF UPA V1008 V1014)
-
     tempvar id_rs_num
-    egen `id_rs_num' = group(`id_dom_temp' V20081 V2008 V2003 `rs_group')
+    egen `id_rs_num' = group(id_dom V20081 V2008 V2003 `rs_group')
     replace `id_rs_num' = `id_rs_num' + `max_id'
 
-    tempvar id_rs_string
-    egen `id_rs_string' = concat(V1014 `id_rs_num'), punct("")
-    replace id_ind = `id_rs_string' if `rs_group' > 0 & !missing(`id_rs_num')
-	recast str20 id_ind
+    gen long id_rs = .
+	replace id_rs = `id_rs_num' if `rs_group' > 0 & !missing(`id_rs_num')
+	replace id_rs = id_ind if missing(id_rs)
 
+	tempvar unmatched_basic unmatched_adv
+	bysort id_ind: gen byte `unmatched_basic' = (_N==1) if !missing(id_ind)
+	bysort id_rs : gen byte `unmatched_adv'   = (_N==1) if !missing(id_rs)
+
+	replace id_rs = id_ind if !(`unmatched_basic'==1 & `unmatched_adv'==0)
+
+	
     tempvar quarters_adv matched_adv
-    egen `quarters_adv' = count(V1014), by(id_ind)
+    egen `quarters_adv' = count(V1014), by(id_rs)
     gen `matched_adv' = (`quarters_adv' == 5)
 
     * >>> grava identificação avançada no próprio arquivo do painel
