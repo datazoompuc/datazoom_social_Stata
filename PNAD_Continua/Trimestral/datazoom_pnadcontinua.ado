@@ -1,5 +1,5 @@
 ******************************************************
-*             datazoom_pnadcontinua.ado              
+*             datazoom_pnadcontinua.ado
 ******************************************************
 *version stata 14.2
 program define datazoom_pnadcontinua
@@ -47,7 +47,7 @@ foreach year in `years'{
     }
 }
 
-if _rc==901 exit    
+if _rc==901 exit
 
 capture mkdir pnadcontinua
 if _rc == 693 {
@@ -62,7 +62,7 @@ else cd "pnadcontinua"
 
 loc caminhoprin = c(pwd)
 
-foreach aa in `years' { 
+foreach aa in `years' {
     use "`PNADC_01`aa''", clear
     foreach trim in 02 03 04 {
         capture append using "`PNADC_`trim'`aa''"
@@ -78,12 +78,8 @@ foreach aa in `years' {
     }
 }
 
-******************************
-* Junta paineis 
-******************************
-
 foreach aa in `years' {
-    forvalues pa = `min_painel'/`max_painel'{    
+    forvalues pa = `min_painel'/`max_painel'{
         use PNADC`aa', clear
         keep if V1014 == `pa'
         tempfile PNADC_Painel`pa'temp`aa'
@@ -91,7 +87,7 @@ foreach aa in `years' {
     }
 }
 
-forvalues pa = `min_painel'/`max_painel'{  
+forvalues pa = `min_painel'/`max_painel'{
     local first = 1
     foreach aa in `years' {
         if `first' {
@@ -114,8 +110,7 @@ forvalues pa = `min_painel'/`max_painel'{
         qui count
         if r(N) != 0 {
             global panels "$panels `pa'"
-            * monta lista de arquivos de painel com aspas
-			local painel_temps `painel_temps' PNADC_Painel`pa'
+            local painel_temps `painel_temps' PNADC_Painel`pa'
         }
     }
 }
@@ -123,9 +118,7 @@ forvalues pa = `min_painel'/`max_painel'{
 display "$panels"
 
 if "`nid'" == ""{
-
-	pnadcont_`idbas'`idrs', temps(`painel_temps')
-
+    pnadcont_`idbas'`idrs', temps(`painel_temps')
 }
 
 di _newline "Esta versão do função datazoom_pnadcontinua é compatível com a última versão dos microdados da PNAD Contínua Trimestral divulgados em 24/02/2022"
@@ -135,10 +128,10 @@ end
 
 
 ******************************************************
-*                IDENTIFICAÇÃO BÁSICA                
+*                IDENTIFICAÇÃO BÁSICA
 ******************************************************
 program pnadcont_idbas
-syntax, temps(namelist)
+syntax, temps(namelist) [internal]
 
 local n : word count `temps'
 local i = 1
@@ -160,53 +153,49 @@ foreach file in `temps' {
     egen id_ind = group(id_dom V2003 V20082 V20081 V2008 V2007)
 
     tempvar num_app
-	gen int `num_app' = .
-	bys id_ind Ano Trimestre: replace `num_app' = _N if !missing(id_ind)
-	replace id_ind = . if `num_app' != 1 & !missing(`num_app')
-
-
-	noi di as error "DEBUG: antes de criar aux_id"
-	noi list V1014 id_dom id_ind `num_app' in 1/20, abbrev(20)
-
-	noi di as error "DEBUG: tipos"
-	noi describe id_dom id_ind `num_app'
+    gen int `num_app' = .
+    bys id_ind Ano Trimestre: replace `num_app' = _N if !missing(id_ind)
+    replace id_ind = . if `num_app' != 1 & !missing(`num_app')
 
     label var id_ind "Basic identifier"
 
     capture drop __*
-	
-	* garante que id_ind existe
-	capture confirm variable id_ind
-	if _rc {
-    di as error "ERRO FATAL: id_ind não existe em `file'"
-    exit 459
-	}
 
-	* remove variáveis auxiliares
-	capture drop hous_id
-	capture drop aux_id
-	capture drop num_app
-	capture drop __*
+    capture confirm variable id_ind
+    if _rc {
+        di as error "ERRO FATAL: id_ind não existe em `file'"
+        exit 459
+    }
 
-	* organiza
-	order id_dom id_ind, first
-	compress
+    capture drop hous_id
+    capture drop aux_id
+    capture drop num_app
+    capture drop __*
 
-	save "`file'", replace
+    order id_dom id_ind, first
+    compress
 
+    if "`internal'" == "" {
+        tostring id_ind, gen(id_ind_str) format(%20.0f) force
+        gen str40 id_ind_out = "" 
+        replace id_ind_out = string(V1014) + "_" + id_ind_str if !missing(id_ind)
+        drop id_ind id_ind_str
+        rename id_ind_out id_ind
+    }
+
+    save "`file'", replace
 }
 
 end
 
 
 ******************************************************
-*                IDENTIFICAÇÃO AVANÇADA         
+*                IDENTIFICAÇÃO AVANÇADA
 ******************************************************
 program pnadcont_idrs
 syntax, temps(namelist)
 
-* primeiro gera a identificação básica
-pnadcont_idbas, temps(`temps')
+pnadcont_idbas, temps(`temps') internal
 
 local n : word count `temps'
 local i = 1
@@ -225,16 +214,14 @@ foreach file in `temps' {
     if _rc destring V1014, replace ignore(" ")
 
     quietly summarize id_ind if !missing(id_ind), meanonly
-	local max_id = r(max)
-	if missing(`max_id') local max_id = 0
-
+    local max_id = r(max)
+    if missing(`max_id') local max_id = 0
 
     tempvar quarters_basic matched_basic
     egen `quarters_basic' = count(V1014), by(id_ind)
     gen `matched_basic' = (`quarters_basic' == 5)
+    replace `matched_basic' = 0 if missing(id_ind)
 
-	replace `matched_basic' = 0 if missing(id_ind)
-	
     tempvar rs_group
     gen `rs_group' = 0
     replace `rs_group' = 1 if `matched_basic' != 1 & inlist(V2005, 1, 2, 3)
@@ -245,21 +232,24 @@ foreach file in `temps' {
     replace `id_rs_num' = `id_rs_num' + `max_id'
 
     gen long id_rs = .
-	replace id_rs = `id_rs_num' if `rs_group' > 0 & !missing(`id_rs_num')
-	replace id_rs = id_ind if missing(id_rs)
+    replace id_rs = `id_rs_num' if `rs_group' > 0 & !missing(`id_rs_num')
 
-	tempvar unmatched_basic unmatched_adv
-	bysort id_ind: gen byte `unmatched_basic' = (_N==1) if !missing(id_ind)
-	bysort id_rs : gen byte `unmatched_adv'   = (_N==1) if !missing(id_rs)
-
-	replace id_rs = id_ind if !(`unmatched_basic'==1 & `unmatched_adv'==0)
-
-	
     tempvar quarters_adv matched_adv
     egen `quarters_adv' = count(V1014), by(id_rs)
     gen `matched_adv' = (`quarters_adv' == 5)
 
-    * >>> grava identificação avançada no próprio arquivo do painel
+    tostring id_ind, gen(id_ind_str) format(%20.0f) force
+    gen str40 id_ind_out = ""
+    replace id_ind_out = string(V1014) + "_" + id_ind_str if !missing(id_ind)
+    drop id_ind id_ind_str
+    rename id_ind_out id_ind
+
+    tostring id_rs, gen(id_rs_str) format(%20.0f) force
+    gen str40 id_rs_out = ""
+    replace id_rs_out = string(V1014) + "_" + id_rs_str if !missing(id_rs)
+    drop id_rs id_rs_str
+    rename id_rs_out id_rs
+
     save "`file'", replace
 }
 
