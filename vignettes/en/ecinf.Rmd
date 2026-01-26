@@ -32,3 +32,5 @@ Due to the large number of topics investigated, there are several microdata file
 
   - [ECINF 1997 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
   - [ECINF 2003 dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003.xls)
+
+</details>
