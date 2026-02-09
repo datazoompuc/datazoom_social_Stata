@@ -75,8 +75,8 @@ IBGE also conducts a more detailed interview on a large random sample of
 households, investigating household members’ socio-demographic
 characteristics (schooling, income etc.), household’s characteristics
 (wall materials, plumbing etc.), and possession of physical assets
-(refrigerator, car etc.). In the 2010 Census sample, there are 6.2
-million households and 20.6 million individuals.
+(refrigerator, car etc.). In the 2022 Census sample, there are [INSERT HERE NEW INFO]
+million households and [INSERT HERE NEW INFO] million individuals.
 
 ### Microdata
 
@@ -85,12 +85,10 @@ For each year, there is a data file for each unit of the federation
 individual characteristics. Since 2000, there is one file for each type
 of record.
 
-Our Census program applies to the 1970, 1980, 1991, 2000 and 2010 rounds
-of the Census. The 2000 and 2010 microdata and documentation are
+Our Census program applies to the 1970, 1980, 1991, 2000, 2010 and 2022 rounds
+of the Census. The microdata and documentation are
 available for download from the IBGE website on [this
-link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-2020-censo4.html?=&t=microdados).
-For information on how to acquire other rounds, [click
-here](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
+link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
 
 Because of methodological changes made by IBGE over the years, the same
 information may not be available every year and/or may not have been
@@ -114,8 +112,8 @@ computer.
 
 ### Supporting files
 
-- [Microdata and documentation: 2000 and 2010
-  Censuses](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+- [Microdata and documentation: from 1970 to 2022
+  Censuses](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads)
 - [Compatibilized
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)
 
@@ -136,6 +134,8 @@ In English:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
 - [Censo 2010
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)
+- [Censo 2022
+  dictionary](INCLUIR INFO NOVA)
 
 </details>
 <details>
@@ -155,7 +155,9 @@ In Portuguese:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
 - [Censo 2010
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
-
+- [Censo 2022
+  dictionary](INCLUIR INFO NOVA)
+  
 </details>
 
 ## ECINF

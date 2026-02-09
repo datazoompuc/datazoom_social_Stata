@@ -19,7 +19,7 @@ BEGIN
 	BUTTON btn_pns 			+158 @   @  @, label("PNS") onpush(script child_pns)
 	BUTTON btn_pof 			+158 @   @  @, label("POF") onpush(script child_pof)
 	
-	TEXTBOX txb_censo    		15 75 140 45, label("Census - 1970 to 2010") center
+	TEXTBOX txb_censo    		15 75 140 45, label("Census - 1970 to 2022") center
 	TEXTBOX txb_ecinf    		+158 @ @ @, label("Urban Informal Economy - 1997 and 2003") center
 	TEXTBOX txb_pme    	 	+158 @ @ @, label("Monthly Employment Survey - 1990 to 2015") center
 	TEXTBOX txb_pnad     		+158 @ @ @, label("National Household Sample Survey - 2001 to 2015") center
