@@ -28,7 +28,7 @@ Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 
 <details>
 <summary> Em português: </summary>
 
-  - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
+  - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
   - [Dicionário Censo 1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970.pdf)
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
@@ -40,7 +40,7 @@ Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 
 <details>
 <summary> Em inglês: </summary>
 
-  - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao_en.pdf)
+  - [Compatibilização dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
   - [Dicionário Censo 1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970_en.pdf)
   - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980_en.pdf)
   - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
