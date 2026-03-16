@@ -4,7 +4,7 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf]
 
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
@@ -16,6 +16,8 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `fam' indica arquivo de família disponível apenas para o ano 2000
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
+* `dbf' indica que o formato de dados originais usados é dbf para o ano de 1991
+
  
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
@@ -32,15 +34,21 @@ if "`all'"~="" {
 	loc fam "fam"
 	display as result "Pessoas, Famílias e Domicílios (2000)"
 }
+if "`dbf'"~="" {
+	loc pes "pes"
+	loc dom "dom"
+	loc fam "fam"
+	display as result "Pessoas, Famílias e Domicílios (2000)"
+}
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf'
 
 end
 
 program load_censo
-syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english]
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf(Censo 91)]
 
 if "`english'" != "" local lang "_en"
 
@@ -52,6 +60,7 @@ local suf1970  = `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ G
 *local suf1980  = `"11 12 13 14 15 16 "" "" 20 21 22 23 24 25 26 27 28 29 "31A 31B" 32 "33A 33B" "" "35 35B 35C" 41 42 43 50 51 52 53"'
 local suf1980  =  `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ "" SP PR SC RS MS MT GO DF"'
 local suf1991  = `"U11 U12 U13 U14 U15 U16 U17 "" U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 "" "P35 P36" U41 U42 U43 U50 U51 U52 U53"'
+local suf1991dbf = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2000  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"'
 
@@ -438,6 +447,11 @@ foreach ano in `years' {
 		if "`fam'" != "" {
 						di as err "Opção Família não disponível para o ano `ano'"
 						exit
+						}
+		
+		if "`dbf'" != "" {
+						local suf1991 `"`suf1991dbf'"'
+						di as text "Formato dos microdados originais do Censo 1991: DBF"
 						}
 		
 		foreach UF in `ufs' {
