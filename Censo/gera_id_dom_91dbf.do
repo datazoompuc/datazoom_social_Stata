@@ -19,26 +19,56 @@ gen long id_dom = sum(((v0304 == 1 | v0304 == 3) & v0303 == 1) | ///
 				tostring id_dom, replace
 				lab var id_dom "identificação do domicílio" */
 	
-/* outro método */	
+/* método alternativo 2 */	
 /*
+destring v0201 v0302 v0209 v2012 v2121 v7300, replace force
+gen long id_dom = sum((v0201 != v0201[_n-1]) | ///
+						(v0302 == 20) | ///
+						((v2012 != v2012[_n-1]) | (v0209 != v0209[_n-1]) | (v7300 != v7300[_n-1]) | (v2121 != v2121[_n-1]) | (v0210 != v0210[_n-1]))) ///
+						
+				tostring id_dom, replace
+				lab var id_dom "identificação do domicílio"
+*/		
+		
+				
+/*
+/* método alternativo 1 */	
 destring v0303 v0304 v0201, replace force
 gen long id_dom = sum(((v0201 != v0201[_n-1]) | ///
 						(v0302 == 20) | ///
 						(v0302 == 1))) ///
 						
 				tostring id_dom, replace
-				lab var id_dom "identificação do domicílio" */
+				lab var id_dom "identificação do domicílio"
+*/				
+
 				
+						
+/* dbf (com método alternativo 2) */
 
-/* dbf (com método alternativo) */
+						
+import dbase using "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\dbf\dados\Região Norte\CD91AMOUP11.DBF", clear
 
+destring NUMFAM ESPECIE PARENDOM, replace force
+gen long id_dom = sum((ESPECIE != ESPECIE[_n-1]) | ///
+						(PARENDOM == 20) | ///
+						((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | (PESO != PESO[_n-1]) | (DEMODORM != DEMODORM[_n-1]) | (COMBCOZI != COMBCOZI[_n-1])))						
+
+
+
+/* dbf (com método alternativo 1) */
+
+/*
 import dbase using "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\dbf\dados\Região Norte\CD91AMOUP14.DBF", clear
 
 destring NUMFAM ESPECIE PARENDOM, replace force
 gen long id_dom = sum((ESPECIE != ESPECIE[_n-1]) | ///
 						(PARENDOM == 20) | ///
 						(PARENDOM == 1))
-
+						
+*/
+						
+						
 /*
 numfam - unica == 1
 especie - particular - permanente == 1
