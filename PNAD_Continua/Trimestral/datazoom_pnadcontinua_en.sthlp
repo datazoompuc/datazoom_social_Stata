@@ -18,7 +18,7 @@
 {title:Title}
 
 {p 4 4 2}
-{cmd:datazoom_pnadcont_anual} {hline 2} Access to Continuous PNAD microdata {c -}  Quarterly Dissemination
+{cmd:datazoom_pnadcont_en} {hline 2} Access to Continuous PNAD microdata {c -}  Quarterly Dissemination
 
 {marker syntax}{...}
 {title:Syntax}
@@ -48,8 +48,8 @@ Use command {cmd:db datazoom_pnadcontinua_en} to access through dialog box.
 {title:Description}
 
 {p 4 4 2}
-{cmd:datazoom_pnadcontinua} extracts Continuous PNAD databases from the original IBGE microdata. 
-Can be used for years 2012 to 2020. 
+{cmd:datazoom_pnadcontinua} extracts Continuous PNAD databases from the original IBGE microdata, which must be downloaded beforehand. 
+Currently supports data from years 2012 to 2025. 
 
 {p 4 4 2}
 Although Continuous PNAD is a quartely survey, this program does not allow specific quarter to be chosen, only years. The package generates a single database for each year, with quarters appended. 
@@ -57,7 +57,7 @@ As Continuous PNAD is still published by IBGE, this program is
 under constant update.
   
 {p 4 4 2}
-The Continuous PNAD is a panel survey, in which each household is interviewed for five consecutive quarters. Despite correctly identifying the same household in all five interviews, the Pnad Continuous does not assign the same identification number to each member of the household at every interview. 
+The Continuous PNAD is a panel survey, in which each household is interviewed for five consecutive quarters. Despite correctly identifying the same household in all five interviews, the PNAD Continuous does not assign the same identification number to each member of the household at every interview. 
 In case the user wishes to work with an individuals panel,
 it is necessary to construct a variable to identify each individual throughout different surveys.
  For this reason we use algorithms suggested by Ribas and Soares (2008).
@@ -68,10 +68,10 @@ amount of time to perform the identification process, depending on the computati
 capacity.
 
 {p 4 4 2}
-If {opt nid} is selected, the program will generate a database for each selected year. Other options
+If {opt nid} is selected (no identification), the program will generate a database for each selected year. Other options
  will yield one database for each PME panel. That is,
 the program will generate a database for each set of households with partook the survey cycle in a given 
-quarter. If so desired, use command {help append} to pool together databases.
+quarter. Therefore, it is recommended that you select all years included in the panels of interest. If desired, use command {help append} to pool the databases together.
 
 
 {marker options}{...}
@@ -79,8 +79,8 @@ quarter. If so desired, use command {help append} to pool together databases.
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} specifies the list of years the user wants to work with. This program
-covers all years from 2012 to 2020. It is not possible to choose specific quarters.
+{opt years(numlist)} specifies the list of years the user wants to work with. This program currently
+covers all years from 2012 to 2025. It is not possible to choose specific quarters.
 
 {phang} {opt original(str)} indicates the path of the original data files. 
 There is one data file for each quarter. All of these files must be placed in the same 
@@ -88,16 +88,21 @@ folder for the program's proper functioning.
 
 {phang} {opt saving(str)} specifies the folder path where the new databases are to be saved.
 
+{phang} {opt nid} No Identification / {opt idbas} Basic Identification / {opt idrs} Advanced Identification (Ribas-Soares)
+
+{phang} {opt english} generates variable labels in english (optional)
+
+
 {marker examples}{...}
 {title:Examples}
 
 {p 4 4 2}
 Quarterly databases, with English variable labels
 
-{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original("~/mydata") saving("~/mydata") english
+{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original("~/mydata") saving("~/mydata") nid english
 
 {p 6 6 2}
-Three databases are created, one for each year.
+Three databases are created, one for each year, with no identification of individuals throughout the panels.
 
 {title:Author}
 
