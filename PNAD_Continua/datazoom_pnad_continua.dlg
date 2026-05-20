@@ -1,18 +1,17 @@
 VERSION 2.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 400 120
+POSITION . . 300 130
 
 DIALOG main, label("PNAD Contínua")
 BEGIN
-	FRAME fr_anual   			0  0 400 45
-	FRAME fr_trimestral   			0  45 400 45
 	
-	BUTTON btn_anual			20 10 120 25, label("Anual") onpush(script child_anual)
-	BUTTON btn_trimestral			20 55 120 25, label("Trimestral") onpush(script child_trimestral)
+	BUTTON btn_anual			90 15 120 25, label("Anual") onpush(script child_anual)
 	
-    TEXT bottom1   10   95  250  ., label("PUC-Rio - Departamento de Economia") left
-	TEXT bottom2   320  95  70  ., label("Versão 2.0") right
+	BUTTON btn_trimestral			90 50 120 25, label("Trimestral") onpush(script child_trimestral)
+	
+    TEXT bottom1   0   90  300 15, label("PUC-Rio - Departamento de Economia") center
+	TEXT bottom2   0   105  300 15, label("Versão 2.0") center
 END
 
 CANCEL can1, label("Cancel")
