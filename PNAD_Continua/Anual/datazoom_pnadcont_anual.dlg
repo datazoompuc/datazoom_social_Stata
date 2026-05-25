@@ -6,65 +6,65 @@ POSITION . . 500 500
 
 DIALOG main, label("PNAD Contínua Anual") tabtitle("Main")
 BEGIN
-******************************************************************************   
+******************************************************************************   
 GROUPBOX caixaVisitas 20 20 200 270, label("Visita(s)")
 
-   CHECKBOX    ck2012_vis1 +14 +20 90  ., label("2012 visita 1")  option(2012_vis1)
-   CHECKBOX    ck2013_vis1 @ +20 90    ., label("2013 visita 1")  option(2013_vis1)
-   CHECKBOX    ck2014_vis1 @ +20 90    ., label("2014 visita 1")  option(2014_vis1)
-   CHECKBOX    ck2015_vis1 @ +20 90    ., label("2015 visita 1")  option(2015_vis1)
-   CHECKBOX	   ck2016_vis1 @ +20 90	   ., label("2016 visita 1")  option(2016_vis1)
-   CHECKBOX	   ck2016_vis5 @ +20 90	   ., label("2016 visita 5")  option(2016_vis5)
-   CHECKBOX	   ck2017_vis1 @ +20 90	   ., label("2017 visita 1")  option(2017_vis1)
-   CHECKBOX	   ck2017_vis5 @ +20 90	   ., label("2017 visita 5")  option(2017_vis5)
-   CHECKBOX	   ck2018_vis1 @ +20 90	   ., label("2018 visita 1")  option(2018_vis1)
-   CHECKBOX	   ck2018_vis5 @ +20 90	   ., label("2018 visita 5")  option(2018_vis5)
-   CHECKBOX	   ck2019_vis1 @ +20 90	   ., label("2019 visita 1")  option(2019_vis1)
-   CHECKBOX	   ck2019_vis5 @ +20 90	   ., label("2019 visita 5")  option(2019_vis5)
-   CHECKBOX	   ck2020_vis2 +95 -220 90	   ., label("2020 visita 2")  option(2020_vis2)
-   CHECKBOX	   ck2020_vis5 @ +20 90	   ., label("2020 visita 5")  option(2020_vis5)
-   CHECKBOX	   ck2021_vis2 @ +20 90	   ., label("2021 visita 2")  option(2021_vis2)
-   CHECKBOX	   ck2021_vis5 @ +20 90	   ., label("2021 visita 5")  option(2021_vis5)
-   CHECKBOX	   ck2022_vis1 @ +20 90	   ., label("2022 visita 1")  option(2022_vis1) 
-   CHECKBOX	   ck2022_vis5 @ +20 90	   ., label("2022 visita 5")  option(2022_vis5)
-   CHECKBOX	   ck2023_vis1 @ +20 90	   ., label("2023 visita 1")  option(2023_vis1)
-   CHECKBOX	   ck2023_vis2 @ +20 90	   ., label("2023 visita 2")  option(2023_vis2)
-   CHECKBOX	   ck2023_vis5 @ +20 90	   ., label("2023 visita 5")  option(2023_vis5)
-   CHECKBOX	   ck2024_vis1 @ +20 90	   ., label("2024 visita 1")  option(2024_vis1)
-   CHECKBOX	   ck2024_vis2 @ +20 90	   ., label("2024 visita 2")  option(2024_vis2)
-   CHECKBOX	   ck2024_vis5 @ +20 90	   ., label("2024 visita 5")  option(2024_vis5)
+   CHECKBOX    ck2012_vis1 +14 +20 120  ., label("2012 visita 1")  option(2012_vis1)
+   CHECKBOX    ck2013_vis1 @ +20 120    ., label("2013 visita 1")  option(2013_vis1)
+   CHECKBOX    ck2014_vis1 @ +20 120    ., label("2014 visita 1")  option(2014_vis1)
+   CHECKBOX    ck2015_vis1 @ +20 120    ., label("2015 visita 1")  option(2015_vis1)
+   CHECKBOX	   ck2016_vis1 @ +20 120	   ., label("2016 visita 1")  option(2016_vis1)
+   CHECKBOX	   ck2016_vis5 @ +20 120	   ., label("2016 visita 5")  option(2016_vis5)
+   CHECKBOX	   ck2017_vis1 @ +20 120	   ., label("2017 visita 1")  option(2017_vis1)
+   CHECKBOX	   ck2017_vis5 @ +20 120	   ., label("2017 visita 5")  option(2017_vis5)
+   CHECKBOX	   ck2018_vis1 @ +20 120	   ., label("2018 visita 1")  option(2018_vis1)
+   CHECKBOX	   ck2018_vis5 @ +20 120	   ., label("2018 visita 5")  option(2018_vis5)
+   CHECKBOX	   ck2019_vis1 @ +20 120	   ., label("2019 visita 1")  option(2019_vis1)
+   CHECKBOX	   ck2019_vis5 @ +20 120	   ., label("2019 visita 5")  option(2019_vis5)
+   CHECKBOX	   ck2020_vis2 +95 -220 120	   ., label("2020 visita 2")  option(2020_vis2)
+   CHECKBOX	   ck2020_vis5 @ +20 120	   ., label("2020 visita 5")  option(2020_vis5)
+   CHECKBOX	   ck2021_vis2 @ +20 120	   ., label("2021 visita 2")  option(2021_vis2)
+   CHECKBOX	   ck2021_vis5 @ +20 120	   ., label("2021 visita 5")  option(2021_vis5)
+   CHECKBOX	   ck2022_vis1 @ +20 120	   ., label("2022 visita 1")  option(2022_vis1) 
+   CHECKBOX	   ck2022_vis5 @ +20 120	   ., label("2022 visita 5")  option(2022_vis5)
+   CHECKBOX	   ck2023_vis1 @ +20 120	   ., label("2023 visita 1")  option(2023_vis1)
+   CHECKBOX	   ck2023_vis2 @ +20 120	   ., label("2023 visita 2")  option(2023_vis2)
+   CHECKBOX	   ck2023_vis5 @ +20 120	   ., label("2023 visita 5")  option(2023_vis5)
+   CHECKBOX	   ck2024_vis1 @ +20 120	   ., label("2024 visita 1")  option(2024_vis1)
+   CHECKBOX	   ck2024_vis2 @ +20 120	   ., label("2024 visita 2")  option(2024_vis2)
+   CHECKBOX	   ck2024_vis5 @ +20 120	   ., label("2024 visita 5")  option(2024_vis5)
 	
 GROUPBOX caixaTrimestres 225 20 130 410, label("Trimestre(s)")
 
-   CHECKBOX	   ck2016_tri2 +14 +20 110	   ., label("2016 trimestre 2")  option(2016_tri2)
-   CHECKBOX	   ck2016_tri4 @ +20 110	   ., label("2016 trimestre 4")  option(2016_tri4)
-   CHECKBOX	   ck2017_tri2 @ +20 110	   ., label("2017 trimestre 2")  option(2017_tri2)
-   CHECKBOX	   ck2017_tri4 @ +20 110	   ., label("2017 trimestre 4")  option(2017_tri4)
-   CHECKBOX	   ck2018_tri2 @ +20 110	   ., label("2018 trimestre 2")  option(2018_tri2)
-   CHECKBOX	   ck2018_tri4 @ +20 110	   ., label("2018 trimestre 4")  option(2018_tri4)
-   CHECKBOX	   ck2019_tri2 @ +20 110	   ., label("2019 trimestre 2")  option(2019_tri2)
-   CHECKBOX	   ck2019_tri3 @ +20 110	   ., label("2019 trimestre 3")  option(2019_tri3)
-   CHECKBOX	   ck2019_tri4 @ +20 110	   ., label("2019 trimestre 4")  option(2019_tri4)
-   CHECKBOX	   ck2021_tri4 @ +20 110	   ., label("2021 trimestre 4")  option(2021_tri4)
-   CHECKBOX	   ck2022_tri2 @ +20 110	   ., label("2022 trimestre 2")  option(2022_tri2)
-   CHECKBOX	   ck2022_tri3 @ +20 110	   ., label("2022 trimestre 3")  option(2022_tri3)
-   CHECKBOX	   ck2022_tri4 @ +20 110	   ., label("2022 trimestre 4")  option(2022_tri4)
-   CHECKBOX	   ck2023_tri1 @ +20 110	   ., label("2023 trimestre 1")  option(2023_tri1)
-   CHECKBOX    ck2023_tri2 @ +20 110	   ., label("2023 trimestre 2")  option(2023_tri2)
-   CHECKBOX    ck2023_tri4 @ +20 110	   ., label("2023 trimestre 4")  option(2023_tri4)
-   CHECKBOX    ck2024_tri2 @ +20 110	   ., label("2024 trimestre 2")  option(2024_tri2)
-   CHECKBOX    ck2024_tri3 @ +20 110	   ., label("2024 trimestre 3")  option(2024_tri3)
-   CHECKBOX    ck2024_tri4 @ +20 110	   ., label("2024 trimestre 4")  option(2024_tri4)
-   
+   CHECKBOX	   ck2016_tri2 +14 +20 120	   ., label("2016 trimestre 2")  option(2016_tri2)
+   CHECKBOX	   ck2016_tri4 @ +20 120	   ., label("2016 trimestre 4")  option(2016_tri4)
+   CHECKBOX	   ck2017_tri2 @ +20 120	   ., label("2017 trimestre 2")  option(2017_tri2)
+   CHECKBOX	   ck2017_tri4 @ +20 120	   ., label("2017 trimestre 4")  option(2017_tri4)
+   CHECKBOX	   ck2018_tri2 @ +20 120	   ., label("2018 trimestre 2")  option(2018_tri2)
+   CHECKBOX	   ck2018_tri4 @ +20 120	   ., label("2018 trimestre 4")  option(2018_tri4)
+   CHECKBOX	   ck2019_tri2 @ +20 120	   ., label("2019 trimestre 2")  option(2019_tri2)
+   CHECKBOX	   ck2019_tri3 @ +20 120	   ., label("2019 trimestre 3")  option(2019_tri3)
+   CHECKBOX	   ck2019_tri4 @ +20 120	   ., label("2019 trimestre 4")  option(2019_tri4)
+   CHECKBOX	   ck2021_tri4 @ +20 120	   ., label("2021 trimestre 4")  option(2021_tri4)
+   CHECKBOX	   ck2022_tri2 @ +20 120	   ., label("2022 trimestre 2")  option(2022_tri2)
+   CHECKBOX	   ck2022_tri3 @ +20 120	   ., label("2022 trimestre 3")  option(2022_tri3)
+   CHECKBOX	   ck2022_tri4 @ +20 120	   ., label("2022 trimestre 4")  option(2022_tri4)
+   CHECKBOX	   ck2023_tri1 @ +20 120	   ., label("2023 trimestre 1")  option(2023_tri1)
+   CHECKBOX    ck2023_tri2 @ +20 120	   ., label("2023 trimestre 2")  option(2023_tri2)
+   CHECKBOX    ck2023_tri4 @ +20 120	   ., label("2023 trimestre 4")  option(2023_tri4)
+   CHECKBOX    ck2024_tri2 @ +20 120	   ., label("2024 trimestre 2")  option(2024_tri2)
+   CHECKBOX    ck2024_tri3 @ +20 120	   ., label("2024 trimestre 3")  option(2024_tri3)
+   CHECKBOX    ck2024_tri4 @ +20 120	   ., label("2024 trimestre 4")  option(2024_tri4)
+   
 GROUPBOX caixaDicionários 360 50 120 100, label("Bases de Dados")
 
-	BUTTON	fldados 	+10 +25 100 ., label("Dados originais...") onpush(script dados) 
-	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
-   HLINK hlink1 -8 +50 130 ., label("Guia Suplementos IBGE") onpush(program hlink1)
+	BUTTON	fldados 	+10 +25 100 ., label("Dados originais...") onpush(script dados) 
+	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
+   HLINK hlink1 -8 +50 160 ., label("Guia Suplementos IBGE") onpush(program hlink1)
 
-	CHECKBOX	eng     360  30 120 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     360  30 220 ., label("Labels em inglês") option(english)
 
-TEXT     credit     0 480 460 1, label("PUC-Rio - Departmento de Economia") right
+TEXT     credit     0 480 460 1, label("PUC-Rio - Departmento de Economia") right
 
 
 END
@@ -72,16 +72,16 @@ END
 
 SCRIPT PREINIT_SCRIPT
 	BEGIN
-   create STRING saidadata
-   create STRING saidasalvando
+   create STRING saidadata
+   create STRING saidasalvando
 	END
 
 ******************************************************************************
 
-OK ok1,      label("OK")
+OK ok1,      label("OK")
 SUBMIT sub1
 CANCEL can1, label("Cancel")
-HELP hlp1,   view("help datazoom_pnadcont_anual")
+HELP hlp1,   view("help datazoom_pnadcont_anual")
 RESET res1
 
 ******************************************************************************
@@ -105,7 +105,7 @@ PROGRAM hlink1
 	BEGIN
 		put "datazoom_link"
 		stata
-   END
+   END
 
 PROGRAM command
 	BEGIN
