@@ -2,8 +2,8 @@ library(dplyr)
 library(haven)
 
 ref_dir  <- "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\tarefa_18mai\\Norte_dat" # arquivos dta
-test_dir <- "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\dbf\\tarefa\\com_id_dom_18mai" 
-out_dir  <- "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\tarefa_18mai\\dbf_comNA"
+test_dir <- "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\dbf\\tarefa\\01jun" 
+out_dir  <- "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\tarefa_1jun"
 
 dir.create(out_dir, showWarnings = FALSE)
 
@@ -170,4 +170,4 @@ mun_total <- bind_rows(
 )
 
 
-write_dta(data = municipios_ruins, path = "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\tarefa_18mai\\municipios_inconsistentes.dta")
+write_dta(data = municipios_ruins, path = "C:\\Users\\felip\\OneDrive\\Documentos\\PUC\\Data Zoom\\Censo\\1991\\tarefa_1jun\\municipios_inconsistentes.dta")

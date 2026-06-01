@@ -2,9 +2,9 @@
 * Configurações
 * ================================================
 
-local x_path    "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\tarefa_18mai\municipios_inconsistentes.dta"
+local x_path    "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\tarefa_1jun\municipios_inconsistentes.dta"
 local input_dir "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\dbf\dados\todos"
-local out_dir   "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\tarefa_25mai"
+local out_dir   "C:\Users\felip\OneDrive\Documentos\PUC\Data Zoom\Censo\1991\tarefa_1jun\dta_gerado_pelo_stata_comNA"
 
 * ================================================
 * Lê o dataframe x e salva como tempfile
@@ -65,22 +65,43 @@ foreach f of local files {
 
         di "Nenhum município problemático. Rodando fórmula para UF inteira..."
 
-        replace id_dom = sum((ESPECIE != ESPECIE[_n-1]) | ///
-            (PARENDOM == 20) | ///
-            ((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | ///
-            (PESO != PESO[_n-1]) | (DEMODORM != DEMODORM[_n-1]) | ///
-            (COMBCOZI != COMBCOZI[_n-1])))
-
+        destring NUMFAM ESPECIE PARENDOM, replace force
+		replace id_dom = sum((ESPECIE != ESPECIE[_n-1]) | ///
+					(PARENDOM == 20) | ///
+					((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | (PESO != PESO[_n-1]) | (DEMODORM != DEMODORM[_n-1]) | (COMBCOZI != COMBCOZI[_n-1]) | ///
+					(AGUA != AGUA[_n-1]) | (ALUGUEFX != ALUGUEFX[_n-1]) | (ASPIRPO != ASPIRPO[_n-1]) | ///
+					(AUTPART != AUTPART[_n-1]) | (AUTTRAB != AUTTRAB[_n-1]) | (BANHEIRO != BANHEIRO[_n-1]) | ///
+					(CD107 != CD107[_n-1]) | (COBERTUR != COBERTUR[_n-1]) | (COMODOR != COMODOR[_n-1]) | ///
+					(COMODOS != COMODOS[_n-1]) | (CONDOCUP != CONDOCUP[_n-1]) | (DEMOCOFX != DEMOCOFX[_n-1]) | ///
+					(DEMOCOMO != DEMOCOMO[_n-1]) | (DEMODOFX != DEMODOFX[_n-1]) | (FILTRO != FILTRO[_n-1]) | ///
+					(FREEZER != FREEZER[_n-1]) | (GELADEIR != GELADEIR[_n-1]) | (ILUMINA != ILUMINA[_n-1]) | ///
+					(LIXO != LIXO[_n-1]) | (LOCALIZA != LOCALIZA[_n-1]) | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+					(PAREDES != PAREDES[_n-1]) | (RADIO != RADIO[_n-1]) | (RDONOMIF != RDONOMIF[_n-1]) | ///
+					(RDOREALF != RDOREALF[_n-1]) | (SANESCOA != SANESCOA[_n-1]) | (SANUSO != SANUSO[_n-1]) | ///
+					(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1])))
+						
+						
+				tostring id_dom, replace
+				lab var id_dom "identificação do domicílio"
     }
     else {
 
         di "Municípios problemáticos encontrados. Aplicando NA onde necessário..."
 
+		destring NUMFAM ESPECIE PARENDOM, replace force
         replace id_dom = sum((ESPECIE != ESPECIE[_n-1]) | ///
-            (PARENDOM == 20) | ///
-            ((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | ///
-            (PESO != PESO[_n-1]) | (DEMODORM != DEMODORM[_n-1]) | ///
-            (COMBCOZI != COMBCOZI[_n-1]))) if ruins != 1
+					(PARENDOM == 20) | ///
+					((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | (PESO != PESO[_n-1]) | (DEMODORM != DEMODORM[_n-1]) | (COMBCOZI != COMBCOZI[_n-1]) | ///
+					(AGUA != AGUA[_n-1]) | (ALUGUEFX != ALUGUEFX[_n-1]) | (ASPIRPO != ASPIRPO[_n-1]) | ///
+					(AUTPART != AUTPART[_n-1]) | (AUTTRAB != AUTTRAB[_n-1]) | (BANHEIRO != BANHEIRO[_n-1]) | ///
+					(CD107 != CD107[_n-1]) | (COBERTUR != COBERTUR[_n-1]) | (COMODOR != COMODOR[_n-1]) | ///
+					(COMODOS != COMODOS[_n-1]) | (CONDOCUP != CONDOCUP[_n-1]) | (DEMOCOFX != DEMOCOFX[_n-1]) | ///
+					(DEMOCOMO != DEMOCOMO[_n-1]) | (DEMODOFX != DEMODOFX[_n-1]) | (FILTRO != FILTRO[_n-1]) | ///
+					(FREEZER != FREEZER[_n-1]) | (GELADEIR != GELADEIR[_n-1]) | (ILUMINA != ILUMINA[_n-1]) | ///
+					(LIXO != LIXO[_n-1]) | (LOCALIZA != LOCALIZA[_n-1]) | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+					(PAREDES != PAREDES[_n-1]) | (RADIO != RADIO[_n-1]) | (RDONOMIF != RDONOMIF[_n-1]) | ///
+					(RDOREALF != RDOREALF[_n-1]) | (SANESCOA != SANESCOA[_n-1]) | (SANUSO != SANUSO[_n-1]) | ///
+					(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1]))) if ruins != 1
 
     }
 
