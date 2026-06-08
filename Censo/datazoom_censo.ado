@@ -4,7 +4,7 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf]
 
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
@@ -16,11 +16,14 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `fam' indica arquivo de família disponível apenas para o ano 2000
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
+* `english' indica labels das variáveis em inglês
+* `dbf' indica que o formato de dados originais usados é dbf para o ano de 1991
+
  
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
 if "`dom'"~="" display as result " Domicílios"
-if "`fam'"~="" display as result " Famílias (2000)"
+if "`fam'"~="" display as result " Famílias"
 if "`both'"~="" {
 	loc pes "pes"
 	loc dom "dom"
@@ -30,17 +33,18 @@ if "`all'"~="" {
 	loc pes "pes"
 	loc dom "dom"
 	loc fam "fam"
-	display as result "Pessoas, Famílias e Domicílios (2000)"
+	display as result "Pessoas, Famílias e Domicílios"
 }
+
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf'
 
 end
 
 program load_censo
-syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english]
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf]
 
 if "`english'" != "" local lang "_en"
 
@@ -52,6 +56,7 @@ local suf1970  = `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ G
 *local suf1980  = `"11 12 13 14 15 16 "" "" 20 21 22 23 24 25 26 27 28 29 "31A 31B" 32 "33A 33B" "" "35 35B 35C" 41 42 43 50 51 52 53"'
 local suf1980  =  `"RO AC AM RR PA AP "" FN MA PI CE RN PB PE AL SE BA MG ES RJ "" SP PR SC RS MS MT GO DF"'
 local suf1991  = `"U11 U12 U13 U14 U15 U16 U17 "" U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 "" "P35 P36" U41 U42 U43 U50 U51 U52 U53"'
+local suf1991dbf = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2000  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" 35 41 42 43 50 51 52 53"'
 local suf2010  = `"11 12 13 14 15 16 17 "" 21 22 23 24 25 26 27 28 29 31 32 33 "" "35_outras 35_RMSP" 41 42 43 50 51 52 53"'
 
@@ -435,8 +440,176 @@ foreach ano in `years' {
 	
 	else if `ano' == 1991 {
 	
+		
+		
+		if "`dbf'" != "" {
+							di as text "Formato selecionado dos microdados originais do Censo 1991: DBF"
+							
+							foreach UF in `ufs' {
+								/* Achando posição da UF nas listas: */
+								local pos = 1
+								while word(`"`nomesUFs'"', `pos') != "`UF'" {
+									local pos = `pos' + 1
+								}
+								/* Loop para todos os arquivos da UF                              */
+								/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+								tokenize `suf1991dbf'
+								local sufixos = "``pos''"
+								/* Mesmo para o código */
+								tokenize `codUFs'
+								local codUF = "``pos''"
+								di "`sufixos'"
+								foreach suf in `sufixos'{
+									display as input "Extraindo `ano' `UF' - `suf' ..."	
+									import dbase using "`original'/CD91AMOUP`suf'.DBF", clear
+									
+									egen munic = concat(UFNUM MUNICNUM)
+									lab var munic "municipality codes without DV (6 digits)"
+										
+									gen ano = 1991
+									lab var ano "ano da pesquisa"
+										
+									destring NUMFAM ESPECIE PARENDOM, replace force /* altera o id_dom, se: */
+									gen long id_dom = sum((MUNICNUM != MUNICNUM[_n-1]) | /// se muda o municipio
+															(ESPECIE != ESPECIE[_n-1]) | /// se muda a especie do domicilio
+															(PARENDOM == 20) | /// se o individuo mora sozinho
+															((RDOMICIV != RDOMICIV[_n-1]) | (ALUGUEL != ALUGUEL[_n-1]) | (PESO != PESO[_n-1]) | ///
+															(DEMODORM != DEMODORM[_n-1]) | (COMBCOZI != COMBCOZI[_n-1]) | ///
+															(AGUA != AGUA[_n-1]) | (ALUGUEFX != ALUGUEFX[_n-1]) | (ASPIRPO != ASPIRPO[_n-1]) | ///
+															(AUTPART != AUTPART[_n-1]) | (AUTTRAB != AUTTRAB[_n-1]) | (BANHEIRO != BANHEIRO[_n-1]) | ///
+															(CD107 != CD107[_n-1]) | (COBERTUR != COBERTUR[_n-1]) | (COMODOR != COMODOR[_n-1]) | ///
+															(COMODOS != COMODOS[_n-1]) | (CONDOCUP != CONDOCUP[_n-1]) | (DEMOCOFX != DEMOCOFX[_n-1]) | ///
+															(DEMOCOMO != DEMOCOMO[_n-1]) | (DEMODOFX != DEMODOFX[_n-1]) | (FILTRO != FILTRO[_n-1]) | ///
+															(FREEZER != FREEZER[_n-1]) | (GELADEIR != GELADEIR[_n-1]) | (ILUMINA != ILUMINA[_n-1]) | ///
+															(LIXO != LIXO[_n-1]) | (LOCALIZA != LOCALIZA[_n-1]) | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+															(PAREDES != PAREDES[_n-1]) | (RADIO != RADIO[_n-1]) | (RDONOMIF != RDONOMIF[_n-1]) | ///
+															(RDOREALF != RDOREALF[_n-1]) | (SANESCOA != SANESCOA[_n-1]) | (SANUSO != SANUSO[_n-1]) | ///
+															(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1])))
+															
+									if "`all'"~="" {
+									
+										/* eh possivel compatibilizar? se sim:
+										if "`comp'" != "" {
+											rename
+											roda compatibilizacao
+											
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+										
+										}
+										else{
+											roda sem compatibilizacao
+										}*/
+									
+										save CENSO91_`UF'_all, replace
+									} 
+										else{
+											if "`both'"~="" {
+											
+											/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+											if "`comp'" != "" {
+												
+											rename
+											
+											roda compatibilizacao para dom ?
+											roda compatibilizacao para pes ?
+											
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+											
+											} 
+											else{
+														colocar a leitura em both se n tiver compat} */ 
+											
+											/* drop variaveis de familias */
+											
+											save CENSO91_`UF'_pes_e_dom, replace
+											
+											}
+											else{
+												if "`pes'"~="" {
+												
+												
+												/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+												if "`comp'" != ""
+													
+													rename ...
+													drop ...
+													
+													compat_censo91pess
+
+													/* Áreas Mínimas Comparáveis */
+													findfile amcs.dta
+													sort munic
+													merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													} 
+													else{
+																	colocar a leitura em pes se n tiver compat} */
+													
+												
+												drop AGUA ALUGUEFX ALUGUEL ASPIRPO AUTPART AUTTRAB BANHEIRO CD107 ///
+													 COBERTUR COMBCOZI COMODOR COMODOS CONDOCUP DEMOCOFX DEMOCOMO ///
+													 DEMODOFX DEMODORM ESPECIE FILTRO FREEZER GELADEIR ILUMINA ///
+													 LIXO LOCALIZA MAQLAVAR PAREDES RADIO RDOMICIV RDONOMIF RDOREALF ///
+													 SANESCOA SANUSO TELEFONE TVCORES TVPRETO ESPFAM NUMFAM ///
+													 RFACHCAF RFACHCAV RFAMILIV RFANOMIF RFAPCAPF RFAPCAPV RFAREALF
+													
+													
+													save CENSO91_`UF'_pes, replace
+												}
+												
+												if "`dom'"~="" {
+													/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+													if "`comp'" != "" {
+													
+													rename ...
+													drop ...
+													
+													compat_censo91dom
+
+													/* Áreas Mínimas Comparáveis */
+													findfile amcs.dta
+													sort munic
+													merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													} 
+													else{
+															colocar a leitura em dom se n tiver compat} */
+													
+													/* drop variaveis de pessoas e familias mantendo id_dom e pesos para expansao */
+													
+													save CENSO91_`UF'_dom, replace
+												}
+													
+												if "`fam'"{
+													/* eh possivel compatibilizar? se sim:
+													if "`comp'" != "" {
+														rename
+														roda compatibilizacao
+														
+														/* Áreas Mínimas Comparáveis */
+														findfile amcs.dta
+														sort munic
+														merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													
+													}
+													else{
+														roda sem compatibilizacao
+													}*/
+												
+													save CENSO91_`UF'_fam, replace
+												}
+											}
+										}
+									}
+								}
+							}
+							else{
 		if "`fam'" != "" {
-						di as err "Opção Família não disponível para o ano `ano'"
+						di as err "Opção Família não disponível para o ano `ano', exceto em DBF"
 						exit
 						}
 		
@@ -582,6 +755,7 @@ foreach ano in `years' {
 						}
 						if "`comp'"~="" save CENSO91_`UF'_dom_comp, replace
 						else save CENSO91_`UF'_dom, replace
+						}
 					}
 				}
 			}
