@@ -450,9 +450,104 @@ foreach ano in `years' {
 						}
 		
 		if "`dbf'" != "" {
-						local suf1991 `"`suf1991dbf'"'
-						di as text "Formato dos microdados originais do Censo 1991: DBF"
-						}
+							di as text "Formato selecionado dos microdados originais do Censo 1991: DBF"
+							
+							foreach UF in `ufs' {
+								/* Achando posição da UF nas listas: */
+								local pos = 1
+								while word(`"`nomesUFs'"', `pos') != "`UF'" {
+									local pos = `pos' + 1
+								}
+								/* Loop para todos os arquivos da UF                              */
+								/* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo */
+								tokenize `suf1991dbf'
+								local sufixos = "``pos''"
+								/* Mesmo para o código */
+								tokenize `codUFs'
+								local codUF = "``pos''"
+								di "`sufixos'"
+								foreach suf in `sufixos'{
+									display as input "Extraindo `ano' `UF' - `suf' ..."	
+									import dbase "`original'/CD91AMOUP`suf'.DBF") clear
+									
+									egen munic = concat(UFNUM MUNICNUM)
+									lab var munic "municipality codes without DV (6 digits)"
+										
+									gen ano = 1991
+									lab var ano "ano da pesquisa"
+										
+									/* cria id_dom */
+									
+									if "`pes'"~="" {
+										
+										
+										/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+										if "`comp'" != ""
+											
+											rename ...
+											drop ...
+											
+											compat_censo91pess
+
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+										} else{
+														colocar a leitura em pes se n tiver compat} */
+										
+								
+										
+										
+										/* drop variaveis de domicilio mantendo id_dom e pesos para expansao */
+											
+											
+											tempfile CENSO91_`UF'_pes_`suf'
+											save `CENSO91_`UF'_pes_`suf'', replace
+										}
+										
+										if "`dom'"~="" {
+											/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+											if "`comp'" != "" {
+											
+											rename ...
+											drop ...
+											
+											compat_censo91dom
+
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+											} else{
+													colocar a leitura em dom se n tiver compat} */
+											
+											/* drop variaveis de pessoas mantendo id_dom e pesos para expansao */
+											
+											tempfile CENSO91_`UF'_dom_`suf'
+											save `CENSO91_`UF'_dom_`suf'', replace
+										
+										}
+										
+										
+										if "`both'"~="" {
+										
+										/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+										if "`comp'" != ""
+											
+											merge da compat de pessoas e domicilios
+										} else{
+													colocar a leitura em both se n tiver compat}
+													
+													sera que precisa usar alguma */ 
+										
+										tempfile CENSO91_`UF'_`suf'
+										save `CENSO91_`UF'_`suf'', replace
+										
+										}
+									
+										
+										}}} else{
 		
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
@@ -596,6 +691,7 @@ foreach ano in `years' {
 						}
 						if "`comp'"~="" save CENSO91_`UF'_dom_comp, replace
 						else save CENSO91_`UF'_dom, replace
+						}
 					}
 				}
 			}
