@@ -16,13 +16,14 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `fam' indica arquivo de família disponível apenas para o ano 2000
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
+* `english' indica labels das variáveis em inglês
 * `dbf' indica que o formato de dados originais usados é dbf para o ano de 1991
 
  
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
 if "`dom'"~="" display as result " Domicílios"
-if "`fam'"~="" display as result " Famílias (2000)"
+if "`fam'"~="" display as result " Famílias"
 if "`both'"~="" {
 	loc pes "pes"
 	loc dom "dom"
@@ -32,7 +33,7 @@ if "`all'"~="" {
 	loc pes "pes"
 	loc dom "dom"
 	loc fam "fam"
-	display as result "Pessoas, Famílias e Domicílios (2000)"
+	display as result "Pessoas, Famílias e Domicílios"
 }
 
 /* Pastas para guardar arquivos da sessão */
@@ -439,10 +440,7 @@ foreach ano in `years' {
 	
 	else if `ano' == 1991 {
 	
-		if "`fam'" != "" {
-						di as err "Opção Família não disponível para o ano `ano'"
-						exit
-						}
+		
 		
 		if "`dbf'" != "" {
 							di as text "Formato selecionado dos microdados originais do Censo 1991: DBF"
@@ -486,91 +484,134 @@ foreach ano in `years' {
 															(LIXO != LIXO[_n-1]) | (LOCALIZA != LOCALIZA[_n-1]) | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
 															(PAREDES != PAREDES[_n-1]) | (RADIO != RADIO[_n-1]) | (RDONOMIF != RDONOMIF[_n-1]) | ///
 															(RDOREALF != RDOREALF[_n-1]) | (SANESCOA != SANESCOA[_n-1]) | (SANUSO != SANUSO[_n-1]) | ///
-															(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1]))) ///
-															/* se ha diferenca em qualquer outra variavel domiciliar */
+															(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1])))
+															
+									if "`all'"~="" {
 									
-									if "`both'"~="" {
-										
-										/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
-										if "`comp'" != ""
+										/* eh possivel compatibilizar? se sim:
+										if "`comp'" != "" {
+											rename
+											roda compatibilizacao
 											
-										rename
-										
-										roda compatibilizacao para dom ?
-										roda compatibilizacao para pes ?
-										
-										/* Áreas Mínimas Comparáveis */
-										findfile amcs.dta
-										sort munic
-										merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-										
-										} 
-										else{
-													colocar a leitura em both se n tiver compat} */ 
-										
-										save CENSO91_`UF', replace
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
 										
 										}
 										else{
-											if "`pes'"~="" {
-											
+											roda sem compatibilizacao
+										}*/
+									
+										save CENSO91_`UF'_all, replace
+									} 
+										else{
+											if "`both'"~="" {
 											
 											/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
-											if "`comp'" != ""
+											if "`comp'" != "" {
 												
-												rename ...
-												drop ...
-												
-												compat_censo91pess
-
-												/* Áreas Mínimas Comparáveis */
-												findfile amcs.dta
-												sort munic
-												merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-												} 
-												else{
-																colocar a leitura em pes se n tiver compat} */
-												
+											rename
 											
-											drop AGUA ALUGUEFX ALUGUEL ASPIRPO AUTPART AUTTRAB BANHEIRO CD107 ///
-												 COBERTUR COMBCOZI COMODOR COMODOS CONDOCUP DEMOCOFX DEMOCOMO ///
-												 DEMODOFX DEMODORM ESPECIE FILTRO FREEZER GELADEIR ILUMINA ///
-												 LIXO LOCALIZA MAQLAVAR PAREDES RADIO RDOMICIV RDONOMIF RDOREALF///
-												 SANESCOA SANUSO TELEFONE TVCORES TVPRETO ESPFAM NUMFAM///
-												 RFACHCAF RFACHCAV RFAMILIV RFANOMIF RFAPCAPF RFAPCAPV RFAREALF///
-												 /* drop variaveis de domicilio mantendo id_dom e pesos para expansao */
-												
-												
-												save CENSO91_`UF'_pes, replace
+											roda compatibilizacao para dom ?
+											roda compatibilizacao para pes ?
+											
+											/* Áreas Mínimas Comparáveis */
+											findfile amcs.dta
+											sort munic
+											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+											
+											} 
+											else{
+														colocar a leitura em both se n tiver compat} */ 
+											
+											/* drop variaveis de familias */
+											
+											save CENSO91_`UF'_pes_e_dom, replace
+											
 											}
-											
-											if "`dom'"~="" {
+											else{
+												if "`pes'"~="" {
+												
+												
 												/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
-												if "`comp'" != "" {
-												
-												rename ...
-												drop ...
-												
-												compat_censo91dom
+												if "`comp'" != ""
+													
+													rename ...
+													drop ...
+													
+													compat_censo91pess
 
-												/* Áreas Mínimas Comparáveis */
-												findfile amcs.dta
-												sort munic
-												merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-												} 
-												else{
-														colocar a leitura em dom se n tiver compat} */
+													/* Áreas Mínimas Comparáveis */
+													findfile amcs.dta
+													sort munic
+													merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													} 
+													else{
+																	colocar a leitura em pes se n tiver compat} */
+													
 												
-												/* drop variaveis de pessoas mantendo id_dom e pesos para expansao */
+												drop AGUA ALUGUEFX ALUGUEL ASPIRPO AUTPART AUTTRAB BANHEIRO CD107 ///
+													 COBERTUR COMBCOZI COMODOR COMODOS CONDOCUP DEMOCOFX DEMOCOMO ///
+													 DEMODOFX DEMODORM ESPECIE FILTRO FREEZER GELADEIR ILUMINA ///
+													 LIXO LOCALIZA MAQLAVAR PAREDES RADIO RDOMICIV RDONOMIF RDOREALF ///
+													 SANESCOA SANUSO TELEFONE TVCORES TVPRETO ESPFAM NUMFAM ///
+													 RFACHCAF RFACHCAV RFAMILIV RFANOMIF RFAPCAPF RFAPCAPV RFAREALF
+													
+													
+													save CENSO91_`UF'_pes, replace
+												}
 												
-												save CENSO91_`UF'_dom, replace
-											
+												if "`dom'"~="" {
+													/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
+													if "`comp'" != "" {
+													
+													rename ...
+													drop ...
+													
+													compat_censo91dom
+
+													/* Áreas Mínimas Comparáveis */
+													findfile amcs.dta
+													sort munic
+													merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													} 
+													else{
+															colocar a leitura em dom se n tiver compat} */
+													
+													/* drop variaveis de pessoas e familias mantendo id_dom e pesos para expansao */
+													
+													save CENSO91_`UF'_dom, replace
+												}
+													
+												if "`fam'"{
+													/* eh possivel compatibilizar? se sim:
+													if "`comp'" != "" {
+														rename
+														roda compatibilizacao
+														
+														/* Áreas Mínimas Comparáveis */
+														findfile amcs.dta
+														sort munic
+														merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+													
+													}
+													else{
+														roda sem compatibilizacao
+													}*/
+												
+													save CENSO91_`UF'_fam, replace
+												}
 											}
 										}
 									}
 								}
 							}
 							else{
+		if "`fam'" != "" {
+						di as err "Opção Família não disponível para o ano `ano', exceto em DBF"
+						exit
+						}
 		
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
@@ -724,12 +765,6 @@ foreach ano in `years' {
 
 	di as input "Atenção: utilize os microdados do Censo 2000 atualizados em 08/09/2017"
 
-	if "`dbf'"~="" {
-	loc pes "pes"
-	loc dom "dom"
-	loc fam "fam"
-	display as result "Pessoas, Famílias e Domicílios (2000)"
-	}
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
 			local pos = 1
