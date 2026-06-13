@@ -120,41 +120,152 @@ computer.
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
 <details>
+
 <summary>
+
 In English:
 </summary>
 
-- [Making Censuses
-  compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
-- [Censo 1970
-  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1970_en.pdf)
-- [Censo 1980
-  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1980_en.pdf)
-- [Censo 1991
-  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1991_en.pdf)
-- [Censo 2000
-  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
-- [Censo 2010
-  dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+- <details>
+
+  <summary>
+
+  Dictionaries and Compatibilization
+  </summary>
+
+  - [Making Censuses
+    compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
+  - [Censo 1970
+    dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1970_en.pdf)
+  - [Censo 1980
+    dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1980_en.pdf)
+  - [Censo 1991
+    dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1991_en.pdf)
+  - [Censo 2000
+    dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
+  - [Censo 2010
+    dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Questionnaires
+  </summary>
+
+  - [Questionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
+  - [Questionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1980.pdf)
+  - [Questionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Question%C3%A1rio%20da%20Amostra_1991.pdf)
+  - [Questionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2000.pdf)
+  - [Questionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2010.pdf)
+  - [Questionário Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2022.pdf)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Census Taker Manuals
+  </summary>
+
+  - [Manual do Recenseador Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
+  - [Manual do Recenseador Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1980.pdf)
+  - [Manual do Recenseador Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1991.pdf)
+  - [Manual do Recenseador Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2000.pdf)
+  - [Manual do Recenseador Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2010.pdf)
+  - [Manual do Recenseador Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2022.pdf)
+
+  </details>
 
 </details>
+
 <details>
+
 <summary>
+
 In Portuguese:
 </summary>
 
-- [Compatibilização dos
-  Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
-- [Dicionário Censo
-  1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1970.pdf)
-- [Dicionário Censo
-  1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1980.xlsx)
-- [Dicionário Censo
-  1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1991.pdf)
-- [Dicionário Censo
-  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
-- [Dicionário Censo
-  2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+- <details>
+
+  <summary>
+
+  Dicionários e Compatibilização
+  </summary>
+
+  - [Compatibilização dos
+    Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
+  - [Dicionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1970.pdf)
+  - [Dicionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1980.xlsx)
+  - [Dicionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1991.pdf)
+  - [Dicionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
+  - [Dicionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Questionários
+  </summary>
+
+  - [Questionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
+  - [Questionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1980.pdf)
+  - [Questionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Question%C3%A1rio%20da%20Amostra_1991.pdf)
+  - [Questionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2000.pdf)
+  - [Questionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2010.pdf)
+  - [Questionário Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2022.pdf)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Manuais do Recenseador
+  </summary>
+
+  - [Manual do Recenseador Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
+  - [Manual do Recenseador Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1980.pdf)
+  - [Manual do Recenseador Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1991.pdf)
+  - [Manual do Recenseador Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2000.pdf)
+  - [Manual do Recenseador Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2010.pdf)
+  - [Manual do Recenseador Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2022.pdf)
+
+  </details>
 
 </details>
 
@@ -183,8 +294,11 @@ here](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
   documentation](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
 
 </details>
+
 <details>
+
 <summary>
+
 In English:
 </summary>
 
@@ -194,8 +308,11 @@ In English:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003_en.xlsx)
 
 </details>
+
 <details>
+
 <summary>
+
 In Portuguese:
 </summary>
 
@@ -264,7 +381,9 @@ here](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
 <details>
+
 <summary>
+
 In English:
 </summary>
 
@@ -278,8 +397,11 @@ In English:
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova_en.xls)
 
 </details>
+
 <details>
+
 <summary>
+
 In Portuguese:
 </summary>
 
@@ -341,7 +463,9 @@ explains all the procedures adopted in the process.
   dictionary](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_compatibilizado.xlsx)
 
 <details>
+
 <summary>
+
 In English:
 </summary>
 
@@ -381,8 +505,11 @@ In English:
   (Individuals)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_2000s_pess_en.xlsx)
 
 </details>
+
 <details>
+
 <summary>
+
 In Portuguese:
 </summary>
 
@@ -540,7 +667,9 @@ those obtained from the standard database.
   documentation](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
 <details>
+
 <summary>
+
 In English:
 </summary>
 
@@ -624,7 +753,7 @@ at the PUC-Rio Department of Economics.
 To cite package `datazoom_social`, use:
 
 > Data Zoom (2023). Data Zoom: Simplifying Access To Brazilian
-> Microdata.  
+> Microdata.\
 > <https://www.econ.puc-rio.br/datazoom/english/index.html>
 
 Or in BibTeX format:
