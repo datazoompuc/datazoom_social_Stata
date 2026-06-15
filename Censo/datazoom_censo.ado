@@ -13,7 +13,7 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `comp' especifica que será feita a compatibilização.
 * `pes' indica arquivo de pessoas
 * `dom' indica arquivo de domicilios
-* `fam' indica arquivo de família disponível apenas para o ano 2000
+* `fam' indica arquivo de família, disponível apenas para o ano 2000
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
 * `english' indica labels das variáveis em inglês
@@ -23,7 +23,7 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
 if "`dom'"~="" display as result " Domicílios"
-if "`fam'"~="" display as result " Famílias"
+if "`fam'"~="" display as result " Famílias (2000)"
 if "`both'"~="" {
 	loc pes "pes"
 	loc dom "dom"
@@ -33,7 +33,7 @@ if "`all'"~="" {
 	loc pes "pes"
 	loc dom "dom"
 	loc fam "fam"
-	display as result "Pessoas, Famílias e Domicílios"
+	display as result "Pessoas, Famílias e Domicílios (2000)"
 }
 
 /* Pastas para guardar arquivos da sessão */
@@ -440,7 +440,10 @@ foreach ano in `years' {
 	
 	else if `ano' == 1991 {
 	
-		
+		if "`fam'" != "" {
+						di as err "Opção Família não disponível para o ano `ano'"
+						exit
+						}
 		
 		if "`dbf'" != "" {
 							di as text "Formato selecionado dos microdados originais do Censo 1991: DBF"
@@ -486,26 +489,7 @@ foreach ano in `years' {
 															(RDOREALF != RDOREALF[_n-1]) | (SANESCOA != SANESCOA[_n-1]) | (SANUSO != SANUSO[_n-1]) | ///
 															(TELEFONE != TELEFONE[_n-1]) | (TVCORES != TVCORES[_n-1]) | (TVPRETO != TVPRETO[_n-1])))
 															
-									if "`all'"~="" {
 									
-										/* eh possivel compatibilizar? se sim:
-										if "`comp'" != "" {
-											rename
-											roda compatibilizacao
-											
-											/* Áreas Mínimas Comparáveis */
-											findfile amcs.dta
-											sort munic
-											merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-										
-										}
-										else{
-											roda sem compatibilizacao
-										}*/
-									
-										save CENSO91_`UF'_all, replace
-									} 
-										else{
 											if "`both'"~="" {
 											
 											/* Compatibiliza, se especificado */			/* Trabalhando no recurso de compatibilizacao
@@ -515,6 +499,8 @@ foreach ano in `years' {
 											
 											roda compatibilizacao para dom ?
 											roda compatibilizacao para pes ?
+											ou roda compatibilizacao para dom e pes ?
+											
 											
 											/* Áreas Mínimas Comparáveis */
 											findfile amcs.dta
@@ -523,12 +509,11 @@ foreach ano in `years' {
 											
 											} 
 											else{
-														colocar a leitura em both se n tiver compat} */ 
+														colocar a leitura em both se n tiver compat
+														(acho que eh so salvar o censo mesmo)} */
 											
-											/* drop variaveis de familias */
-											
-											save CENSO91_`UF'_pes_e_dom, replace
-											
+											save CENSO91_`UF', replace
+								
 											}
 											else{
 												if "`pes'"~="" {
@@ -583,35 +568,11 @@ foreach ano in `years' {
 													
 													save CENSO91_`UF'_dom, replace
 												}
-													
-												if "`fam'"{
-													/* eh possivel compatibilizar? se sim:
-													if "`comp'" != "" {
-														rename
-														roda compatibilizacao
-														
-														/* Áreas Mínimas Comparáveis */
-														findfile amcs.dta
-														sort munic
-														merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-													
-													}
-													else{
-														roda sem compatibilizacao
-													}*/
-												
-													save CENSO91_`UF'_fam, replace
-												}
 											}
 										}
 									}
 								}
-							}
-							else{
-		if "`fam'" != "" {
-						di as err "Opção Família não disponível para o ano `ano', exceto em DBF"
-						exit
-						}
+								else{
 		
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
