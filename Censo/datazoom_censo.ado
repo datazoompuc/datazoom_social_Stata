@@ -493,13 +493,183 @@ foreach ano in `years' {
 									
 											if "`both'"~="" {
 											
-											/* Compatibiliza, se especificado
+											/* Compatibiliza, se especificado */
 											if "`comp'" != "" {
+												/*	/* ============================================================ */
+													/* DROPS                                                        */
+													/* ============================================================ */
+													capture drop UFNOM MESONOM MICRONOM MUNICNOM RFAPCAPV
+
+													/* ============================================================ */
+													/* RENAMES - DOMICÍLIO                                          */
+													/* ============================================================ */
+													destring UFNUM, replace
+													capture rename UFNUM v1101
+													capture rename MESONUM  v7001
+													capture rename MICRONUM v7002
+													capture rename METROP   v7003
+													capture rename MUNICNUM v1102
+													capture rename SITSET   v1061
+
+													capture rename AGUA     v0205
+													capture rename ALUGUEFX v2094
+													capture rename ALUGUEL  v0209
+													capture rename ASPIRPO  v0227
+													capture rename AUTPART  v0218
+													capture rename AUTTRAB  v0219
+													capture rename BANHEIRO v0213
+													capture rename CD107    v0109
+													capture rename COBERTUR v0204
+													capture rename COMBCOZI v0210
+													capture rename COMODOR  v0212
+													capture rename COMODOS  v0211
+													capture rename CONDOCUP v0208
+													capture rename DEMOCOFX v2112
+													capture rename DEMOCOMO v2111
+													capture rename DEMODOFX v2122
+													capture rename DEMODORM v2121
+													capture rename ESPECIE  v0201
+													capture rename FILTRO   v0216
+													capture rename FREEZER  v0225
+													capture rename GELADEIR v0222
+													capture rename ILUMINA  v0221
+													capture rename LIXO     v0214
+													capture rename LOCALIZA v0202
+													capture rename MAQLAVAR v0226
+													capture rename PAREDES  v0203
+													capture rename PESO     v7300
+													capture rename RADIO    v0220
+													capture rename RDOMICIV v2012
+													capture rename RDONOMIF v2013
+													capture rename RDOREALF v2014
+													capture rename SANESCOA v0206
+													capture rename SANUSO   v0207
+													capture rename TELEFONE v0217
+													capture rename TVCORES  v0224
+													capture rename TVPRETO  v0223
+
+													/* ============================================================ */
+													/* RENOMES - FAMÍLIA                                            */
+													/* ============================================================ */
+													capture rename ESPFAM   v2011
+													capture rename NUMFAM   v0304
+													capture rename RFACHCAF v3044
+													capture rename RFACHCAV v3043
+													capture rename RFAMILIV v3045
+													capture rename RFANOMIF v3046
+													capture rename RFAPCAPF v3049
+													capture rename RFAREALF v3047
+
+													/* ============================================================ */
+													/* RENOMES - PESSOAS                                            */
+													/* ============================================================ */
+													capture rename APOPENS  v0359
+													capture rename ATIVIDAD v0347
+													capture rename ATIVISET v3471
+													capture rename CARTASS  v0350
+													capture rename CONPREV  v0353
+													capture rename DEFICIE  v0311
+													capture rename EDANOEST v3241
+													capture rename EDCURSNS v0326
+													capture rename EDCURSO  v0329
+													capture rename EDGRAU   v0325
+													capture rename EDSABELE v0323
+													capture rename EDSERIE  v0324
+													capture rename EDULGRAU v0328
+													capture rename EDULSERI v0327
+													capture rename EMPESTB  v0351
+													capture rename FLDOMICH v0335
+													capture rename FLDOMICM v0336
+													capture rename FLMORTOH v0339
+													capture rename FLMORTOM v0340
+													capture rename FLNAMORH v0341
+													capture rename FLNAMORM v0342
+													capture rename FLNAMORT v3357
+													capture rename FLNAODOH v0337
+													capture rename FLNAODOM v0338
+													capture rename FLNAVIVH v3355
+													capture rename FLNAVIVM v3356
+													capture rename FLNAVIVT v3354
+													capture rename FLTIDOSH v3352
+													capture rename FLTIDOSM v3353
+													capture rename FLTIDOST v3351
+													capture rename FLVIVOSH v3361
+													capture rename FLVIVOSM v3362
+													capture rename FLVIVOST v3360
+													capture rename HOROUTR  v0355
+													capture rename HORTRAB  v0354
+													capture rename IDADEANO v3072
+													capture rename IDADEMES v3073
+													capture rename IDADETIP v3071
+													capture rename LOCTRAB  v0352
+													capture rename MIANMOMU v0318
+													capture rename MIANMOUF v0317
+													capture rename MIANORES v3152
+													capture rename MIANTEMU v3191
+													capture rename MIANTEUF v0319
+													capture rename MIANTEZN v0320
+													capture rename MIMO86MU v3211
+													capture rename MIMO86UF v0321
+													capture rename MIMO86ZN v0322
+													capture rename MIMUMOZN v0312
+													capture rename MINACION v3151
+													capture rename MINASCMU v0314
+													capture rename MIUFPAIS v0316
+													capture rename MIULTMUD v0313
+													capture rename NORDMAE  v3005
+													capture rename OCUPACAO v0346
+													capture rename OCUPAGRP v3461
+													capture rename PARENDOM v0302
+													capture rename PARENFAM v0303
+													capture rename PESSOAN  v0098
+													capture rename POSOCUP  v0349
+													capture rename RACACOR  v0309
+													capture rename RAPOSENF v3604
+													capture rename RAPOSENV v0360
+													capture rename RELIGIAO v0310
+													capture rename ROUTOCUF v3574
+													capture rename ROUTOCUV v0357
+													capture rename ROUTRENF v3614
+													capture rename ROUTRENV v0361
+													capture rename RPRINCIF v3564
+													capture rename RPRINCIV v0356
+													capture rename RTONOMIF v3562
+													capture rename RTOREALF v3563
+													capture rename RTOTALPV v3561
+													capture rename SCATUAL  v3342
+													capture rename SCDURASC v3341
+													capture rename SCID1UNI v3311
+													capture rename SCIDISCA v3312
+													capture rename SCNAOUNI v0333
+													capture rename SCNATUNI v0332
+													capture rename SCVIVCON v0330
+													capture rename SEXO     v0301
+													capture rename SITDESO  v0358
+													capture rename TRUL12M  v0345
+													capture rename UVIVIDAD v3443
+													capture rename UVIVIDTP v3444
+													capture rename UVIVSEXO v0343
+													
+													destring v0316 v0319 v0321 v3151 v3152 v3191 v3211 v0314 v0312 v0310, replace force
+
+													/* ============================================================ */
+													/* VARIÁVEIS GERADAS                                            */
+													/* ============================================================ */
+													capture gen v3041 = .
+													capture gen v3042 = .
+													capture gen v7004 = .
+													capture gen v0111 = .
+													capture gen v0112 = .
+													capture gen v7301 = v7300
+													
 											
-											roda compatibilizacao para dom ?
-											roda compatibilizacao para pes ?
-											ou roda compatibilizacao para dom e pes ?
+											/* roda compatibilizacao para dom e pes?*/ */
 											
+											
+											
+											/* ou roda compatibilizacao para uma compatibilizacao unica?*/
+											
+											compat_censo91dbf
 											
 											/* Áreas Mínimas Comparáveis */
 											findfile amcs.dta
@@ -510,9 +680,9 @@ foreach ano in `years' {
 											} 
 											else{
 											save CENSO91_`UF', replace
-											} */
+											}
 											
-											save CENSO91_`UF', replace
+											/* save CENSO91_`UF', replace */
 								
 											}
 											else{
@@ -533,7 +703,7 @@ foreach ano in `years' {
 													capture drop UFNOM MESONOM MICRONOM MUNICNOM RFAPCAPV
 
 													/* ============================================================ */
-													/* RENOMES - DOMICÍLIO                                          */
+													/* RENAMES - DOMICÍLIO                                          */
 													/* ============================================================ */
 													destring UFNUM, replace
 													capture rename UFNUM v1101
@@ -737,6 +907,7 @@ foreach ano in `years' {
 													/* ============================================================ */
 													/* RENOMES - DOMICÍLIO                                          */
 													/* ============================================================ */
+													destring UFNUM, replace
 													capture rename UFNUM    v1101
 													capture rename MESONUM  v7001
 													capture rename MICRONUM v7002
@@ -5945,295 +6116,454 @@ end
 
 program define compat_censo91dbf
 
-/* RENOMES DBF -> v0xxx */
+/* ============================================================ */
+/* DROPS                                                        */
+/* ============================================================ */
+capture drop UFNOM MESONOM MICRONOM MUNICNOM RFAPCAPV
 
-drop ufnom mesonom micronom municnom rfapcapv
+/* ============================================================ */
+/* RENAMES - DOMICÍLIO                                          */
+/* ============================================================ */
+destring UFNUM, replace
+capture rename UFNUM    v1101
+capture rename MESONUM  v7001
+capture rename MICRONUM v7002
+capture rename METROP   v7003
+capture rename MUNICNUM v1102
+capture rename SITSET   v1061
 
-rename ufnum v1101
-rename mesonum v7001
-rename micronum v7002
-rename metrop v7003
-rename municnum v1102
-rename sitset v1061
+capture rename AGUA     v0205
+capture rename ALUGUEFX v2094
+capture rename ALUGUEL  v0209
+capture rename ASPIRPO  v0227
+capture rename AUTPART  v0218
+capture rename AUTTRAB  v0219
+capture rename BANHEIRO v0213
+capture rename CD107    v0109
+capture rename COBERTUR v0204
+capture rename COMBCOZI v0210
+capture rename COMODOR  v0212
+capture rename COMODOS  v0211
+capture rename CONDOCUP v0208
+capture rename DEMOCOFX v2112
+capture rename DEMOCOMO v2111
+capture rename DEMODOFX v2122
+capture rename DEMODORM v2121
+capture rename ESPECIE  v0201
+capture rename FILTRO   v0216
+capture rename FREEZER  v0225
+capture rename GELADEIR v0222
+capture rename ILUMINA  v0221
+capture rename LIXO     v0214
+capture rename LOCALIZA v0202
+capture rename MAQLAVAR v0226
+capture rename PAREDES  v0203
+capture rename PESO     v7300
+capture rename RADIO    v0220
+capture rename RDOMICIV v2012
+capture rename RDONOMIF v2013
+capture rename RDOREALF v2014
+capture rename SANESCOA v0206
+capture rename SANUSO   v0207
+capture rename TELEFONE v0217
+capture rename TVCORES  v0224
+capture rename TVPRETO  v0223
 
-rename agua v0205
-rename aluguefx v2094
-rename aluguel v0209
-rename aspirpo v0227
-rename autpart v0218
-rename auttrab v0219
-rename banheiro v0213
-rename cd107 v0109
-rename cobertur v0204
-rename combcozi v0210
-rename comodor v0212
-rename comodos v0211
-rename condocup v0208
-rename democofx v2112
-rename democomo v2111
-rename demodofx v2122
-rename demodorm v2121
-rename especie v0201
-rename filtro v0216
-rename freezer v0225
-rename geladeir v0222
-rename ilumina v0221
-rename lixo v0214
-rename localiza v0202
-rename maqlavar v0226
-rename paredes v0203
-rename peso v7300
-rename radio v0220
-rename rdomiciv v2012
-rename rdonomif v2013
-rename rdorealf v2014
-rename sanescoa v0206
-rename sanuso v0207
-rename telefone v0217
-rename tvcores v0224
-rename tvpreto v0223
+/* ============================================================ */
+/* RENOMES - FAMÍLIA                                            */
+/* ============================================================ */
+capture rename ESPFAM   v2011
+capture rename NUMFAM   v0304
+capture rename RFACHCAF v3044
+capture rename RFACHCAV v3043
+capture rename RFAMILIV v3045
+capture rename RFANOMIF v3046
+capture rename RFAPCAPF v3049
+capture rename RFAREALF v3047
 
-rename espfam v2011
-rename numfam v0304
-rename rfachcaf v3044
-rename rfachcav v3043
-rename rfamiliv v3045
-rename rfanomif v3046
-rename rfapcapf v3049
-rename rfarealf v3047
+/* ============================================================ */
+/* RENOMES - PESSOAS                                            */
+/* ============================================================ */
+capture rename APOPENS  v0359
+capture rename ATIVIDAD v0347
+capture rename ATIVISET v3471
+capture rename CARTASS  v0350
+capture rename CONPREV  v0353
+capture rename DEFICIE  v0311
+capture rename EDANOEST v3241
+capture rename EDCURSNS v0326
+capture rename EDCURSO  v0329
+capture rename EDGRAU   v0325
+capture rename EDSABELE v0323
+capture rename EDSERIE  v0324
+capture rename EDULGRAU v0328
+capture rename EDULSERI v0327
+capture rename EMPESTB  v0351
+capture rename FLDOMICH v0335
+capture rename FLDOMICM v0336
+capture rename FLMORTOH v0339
+capture rename FLMORTOM v0340
+capture rename FLNAMORH v0341
+capture rename FLNAMORM v0342
+capture rename FLNAMORT v3357
+capture rename FLNAODOH v0337
+capture rename FLNAODOM v0338
+capture rename FLNAVIVH v3355
+capture rename FLNAVIVM v3356
+capture rename FLNAVIVT v3354
+capture rename FLTIDOSH v3352
+capture rename FLTIDOSM v3353
+capture rename FLTIDOST v3351
+capture rename FLVIVOSH v3361
+capture rename FLVIVOSM v3362
+capture rename FLVIVOST v3360
+capture rename HOROUTR  v0355
+capture rename HORTRAB  v0354
+capture rename IDADEANO v3072
+capture rename IDADEMES v3073
+capture rename IDADETIP v3071
+capture rename LOCTRAB  v0352
+capture rename MIANMOMU v0318
+capture rename MIANMOUF v0317
+capture rename MIANORES v3152
+capture rename MIANTEMU v3191
+capture rename MIANTEUF v0319
+capture rename MIANTEZN v0320
+capture rename MIMO86MU v3211
+capture rename MIMO86UF v0321
+capture rename MIMO86ZN v0322
+capture rename MIMUMOZN v0312
+capture rename MINACION v3151
+capture rename MINASCMU v0314
+capture rename MIUFPAIS v0316
+capture rename MIULTMUD v0313
+capture rename NORDMAE  v3005
+capture rename OCUPACAO v0346
+capture rename OCUPAGRP v3461
+capture rename PARENDOM v0302
+capture rename PARENFAM v0303
+capture rename PESSOAN  v0098
+capture rename POSOCUP  v0349
+capture rename RACACOR  v0309
+capture rename RAPOSENF v3604
+capture rename RAPOSENV v0360
+capture rename RELIGIAO v0310
+capture rename ROUTOCUF v3574
+capture rename ROUTOCUV v0357
+capture rename ROUTRENF v3614
+capture rename ROUTRENV v0361
+capture rename RPRINCIF v3564
+capture rename RPRINCIV v0356
+capture rename RTONOMIF v3562
+capture rename RTOREALF v3563
+capture rename RTOTALPV v3561
+capture rename SCATUAL  v3342
+capture rename SCDURASC v3341
+capture rename SCID1UNI v3311
+capture rename SCIDISCA v3312
+capture rename SCNAOUNI v0333
+capture rename SCNATUNI v0332
+capture rename SCVIVCON v0330
+capture rename SEXO     v0301
+capture rename SITDESO  v0358
+capture rename TRUL12M  v0345
+capture rename UVIVIDAD v3443
+capture rename UVIVIDTP v3444
+capture rename UVIVSEXO v0343
 
-rename apopens v0359
-rename atividad v0347
-rename ativiset v3471
-rename cartass v0350
-rename conprev v0353
-rename deficie v0311
-rename edanoest v3241
-rename edcursns v0326
-rename edcurso v0329
-rename edgrau v0325
-rename edsabele v0323
-rename edserie v0324
-rename edulgrau v0328
-rename edulseri v0327
-rename empestb v0351
-rename fldomich v0335
-rename fldomicm v0336
-rename flmortoh v0339
-rename flmortom v0340
-rename flnamorh v0341
-rename flnamorm v0342
-rename flnamort v3357
-rename flnaodoh v0337
-rename flnaodom v0338
-rename flnavivh v3355
-rename flnavivm v3356
-rename flnavivt v3354
-rename fltidosh v3352
-rename fltidosm v3353
-rename fltidost v3351
-rename flvivosh v3361
-rename flvivosm v3362
-rename flvivost v3360
-rename horoutr v0355
-rename hortrab v0354
-rename idadeano v3072
-rename idademes v3073
-rename idadetip v3071
-rename loctrab v0352
-rename mianmomu v0318
-rename mianmouf v0317
-rename mianores v3152
-rename miantemu v3191
-rename mianteuf v0319
-rename miantezn v0320
-rename mimo86mu v3211
-rename mimo86uf v0321
-rename mimo86zn v0322
-rename mimumozn v0312
-rename minacion v3151
-rename minascmu v0314
-rename miufpais v0316
-rename miultmud v0313
-rename nordmae v3005
-rename ocupacao v0346
-rename ocupagrp v3461
-rename parendom v0302
-rename parenfam v0303
-rename pessoan ordem
-lab var ordem "número de ordem"
-rename posocup v0349
-rename racacor v0309
-rename raposenf v3604
-rename raposenv v0360
-rename religiao v0310
-rename routocuf v3574
-rename routocuv v0357
-rename routrenf v3614
-rename routrenv v0361
-rename rprincif v3564
-rename rprinciv v0356
-rename rtonomif v3562
-rename rtorealf v3563
-rename rtotalpv v3561
-rename scatual v3342
-rename scdurasc v3341
-rename scid1uni v3311
-rename scidisca v3312
-rename scnaouni v0333
-rename scnatuni v0332
-rename scvivcon v0330
-rename sexo v0301
-rename sitdeso v0358
-rename trul12m v0345
-rename uvividad v3443
-rename uvividtp v3444
-rename uvivsexo v0343
+/* ============================================================ */
+/* VARIÁVEIS GERADAS                                            */
+/* ============================================================ */
+capture gen v3041 = .
+capture gen v3042 = .
+capture gen v7004 = .
+capture gen v0111 = .
+capture gen v0112 = .
+capture gen v7301 = v7300
 
-/* Variáveis ausentes no DBF — geradas como missing */
-gen v3041 = .
-lab var v3041 "Homens na familia"
-gen v3042 = .
-lab var v3042 "Mulheres na familia"
-gen v7004 = .
-lab var v7004 "macroregião"
-gen v0111 = .
-lab var v0111 "número de homens no domicílio"
-gen v0112 = .
-lab var v0112 "número de mulheres no domicílio"
-gen v7301 = v7300
-lab var v7301 "peso amostral"
 
 /* ============================================================ */
 /* BLOCO DE DOMICÍLIOS                                          */
 /* ============================================================ */
 
+/* A. ANO */
+* Essa variável é definida antes de chamar este programa.
+
+/* B. IDENTIFICAÇÃO E NÚMERO DE PESSOAS */
+
+/* B.1. IDENTIFICAÇÃO */
 rename v1101 UF
 drop v1102
+
+capture rename v0102 id_dom
+
 rename v7004 regiao
+* regiao = 1 região norte
+*          2 região nordeste
+*          3 região sudeste
+*          4 região sul
+*          5 região centro-oeste
+
+
 drop v7001 v7002 v0109 v7003
 
+	
+/* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
 rename v0111 n_homem_dom
 rename v0112 n_mulher_dom
 egen n_pes_dom = rowtotal(n_homem_dom n_mulher_dom)
 lab var n_pes_dom "número de moradores no domicílio"
 
+/* C. VARIÁVEIS DE DOMICÍLIO*/
+
+/* C.1. SITUAÇÃO */
 rename v1061 sit_setor
 lab var sit_setor "situação do domicílio - desagregado"
+* sit_setor = 1 - Área urbanizada de vila ou cidade
+*             2 - Área não urbanizada de vila ou cidade
+*             3 - Área urbanizada isolada
+*             4 - Rural - extensão urbana
+*             5 - Rural - povoado
+*             6 - Rural - núcleo
+*             7 - Rural - outros aglomerados
+*             8 - Rural - exclusive os aglomerados rurais
 
 gen sit_setor_B = sit_setor
 recode sit_setor_B (1 2 = 1) (3=2) (4/7 = 3) (8=4)
 lab var sit_setor_B "situação do domicílio - agregado"
+* sit_setor_B = 1 - Vila ou cidade
+*               2 - Urbana isolada
+*               3 - Aglomerado rural
+*               4 - Rural exclusive os aglomerados
 
 gen sit_setor_C = sit_setor_B
 recode sit_setor_C (1 2 = 1) (3 4 = 0)
-lab var sit_setor_C "situação do domicílio - urbano/rural"
+lab var  sit_setor_C "situação do domicílio - urbano/rural"
+* sit_setor_C = 1 - Urbana
+*               0 - Rural
 
+/* C.2. ESPÉCIE */
 recode v0201 (1=0) (2=1) (3=2)
 rename v0201 especie
+* especie = 0 - particular permanente
+*           1 - particular improvisado
+*           2 - coletivo
 
+/* C.3. MATERIAL DAS PAREDES */
 rename v0203 paredes
-rename v0204 cobertura
+* paredes 	= 1   Alvenaria
+*        	= 2   Madeira aparelhada
+*        	= 3   Taipa não revestida
+*       	= 4   Material aproveitado
+*   	    = 5   Palha
+*	        = 6   Outro
 
+
+/* C.4. MATERIAL DA COBERTURA */
+rename v0204 cobertura
+*cobertura = 1 laje de concreto
+*		   = 2 telha de barro
+*		   = 3 telha de amianto
+*		   = 4 zinco
+*		   = 5 madeira aparelhada
+*		   = 6 palha
+*		   = 7 material aproveitado
+*		   = 8 outro material
+
+
+/* C.5. TIPO */
+
+* Somente para domicílios particulares permanentes tipo casa ou apt (não cômodo)
 gen subnormal = 1 if (v0202 == 3 | v0202 == 6)
 replace subnormal = 0 if (v0202 == 1 | v0202 ==2 | v0202 == 4 | v0202 == 5)
 lab var subnormal "dummy para setor subnormal"
+* subnormal = 0 - não
+*             1 - sim
 
 recode v0202 (1/3 = 1) (4/6 = 2) (7=3)
 rename v0202 tipo_dom
+* tipo_dom = 1 - casa
+*            2 - apartamento
+*            3 - cômodo
 
 gen tipo_dom_B = tipo_dom
 recode tipo_dom_B (3=2)
 lab var tipo_dom_B "tipo de domicílio B"
+* tipo_dom_B = 1 - casa
+*              2 - apartamento (ou cômodo)
 
+/* C.6. CONDIÇÃO DE OCUPAÇÃO E ALUGUEL */
 gen terreno_prop = 1 if v0208==1
 replace terreno_prop = 0 if v0208==2
 lab var terreno_prop "dummy para terreno próprio"
+* terreno_prop = 0 - não
+*                1 - sim
 
-recode v0208 (2=1) (3=2) (4=3) (5=4) (6=5)
+recode v0208 (2=1) (3=2) (4=3) (5=4) (6=5) // (1=1)
 rename v0208 cond_ocup
+* cond_ocup = 1 - próprio
+*             2 - alugado
+*             3 - cedido por empregador
+*             4 - cedido de outra forma
+*             5 - outra condição
 
 gen cond_ocup_B = cond_ocup
-recode cond_ocup_B (4=3) (5=4)
-lab var cond_ocup_B "condição de ocupação B"
+recode cond_ocup_B (4=3) (5=4) // 1 a 3 mantidos
+lab var  cond_ocup_B "condição de ocupação B"
+* cond_ocup_B = 1 - próprio
+*               2 - alugado
+*               3 - cedido
+*               4 - outra condição
 
 recode v0209 (0 999999=.)
 rename v0209 aluguel
-drop v2094
 
+* Aluguel em salários mínimos
+drop v2094 
+
+
+/* C.7. ABASTECIMENTO DE ÁGUA */
 recode v0205 (1=1) (2=3) (3=5) (4=2) (5=4) (6=5)
 rename v0205 abast_agua
+* abast_agua = 1 - rede geral com canalização interna
+*              2 - rede geral sem canalização interna
+*              3 - poço ou nascente com canalização interna
+*              4 - poço ou nascente sem canalização interna
+*              5 - outra forma
 
+
+/* C.8. INSTALAÇÕES SANITÁRIAS */
 gen sanitario = 0 if v0206 == 0
 replace sanitario = 1 if (v0206 >= 1) & (v0206 <= 7)
 lab var sanitario "dummy para acesso a sanitário"
+* sanitario = 0 - não tem acesso
+*                1 - tem acesso
 
-recode v0206 (3=2) (4=3) (5 6 = 4) (7 0 = .)
+recode v0206 (3=2) (4=3) (5 6 = 4) (7 0 = .) // 1 e 2 mantidos
 rename v0206 tipo_esc_san
+* tipo_esc_san = 1 - Rede geral
+*                2 - Fossa séptica
+*                3 - Fossa rudimentar
+*                4 - Outro escoadouro
 
-recode v0207 (2=0)
+recode v0207 (2=0) // 0 e 1 mantidos
 rename v0207 sanitario_ex
-lab var sanitario_ex "acesso exclusivo a instalação sanitária"
+label var sanitario_ex "acesso exclusivo a instalação sanitária"
+* inst_san_exc = 0 - não tem acesso a inst san exclusiva
+*                1 - tem acesso a inst sanitária exclusiva
 
 rename v0213 banheiros
-rename v0214 dest_lixo
+* banheiros = 0 - não tem
+*             1 a 4 - número de banheiros
+*             5 - cinco ou mais banheiros
 
+
+/* C.9. DESTINO DO LIXO */
+rename v0214 dest_lixo
+* dest_lixo = 1 - Coletado por serviço de limpeza
+*             2 - Colocado em caçamba de serviço de limpeza
+*             3 - Queimado(na propriedade)
+*             4 - Enterrado(na propriedade)
+*             5 - Jogado em terreno baldio ou logradouro
+*             6 - Jogado em rio, lago ou mar
+*             7 - Tem outro destino
+
+
+/* C.10. ILUMINAÇÃO ELÉTRICA */
 gen medidor_el = 0 if v0221 == 2
 replace medidor_el = 1 if v0221 == 1
-lab var medidor_el "presença de medidor de consumo de eletricidade"
+label var medidor_el "presença de medidor de consumo de eletricidade"
+* medidor_el = 0 - não tem
+*                1 - tem
 
-recode v0221 (2=1) (3 4 = 0)
+recode v0221 (2=1) (3 4 = 0) // (1=1)
 rename v0221 ilum_eletr
+* ilum_eletr = 0 - não tem
+*              1 - tem
 
+
+/* C.11. BENS DE CONSUMO DURÁVEIS */
 generate fogao_ou_fog = 0 if v0210 == 0
 replace fogao_ou_fog = 1 if (v0210 >= 1) & (v0210 <= 6)
-lab var fogao_ou_fog "fogão ou fogareiro"
+label var fogao_ou_fog "fogão ou fogareiro"
+* fogao_ou_fog = 0 - não tem
+*                1 - tem
 
-recode v0210 (2 4 = 1) (3=2) (5=3) (6=4)
+recode v0210 (2 4 = 1) (3=2) (5=3) (6=4) // 0 e 1 mantidos
 rename v0210 comb_fogao
+* comb_fogao = 1 - gás
+*                2 - lenha
+*                3 - carvão
+*                4 - outro
+*                0 - não tem fogão nem fogareiro
 
 rename v0220 radio
+* radio = 0 - não tem
+*         1 - tem
 
-recode v0222 (2=1)
+recode v0222 (2=1) // 0 e 1 mantidos
 rename v0222 geladeira
+* geladeira = 0 - não tem
+*             1 - tem
 
 gen gelad_ou_fre = 0 if (geladeira == 0) & (v0225 == 0)
 replace gelad_ou_fre = 1 if (geladeira == 1) | (v0225 == 1)
 lab var gelad_ou_fre "geladeira ou freezer"
+* gelad_ou_fre = 0 - não tem
+*                1 - tem
 drop v0225
 
 recode v0217 (2 = 1)
 rename v0217 telefone
+* telefone = 0 - não tem
+*            1 - tem
 
 rename v0223 tv_pb
-recode v0224 (2 3 = 1)
+recode v0224 (2 3 = 1) // 0 e 1 mantidos
 rename v0224 tv_cores
 
 gen televisao = 0 if tv_pb == 0 & tv_cores == 0
 replace televisao = 1 if (tv_pb == 1) | (tv_cores == 1)
 lab var televisao "televisão"
+* televisao, tv_pb, tv_cores = 0 - não tem
+*                              1 - tem
 
-recode v0218 (2 3 = 1)
+recode v0218 (2 3 = 1) // 0 e 1 mantidos
 rename v0218 automov_part
 gen automovel = 0 if automov_part == 0
 replace automovel = 1 if (automov_part == 1) | (v0219 == 1) | (v0219 == 2)
 lab var automovel "automóvel"
+* automovel, automov_part = 0 - não tem
+*                           1 - tem
+
+* Quesito automóvel para trabalho pesquisado só em 1991
 drop v0219
 
 rename v0226 lavaroupa
+* lavaroupa 0 - não tem
+*			1 - tem
+
 drop v0216 v0227
 
+
+/* C.12. NÚMERO DE CÔMODOS */
 rename v0211 tot_comodos
 rename v0212 tot_dorm
+
 drop v2111 v2112 v2121 v2122
 
+
+/* C.13. RENDA DOMICILIAR */
 replace v2012 = . if v2012>10^8
 rename v2012 renda_dom
+
 drop v2013 v2014
 
+/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
 g double deflator = 0.000038883
 g double conversor = 2750000
-lab var deflator "deflator de rendimentos - base 08/2010"
+
+lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -6242,251 +6572,558 @@ lab var renda_dom_def "renda_dom deflacionada"
 g aluguel_def = (aluguel/conversor)/deflator
 lab var aluguel_def "aluguel deflacionada"
 
+
+/* C.14. PESO AMOSTRAL */
 rename v7300 peso_dom
+  
 
 /* ============================================================ */
-/* BLOCO DE PESSOAS                                             */
+/* BLOCO DE PESSOAS                                          */
 /* ============================================================ */
 
-drop v3043 v3044 v3046 v3049
+rename v0098 ordem
+
+* renda do casal
+drop v3043 v3044 v3046- v3049 
+
+* numero de ordem da mae
 drop v3005
 
+/* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
 rename v3041 n_homem_fam
 rename v3042 n_mulher_fam
 egen n_pes_fam = rowtotal(n_homem_fam n_mulher_fam)
 lab var n_pes_fam "número de pessoas na família"
+* Pessoas no domicílio: não disponível no registro de pessoas.
 
-recode v0301 (2=0)
+
+/* D. OUTRAS VARIÁVEIS PESSOA */
+
+/* D.1. SEXO */
+recode v0301 (2=0) // (1=1)
 rename v0301 sexo
+* sexo = 0 - feminino
+*        1 - masculino
 
-recode v0302 (3 4 = 3) (5 6 = 4) (8=5) (10=6) (7 9 11 12 = 7) (13=8) ///
+/* D.2. CONDIÇÃO NA FAMÍLIA E NO DOMICÍLIO */
+recode v0302 (3 4 = 3) (5 6 = 4) (8=5) (10=6) (7 9 11 12 = 7) (13=8) /// (1=1) (2=2)
              (14=9) (15=10) (16=11) (20=12)
 rename v0302 cond_dom
+* cond_dom =  1 - Pessoa responsável
+*                 2 - Cônjuge, companheiro(a)
+*                 3 - Filho(a), enteado(a)
+*                 4 - Pai, mãe, sogro(a)
+*                 5 - Neto(a), bisneto(a)
+*                 6 - Irmão, irmã
+*                 7 - Outro parente
+*                 8 - Agregado(a)
+*                 9 - Pensionista
+*                10 - Empregado(a) doméstico(a)
+*                11 - Parente do(a) empregado(a) doméstico(a)
+*                12 - Individual em domicílio coletivo
 
-recode v0303 (3 4 = 3) (5 6 = 4) (8=5) (10=6) (7 9 11 12 = 7) (13=8) ///
+recode v0303 (3 4 = 3) (5 6 = 4) (8=5) (10=6) (7 9 11 12 = 7) (13=8) /// (1=1) (2=2)
              (14=9) (15=10) (16=11) (20=12)
 rename v0303 cond_fam
+* cond_fam =  1 - Pessoa responsável
+*                 2 - Cônjuge, companheiro(a)
+*                 3 - Filho(a), enteado(a)
+*                 4 - Pai, mãe, sogro(a)
+*                 5 - Neto(a), bisneto(a)
+*                 6 - Irmão, irmã
+*                 7 - Outro parente
+*                 8 - Agregado(a)
+*                 9 - Pensionista
+*                10 - Empregado(a) doméstico(a)
+*                11 - Parente do(a) empregado(a) doméstico(a)
+*                12 - Individual em domicílio coletivo
 
 gen cond_dom_B = cond_dom
-recode cond_dom_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10)
+recode cond_dom_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10) // 1 a 4 mantidos
 lab var cond_dom_B "relação com o responsável do domicílio B"
 
 gen cond_fam_B = cond_fam
-recode cond_fam_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10)
 lab var cond_fam_B "relação com o responsável da família B"
+recode cond_fam_B (5/7 = 5) (8=6) (9=7) (10=8) (11=9) (12=10) // 1 a 4 mantidos
+* cond_***_B =  1 - Pessoa responsável
+*               2 - Cônjuge, companheiro(a)
+*               3 - Filho(a), enteado(a)
+*               4 - Pai, mãe, sogro(a)
+*               5 - Outro parente
+*               6 - Agregado
+*               7 - Hóspede, pensionista
+*               8 - Empregado(a) doméstico(a)
+*               9 - Parente do(a) empregado(a) doméstico(a)
+*              10 - Individual em domicílio coletivo
 
-recode v0304 (2=0) (3=1) (4=2) (5=3) (6=4) (7=5)
+recode v0304 (2=0) (3=1) (4=2) (5=3) (6=4) (7=5) // 1 mantido
 rename v0304 num_fam
-drop v2011
 
-recode v3071 (2=0)
+* tipo de familia
+drop v2011 // só em 1991
+
+/* D.3. IDADE */
+recode v3071 (2=0) // (1=1)
 rename v3071 idade_presumida
+* idade_presumida = 0 - não
+*                   1 - sim
+
 rename v3072 idade
 rename v3073 idade_meses
 
+/* D.4. COR OU RAÇA */
 recode v0309 (9=.)
 rename v0309 raca
+* raca = 1 - branca
+*        2 - preta
+*        3 - amarela
+*        4 - parda
+*        5 - indígena
 
 gen racaB = raca
-recode racaB (5=4)
+recode racaB (5=4) // 1 a 4 mantidos
 lab var racaB "cor ou raça (indígena=pardo)"
+* racaB = 1 - branca
+*         2 - preta
+*         3 - amarela
+*         4 - parda
 
+/* D.5. RELIGIÃO */
 recode v0310 (11=1) (21/30 = 2) (31/41 45 = 3) (61=4) (62 63 = 5) (75 76 77 79 = 6) ///
-             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .)
+             (71=7) (49 51 52 53 59 81 82 83 84 12 13 19 = 8) (85 86 89 99 = .) // 19 nao tem no dicionario: confirmar tabulacao.
 rename v0310 religiao
+* religiao = 0 - sem religião
+*            1 - católica
+*            2 - evangélica tradicional
+*            3 - evangélica pentecostal
+*            4 - espírita kardecista
+*            5 - espírita afro-brasileira
+*            6 - religiões orientais
+*            7 - judaica/israelita
+*            8 - outras religiões
 
 gen religiao_B = religiao
 recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
 lab var religiao_B "religião B - mais agregada"
+* religiao_B = 0 - sem religião
+*              1 - católica
+*              2 - evangélica
+*              3 - espírita
+*              4 - outra
 
+/* D.6. DEFICIÊNCIAS FÍSICA E MENTAL */
+* foi retirado da compatibilizacao porque o item é analisada em uma única
+* pergunta, diferentemente dos anos subsequentes
 drop v0311
 
+/* D.7. NATURALIDADE E MIGRAÇÃO */
+
+*** Condição de migrante
 gen sempre_morou = 0 if (v0314 == 2 | v0314 == 3)
 replace sempre_morou = 1 if v0314 == 1
-lab var sempre_morou "Sempre morou neste município"
+label var sempre_morou "Sempre morou neste município"
+* sempre_morou = 0 - não
+*                1 - sim
 
 recode v0312 (1=0) (2=1) (3=2)
 rename v0312 onde_morou
+* onde_morou = 0 só na zona urbana
+*                1 só na zona rural
+*                2 nas zonas urbana e rural
 
+* O quesito abaixo só é pesquisado em 1991.
 drop v0313
 
-recode v0314 (3=0) (2=1)
+*** Nacionalidade e naturalidade
+recode v0314 (3=0) (2=1) // (1=1)
 rename v0314 nasceu_mun
-lab var nasceu_mun "Nasceu neste município"
+label var nasceu_mun "Nasceu neste município"
+* nasceu_mun = 0 não
+*              1 sim
+
 
 recode v3151 (1=0) (2=1) (3=2)
 replace v3151 = 0 if nasceu_mun==1
 rename v3151 nacionalidade
+* nacionalidade = 0 - brasileiro nato
+*                 1 - brasileiro naturalizado
+*                 2 - estrangeiro
 
-replace v3152 = . if nacionalidade == 0
+replace v3152 = . if nacionalidade == 0 // originalmente ambíguo: bras nato ou
+										// estrangeiro que fixou res até 1900
 replace v3152 = 1900 + v3152 if (v3152 >= 0 & v3152 <= 91)
 rename v3152 ano_fix_res
 
 gen UF_nascim = v0316
 replace UF_nascim = . if (v0316 >= 30 & v0316 != .)
 recode UF_nascim (1=11) (2=12) (3=13) (4=14) (5=15) (6=16) (7=17) (8=21) (9=22) (10=23) ///
-                 (11=24) (12=25) (13=26) (14=27) (15=28) (16=29) (17=31) (18=32) (19=33) ///
-                 (20=35) (21=41) (22=42) (23=43) (24=50) (25=51) (26=52) (27=53) (29=.)
-lab var UF_nascim "UF de nascimento"
+				 (11=24) (12=25) (13=26) (14=27) (15=28) (16=29) (17=31) (18=32) (19=33) ///
+				 (20=35) (21=41) (22=42) (23=43) (24=50) (25=51) (26=52) (27=53) (29=.)
+*	replace UF_nascim = UF if nasceu_mun==1
+label var UF_nascim "UF de nascimento"
+* UF_nascim = 11-53 UF de nascimento especificada
 
 gen nasceu_UF = 0
 replace nasceu_UF = 1 if UF_nascim == UF | nasceu_mun==1
-lab var nasceu_UF "Nasceu nesta UF"
+label var nasceu_UF "Nasceu nesta UF"
+* nasceu_UF = 0 não
+*             1 sim
 
-recode v0316 (1/29 99 = .) ///
-    (82 84 85 = 83) (83 = 82) (86 87=84) (88=86) (89=87) (90=88) ///
-    (91=89) (92=90) (93=91) (94=92) (95=93) (96=94) (97=95) (98=96), copy g(pais_nascim)
-lab var pais_nascim "País de nascimento - códigos 1970"
+recode v0316 (1/29 99 = .)	///
+	(82 84 85 = 83 )	///
+	(83 = 82 )	///
+	(86 87=84 ) ///
+	(88=86 ) ///
+	(89=87 ) ///
+	(90=88 ) ///
+	(91=89 ) ///
+	(92=90 ) ///
+	(93=91 ) ///
+	(94=92 ) ///
+	(95=93 ) ///
+	(96=94 ) ///   
+	(97=95 ) ///
+	(98=96 ), copy g(pais_nascim)
+* pais_nascim = 30-98 país estrangeiro especificado
+* 83 = Africa - outros  
+* 82 = Egito	
+* 84 = China 
+* 86 = Coréia 
+* 87 = Índia 
+* 88 = Israel 
+* 89 = Japão 
+* 90 = Líbano 
+* 91 = Paquistão 
+* 92 = Síria 
+* 93 = Turquia 
+* 94 = Ásia - outros 
+* 95 = Australia
+* 96 = Oceania
+label var pais_nascim "País de nascimento - códigos 1970"
+* pais_nascim = 30-98 país estrangeiro especificado
 drop v0316
+
+*** Última migração
 
 rename v0317 anos_mor_UF
 rename v0318 anos_mor_mun
 
+* em 1970, somente quem não nasceu no município responde às questões de tempo de moradia
 g t_mor_UF_70 = anos_mor_UF
 g t_mor_mun_70 = anos_mor_mun
 recode t_mor_UF_70 t_mor_mun_70 (7/10=6) (11/max=7)
+
 lab var t_mor_UF_70 "tempo de moradia na UF - grupos de 1970"
 lab var t_mor_mun_70 "tempo de moradia no municipio - grupos de 1970"
 
+* De 1980 em diante, podemos montar a variavel de tempo de moradia incluindo
+* pessoas que nasceram mas nem sempre moraram no municipio em que residem
 recode anos_mor_UF (7/9 =6) (10/max =7), g(t_mor_UF_80)
 recode anos_mor_mun (7/9 =6) (10/max =7), g(t_mor_mun_80)
 lab var t_mor_UF_80 "tempo de moradia na UF - grupos de 1980"
 lab var t_mor_mun_80 "tempo de moradia no municipio - grupos de 1980"
 
+*** Onde morava anteriormente - para quem migrou nos últimos 10 anos:
 gen pais_mor_ant = v3191 if v0319 == 80
-recode pais_mor_ant (0/29 99=.) (82 84 85 = 83) (83 = 82) (86 87=84) ///
-    (88=86) (89=87) (90=88) (91=89) (92=90) (93=91) (94=92) ///
-    (95=93) (96=94) (97=95) (98=96)
-lab var pais_mor_ant "País onde morava anteriormente (se migrou nos últ 10 anos)"
+recode pais_mor_ant (0/29 99=.)	///
+	(82 84 85 = 83 )	///
+	(83 = 82 )	///
+	(86 87=84 ) ///
+	(88=86 ) ///
+	(89=87 ) ///
+	(90=88 ) ///
+	(91=89 ) ///
+	(92=90 ) ///
+	(93=91 ) ///
+	(94=92 ) ///
+	(95=93 ) ///
+	(96=94 ) ///   
+	(97=95 ) ///
+	(98=96 )
+label var pais_mor_ant "País onde morava anteriormente (se migrou nos últ 10 anos)"
+* pais_mor_ant = 30-98 país estrangeiro especificado
 
 gen long mun_mor_ant = 10000*v0319 + v3191 if v0319 <= 53
-lab var mun_mor_ant "Município onde morava ant (se migrou nos últ 10 anos)"
+label var mun_mor_ant "Município onde morava ant (se migrou nos últ 10 anos)"
 
 recode v0319 (0 54 80 99=.)
 rename v0319 UF_mor_ant
-lab var UF_mor_ant "UF onde morava anteriormente (se migrou nos últ 10 anos)"
+label var UF_mor_ant "UF onde morava anteriormente (se migrou nos últ 10 anos)"
+* UF_mor_ant = 11-53 código da UF em que morava
+
 drop v3191
 
-recode v0320 (9=.) (2=0)
+recode v0320 (9=.) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0320 sit_mun_ant
+* sit_mun_ant = 1 zona urbana
+*               0 zona rural
 
+*** Local de residência há 5 anos:
 gen pais_mor5anos = v3211 if v0321 == 80
-recode pais_mor5anos (0/29 99=.) (82 84 85 = 83) (83 = 82) (86 87=84) ///
-    (88=86) (89=87) (90=88) (91=89) (92=90) (93=91) (94=92) ///
-    (95=93) (96=94) (97=95) (98=96)
-lab var pais_mor5anos "País onde morava há 5 anos"
+recode pais_mor5anos (0/29 99=.)	///
+	(82 84 85 = 83)	///
+	(83 = 82)	///
+	(86 87=84) ///
+	(88=86) ///
+	(89=87) ///
+	(90=88) ///
+	(91=89) ///
+	(92=90) ///
+	(93=91) ///
+	(94=92) ///
+	(95=93) ///
+	(96=94) ///   
+	(97=95) ///
+	(98=96)
+label var pais_mor5anos "País onde morava há 5 anos"
+* pais_mor5anos = 30-98 código de país/região estrangeiro(a)
 
 gen long mun_mor5anos = 10000*v0321 + v3211 if v0321 <= 53
-lab var mun_mor5anos "Município onde morava há 5 anos"
+label var mun_mor5anos "Município onde morava há 5 anos"
 drop v3211
 
-recode v0321 (54 70 80 99=.)
+recode v0321 (54 70 80 99=.) // 70 é não-migrante
 rename v0321 UF_mor5anos
-lab var UF_mor5anos "UF onde morava há 5 anos"
+label var UF_mor5anos "UF onde morava há 5 anos"
+* UF_mor5anos = 11-53 código de UF em que morava
 
-recode v0322 (2=0) (9=.)
+recode v0322 (2=0) (9=.) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 replace v0322 =. if pais_mor5anos~=.
 rename v0322 sit_dom5anos
-lab var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
+label var sit_dom5anos "Situação do domicílio onde morava há 5 anos"
+* sit_dom5anos = 1 zona urbana
+*                0 zona rural
 
-recode v0323 (2=0)
+/* D.8. EDUCAÇÃO */
+recode v0323 (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0323 alfabetizado
+* alfabetizado = 0 - não
+*                1 - sim
 
 gen freq_escola = 0     if idade >= 5
-replace freq_escola = 1 if (idade >= 5) & (v0325 ~= 0)
-replace freq_escola = 1 if (idade >= 5) & ((v0326>=2 & v0326<=4) | v0326==6)
+replace freq_escola = 1 if (idade >= 5) & (v0325 ~= 0) // frequenta curso seriado
+replace freq_escola = 1 if (idade >= 5) & ((v0326>=2 & v0326<=4) | v0326==6) // frequenta curso não-seriado
 lab var freq_escola "frequenta escola"
 
 gen freq_escolaB = freq_escola
-replace freq_escolaB = 1 if v0326 == 1
+replace freq_escolaB = 1 if v0326 == 1 // inclui pré-escola
 lab var freq_escolaB "frequenta escola - inclui pré-escola"
 
-recode v3241 (20 = .) (17=16) (30 = 0)
-rename v3241 anos_estudo
 
+* Anos de estudo - cálculo do IBGE
+recode v3241 (20 = .) (17=16) (30 = 0) // 20 é "indefinido"; lim em 16 pois é máximo em 1970  // no dicionario, tem opcao 31 como NSA. checar na tabulacao para transformar em missing tambem
+rename v3241 anos_estudo
+* anos_estudo = 0      - Sem instrução ou menos de 1 ano
+*               1 a 15 - Número de anos
+*               16     - 16 anos ou mais
+
+
+* Anos de estudo "B" - nível de escolaridade associado à série atualmente cursada
+
+* Para quem não freqüenta, usamos anos_estudo:
 gen anos_estudoB = anos_estudo if freq_escola == 0
 lab var anos_estudoB "anos de estudo - associado à série atualmente cursada"
 
-replace anos_estudoB = 0  if (freq_escola == 1) & (v0326 >= 1) & (v0326 <= 2)
-replace anos_estudoB = 8  if (freq_escola == 1) & (v0326 == 4)
-replace anos_estudoB = 11 if (freq_escola == 1) & (v0326 == 5)
-replace anos_estudoB = 15 if (freq_escola == 1) & (v0326 == 6)
+* Frequentando cursos não seriados:
+replace anos_estudoB = 0  if (freq_escola == 1) & (v0326 >= 1) & (v0326 <= 2) // pré-escola, alfabetização de adultos
+* Na situaçao abaixo, supletivo de 1o grau, IBGE tem optado por considerar nível "indefinido"
+*replace anos_estudoB = 0  if (freq_escola == 1) & (v0326 == 3) // suplet 1o grau
+replace anos_estudoB = 8  if (freq_escola == 1) & (v0326 == 4) // suplet 2o grau
+replace anos_estudoB = 11 if (freq_escola == 1) & (v0326 == 5) // pré-vestibular
+replace anos_estudoB = 15 if (freq_escola == 1) & (v0326 == 6) // mestrado ou doutorado
 
-replace anos_estudoB = v0324 - 1  if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 8) & ((v0325 == 1) | (v0325 == 4))
-replace anos_estudoB = v0324 + 7  if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 3) & ((v0325 == 2) | (v0325 == 5))
-replace anos_estudoB = 10         if (freq_escola == 1) & (v0324 >= 4) & (v0324 <= 8) & ((v0325 == 2) | (v0325 == 5))
-replace anos_estudoB = v0324 + 10 if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 5) & (v0325 == 3)
-replace anos_estudoB = 15         if (freq_escola == 1) & (v0324 >= 6) & (v0324 <= 8) & (v0325 == 3)
+* Frequentando cursos seriados:
+replace anos_estudoB = v0324 - 1  if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 8) & ((v0325 == 1) | (v0325 == 4)) // 1o grau reg ou supletivo
+replace anos_estudoB = v0324 + 7  if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 3) & ((v0325 == 2) | (v0325 == 5)) // 2o grau reg ou supletivo
+replace anos_estudoB = 10         if (freq_escola == 1) & (v0324 >= 4) & (v0324 <= 8) & ((v0325 == 2) | (v0325 == 5)) // não terminou médio, não pode receber 11 anos
+replace anos_estudoB = v0324 + 10 if (freq_escola == 1) & (v0324 >= 1) & (v0324 <= 5) & (v0325 == 3)                  // superior
+replace anos_estudoB = 15         if (freq_escola == 1) & (v0324 >= 6) & (v0324 <= 8) & (v0325 == 3)                  // atribuo no máx 15 anos p/ superior incompleto
 
+* Gupos de Anos de Estudo
+* para quem frequenta escola
 recode anos_estudoB (min/3 = 0) (4/7 = 1) (8/10 = 2) (11/14 = 3) (15/max = 4), g(anos_estudoC)
 replace anos_estudoC = . if freq_escola==0
-replace anos_estudoC = 0 if freq_escola==1 & v0326 == 3
-replace anos_estudoC = 3 if freq_escola==1 & v0325==3 & anos_estudoC==4
+replace anos_estudoC = 0 if freq_escola==1 & v0326 == 3		// suplet 1o grau
+replace anos_estudoC = 3 if freq_escola==1 & v0325==3 & anos_estudoC==4 	// superior sem conclusao
 
-replace anos_estudoC = 0 if freq_escola==0 & (v0328==1 | v0328==0)
-replace anos_estudoC = 0 if freq_escola==0 & v0328==2
-replace anos_estudoC = 0 if freq_escola==0 & v0328==4 & v0327>=1 & v0327<=3
-replace anos_estudoC = 1 if freq_escola==0 & v0328==4 & v0327>=4 & v0327<=8
-replace anos_estudoC = 1 if freq_escola==0 & v0328==2 & v0329>=1 & v0329<=8
-replace anos_estudoC = 1 if freq_escola==0 & v0328==3
-replace anos_estudoC = 2 if freq_escola==0 & v0328==3 & v0329>=10 & v0329<=23
-replace anos_estudoC = 2 if freq_escola==0 & v0328==4 & v0327>=4 & v0327<=8 & v0329>=10 & v0329<=23
-replace anos_estudoC = 2 if freq_escola==0 & v0328==5
-replace anos_estudoC = 2 if freq_escola==0 & v0328==6
-replace anos_estudoC = 3 if freq_escola==0 & v0328==5 & v0329>=24 & v0329<=42
-replace anos_estudoC = 3 if freq_escola==0 & v0328==6 & v0329>=24 & v0329<=42
-replace anos_estudoC = 3 if freq_escola==0 & v0328==7
-replace anos_estudoC = 4 if freq_escola==0 & v0328==7 & v0329>=43 & v0329<=97
-replace anos_estudoC = 4 if freq_escola==0 & v0328==8
+* para quem nao frequenta escola
+replace anos_estudoC = 0 if freq_escola==0 & (v0328==1 | v0328==0) 	// alfabetizacao de adultos/nenhum
+replace anos_estudoC = 0 if freq_escola==0 & v0328==2 	// primario
+replace anos_estudoC = 0 if freq_escola==0 & v0328==4 & v0327>=1 & v0327<=3 	// 1a-3a serie 1o.grau
+replace anos_estudoC = 1 if freq_escola==0 & v0328==4 & v0327>=4 & v0327<=8 	// 4a-8a serie 1o.grau
+
+replace anos_estudoC = 1 if freq_escola==0 & v0328==2 & v0329>=1 & v0329<=8	// primario com conclusao
+replace anos_estudoC = 1 if freq_escola==0 & v0328==3 	// ginasio/medio 1o.ciclo
+replace anos_estudoC = 2 if freq_escola==0 & v0328==3 & v0329>=10 & v0329<=23 // ginasio/medio 1o.ciclo com conclusao
+
+replace anos_estudoC = 2 if freq_escola==0 & v0328==4 & v0327>=4 & v0327<=8 & v0329>=10 & v0329<=23	// 4a-8a serie 1o.grau com conclusao
+replace anos_estudoC = 2 if freq_escola==0 & v0328==5 	// 2o.grau
+replace anos_estudoC = 2 if freq_escola==0 & v0328==6 	// colegiaa/medio 2o.ciclo
+
+replace anos_estudoC = 3 if freq_escola==0 & v0328==5 & v0329>=24 & v0329<=42		// 2o.grau com conclusao
+replace anos_estudoC = 3 if freq_escola==0 & v0328==6 & v0329>=24 & v0329<=42		// colegiaa/medio 2o.ciclo com conclusao
+replace anos_estudoC = 3 if freq_escola==0 & v0328==7 	// superior
+
+replace anos_estudoC = 4 if freq_escola==0 & v0328==7 & v0329>=43 & v0329<=97	// superior com conclusao
+replace anos_estudoC = 4 if freq_escola==0 & v0328==8 	// mestrado/doutorado
+
 lab var anos_estudoC "grupo de anos de escolaridade"
 
-drop v0324 v0325 v0326 v0327 v0328
+* anos_estudoC = 0 – sem instrução ou menos de 3 anos de estudo (primário incompleto)
+*				 2 – de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
+*			 	 3 – de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
+*			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
 
-recode v0329 (1/8 = .) (10/42 = .) ///
-    (72/77 80/83 93 94 96 = 3) (43/49 65 86 87 = 4) (50/63 88 89 = 5) ///
-    (64 66 90 = 6) (67/71 78 79 91 92 = 7) (84 = 8) (85 95 97 = 9) (0 = .), g(cursos_c1)
+drop v0324- v0328
+
+recode v0329 (1/8 = .) ///
+		 (10/42 = .) ///
+		 (72/77 80/83 93 94 96 = 3) ///
+		 (43/49 65 86 87 = 4) ///
+		 (50/63 88 89 = 5) ///
+		 (64 66 90 = 6) ///
+		 (67/71 78 79 91 92 = 7) ///
+		 (84 = 8) ///
+		 (85 95 97 = 9)	///
+		 (0 = .), g(cursos_c1) 
 lab var cursos_c1 "curso superior concluído"
+* cursos_c1	=	3	ciências humanas
+*				4	ciências biológicas
+*				5	ciências exatas
+*				6	ciências agrárias
+*				7	ciências sociais
+*				8	militar
+*				9	outros cursos
 
-recode v0329 (1/42 = .) (77 94 = 1) (74/76 80/83 96 = 2) (67/73 78 79 91/93 = 3) ///
-    (43 51 52 58/62 87 89 = 4) (50 53/57 63 88 = 5) (64/66 90 = 6) ///
-    (44/49 86 = 7) (84 = 8) (85 95 97 = 9) (0 = .), g(cursos_c2)
+recode v0329 (1/42 = .) /// 
+		 (77 94 = 1) ///
+		 (74/76 80/83 96 = 2) ///
+		 (67/73 78 79 91/93 = 3) ///
+		 (43 51 52 58/62 87 89 = 4) ///
+		 (50 53/57 63 88 = 5) ///
+		 (64/66 90 = 6) ///
+		 (44/49 86 = 7) ///
+		 (84 = 8) ///
+		 (85 95 97 = 9)	///
+		 (0 = .), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
+* cursos_c2 =	1	Educação
+*				2	Artes, Humanidades e Letras
+*				3	Ciências Sociais, Administração e Direito
+*				4	Ciências, Matemática e Computação
+*				5	Engenharia, Produção e Construção
+*				6	Agricultura e Veterinária
+*				7	Saúde e Bem-Estar Social    
+*				8	militar
+*				9	Outros
 
-rename v0329 curso_concl
+rename v0329 curso_concl	// COMP SO PARA CURSO SUPERIOR
+* curso_concl = 00 nenhum curso
+*             = 01-97 curso concluído
 
-recode v0330 (2 = 0)
+/* D.9. SITUAÇÃO CONJUGAL */
+
+recode v0330 (2 = 0)  // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0330 teve_conjuge
+* teve_conjuge = 0 não
+*              = 1 sim
 
 gen vive_conjuge = 1 if (v3342 >= 1 & v3342 <= 3)
 replace vive_conjuge = 0 if v3342 == 4 | v3342 == 5
-lab var vive_conjuge "vive com cônjuge"
+label var vive_conjuge "vive com cônjuge"
+* vive_conjuge = 0 - não
+*                1 - sim
 drop v3342
 
 gen estado_conj = v0332 if (v0332 >= 1 & v0332 <=4)
 replace estado_conj = v0333 + 1 if (v0333 >= 5 & v0333 <= 8)
 replace estado_conj = 5 if teve_conjuge== 0
-lab var estado_conj "estado conjugal"
+label var estado_conj "estado conjugal"
+* estado_conj = 1 casamento civil e religioso
+*               2 só casamento civil
+*               3 só casamento religioso
+*               4 união consensual
+*               5 solteiro
+*               6 separado(a)
+*               7 desquitado(a)/separado(a) judicialmente
+*               8 divorciado(a)
+*               9 viúvo(a)
 drop v0332 v0333
+
 drop v3311 v3312 v3341
 
-recode v0345 (2=1) (3=0)
+
+/* D.10. RENDA E ATIVIDADE ECONÔMICA */
+
+recode v0345 (2=1) (3=0) // (1=1)
 rename v0345 trab_ult_12m
+*trab_ult_12m = 0 não
+*               1 sim
 
 rename v0346 ocup_hab
+
 rename v3461 grp_ocup_hab
+* grp_ocup_hab =  1 administrativas
+*                 2 técnicas, científicas, artísticas e assemelhadas
+*                 3 agropecuária e da produção extrativa vegetal e animal
+*                 4 produção extrativa mineral
+*                 5 indústrias de transformação e construção civil
+*                 6 comércio e atividades auxiliares
+*                 7 transportes e comunicações
+*                 8 prestação de serviços
+*                 9 defesa nacional e segurança pública
+*                10 outras ocupações, ocupações mal definidas ou não declaradas
+
 rename v0347 ativ_hab
+
 rename v3471 set_ativ_hab
+* set_ativ_hab =  1 atividades agropecuárias, de extração vegetal e pesca
+*                 2 indústria de transformação
+*                 3 indústria da construção civil
+*                 4 outras atividades industriais (extração mineral e serviços
+*                   industriais de utilidade pública)
+*                 5 comércio de mercadorias
+*                 6 transporte e comunicação
+*                 7 serviços auxiliares da atividade econômica (técnico-profissionais
+*                   e auxiliares das atividades econômicas)
+*                 8 prestação de serviços (alojamento e alimentação, reparação e
+*                   conservação, pessoais, domiciliares e diversões)
+*                 9 social(comunitárias, médicas, odontológicas e ensino)
+*                10 administração pública, defesa nacional e segurança pública
+*                11 outras atividades (instituições de crédito, seguros e
+*                   capitalização, comércio e administração de imóveis e valores
+*                   mobiliários, organizações internacionais e representações
+*                   estrangeiras, atividades não compreendidas nos demais ramos e
+*                   atividades mal definidas ou não declaradas)
 
-recode v0349 (7 8 = 6) (9=7) (10=8) (11=0)
+recode v0349 (7 8 = 6) (9=7) (10=8) (11=0) // 1 a 6 mantidos
 rename v0349 pos_ocup_hab
+* pos_ocup_hab = 0 sem remuneração
+*                1 trabalhador agrícola volante
+*                2 parceiro ou meeiro - empregado
+*                3 parceiro ou meeiro - autônomo ou conta-própria
+*                4 trabalhador doméstico - empregado
+*                5 trabalhador doméstico - autônomo ou conta-própria
+*                6 empregado
+*                7 autônomo ou conta-própria
+*                8 empregador
 
-recode pos_ocup_hab (1=4) (2 3=1) (4=2) (5=3) (6=4) (7=5) (8=6), copy gen(pos_ocup_habB)
+recode pos_ocup_hab (1 =4) (2 3 =1) (4 =2) (5 =3) (6 =4) (7 =5) (8 =6), copy gen(pos_ocup_habB) 
 lab var pos_ocup_habB "Posição na ocupação habitual - agregada"
+* pos_ocup_habB = 0 sem remuneração
+*                 1 parceiro ou meeiro 
+*                 2 trabalhador doméstico - empregado
+*                 3 trabalhador doméstico - autônomo ou conta-própria
+*                 4 empregado
+*                 5 autônomo ou conta-própria
+*                 6 empregador
 
 drop v0350 v0351 v0352
 
 recode v0353 (2 = .) (3 = 0)
 rename v0353 previd_A
+* previd = 0 não
+*          1 sim
 
 gen hrs_oc_hab = 1 if v0354 < 15
 replace hrs_oc_hab = 2 if (v0354 >= 15) & (v0354 < 30)
@@ -6494,6 +7131,11 @@ replace hrs_oc_hab = 3 if (v0354 >= 30) & (v0354 < 40)
 replace hrs_oc_hab = 4 if (v0354 >= 40) & (v0354 < 49)
 replace hrs_oc_hab = 5 if (v0354 >= 49) & v0354~=.
 lab var hrs_oc_hab "horas trabalhadas p/semana - ocup hab"
+* hrs_oc_hab = 1 - menos de 15 horas
+*              2 - de 15 a 29 horas
+*              3 - de 30 a 39 horas
+*              4 - de 40 a 48 horas
+*              5 - 49 horas ou mais
 
 gen hrs_oc_habB = 1 if v0354 < 15
 replace hrs_oc_habB = 2 if (v0354 >= 15) & (v0354 < 40)
@@ -6501,10 +7143,17 @@ replace hrs_oc_habB = 3 if (v0354 >= 40) & (v0354 < 50)
 replace hrs_oc_habB = 4 if (v0354 >= 50) & v0354~=.
 replace hrs_oc_habB = . if set_ativ_hab==1
 lab var hrs_oc_habB "horas trabalhadas p/semana B - ocup hab - exclusive agropec"
+* hrs_oc_habB = 1 - menos de 15 horas
+*               2 - de 15 a 39 horas
+*               3 - de 40 a 49 horas
+*               4 - 50 horas ou mais
 
 gen hrs_oc_habC = hrs_oc_habB
-recode hrs_oc_habC (4=3)
+recode hrs_oc_habC (4=3) // 1 a 3 mantidos
 lab var hrs_oc_habC "horas trabalhadas p/semana C - ocup hab - exclusive agropec"
+* hrs_oc_habC = 1 - menos de 15 horas
+*               2 - de 15 a 39 horas
+*               3 - 40 horas ou mais
 
 egen hrs_todas_oc = rowtotal(v0354 v0355)
 recode hrs_todas_oc (min/14=1) (15/29=2) (30/39=3) (40/48=4) (49/max=5)
@@ -6512,49 +7161,71 @@ lab var hrs_todas_oc "horas de trabalho p/semana em todas as ocupações"
 
 drop v0354 v0355
 
-recode v0356 (0 9999999=.)
+recode v0356 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0356 rend_ocup_hab
 
-recode v0357 (0 9999999=.)
+recode v0357 (0 9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0357 rend_outras_ocup
 
-recode v0360 (9999999=.)
-recode v0361 (9999999=.)
+recode v0360 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
+recode v0361 (9999999=.) // no dicionario, tem opcao 9999998 como NSA. checar na tabulacao para transformar em missing tambem
 egen rend_outras_fontes = rowtotal(v0360 v0361)
 lab var rend_outras_fontes "rendimento de outras fontes"
 
-recode v3561 (99999999=.)
+recode v3561 (99999999=.) // rendimento total tem 1 dígito a mais // no dicionario, tem opcao 99999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3561 rend_total
 lab var rend_total "total de rendimentos"
 
-replace v3045 = . if v3045>99999999
+* renda familiar
+replace v3045 = . if v3045>99999999 // no dicionario, tem opcao 999999998 como NSA. checar na tabulacao para transformar em missing tambem
 rename v3045 rend_fam
 
 drop v0360 v0361 v3562 v3563 v3564 v3574 v3604 v3614
 
-recode v0358 (4=3) (5=4) (6=5) (7=6) (8=7) (9=8) (0=9)
+recode v0358 (4=3) (5=4) (6=5) (7=6) (8=7) (9=8) (0=9) // 1 a 3 mantidos
 replace v0358 = 0 if trab_ult_12m == 1
 rename v0358 cond_ativ
+* cond_ativ = 0 trabalhou nos últimos 12 meses
+*             1 procurando trabalho - já trabalhou
+*             2 procurando trabalho - nunca trabalhou
+*             3 aposentado ou pensionista
+*             4 vive de renda
+*             5 detento
+*             6 estudante
+*             7 doente ou inválido
+*             8 afazeres domésticos
+*             9 sem ocupação
 drop v0359
 
-recode cond_ativ (0 2=1) (3/9=0), copy g(pea)
+recode cond_ativ (0 2=1) (3/9 =0), copy g(pea)
 lab var pea "população economicamente ativa"
+* pea	= 1 economicamente ativo
+*         0 inativo
 
-foreach var in rend_ocup_hab rend_outras_ocup rend_outras_fontes rend_total rend_fam {
-    g `var'_def = (`var'/conversor)/deflator
-    lab var `var'_def "`var' deflacionada"
+
+foreach var in rend_ocup_hab rend_outras_ocup rend_outras_fontes rend_total rend_fam  {
+		g `var'_def = (`var'/conversor)/deflator
+		lab var `var'_def "`var' deflacionada"
 }
 
 drop trab_ult_12m
+	
+/* D.11. VARIÁVEIS DE FECUNDIDADE */
+* Em 1970 e 1980, a fecundidade foi investigada para mulheres de 15 anos ou mais;
+* A partir de 1991, a idade foi reduzida para 10 anos ou mais
 
 rename v3351 filhos_tot
+
 rename v3352 filhos_hom
 rename v3353 filhos_mul
+
 rename v3354 filhos_nasc_vivos
 rename v3355 f_nasc_v_hom
 rename v3356 f_nasc_v_mul
-lab var f_nasc_v_hom "filhos nascidos vivos (homens)"
-lab var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+
 rename v3360 filhos_vivos
 rename v3361 f_vivos_hom
 rename v3362 f_vivos_mul
@@ -6564,25 +7235,29 @@ drop v0335 v0336 v0337 v0338 v0339 v0340
 rename v3357 filhos_nasc_mortos
 rename v0341 f_nasc_m_hom
 rename v0342 f_nasc_m_mul
-lab var f_nasc_m_hom "filhos nascidos mortos (homens)"
-lab var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
+
+label var f_nasc_m_hom "filhos nascidos mortos (homens)"
+label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 foreach var in filhos_tot filhos_hom filhos_mul filhos_nasc_vivos f_nasc_v_hom ///
-    f_nasc_v_mul filhos_vivos f_vivos_hom f_vivos_mul filhos_nasc_mortos ///
-    f_nasc_m_hom f_nasc_m_mul {
-        replace `var'=. if `var'==99
+	f_nasc_v_mul filhos_vivos f_vivos_hom f_vivos_mul filhos_nasc_mortos ///
+	f_nasc_m_hom f_nasc_m_mul {
+		replace `var'=. if `var'==99 // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
 }
 
-recode v0343 (7 = .) (9 = .) (2=0)
+
+recode v0343 (7 = .) (9 = .) (2=0) // (1=1) // no dicionario, tem opcao 0 como NSA. checar na tabulacao para transformar em missing tambem
 rename v0343 sexo_ult_nasc_v
+* sexo_ult_nasc_v = 0 feminino
+*                 = 1 masculino
 
 recode v3443 (99 = .)
-rename v3443 idade_ult_nasc_v
-lab var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
+rename v3443 idade_ult_nasc_v // no dicionario, tem opcao 100 como NSA. checar na tabulacao para transformar em missing tambem
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 drop v3444
 
+/* OUTRAS */
 rename v7301 peso_pess
-
 order ano UF regiao munic id_dom ordem
 
 datazoom_message
