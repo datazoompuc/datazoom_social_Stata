@@ -55,7 +55,7 @@ BEGIN
    CHECKBOX ck2024_tri4 190 180 150 20, label("2024 trimester 4") option(2024_tri4)
 END
 
-DIALOG dados, tabtitle("Databases")
+DIALOG bases, tabtitle("Databases")
 BEGIN
    BUTTON fldados 20 30 150 25, label("Original files...") onpush(script dados)
    BUTTON flsalvando 20 70 150 25, label("Saving...") onpush(script salvando)
