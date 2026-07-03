@@ -6970,6 +6970,7 @@ replace anos_estudoC = 4 if freq_escola==0 & v0328==8 	// mestrado/doutorado
 lab var anos_estudoC "grupo de anos de escolaridade"
 
 * anos_estudoC = 0 – sem instrução ou menos de 3 anos de estudo (primário incompleto)
+*                1 – de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
 *				 2 – de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
 *			 	 3 – de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
 *			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
