@@ -535,7 +535,8 @@ foreach ano in `years' {
 													/* ============================================================ */
 													/* RENOMES - DOMICÍLIO                                          */
 													/* ============================================================ */
-													capture rename UFNUM    v1101
+													destring UFNUM, replace
+													capture rename UFNUM v1101
 													capture rename MESONUM  v7001
 													capture rename MICRONUM v7002
 													capture rename METROP   v7003
