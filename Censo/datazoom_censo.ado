@@ -3031,7 +3031,7 @@ if `d'==1 {
 
 	/* C.2. ESPÉCIE */
 	replace v008 = 0 if (v007 == 0 & (v008 == 0 | v008 == 1))
-	replace v008 = 1 if (v007 == 1 & (v008 == 2 | v008 == .))
+	replace v008 = 1 if (v007 == 0 & (v008 == 2 | v008 == .))
 	replace v008 = 2 if v007 == 1
 	rename v008 especie
 	* especie = 0 - particular permanente
