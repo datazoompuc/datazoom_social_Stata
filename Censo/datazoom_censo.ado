@@ -3421,11 +3421,11 @@ if `p'==1 {
 	by id_dom num_fam: egen rend_fam = total(rend_total*(cond_fam_B <= 6))
 	lab var rend_fam "renda familiar"
 	
-	recode v043 (0=8) (1=6) (2=3) (3=4) (4=7) (5=5) (6=0) (7=1) (nonmissing = .)
+	recode v043 (0=8) (1=6) (2=3) (3=4) (4=7) (5=5) (6=9) (7=1) (nonmissing = .)
 	replace v043 = 2 if v044 == 924 & v045 == 933 // duas condições dizem o mesmo:
 												  // procura trabalho pela 1a vez
-	rename v043 cond_ativB // NO DICIONARIO SO TEM cond_ativ, NAO TEM cond_ativB. AJUSTAR O NOME AQUI?!
-	* cond_ativ = 1 trabalha/procurando trabalho - já trabalhou
+	rename v043 cond_ativB
+	* cond_ativB = 1 trabalhou nos últimos 12 meses ou procurando trabalho - já trabalhou
 	*             2 procurando trabalho - nunca trabalhou
 	*             3 aposentado ou pensionista
 	*             4 vive de renda
@@ -3433,7 +3433,7 @@ if `p'==1 {
 	*             6 estudante
 	*             7 doente ou inválido
 	*             8 afazeres domésticos
-	*             0 sem ocupação
+	*             9 sem ocupação
 
 	recode cond_ativB (2=1) (3/8 =0), copy g(pea)
 	lab var pea "população economicamente ativa"
@@ -4223,6 +4223,18 @@ if `p'==1 {
 	rename v529 cond_ativ
 	* cond_ativ = 0 trabalhou nos últimos 12 meses
 	*             1 procurando trabalho - já trabalhou
+	*             2 procurando trabalho - nunca trabalhou
+	*             3 aposentado ou pensionista
+	*             4 vive de renda
+	*             5 detento
+	*             6 estudante
+	*             7 doente ou inválido
+	*             8 afazeres domésticos
+	*             9 sem ocupação
+
+	gen cond_ativB = cond_ativ
+	recode cond_ativB (0 = 1)
+	* cond_ativB = 1 trabalhou nos últimos 12 meses ou procurando trabalho - já trabalhou
 	*             2 procurando trabalho - nunca trabalhou
 	*             3 aposentado ou pensionista
 	*             4 vive de renda
@@ -5382,7 +5394,7 @@ rename v3045 rend_fam
 drop v0360 v0361 v3562 v3563 v3564 v3574 v3604 v3614
 
 recode v0358 (4=3) (5=4) (6=5) (7=6) (8=7) (9=8) (0=9) // 1 a 3 mantidos
-replace v0358 = 0 if trab_ult_12m == 1
+replace v0358 = 0 if v0358 == . & trab_ult_12m == 1
 rename v0358 cond_ativ
 * cond_ativ = 0 trabalhou nos últimos 12 meses
 *             1 procurando trabalho - já trabalhou
@@ -5395,6 +5407,18 @@ rename v0358 cond_ativ
 *             8 afazeres domésticos
 *             9 sem ocupação
 drop v0359
+
+gen cond_ativB = cond_ativ
+recode cond_ativB (0 = 1)
+* cond_ativB = 1 trabalhou nos últimos 12 meses ou procurando trabalho - já trabalhou
+*             2 procurando trabalho - nunca trabalhou
+*             3 aposentado ou pensionista
+*             4 vive de renda
+*             5 detento
+*             6 estudante
+*             7 doente ou inválido
+*             8 afazeres domésticos
+*             9 sem ocupação
 
 recode cond_ativ (0 2=1) (3/9 =0), copy g(pea)
 lab var pea "população economicamente ativa"
