@@ -6,17 +6,14 @@ POSITION . . 400 90
 DIALOG main, label("PME")
 BEGIN
 	
-	BUTTON btn_censo 			20 10 120 25, label("PME Antiga") onpush(script child_antiga)
+	FRAME fr_antiga   			0  0 400 45
+	FRAME fr_nova   			0  43 400 45
 	
+	BUTTON btn_censo 			20 10 120 25, label("PME Antiga") onpush(script child_antiga)
 	BUTTON btn_pncon 			20 52 120 25, label("PME Nova") onpush(script child_nova)
 	
 	TEXTBOX txb_antiga    			150 15 200 25, label("1991 a 2001") center
-	
-    	TEXTBOX txb_nova			150 57 230 25, label("2001 a 2015 - Microdados reponderados") center
-	
-	FRAME fr_antiga   			0  0 400 45
-
-	FRAME fr_nova   			0  43 400 45
+	TEXTBOX txb_nova			150 57 230 25, label("2001 a 2015 - Microdados reponderados") center
 	
     TEXT bottom1   10   230  480  ., label("PUC-Rio - Departamento de Economia") left
 	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
