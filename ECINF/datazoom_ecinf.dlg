@@ -10,14 +10,14 @@ BEGIN
 
 GROUPBOX caixaanos 5 5 135 50, label("Anos")
 
-	RADIO ch1997  +15 +20 60 ., first label("1997") option(1997) onclickon(script on1997)
-	RADIO ch2003  +60 @ @ .,  last label("2003") option(2003) onclickon(script on2003)
+	RADIO ch1997  +15 +20 60 20, first label("1997") option(1997) onclickon(script on1997)
+	RADIO ch2003  +60 @ @ 20,  last label("2003") option(2003) onclickon(script on2003)
 	
 
 GROUPBOX caixaBase 5 +50 135 100, label("Bases de Dados")
 
-    BUTTON  fl_base    		+17 +26 100     ., label("Dados originais...") onpush(script dados)
-    BUTTON  fl_salvabase    +0 +35 100     ., label("Salvando...") onpush(script salvando)
+    BUTTON  fl_base    		+17 +26 100 25, label("Dados originais...") onpush(script dados)
+    BUTTON  fl_salvabase    +0 +35 100 25, label("Salvando...") onpush(script salvando)
 
 
 GROUPBOX trs +145 5 160 170, label("Tipos de Registros")
@@ -30,7 +30,7 @@ GROUPBOX trs +145 5 160 170, label("Tipos de Registros")
 	CHECKBOX ch_tr6    @ +20 @ @, label("Proprietário") option(pesocup)
 	CHECKBOX ch_tr7    @ +20 @ @, label("Sebrae") option(sebrae)
 
-	CHECKBOX	eng     5  180 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     5  180 200 20, label("Labels em inglês") option(english)
 
 	TEXT     credit     15   210  310    ., label("PUC-Rio - Departamento de Economia") right  
 END
