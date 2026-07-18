@@ -33,9 +33,9 @@ DEFINE ps_tx_salvabase 10
 
 GROUPBOX opc_extr 5 ps_opc_extr_y 295 65, label("Tipo de Identificação")
 
-	RADIO   rd_dom     +7 +25 100 20, first label("Domicílio") option(dom)
-	RADIO   rd_uc       +82 @   150 20, middle label("Unidade de Consumo") option(uc)
-	RADIO   rd_pess     +142 @  100 20, last label("Pessoas") option(pess)
+	RADIO   rd_dom     15 30 80 20, first label("Domicílio") option(dom)
+	RADIO   rd_uc      100 30 110 20, middle label("Unidade de Consumo") option(uc)
+	RADIO   rd_pess    215 30 75 20, last label("Pessoas") option(pess)
 	
 GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	

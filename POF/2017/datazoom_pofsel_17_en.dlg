@@ -33,9 +33,9 @@ DEFINE ps_tx_salvabase 10
 
 GROUPBOX opc_extr 5 ps_opc_extr_y 265 65, label("Identification type")
 
-	RADIO   rd_dom     +15 +25 100 20, first label("Household") option(dom)
-	RADIO   rd_uc       +90 @   150 20, middle label("Family") option(uc)
-	RADIO   rd_pess     +70 @  100 20, last label("Individuals") option(pess)
+	RADIO   rd_dom     15 30 80 20, first label("Household") option(dom)
+	RADIO   rd_uc      100 30 70 20, middle label("Family") option(uc)
+	RADIO   rd_pess    175 30 85 20, last label("Individuals") option(pess)
 	
 GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	
