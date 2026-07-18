@@ -63,6 +63,7 @@ foreach survey in `years' {
 	* Lendo o dicionário
 	
 	tempfile dict_file
+	local dict_file "`dict_file'.dct"
 	
 	read_compdct, compdct("`masterdict'") dict_name("`dic'") out("`dict_file'")
 	
