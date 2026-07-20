@@ -73,7 +73,7 @@ BEGIN
 
 	CHECKBOX	eng     145  365 200 ., label("Labels in English") option(english)
 
-	TEXT     credit     225   435  200    ., label("By PUC-Rio - Department of Economics") right  
+	TEXT     credit     225   435  250    ., label("By PUC-Rio - Department of Economics") right  
 
 END
 
