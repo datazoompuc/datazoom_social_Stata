@@ -186,6 +186,7 @@ program load_pnad
 syntax, file(string) original(string) dict_name(string)
 
 	tempfile dic
+	local dic "`dic'.dct"
 
 	findfile dict.dta
 
@@ -233,6 +234,7 @@ if `ano' <= 1990 {                                     // Se tem ano até 1990
 			preserve
 						
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 

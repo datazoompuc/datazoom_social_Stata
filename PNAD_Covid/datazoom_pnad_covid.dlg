@@ -9,20 +9,20 @@ BEGIN
 ******************************************************************************   
 GROUPBOX caixaAnos 5 20 190 220, label("Mês")
 
-   CHECKBOX    ck05 +14 +20 210  ., label("Maio/2020")  option(05)
-   CHECKBOX    ck06 @ +24 210    ., label("Junho/2020")  option(06)
-   CHECKBOX    ck07 @ +24 210    ., label("Julho/2020")  option(07)
-   CHECKBOX    ck08 @ +24 210    ., label("Agosto/2020")  option(08)
-   CHECKBOX    ck09 @ +24 210    ., label("Setembro/2020")  option(09)
-   CHECKBOX    ck10 @ +24 210    ., label("Outubro/2020")  option(10)
-   CHECKBOX    ck11 @ +24 210    ., label("Novembro/2020")  option(11)	
+   CHECKBOX    ck05 +14 +20 210 20, label("Maio/2020")  option(05)
+   CHECKBOX    ck06 @ +24 210 20, label("Junho/2020")  option(06)
+   CHECKBOX    ck07 @ +24 210 20, label("Julho/2020")  option(07)
+   CHECKBOX    ck08 @ +24 210 20, label("Agosto/2020")  option(08)
+   CHECKBOX    ck09 @ +24 210 20, label("Setembro/2020")  option(09)
+   CHECKBOX    ck10 @ +24 210 20, label("Outubro/2020")  option(10)
+   CHECKBOX    ck11 @ +24 210 20, label("Novembro/2020")  option(11)	
    
 GROUPBOX caixaDicionários 200 65 160 130, label("Bases de Dados")
 
-	BUTTON	fldados 	+30 +35 100 ., label("Dados originais...") onpush(script dados) 
-	BUTTON	flsalvando  @ +35 100 ., label("Salvando...") onpush(script salvando) 
+	BUTTON	fldados 	+30 +35 100 25, label("Dados originais...") onpush(script dados) 
+	BUTTON	flsalvando  @ +35 100 25, label("Salvando...") onpush(script salvando) 
 
-	CHECKBOX	eng     5  250 110 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     5  250 110 20, label("Labels em inglês") option(english)
 	
 TEXT     credit     120   250 240    ., label("PUC-Rio - Departamento de Economia") right
 

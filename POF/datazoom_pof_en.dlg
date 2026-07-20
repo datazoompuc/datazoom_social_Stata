@@ -12,6 +12,10 @@ BEGIN
 	RADIO  ck2008  +100   20 100 25, middle label("2008/09")  option(datazoom_pof2008)
 	RADIO  ck2017  +100   20 100 25, last label("2017/18")  option(datazoom_pof2017)
 
+	FRAME fr_bp   5 50 170 160
+	FRAME fr_meio  +168 50 170 160
+	FRAME fr_tr  +168 50 170 160
+
 	BUTTON btn_bp 30 75 120 25, label("Standard Databases") onpush(program carregachild_bp)
 	BUTTON btn_gs +160 @   140  @, label("Selected Expenditures") onpush(program carregachild_gs)
 	BUTTON btn_tr 365 @   120  @, label("Types of Register") onpush(program carregachild_tr)
@@ -19,10 +23,6 @@ BEGIN
 	TEXTBOX tx_obs_bp 15 115 150 80, label("These databases contain expenditure variables for agregated items.") center
 	TEXTBOX tx_obs_gs +170  @ 150 80, label("Create your own basket. More specific expenditures are available here.") center
 	TEXTBOX tx_obs_tr 355  @ 135 80, label("Databases without the intervention of any algorithm are available here.") center
-	
-	FRAME fr_bp   5 50 170 160
-	FRAME fr_meio  +168 50 170 160
-	FRAME fr_tr  +168 50 170 160
 	
 TEXT     credit     26   210  480    ., label("PUC-Rio - Department of Economics") right  
 END

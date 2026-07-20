@@ -33,15 +33,15 @@ DEFINE ps_tx_salvabase 10
 
 GROUPBOX opc_extr 5 ps_opc_extr_y 295 65, label("Tipo de Identificação")
 
-	RADIO   rd_dom     +7 +25 100 ., first label("Domicílio") option(dom)
-	RADIO   rd_uc       +82 @   150 ., middle label("Unidade de Consumo") option(uc)
-	RADIO   rd_pess     +142 @  100 ., last label("Pessoas") option(pess)
+	RADIO   rd_dom     15 30 80 20, first label("Domicílio") option(dom)
+	RADIO   rd_uc      100 30 110 20, middle label("Unidade de Consumo") option(uc)
+	RADIO   rd_pess    215 30 75 20, last label("Pessoas") option(pess)
 	
 GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	
-	RADIO rd_ali +15 +20 . ., label("Alimentação") onclickon(script habilita_ali) first
-	RADIO rd_des +90  @ 120 ., label("Outros Gastos") onclickon(script habilita_desp) middle
-	RADIO rd_ren +100 @ 55 ., label("Renda") onclickon(script habilita_ren) last
+	RADIO rd_ali +15 +20 . 20, label("Alimentação") onclickon(script habilita_ali) first
+	RADIO rd_des +90  @ 120 20, label("Outros Gastos") onclickon(script habilita_desp) middle
+	RADIO rd_ren +100 @ 55 20, label("Renda") onclickon(script habilita_ren) last
 	
 	TEXT        agr_ali         20 ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e...")
 	COMBOBOX	cb_alimentos    @  +20 255 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
@@ -50,7 +50,7 @@ GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	TEXT        agr_ren         @ ps_agr_ali_y 230 ., label("Rendimentos: Selecione um item e...")
 	COMBOBOX	cb_rendas       @  +20 255 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   +108 +60 150 ., label("...clique para adicioná-lo") onpush(program atualizaListas)
+	BUTTON  btn_ch   +108 +60 150 25, label("...clique para adicioná-lo") onpush(program atualizaListas)
 	
 GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 
@@ -58,10 +58,10 @@ GROUPBOX agr_ad 305 ps_agr_ad_y 230 345, label("Itens Selecionados")
 	
 GROUPBOX opc_dic 5 264 295 85, label("Bases de Dados")
 	
-	BUTTON   tx_base     ps_tx_base +35 110  ., label("Dados originais...") onpush(script dados)
-	BUTTON   tx_salvabase +130 @ 110  ., label("Salvando...") onpush(script salvando)
+	BUTTON   tx_base     ps_tx_base +35 110 25, label("Dados originais...") onpush(script dados)
+	BUTTON   tx_salvabase +130 @ 110 25, label("Salvando...") onpush(script salvando)
 
-CHECKBOX	eng     10  360 150 ., label("Labels em inglês") option(english)
+CHECKBOX	eng     10  360 150 20, label("Labels em inglês") option(english)
 
 TEXT     credit     215   360  320    ., label("PUC-Rio - Departamento de Economia") right  
 
