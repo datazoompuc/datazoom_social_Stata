@@ -4,7 +4,7 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf91 dattxt91]
 
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
@@ -17,8 +17,8 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
 * `english' indica labels das variáveis em inglês
-* `dbf' indica que o formato de dados originais usados é dbf para o ano de 1991
-
+* `dbf91' indica que o formato de dados originais usados é dbf para o ano de 1991
+* `dattxt91' indica que o formato de dados originais usados é dat ou txt para o ano de 1991
  
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
@@ -39,12 +39,12 @@ if "`all'"~="" {
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91'
 
 end
 
 program load_censo
-syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf]
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf91 dattxt91]
 
 if "`english'" != "" local lang "_en"
 
@@ -445,7 +445,7 @@ foreach ano in `years' {
 						exit
 						}
 		
-		if "`dbf'" != "" {
+		if "`dbf91'" != "" & "`dattxt91'" == "" {
 							di as text "Formato selecionado dos microdados originais do Censo 1991: DBF"
 							
 							foreach UF in `ufs' {
@@ -464,8 +464,14 @@ foreach ano in `years' {
 								di "`sufixos'"
 								foreach suf in `sufixos'{
 									display as input "Extraindo `ano' `UF' - `suf' ..."	
-									import dbase using "`original'/CD91AMOUP`suf'.DBF", clear
-									
+									capture import dbase using "`original'/CD91AMOUP`suf'.DBF", clear 
+									if _rc == 601 {
+									di as err "Erro para encontrar o arquivo original indicado. Confira se:"
+									di as err "O arquivo original se encontra no formato selecionado (nesse caso, DBF);"
+									di as err "O arquivo original está com o nome que vem quando é baixado pelo IBGE"
+									di as err "O arquivo original é acessado diretamente da pasta designada (não deve haver pastas intermediárias até o arquivo original)"
+									exit
+										}
 									egen munic = concat(UFNUM MUNICNUM)
 									destring munic, replace
 									lab var munic "municipality codes without DV (6 digits)"
@@ -895,6 +901,7 @@ foreach ano in `years' {
 													 SCVIVCON SEXO SITDESO TRUL12M UVIVIDAD UVIVIDTP UVIVSEXO ///
 													 ESPFAM NUMFAM RFACHCAF RFACHCAV RFAMILIV RFANOMIF RFAPCAPF RFAPCAPV RFAREALF
 													 
+													/* drop variaveis de pessoas e familias mantendo id_dom e pesos para expansao */ 
 											
 													/* Compatibiliza, se especificado */
 													if "`comp'" != "" {
@@ -1070,20 +1077,19 @@ foreach ano in `years' {
 													findfile amcs.dta
 													sort munic
 													merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-													} 
-													else{
+													
 													save CENSO91_`UF'_dom_comp, replace
 													}
-													
-													/* drop variaveis de pessoas e familias mantendo id_dom e pesos para expansao */
-													
+													else{
 													save CENSO91_`UF'_dom, replace
+													}
 												}
 											}
 										}
 									}
 								}
-								else{
+								else if "`dattxt91'" != "" & "`dbf91'" == "" {
+		di as text "Formato selecionado dos microdados originais do Censo 1991: DAT / TXT"
 		
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
@@ -1113,7 +1119,17 @@ foreach ano in `years' {
 					
 					capture infile using `dic', using("`original'/CD102`suf'.txt") clear
 					/* Próximas linha roda se Stata não encontrar o .txt */
-					if _rc == 601 cap infile using `dic', using("`original'/CD102`suf'.dat") clear
+					if _rc == 601 {
+									capture infile using `dic', using("`original'/CD102`suf'.dat") clear
+									if _rc == 601 {
+									di as err "Erro para encontrar o arquivo original indicado. Confira se:"
+									di as err "O arquivo original se encontra no formato selecionado (nesse caso, DAT ou TXT);"
+									di as err "O arquivo original está com o nome que vem quando é baixado pelo IBGE"
+									di as err "O arquivo original é acessado diretamente da pasta designada (não deve haver pastas intermediárias até o arquivo original)"
+									exit
+										}
+									}
+					
 
 					keep if v0099 == 1 // i.e. guarda só os domicíios
 					keep v0102 v1101 v1102 v7002
@@ -1122,7 +1138,7 @@ foreach ano in `years' {
 					sort v0102
 					save `cod91', replace
 
-					/* Primeiros base de pessoas                    */
+					/* Primeiros base de pessoas */
 					
 					tempfile dic
 
@@ -1232,7 +1248,15 @@ foreach ano in `years' {
 				}
 			}
 		}
-	}
+	 else if "`dattxt91'" != "" & "`dbf91'" != "" {
+														di as err "Apenas uma opção de formato dos arquivos originais deve ser escolhida (dbf91 ou dat/txt91)"
+														exit
+													}
+	 else if "`dattxt91'" == "" & "`dbf91'" == "" {
+														di as err "Deve ser escolhida uma opção de formato de acordo com os arquivos originais usados (dbf91 ou dat/txt91)"
+														exit
+													}
+	}	
 	else if `ano' == 2000 {
 
 	di as input "Atenção: utilize os microdados do Censo 2000 atualizados em 08/09/2017"
