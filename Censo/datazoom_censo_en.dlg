@@ -1,34 +1,38 @@
 * VERSION 1.4
 
 VERSION 10.0
-POSITION . . 540 420
+POSITION . . 545 470
 
 DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    
-   GROUPBOX caixayear 10 30 105 125, label("Year(s)")
-   CHECKBOX	chk70     +20 +20 100 ., label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
+   GROUPBOX caixayear 10 30 115 125, label("Year(s)")
+   CHECKBOX	chk70     +5 +20 100 ., label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
    CHECKBOX	chk80     @  +20 100 ., label("1980")  onclickon(script c80on) onclickoff(program c80off) option(1980)
    CHECKBOX	chk91     @  +20 100 ., label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 ., label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 ., label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
    
-   BUTTON fldata      10 +35  105     ., label("Original files...") onpush(script dados)
-   BUTTON fldict      10 +25  105     ., label("Saving...") onpush(script salvando)
+   BUTTON fldata      10 +35  115     ., label("Original files...") onpush(script dados)
+   BUTTON fldict      10 +25  115     ., label("Saving...") onpush(script salvando)
    
-  GROUPBOX caixaarq 10 +30 105 125, label("Type of Register") 
+  GROUPBOX caixaarq 10 +30 115 125, label("Type of Register") 
    RADIO	pes     +10 +20 100 ., first 	label("Individual") onclickon(script peson) option(pes) 
    RADIO	dom		+0 +20 100 ., middle 	label("Household") onclickon(script domon) option(dom) 
    RADIO	fam		+0 +20 100 ., middle 	label("Family") onclickon(script famon) option(fam) 
    RADIO	both		+0 +20 100 ., middle	label("Both merged") onclickon(script bothon) option(both) 
    RADIO	all		+0 +20 100 ., last 		label("All merged") onclickon(script allon) option(all) 
  
-   GROUPBOX caixaCompatibility 10 +30 105 45, label("Compatibility")
+   GROUPBOX caixaCompatibility 10 +30 115 45, label("Compatibility")
       CHECKBOX chkcomp    +10  +20  430   ., label("Activate option") option(comp)
 
-   TEXT instrUF       140    5  350   ., label("Select states and/or geographical regions:")
-	  CHECKBOX chkregN   130   30  175 126, label("North") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
+   GROUPBOX caixaFormat 10 +30 115 65, label("Format 1991 data")
+	  RADIO dbf91    +10  +20  100   ., first label("DBF") option(dbf91)  
+	  RADIO dattxt91 +0 	+20  100   ., last label("DAT/TXT") option(dattxt91)  
+	  
+   TEXT instrUF       145    5  350   ., label("Select states and/or geographical regions:")
+	  CHECKBOX chkregN   140   30  175 126, label("North") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
 	  CHECKBOX chkAC   +5  +22  200   ., label("Acre") onclickoff(script nemtudoN) option(AC)
       CHECKBOX chkAP    @  +25  200   ., label("Amapá") onclickoff(script nemtudoN) option(AP)
       CHECKBOX chkAM    @  +25  200   ., label("Amazonas") onclickoff(script nemtudoN) option(AM)
@@ -37,7 +41,7 @@ BEGIN
       CHECKBOX chkRR    @  +25  200   ., label("Roraima") onclickoff(script nemtudoN) option(RR)
       CHECKBOX chkTO  -85  +25  200   ., label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
 
-   CHECKBOX chkregNE  130  +45  175 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
+   CHECKBOX chkregNE  140  +45  175 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
       CHECKBOX chkBA    @  +25  200   ., label("Bahia") onclickoff(script nemtudoNE) option(BA)
       CHECKBOX chkCE    @  +25  200   ., label("Ceará") onclickoff(script nemtudoNE) option(CE)
@@ -49,27 +53,27 @@ BEGIN
       CHECKBOX chkPI    @  +25  200   ., label("Piauí") onclickoff(script nemtudoNE) option(PI)
       CHECKBOX chkSE    @  +25  200   ., label("Sergipe") onclickoff(script nemtudoNE) option(SE)
 
-   CHECKBOX chkregSE  325   30  205  90, label("Southeast") onclickon(script marcatudoSE) onclickoff(script desmarcatudoSE) groupbox
+   CHECKBOX chkregSE  330   30  205  90, label("Southeast") onclickon(script marcatudoSE) onclickoff(script desmarcatudoSE) groupbox
       CHECKBOX chkES   +5  +18  200   ., label("Espírito Santo") onclickoff(script nemtudoSE) option(ES)
       CHECKBOX chkMG    @  +23  200   ., label("Minas Gerais") onclickoff(script nemtudoSE) option(MG)
       CHECKBOX chkRJ  +100  -23  200   ., label("Rio de Janeiro") onclickoff(script nemtudoSE) option(RJ)
       CHECKBOX chkSP    @  +23  200   ., label("São Paulo") onclickoff(script nemtudoSE) option(SP)
       CHECKBOX chkGB  -100  +23  200   ., label("Guanabara (1970)") onclickoff(script nemtudoSE) option(GB)
 
-   CHECKBOX chkregS   325  +40  205  90,label("South") onclickon(script marcatudoS) onclickoff(script desmarcatudoS) groupbox
+   CHECKBOX chkregS   330  +40  205  90,label("South") onclickon(script marcatudoS) onclickoff(script desmarcatudoS) groupbox
       CHECKBOX chkPR   +5  +18  200   ., label("Paraná") onclickoff(script nemtudoS) option(PR)
       CHECKBOX chkSC  @   +22 200   ., label("Santa Catarina") onclickoff(script nemtudoS) option(SC)
       CHECKBOX chkRS  @  +22  200   ., label("Rio Grande do Sul") onclickoff(script nemtudoS) option(RS)
 
-   CHECKBOX chkregCO  325  +40  205 119, label("Center-West") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
+   CHECKBOX chkregCO  330  +40  205 119, label("Center-West") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
       CHECKBOX chkGO   +5  +18  200   ., label("Goiás") onclickoff(script nemtudoCO) option(GO)
       CHECKBOX chkMT    @  +23  200   ., label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
       CHECKBOX chkDF    @  +23  200   ., label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
       CHECKBOX chkMS    @  +23  200   ., label("Mato G. do Sul (1980 to 2010)") onclickoff(script nemtudoCO) option(MS)
 
-	CHECKBOX	eng     135  365 200 ., label("Labels in English") option(english)
+	CHECKBOX	eng     145  365 200 ., label("Labels in English") option(english)
 
-	TEXT     credit     20   395  480    ., label("By PUC-Rio - Department of Economics") right  
+	TEXT     credit     225   435  250    ., label("By PUC-Rio - Department of Economics") right  
 
 END
 
@@ -80,6 +84,8 @@ BEGIN
    main.chkTO.disable
    main.fam.disable
    main.all.disable
+   main.dbf91.disable
+   main.dattxt91.disable
 END
 
 SCRIPT c70on
@@ -103,6 +109,8 @@ SCRIPT c91on
 BEGIN	
 	main.chkMS.enable
 	main.chkTO.enable
+	main.dbf91.enable
+	main.dattxt91.enable
 END
 
 SCRIPT c00on
@@ -132,6 +140,8 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
+	call main.dbf91.disable
+	call main.dattxt91.disable
 END	
 
 PROGRAM	c00off
@@ -315,6 +325,7 @@ BEGIN
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
 	  option main.eng
+	  option radio(dbf91 dattxt91)
 	  
    endoptions
    stata

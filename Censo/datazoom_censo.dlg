@@ -1,7 +1,7 @@
 * VERSION 1.4
 
 VERSION 10.0
-POSITION . . 545 420
+POSITION . . 545 470
 
 DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
@@ -24,10 +24,13 @@ BEGIN
    RADIO	both		+0 +20 100 ., middle	label("Ambos merged") onclickon(script bothon) option(both) 
    RADIO	all		+0 +20 100 ., last 		label("Todos merged") onclickon(script allon) option(all) 
  
- 
    GROUPBOX caixaCompatibility 10 +30 115 45, label("Compatibilidade")
       CHECKBOX chkcomp    +10  +20  430   ., label("Opção ativada") option(comp)
 
+   GROUPBOX caixaFormat 10 +30 115 65, label("Formato 1991")
+	  RADIO dbf91    +10  +20  100   ., first label("DBF") option(dbf91)  
+	  RADIO dattxt91 +0 	+20  100   ., last label("DAT/TXT") option(dattxt91)
+	  
    TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
 	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
 	  CHECKBOX chkAC   +5  +22  200   ., label("Acre") onclickoff(script nemtudoN) option(AC)
@@ -70,7 +73,7 @@ BEGIN
 
 	CHECKBOX	eng     145  365 200 ., label("Labels em inglês") option(english)
 
-	TEXT     credit     30   395  480    ., label("PUC-Rio - Departamento de Economia") right  
+	TEXT     credit     225   435  300    ., label("PUC-Rio - Departamento de Economia") right
 
 END
 
@@ -81,6 +84,8 @@ BEGIN
    main.chkTO.disable
    main.fam.disable
    main.all.disable
+   main.dbf91.disable
+   main.dattxt91.disable
 END
 
 SCRIPT c70on
@@ -104,6 +109,8 @@ SCRIPT c91on
 BEGIN	
 	main.chkMS.enable
 	main.chkTO.enable
+	main.dbf91.enable
+	main.dattxt91.enable
 END
 
 SCRIPT c00on
@@ -133,6 +140,8 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
+	call main.dbf91.disable
+	call main.dattxt91.disable
 END	
 
 PROGRAM	c00off
@@ -316,6 +325,7 @@ BEGIN
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
 	  option main.eng
+	  option radio(dbf91 dattxt91)
 	  
    endoptions
    stata
