@@ -19,6 +19,140 @@ Para utilizar o pacote do Data Zoom no Stata, você deve baixar os arquivos de m
 
 Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para compra. Nesta mudança, o formato em que os dados são disponibilizados também mudou. O Data Zoom terá que ajustar seus códigos para esse novo formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para os dados no formato antigo. Atualizaremos este documento quando a versão do pacote flexível ao novo formato estiver disponível.
 
+
+<details><summary style="font-size:1.5em;">Construção do id_dom para leitura do Censo 1991 DBF</summary>
+
+<h3> Visão geral </h3>
+
+Esta seção descreve o método utilizado no `datazoom_censo` para identificar
+domicílios (`id_dom`) a partir dos microdados do Censo 1991 lidos em formato
+DBF. O identificador de domicílio não vem pronto nos arquivos originais em
+DBF (diferente de outras rotinas do Censo que usam identificadores nativos),
+então ele precisa ser reconstruído a partir da estrutura sequencial dos
+registros.
+
+> **Pendente:** esta seção ainda não descreve a etapa de leitura do DBF em si
+> (import, tratamento de tipos, concatenação de UFs etc.). Assim que você
+> enviar o trecho de código correspondente, eu incluo aqui.
+
+<h3> Pressupostos do método </h3>
+
+O método parte de duas premissas sobre a estrutura dos dados:
+
+1. **Ordem sequencial**: os registros de pessoas de um mesmo domicílio
+   aparecem em sequência no arquivo (não há intercalação de domicílios
+   diferentes).
+2. **Domicílio muda quando qualquer variável domiciliar muda** de uma linha
+   para a linha seguinte — ou seja, se duas linhas consecutivas têm exatamente
+   os mesmos valores para todas as variáveis domiciliares, elas pertencem ao
+   mesmo domicílio.
+
+A partir disso, um novo domicílio é identificado quando **qualquer uma** das
+seguintes condições é verdadeira, em relação à observação anterior (`_n-1`):
+
+- muda o município (`MUNICNUM`);
+- muda a espécie do domicílio (`ESPECIE`);
+- o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um novo
+  domicílio independentemente das demais variáveis, já que um morador sozinho
+  não tem como ser comparado de forma confiável a um domicílio anterior;
+- muda qualquer uma das variáveis domiciliares listadas abaixo.
+
+<h3> Código (Stata) </h3>
+
+```stata
+* Pressupõe que a base está ordenada de forma que registros do mesmo
+* domicílio fiquem em sequência (ex.: sort por UF, setor, domicílio, ordem)
+
+gen long id_dom = sum( ///
+      (MUNICNUM != MUNICNUM[_n-1])  | ///  muda o município
+      (ESPECIE  != ESPECIE[_n-1])   | ///  muda a espécie do domicílio
+      (PARENDOM == 20)              | ///  indivíduo mora sozinho
+      (RDOMICIV != RDOMICIV[_n-1])  | (ALUGUEL  != ALUGUEL[_n-1])  | ///
+      (PESO     != PESO[_n-1])      | (DEMODORM != DEMODORM[_n-1]) | ///
+      (COMBCOZI != COMBCOZI[_n-1])  | (AGUA     != AGUA[_n-1])     | ///
+      (ALUGUEFX != ALUGUEFX[_n-1])  | (ASPIRPO  != ASPIRPO[_n-1])  | ///
+      (AUTPART  != AUTPART[_n-1])   | (AUTTRAB  != AUTTRAB[_n-1])  | ///
+      (BANHEIRO != BANHEIRO[_n-1])  | (CD107    != CD107[_n-1])    | ///
+      (COBERTUR != COBERTUR[_n-1])  | (COMODOR  != COMODOR[_n-1])  | ///
+      (COMODOS  != COMODOS[_n-1])   | (CONDOCUP != CONDOCUP[_n-1]) | ///
+      (DEMOCOFX != DEMOCOFX[_n-1])  | (DEMOCOMO != DEMOCOMO[_n-1]) | ///
+      (DEMODOFX != DEMODOFX[_n-1])  | (FILTRO   != FILTRO[_n-1])   | ///
+      (FREEZER  != FREEZER[_n-1])   | (GELADEIR != GELADEIR[_n-1]) | ///
+      (ILUMINA  != ILUMINA[_n-1])   | (LIXO     != LIXO[_n-1])     | ///
+      (LOCALIZA != LOCALIZA[_n-1])  | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+      (PAREDES  != PAREDES[_n-1])   | (RADIO    != RADIO[_n-1])    | ///
+      (RDONOMIF != RDONOMIF[_n-1])  | (RDOREALF != RDOREALF[_n-1]) | ///
+      (SANESCOA != SANESCOA[_n-1])  | (SANUSO   != SANUSO[_n-1])   | ///
+      (TELEFONE != TELEFONE[_n-1])  | (TVCORES  != TVCORES[_n-1])  | ///
+      (TVPRETO  != TVPRETO[_n-1]) )
+```
+
+<h3> Como funciona o `sum()` </h3>
+
+`sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é uma
+expressão binária (0/1). Sempre que **pelo menos uma** condição é verdadeira
+na linha `_n`, o resultado da soma booleana daquela linha é 1, o que
+incrementa o acumulado — criando assim um novo valor de `id_dom`. Quando
+nenhuma condição é verdadeira, o acumulado permanece igual ao da linha
+anterior, e a observação é atribuída ao mesmo domicílio.
+
+Na primeira observação da base (`_n-1` inexistente), o Stata trata os
+componentes `X[_n-1]` como *missing*, e qualquer comparação com *missing*
+retorna verdadeiro — o que garante que a primeira linha sempre inicia um novo
+domicílio (`id_dom == 1`).
+
+<h3> Variáveis domiciliares consideradas </h3>
+
+As variáveis abaixo foram incluídas por serem características do domicílio
+(não da pessoa), portanto esperadas como constantes entre moradores do mesmo
+domicílio. Descrições curtas — **vale conferir o dicionário de variáveis do
+IBGE do Censo 1991 para a definição oficial de cada uma**, já que alguns
+nomes podem ter mudado de significado entre versões do dicionário:
+
+| Variável | Uso no critério |
+|---|---|
+| `MUNICNUM` | código do município |
+| `ESPECIE` | espécie do domicílio |
+| `PARENDOM` | relação com a pessoa de referência (usada para detectar morador sozinho, código 20) |
+| `RDOMICIV`, `RDONOMIF`, `RDOREALF` | rendimento domiciliar |
+| `ALUGUEL`, `ALUGUEFX` | aluguel (valor e faixa) |
+| `PESO` | peso amostral |
+| `DEMODORM`, `DEMOCOFX`, `DEMOCOMO`, `DEMODOFX` | dormitórios/cômodos (demografia do domicílio) |
+| `COMBCOZI` | combustível usado para cozinhar |
+| `AGUA` | abastecimento de água |
+| `ASPIRPO`, `AUTPART`, `AUTTRAB`, `FILTRO`, `FREEZER`, `GELADEIR`, `MAQLAVAR`, `RADIO`, `TELEFONE`, `TVCORES`, `TVPRETO` | posse de bens duráveis do domicílio |
+| `BANHEIRO`, `SANESCOA`, `SANUSO` | instalação sanitária |
+| `CD107` | característica domiciliar (verificar dicionário) |
+| `COBERTUR`, `PAREDES` | material de construção (cobertura/paredes) |
+| `COMODOR`, `COMODOS` | número de cômodos |
+| `CONDOCUP` | condição de ocupação do domicílio |
+| `ILUMINA` | iluminação |
+| `LIXO` | destino do lixo |
+| `LOCALIZA` | localização (urbano/rural) |
+
+<h3> Limitações e pontos de atenção </h3>
+
+- O método depende de a base estar **corretamente ordenada** antes de rodar
+  o `sum()`. Qualquer erro de ordenação quebra a lógica sequencial e gera
+  domicílios espúrios.
+- Se duas famílias diferentes, por coincidência, tiverem valores idênticos em
+  **todas** as variáveis domiciliares listadas e estiverem em sequência no
+  arquivo, o método as tratará como um único domicílio (falso negativo).
+- A regra de `PARENDOM == 20` força um novo domicílio a cada morador sozinho,
+  mesmo que as variáveis domiciliares coincidam com a linha anterior — isso é
+  proposital, mas vale documentar como uma exceção à regra geral.
+- O método não verifica se há mudança de setor censitário ou de outros
+  identificadores geográficos além do município; se houver granularidade
+  geográfica menor relevante, considerar incluir esse campo no critério.
+
+<h3> Próximos passos </h3>
+
+- Adicionar seção sobre a leitura do DBF (import, tipos, tratamento de UFs).
+- Adicionar exemplo com um recorte de dados antes/depois do `id_dom`.
+
+</details>
+
+
 ### Arquivos de apoio
 
   - [Microdados e documentação referente a 2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
