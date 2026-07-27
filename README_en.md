@@ -1,4 +1,8 @@
 
+<style>
+summary > p { display: inline; margin: 0; }
+</style>
+
 Para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
 [![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
@@ -86,11 +90,9 @@ individual characteristics. Since 2000, there is one file for each type
 of record.
 
 Our Census program applies to the 1970, 1980, 1991, 2000 and 2010 rounds
-of the Census. The 2000 and 2010 microdata and documentation are
-available for download from the IBGE website on [this
+of the Census. The microdata and documentation are available for
+download from the IBGE website on [this
 link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-2020-censo4.html?=&t=microdados).
-For information on how to acquire other rounds, [click
-here](https://loja.ibge.gov.br/catalogsearch/result/?q=censo).
 
 Because of methodological changes made by IBGE over the years, the same
 information may not be available every year and/or may not have been
@@ -111,6 +113,167 @@ the following file
 link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
 and add it to the same folder where the microdata is located on your
 computer.
+
+There have recently been changes in the availability of microdata from
+the 1970, 1980, and 1991 censuses. Previously, they were available only
+for purchase, but they are now available for free on the IBGE website.
+In addition, this process involved significant changes for the 1991
+Census, such as the switch to the .DBF format and the omission of the
+household identifier. As a result, Data Zoom had to adjust its code,
+primarily to create a new household identifier for the 1991 Census.
+
+It is still possible to process the 1991 Census microdata for those who
+have the older data (in .TXT or .DAT format), but it is now also
+possible to use the data currently made available by the IBGE on its
+official website (in .DBF format).
+
+Below are the main changes for reading the 1991 Census data and the
+documentation for the new household identifier created by Data Zoom.
+
+<details>
+
+<summary style="font-size:1.5em">
+
+Reading the 1991 Census DBF and Creating the id_dom
+</summary>
+
+<h3>
+
+Overview and Variables
+</h3>
+
+Compared to the older version (in .DAT or .TXT format), the DBF data no
+longer includes the following variables:
+
+- v0102 Questionnaire ID (id_dom)
+- v3041 Men in the family
+- v3042 Women in the family
+- v0111 Number of men in the household
+- v0112 Number of women in the household
+
+Thus, the household identifier is not included in the original .DBF
+files and must be reconstructed.
+
+The section below describes the method used in `datazoom_censo` to
+identify households (`id_dom`) from the 1991 Census microdata read in
+.DBF format.
+
+<h3>
+
+Assumptions of the Method
+</h3>
+
+The method is based on three assumptions regarding the data structure:
+
+1.  **Sequential Order**: Records for individuals from the same
+    household appear in sequence in the file (there is no interleaving
+    of records from different households).
+
+2.  **A household changes when any household variable changes:** Records
+    for the same household must have identical values for household
+    variables. That is, if two consecutive rows belong to the same
+    household, they must have exactly the same values for all household
+    variables.
+
+3.  **Consecutive observations with the same household data belong to
+    the same household:** There are 37 household variables, some of
+    which are continuous, such as rent and nominal income; therefore, it
+    is extremely unlikely that two consecutive households would have
+    exactly the same data for each of the household variables, unless
+    they belong to the same household.
+
+Based on this, a new household is identified when **any** of the
+following conditions is true, relative to the previous observation
+(`_n-1`):
+
+- the municipality changes (`MUNICNUM`);
+- the household type changes (`ESPECIE`);
+- the individual lives alone (`PARENDOM == 20`) — in this case, a new
+  household is forced regardless of the other variables;
+- any of the household variables listed below changes.
+
+<h3>
+
+Code (Stata)
+</h3>
+
+``` stata
+
+gen long id_dom = sum( ///
+      (MUNICNUM != MUNICNUM[_n-1])  | /// municipality changes
+      (ESPECIE  != ESPECIE[_n-1])   | /// household type changes
+      (PARENDOM == 20)              | /// individual lives alone
+      (RDOMICIV != RDOMICIV[_n-1])  | (ALUGUEL  != ALUGUEL[_n-1])  | ///
+      (PESO     != PESO[_n-1])      | (DEMODORM != DEMODORM[_n-1]) | ///
+      (COMBCOZI != COMBCOZI[_n-1])  | (AGUA     != AGUA[_n-1])     | ///
+      (ALUGUEFX != ALUGUEFX[_n-1])  | (ASPIRPO  != ASPIRPO[_n-1])  | ///
+      (AUTPART  != AUTPART[_n-1])   | (AUTTRAB  != AUTTRAB[_n-1])  | ///
+      (BANHEIRO != BANHEIRO[_n-1])  | (CD107    != CD107[_n-1])    | ///
+      (COBERTUR != COBERTUR[_n-1])  | (COMODOR  != COMODOR[_n-1])  | ///
+      (COMODOS  != COMODOS[_n-1])   | (CONDOCUP != CONDOCUP[_n-1]) | ///
+      (DEMOCOFX != DEMOCOFX[_n-1])  | (DEMOCOMO != DEMOCOMO[_n-1]) | ///
+      (DEMODOFX != DEMODOFX[_n-1])  | (FILTRO   != FILTRO[_n-1])   | ///
+      (FREEZER  != FREEZER[_n-1])   | (GELADEIR != GELADEIR[_n-1]) | ///
+      (ILUMINA  != ILUMINA[_n-1])   | (LIXO     != LIXO[_n-1])     | ///
+      (LOCALIZA != LOCALIZA[_n-1])  | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+      (PAREDES  != PAREDES[_n-1])   | (RADIO    != RADIO[_n-1])    | ///
+      (RDONOMIF != RDONOMIF[_n-1])  | (RDOREALF != RDOREALF[_n-1]) | ///
+      (SANESCOA != SANESCOA[_n-1])  | (SANUSO   != SANUSO[_n-1])   | ///
+      (TELEFONE != TELEFONE[_n-1])  | (TVCORES  != TVCORES[_n-1])  | ///
+      (TVPRETO  != TVPRETO[_n-1]) )
+```
+
+More specific information about each of these variables can be found in
+the [dictionary provided by
+IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/Censo/dicionario_1991_dbf_en.xlsx).
+
+<h3>
+
+How `sum()` works
+</h3>
+
+`sum()` in Stata is a cumulative sum. Each condition within parentheses
+is a binary expression (0/1). Whenever **at least one** condition is
+true in row `_n`, the result of the Boolean sum for that row is 1, which
+increases the cumulative total—thus creating a new value for `id_dom`.
+When no conditions are true, the cumulative total remains the same as in
+the previous row, and the observation is assigned to the same household.
+
+In the first observation of the dataset (`_n-1` does not exist), Stata
+treats the components `X[_n-1]` as *missing*, and any comparison with
+*missing* returns true—which ensures that the first row always starts a
+new household (`id_dom == 1`).
+
+<h3>
+
+Comparison of Indicators using the constructed id_dom and the original
+</h3>
+
+Number of households in each state:
+
+Average per capita income by state:
+
+<h3>
+
+Limitations and points to note
+</h3>
+
+- The method relies on the IBGE dataset being **correctly sorted**
+  before running the `sum()` function. A break in the sequential logic
+  can generate spurious households.
+
+- If two different households in the same municipality, by coincidence,
+  have identical values for **all** household variables, the residents
+  do not live alone, and they appear consecutively in the file, the
+  program will treat them as a single household (false negative).
+
+- If there is an error in the data such that people from the same
+  household have different household information, this error will result
+  in one more household than there should be (false positive).
+
+</details>
+
+<br>
 
 ### Supporting files
 
@@ -753,7 +916,7 @@ at the PUC-Rio Department of Economics.
 To cite package `datazoom_social`, use:
 
 > Data Zoom (2023). Data Zoom: Simplifying Access To Brazilian
-> Microdata.\
+> Microdata.  
 > <https://www.econ.puc-rio.br/datazoom/english/index.html>
 
 Or in BibTeX format:
