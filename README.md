@@ -169,12 +169,12 @@ O método parte de três premissas sobre a estrutura dos dados:
     pertencem ao mesmo domicílio, elas devem ter exatamente os mesmos
     valores para todas as variáveis domiciliares.
 
-3.  **Observações consecutivas que apresentam exatamente os mesmos dados
-    domiciliares são do mesmo domicílio:** Existem 37 variáveis
-    domiciliares, sendo algumas delas contínuas, como aluguel e
-    rendimento nominal, dessa forma, é extremamente improvável que dois
-    domicílios consecutivos apresentem exatamente os mesmos dados para
-    cada uma das variáveis domiciliares.
+3.  **Observações consecutivas com os mesmos dados domiciliares são do
+    mesmo domicílio:** Existem 37 variáveis domiciliares, sendo algumas
+    delas contínuas, como aluguel e rendimento nominal, dessa forma, é
+    extremamente improvável que dois domicílios consecutivos apresentem
+    exatamente os mesmos dados para cada uma das variáveis domiciliares,
+    a menos que sejam do mesmo domicílio.
 
 A partir disso, um novo domicílio é identificado quando **qualquer uma**
 das seguintes condições é verdadeira, em relação à observação anterior
@@ -245,19 +245,21 @@ Comparação de Indicadores usando o id_dom construído e o original
 
 Quantidade de domicílios em cada UF:
 
+Média de Renda per capita por UF:
+
 <h3>
 
 Limitações e pontos de atenção
 </h3>
 
-- O método depende de a base estar **corretamente ordenada** antes de
-  rodar o `sum()`. A quebra da lógica sequencial pode gerar domicílios
-  espúrios.
+- O método depende de a base do IBGE estar **corretamente ordenada**
+  antes de rodar o `sum()`. A quebra da lógica sequencial pode gerar
+  domicílios espúrios.
 
-- Se duas famílias diferentes, por coincidência, tiverem valores
-  idênticos em **todas** as variáveis domiciliares listadas e estiverem
-  em sequência no arquivo, o método as tratará como um único domicílio
-  (falso negativo).
+- Se dois domicílios diferentes em um mesmo município, por coincidência,
+  tiverem valores idênticos em **todas** as variáveis domiciliares, os
+  moradores não morarem sozinhos, e estiverem em sequência no arquivo, o
+  programa os tratará como um único domicílio (falso negativo).
 
 - Se houver um erro nos dados de forma que pessoas de um mesmo domicílio
   apresentem informações domiciliares distintas, esse erro gerará um
