@@ -106,51 +106,75 @@ link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico
 Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com
 dados de 14 municípios que sofreram reponderação posteriormente.
 
-Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de
-1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para
-compra. Nesta mudança, o formato em que os dados são disponibilizados
-também mudou. O Data Zoom terá que ajustar seus códigos para esse novo
-formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para
-os dados no formato antigo. Atualizaremos este documento quando a versão
-do pacote flexível ao novo formato estiver disponível.
+Recentemente ocorreram mudanças na disponibilização dos microdados dos
+Censos de 1970, 1980 e 1991. Antes eles estavam disponíveis apenas
+mediante compra, mas agora estão disponíveis gratuitamente no site do
+IBGE. Além disso, neste processo ocorreram mudanças importantes para o
+Censo de 1991, como a mudança para o formato .DBF e a omissão do
+identicador de domicílio. Por isso, o Data Zoom precisou ajustar seus
+códigos, principalmente para construir um novo identificador de
+domicílio para o Censo de 1991.
+
+Ainda é possível fazer a leitura dos microdados do Censo de 1991 para
+quem possui os dados antigos (em .TXT ou .DAT), mas agora há também a
+possibilidade de usar os dados atualmente disponibilizados pelo IBGE no
+site oficial (em .DBF).
+
+Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a
+documentação do novo identificador de domicílios construído pelo Data
+Zoom.
 
 <details>
 
 <summary style="font-size:1.5em">
 
-Construção do id_dom para leitura do Censo 1991 DBF
+Leitura do Censo 1991 DBF e Construção do id_dom
 </summary>
 
 <h3>
 
-Visão geral
+Visão Geral e Variáveis
 </h3>
 
-Esta seção descreve o método utilizado no `datazoom_censo` para
-identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
-lidos em formato DBF. O identificador de domicílio não vem pronto nos
-arquivos originais em DBF (diferente de outras rotinas do Censo que usam
-identificadores nativos), então ele precisa ser reconstruído a partir da
-estrutura sequencial dos registros.
+Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não
+disponibilizam mais as seguintes variáveis:
 
-> **Pendente:** esta seção ainda não descreve a etapa de leitura do DBF
-> em si (import, tratamento de tipos, concatenação de UFs etc.). Assim
-> que você enviar o trecho de código correspondente, eu incluo aqui.
+- v0102 Identificação do questionário (id_dom)
+- v3041 Homens na familia
+- v3042 Mulheres na familia
+- v0111 Número de homens no domicílio
+- v0112 Número de mulheres no domicílio
+
+Assim, o identificador de domicílio não vem pronto nos arquivos
+originais em .DBF, e ele precisa ser reconstruído.
+
+A seção abaixo descreve o método utilizado no `datazoom_censo` para
+identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
+lidos em formato .DBF.
 
 <h3>
 
 Pressupostos do método
 </h3>
 
-O método parte de duas premissas sobre a estrutura dos dados:
+O método parte de três premissas sobre a estrutura dos dados:
 
-1.  **Ordem sequencial**: os registros de pessoas de um mesmo domicílio
+1.  **Ordem sequencial**: Os registros de pessoas de um mesmo domicílio
     aparecem em sequência no arquivo (não há intercalação de domicílios
     diferentes).
-2.  **Domicílio muda quando qualquer variável domiciliar muda** de uma
-    linha para a linha seguinte — ou seja, se duas linhas consecutivas
-    têm exatamente os mesmos valores para todas as variáveis
-    domiciliares, elas pertencem ao mesmo domicílio.
+
+2.  **Domicílio muda quando qualquer variável domiciliar muda:** Os
+    registros de um mesmo domicílio devem apresentar os mesmos registros
+    em variáveis domiciliares. Ou seja, se duas linhas consecutivas
+    pertencem ao mesmo domicílio, elas devem ter exatamente os mesmos
+    valores para todas as variáveis domiciliares.
+
+3.  **Observações consecutivas que apresentam exatamente os mesmos dados
+    domiciliares são do mesmo domicílio:** Existem 37 variáveis
+    domiciliares, sendo algumas delas contínuas, como aluguel e
+    rendimento nominal, dessa forma, é extremamente improvável que dois
+    domicílios consecutivos apresentem exatamente os mesmos dados para
+    cada uma das variáveis domiciliares.
 
 A partir disso, um novo domicílio é identificado quando **qualquer uma**
 das seguintes condições é verdadeira, em relação à observação anterior
@@ -159,9 +183,7 @@ das seguintes condições é verdadeira, em relação à observação anterior
 - muda o município (`MUNICNUM`);
 - muda a espécie do domicílio (`ESPECIE`);
 - o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um
-  novo domicílio independentemente das demais variáveis, já que um
-  morador sozinho não tem como ser comparado de forma confiável a um
-  domicílio anterior;
+  novo domicílio independentemente das demais variáveis;
 - muda qualquer uma das variáveis domiciliares listadas abaixo.
 
 <h3>
@@ -170,8 +192,6 @@ Código (Stata)
 </h3>
 
 ``` stata
-* Pressupõe que a base está ordenada de forma que registros do mesmo
-* domicílio fiquem em sequência (ex.: sort por UF, setor, domicílio, ordem)
 
 gen long id_dom = sum( ///
       (MUNICNUM != MUNICNUM[_n-1])  | ///  muda o município
@@ -197,6 +217,9 @@ gen long id_dom = sum( ///
       (TVPRETO  != TVPRETO[_n-1]) )
 ```
 
+Informações mais espcíficas sobre cada uma dessas variáveis podem ser
+encontradas no dicionário disponibilizado pelo IBGE.
+
 <h3>
 
 Como funciona o `sum()`
@@ -217,36 +240,10 @@ inicia um novo domicílio (`id_dom == 1`).
 
 <h3>
 
-Variáveis domiciliares consideradas
+Comparação de Indicadores usando o id_dom construído e o original
 </h3>
 
-As variáveis abaixo foram incluídas por serem características do
-domicílio (não da pessoa), portanto esperadas como constantes entre
-moradores do mesmo domicílio. Descrições curtas — **vale conferir o
-dicionário de variáveis do IBGE do Censo 1991 para a definição oficial
-de cada uma**, já que alguns nomes podem ter mudado de significado entre
-versões do dicionário:
-
-| Variável | Uso no critério |
-|----|----|
-| `MUNICNUM` | código do município |
-| `ESPECIE` | espécie do domicílio |
-| `PARENDOM` | relação com a pessoa de referência (usada para detectar morador sozinho, código 20) |
-| `RDOMICIV`, `RDONOMIF`, `RDOREALF` | rendimento domiciliar |
-| `ALUGUEL`, `ALUGUEFX` | aluguel (valor e faixa) |
-| `PESO` | peso amostral |
-| `DEMODORM`, `DEMOCOFX`, `DEMOCOMO`, `DEMODOFX` | dormitórios/cômodos (demografia do domicílio) |
-| `COMBCOZI` | combustível usado para cozinhar |
-| `AGUA` | abastecimento de água |
-| `ASPIRPO`, `AUTPART`, `AUTTRAB`, `FILTRO`, `FREEZER`, `GELADEIR`, `MAQLAVAR`, `RADIO`, `TELEFONE`, `TVCORES`, `TVPRETO` | posse de bens duráveis do domicílio |
-| `BANHEIRO`, `SANESCOA`, `SANUSO` | instalação sanitária |
-| `CD107` | característica domiciliar (verificar dicionário) |
-| `COBERTUR`, `PAREDES` | material de construção (cobertura/paredes) |
-| `COMODOR`, `COMODOS` | número de cômodos |
-| `CONDOCUP` | condição de ocupação do domicílio |
-| `ILUMINA` | iluminação |
-| `LIXO` | destino do lixo |
-| `LOCALIZA` | localização (urbano/rural) |
+Quantidade de domicílios em cada UF:
 
 <h3>
 
@@ -254,30 +251,21 @@ Limitações e pontos de atenção
 </h3>
 
 - O método depende de a base estar **corretamente ordenada** antes de
-  rodar o `sum()`. Qualquer erro de ordenação quebra a lógica sequencial
-  e gera domicílios espúrios.
+  rodar o `sum()`. A quebra da lógica sequencial pode gerar domicílios
+  espúrios.
+
 - Se duas famílias diferentes, por coincidência, tiverem valores
   idênticos em **todas** as variáveis domiciliares listadas e estiverem
   em sequência no arquivo, o método as tratará como um único domicílio
   (falso negativo).
-- A regra de `PARENDOM == 20` força um novo domicílio a cada morador
-  sozinho, mesmo que as variáveis domiciliares coincidam com a linha
-  anterior — isso é proposital, mas vale documentar como uma exceção à
-  regra geral.
-- O método não verifica se há mudança de setor censitário ou de outros
-  identificadores geográficos além do município; se houver granularidade
-  geográfica menor relevante, considerar incluir esse campo no critério.
 
-<h3>
-
-Próximos passos
-</h3>
-
-- Adicionar seção sobre a leitura do DBF (import, tipos, tratamento de
-  UFs).
-- Adicionar exemplo com um recorte de dados antes/depois do `id_dom`.
+- Se houver um erro nos dados de forma que pessoas de um mesmo domicílio
+  apresentem informações domiciliares distintas, esse erro gerará um
+  domicílio a mais do que deveria (falso positivo).
 
 </details>
+
+<br>
 
 ### Arquivos de apoio
 
