@@ -218,7 +218,8 @@ gen long id_dom = sum( ///
 ```
 
 Informações mais espcíficas sobre cada uma dessas variáveis podem ser
-encontradas no dicionário disponibilizado pelo IBGE.
+encontradas no [dicionário disponibilizado pelo
+IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
 
 <h3>
 
