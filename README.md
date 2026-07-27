@@ -126,9 +126,9 @@ Zoom.
 
 <details>
 
-<summary style="font-size:1.5em">
+<summary>
 
-Leitura do Censo 1991 DBF e Construção do id_dom
+<strong>Leitura do Censo 1991 DBF e Construção do id_dom</strong>
 </summary>
 
 <h3>

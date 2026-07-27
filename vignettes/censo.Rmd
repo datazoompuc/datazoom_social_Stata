@@ -23,7 +23,8 @@ Ainda é possível fazer a leitura dos microdados do Censo de 1991 para quem pos
 
 Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a documentação do novo identificador de domicílios construído pelo Data Zoom.
 
-<details><summary style="font-size:1.5em">Leitura do Censo 1991 DBF e Construção do id_dom</summary>
+<details><summary><strong>Leitura do Censo 1991 DBF e Construção do id_dom</strong></summary>
+
 
 <h3> Visão Geral e Variáveis </h3>
 
