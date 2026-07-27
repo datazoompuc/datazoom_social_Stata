@@ -20,7 +20,7 @@ Para utilizar o pacote do Data Zoom no Stata, você deve baixar os arquivos de m
 Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para compra. Nesta mudança, o formato em que os dados são disponibilizados também mudou. O Data Zoom terá que ajustar seus códigos para esse novo formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para os dados no formato antigo. Atualizaremos este documento quando a versão do pacote flexível ao novo formato estiver disponível.
 
 
-<details><summary style="font-size:1.5em;">Construção do id_dom para leitura do Censo 1991 DBF</summary>
+<details><summary style="font-size:1.5em">Construção do id_dom para leitura do Censo 1991 DBF</summary>
 
 <h3> Visão geral </h3>
 

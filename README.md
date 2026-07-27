@@ -1,4 +1,8 @@
 
+<style>
+summary > p { display: inline; margin: 0; }
+</style>
+
 For the English version, click on the Shield below:
 <!-- badges: start -->
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README_en.md)
@@ -112,7 +116,7 @@ do pacote flexível ao novo formato estiver disponível.
 
 <details>
 
-<summary style="font-size:1.5em;">
+<summary style="font-size:1.5em">
 
 Construção do id_dom para leitura do Censo 1991 DBF
 </summary>
