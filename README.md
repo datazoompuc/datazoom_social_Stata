@@ -1,8 +1,4 @@
 
-<style>
-summary > p { display: inline; margin: 0; }
-</style>
-
 For the English version, click on the Shield below:
 <!-- badges: start -->
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README_en.md)
