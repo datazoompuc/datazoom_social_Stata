@@ -120,22 +120,29 @@ Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a
 documentação do novo identificador de domicílios construído pelo Data
 Zoom.
 
-<!-- <details>
-<summary> Leitura do Censo 1991 DBF e Construção do id_dom </summary>
-&#10;
-<h3> Visão Geral e Variáveis </h3>
-&#10;Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não disponibilizam mais as seguintes variáveis:
-&#10;- v0102 Identificação do questionário (id_dom)
+<details><summary>Leitura do Censo 1991 DBF e Construção do id_dom</summary>
+
+<h3>
+
+Visão Geral e Variáveis
+</h3>
+
+Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não
+disponibilizam mais as seguintes variáveis:
+
+- v0102 Identificação do questionário (id_dom)
 - v3041 Homens na familia
 - v3042 Mulheres na familia
 - v0111 Número de homens no domicílio
 - v0112 Número de mulheres no domicílio
-&#10;Assim, o identificador de domicílio não vem pronto nos arquivos originais em
-.DBF, e ele precisa ser reconstruído.
-&#10;A seção abaixo descreve o método utilizado no `datazoom_censo` para identificar
-domicílios (`id_dom`) a partir dos microdados do Censo 1991 lidos em formato
-.DBF.
-&#10;
+
+Assim, o identificador de domicílio não vem pronto nos arquivos
+originais em .DBF, e ele precisa ser reconstruído.
+
+A seção abaixo descreve o método utilizado no `datazoom_censo` para
+identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
+lidos em formato .DBF.
+
 <!-- <h3> Pressupostos do método </h3>
 &#10;O método parte de três premissas sobre a estrutura dos dados:
 &#10;1. **Ordem sequencial**:
@@ -251,12 +258,7 @@ domicílio (`id_dom == 1`).
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - <details>
 
@@ -326,12 +328,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - <details>
 
@@ -427,12 +424,7 @@ aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
@@ -441,12 +433,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
@@ -507,12 +494,7 @@ aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 - [Ribas e Soares
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Dicionário PME Antiga: 1991 a
   2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
@@ -523,12 +505,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - Dicionários PME Antiga: 1991 a 2000
   - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
@@ -597,12 +574,7 @@ compatibilização do programa.
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
@@ -641,12 +613,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
@@ -813,12 +780,7 @@ itens um pouco mais desagregados do que os existentes na base padrão.
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - POF 1995-96
   - [Dicionário](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)

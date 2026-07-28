@@ -1,5 +1,6 @@
 ---
 output: github_document
+knit: (function(input, encoding) { rmarkdown::render(input, encoding = encoding); md_path <- sub("\\.Rmd$", ".md", input); texto <- paste(readLines(md_path, warn = FALSE), collapse = "\n"); texto <- gsub("<details>\\s*\\n<summary>\\s*\\n(.*?)\\n\\s*</summary>", "<details><summary>\\1</summary>", texto, perl = TRUE); writeLines(texto, md_path) })
 ---
 
 

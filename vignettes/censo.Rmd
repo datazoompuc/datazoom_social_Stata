@@ -23,8 +23,7 @@ Ainda é possível fazer a leitura dos microdados do Censo de 1991 para quem pos
 
 Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a documentação do novo identificador de domicílios construído pelo Data Zoom.
 
-<!-- <details>
-<summary> Leitura do Censo 1991 DBF e Construção do id_dom </summary>
+<details><summary> Leitura do Censo 1991 DBF e Construção do id_dom </summary>
 
 
 <h3> Visão Geral e Variáveis </h3>
@@ -43,7 +42,6 @@ Assim, o identificador de domicílio não vem pronto nos arquivos originais em
 A seção abaixo descreve o método utilizado no `datazoom_censo` para identificar
 domicílios (`id_dom`) a partir dos microdados do Censo 1991 lidos em formato
 .DBF.
-
 
 <!-- <h3> Pressupostos do método </h3>
 
