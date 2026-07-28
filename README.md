@@ -143,32 +143,48 @@ A seção abaixo descreve o método utilizado no `datazoom_censo` para
 identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
 lidos em formato .DBF.
 
-<!-- <h3> Pressupostos do método </h3>
-&#10;O método parte de três premissas sobre a estrutura dos dados:
-&#10;1. **Ordem sequencial**:
-   Os registros de pessoas de um mesmo domicílio
-   aparecem em sequência no arquivo (não há intercalação de domicílios
-   diferentes).
-   &#10;2. **Domicílio muda quando qualquer variável domiciliar muda:**
-   Os registros de 
-   um mesmo domicílio devem apresentar os mesmos registros em variáveis domiciliares.
-   Ou seja, se duas linhas consecutivas pertencem ao mesmo domicílio,
-   elas devem ter exatamente os mesmos valores para todas as variáveis domiciliares.
-   &#10;3. **Observações consecutivas com os mesmos dados domiciliares são do mesmo domicílio:**
-   Existem 37 variáveis domiciliares, sendo algumas delas contínuas, como aluguel e rendimento nominal,
-   dessa forma, é extremamente improvável que dois domicílios consecutivos apresentem exatamente
-   os mesmos dados para cada uma das variáveis domiciliares, a menos que sejam do mesmo domicílio.
-&#10;
-A partir disso, um novo domicílio é identificado quando **qualquer uma** das
-seguintes condições é verdadeira, em relação à observação anterior (`_n-1`):
-&#10;- muda o município (`MUNICNUM`);
+<h3>
+
+Pressupostos do método
+</h3>
+
+O método parte de três premissas sobre a estrutura dos dados:
+
+1.  **Ordem sequencial**: Os registros de pessoas de um mesmo domicílio
+    aparecem em sequência no arquivo (não há intercalação de domicílios
+    diferentes).
+
+2.  **Domicílio muda quando qualquer variável domiciliar muda:** Os
+    registros de um mesmo domicílio devem apresentar os mesmos registros
+    em variáveis domiciliares. Ou seja, se duas linhas consecutivas
+    pertencem ao mesmo domicílio, elas devem ter exatamente os mesmos
+    valores para todas as variáveis domiciliares.
+
+3.  **Observações consecutivas com os mesmos dados domiciliares são do
+    mesmo domicílio:** Existem 37 variáveis domiciliares, sendo algumas
+    delas contínuas, como aluguel e rendimento nominal, dessa forma, é
+    extremamente improvável que dois domicílios consecutivos apresentem
+    exatamente os mesmos dados para cada uma das variáveis domiciliares,
+    a menos que sejam do mesmo domicílio.
+
+A partir disso, um novo domicílio é identificado quando **qualquer uma**
+das seguintes condições é verdadeira, em relação à observação anterior
+(`_n-1`):
+
+- muda o município (`MUNICNUM`);
 - muda a espécie do domicílio (`ESPECIE`);
-- o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um novo
-  domicílio independentemente das demais variáveis;
+- o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um
+  novo domicílio independentemente das demais variáveis;
 - muda qualquer uma das variáveis domiciliares listadas abaixo.
-&#10;<!-- <h3> Código (Stata) </h3>
-&#10;```stata
-&#10;gen long id_dom = sum( ///
+
+<h3>
+
+Código (Stata)
+</h3>
+
+``` stata
+
+gen long id_dom = sum( ///
       (MUNICNUM != MUNICNUM[_n-1])  | ///  muda o município
       (ESPECIE  != ESPECIE[_n-1])   | ///  muda a espécie do domicílio
       (PARENDOM == 20)              | ///  indivíduo mora sozinho
@@ -191,61 +207,90 @@ seguintes condições é verdadeira, em relação à observação anterior (`_n-
       (TELEFONE != TELEFONE[_n-1])  | (TVCORES  != TVCORES[_n-1])  | ///
       (TVPRETO  != TVPRETO[_n-1]) )
 ```
-&#10;Informações mais espcíficas sobre cada uma dessas variáveis podem ser encontradas no [dicionário disponibilizado pelo IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
-&#10;
-<!-- <h3> Como funciona o `sum()` </h3>
-&#10;`sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é uma
-expressão binária (0/1). Sempre que **pelo menos uma** condição é verdadeira
-na linha `_n`, o resultado da soma booleana daquela linha é 1, o que
-incrementa o acumulado — criando assim um novo valor de `id_dom`. Quando
-nenhuma condição é verdadeira, o acumulado permanece igual ao da linha
-anterior, e a observação é atribuída ao mesmo domicílio.
-&#10;Na primeira observação da base (`_n-1` inexistente), o Stata trata os
-componentes `X[_n-1]` como *missing*, e qualquer comparação com *missing*
-retorna verdadeiro — o que garante que a primeira linha sempre inicia um novo
-domicílio (`id_dom == 1`).
-&#10;
-<!-- <h3> Comparação de identificadores distintos gerados usando o id_dom construído e o original </h3>
-&#10;
-| UF | Código IBGE | .DBF (data zoom) | .DAT (original) | Diferença |
-|----|-------------|-------------------|-------------------|-----------|
-| RO | 11          | 26859             | 26850             | 9         |
-| AC | 12          | 9824              | 9824              | 0         |
-| AM | 13          | 45583             | 45583             | 0         |
-| RR | 14          | 5485              | 5486              | -1        |
-| PA | 15          | 103849            | 103849            | 0         |
-| AP | 16          | 6073              | 6073              | 0         |
-| TO | 17          | 29801             | 29801             | 0         |
-| MA | 21          | 105843            | 105841            | 2         |
-| PI | 22          | 66477             | 66477             | 0         |
-| CE | 23          | 151181            | 151181            | 0         |
-| RN | 24          | 72051             | 72051             | 0         |
-| PB | 25          | 89691             | 89692             | -1        |
-| PE | 26          | 172781            | 172781            | 0         |
-| AL | 27          | 61493             | 61493             | 0         |
-| SE | 28          | 42139             | 42139             | 0         |
-| BA | 29          | 306696            | 306697            | -1        |
-| MG | 31          | 462237            | 462239            | -2        |
-| ES | 32          | 70507             | 70507             | 0         |
-| RJ | 33          | 357009            | 357010            | -1        |
-| SP | 35          | 879368            | 879371            | -3        |
-| PR | 41          | 249309            | 249310            | -1        |
-| SC | 42          | 141031            | 141032            | -1        |
-| RS | 43          | 292564            | 292564            | 0         |
-| MS | 50          | 52966             | 52966             | 0         |
-| MT | 51          | 60831             | 60831             | 0         |
-| GO | 52          | 124488            | 124488            | 0         |
-| DF | 53          | 38407             | 38407             | 0         |
-&#10;
-<!-- <h3> Limitações e pontos de atenção </h3> 
-&#10;- O método depende de a base do IBGE estar **corretamente ordenada** antes de rodar
-  o `sum()`. A quebra da lógica sequencial pode gerar domicílios espúrios.
-  &#10;- Se dois domicílios diferentes em um mesmo município, por coincidência, tiverem valores idênticos em
-  **todas** as variáveis domiciliares, os moradores não morarem sozinhos, e estiverem em sequência no
-  arquivo, o programa os tratará como um único domicílio (falso negativo).
-&#10;- Se houver um erro nos dados de forma que pessoas de um mesmo domicílio apresentem
-  informações domiciliares distintas, esse erro gerará um domicílio a mais
-  do que deveria (falso positivo). -->
+
+Informações mais espcíficas sobre cada uma dessas variáveis podem ser
+encontradas no [dicionário disponibilizado pelo
+IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
+
+<h3>
+
+Como funciona o `sum()`
+</h3>
+
+`sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é
+uma expressão binária (0/1). Sempre que **pelo menos uma** condição é
+verdadeira na linha `_n`, o resultado da soma booleana daquela linha é
+1, o que incrementa o acumulado — criando assim um novo valor de
+`id_dom`. Quando nenhuma condição é verdadeira, o acumulado permanece
+igual ao da linha anterior, e a observação é atribuída ao mesmo
+domicílio.
+
+Na primeira observação da base (`_n-1` inexistente), o Stata trata os
+componentes `X[_n-1]` como *missing*, e qualquer comparação com
+*missing* retorna verdadeiro — o que garante que a primeira linha sempre
+inicia um novo domicílio (`id_dom == 1`).
+
+<h3>
+
+Comparação de identificadores distintos gerados usando o id_dom
+construído e o original
+</h3>
+
+| UF  | Código IBGE | .DBF (data zoom) | .DAT (original) | Diferença |
+|-----|-------------|------------------|-----------------|-----------|
+| RO  | 11          | 26859            | 26850           | 9         |
+| AC  | 12          | 9824             | 9824            | 0         |
+| AM  | 13          | 45583            | 45583           | 0         |
+| RR  | 14          | 5485             | 5486            | -1        |
+| PA  | 15          | 103849           | 103849          | 0         |
+| AP  | 16          | 6073             | 6073            | 0         |
+| TO  | 17          | 29801            | 29801           | 0         |
+| MA  | 21          | 105843           | 105841          | 2         |
+| PI  | 22          | 66477            | 66477           | 0         |
+| CE  | 23          | 151181           | 151181          | 0         |
+| RN  | 24          | 72051            | 72051           | 0         |
+| PB  | 25          | 89691            | 89692           | -1        |
+| PE  | 26          | 172781           | 172781          | 0         |
+| AL  | 27          | 61493            | 61493           | 0         |
+| SE  | 28          | 42139            | 42139           | 0         |
+| BA  | 29          | 306696           | 306697          | -1        |
+| MG  | 31          | 462237           | 462239          | -2        |
+| ES  | 32          | 70507            | 70507           | 0         |
+| RJ  | 33          | 357009           | 357010          | -1        |
+| SP  | 35          | 879368           | 879371          | -3        |
+| PR  | 41          | 249309           | 249310          | -1        |
+| SC  | 42          | 141031           | 141032          | -1        |
+| RS  | 43          | 292564           | 292564          | 0         |
+| MS  | 50          | 52966            | 52966           | 0         |
+| MT  | 51          | 60831            | 60831           | 0         |
+| GO  | 52          | 124488           | 124488          | 0         |
+| DF  | 53          | 38407            | 38407           | 0         |
+
+<h3>
+
+Limitações e pontos de atenção
+</h3>
+
+- O método depende de a base do IBGE estar **corretamente ordenada**
+  antes de rodar o `sum()`. A quebra da lógica sequencial pode gerar
+  domicílios espúrios.
+
+- Se dois domicílios diferentes em um mesmo município, por coincidência,
+  tiverem valores idênticos em **todas** as variáveis domiciliares, os
+  moradores não morarem sozinhos, e estiverem em sequência no arquivo, o
+  programa os tratará como um único domicílio (falso negativo).
+
+- Se houver um erro nos dados de forma que pessoas de um mesmo domicílio
+  apresentem informações domiciliares distintas, esse erro gerará um
+  domicílio a mais do que deveria (falso positivo).
+
+<!-- -->
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 </details>
 

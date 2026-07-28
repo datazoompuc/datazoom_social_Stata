@@ -3,7 +3,6 @@ output: github_document
 knit: (function(input, encoding) { rmarkdown::render(input, encoding = encoding); md_path <- sub("\\.Rmd$", ".md", input); texto <- paste(readLines(md_path, warn = FALSE), collapse = "\n"); texto <- gsub("<details>\\s*\\n<summary>\\s*\\n(.*?)\\n\\s*</summary>", "<details><summary>\\1</summary>", texto, perl = TRUE); writeLines(texto, md_path) })
 ---
 
-
 For the English version, click on the Shield below:
 <!-- badges: start -->
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README_en.md)
