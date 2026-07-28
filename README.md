@@ -124,12 +124,10 @@ Zoom.
 
 <summary>
 
-<strong>Leitura do Censo 1991 DBF e Construção do id_dom</strong>
+<b>Leitura do Censo 1991 DBF e Construção do id_dom</b>
 </summary>
 
-<h3>
-
-Visão Geral e Variáveis
+\### Visão Geral e Variáveis
 </h3>
 
 Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não
@@ -148,9 +146,7 @@ A seção abaixo descreve o método utilizado no `datazoom_censo` para
 identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
 lidos em formato .DBF.
 
-<h3>
-
-Pressupostos do método
+\### Pressupostos do método
 </h3>
 
 O método parte de três premissas sobre a estrutura dos dados:
@@ -182,9 +178,7 @@ das seguintes condições é verdadeira, em relação à observação anterior
   novo domicílio independentemente das demais variáveis;
 - muda qualquer uma das variáveis domiciliares listadas abaixo.
 
-<h3>
-
-Código (Stata)
+\### Código (Stata)
 </h3>
 
 ``` stata
@@ -217,9 +211,7 @@ Informações mais espcíficas sobre cada uma dessas variáveis podem ser
 encontradas no [dicionário disponibilizado pelo
 IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
 
-<h3>
-
-Como funciona o `sum()`
+\### Como funciona o `sum()`
 </h3>
 
 `sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é
@@ -235,9 +227,7 @@ componentes `X[_n-1]` como *missing*, e qualquer comparação com
 *missing* retorna verdadeiro — o que garante que a primeira linha sempre
 inicia um novo domicílio (`id_dom == 1`).
 
-<h3>
-
-Comparação de identificadores distintos gerados usando o id_dom
+\### Comparação de identificadores distintos gerados usando o id_dom
 construído e o original
 </h3>
 
@@ -271,9 +261,7 @@ construído e o original
 | GO  | 52          | 124488           | 124488          | 0         |
 | DF  | 53          | 38407            | 38407           | 0         |
 
-<h3>
-
-Limitações e pontos de atenção
+\### Limitações e pontos de atenção
 </h3>
 
 - O método depende de a base do IBGE estar **corretamente ordenada**
