@@ -126,12 +126,7 @@ official website (in .DBF format).
 Below are the main changes for reading the 1991 Census data and the
 documentation for the new household identifier created by Data Zoom.
 
-<details>
-
-<summary style="font-size:1.5em">
-
-Reading the 1991 Census DBF and Creating the id_dom
-</summary>
+<details><summary style="font-size:1.5em">Reading the 1991 Census DBF and Creating the id_dom</summary>
 
 <h3>
 
@@ -281,12 +276,12 @@ id_dom and the original identifier
 Limitations and points to note
 </h3>
 
-- The method relies on the dataset being properly sorted before being
-  passed to the program, that is, with observations belonging to the
-  same household appearing consecutively in the dataset. Any disruption
-  to this sequential ordering may result in spurious households. As of
-  July 2026, the original IBGE datasets are distributed with this
-  ordering.
+- The method relies on the dataset being **properly sorted** before
+  being passed to the program, that is, with observations belonging to
+  the same household appearing consecutively in the dataset. Any
+  disruption to this sequential ordering may result in spurious
+  households. At the time of writing (July 2026), the original IBGE
+  datasets are already sorted in this way.
 
 - If two different households in the same municipality, by coincidence,
   have identical values for **all** household variables, the residents
@@ -310,12 +305,7 @@ Limitations and points to note
 
 <details><summary>In English:</summary>
 
-- <details>
-
-  <summary>
-
-  Dictionaries and Compatibilization
-  </summary>
+- <details><summary>Dictionaries and Compatibilization</summary>
 
   - [Making Censuses
     compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
@@ -332,12 +322,7 @@ Limitations and points to note
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionnaires
-  </summary>
+- <details><summary>Questionnaires</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -354,12 +339,7 @@ Limitations and points to note
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Census Taker Manuals
-  </summary>
+- <details><summary>Census Taker Manuals</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -380,12 +360,7 @@ Limitations and points to note
 
 <details><summary>In Portuguese:</summary>
 
-- <details>
-
-  <summary>
-
-  Dicionários e Compatibilização
-  </summary>
+- <details><summary>Dicionários e Compatibilização</summary>
 
   - [Compatibilização dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
@@ -402,12 +377,7 @@ Limitations and points to note
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionários
-  </summary>
+- <details><summary>Questionários</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -424,12 +394,7 @@ Limitations and points to note
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Manuais do Recenseador
-  </summary>
+- <details><summary>Manuais do Recenseador</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)

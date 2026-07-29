@@ -120,12 +120,7 @@ Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a
 documentação do novo identificador de domicílios construído pelo Data
 Zoom.
 
-<details>
-
-<summary style="font-size:1.5em;">
-
-Leitura do Censo 1991 DBF e Construção do id_dom
-</summary>
+<details><summary style="font-size:1.5em;">Leitura do Censo 1991 DBF e Construção do id_dom</summary>
 
 <h3>
 
@@ -306,12 +301,7 @@ Limitações e pontos de atenção
 
 <details><summary>Em português:</summary>
 
-- <details>
-
-  <summary>
-
-  Dicionários e Compatibilização
-  </summary>
+- <details><summary>Dicionários e Compatibilização</summary>
 
   - [Compatibilização dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
@@ -328,12 +318,7 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionários
-  </summary>
+- <details><summary>Questionários</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -350,12 +335,7 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Manuais do Recenseador
-  </summary>
+- <details><summary>Manuais do Recenseador</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -376,12 +356,7 @@ Limitações e pontos de atenção
 
 <details><summary>Em inglês:</summary>
 
-- <details>
-
-  <summary>
-
-  Dictionaries and Compatibilization
-  </summary>
+- <details><summary>Dictionaries and Compatibilization</summary>
 
   - [Censo’s
     Compatibilization](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
@@ -398,12 +373,7 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionnaires
-  </summary>
+- <details><summary>Questionnaires</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -420,12 +390,7 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Census Taker Manuals
-  </summary>
+- <details><summary>Census Taker Manuals</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
