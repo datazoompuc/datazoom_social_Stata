@@ -116,11 +116,11 @@ quem possui os dados antigos (em .TXT ou .DAT), mas agora há também a
 possibilidade de usar os dados atualmente disponibilizados pelo IBGE no
 site oficial (em .DBF).
 
-Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a
-documentação do novo identificador de domicílios construído pelo Data
-Zoom.
+Abra a seção abaixo para ver as principais mudanças na leitura do Censo
+de 1991 e a documentação do novo identificador de domicílios construído
+pelo Data Zoom.
 
-<details><summary style="font-size:1.5em;">Leitura do Censo 1991 DBF e Construção do id_dom</summary>
+<details><summary style="font-size:1.5em;"><strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong></summary>
 
 <h3>
 
@@ -236,35 +236,35 @@ Comparação de identificadores distintos gerados usando o id_dom
 construído e o original
 </h3>
 
-| UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença |
-|-----|-------------|------------------|-----------------|-----------|
-| RO  | 11          | 26859            | 26850           | 9         |
-| AC  | 12          | 9824             | 9824            | 0         |
-| AM  | 13          | 45583            | 45583           | 0         |
-| RR  | 14          | 5485             | 5486            | -1        |
-| PA  | 15          | 103849           | 103849          | 0         |
-| AP  | 16          | 6073             | 6073            | 0         |
-| TO  | 17          | 29801            | 29801           | 0         |
-| MA  | 21          | 105843           | 105841          | 2         |
-| PI  | 22          | 66477            | 66477           | 0         |
-| CE  | 23          | 151181           | 151181          | 0         |
-| RN  | 24          | 72051            | 72051           | 0         |
-| PB  | 25          | 89691            | 89692           | -1        |
-| PE  | 26          | 172781           | 172781          | 0         |
-| AL  | 27          | 61493            | 61493           | 0         |
-| SE  | 28          | 42139            | 42139           | 0         |
-| BA  | 29          | 306696           | 306697          | -1        |
-| MG  | 31          | 462237           | 462239          | -2        |
-| ES  | 32          | 70507            | 70507           | 0         |
-| RJ  | 33          | 357009           | 357010          | -1        |
-| SP  | 35          | 879368           | 879371          | -3        |
-| PR  | 41          | 249309           | 249310          | -1        |
-| SC  | 42          | 141031           | 141032          | -1        |
-| RS  | 43          | 292564           | 292564          | 0         |
-| MS  | 50          | 52966            | 52966           | 0         |
-| MT  | 51          | 60831            | 60831           | 0         |
-| GO  | 52          | 124488           | 124488          | 0         |
-| DF  | 53          | 38407            | 38407           | 0         |
+| UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença | % Diferença |
+|-----|-------------|------------------|-----------------|-----------|-------------|
+| RO  | 11          | 26859            | 26850           | 9         | 0,0335%     |
+| AC  | 12          | 9824             | 9824            | 0         | 0,0000%     |
+| AM  | 13          | 45583            | 45583           | 0         | 0,0000%     |
+| RR  | 14          | 5485             | 5486            | -1        | -0,0182%    |
+| PA  | 15          | 103849           | 103849          | 0         | 0,0000%     |
+| AP  | 16          | 6073             | 6073            | 0         | 0,0000%     |
+| TO  | 17          | 29801            | 29801           | 0         | 0,0000%     |
+| MA  | 21          | 105843           | 105841          | 2         | 0,0019%     |
+| PI  | 22          | 66477            | 66477           | 0         | 0,0000%     |
+| CE  | 23          | 151181           | 151181          | 0         | 0,0000%     |
+| RN  | 24          | 72051            | 72051           | 0         | 0,0000%     |
+| PB  | 25          | 89691            | 89692           | -1        | -0,0011%    |
+| PE  | 26          | 172781           | 172781          | 0         | 0,0000%     |
+| AL  | 27          | 61493            | 61493           | 0         | 0,0000%     |
+| SE  | 28          | 42139            | 42139           | 0         | 0,0000%     |
+| BA  | 29          | 306696           | 306697          | -1        | -0,0003%    |
+| MG  | 31          | 462237           | 462239          | -2        | -0,0004%    |
+| ES  | 32          | 70507            | 70507           | 0         | 0,0000%     |
+| RJ  | 33          | 357009           | 357010          | -1        | -0,0003%    |
+| SP  | 35          | 879368           | 879371          | -3        | -0,0003%    |
+| PR  | 41          | 249309           | 249310          | -1        | -0,0004%    |
+| SC  | 42          | 141031           | 141032          | -1        | -0,0007%    |
+| RS  | 43          | 292564           | 292564          | 0         | 0,0000%     |
+| MS  | 50          | 52966            | 52966           | 0         | 0,0000%     |
+| MT  | 51          | 60831            | 60831           | 0         | 0,0000%     |
+| GO  | 52          | 124488           | 124488          | 0         | 0,0000%     |
+| DF  | 53          | 38407            | 38407           | 0         | 0,0000%     |
 
 <h3>
 

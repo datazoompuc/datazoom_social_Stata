@@ -123,10 +123,17 @@ have the older data (in .TXT or .DAT format), but it is now also
 possible to use the data currently made available by the IBGE on its
 official website (in .DBF format).
 
-Below are the main changes for reading the 1991 Census data and the
-documentation for the new household identifier created by Data Zoom.
+Expand the section below to view the main changes to the 1991 Census
+data import process and the documentation for the new household
+identifier constructed by Data Zoom.
 
-<details><summary style="font-size:1.5em">Reading the 1991 Census DBF and Creating the id_dom</summary>
+<details>
+
+<summary style="font-size:1.5em">
+
+<strong> Reading of the 1991 Census DBF files and Household Identifier
+(id_dom) Construction </strong>
+</summary>
 
 <h3>
 
@@ -238,38 +245,38 @@ new household (`id_dom == 1`).
 <h3>
 
 Comparison of distinct identifiers generated using the constructed
-id_dom and the original identifier
+Household Identifier (id_dom) and the original identifier
 </h3>
 
-| State | IBGE State Code | .DBF (Data Zoom) | .DAT (Original) | Difference |
-|----|----|----|----|----|
-| Rondônia | 11 | 26,859 | 26,850 | 9 |
-| Acre | 12 | 9,824 | 9,824 | 0 |
-| Amazonas | 13 | 45,583 | 45,583 | 0 |
-| Roraima | 14 | 5,485 | 5,486 | -1 |
-| Pará | 15 | 103,849 | 103,849 | 0 |
-| Amapá | 16 | 6,073 | 6,073 | 0 |
-| Tocantins | 17 | 29,801 | 29,801 | 0 |
-| Maranhão | 21 | 105,843 | 105,841 | 2 |
-| Piauí | 22 | 66,477 | 66,477 | 0 |
-| Ceará | 23 | 151,181 | 151,181 | 0 |
-| Rio Grande do Norte | 24 | 72,051 | 72,051 | 0 |
-| Paraíba | 25 | 89,691 | 89,692 | -1 |
-| Pernambuco | 26 | 172,781 | 172,781 | 0 |
-| Alagoas | 27 | 61,493 | 61,493 | 0 |
-| Sergipe | 28 | 42,139 | 42,139 | 0 |
-| Bahia | 29 | 306,696 | 306,697 | -1 |
-| Minas Gerais | 31 | 462,237 | 462,239 | -2 |
-| Espírito Santo | 32 | 70,507 | 70,507 | 0 |
-| Rio de Janeiro | 33 | 357,009 | 357,010 | -1 |
-| São Paulo | 35 | 879,368 | 879,371 | -3 |
-| Paraná | 41 | 249,309 | 249,310 | -1 |
-| Santa Catarina | 42 | 141,031 | 141,032 | -1 |
-| Rio Grande do Sul | 43 | 292,564 | 292,564 | 0 |
-| Mato Grosso do Sul | 50 | 52,966 | 52,966 | 0 |
-| Mato Grosso | 51 | 60,831 | 60,831 | 0 |
-| Goiás | 52 | 124,488 | 124,488 | 0 |
-| Brasília (DF) | 53 | 38,407 | 38,407 | 0 |
+| State | IBGE State Code | .DBF (Data Zoom) | .DAT (Original) | Difference | % Difference |
+|----|----|----|----|----|----|
+| Rondônia | 11 | 26,859 | 26,850 | 9 | 0.0335% |
+| Acre | 12 | 9,824 | 9,824 | 0 | 0.0000% |
+| Amazonas | 13 | 45,583 | 45,583 | 0 | 0.0000% |
+| Roraima | 14 | 5,485 | 5,486 | -1 | -0.0182% |
+| Pará | 15 | 103,849 | 103,849 | 0 | 0.0000% |
+| Amapá | 16 | 6,073 | 6,073 | 0 | 0.0000% |
+| Tocantins | 17 | 29,801 | 29,801 | 0 | 0.0000% |
+| Maranhão | 21 | 105,843 | 105,841 | 2 | 0.0019% |
+| Piauí | 22 | 66,477 | 66,477 | 0 | 0.0000% |
+| Ceará | 23 | 151,181 | 151,181 | 0 | 0.0000% |
+| Rio Grande do Norte | 24 | 72,051 | 72,051 | 0 | 0.0000% |
+| Paraíba | 25 | 89,691 | 89,692 | -1 | -0.0011% |
+| Pernambuco | 26 | 172,781 | 172,781 | 0 | 0.0000% |
+| Alagoas | 27 | 61,493 | 61,493 | 0 | 0.0000% |
+| Sergipe | 28 | 42,139 | 42,139 | 0 | 0.0000% |
+| Bahia | 29 | 306,696 | 306,697 | -1 | -0.0003% |
+| Minas Gerais | 31 | 462,237 | 462,239 | -2 | -0.0004% |
+| Espírito Santo | 32 | 70,507 | 70,507 | 0 | 0.0000% |
+| Rio de Janeiro | 33 | 357,009 | 357,010 | -1 | -0.0003% |
+| São Paulo | 35 | 879,368 | 879,371 | -3 | -0.0003% |
+| Paraná | 41 | 249,309 | 249,310 | -1 | -0.0004% |
+| Santa Catarina | 42 | 141,031 | 141,032 | -1 | -0.0007% |
+| Rio Grande do Sul | 43 | 292,564 | 292,564 | 0 | 0.0000% |
+| Mato Grosso do Sul | 50 | 52,966 | 52,966 | 0 | 0.0000% |
+| Mato Grosso | 51 | 60,831 | 60,831 | 0 | 0.0000% |
+| Goiás | 52 | 124,488 | 124,488 | 0 | 0.0000% |
+| Brasília (DF) | 53 | 38,407 | 38,407 | 0 | 0.0000% |
 
 <h3>
 
