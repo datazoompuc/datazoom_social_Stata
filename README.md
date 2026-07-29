@@ -120,7 +120,12 @@ Abaixo seguem as principais mudanças para a leitura do Censo de 1991 e a
 documentação do novo identificador de domicílios construído pelo Data
 Zoom.
 
-<details><summary>Leitura do Censo 1991 DBF e Construção do id_dom</summary>
+<details>
+
+<summary style="font-size:1.5em;">
+
+Leitura do Censo 1991 DBF e Construção do id_dom
+</summary>
 
 <h3>
 
@@ -236,7 +241,7 @@ Comparação de identificadores distintos gerados usando o id_dom
 construído e o original
 </h3>
 
-| UF  | Código IBGE | .DBF (data zoom) | .DAT (original) | Diferença |
+| UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença |
 |-----|-------------|------------------|-----------------|-----------|
 | RO  | 11          | 26859            | 26850           | 9         |
 | AC  | 12          | 9824             | 9824            | 0         |
@@ -271,9 +276,11 @@ construído e o original
 Limitações e pontos de atenção
 </h3>
 
-- O método depende de a base do IBGE estar **corretamente ordenada**
-  antes de rodar o `sum()`. A quebra da lógica sequencial pode gerar
-  domicílios espúrios.
+- O método depende de a base estar **corretamente ordenada** antes de
+  ser passada para o programa, ou seja, com as observações do mesmo
+  domcílio aparecendo sequencialmente no dataset. A quebra da lógica
+  sequencial pode gerar domicílios espúrios. Em julho/2026, as bases do
+  IBGE vêm originalmente ordenadas dessa forma.
 
 - Se dois domicílios diferentes em um mesmo município, por coincidência,
   tiverem valores idênticos em **todas** as variáveis domiciliares, os
@@ -283,12 +290,6 @@ Limitações e pontos de atenção
 - Se houver um erro nos dados de forma que pessoas de um mesmo domicílio
   apresentem informações domiciliares distintas, esse erro gerará um
   domicílio a mais do que deveria (falso positivo).
-
-<!-- -->
-
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 

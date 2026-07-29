@@ -1,8 +1,4 @@
 
-<style>
-summary > p { display: inline; margin: 0; }
-</style>
-
 Para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
 [![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
@@ -246,21 +242,51 @@ new household (`id_dom == 1`).
 
 <h3>
 
-Comparison of Indicators using the constructed id_dom and the original
+Comparison of distinct identifiers generated using the constructed
+id_dom and the original identifier
 </h3>
 
-Number of households in each state:
-
-Average per capita income by state:
+| State | IBGE State Code | .DBF (Data Zoom) | .DAT (Original) | Difference |
+|----|----|----|----|----|
+| Rondônia | 11 | 26,859 | 26,850 | 9 |
+| Acre | 12 | 9,824 | 9,824 | 0 |
+| Amazonas | 13 | 45,583 | 45,583 | 0 |
+| Roraima | 14 | 5,485 | 5,486 | -1 |
+| Pará | 15 | 103,849 | 103,849 | 0 |
+| Amapá | 16 | 6,073 | 6,073 | 0 |
+| Tocantins | 17 | 29,801 | 29,801 | 0 |
+| Maranhão | 21 | 105,843 | 105,841 | 2 |
+| Piauí | 22 | 66,477 | 66,477 | 0 |
+| Ceará | 23 | 151,181 | 151,181 | 0 |
+| Rio Grande do Norte | 24 | 72,051 | 72,051 | 0 |
+| Paraíba | 25 | 89,691 | 89,692 | -1 |
+| Pernambuco | 26 | 172,781 | 172,781 | 0 |
+| Alagoas | 27 | 61,493 | 61,493 | 0 |
+| Sergipe | 28 | 42,139 | 42,139 | 0 |
+| Bahia | 29 | 306,696 | 306,697 | -1 |
+| Minas Gerais | 31 | 462,237 | 462,239 | -2 |
+| Espírito Santo | 32 | 70,507 | 70,507 | 0 |
+| Rio de Janeiro | 33 | 357,009 | 357,010 | -1 |
+| São Paulo | 35 | 879,368 | 879,371 | -3 |
+| Paraná | 41 | 249,309 | 249,310 | -1 |
+| Santa Catarina | 42 | 141,031 | 141,032 | -1 |
+| Rio Grande do Sul | 43 | 292,564 | 292,564 | 0 |
+| Mato Grosso do Sul | 50 | 52,966 | 52,966 | 0 |
+| Mato Grosso | 51 | 60,831 | 60,831 | 0 |
+| Goiás | 52 | 124,488 | 124,488 | 0 |
+| Brasília (DF) | 53 | 38,407 | 38,407 | 0 |
 
 <h3>
 
 Limitations and points to note
 </h3>
 
-- The method relies on the IBGE dataset being **correctly sorted**
-  before running the `sum()` function. A break in the sequential logic
-  can generate spurious households.
+- The method relies on the dataset being properly sorted before being
+  passed to the program, that is, with observations belonging to the
+  same household appearing consecutively in the dataset. Any disruption
+  to this sequential ordering may result in spurious households. As of
+  July 2026, the original IBGE datasets are distributed with this
+  ordering.
 
 - If two different households in the same municipality, by coincidence,
   have identical values for **all** household variables, the residents
@@ -271,9 +297,9 @@ Limitations and points to note
   household have different household information, this error will result
   in one more household than there should be (false positive).
 
-</details>
+------------------------------------------------------------------------
 
-<br>
+</details>
 
 ### Supporting files
 
@@ -282,12 +308,7 @@ Limitations and points to note
 - [Compatibilized
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - <details>
 
@@ -357,12 +378,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - <details>
 
@@ -458,12 +474,7 @@ here](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 
 </details>
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - [ECINF 1997
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
@@ -472,12 +483,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [ECINF 1997
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
@@ -543,12 +549,7 @@ here](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 - [Ribas and Soares
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - PME Antiga dictionaries: 1991 to 2000
   - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
@@ -561,12 +562,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [PME Antiga dictionary: 1991 to
   2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
@@ -625,12 +621,7 @@ explains all the procedures adopted in the process.
 - [Compatibilized
   dictionary](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - [Making PNADs
   compatible](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
@@ -669,12 +660,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [Making PNADs
   compatible](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
@@ -829,12 +815,7 @@ those obtained from the standard database.
 - [Microdata and
   documentation](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - POF 1995-96
   - [Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)
