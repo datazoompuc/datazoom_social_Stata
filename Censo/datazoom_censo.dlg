@@ -325,7 +325,7 @@ BEGIN
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
 	  option main.eng
-	  option radio(dbf91 dattxt91)
+	  option radio(main dbf91 dattxt91)
 	  
    endoptions
    stata
