@@ -124,7 +124,7 @@ pelo Data Zoom.
 
 <h3>
 
-Visão Geral e Variáveis
+Leitura do Censo: Visão Geral e Variáveis
 </h3>
 
 Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não
@@ -145,8 +145,13 @@ lidos em formato .DBF.
 
 <h3>
 
-Pressupostos do método
+Construção do id_dom
 </h3>
+
+<h4>
+
+Pressupostos do método
+</h4>
 
 O método parte de três premissas sobre a estrutura dos dados:
 
@@ -177,10 +182,10 @@ das seguintes condições é verdadeira, em relação à observação anterior
   novo domicílio independentemente das demais variáveis;
 - muda qualquer uma das variáveis domiciliares listadas abaixo.
 
-<h3>
+<h4>
 
 Código (Stata)
-</h3>
+</h4>
 
 ``` stata
 
@@ -212,10 +217,10 @@ Informações mais espcíficas sobre cada uma dessas variáveis podem ser
 encontradas no [dicionário disponibilizado pelo
 IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
 
-<h3>
+<h4>
 
 Como funciona o `sum()`
-</h3>
+</h4>
 
 `sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é
 uma expressão binária (0/1). Sempre que **pelo menos uma** condição é
@@ -230,11 +235,11 @@ componentes `X[_n-1]` como *missing*, e qualquer comparação com
 *missing* retorna verdadeiro — o que garante que a primeira linha sempre
 inicia um novo domicílio (`id_dom == 1`).
 
-<h3>
+<h4>
 
 Comparação de identificadores distintos gerados usando o id_dom
 construído e o original
-</h3>
+</h4>
 
 | UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença | % Diferença |
 |-----|-------------|------------------|-----------------|-----------|-------------|
@@ -266,10 +271,10 @@ construído e o original
 | GO  | 52          | 124488           | 124488          | 0         | 0,0000%     |
 | DF  | 53          | 38407            | 38407           | 0         | 0,0000%     |
 
-<h3>
+<h4>
 
 Limitações e pontos de atenção
-</h3>
+</h4>
 
 - O método depende de a base estar **corretamente ordenada** antes de
   ser passada para o programa, ou seja, com as observações do mesmo

@@ -26,7 +26,7 @@ Abra a seção abaixo para ver as principais mudanças na leitura do Censo de 19
 <details><summary style="font-size:1.5em;"><strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong></summary>
 
 
-<h3> Visão Geral e Variáveis </h3>
+<h3> Leitura do Censo: Visão Geral e Variáveis </h3>
 
 Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não disponibilizam mais as seguintes variáveis:
 
@@ -43,7 +43,9 @@ A seção abaixo descreve o método utilizado no `datazoom_censo` para identific
 domicílios (`id_dom`) a partir dos microdados do Censo 1991 lidos em formato
 .DBF.
 
-<h3> Pressupostos do método </h3>
+<h3> Construção do id_dom </h3>
+
+<h4> Pressupostos do método </h4>
 
 O método parte de três premissas sobre a estrutura dos dados:
 
@@ -73,7 +75,7 @@ seguintes condições é verdadeira, em relação à observação anterior (`_n-
   domicílio independentemente das demais variáveis;
 - muda qualquer uma das variáveis domiciliares listadas abaixo.
 
-<h3> Código (Stata) </h3>
+<h4> Código (Stata) </h4>
 
 ```stata
 
@@ -104,7 +106,7 @@ gen long id_dom = sum( ///
 Informações mais espcíficas sobre cada uma dessas variáveis podem ser encontradas no [dicionário disponibilizado pelo IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
 
 
-<h3> Como funciona o `sum()` </h3>
+<h4> Como funciona o `sum()` </h4>
 
 `sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é uma
 expressão binária (0/1). Sempre que **pelo menos uma** condição é verdadeira
@@ -119,7 +121,7 @@ retorna verdadeiro — o que garante que a primeira linha sempre inicia um novo
 domicílio (`id_dom == 1`).
 
 
-<h3> Comparação de identificadores distintos gerados usando o id_dom construído e o original </h3>
+<h4> Comparação de identificadores distintos gerados usando o id_dom construído e o original </h4>
 
 
 | UF | Código IBGE | .DBF (Data Zoom)  | .DAT (Original)   | Diferença | % Diferença     |
@@ -155,7 +157,7 @@ domicílio (`id_dom == 1`).
 
 
 
-<h3> Limitações e pontos de atenção </h3> 
+<h4> Limitações e pontos de atenção </h4> 
 
 - O método depende de a base estar **corretamente ordenada** antes de ser passada para o programa, ou seja, com as observações do mesmo domcílio aparecendo sequencialmente no dataset. A quebra da lógica sequencial pode gerar domicílios espúrios. Em julho/2026, as bases do IBGE vêm originalmente ordenadas dessa forma.
   
