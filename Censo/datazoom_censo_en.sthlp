@@ -19,7 +19,7 @@
 {title:Title}
 
 {p 4 4 2}
-{cmd:datazoom_censo} {hline 2} Access to Censo microdata
+{cmd:datazoom_censo} {hline 2} Access to Brazilian Census's (Censo) microdata
 
 {marker syntax}{...}
 {title:Syntax}
@@ -45,6 +45,13 @@
 {synopt:{opt fam}} family (2000) {p_end}
 {synopt:{opt both}} individual and household merged {p_end}
 {synopt:{opt all}} individual, family, and household merged (2000) {p_end}
+
+{syntab:Translation}
+{synopt:{opt english}} Translate variable labels from Portuguese to English {p_end}
+
+{syntab:Types of Format (only for 1991)}
+{synopt:{opt dbf91}} original data in dbf format {p_end}
+{synopt:{opt dattxt91}} original data in dbf format in dat or txt format {p_end}
 
 {synoptline}
 {p2colreset}{...}
@@ -123,6 +130,19 @@ waves. Even so, due to methodological changes, some variables are not subject to
 {opt all} specifies that the user wants to get variables at household, family and individual levels (2000). In this option,
  the three types of variables are merged in a single database. The program executes the command {help merge} 
  automatically so as to aggregate the three types of variables.
+
+{dlgtab:Translation}
+
+{phang}
+{opt english} requests that the variable labels be translated from Portuguese to English. 
+
+{dlgtab:Types of Format (only for 1991)}
+
+{phang}
+{opt dbf91} specifies that the original data in use for 1991 Census is in dbf format {p_end}
+
+{phang}
+{opt dattxt91} specifies that the original data in use for 1991 Census is in dat or txt format {p_end} 
  
 {marker examples}{...}
 {title:Examples}
@@ -133,9 +153,14 @@ Produces eight databases, one for each state and year. Variables are not made co
 {p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
 
 {p 4 4 2}
-Same eight databases, but now at both the individual and household levels, as well as with compatible variables between the years.
+Same eight databases, but now at both the individual and household levels, as well as with compatible variables between the years and variable labels translated to English.
 
-{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both english
+
+{p 4 4 2}
+Produces two databases from the year of 1991 at household level, one for each selected state, in which the original data is in .dat format.
+
+{p 8 6 2}. datazoom_censo, years(1991) original("~/mydir") saving("~/mydir") ufs(ES MG) dom dattxt91
  
 {marker remarks}{...}
 {title:Note on the original data}
@@ -158,7 +183,7 @@ work properly after the user rename his data file by adapting it to the one foun
 However, it is possible that the structure of the data used by Data Zoom is different from the structure of 
 the data owned by the user even in the case where apparently there are differences in names only. In this case, 
 the program will not work correctly. To check for possible structural differences, please check the variables dictionary 
-available for download in www.econ.puc-rio.br/datazoom and compare it with the dictionary at hand.
+available for download on our website {browse "https://datazoom.com.br/en":datazoom.com.br/en} and on our {browse "https://github.com/datazoompuc/datazoom_social_Stata":GitHub} and compare it with the dictionary at hand.
 
 {phang} - Microdata names list. For 1991 onward, suffix number refers, in general,
  to the IBGE Federative Unit codes.
@@ -177,11 +202,21 @@ available for download in www.econ.puc-rio.br/datazoom and compare it with the d
 
 {phang} 1991 
 
-{phang} - prefix for all files: CD102U
+{phang} - In 1991 there are 2 possibilities of format for original data: dat or txt (old format) e dbf (up to date format from IBGE)
+
+{phang} For dat or txt format:
+
+{phang} - prefix: CD102U
 
 {phang} - suffixes: U11 U12 U13 U14 U15 U16 U17 U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 P35 P36 U41 U42 U43 U50 U51 U52 U53
 
 {phang} - note that P35 and P36 refer to SP datafiles
+
+{phang} For dbf format:
+
+{phang} - prefix: CD91AMOUP
+
+{phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
 
 {phang} 2000
 
@@ -205,6 +240,6 @@ available for download in www.econ.puc-rio.br/datazoom and compare it with the d
 {p 4 4 2}
 DataZoom     {break}
 PUC-Rio - Department of Economics   {break}
-Contact through  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
+Contact through  {browse "https://github.com/datazoompuc/datazoom_social_Stata":GitHub}      {break}
 
 {space 4}{hline}

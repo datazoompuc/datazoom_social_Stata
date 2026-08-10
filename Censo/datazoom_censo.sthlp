@@ -46,6 +46,13 @@
 {synopt:{opt both}} pessoas e domicílios em um mesmo arquivo {p_end}
 {synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000) {p_end}
 
+{syntab:Traduz}
+{synopt:{opt english}} traduz labels das variáveis para o inglês {p_end}
+
+{syntab:Formato dos dados (apenas para o Censo de 1991)}
+{synopt:{opt dbf91}} dados originais do Censo de 91 em dbf {p_end}
+{synopt:{opt dattxt91}} dados originais do Censo de 91 em dat ou txt {p_end}
+
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
@@ -133,6 +140,19 @@ combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
 {opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados 
 para o ano 2000, ou seja, o programa executa o comando {help merge} automaticamente para unir os
  três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
+ 
+{dlgtab:Traduz}
+
+{phang}
+{opt english} solicita que o dataset final venha com as labels das variáveis traduzidas em inglês.
+
+{dlgtab:Formato dos dados (apenas para 1991)}
+
+{phang}
+{opt dbf91}  especifica que os dados originais em uso do Censo de 91 estão em dbf (Não pode ser combinada com {opt dattxt91}).
+
+{phang}
+{opt dattxt91}  especifica que os dados originais em uso do Censo de 91 estão em dat ou em txt (Não pode ser combinada com {opt dbf91}).
 
 {marker examples}{...}
 {title:Examples}
@@ -143,9 +163,14 @@ Produz oito bases de dados, uma para cada estado e anos escolhidos. As variávei
 {p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) pes
 
 {p 4 4 2}
-As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas.
+As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base contém as variáveis de pessoas e domicílios, todas compatibilizadas e com labels das variáveis traduzidos em inglês.
 
-{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both
+{p 8 6 2}. datazoom_censo, years(1970 2000) original("~/mydir") saving("~/mydir") ufs(BA RJ SP DF) comp both english
+
+{p 4 4 2}
+Produz duas bases de dados com as variáveis de domicílio do ano de 1991, uma para cada estado escolhido, sendo que os dados originais estão em .dat
+
+{p 8 6 2}. datazoom_censo, years(1991) original("~/mydir") saving("~/mydir") ufs(ES MG) dom dattxt91
  
 {marker remarks}{...}
 {title:Nota sobre os dados originais}
@@ -167,7 +192,7 @@ deve funcionar corretamente após o usuário renomear seus arquivos de dados ada
 No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
 dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes. Se isso ocorrer, 
 o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 
-variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare com o dicionário em mãos.
+variáveis disponível para download em nosso site {browse "https://datazoom.com.br":datazoom.com.br} e no nosso {browse "https://github.com/datazoompuc/datazoom_social_Stata":GitHub} e compare com o dicionário em mãos.
 
 {phang} - Lista dos nomes dos arquivos de microdados. De 1991 em diante, os números dos sufixos, em geral, referem-se
  aos códigos IBGE de cada estado.
@@ -186,11 +211,21 @@ variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare c
 
 {phang} 1991 
 
-{phang} - prefixo para todos arquivos: CD102U
+{phang} - Em 1991 existem 2 possibilidades de formatos dos dados originais: dat ou txt (formato antigo) e dbf (formato atual disponibilizado pelo IBGE)
+
+{phang} Para os arquivos em dat ou txt:
+
+{phang} - prefixo: CD102U
 
 {phang} - sufixos: U11 U12 U13 U14 U15 U16 U17 U21 U22 U23 U24 U25 U26 U27 U28 U29 U31 U32 U33 P35 P36 U41 U42 U43 U50 U51 U52 U53
 
 {phang} - note que P35 e P36 referem-se aos dados para SP
+
+{phang} Para os arquivos em dbf:
+
+{phang} - prefixo: CD91AMOUP
+
+{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
 
 {phang} 2000
 
@@ -214,6 +249,6 @@ variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare c
 {p 4 4 2}
 DataZoom     {break}
 PUC-Rio - Departamento de Economia      {break}
-Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
+Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":GitHub}      {break}
 
 {space 4}{hline}
