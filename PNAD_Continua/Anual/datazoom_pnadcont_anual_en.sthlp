@@ -29,10 +29,10 @@
 {synopthdr}
 {synoptline}
 {syntab:Input}
-{synopt:{opt years(numlist)}}  {p_end}
+{synopt:{opt years(numlist)}} years followed by visits or trimesters (quarters) {p_end}
 {synopt:{opt original(str)}} path to original microdata {p_end}
 {synopt:{opt saving(str)}} path where databases will be saved {p_end}
-{synopt:{opt english}} variable labels in English {p_end}
+{synopt:{opt english}} requests variable labels in English {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
@@ -44,35 +44,30 @@ Use command {cmd:db datazoom_pnadcont_anual_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_pnadcont_anual} extracts and builds databases from the original PNAD Contínua 
-Annual Dissemination microdata, for years 2012 to 2019. 
+Annual Dissemination microdata, for years 2012 to 2024. 
 
 {p 4 4 2}
-Although Annual Continuous PNAD is an annual survey, from 2016 this program allows selection for the first interview of the household (2016_entr1 and 2017_entr1 ) and 
-for the 5th interview of the household (2016_entr5 and 2017_entr5). This is due to the change in IBGE's survey with the transfer of the questions  "Other forms of work"
- to the 5th home interview in the years 2016 and 2019. For each interview, there is an original txt database available on the IBGE website. 
- For more information about the survey's change, read the technical note of the survey on the IBGE website.
+This program allows, for each year, the selection of the available household acumulated visits and quarters for data extraction. For example, years(2016_vis1 2017_tri2) refers to the first cumulative household visits in 2016 and to the second quarter (trimester) of 2017. Annual Continuous PNAD data are particularly useful for the analysis of PNAD supplements, in which IBGE includes additional questions on specific topics in particular quarters and household visits in selected years. To verify the periods in which each supplement is available, consult the Supplements Guide. Users may generate a download link using the program’s dialog box, or alternatively search directly on the IBGE website. For further information on cumulative visits data, quarters, and supplements, read the survey’s technical note available on the IBGE website. For each household visit and each quarter, there is an original txt database available on the IBGE website. Users must download the original data files and provide the path to this folder in the option original() in order to use the command correctly.
  
 {p 4 4 2}
 Since IBGE still conducts Annual PNAD Continuous surveys, this program will be continuously updated.
   
 {p 4 4 2}
-The program generates a database for each selected year. If necessary, use
-command {help append} in order to aggregate all years.
+The program generates one dataset for each selected period (year_visit and/or year_quarter). It may be useful to use the {help append} command to stack the datasets, provided that they are compatible.
 
 {marker options}{...}
 {title:Options}
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} specifies the list of years the user wants to work with. This program
-covers all years from 2012 to 2019.
+{opt years(numlist)} Specifies the list of years, together with the household visits and/or quarters with which the user wishes to work. This program can be used for the period from 2012 to 2024, with specific visits and quarters. Annual dissemination microdata files are not available for all visits or quarters. Therefore, it is necessary to verify which visits and quarters are available in order to call the command correctly.
 
-{phang} {opt original(str)} indicates the path of the original data files. 
-There is one data file for each annual survey, except for 2016 and 2017, when there are two annual surveys per year 
-(one referring to the first interview and another referring to the fifth interview). All of these files must be placed in the same 
-folder for the program's proper functioning.
+{phang} {opt original(str)} Indicates the path to the folder where the original data files are located. There are microdata files for each survey year, and there may be one or more files per year, referring to cumulative household visits and quarters. All files must be stored in the same folder in order for the program to work properly. 
+The Portal does not provide the original data files, which can be obtained from the IBGE website.
 
 {phang} {opt saving(str)} specifies the folder path where the new databases are to be saved.
+
+{phang} {opt english} requests English variable labels. By default, labels are provided in Portuguese (Brazil).
 
 {marker examples}{...}
 {title:Examples}
@@ -80,10 +75,10 @@ folder for the program's proper functioning.
 {p 4 4 2}
 Annual databases, with English variable labels
 
-{p 8 6 2}. datazoom_pnadcont_anual, years(2012 2014 2015) original("~/mydir") saving("~/mydir") english 
+{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2017_tri2) original("~/mydir") saving("~/mydir") english 
 
 {p 6 6 2}
-Three databases are created, one per year.
+Three databases are created, one per visit or quarter.
 
 {title:Author}
 

@@ -29,6 +29,7 @@ syntax, year(integer) [english] [original(str)]
 if "`english'" != "" local lang "_en"
 
 tempfile dic
+local dic "`dic'.dct"
 
 findfile dict.dta
 

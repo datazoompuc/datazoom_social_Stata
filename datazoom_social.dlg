@@ -1,4 +1,4 @@
-VERSION 2.0
+VERSION 10.0
 SYNCHRONOUS_ONLY
 
 POSITION . . 644 250
@@ -6,6 +6,16 @@ POSITION . . 644 250
 DIALOG main, label("Datazoom Social")
 BEGIN
 	
+	FRAME fr_censo   		5   30 160 100
+	FRAME fr_ecinf  		+158 @  @   @
+	FRAME fr_pme  			+158 @  @   @
+	FRAME fr_pnad  			+158 @  @   @
+	
+	FRAME fr_pncon   		5   128 160 100
+	FRAME fr_pncov  		+158 @  @   @
+	FRAME fr_pns  			+158 @  @   @
+	FRAME fr_pof  			+158 @  @   @
+
 	TEXT tx_eng  10   3 250 25, label("For the English version of this dialog box, click") left
 	HLINK hl_eng 258 3 240 20, label("here") left onpush(script child_en)
 	
@@ -28,16 +38,6 @@ BEGIN
 	TEXTBOX txb_pncov			+158 @ @ @, label("PNAD Covid - 2020") center
 	TEXTBOX txb_pns   			+158 @ @ @, label("Pesquisa Nacional de Saúde - 2013 e 2019") center
 	TEXTBOX txb_pof 			+158 @ @ @, label("Pesquisa de Orçamentos Familiares - 1995 a 2018") center
-	
-	FRAME fr_censo   		5   30 160 100
-	FRAME fr_ecinf  		+158 @  @   @
-	FRAME fr_pme  			+158 @  @   @
-	FRAME fr_pnad  			+158 @  @   @
-	
-	FRAME fr_pncon   		5   128 160 100
-	FRAME fr_pncov  		+158 @  @   @
-	FRAME fr_pns  			+158 @  @   @
-	FRAME fr_pof  			+158 @  @   @
 	
     TEXT bottom1   10   230  480  ., label("PUC-Rio - Departamento de Economia") left
 	TEXT bottom2   568   230  100  ., label("Versão 2.0") left

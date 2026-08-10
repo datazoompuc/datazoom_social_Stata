@@ -1,21 +1,15 @@
-VERSION 2.0
+VERSION 10.0
 SYNCHRONOUS_ONLY
 
-POSITION . . 160 90
+POSITION . . 300 130
 
 DIALOG main, label("PNAD Contínua")
 BEGIN
+	BUTTON btn_anual          90 15 120 25, label("Anual") onpush(script child_anual)
+	BUTTON btn_trimestral     90 50 120 25, label("Trimestral") onpush(script child_trimestral)
 	
-	BUTTON btn_anual			20 10 120 25, label("Anual") onpush(script child_anual)
-	
-	BUTTON btn_trimestral			20 52 120 25, label("Trimestral") onpush(script child_trimestral)
-	
-	FRAME fr_anual   			0  0 400 45
-
-	FRAME fr_trimestral   			0  43 400 45
-	
-    TEXT bottom1   10   230  480  ., label("PUC-Rio - Departamento de Economia") left
-	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
+	TEXT bottom1               0 90 300 15, label("PUC-Rio - Departamento de Economia") center
+	TEXT bottom2               0 105 300 15, label("Versão 2.0") center
 END
 
 CANCEL can1, label("Cancel")
@@ -23,17 +17,17 @@ HELP hlp1,   view("help datazoom_pnad_continua")
 RESET res1
 
 SCRIPT PREINIT_SCRIPT
-   BEGIN
-      create STRING nomeDialog
-      nomeDialog.storeDialogClassName
-   END
+BEGIN
+	create STRING nomeDialog
+	nomeDialog.storeDialogClassName
+END
 
 SCRIPT child_anual
-   BEGIN
-      create CHILD datazoom_pnadcont_anual, allowsubmit
-   END   
- 
+BEGIN
+	create CHILD datazoom_pnadcont_anual AS pnad_anual, allowsubmit
+END   
+
 SCRIPT child_trimestral
-   BEGIN
-      create CHILD datazoom_pnadcontinua, allowsubmit
-   END
+BEGIN
+	create CHILD datazoom_pnadcontinua AS pnad_trimestral, allowsubmit
+END

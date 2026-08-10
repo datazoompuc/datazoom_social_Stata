@@ -85,6 +85,7 @@ foreach ano in `years' {
 				display as input "Extraindo `ano' `UF' - `suf' ..."
 				
 				tempfile dic
+				local dic "`dic'.dct"
 
 				findfile dict.dta
 
@@ -239,6 +240,7 @@ foreach ano in `years' {
 				/* Abrindo arquivo           */
 				
 				tempfile dic
+				local dic "`dic'.dct"
 
 				findfile dict.dta
 
@@ -1408,6 +1410,7 @@ foreach ano in `years' {
 					* resgata códigos do município e microrregião do arquivo de domicílios
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1437,6 +1440,7 @@ foreach ano in `years' {
 					/* Primeiros base de pessoas */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1497,6 +1501,7 @@ foreach ano in `years' {
 					/* Agora os domicílios */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1618,6 +1623,7 @@ foreach ano in `years' {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1644,6 +1650,7 @@ foreach ano in `years' {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1678,6 +1685,7 @@ foreach ano in `years' {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1798,6 +1806,7 @@ foreach ano in `years' {
 					/* Infile arquivo novo para os 14 municípios */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1820,6 +1829,7 @@ foreach ano in `years' {
 					/* Abrindo arquivo principal */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1866,6 +1876,7 @@ foreach ano in `years' {
 					/* Infile arquivo novo para os 14 municípios */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -1888,6 +1899,7 @@ foreach ano in `years' {
 					/* Abrindo arquivo principal */
 					
 					tempfile dic
+					local dic "`dic'.dct"
 
 					findfile dict.dta
 
@@ -5252,7 +5264,7 @@ if `p'==1 {
 	*             7 doente ou inválido
 	*             8 afazeres domésticos
 	*             9 sem ocupação
-	
+
 	recode cond_ativ (0/2=1) (3/9 =0), copy g(pea)
 	lab var pea "população economicamente ativa"
 	* pea	= 1 economicamente ativo

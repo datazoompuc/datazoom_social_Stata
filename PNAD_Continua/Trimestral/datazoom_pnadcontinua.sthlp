@@ -18,7 +18,7 @@
 {title:Title}
 
 {p 4 4 2}
-{cmd:datazoom_pnadcont_anual} {hline 2} Acesso aos microdados da PNAD Contínua {c -}  Divulgação Trimestral
+{cmd:datazoom_pnadcontinua} {hline 2} Acesso aos microdados da PNAD Contínua {c -}  Divulgação Trimestral
 
 {marker syntax}{...}
 {title:Syntax}
@@ -34,10 +34,10 @@
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 {synopt:{opt english}} labels das variáveis em inglês {p_end}
 
-{syntab:Identificação do Indivíduo}
+{syntab:Identificação do Indivíduo (é necessário escolher uma das opções abaixo)}
 {synopt:{opt nid}} Sem identificação {p_end}
 {synopt:{opt idbas}} Identificação básica {p_end}
-{synopt:{opt idrs}} Avançada {p_end}
+{synopt:{opt idrs}} Avançada (Ribas-Soares) {p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}
@@ -48,8 +48,8 @@ Digite {cmd:db datazoom_pnadcontinua} para utilizar a função via caixa de diá
 {title:Description}
 
 {p 4 4 2}
-{cmd:datazoom_pnadcontinua} extrai e constrói bases de dados da PNAD Contínua em formato Stata a partir 
-dos microdados originais. O programa pode ser utilizado para os anos de 2012 a 2020. 
+{cmd:datazoom_pnadcontinua} extrai e gera bases de dados da PNAD Contínua em formato Stata a partir 
+dos microdados originais do IBGE, que devem ser previamente baixados. Atualmente programa pode ser utilizado para os anos de 2012 a 2025. 
 
 {p 4 4 2}
 Embora seja uma pesquisa trimestral, este programa não permite a escolha de trimestres específicos para extração, 
@@ -57,8 +57,8 @@ somente anos. O pacote gera uma base única para o ano, com os trimestres empilh
 IBGE, este programa está em constante atualização.
   
 {p 4 4 2}
-A Pnad Contínua Trimestral é uma pesquisa em painel, na qual cada domicílio é entrevistado cinco vezes, durante cinco trimestres 
-consecutivos. Apesar de identificar corretamente o mesmo domicílio nas cinco entrevistas, a Pnad Contínua não atribui o 
+A PNAD Contínua Trimestral é uma pesquisa em painel, na qual cada domicílio é entrevistado cinco vezes, durante cinco trimestres 
+consecutivos. Apesar de identificar corretamente o mesmo domicílio nas cinco entrevistas, a PNAD Contínua não atribui o 
 mesmo número de identificação a cada membro do domicílio em todas as entrevistas. Caso o usuário necessite trabalhar com um painel
 de indivíduos, é necessário construir uma variável que identifique o mesmo indivíduo ao longo das pesquisas. 
 Para isso, são utilizados os algoritmos propostos por Ribas e Soares (2008). Os autores elaboram uma identificação básica e outra
@@ -67,9 +67,8 @@ A ideia dos algoritmos é verificar inconsistências no conjunto de variáveis. 
 da capacidade computacional utilizada, o programa pode consumir um tempo razoável para realizar a identificação.
 
 {p 4 4 2}
-Se a opção {opt nid} for escolhida, uma base de dados para cada ano selecionado será gerada. Ao utilizar as outras opçãos 
-(identificadas), é necessário selecionar todos os ano. As base de dados para cada painel da PNAD Contínua será o produto final.
-Um painel da PNAD é um conjunto de domicílios que ingressam e deixam o ciclo de entrevistas no mesmo trimestre. Se for o caso,
+Se a opção {opt nid} (sem identificação) for escolhida, uma base de dados para cada ano selecionado será gerada. Ao utilizar as outras opções 
+(identificadas), é necessário selecionar todos os anos que compõem o painel de interesse. As base de dados para cada painel da PNAD Contínua que tem parte nos anos selecionados será o produto final. Um painel da PNAD é um conjunto de domicílios que ingressam e deixam o ciclo de entrevistas no mesmo trimestre. Se for o caso,
 utilize o comando {help append} para empilhar as bases.
 
 
@@ -78,8 +77,8 @@ utilize o comando {help append} para empilhar as bases.
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para o período de 2012 a 2020. Não é possível escolher trimestres específicos.
+{opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa atualmente
+pode ser utilizado para o período de 2012 a 2025. Não é possível escolher trimestres específicos.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
 Existe um arquivo de microdados para cada trimestre da pesquisa. Todos eles devem estar posicionados na mesma pasta 
@@ -87,16 +86,21 @@ para que o programa funcione adequadamente.
 
 {phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
 
+{phang} {opt nid} Sem identificação / {opt idbas} Identificação básica / {opt idrs} Avançada (Ribas-Soares)
+
+{phang} {opt english} gera labels das variáveis em inglês (opcional)
+
+
 {marker examples}{...}
 {title:Examples}
 
 {p 4 4 2}
 Bases de dados trimestrais 
 
-{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original("~/mydata") saving("~/mydata") english
+{p 8 6 2}datazoom_pnadcontinua, years(2012 2013 2014) original("~/mydata") saving("~/mydata") nid english
 
 {p 6 6 2}
-Três bases de dados são geradas, uma para cada ano selecionado.
+Três bases de dados são geradas, uma para cada ano selecionado, sem identificação de indivíduos ao longo dos painéis e com labels das variáveis em inglês.
 
 {title:Author}
 
