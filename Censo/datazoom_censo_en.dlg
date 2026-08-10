@@ -33,13 +33,13 @@ BEGIN
 	  
    TEXT instrUF       145    5  350   ., label("Select states and/or geographical regions:")
 	  CHECKBOX chkregN   140   30  175 126, label("North") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
-	  CHECKBOX chkAC   +5  +22  200   20, label("Acre") onclickoff(script nemtudoN) option(AC)
-      CHECKBOX chkAP    @  +25  200   20, label("Amapá") onclickoff(script nemtudoN) option(AP)
-      CHECKBOX chkAM    @  +25  200   20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
-      CHECKBOX chkPA  +85  -50  200   20, label("Pará") onclickoff(script nemtudoN) option(PA)
-      CHECKBOX chkRO    @  +25  200   20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
-      CHECKBOX chkRR    @  +25  200   20, label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -85  +25  200   20, label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+	  CHECKBOX chkAC   +5  +22  200 20, label("Acre") onclickoff(script nemtudoN) option(AC)
+      CHECKBOX chkAP    @  +25  200 20, label("Amapá") onclickoff(script nemtudoN) option(AP)
+      CHECKBOX chkAM    @  +25  200 20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
+      CHECKBOX chkPA  +85  -50  200 20, label("Pará") onclickoff(script nemtudoN) option(PA)
+      CHECKBOX chkRO    @  +25  200 20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
+      CHECKBOX chkRR    @  +25  200 20, label("Roraima") onclickoff(script nemtudoN) option(RR)
+      CHECKBOX chkTO  -85  +25  200 20, label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
 
    CHECKBOX chkregNE  140  +45  175 183, label("Northeast") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200 20, label("Alagoas") onclickoff(script nemtudoNE) option(AL)
