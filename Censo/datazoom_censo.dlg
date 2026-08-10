@@ -24,6 +24,7 @@ BEGIN
    RADIO	both		+0 +20 100 20, middle	label("Ambos merged") onclickon(script bothon) option(both) 
    RADIO	all		+0 +20 100 20, last 		label("Todos merged") onclickon(script allon) option(all) 
  
+ 
    GROUPBOX caixaCompatibility 10 +30 115 45, label("Compatibilidade")
       CHECKBOX chkcomp    +10  +20  430 20, label("Opção ativada") option(comp)
 
@@ -33,13 +34,13 @@ BEGIN
 	  
    TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
 	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
-	  CHECKBOX chkAC   +5  +22  200   20, label("Acre") onclickoff(script nemtudoN) option(AC)
-      CHECKBOX chkAP    @  +25  200   20, label("Amapá") onclickoff(script nemtudoN) option(AP)
-      CHECKBOX chkAM    @  +25  200   20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
-      CHECKBOX chkPA  +85  -50  200   20, label("Pará") onclickoff(script nemtudoN) option(PA)
-      CHECKBOX chkRO    @  +25  200   20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
-      CHECKBOX chkRR    @  +25  200   20, label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -85  +25  200   20, label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
+	  CHECKBOX chkAC   +5  +22  200 20, label("Acre") onclickoff(script nemtudoN) option(AC)
+      CHECKBOX chkAP    @  +25  200 20, label("Amapá") onclickoff(script nemtudoN) option(AP)
+      CHECKBOX chkAM    @  +25  200 20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
+      CHECKBOX chkPA  +85  -50  200 20, label("Pará") onclickoff(script nemtudoN) option(PA)
+      CHECKBOX chkRO    @  +25  200 20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
+      CHECKBOX chkRR    @  +25  200 20, label("Roraima") onclickoff(script nemtudoN) option(RR)
+      CHECKBOX chkTO  -85  +25  200 20, label("Tocantins (1991 a 2010)") onclickoff(script nemtudoN) option(TO)
 
    CHECKBOX chkregNE  140  +45  175 183, label("Nordeste") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200 20, label("Alagoas") onclickoff(script nemtudoNE) option(AL)
