@@ -127,8 +127,8 @@ pelo Data Zoom.
 Leitura do Censo: Visão Geral e Variáveis
 </h3>
 
-Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF não
-disponibilizam mais as seguintes variáveis:
+Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF
+disponibilizados no site do IBGE não contêm mais as seguintes variáveis:
 
 - v0102 Identificação do questionário (id_dom)
 - v3041 Homens na familia
@@ -160,10 +160,10 @@ O método parte de três premissas sobre a estrutura dos dados:
     diferentes).
 
 2.  **Domicílio muda quando qualquer variável domiciliar muda:** Os
-    registros de um mesmo domicílio devem apresentar os mesmos registros
-    em variáveis domiciliares. Ou seja, se duas linhas consecutivas
-    pertencem ao mesmo domicílio, elas devem ter exatamente os mesmos
-    valores para todas as variáveis domiciliares.
+    registros de um mesmo domicílio devem apresentar as mesmas
+    informações em variáveis domiciliares. Ou seja, se duas linhas
+    consecutivas pertencem ao mesmo domicílio, elas devem ter exatamente
+    os mesmos valores para todas as variáveis domiciliares.
 
 3.  **Observações consecutivas com os mesmos dados domiciliares são do
     mesmo domicílio:** Existem 37 variáveis domiciliares, sendo algumas
@@ -241,6 +241,12 @@ Comparação de identificadores distintos gerados usando o id_dom
 construído e o original
 </h4>
 
+A tabela a seguir apresenta a contagem de domicílios com base nos dados
+em .DBF usando o identificador de domicílio construído pelo Data Zoom e
+compara com a contagem de domicílios com base nos dados em .DAT usando o
+identificador de domicílio original do IBGE (disponível apenas nos dados
+em .DAT):
+
 | UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença | % Diferença |
 |-----|-------------|------------------|-----------------|-----------|-------------|
 | RO  | 11          | 26859            | 26850           | 9         | 0,0335%     |
@@ -270,6 +276,10 @@ construído e o original
 | MT  | 51          | 60831            | 60831           | 0         | 0,0000%     |
 | GO  | 52          | 124488           | 124488          | 0         | 0,0000%     |
 | DF  | 53          | 38407            | 38407           | 0         | 0,0000%     |
+
+A pequena diferença apresentada indica que o identificador criado pelo
+Data Zoom consegue replicar com boa precisão o identificador de
+domicílio original.
 
 <h4>
 
