@@ -17,7 +17,161 @@ Há diferenças nos questionários da amostra ao longo dos anos. Por isso, diver
 
 Para utilizar o pacote do Data Zoom no Stata, você deve baixar os arquivos de microdados para o seu computador. O IBGE disponibiliza gratuitamente para download os microdados e a documentação para os Censos de 2010, 2000, 1991, 1980 e 1970. Encontre os arquivos [neste link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads). Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com dados de 14 municípios que sofreram reponderação posteriormente.
 
-Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de 1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para compra. Nesta mudança, o formato em que os dados são disponibilizados também mudou. O Data Zoom terá que ajustar seus códigos para esse novo formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para os dados no formato antigo. Atualizaremos este documento quando a versão do pacote flexível ao novo formato estiver disponível.
+Recentemente ocorreram mudanças na disponibilização dos microdados dos Censos de 1970, 1980 e 1991. Antes eles estavam disponíveis apenas mediante compra, mas agora estão disponíveis gratuitamente no site do IBGE. Além disso, neste processo ocorreram mudanças importantes para o Censo de 1991, como a mudança para o formato .DBF e a omissão do identicador de domicílio. Por isso, o Data Zoom precisou ajustar seus códigos, principalmente para construir um novo identificador de domicílio para o Censo de 1991. 
+
+Ainda é possível fazer a leitura dos microdados do Censo de 1991 para quem possui os dados antigos (em .TXT ou .DAT), mas agora há também a possibilidade de usar os dados atualmente disponibilizados pelo IBGE no site oficial (em .DBF).
+
+Abra a seção abaixo para ver as principais mudanças na leitura do Censo de 1991 e a documentação do novo identificador de domicílios construído pelo Data Zoom.
+
+<details><summary style="font-size:1.5em;"><strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong></summary>
+
+
+<h3> Leitura do Censo: Visão Geral e Variáveis </h3>
+
+Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF disponibilizados no site do IBGE não contêm mais as seguintes variáveis:
+
+- v0102	Identificação do questionário (id_dom)
+- v3041	Homens na familia
+- v3042	Mulheres na familia
+- v0111	Número de homens no domicílio
+- v0112	Número de mulheres no domicílio
+
+Assim, o identificador de domicílio não vem pronto nos arquivos originais em
+.DBF, e ele precisa ser reconstruído.
+
+A seção abaixo descreve o método utilizado no `datazoom_censo` para identificar
+domicílios (`id_dom`) a partir dos microdados do Censo 1991 lidos em formato
+.DBF.
+
+<h3> Construção do id_dom </h3>
+
+<h4> Pressupostos do método </h4>
+
+O método parte de três premissas sobre a estrutura dos dados:
+
+1. **Ordem sequencial**:
+   Os registros de pessoas de um mesmo domicílio
+   aparecem em sequência no arquivo (não há intercalação de domicílios
+   diferentes).
+   
+2. **Domicílio muda quando qualquer variável domiciliar muda:**
+   Os registros de um mesmo domicílio devem apresentar as mesmas informações em variáveis domiciliares. Ou seja, se duas linhas consecutivas pertencem ao mesmo domicílio, elas devem ter exatamente os mesmos valores para todas as variáveis domiciliares. 
+   
+3. **Observações consecutivas com os mesmos dados domiciliares são do mesmo domicílio:**
+   Existem 37 variáveis domiciliares, sendo algumas delas contínuas, como aluguel e rendimento nominal,
+   dessa forma, é extremamente improvável que dois domicílios consecutivos apresentem exatamente
+   os mesmos dados para cada uma das variáveis domiciliares, a menos que sejam do mesmo domicílio.
+
+
+A partir disso, um novo domicílio é identificado quando **qualquer uma** das
+seguintes condições é verdadeira, em relação à observação anterior (`_n-1`):
+
+- muda o município (`MUNICNUM`);
+- muda a espécie do domicílio (`ESPECIE`);
+- o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um novo
+  domicílio independentemente das demais variáveis;
+- muda qualquer uma das variáveis domiciliares listadas abaixo.
+
+<h4> Código (Stata) </h4>
+
+```stata
+
+gen long id_dom = sum( ///
+      (MUNICNUM != MUNICNUM[_n-1])  | ///  muda o município
+      (ESPECIE  != ESPECIE[_n-1])   | ///  muda a espécie do domicílio
+      (PARENDOM == 20)              | ///  indivíduo mora sozinho
+      (RDOMICIV != RDOMICIV[_n-1])  | (ALUGUEL  != ALUGUEL[_n-1])  | ///
+      (PESO     != PESO[_n-1])      | (DEMODORM != DEMODORM[_n-1]) | ///
+      (COMBCOZI != COMBCOZI[_n-1])  | (AGUA     != AGUA[_n-1])     | ///
+      (ALUGUEFX != ALUGUEFX[_n-1])  | (ASPIRPO  != ASPIRPO[_n-1])  | ///
+      (AUTPART  != AUTPART[_n-1])   | (AUTTRAB  != AUTTRAB[_n-1])  | ///
+      (BANHEIRO != BANHEIRO[_n-1])  | (CD107    != CD107[_n-1])    | ///
+      (COBERTUR != COBERTUR[_n-1])  | (COMODOR  != COMODOR[_n-1])  | ///
+      (COMODOS  != COMODOS[_n-1])   | (CONDOCUP != CONDOCUP[_n-1]) | ///
+      (DEMOCOFX != DEMOCOFX[_n-1])  | (DEMOCOMO != DEMOCOMO[_n-1]) | ///
+      (DEMODOFX != DEMODOFX[_n-1])  | (FILTRO   != FILTRO[_n-1])   | ///
+      (FREEZER  != FREEZER[_n-1])   | (GELADEIR != GELADEIR[_n-1]) | ///
+      (ILUMINA  != ILUMINA[_n-1])   | (LIXO     != LIXO[_n-1])     | ///
+      (LOCALIZA != LOCALIZA[_n-1])  | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+      (PAREDES  != PAREDES[_n-1])   | (RADIO    != RADIO[_n-1])    | ///
+      (RDONOMIF != RDONOMIF[_n-1])  | (RDOREALF != RDOREALF[_n-1]) | ///
+      (SANESCOA != SANESCOA[_n-1])  | (SANUSO   != SANUSO[_n-1])   | ///
+      (TELEFONE != TELEFONE[_n-1])  | (TVCORES  != TVCORES[_n-1])  | ///
+      (TVPRETO  != TVPRETO[_n-1]) )
+```
+
+Informações mais específicas sobre cada uma dessas variáveis podem ser encontradas no [dicionário disponibilizado pelo IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
+
+
+<h4> Como funciona o `sum()` </h4>
+
+`sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é uma
+expressão binária (0/1). Sempre que **pelo menos uma** condição é verdadeira
+na linha `_n`, o resultado da soma booleana daquela linha é 1, o que
+incrementa o acumulado — criando assim um novo valor de `id_dom`. Quando
+nenhuma condição é verdadeira, o acumulado permanece igual ao da linha
+anterior, e a observação é atribuída ao mesmo domicílio.
+
+Na primeira observação da base (`_n-1` inexistente), o Stata trata os
+componentes `X[_n-1]` como *missing*, e qualquer comparação com *missing*
+retorna verdadeiro — o que garante que a primeira linha sempre inicia um novo
+domicílio (`id_dom == 1`).
+
+
+<h4> Comparação de identificadores distintos gerados usando o id_dom construído e o original </h4>
+
+A tabela a seguir apresenta a contagem de domicílios com base nos dados em .DBF usando o identificador de domicílio construído pelo Data Zoom e compara com a contagem de domicílios com base nos dados em .DAT usando o identificador de domicílio original do IBGE (disponível apenas nos dados em .DAT):
+
+| UF | Código IBGE | .DBF (Data Zoom)  | .DAT (Original)   | Diferença | % Diferença     |
+|----|-------------|-------------------|-------------------|-----------|-----------------|
+| RO | 11          | 26859             | 26850             | 9         | 0,0335%         |
+| AC | 12          | 9824              | 9824              | 0         | 0,0000%         |
+| AM | 13          | 45583             | 45583             | 0         | 0,0000%         |
+| RR | 14          | 5485              | 5486              | -1        | -0,0182%        |
+| PA | 15          | 103849            | 103849            | 0         | 0,0000%         |
+| AP | 16          | 6073              | 6073              | 0         | 0,0000%         |
+| TO | 17          | 29801             | 29801             | 0         | 0,0000%         |
+| MA | 21          | 105843            | 105841            | 2         | 0,0019%         |
+| PI | 22          | 66477             | 66477             | 0         | 0,0000%         |
+| CE | 23          | 151181            | 151181            | 0         | 0,0000%         |
+| RN | 24          | 72051             | 72051             | 0         | 0,0000%         |
+| PB | 25          | 89691             | 89692             | -1        | -0,0011%        |
+| PE | 26          | 172781            | 172781            | 0         | 0,0000%         |
+| AL | 27          | 61493             | 61493             | 0         | 0,0000%         |
+| SE | 28          | 42139             | 42139             | 0         | 0,0000%         |
+| BA | 29          | 306696            | 306697            | -1        | -0,0003%        |
+| MG | 31          | 462237            | 462239            | -2        | -0,0004%        |
+| ES | 32          | 70507             | 70507             | 0         | 0,0000%         |
+| RJ | 33          | 357009            | 357010            | -1        | -0,0003%        |
+| SP | 35          | 879368            | 879371            | -3        | -0,0003%        |
+| PR | 41          | 249309            | 249310            | -1        | -0,0004%        |
+| SC | 42          | 141031            | 141032            | -1        | -0,0007%        |
+| RS | 43          | 292564            | 292564            | 0         | 0,0000%         |
+| MS | 50          | 52966             | 52966             | 0         | 0,0000%         |
+| MT | 51          | 60831             | 60831             | 0         | 0,0000%         |
+| GO | 52          | 124488            | 124488            | 0         | 0,0000%         |
+| DF | 53          | 38407             | 38407             | 0         | 0,0000%         |
+
+A pequena diferença apresentada indica que o identificador criado pelo Data Zoom consegue replicar com boa precisão o identificador de domicílio original.
+
+
+
+<h4> Limitações e pontos de atenção </h4> 
+
+- O método depende de a base estar **corretamente ordenada** antes de ser passada para o programa, ou seja, com as observações do mesmo domcílio aparecendo sequencialmente no dataset. A quebra da lógica sequencial pode gerar domicílios espúrios. Em julho/2026, as bases do IBGE vêm originalmente ordenadas dessa forma.
+  
+- Se dois domicílios diferentes em um mesmo município, por coincidência, tiverem valores idênticos em
+  **todas** as variáveis domiciliares, os moradores não morarem sozinhos, e estiverem em sequência no
+  arquivo, o programa os tratará como um único domicílio (falso negativo).
+
+- Se houver um erro nos dados de forma que pessoas de um mesmo domicílio apresentem
+  informações domiciliares distintas, esse erro gerará um domicílio a mais
+  do que deveria (falso positivo). 
+  
+---
+
+
+</details>
 
 ### Arquivos de apoio
 
