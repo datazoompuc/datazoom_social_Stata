@@ -38,7 +38,7 @@ pacote. Os dados estão disponíveis no site do
 Digite o código abaixo na linha de comando do Stata para baixar e
 instalar a versão mais recente do pacote
 
-    net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") force
+    net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/main/") force
 
 ## Uso
 
@@ -120,7 +120,12 @@ Abra a seção abaixo para ver as principais mudanças na leitura do Censo
 de 1991 e a documentação do novo identificador de domicílios construído
 pelo Data Zoom.
 
-<details><summary style="font-size:1.5em;"><strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong></summary>
+<details>
+
+<summary style="font-size:1.5em;">
+
+<strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong>
+</summary>
 
 <h3>
 
@@ -314,9 +319,19 @@ Limitações e pontos de atenção
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
-<details><summary>Em português:</summary>
+<details>
 
-- <details><summary>Dicionários e Compatibilização</summary>
+<summary>
+
+Em português:
+</summary>
+
+- <details>
+
+  <summary>
+
+  Dicionários e Compatibilização
+  </summary>
 
   - [Compatibilização dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
@@ -333,7 +348,12 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details><summary>Questionários</summary>
+- <details>
+
+  <summary>
+
+  Questionários
+  </summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -350,7 +370,12 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details><summary>Manuais do Recenseador</summary>
+- <details>
+
+  <summary>
+
+  Manuais do Recenseador
+  </summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -369,9 +394,19 @@ Limitações e pontos de atenção
 
 </details>
 
-<details><summary>Em inglês:</summary>
+<details>
 
-- <details><summary>Dictionaries and Compatibilization</summary>
+<summary>
+
+Em inglês:
+</summary>
+
+- <details>
+
+  <summary>
+
+  Dictionaries and Compatibilization
+  </summary>
 
   - [Censo’s
     Compatibilization](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
@@ -388,7 +423,12 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details><summary>Questionnaires</summary>
+- <details>
+
+  <summary>
+
+  Questionnaires
+  </summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -405,7 +445,12 @@ Limitações e pontos de atenção
 
   </details>
 
-- <details><summary>Census Taker Manuals</summary>
+- <details>
+
+  <summary>
+
+  Census Taker Manuals
+  </summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -450,7 +495,12 @@ aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
 
-<details><summary>Em português:</summary>
+<details>
+
+<summary>
+
+Em português:
+</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
@@ -459,7 +509,12 @@ aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 
 </details>
 
-<details><summary>Em inglês:</summary>
+<details>
+
+<summary>
+
+Em inglês:
+</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
@@ -520,7 +575,12 @@ aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 - [Ribas e Soares
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
-<details><summary>Em português:</summary>
+<details>
+
+<summary>
+
+Em português:
+</summary>
 
 - [Dicionário PME Antiga: 1991 a
   2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
@@ -531,7 +591,12 @@ aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 
 </details>
 
-<details><summary>Em inglês:</summary>
+<details>
+
+<summary>
+
+Em inglês:
+</summary>
 
 - Dicionários PME Antiga: 1991 a 2000
   - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
@@ -600,7 +665,12 @@ compatibilização do programa.
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_compatibilizado.xlsx)
 
-<details><summary>Em português:</summary>
+<details>
+
+<summary>
+
+Em português:
+</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
@@ -639,7 +709,12 @@ compatibilização do programa.
 
 </details>
 
-<details><summary>Em inglês:</summary>
+<details>
+
+<summary>
+
+Em inglês:
+</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
@@ -806,7 +881,12 @@ itens um pouco mais desagregados do que os existentes na base padrão.
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
-<details><summary>Em inglês:</summary>
+<details>
+
+<summary>
+
+Em inglês:
+</summary>
 
 - POF 1995-96
   - [Dicionário](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)
