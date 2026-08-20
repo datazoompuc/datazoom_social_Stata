@@ -41,7 +41,7 @@ Note: This package does **not** download microdata. You must have the microdata 
 Enter the code below in the Stata command line to download and install the latest version of the package
 
 ```
-net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") force
+net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/main/") force
 ```
 
 ## Usage
