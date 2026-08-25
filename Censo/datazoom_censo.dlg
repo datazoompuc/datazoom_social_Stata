@@ -31,13 +31,13 @@ BEGIN
 
    TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
 	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
-	  CHECKBOX chkAC   +5  +22  200   20, label("Acre") onclickoff(script nemtudoN) option(AC)
-      CHECKBOX chkAP    @  +25  200   20, label("Amapá") onclickoff(script nemtudoN) option(AP)
-      CHECKBOX chkAM    @  +25  200   20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
-      CHECKBOX chkPA  +85  -50  200   20, label("Pará") onclickoff(script nemtudoN) option(PA)
-      CHECKBOX chkRO    @  +25  200   20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
-      CHECKBOX chkRR    @  +25  200   20, label("Roraima") onclickoff(script nemtudoN) option(RR)
-      CHECKBOX chkTO  -85  +25  200   20, label("Tocantins (1991 a 2022)") onclickoff(script nemtudoN) option(TO)
+	  CHECKBOX chkAC   +5  +22  200 20, label("Acre") onclickoff(script nemtudoN) option(AC)
+      CHECKBOX chkAP    @  +25  200 20, label("Amapá") onclickoff(script nemtudoN) option(AP)
+      CHECKBOX chkAM    @  +25  200 20, label("Amazonas") onclickoff(script nemtudoN) option(AM)
+      CHECKBOX chkPA  +85  -50  200 20, label("Pará") onclickoff(script nemtudoN) option(PA)
+      CHECKBOX chkRO    @  +25  200 20, label("Rondônia") onclickoff(script nemtudoN) option(RO)
+      CHECKBOX chkRR    @  +25  200 20, label("Roraima") onclickoff(script nemtudoN) option(RR)
+      CHECKBOX chkTO  -85  +25  200 20, label("Tocantins (1991 a 2022)") onclickoff(script nemtudoN) option(TO)
 
    CHECKBOX chkregNE  140  +45  175 183, label("Nordeste") onclickon(script marcatudoNE) onclickoff(script desmarcatudoNE) groupbox
       CHECKBOX chkAL   +5  +25  200   ., label("Alagoas") onclickoff(script nemtudoNE) option(AL)
@@ -64,10 +64,10 @@ BEGIN
       CHECKBOX chkRS  @  +22  200   ., label("Rio Grande do Sul") onclickoff(script nemtudoS) option(RS)
 
    CHECKBOX chkregCO  330  +40  205 119, label("Centro-Oeste") onclickon(script marcatudoCO) onclickoff(script desmarcatudoCO) groupbox
-      CHECKBOX chkGO   +5  +18  200   20, label("Goiás") onclickoff(script nemtudoCO) option(GO)
-      CHECKBOX chkMT    @  +23  200   20, label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
-      CHECKBOX chkDF    @  +23  200   20, label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
-      CHECKBOX chkMS    @  +23  200   20, label("Mato G. do Sul (1980 to 2022)") onclickoff(script nemtudoCO) option(MS)
+      CHECKBOX chkGO   +5  +18  200 20, label("Goiás") onclickoff(script nemtudoCO) option(GO)
+      CHECKBOX chkMT    @  +23  200 20, label("Mato Grosso") onclickoff(script nemtudoCO) option(MT)
+      CHECKBOX chkDF    @  +23  200 20, label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
+      CHECKBOX chkMS    @  +23  200 20, label("Mato G. do Sul (1980 to 2022)") onclickoff(script nemtudoCO) option(MS)
 
 	CHECKBOX	eng     145  365 200 ., label("Labels em inglês") option(english)
 
