@@ -6,7 +6,7 @@ POSITION . . 340 320
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 
-   GROUPBOX caixaAnos 20 10 130 200, label("Year(s)")
+   GROUPBOX caixaAnos 20 10 130 220, label("Year(s)")
 
    CHECKBOX    ck2012 +14 +24 50 20, label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 50 20, label("2013")  option(2013)
@@ -56,14 +56,14 @@ RESET res1
 SCRIPT dados
 BEGIN
    create CHILD datazoom_datafolder AS pnad_data
-   pnad_data.settitle "Annual Continuous PNAD original data file"
+   pnad_data.settitle "Continuous PNAD original data file"
    pnad_data.setExitString saidadata
 END
 
 SCRIPT salvando
 BEGIN
    create CHILD datazoom_finalfolder AS pnad_dic
-   pnad_dic.settitle "Annual Continuous PNAD final data folder"
+   pnad_dic.settitle "Continuous PNAD final data folder"
    pnad_dic.setExitString saidasalvando
 END
 
