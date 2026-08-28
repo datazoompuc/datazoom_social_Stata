@@ -81,7 +81,7 @@ quarter. Therefore, it is recommended that you select all years included in the 
 
 {phang} 
 {opt years(numlist)} specifies the list of years the user wants to work with. This program currently
-covers all years from 2012 to 2025. It is not possible to choose specific quarters.
+covers all years from 2012 to 2026. It is not possible to choose specific quarters.
 
 {phang} {opt original(str)} indicates the path of the original data files. 
 There is one data file for each quarter. All of these files must be placed in the same 

@@ -49,7 +49,7 @@ Digite {cmd:db datazoom_pnadcontinua} para utilizar a função via caixa de diá
 
 {p 4 4 2}
 {cmd:datazoom_pnadcontinua} extrai e gera bases de dados da PNAD Contínua em formato Stata a partir 
-dos microdados originais do IBGE, que devem ser previamente baixados. Atualmente programa pode ser utilizado para os anos de 2012 a 2025. 
+dos microdados originais do IBGE, que devem ser previamente baixados. Atualmente programa pode ser utilizado para os anos de 2012 a 2026. 
 
 {p 4 4 2}
 Embora seja uma pesquisa trimestral, este programa não permite a escolha de trimestres específicos para extração, 
