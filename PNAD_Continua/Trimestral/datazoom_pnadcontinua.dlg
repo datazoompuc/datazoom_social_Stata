@@ -6,7 +6,7 @@ POSITION . . 340 320
 DIALOG main, label("PNAD Contínua") tabtitle("Main")
 BEGIN
 
-   GROUPBOX caixaAnos 20 10 130 200, label("Ano(s)")
+   GROUPBOX caixaAnos 20 10 130 220, label("Ano(s)")
 
    CHECKBOX    ck2012 +14 +24 50 20, label("2012")  option(2012)
    CHECKBOX    ck2013 @ +24 50 20, label("2013")  option(2013)
@@ -16,7 +16,7 @@ BEGIN
    CHECKBOX    ck2017 @ +24 50 20, label("2017")  option(2017)
    CHECKBOX    ck2018 @ +24 50 20, label("2018")  option(2018)
    CHECKBOX    ck2019 @ +24 50 20, label("2019")  option(2019)
-   CHECKBOX    ck2020 +55 -144 50 20, label("2020")  option(2020)
+   CHECKBOX    ck2020 +55 -168 50 20, label("2020")  option(2020)
    CHECKBOX    ck2021 @ +24 50 20, label("2021")  option(2021)
    CHECKBOX    ck2022 @ +24 50 20, label("2022")  option(2022)
    CHECKBOX    ck2023 @ +24 50 20, label("2023")  option(2023)
