@@ -49,12 +49,14 @@ Digite {cmd:db datazoom_pnadcontinua} para utilizar a função via caixa de diá
 
 {p 4 4 2}
 {cmd:datazoom_pnadcontinua} extrai e gera bases de dados da PNAD Contínua em formato Stata a partir 
-dos microdados originais do IBGE, que devem ser previamente baixados. Atualmente programa pode ser utilizado para os anos de 2012 a 2025. 
+dos microdados originais do IBGE, que devem ser previamente baixados. Atualmente programa pode ser utilizado para os anos de 2012 a 2026. 
 
 {p 4 4 2}
 Embora seja uma pesquisa trimestral, este programa não permite a escolha de trimestres específicos para extração, 
 somente anos. O pacote gera uma base única para o ano, com os trimestres empilhados. Como a pesquisa ainda é publicada pelo
 IBGE, este programa está em constante atualização.
+É possível fazer a leitura isolada de alguns trimestres em sequência. No entanto, para ler uma base é necessário ter lido as anteriores daquele mesmo ano.
+Ex: É possível ler apenas o primeiro trimestre de 2025, mas se quiser ler o terceiro trimestre é preciso ter lido o primeiro e o segundo semestre de 2025.
   
 {p 4 4 2}
 A PNAD Contínua Trimestral é uma pesquisa em painel, na qual cada domicílio é entrevistado cinco vezes, durante cinco trimestres 
@@ -78,7 +80,7 @@ utilize o comando {help append} para empilhar as bases.
 
 {phang} 
 {opt years(numlist)} especifica a lista de anos com os quais o usuário deseja trabalhar. Este programa atualmente
-pode ser utilizado para o período de 2012 a 2025. Não é possível escolher trimestres específicos.
+pode ser utilizado para o período de 2012 a 2026. Não é possível escolher trimestres específicos.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
 Existe um arquivo de microdados para cada trimestre da pesquisa. Todos eles devem estar posicionados na mesma pasta 

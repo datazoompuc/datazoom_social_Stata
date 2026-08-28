@@ -49,12 +49,13 @@ Use command {cmd:db datazoom_pnadcontinua_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_pnadcontinua} extracts Continuous PNAD databases from the original IBGE microdata, which must be downloaded beforehand. 
-Currently supports data from years 2012 to 2025. 
+Currently supports data from years 2012 to 2026. 
 
 {p 4 4 2}
 Although Continuous PNAD is a quartely survey, this program does not allow specific quarter to be chosen, only years. The package generates a single database for each year, with quarters appended. 
-As Continuous PNAD is still published by IBGE, this program is
-under constant update.
+As Continuous PNAD is still published by IBGE, this program is under constant update.
+It is possible to read only some consecutive quarters. However, in order to read a given dataset, the previous quarters from the same year must have been read first.
+Example: It is possible to read only the first quarter of 2025. However, if you want to read the third quarter, you must have read both the first and second quarters of 2025.
   
 {p 4 4 2}
 The Continuous PNAD is a panel survey, in which each household is interviewed for five consecutive quarters. Despite correctly identifying the same household in all five interviews, the PNAD Continuous does not assign the same identification number to each member of the household at every interview. 
@@ -80,7 +81,7 @@ quarter. Therefore, it is recommended that you select all years included in the 
 
 {phang} 
 {opt years(numlist)} specifies the list of years the user wants to work with. This program currently
-covers all years from 2012 to 2025. It is not possible to choose specific quarters.
+covers all years from 2012 to 2026. It is not possible to choose specific quarters.
 
 {phang} {opt original(str)} indicates the path of the original data files. 
 There is one data file for each quarter. All of these files must be placed in the same 
