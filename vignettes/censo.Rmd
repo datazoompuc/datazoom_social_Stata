@@ -175,8 +175,8 @@ A pequena diferença apresentada indica que o identificador criado pelo Data Zoo
 
 ### Arquivos de apoio
 
-  - [Microdados e documentação referente a 2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
-  - [Microdados e documentação referente a 1970-2000](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads)
+  - [Microdados e documentação referente a 2000 a 2022](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+  - [Microdados e documentação referente a 1970 a 2000](https://www.ibge.gov.br/estatisticas/sociais/saude/25089-censo-1991-6.html?edicao=25091&t=downloads)
   - [Dicionário compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)  
 
 <details>
@@ -190,7 +190,8 @@ A pequena diferença apresentada indica que o identificador criado pelo Data Zoo
     - [Dicionário Censo 1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1980.xlsx)
     - [Dicionário Censo 1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1991.pdf)
     - [Dicionário Censo 2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
-    - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)  
+    - [Dicionário Censo 2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+    - Em breve: Dicionário Censo 2022
 
     </details>
   - <details>
@@ -228,7 +229,8 @@ A pequena diferença apresentada indica que o identificador criado pelo Data Zoo
     - [1980 Censo's Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1980_en.xlsx)
     - [1991 Censo's Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1991_en.pdf)
     - [2000 Censo's Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
-    - [2010c Censo's Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls) 
+    - [2010 Censo's Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+    - Soon: 2022 Censo's Dictionary
 
     </details>
   - <details>

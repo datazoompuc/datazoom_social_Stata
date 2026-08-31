@@ -129,7 +129,7 @@ BEGIN
 	main.chkMS.enable
 END
 
-SCRIPT c22on // CHECAR SE PRECISARÁ DE ALGUM AJUSTE A MAIS
+SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable

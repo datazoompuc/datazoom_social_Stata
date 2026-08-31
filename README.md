@@ -56,7 +56,7 @@ pesquisa.
 
 |  |  |  |  |
 |:--:|:--:|:--:|:--:|
-| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 1981 a 2015 </small> |
+| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2022 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 1981 a 2015 </small> |
 | <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 em diante </small> | <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
 
 <a href = "#créditos">![Static
@@ -71,15 +71,14 @@ dez anos, em que todos os domicílios do território brasileiro são
 visitados. O Censo fornece uma contagem da população e recolhe
 informações básicas dos moradores, como idade e gênero.
 
-O pacote do Data Zoom trata os microdados da amostra do Censo: o IBGE
-realiza uma entrevista mais detalhada com uma grande amostra
-representativa dos domicílios brasileiros. O questionário da amostra
-explora temas como características sociodemográficas dos moradores -
-como escolaridade e rendimentos -, características físicas do local de
-residência - material das paredes, existência de água encanada, etc. - e
-posse de bens - como geladeira e automóvel. No Censo de 2010, a amostra
-foi de 6,2 milhões de domicílios, o que abrange 20,6 milhões de
-indivíduos.
+Por ocasião do Censo, o IBGE realiza uma entrevista mais detalhada com
+uma grande amostra aleatória dos domicílios, na qual investiga
+características sociodemográficas dos moradores (como escolaridade e
+rendimentos), características físicas do local de residência (material
+das paredes, existência de água encanada, etc.) e posse de bens (como
+geladeira e automóvel). No Censo de 2022, tal amostra cobria \[INSERIR
+INFORMAÇÃO NOVA\] milhões de domicílios com \[INSERIR INFORMAÇÃO NOVA\]
+milhões de indivíduos.
 
 Há diferenças nos questionários da amostra ao longo dos anos. Por isso,
 diversas variáveis não estão disponíveis em todos os anos ou têm opções
@@ -120,12 +119,7 @@ Abra a seção abaixo para ver as principais mudanças na leitura do Censo
 de 1991 e a documentação do novo identificador de domicílios construído
 pelo Data Zoom.
 
-<details>
-
-<summary style="font-size:1.5em;">
-
-<strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong>
-</summary>
+<details><summary style="font-size:1.5em;"><strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong></summary>
 
 <h3>
 
@@ -312,26 +306,16 @@ Limitações e pontos de atenção
 
 ### Arquivos de apoio
 
-- [Microdados e documentação referente a
-  2010](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
-- [Microdados e documentação referente a
-  1970-2000](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads)
+- [Microdados e documentação referente a 2000 a
+  2022](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
+- [Microdados e documentação referente a 1970 a
+  2000](https://www.ibge.gov.br/estatisticas/sociais/saude/25089-censo-1991-6.html?edicao=25091&t=downloads)
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
-<details>
+<details><summary>Em português:</summary>
 
-<summary>
-
-Em português:
-</summary>
-
-- <details>
-
-  <summary>
-
-  Dicionários e Compatibilização
-  </summary>
+- <details><summary>Dicionários e Compatibilização</summary>
 
   - [Compatibilização dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
@@ -345,15 +329,11 @@ Em português:
     2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
   - [Dicionário Censo
     2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+  - Em breve: Dicionário Censo 2022
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionários
-  </summary>
+- <details><summary>Questionários</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -370,12 +350,7 @@ Em português:
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Manuais do Recenseador
-  </summary>
+- <details><summary>Manuais do Recenseador</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -394,19 +369,9 @@ Em português:
 
 </details>
 
-<details>
+<details><summary>Em inglês:</summary>
 
-<summary>
-
-Em inglês:
-</summary>
-
-- <details>
-
-  <summary>
-
-  Dictionaries and Compatibilization
-  </summary>
+- <details><summary>Dictionaries and Compatibilization</summary>
 
   - [Censo’s
     Compatibilization](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
@@ -418,17 +383,13 @@ Em inglês:
     Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1991_en.pdf)
   - [2000 Censo’s
     Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
-  - [2010c Censo’s
+  - [2010 Censo’s
     Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+  - Soon: 2022 Censo’s Dictionary
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionnaires
-  </summary>
+- <details><summary>Questionnaires</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -445,12 +406,7 @@ Em inglês:
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Census Taker Manuals
-  </summary>
+- <details><summary>Census Taker Manuals</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -495,12 +451,7 @@ aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
@@ -509,12 +460,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - [Dicionário ECINF
   1997](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
@@ -575,12 +521,7 @@ aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 - [Ribas e Soares
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Dicionário PME Antiga: 1991 a
   2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
@@ -591,12 +532,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - Dicionários PME Antiga: 1991 a 2000
   - [Domicílios](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
@@ -665,12 +601,7 @@ compatibilização do programa.
 - [Dicionário
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-Em português:
-</summary>
+<details><summary>Em português:</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
@@ -709,12 +640,7 @@ Em português:
 
 </details>
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - [Compatibilização das
   PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
@@ -881,12 +807,7 @@ itens um pouco mais desagregados do que os existentes na base padrão.
 - [Microdados e
   documentação](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
-<details>
-
-<summary>
-
-Em inglês:
-</summary>
+<details><summary>Em inglês:</summary>
 
 - POF 1995-96
   - [Dicionário](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)

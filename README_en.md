@@ -1,7 +1,7 @@
 
 Para a versão em português, clique no escudo abaixo:
 <!-- badges: start -->
-[![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/English-READ.ME/README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-blue.svg)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/README.md)
 <!-- badges: end -->
 
 <a href="https://github.com/datazoompuc/datazoom_social_Stata"><img src="https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/logo.png" align="left" width="100" hspace="10" vspace="6"></a>
@@ -56,7 +56,7 @@ Click on the buttons below for additional information on each survey.
 
 |  |  |  |  |
 |:--:|:--:|:--:|:--:|
-| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 1981 to 2015 </small> |
+| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Demographic Census </small> <br> <small> 1970 to 2022 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Urban Informal Economy </small> <br> <small> 1997 and 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Monthly Employment Survey </small> <br> <small> 1990 to 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> Old PNAD </small> <br> <small> 1981 to 2015 </small> |
 | <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> Continuous PNAD </small> <br> <small> 2012 to present </small> | <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> National Health Survey </small> <br> <small> 2013 and 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Consumer Expenditure Survey </small> <br> <small> 1995 to 2018 </small> |
 
 <a href = "#credits">![Static
@@ -75,8 +75,8 @@ IBGE also conducts a more detailed interview on a large random sample of
 households, investigating household members’ socio-demographic
 characteristics (schooling, income etc.), household’s characteristics
 (wall materials, plumbing etc.), and possession of physical assets
-(refrigerator, car etc.). In the 2022 Census sample, there are [INSERT HERE NEW INFO]
-million households and [INSERT HERE NEW INFO] million individuals.
+(refrigerator, car etc.). In the 2022 Census sample, there are \[UPDATED
+INFO\] million households and \[UPDATED INFO\] million individuals.
 
 ### Microdata
 
@@ -85,9 +85,9 @@ For each year, there is a data file for each unit of the federation
 individual characteristics. Since 2000, there is one file for each type
 of record.
 
-Our Census program applies to the 1970, 1980, 1991, 2000, 2010 and 2022 rounds
-of the Census. The microdata and documentation are
-available for download from the IBGE website on [this
+Our Census program applies to the 1970, 1980, 1991, 2000, 2010 and 2022
+rounds of the Census. The microdata and documentation are available for
+download from the IBGE website on [this
 link](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads).
 
 Because of methodological changes made by IBGE over the years, the same
@@ -320,24 +320,14 @@ Limitations and points to note
 
 ### Supporting files
 
-- [Microdata and documentation: from 1970 to 2022
-  Censuses](https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?=&t=downloads)
+- [Microdata and documentation: 2000 to 2022
+  Censuses](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=microdados)
 - [Compatibilized
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
-<details>
+<details><summary>In English:</summary>
 
-<summary>
-
-In English:
-</summary>
-
-- <details>
-
-  <summary>
-
-  Dictionaries and Compatibilization
-  </summary>
+- <details><summary>Dictionaries and Compatibilization</summary>
 
   - [Making Censuses
     compatible](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
@@ -351,15 +341,11 @@ In English:
     dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
   - [Censo 2010
     dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+  - Soon: Censo 2022 dictionary
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionnaires
-  </summary>
+- <details><summary>Questionnaires</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -376,12 +362,7 @@ In English:
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Census Taker Manuals
-  </summary>
+- <details><summary>Census Taker Manuals</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -400,19 +381,9 @@ In English:
 
 </details>
 
-<details>
+<details><summary>In Portuguese:</summary>
 
-<summary>
-
-In Portuguese:
-</summary>
-
-- <details>
-
-  <summary>
-
-  Dicionários e Compatibilização
-  </summary>
+- <details><summary>Dicionários e Compatibilização</summary>
 
   - [Compatibilização dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
@@ -426,15 +397,11 @@ In Portuguese:
     2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
   - [Dicionário Censo
     2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+  - Em breve: Dicionário Censo 2022
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Questionários
-  </summary>
+- <details><summary>Questionários</summary>
 
   - [Questionário Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
@@ -451,12 +418,7 @@ In Portuguese:
 
   </details>
 
-- <details>
-
-  <summary>
-
-  Manuais do Recenseador
-  </summary>
+- <details><summary>Manuais do Recenseador</summary>
 
   - [Manual do Recenseador Censo
     1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
@@ -501,12 +463,7 @@ here](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
 
 </details>
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - [ECINF 1997
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997_en.xlsx)
@@ -515,12 +472,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [ECINF 1997
   dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_1997.doc)
@@ -586,12 +538,7 @@ here](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
 - [Ribas and Soares
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - PME Antiga dictionaries: 1991 to 2000
   - [Households](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000_dom_en.pdf),
@@ -604,12 +551,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [PME Antiga dictionary: 1991 to
   2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_antiga_1991_2000.pdf)
@@ -668,12 +610,7 @@ explains all the procedures adopted in the process.
 - [Compatibilized
   dictionary](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_compatibilizado.xlsx)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - [Making PNADs
   compatible](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
@@ -712,12 +649,7 @@ In English:
 
 </details>
 
-<details>
-
-<summary>
-
-In Portuguese:
-</summary>
+<details><summary>In Portuguese:</summary>
 
 - [Making PNADs
   compatible](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
@@ -872,12 +804,7 @@ those obtained from the standard database.
 - [Microdata and
   documentation](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
-<details>
-
-<summary>
-
-In English:
-</summary>
+<details><summary>In English:</summary>
 
 - POF 1995-96
   - [Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/POF/dicionario_1995_en.pdf)

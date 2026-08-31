@@ -13,6 +13,7 @@ BEGIN
    CHECKBOX	chk91     @  +20 100 20, label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 20, label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 20, label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
+   CHECKBOX	chk22     @  +20 100 20, label("2022")  onclickon(script c22on) onclickoff(program c22off) option(2022)
    
    BUTTON fldata      10 +35  115 25, label("Original files...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Saving...") onpush(script salvando)
@@ -127,7 +128,7 @@ BEGIN
 	main.chkMS.enable
 END
 
-SCRIPT c22on // CHECAR SE PRECISARÁ DE ALGUM AJUSTE A MAIS
+SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
@@ -338,7 +339,7 @@ BEGIN
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
 	  option main.eng
-	  option radio(dbf91 dattxt91)
+	  option radio(main dbf91 dattxt91)
 	  
    endoptions
    stata
