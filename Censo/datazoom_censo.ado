@@ -2125,7 +2125,7 @@ else if `ano' == 2022 {
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
-di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016 e Censo 2000 divulgados em 08/09/2017."
+di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2022 divulgados em 31/08/2026, Censo 2010 divulgados em 11/03/2016 e Censo 2000 divulgados em 08/09/2017."
 
 end
 
@@ -3044,33 +3044,33 @@ program define compat_censo22dom
 /* B. IDENTIFICAÇÃO  */
 
 /* B.1. IDENTIFICAÇÃO */
-rename v UF *v0001
-rename v id_dom
-rename v regiao
-drop v
+rename D0020 UF
+rename D0100 id_dom
+rename D0010 regiao
 
 /* B.2. VARIÁVEIS DE NÚMERO DE PESSOAS */
-rename v n_homem_dom
-rename v n_mulher_dom
-rename v n_pes_dom *v0201
+rename D0370 n_homem_dom
+rename D0380 n_mulher_dom
+rename D0150 n_pes_dom
 
 /* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
 
 /* C.1. SITUAÇÃO */
 
-rename v sit_setor *v1005
+rename D0120 sit_setor
+destring sit_setor, replace // Retira zeros à esquerda
 lab var sit_setor "situação do domicílio"
 * sit_setor = 	1	Área urbanizada de vila ou cidade
 *				2	Área não urbanizada de vila ou cidade
 *				3	Área urbanizada isolada
-*				4	Rural-extensão urbana
+*				4	- N/A
 *				5	Rural - povoado
 *				6	Rural núcleo
 *				7	Rural - outros aglomerados
 *				8	Rural exclusive os aglomerados rurais
 
 g sit_setor_B = sit_setor
-recode sit_setor_B (1 2 = 1) (3=2) (4/7 = 3) (8=4)
+recode sit_setor_B (1 2 = 1) (3=2) (5/7 = 3) (8=4)
 lab var sit_setor_B "situação do domicílio - agregado"
 * sit_setor_B = 1 - Vila ou cidade
 *               2 - Urbana isolada
@@ -3085,35 +3085,37 @@ lab var sit_setor_C "situação do domicílio - urbano/rural"
 
 /* C.2. ESPÉCIE */
 
-rename v especie *v1011
+rename D0130 especie
+destring especie, replace // Retira zeros à esquerda
 recode especie (1 = 0) (5 = 1) (6 = 2)
 * especie = 0 - particular permanente 
 *           1 - particular improvisado
 *           2 - coletivo
 
 /* C.3. MATERIAL DAS PAREDES */
-recode v (2 = 1) (4 = 2) (5 = 4) (6 = 5) (7 = .) *v0302 // (1 = 1) (3 = 3)
-rename v paredes_B *v0302
+recode D0210 (2 = 1) (4 = 2) (5 = 4) (6 = 5) (7 = .) // (1 = 1) (3 = 3)
+rename D0210 paredes_B
 * paredes_B	= 1   Alvenaria
 *        	= 2   Madeira aparelhada
 *        	= 3   Taipa não revestida
 *       	= 4   Material aproveitado
 *   	    = 5   Outro
 
-
 /* C.4.	MATERIAL DA COBERTURA */
 
 /* C.5. TIPO */
 * Em 2022, permanece a categoria "maloca" ou "habitação indígena sem paredes". Foi mantida em "casa" por
 * exclusão, pois não se trata de apartamento nem de cômodo.
+* Também foi considerado por exclusão como casa a habitação permanente ocupada que se tratava de estrutura residencial 
+* permanente degradada ou inacabada.
+* Domicílios improvisados ou coletivos foram considerados missing nessa categoria.
 
-recode v (11 12 15 = 1) (13 = 2) (14 = 3) (50/max = .) *v1012
-rename v tipo_dom *v1012
+recode D0200 (11 12 15 16 = 1) (13 = 2) (14 = 3) (50/max = .)
+rename D0200 tipo_dom
 * tipo_dom = 1 - casa ou oca/maloca
 *            2 - apartamento
 *            3 - cômodo
 lab var tipo_dom "tipo do domicílio"
-
 
 g tipo_dom_B = tipo_dom
 recode tipo_dom_B (3 = 2)
@@ -3124,7 +3126,7 @@ lab var tipo_dom_B "tipo do domicílio B"
 
 /* C.6. CONDIÇÃO DE OCUPAÇÃO E ALUGUEL */
 
-g cond_ocup = v * v0301
+g cond_ocup = D0190
 recode cond_ocup (2=1) (3=2) (4=3) (5 6=4) (7=5) 
 * cond_ocup  = 1 - Próprio
 *              2 - Alugado
@@ -3141,7 +3143,7 @@ recode cond_ocup_B (4=3) (5=4)
 *               4 - outra condição
 lab var cond_ocup_B "condição de ocupação do domicílio B"
 
-rename v cond_ocup_C * v0301
+rename D0190 cond_ocup_C
 recode cond_ocup_C (6=5) (7=6) 
 * cond_ocup_C = 1 - Próprio, já pago
 *               2 - Próprio, ainda pagando
@@ -3151,8 +3153,8 @@ recode cond_ocup_C (6=5) (7=6)
 *               6 - Outra Condição
 lab var cond_ocup_B "condição de ocupação do domicílio C"
 
-g dom_pago = 1 if v == 1 *v0301
-replace dom_pago = 0 if v == 2 *v0301
+g dom_pago = 1 if cond_ocup_C == 1
+replace dom_pago = 0 if cond_ocup_C == 2
 lab var dom_pago "dummy para domicílio próprio já pago"
 * dom_pago = 0 - Domicílio próprio em aquisição
 *            1 - Domicílio próprio já pago
@@ -4191,6 +4193,13 @@ rename v0202 paredes
 *   	    	= 5   Palha
 *	        = 6   Outro
 
+gen paredes_B = paredes
+recode paredes_B (6=5)
+* paredes_B	= 1   Alvenaria
+*        	= 2   Madeira aparelhada
+*        	= 3   Taipa não revestida
+*       	= 4   Material aproveitado
+*   	    = 5   Outro
 
 /* C.4.	MATERIAL DA COBERTURA */
 
@@ -5939,6 +5948,13 @@ if `d'==1 {
 	*   	    	= 5   Palha
 	*	        = 6   Outro
 
+	gen paredes_B = paredes
+	recode paredes_B (6=5)
+	* paredes_B	= 1   Alvenaria
+	*        	= 2   Madeira aparelhada
+	*        	= 3   Taipa não revestida
+	*       	= 4   Material aproveitado
+	*   	    = 5   Outro
 
 	/* C.4.	MATERIAL DA COBERTURA */
 	recode v205 (0 =8) (9 =.)
@@ -6826,6 +6842,13 @@ rename v0203 paredes
 *   	    = 5   Palha
 *	        = 6   Outro
 
+gen paredes_B = paredes
+recode paredes_B (6=5)
+* paredes_B	= 1   Alvenaria
+*        	= 2   Madeira aparelhada
+*        	= 3   Taipa não revestida
+*       	= 4   Material aproveitado
+*   	    = 5   Outro
 
 /* C.4. MATERIAL DA COBERTURA */
 rename v0204 cobertura
@@ -8015,6 +8038,13 @@ rename v0203 paredes
 *   	    = 5   Palha
 *	        = 6   Outro
 
+gen paredes_B = paredes
+recode paredes_B (6=5)
+* paredes_B	= 1   Alvenaria
+*        	= 2   Madeira aparelhada
+*        	= 3   Taipa não revestida
+*       	= 4   Material aproveitado
+*   	    = 5   Outro
 
 /* C.4. MATERIAL DA COBERTURA */
 rename v0204 cobertura
