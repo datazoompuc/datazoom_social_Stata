@@ -25,6 +25,7 @@ while "`*'" != "" {
 	di _newline as input "Extraindo arquivo `year' `1' ..."
 	
 	tempfile dic
+	local dic "`dic'.dct"
 
 	findfile dict.dta
 

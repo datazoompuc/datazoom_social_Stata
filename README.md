@@ -38,7 +38,7 @@ pacote. Os dados estão disponíveis no site do
 Digite o código abaixo na linha de comando do Stata para baixar e
 instalar a versão mais recente do pacote
 
-    net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/") force
+    net install datazoom_social, from("https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/main/") force
 
 ## Uso
 
@@ -56,7 +56,7 @@ pesquisa.
 
 |  |  |  |  |
 |:--:|:--:|:--:|:--:|
-| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 2001 a 2015 </small> |
+| <a href = "#censo"> <kbd> <br>    <font size = 3> Censo </font>    <br><br> </kbd> </a> <br> <br> <small> Censo Demográfico </small> <br> <small> 1970 a 2010 </small> | <a href = "#ecinf"> <kbd> <br>    <font size = 3> ECINF </font>    <br><br> </kbd> </a> <br><br> <small> Economia Informal Urbana </small> <br> <small> 1997 e 2003 </small> | <a href = "#pme"> <kbd> <br>    <font size = 3> PME </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Mensal de Emprego </small> <br> <small> 1990 a 2015 </small> | <a href = "#pnad"> <kbd> <br>    <font size = 3> PNAD </font>    <br><br> </kbd> </a> <br><br> <small> PNAD Antiga </small> <br> <small> 1981 a 2015 </small> |
 | <a href = "#pnad-contínua"> <kbd> <br> <font size = 3> PNAD Contínua </font> <br><br> </kbd> </a> <br><br> <small> PNAD Contínua </small> <br> <small> 2012 em diante </small> | <a href = "#pnad-covid"> <kbd> <br>   <font size = 3> PNAD Covid </font>   <br><br> </kbd> </a> <br><br> <small> PNAD Covid </small> <br> <small> 2020 </small> | <a href = "#pns"> <kbd> <br>    <font size = 3> PNS </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa Nacional de Saúde </small> <br> <small> 2013 e 2019 </small> | <a href = "#pof"> <kbd> <br>    <font size = 3> POF </font>    <br><br> </kbd> </a> <br><br> <small> Pesquisa de Orçamentos Familiares </small> <br> <small> 1995 a 2018 </small> |
 
 <a href = "#créditos">![Static
@@ -89,7 +89,7 @@ entregues variáveis compatibilizadas, que procuram uniformizar as
 informações ao longo do tempo. Neste caso, as variáveis da base de dados
 compatibilizada não possuem os nomes sugeridos pelo dicionário original.
 Acesse o documento [Compatibilização dos
-Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
+Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
 para conhecer toda a metodologia de compatibilização.
 
 ### Acesso aos Microdados
@@ -102,13 +102,213 @@ link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico
 Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com
 dados de 14 municípios que sofreram reponderação posteriormente.
 
-Em 2025 o IBGE começou a disponibilizar os microdados dos Censos de
-1970, 1980 e 1991 gratuitamente. Antes, eles estavam disponíveis para
-compra. Nesta mudança, o formato em que os dados são disponibilizados
-também mudou. O Data Zoom terá que ajustar seus códigos para esse novo
-formato. Por enquanto, o pacote do Data Zoom no Stata só funciona para
-os dados no formato antigo. Atualizaremos este documento quando a versão
-do pacote flexível ao novo formato estiver disponível.
+Recentemente ocorreram mudanças na disponibilização dos microdados dos
+Censos de 1970, 1980 e 1991. Antes eles estavam disponíveis apenas
+mediante compra, mas agora estão disponíveis gratuitamente no site do
+IBGE. Além disso, neste processo ocorreram mudanças importantes para o
+Censo de 1991, como a mudança para o formato .DBF e a omissão do
+identicador de domicílio. Por isso, o Data Zoom precisou ajustar seus
+códigos, principalmente para construir um novo identificador de
+domicílio para o Censo de 1991.
+
+Ainda é possível fazer a leitura dos microdados do Censo de 1991 para
+quem possui os dados antigos (em .TXT ou .DAT), mas agora há também a
+possibilidade de usar os dados atualmente disponibilizados pelo IBGE no
+site oficial (em .DBF).
+
+Abra a seção abaixo para ver as principais mudanças na leitura do Censo
+de 1991 e a documentação do novo identificador de domicílios construído
+pelo Data Zoom.
+
+<details>
+
+<summary style="font-size:1.5em;">
+
+<strong> Leitura do Censo 1991 em DBF e Construção do id_dom </strong>
+</summary>
+
+<h3>
+
+Leitura do Censo: Visão Geral e Variáveis
+</h3>
+
+Em relação à versão antiga (em .DAT ou .TXT), os dados em DBF
+disponibilizados no site do IBGE não contêm mais as seguintes variáveis:
+
+- v0102 Identificação do questionário (id_dom)
+- v3041 Homens na familia
+- v3042 Mulheres na familia
+- v0111 Número de homens no domicílio
+- v0112 Número de mulheres no domicílio
+
+Assim, o identificador de domicílio não vem pronto nos arquivos
+originais em .DBF, e ele precisa ser reconstruído.
+
+A seção abaixo descreve o método utilizado no `datazoom_censo` para
+identificar domicílios (`id_dom`) a partir dos microdados do Censo 1991
+lidos em formato .DBF.
+
+<h3>
+
+Construção do id_dom
+</h3>
+
+<h4>
+
+Pressupostos do método
+</h4>
+
+O método parte de três premissas sobre a estrutura dos dados:
+
+1.  **Ordem sequencial**: Os registros de pessoas de um mesmo domicílio
+    aparecem em sequência no arquivo (não há intercalação de domicílios
+    diferentes).
+
+2.  **Domicílio muda quando qualquer variável domiciliar muda:** Os
+    registros de um mesmo domicílio devem apresentar as mesmas
+    informações em variáveis domiciliares. Ou seja, se duas linhas
+    consecutivas pertencem ao mesmo domicílio, elas devem ter exatamente
+    os mesmos valores para todas as variáveis domiciliares.
+
+3.  **Observações consecutivas com os mesmos dados domiciliares são do
+    mesmo domicílio:** Existem 37 variáveis domiciliares, sendo algumas
+    delas contínuas, como aluguel e rendimento nominal, dessa forma, é
+    extremamente improvável que dois domicílios consecutivos apresentem
+    exatamente os mesmos dados para cada uma das variáveis domiciliares,
+    a menos que sejam do mesmo domicílio.
+
+A partir disso, um novo domicílio é identificado quando **qualquer uma**
+das seguintes condições é verdadeira, em relação à observação anterior
+(`_n-1`):
+
+- muda o município (`MUNICNUM`);
+- muda a espécie do domicílio (`ESPECIE`);
+- o indivíduo mora sozinho (`PARENDOM == 20`) — nesse caso força-se um
+  novo domicílio independentemente das demais variáveis;
+- muda qualquer uma das variáveis domiciliares listadas abaixo.
+
+<h4>
+
+Código (Stata)
+</h4>
+
+``` stata
+
+gen long id_dom = sum( ///
+      (MUNICNUM != MUNICNUM[_n-1])  | ///  muda o município
+      (ESPECIE  != ESPECIE[_n-1])   | ///  muda a espécie do domicílio
+      (PARENDOM == 20)              | ///  indivíduo mora sozinho
+      (RDOMICIV != RDOMICIV[_n-1])  | (ALUGUEL  != ALUGUEL[_n-1])  | ///
+      (PESO     != PESO[_n-1])      | (DEMODORM != DEMODORM[_n-1]) | ///
+      (COMBCOZI != COMBCOZI[_n-1])  | (AGUA     != AGUA[_n-1])     | ///
+      (ALUGUEFX != ALUGUEFX[_n-1])  | (ASPIRPO  != ASPIRPO[_n-1])  | ///
+      (AUTPART  != AUTPART[_n-1])   | (AUTTRAB  != AUTTRAB[_n-1])  | ///
+      (BANHEIRO != BANHEIRO[_n-1])  | (CD107    != CD107[_n-1])    | ///
+      (COBERTUR != COBERTUR[_n-1])  | (COMODOR  != COMODOR[_n-1])  | ///
+      (COMODOS  != COMODOS[_n-1])   | (CONDOCUP != CONDOCUP[_n-1]) | ///
+      (DEMOCOFX != DEMOCOFX[_n-1])  | (DEMOCOMO != DEMOCOMO[_n-1]) | ///
+      (DEMODOFX != DEMODOFX[_n-1])  | (FILTRO   != FILTRO[_n-1])   | ///
+      (FREEZER  != FREEZER[_n-1])   | (GELADEIR != GELADEIR[_n-1]) | ///
+      (ILUMINA  != ILUMINA[_n-1])   | (LIXO     != LIXO[_n-1])     | ///
+      (LOCALIZA != LOCALIZA[_n-1])  | (MAQLAVAR != MAQLAVAR[_n-1]) | ///
+      (PAREDES  != PAREDES[_n-1])   | (RADIO    != RADIO[_n-1])    | ///
+      (RDONOMIF != RDONOMIF[_n-1])  | (RDOREALF != RDOREALF[_n-1]) | ///
+      (SANESCOA != SANESCOA[_n-1])  | (SANUSO   != SANUSO[_n-1])   | ///
+      (TELEFONE != TELEFONE[_n-1])  | (TVCORES  != TVCORES[_n-1])  | ///
+      (TVPRETO  != TVPRETO[_n-1]) )
+```
+
+Informações mais específicas sobre cada uma dessas variáveis podem ser
+encontradas no [dicionário disponibilizado pelo
+IBGE](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/Censo/Dicionario_1991_dbf.xls).
+
+<h4>
+
+Como funciona o `sum()`
+</h4>
+
+`sum()` no Stata é uma soma cumulativa. Cada condição entre parênteses é
+uma expressão binária (0/1). Sempre que **pelo menos uma** condição é
+verdadeira na linha `_n`, o resultado da soma booleana daquela linha é
+1, o que incrementa o acumulado — criando assim um novo valor de
+`id_dom`. Quando nenhuma condição é verdadeira, o acumulado permanece
+igual ao da linha anterior, e a observação é atribuída ao mesmo
+domicílio.
+
+Na primeira observação da base (`_n-1` inexistente), o Stata trata os
+componentes `X[_n-1]` como *missing*, e qualquer comparação com
+*missing* retorna verdadeiro — o que garante que a primeira linha sempre
+inicia um novo domicílio (`id_dom == 1`).
+
+<h4>
+
+Comparação de identificadores distintos gerados usando o id_dom
+construído e o original
+</h4>
+
+A tabela a seguir apresenta a contagem de domicílios com base nos dados
+em .DBF usando o identificador de domicílio construído pelo Data Zoom e
+compara com a contagem de domicílios com base nos dados em .DAT usando o
+identificador de domicílio original do IBGE (disponível apenas nos dados
+em .DAT):
+
+| UF  | Código IBGE | .DBF (Data Zoom) | .DAT (Original) | Diferença | % Diferença |
+|-----|-------------|------------------|-----------------|-----------|-------------|
+| RO  | 11          | 26859            | 26850           | 9         | 0,0335%     |
+| AC  | 12          | 9824             | 9824            | 0         | 0,0000%     |
+| AM  | 13          | 45583            | 45583           | 0         | 0,0000%     |
+| RR  | 14          | 5485             | 5486            | -1        | -0,0182%    |
+| PA  | 15          | 103849           | 103849          | 0         | 0,0000%     |
+| AP  | 16          | 6073             | 6073            | 0         | 0,0000%     |
+| TO  | 17          | 29801            | 29801           | 0         | 0,0000%     |
+| MA  | 21          | 105843           | 105841          | 2         | 0,0019%     |
+| PI  | 22          | 66477            | 66477           | 0         | 0,0000%     |
+| CE  | 23          | 151181           | 151181          | 0         | 0,0000%     |
+| RN  | 24          | 72051            | 72051           | 0         | 0,0000%     |
+| PB  | 25          | 89691            | 89692           | -1        | -0,0011%    |
+| PE  | 26          | 172781           | 172781          | 0         | 0,0000%     |
+| AL  | 27          | 61493            | 61493           | 0         | 0,0000%     |
+| SE  | 28          | 42139            | 42139           | 0         | 0,0000%     |
+| BA  | 29          | 306696           | 306697          | -1        | -0,0003%    |
+| MG  | 31          | 462237           | 462239          | -2        | -0,0004%    |
+| ES  | 32          | 70507            | 70507           | 0         | 0,0000%     |
+| RJ  | 33          | 357009           | 357010          | -1        | -0,0003%    |
+| SP  | 35          | 879368           | 879371          | -3        | -0,0003%    |
+| PR  | 41          | 249309           | 249310          | -1        | -0,0004%    |
+| SC  | 42          | 141031           | 141032          | -1        | -0,0007%    |
+| RS  | 43          | 292564           | 292564          | 0         | 0,0000%     |
+| MS  | 50          | 52966            | 52966           | 0         | 0,0000%     |
+| MT  | 51          | 60831            | 60831           | 0         | 0,0000%     |
+| GO  | 52          | 124488           | 124488          | 0         | 0,0000%     |
+| DF  | 53          | 38407            | 38407           | 0         | 0,0000%     |
+
+A pequena diferença apresentada indica que o identificador criado pelo
+Data Zoom consegue replicar com boa precisão o identificador de
+domicílio original.
+
+<h4>
+
+Limitações e pontos de atenção
+</h4>
+
+- O método depende de a base estar **corretamente ordenada** antes de
+  ser passada para o programa, ou seja, com as observações do mesmo
+  domcílio aparecendo sequencialmente no dataset. A quebra da lógica
+  sequencial pode gerar domicílios espúrios. Em julho/2026, as bases do
+  IBGE vêm originalmente ordenadas dessa forma.
+
+- Se dois domicílios diferentes em um mesmo município, por coincidência,
+  tiverem valores idênticos em **todas** as variáveis domiciliares, os
+  moradores não morarem sozinhos, e estiverem em sequência no arquivo, o
+  programa os tratará como um único domicílio (falso negativo).
+
+- Se houver um erro nos dados de forma que pessoas de um mesmo domicílio
+  apresentem informações domiciliares distintas, esse erro gerará um
+  domicílio a mais do que deveria (falso positivo).
+
+------------------------------------------------------------------------
+
+</details>
 
 ### Arquivos de apoio
 
@@ -117,44 +317,155 @@ do pacote flexível ao novo formato estiver disponível.
 - [Microdados e documentação referente a
   1970-2000](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads)
 - [Dicionário
-  compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_compatibilizado.xlsx)
+  compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_compatibilizado.xlsx)
 
 <details>
+
 <summary>
+
 Em português:
 </summary>
 
-- [Compatibilização dos
-  Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao.pdf)
-- [Dicionário Censo
-  1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970.pdf)
-- [Dicionário Censo
-  1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980.xlsx)
-- [Dicionário Censo
-  1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991.pdf)
-- [Dicionário Censo
-  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000.xlsx)
-- [Dicionário Censo
-  2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010.xls)
+- <details>
+
+  <summary>
+
+  Dicionários e Compatibilização
+  </summary>
+
+  - [Compatibilização dos
+    Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/compatibilizacao.pdf)
+  - [Dicionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1970.pdf)
+  - [Dicionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1980.xlsx)
+  - [Dicionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_1991.pdf)
+  - [Dicionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
+  - [Dicionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Questionários
+  </summary>
+
+  - [Questionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1970.pdf)
+  - [Questionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_1980.pdf)
+  - [Questionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Question%C3%A1rio%20da%20Amostra_1991.pdf)
+  - [Questionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2000.pdf)
+  - [Questionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2010.pdf)
+  - [Questionário Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Questionario%20da%20Amostra_2022.pdf)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Manuais do Recenseador
+  </summary>
+
+  - [Manual do Recenseador Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1970.pdf)
+  - [Manual do Recenseador Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1980.pdf)
+  - [Manual do Recenseador Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_1991.pdf)
+  - [Manual do Recenseador Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2000.pdf)
+  - [Manual do Recenseador Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2010.pdf)
+  - [Manual do Recenseador Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2022.pdf)
+
+  </details>
 
 </details>
+
 <details>
+
 <summary>
+
 Em inglês:
 </summary>
 
-- [Compatibilização dos
-  Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/compatibilizacao_en.pdf)
-- [Dicionário Censo
-  1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1970_en.pdf)
-- [Dicionário Censo
-  1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1980_en.pdf)
-- [Dicionário Censo
-  1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_1991_en.pdf)
-- [Dicionário Censo
-  2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2000_en.xlsx)
-- [Dicionário Censo
-  2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/Censo/dicionario_2010_en.xls)
+- <details>
+
+  <summary>
+
+  Dictionaries and Compatibilization
+  </summary>
+
+  - [Censo’s
+    Compatibilization](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/compatibilizacao_en.pdf)
+  - [1970 Censo’s
+    Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1970_en.pdf)
+  - [1980 Censo’s
+    Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1980_en.xlsx)
+  - [1991 Censo’s
+    Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_1991_en.pdf)
+  - [2000 Censo’s
+    Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2000_en.xlsx)
+  - [2010c Censo’s
+    Dictionary](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/dicionario_2010_en.xls)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Questionnaires
+  </summary>
+
+  - [Questionário Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1970.pdf)
+  - [Questionário Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_1980.pdf)
+  - [Questionário Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Question%C3%A1rio%20da%20Amostra_1991.pdf)
+  - [Questionário Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2000.pdf)
+  - [Questionário Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2010.pdf)
+  - [Questionário Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Questionario%20da%20Amostra_2022.pdf)
+
+  </details>
+
+- <details>
+
+  <summary>
+
+  Census Taker Manuals
+  </summary>
+
+  - [Manual do Recenseador Censo
+    1970](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1970.pdf)
+  - [Manual do Recenseador Censo
+    1980](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1980.pdf)
+  - [Manual do Recenseador Censo
+    1991](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_1991.pdf)
+  - [Manual do Recenseador Censo
+    2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2000.pdf)
+  - [Manual do Recenseador Censo
+    2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2010.pdf)
+  - [Manual do Recenseador Censo
+    2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/en/Censo/Manual%20do%20Recenseador_2022.pdf)
+
+  </details>
 
 </details>
 
@@ -185,7 +496,9 @@ aqui](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-inform
   documentação](https://www.ibge.gov.br/estatisticas/sociais/trabalho/9025-economia-informal-urbana.html?=&t=downloads)
 
 <details>
+
 <summary>
+
 Em português:
 </summary>
 
@@ -195,8 +508,11 @@ Em português:
   2003](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/ECINF/dicionario_2003.xls)
 
 </details>
+
 <details>
+
 <summary>
+
 Em inglês:
 </summary>
 
@@ -260,7 +576,9 @@ aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pme).
   (2008)](https://repositorio.ipea.gov.br/handle/11058/1522)
 
 <details>
+
 <summary>
+
 Em português:
 </summary>
 
@@ -272,8 +590,11 @@ Em português:
   Nova](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PME/dicionario_pme_nova.xls)
 
 </details>
+
 <details>
+
 <summary>
+
 Em inglês:
 </summary>
 
@@ -290,14 +611,15 @@ Em inglês:
 
 ## PNAD
 
-A PNAD, Pesquisa Nacional por Amostra de Domicílios, é uma pesquisa
-realizada anualmente pelo IBGE desde 1981. Essa pesquisa investiga
-diversas características da população brasileira, tais como educação,
-trabalho, rendimento, composição domiciliar e fecundidade. Em quase
-todos os anos, ocorre também a investigação de um tema suplementar -
-educação, saúde, qualificação profissional e segurança alimentar, entre
-outros. A amostra da PNAD 2013 cobria 148.697 domicílios com 362.555
-indivíduos.
+A PNAD, Pesquisa Nacional por Amostra de Domicílios, é uma pesquisa que
+[começou em
+1967](https://ces.ibge.gov.br/apresentacao/portarias/200-comite-de-estatisticas-sociais/base-de-dados/1152-pesquisa-nacional-por-amostra-de-domicilios.html)
+e era realizada anualmente pelo IBGE. Essa pesquisa investiga diversas
+características da população brasileira, tais como educação, trabalho,
+rendimento, composição domiciliar e fecundidade. Em quase todos os anos,
+ocorre também a investigação de um tema suplementar - educação, saúde,
+qualificação profissional e segurança alimentar, entre outros. A amostra
+da PNAD 2013 cobria 148.697 domicílios com 362.555 indivíduos.
 
 ### Microdados
 
@@ -306,11 +628,8 @@ referentes a domicílios e pessoas. A partir de 1992, as informações de
 domicílios e pessoas foram separadas em dois arquivos distintos.
 
 O IBGE disponibiliza gratuitamente para download os microdados e toda a
-documentação para todas as PNADs desde 2001 [neste
+documentação para todas as PNADs desde 1976 [neste
 link](https://www.ibge.gov.br/estatisticas/sociais/populacao/9127-pesquisa-nacional-por-amostra-de-domicilios.html?=&t=microdados).
-Para obter informações a respeito de como adquirir os microdados para
-outros anos, [clique
-aqui](https://loja.ibge.gov.br/catalogsearch/result/?q=pnad).
 
 Diversas alterações metodológicas foram realizadas pelo IBGE ao longo
 dos anos. Desta forma, a mesma informação pode não estar disponível em
@@ -335,7 +654,7 @@ foram mantidas com o nome original todas as variáveis que não sofreram
 grandes modificações. Outro dicionário, indicando as variáveis
 existentes nesta base compatibilizada para os anos 1990, é
 disponibilizado para download. O documento [Compatibilização das
-PNADs](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao.pdf)
+PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
 explica todos os procedimentos adotados nas duas opções de
 compatibilização do programa.
 
@@ -347,85 +666,90 @@ compatibilização do programa.
   compatibilizado](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_compatibilizado.xlsx)
 
 <details>
+
 <summary>
+
 Em português:
 </summary>
 
 - [Compatibilização das
-  PNADs](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao.pdf)
+  PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/compatibilizacao.pdf)
 - Dicionários anos 1980
-  - [1981](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1981.pdf),
-    [1982](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1982.pdf),
-    [1983](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1983.pdf),
-    [1984](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1984.pdf),
-    [1985](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1985.pdf),
-    [1986](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1986.pdf),
-    [1987](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1987.pdf),
-    [1988](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1988.pdf),
-    [1989](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1989.pdf)
+  - [1981](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1981.pdf),
+    [1982](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1982.pdf),
+    [1983](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1983.pdf),
+    [1984](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1984.pdf),
+    [1985](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1985.pdf),
+    [1986](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1986.pdf),
+    [1987](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1987.pdff),
+    [1988](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1988.pdf),
+    [1989](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1989.pdf)
 - Dicionários anos 1990
-  - [1990](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1990.pdf),
+  - [1990](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1990.pdf),
     [1992-1995
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_dom.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1992_1995_dom.pdf),
     [1992-1995
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_pess.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1992_1995_pess.pdf),
     [1996
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_pess.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1996_pess.pdf),
     [1996-1997
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_1997_dom.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1996_1997_dom.pdf),
     [1997
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1997_pess.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1997_pess.pdf),
     [1998
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_pess.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1998_pess.pdf),
     [1998-1999
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_1999_dom.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1998_1999_dom.pdf),
     [1999
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1999_pess.pdf)
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_1999_pess.pdf)
 - [Dicionário 2000-2012
-  (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_dom.xlsx)
+  (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_2000s_dom.xlsx)
 - [Dicionário 2000-2012
-  (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_pess.xlsx)
+  (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/pt/PNAD/dicionario_2000s_pess.xlsx)
 
 </details>
+
 <details>
+
 <summary>
+
 Em inglês:
 </summary>
 
 - [Compatibilização das
-  PNADs](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/compatibilizacao_en.pdf)
+  PNADs](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/compatibilizacao_en.pdf)
 - Dicionários anos 1980
-  - [1981](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1981_en.pdf),
-    [1982](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1982_en.pdf),
-    [1983](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1983_en.pdf),
-    [1984](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1984_en.pdf),
-    [1985](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1985_en.pdf),
-    [1986](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1986_en.pdf),
-    [1987](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1987_en.pdf),
-    [1988](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1988_en.pdf),
-    [1989](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1989_en.pdf)
+  - [1981](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1981_en.pdf),
+    [1982](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1982_en.pdf),
+    [1983](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1983_en.pdf),
+    [1984](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1984_en.pdf),
+    [1985](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1985_en.pdf),
+    [1986](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1986_en.pdf),
+    [1987](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1987_en.pdf),
+    [1988](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1988_en.pdf),
+    [1989](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1989_en.pdf)
 - Dicionários anos 1990
-  - [1990](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1990_en.pdf),
+  - [1990](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1990_en.pdf),
     [1992-1995
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_dom_en.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1992_1995_dom_en.pdf),
     [1992-1995
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1992_1995_pess_en.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1992_1995_pess_en.pdf),
     [1996
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_pess_en.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1996_pess_en.pdf),
     [1996-1997
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1996_1997_dom_en.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1996_1997_dom_en.pdf),
     [1997
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1997_pess_en.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1997_pess_en.pdf),
     [1998
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_pess_en.pdf),
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1998_pess_en.pdf),
     [1998-1999
-    (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1998_1999_dom_en.pdf),
+    (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1998_1999_dom_en.pdf),
     [1999
-    (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_1999_pess_en.pdf)
+    (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_1999_pess_en.pdf)
 - [Dicionário 2000-2012
-  (Domicílios)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_dom_en.xlsx)
+  (Domicílios)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_2000s_dom_en.xlsx)
 - [Dicionário 2000-2012
-  (Pessoas)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_stata/master/docs/PNAD/dicionario_2000s_pess_en.xlsx)
+  (Pessoas)](https://github.com/datazoompuc/datazoom_social_Stata/blob/main/docs/en/PNAD/dicionario_2000s_pess_en.xlsx)
 
 </details>
 
@@ -558,7 +882,9 @@ itens um pouco mais desagregados do que os existentes na base padrão.
   documentação](https://www.ibge.gov.br/estatisticas/sociais/populacao/24786-pesquisa-de-orcamentos-familiares-2.html?=&t=microdados)
 
 <details>
+
 <summary>
+
 Em inglês:
 </summary>
 

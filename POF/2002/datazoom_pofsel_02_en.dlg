@@ -33,15 +33,15 @@ DEFINE ps_tx_salvabase 10
 
 GROUPBOX opc_extr 5 ps_opc_extr_y 265 65, label("Identification type")
 
-	RADIO   rd_dom     +15 +25 100 ., first label("Household") option(dom)
-	RADIO   rd_uc       +90 @   150 ., middle label("Family") option(uc)
-	RADIO   rd_pess     +70 @  100 ., last label("Individuals") option(pess)
+	RADIO   rd_dom     15 30 80 20, first label("Household") option(dom)
+	RADIO   rd_uc      100 30 70 20, middle label("Family") option(uc)
+	RADIO   rd_pess    175 30 85 20, last label("Individuals") option(pess)
 	
 GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	
-	RADIO rd_ali +15 +20 . ., label("Food") onclickon(script habilita_ali) first
-	RADIO rd_des +55  @ 120 ., label("Other Expenditures") onclickon(script habilita_desp) middle
-	RADIO rd_ren +125 @ 60 ., label("Income") onclickon(script habilita_ren) last
+	RADIO rd_ali +15 +20 . 20, label("Food") onclickon(script habilita_ali) first
+	RADIO rd_des +55  @ 120 20, label("Other Expenditures") onclickon(script habilita_desp) middle
+	RADIO rd_ren +125 @ 60 20, label("Income") onclickon(script habilita_ren) last
 	
 	TEXT        agr_ali         10 ps_agr_ali_y 180 ., label("Food items:")
 	COMBOBOX	cb_alimentos    @  +20 250 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
@@ -50,7 +50,7 @@ GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	TEXT        agr_ren         @ ps_agr_ali_y 180 ., label("Income items:")
 	COMBOBOX	cb_rendas       @  +20 250 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
-	BUTTON  btn_ch   110 +60 150 ., label("...click to add item") onpush(program atualizaListas)
+	BUTTON  btn_ch   110 +60 150 25, label("...click to add item") onpush(program atualizaListas)
 	
 GROUPBOX agr_ad 275 ps_agr_ad_y 230 345, label("Selected Items")
 
@@ -58,10 +58,10 @@ GROUPBOX agr_ad 275 ps_agr_ad_y 230 345, label("Selected Items")
 	
 GROUPBOX opc_dic 5 ps_opc_dic_y 265 85, label("Databases")
 	
-	BUTTON   tx_base     20 +35 110  ., label("Original files...") onpush(script dados)
-	BUTTON   tx_salvabase +125 @ 110  ., label("Saving...") onpush(script salvando)
+	BUTTON   tx_base     20 +35 110 25, label("Original files...") onpush(script dados)
+	BUTTON   tx_salvabase +125 @ 110 25, label("Saving...") onpush(script salvando)
 
-	CHECKBOX	eng     5  365 150 ., label("Labels in English") option(english)
+	CHECKBOX	eng     5  365 150 20, label("Labels in English") option(english)
 
 TEXT     credit     160   365  345    ., label("PUC-Rio - Department of Economics") right  
 	
