@@ -2315,6 +2315,14 @@ rename v0212 dest_lixo
 *             6 - Jogado em rio, lago ou mar
 *             7 - Tem outro destino
 
+gen dest_lixo_B = dest_lixo
+recode dest_lixo_B (7=6)
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
 
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 recode v0213 (2=0) // (1=1)
@@ -3077,8 +3085,8 @@ lab var sit_setor_B "situação do domicílio - agregado"
 *               3 - Aglomerado rural
 *               4 - Rural exclusive os aglomerados
 
-g sit_setor_C = sit_setor_B
-recode sit_setor_C (2=1) (3/4=0)
+rename D0140 sit_setor_C
+recode sit_setor_C (2=0)
 lab var sit_setor_C "situação do domicílio - urbano/rural"
 * sit_setor_C = 1 - urbano
 *               0 - rural
@@ -3160,7 +3168,7 @@ lab var dom_pago "dummy para domicílio próprio já pago"
 *            1 - Domicílio próprio já pago
  
 /* C.7. INSTALAÇÕES SANITÁRIAS */
-rename v banheiros_B *v0308
+rename D0280 banheiros_B
 * banheiros_B = 0 - não tem
 *               1 - 1 banheiro
 *               2 - 2 banheiros
@@ -3183,21 +3191,20 @@ lab var banheiros "número de banheiros"
 *            5 - 5 ou mais banheiros
 drop banheiros_B
 
-rename v sanitario *v0310 v0309 // ESSE AQUI PRECISA VERIFICAR COM CALMA, POIS PODE MUDAR A FORMA QUE A VARIAVEL DISPONIBILIZADA SERA CONSTRUIDA
-recode sanitario (2 = 0)
-replace sanitario = 1 if banheiros > 0 & banheiros ~= .
+gen sanitario = D0270
+recode sanitario (7 = 0)
+replace sanitario = 1 if sanitario >= 1 & sanitario <= 6
 * sanitario = 0 - Não
 *             1 - Sim
 
-recode v (1=0) // v0309 v0310 // ESSE AQUI PRECISA VERIFICAR COM CALMA, POIS PODE MUDAR A FORMA QUE A VARIAVEL DISPONIBILIZADA SERA CONSTRUIDA
-rename v sanitario_ex // v0309
-replace sanitario_ex = 1 if banheiros > 0 & banheiros ~= .
+recode D0270 (2 3 4 = 1) (5 6 7 = 0)
+rename D0270 sanitario_ex
 label var sanitario_ex "acesso exclusivo a instalação sanitária"
 * inst_san_exc = 0 - não tem acesso a inst san exclusiva
 *                1 - tem acesso a inst sanitária exclusiva
 
-rename v tipo_esc_san_B *v0311 & v0312 uma eh sobre banheiro outra eh sanitario ou buraco, ver na divulgacao
-recode tipo_esc_san_B (3=2) (4=3) (5=4) (6=5) (7=6)
+rename D0250 tipo_esc_san_B
+recode tipo_esc_san_B (3=2) (4=3) (5=4) (6=5) (7=6) (9=.)
 * tipo_esc_san_B = 1 - Rede geral de esgoto ou pluvial
 *                  2 - Fossa séptica
 *                  3 - Fossa rudimentar
@@ -3216,16 +3223,16 @@ lab var tipo_esc_san "tipo de escoadouro"
 
 /* C.8. ABASTECIMENTO DE ÁGUA */
 
-rename v abast_agua_B * v0305 v0306 // ver se vao ser disponibilizadas juntas/combinadas as informacoes de ambas variaveis
+rename D0260 abast_agua_B
 recode abast_agua_B (1=1) (2 3 4 = 2) (5/8 = 3)
 * abast_agua_B = 1 - rede geral
-*               2 - poço ou nascente na propriedade
-*               3 - outra
+*                2 - poço ou nascente na propriedade
+*                3 - outra
 
-gen abast_agua = 1 if (abast_agua_B == 1) & (v == 1) *v0307
-replace abast_agua = 2 if (abast_agua_B == 1) & ((v == 2) | (v == 3)) *v0307
-replace abast_agua = 3 if (abast_agua_B == 2) & (v == 1) *v0307
-replace abast_agua = 4 if (abast_agua_B == 2) & ((v == 2) | (v == 3)) *v0307
+gen abast_agua = 1 if (abast_agua_B == 1) & (D0300 == 1)
+replace abast_agua = 2 if (abast_agua_B == 1) & ((D0300 == 2) | (D0300 == 3))
+replace abast_agua = 3 if (abast_agua_B == 2) & (D0300 == 1)
+replace abast_agua = 4 if (abast_agua_B == 2) & ((D0300 == 2) | (D0300 == 3))
 replace abast_agua = 5 if abast_agua_B == 3
 * abast_agua = 1 - rede geral com canalização interna
 *              2 - rede geral sem canalização interna
@@ -3235,14 +3242,14 @@ replace abast_agua = 5 if abast_agua_B == 3
 lab var abast_agua "forma de abastecimento de água"
 drop abast_agua_B
 
-rename v agua_canal *v0307
+rename D0300 agua_canal
 * agua_canal = 1 - Canalizada em pelo menos um cômodo
 *              2 - Canalizada só na propriedade ou terreno
 *              3 - Não canalizada
 
 
 /* C.9. DESTINO DO LIXO */
-rename v dest_lixo_B *v0313
+rename D0310 dest_lixo_B
 * dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
 *             	2 - Colocado em caçamba de serviço de limpeza
 *             	3 - Queimado na propriedade
@@ -3253,40 +3260,50 @@ rename v dest_lixo_B *v0313
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 
 /* C.11. BENS DE CONSUMO DURÁVEIS */
-rename v lavaroupa * v0314
+rename D0320 lavaroupa
 recode lavaroupa (2 = 0)
 * lavaroupa = 0 - Nao
 *             1 - Sim
 
 /* C.12. NÚMERO DE CÔMODOS */
 
-rename v tot_comodos * v0303
-rename v tot_dorm * v0304
-
-drop v
+rename D0220 tot_comodos
+rename D0230 tot_dorm
 
 /* C.13. RENDA DOMICILIAR */
 
-rename v renda_dom
+rename D0350 renda_dom
 
-drop v
-
-/* DEFLACIONANDO RENDAS: referência = TBD */
+/* DEFLACIONANDO RENDAS: referência = julho de 2022 */
+/* Manual do entrevistador Censo 2022: Trabalho e Rendimento:
+Na investigação deste tema, serão considerados os seguintes períodos de referência:
+SEMANA DE REFERÊNCIA – 25 a 31 de julho de 2022.
+MÊS DE REFERÊNCIA – julho de 2022. */
 g double deflator = 1
 g conversor = 1
 
-lab var deflator "deflator - referência: TBD"
+lab var deflator "deflator - referência: julho de 2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
 lab var renda_dom_def "renda_dom deflacionada"
 
 /* C.14. PESO AMOSTRAL */
-rename v peso_dom
+/* Será necessário adaptar o peso de acordo com a versão dos microdados.
+Acesso público: D0110.
+Acesso controlado: D0111.
+Acesso restrito: D0112. AJUSTAR DE ACORDO COM A ESTRUTURA DE LEITURA. */
+if "`versao_censo22'" = "`publico'" {
+	rename D0110 peso_dom
+	if "`versao_censo22'" = "`controlado'" {
+	rename D0111 peso_dom
+	}
+	else rename D0112 peso_dom
+}
 
 /* Variáveis de domicílio não utilizadas */
 
-drop v
+drop D0030 D0040 D0050 D0060 D0070 D0080 D0090 D0160 D0170 D0171 D0180 D0181 D0240 D0290 D0330 D0340 D0360 D0390 D0400 D0410 MD*
 
 end
  
@@ -4340,6 +4357,15 @@ rename v0210 dest_lixo
 *             5 - Jogado em terreno baldio ou logradouro
 *             6 - Jogado em rio, lago ou mar
 *             7 - Tem outro destino
+
+gen dest_lixo_B = dest_lixo
+recode dest_lixo_B (7=6)
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
 
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 rename v0211 ilum_eletr
@@ -6959,6 +6985,14 @@ rename v0214 dest_lixo
 *             6 - Jogado em rio, lago ou mar
 *             7 - Tem outro destino
 
+gen dest_lixo_B = dest_lixo
+recode dest_lixo_B (7=6)
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
 
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 gen medidor_el = 0 if v0221 == 2
@@ -8155,6 +8189,14 @@ rename v0214 dest_lixo
 *             6 - Jogado em rio, lago ou mar
 *             7 - Tem outro destino
 
+gen dest_lixo_B = dest_lixo
+recode dest_lixo_B (7=6)
+* dest_lixo_B = 1 - Coletado no domicílio por serviço de limpeza
+*             	2 - Colocado em caçamba de serviço de limpeza
+*             	3 - Queimado na propriedade
+*             	4 - Enterrado na propriedade
+*             	5 - Jogado em terreno baldio, encosta ou área pública
+*             	6 - Outro destino
 
 /* C.10. ILUMINAÇÃO ELÉTRICA */
 gen medidor_el = 0 if v0221 == 2
