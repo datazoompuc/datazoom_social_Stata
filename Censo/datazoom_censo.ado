@@ -2549,6 +2549,18 @@ rename v4090 religiao
 *            7 - judaica/israelita
 *            8 - outras religiões
 
+gen religiao_A = religiao
+recode religiao_A (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7)
+lab var religiao_A "religião A - mais agregada"
+* religiao_A = 0 - sem religião
+*            1 - católica
+*            2 - evangélica
+*            3 - espírita kardecista
+*            4 - espírita afro-brasileira
+*            5 - religiões orientais
+*            6 - judaica/israelita
+*            7 - outras religiões
+
 gen religiao_B = religiao
 recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
 lab var religiao_B "religião - mais agregada"
@@ -3314,49 +3326,54 @@ program define compat_censo22pess
 
 /* B. IDENTIFICAÇÃO  */
 
-rename v* UF
-rename v* id_dom
-rename v* num_fam // verificar se disponivel familia
-rename v* n_pes_fam // verificar se disponivel familia
-rename v* regiao
-drop v*
-rename v* peso_pess
+rename P0020 UF
+rename P0100 id_dom
+rename P0010 regiao
 
-sort UF munic id_dom num_fam // verificar se disponivel familia
-by UF munic id_dom: egen n_homem_dom = total(v*==1) // v0204
-by UF munic id_dom: egen n_mulher_dom = total(v*==2)  // v0204
+/* Será necessário adaptar o peso de acordo com a versão dos microdados.
+Acesso público: P0110.
+Acesso controlado: P0111.
+Acesso restrito: P0112. AJUSTAR DE ACORDO COM A ESTRUTURA DE LEITURA. */
+if "`versao_censo22'" = "`publico'" {
+	rename P0110 peso_pess
+	if "`versao_censo22'" = "`controlado'" {
+	rename PD0111 peso_pess
+	}
+	else rename P0112 peso_pess
+}
+
+sort UF munic id_dom
+by UF munic id_dom: egen n_homem_dom = total(P0160==1)
+by UF munic id_dom: egen n_mulher_dom = total(P0160==2)
 lab var n_homem_dom "numero de homens no domicilio"
 lab var n_mulher_dom "numero de mulheres no domicilio"
-
-by UF munic id_dom num_fam: egen n_homem_fam = total(v*==1) // verificar se disponivel familia // v0204
-by UF munic id_dom num_fam: egen n_mulher_fam = total(v*==2) // verificar se disponivel familia // v0204
-lab var n_homem_fam "numero de homens na familia" 
-lab var n_mulher_fam "numero de mulheres na familia"
 
 /* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
 
 /* C.1. SITUAÇÃO */
 
-recode v* (1/3=1) (4/8=0) // v1005
-rename v* sit_setor_C  // v1005
+recode P0140 (2=0)
+rename P0140 sit_setor_C
 lab var sit_setor_C "situação do domicílio - urbano/rural"
 * sit_setor_C = 1 - urbano
 *               0 - rural
 
 /* D. OUTRAS VARIÁVEIS DE PESSOAS */
 
-rename v* ordem // verificar se disponivel familia
+rename P0101 ordem
 
 /* D.1. SEXO */
-
-rename v* sexo // v0204
+/* Há também a variável P0150, elaborada com restrições para atender aos critérios de controle estatístico 
+de confidencialidade. Necessário verificar o que irá funcionar ou se será necessário criar uma condicional
+aqui também. */
+rename P0160 sexo
 recode sexo (2=0)
 * sexo = 0 - Feminino
 *    	 1 - Masculino
 
 /* D.2. CONDIÇÃO NA FAMÍLIA E NO DOMICÍLIO  */
 
-rename v* cond_dom // v0206
+rename P0170 cond_dom
 recode cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 	(12 = 6) (7 13 14 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
 lab var cond_dom_B "condição no domicílio B"
@@ -3389,19 +3406,17 @@ lab var cond_dom_B "condição no domicílio B"
 
 /* D.3. IDADE */
 
-rename v* idade
-rename v* idade_meses
-rename v* idade_presumida
-recode idade_presumida (2 = 1) (1 = 0) // ajustar de acordo com a existencia e valor da variavel
+rename P0181 idade
+rename P0190 idade_meses
+rename P0200 idade_presumida
+recode idade_presumida (1 = 0) (2 = 1)
 * idade_presumida = 0 -	Não
 *					1 - Sim
 
-drop v
-	
 /* D.4. COR OU RACA */
 
-recode v* (9=.) // v0401
-rename v* raca // v0401
+recode P0210 (9=.) // v0401
+rename P0210 raca // v0401
 * raca = 1 - Branca
 *		 2 - Preta
 *		 3 - Amarela
@@ -3416,26 +3431,22 @@ lab var racaB "cor ou raça (indigenous=mulatto)"
 *		  2 - Preta
 *		  3 - Amarela
 *		  4 - Parda
-	
-drop v*
 
 /* D.5 RELIGIÃO */
-replace v* = int(v6121/10) // dois primeiros dígitos = religião com os códs de 1991 // VERIFICAR PERMANENCIA DA CODIFICACAO
-recode v* (11/19 = 1) (21/28 = 2) (31/48 = 3) (61 = 4) (62 63 64 = 5) (74 75 76 78 79 = 6) ///
-             (71 = 7) (12 13 19 30 49 51 52 53 59 81 82 83 84 = 8) (85 86 89 99 = .)
-rename v* religiao
-* religiao = 0 - sem religião
+recode P0411 (27 28 29 = 0) (1 = 1) (4 5 6 7 = 2) (12 = 3) (13 14 15 = 4) (17 18 19 20 21 = 5) ///
+             (16 = 6) (2 3 8 9 10 11 22 23 24 25 26 30 31 = 7) (32 33 = .)
+rename P0411 religiao_A
+* religiao_A = 0 - sem religião
 *            1 - católica
-*            2 - evangélica tradicional
-*            3 - evangélica pentecostal
-*            4 - espírita kardecista
-*            5 - espírita afro-brasileira
-*            6 - religiões orientais
-*            7 - judaica/israelita
-*            8 - outras religiões
+*            2 - evangélica
+*            3 - espírita kardecista
+*            4 - espírita afro-brasileira
+*            5 - religiões orientais
+*            6 - judaica/israelita
+*            7 - outras religiões
 
-gen religiao_B = religiao
-recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
+gen religiao_B = religiao_A
+recode religiao_B (3 4 = 3) (5/7 = 4)
 lab var religiao_B "religião B - mais agregada"
 * religiao_B = 0 - sem religião
 *              1 - católica
@@ -3447,29 +3458,29 @@ lab var religiao_B "religião B - mais agregada"
 
 * legenda: dif_x = dificuldade em fazer o movimento "x"
 
-recode v* (9= .) // v1001
-rename v* dif_enxergar // v1001
+recode P0420 (9 = .)
+rename P0420 dif_enxergar
 * dif_enxergar = 1 - Sim, não consegue de modo algum
 *				 2 - Sim, grande dificuldade
 *				 3 - Sim, alguma dificuldade
 *				 4 - Não, nenhuma dificuldade
 	
-recode v* (9= .) // v1002
-rename v* dif_ouvir // v1002
+recode P0430 (9 = .)
+rename P0430 dif_ouvir
 * dif_ouvir = 1 - Sim, não consegue de modo algum
 *			  2 - Sim, grande dificuldade
 *			  3 - Sim, alguma dificuldade
 *			  4 - Não, nenhuma dificuldade
 	
-recode v* (9= .) // v1003
-rename v* dif_caminhar // v1003
+recode P0440 (9 = .)
+rename P0440 dif_caminhar
 * dif_caminhar = 1 - Sim, não consegue de modo algum
 *			 	 2 - Sim, grande dificuldade
 *			 	 3 - Sim, alguma dificuldade
 *				 4 - Não, nenhuma dificuldade
 
-recode v* (1/3=1) (4=0) (9= .) // v1005
-rename v* def_mental // v1005
+recode P0460 (1/3 = 1) (4 = 0) (9 = .)
+rename P0460 def_mental
 * def_mental = 1 - Sim
 *			   0 - Não
 
@@ -3968,21 +3979,19 @@ drop v*
 /* D.9. SITUAÇÃO CONJUGAL */
 
 * teve conjuge
-recode v* (1 2 = 1) (3 = 0), g(teve_conjuge) // v0601
+recode P0280 (1 2 = 1) (3 = 0), g(teve_conjuge)
 label var teve_conjuge "vive ou já viveu com cônjuge"
 * teve_conjuge = 0 - não
 *                1 - sim
 
 * vive com o cônjuge?
-recode v* (2 3 = 0) // v0601
-rename v* vive_conjuge
+recode P0280 (2 3 = 0)
+rename P0280 vive_conjuge
 lab var vive_conjuge "se a pessoa vive com o cônjuge"
 * vive_conjuge = 0 - Não
 *				 1 - Sim
 
-drop v*
-
-gen estado_conj_B = v* if vive_conjuge == 1 // v0603 para mulher e v0605 para homem. verificar se terá de criar as condicionais ou se variável divulgada será derivada e combinando as informações
+gen estado_conj_B = P0290 if vive_conjuge == 1
 replace estado_conj_B = 5 if teve_conjuge == 0
 replace estado_conj_B = 6 if (teve_conjuge == 1 & vive_conjuge == 0 & estado_conj_B == .)
 label var estado_conj_B "estado conjugal B - mais agregado"
@@ -3992,8 +4001,6 @@ label var estado_conj_B "estado conjugal B - mais agregado"
 *               4 união consensual
 *               5 solteiro
 *               6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
-
-drop v*
 
 /* D.10.1 TRABALHO */
 
@@ -4130,23 +4137,24 @@ drop v*
 
 /* D.11. FECUNDIDADE */
 
-drop v*
-rename v* f_nasc_v_hom // v08011
-rename v* f_nasc_v_mul // v08012
-rename v* filhos_nasc_vivos
-drop v*
-rename v* f_vivos_hom // v08021
-rename v* f_vivos_mul // v08022
-rename v* filhos_vivos
+rename P0320 f_nasc_v_hom
+rename P0330 f_nasc_v_mul
+rename P0340 filhos_nasc_vivos
 
-rename v* idade_ult_nasc_v // v0830
+rename P0350 f_vivos_hom
+rename P0360 f_vivos_mul
+rename P0370 filhos_vivos
 
-drop v*
+rename P0381 idade_ult_nasc_v
 	
-/* DEFLACIONANDO RENDAS: referência = TBD */
-g double deflator = **
-g conversor = **
-lab var deflator "deflator de rendimentos - base TBD"
+/* DEFLACIONANDO RENDAS: referência = julho de 2022 */
+/* Manual do entrevistador Censo 2022: Trabalho e Rendimento:
+Na investigação deste tema, serão considerados os seguintes períodos de referência:
+SEMANA DE REFERÊNCIA – 25 a 31 de julho de 2022.
+MÊS DE REFERÊNCIA – julho de 2022. */
+g double deflator = 1
+g conversor = 1
+lab var deflator "deflator de rendimentos - julho de 2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fontes {
@@ -4579,6 +4587,18 @@ rename v6121 religiao
 *            6 - religiões orientais
 *            7 - judaica/israelita
 *            8 - outras religiões
+
+gen religiao_A = religiao
+recode religiao_A (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7)
+lab var religiao_A "religião A - mais agregada"
+* religiao_A = 0 - sem religião
+*            1 - católica
+*            2 - evangélica
+*            3 - espírita kardecista
+*            4 - espírita afro-brasileira
+*            5 - religiões orientais
+*            6 - judaica/israelita
+*            7 - outras religiões
 
 gen religiao_B = religiao
 recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
@@ -6236,6 +6256,18 @@ if `p'==1 {
 	*            7 - judaica/israelita
 	*            8 - outras religiões
 
+	gen religiao_A = religiao
+	recode religiao_A (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7)
+	lab var religiao_A "religião A - mais agregada"
+	* religiao_A = 0 - sem religião
+	*            1 - católica
+	*            2 - evangélica
+	*            3 - espírita kardecista
+	*            4 - espírita afro-brasileira
+	*            5 - religiões orientais
+	*            6 - judaica/israelita
+	*            7 - outras religiões
+
 	gen religiao_B = religiao
 	recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
 	lab var religiao_B "religião B - mais agregada"
@@ -7247,6 +7279,18 @@ rename v0310 religiao
 *            6 - religiões orientais
 *            7 - judaica/israelita
 *            8 - outras religiões
+
+gen religiao_A = religiao
+recode religiao_A (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7)
+lab var religiao_A "religião A - mais agregada"
+* religiao_A = 0 - sem religião
+*            1 - católica
+*            2 - evangélica
+*            3 - espírita kardecista
+*            4 - espírita afro-brasileira
+*            5 - religiões orientais
+*            6 - judaica/israelita
+*            7 - outras religiões
 
 gen religiao_B = religiao
 recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
@@ -8430,6 +8474,18 @@ rename v0310 religiao
 *            6 - religiões orientais
 *            7 - judaica/israelita
 *            8 - outras religiões
+
+gen religiao_A = religiao
+recode religiao_A (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7)
+lab var religiao_A "religião A - mais agregada"
+* religiao_A = 0 - sem religião
+*            1 - católica
+*            2 - evangélica
+*            3 - espírita kardecista
+*            4 - espírita afro-brasileira
+*            5 - religiões orientais
+*            6 - judaica/israelita
+*            7 - outras religiões
 
 gen religiao_B = religiao
 recode religiao_B (3=2) (4 5 = 3) (6/8 = 4)
