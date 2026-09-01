@@ -3834,7 +3834,7 @@ drop P0630
 
 /* D.8. EDUCACÃO */
 
-rename v* alfabetizado // v1201
+rename P0640 alfabetizado
 recode alfabetizado (2 = 0)
 * alfabetizado = 1 - Sim
 *				 0 - Não
