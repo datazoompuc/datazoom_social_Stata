@@ -1,13 +1,13 @@
 * VERSION 1.4
 
 VERSION 10.0
-POSITION . . 545 470
+POSITION . . 545 500
 
 DIALOG main, label("Censo") tabtitle("Main")
 BEGIN
    TEXT instranos      10    5  430   ., label("Inputs")
    
-   GROUPBOX caixayear 10 30 115 125, label("Ano(s)")
+   GROUPBOX caixayear 10 30 115 145, label("Ano(s)")
    CHECKBOX	chk70     +5 +20 100 20, label("1970") onclickon(script c70on) onclickoff(script c70off) option(1970)
    CHECKBOX	chk80     @  +20 100 20, label("1980")  onclickon(script c80on) onclickoff(program c80off) option(1980)
    CHECKBOX	chk91     @  +20 100 20, label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
@@ -27,11 +27,18 @@ BEGIN
  
  
    GROUPBOX caixaCompatibility 10 +30 115 45, label("Compatibilidade")
-      CHECKBOX chkcomp    +10  +20  430 20, label("Opção ativada") option(comp)
-
-   GROUPBOX caixaFormat 10 +30 115 65, label("Formato 1991")
+      CHECKBOX chkcomp    +10  +20  100 20, label("Opção ativada") option(comp)
+	  
+	  
+	  
+	  
+   GROUPBOX caixaFormat91 10 +30 115 65, label("Formato 1991")
 	  RADIO dbf91    +10  +20  100   20, first label("DBF") option(dbf91)  
 	  RADIO dattxt91 +0   +20  100   20, last label("DAT/TXT") option(dattxt91)
+
+   GROUPBOX caixaFormat22 130 -40 115 65, label("Formato 2022")
+	  RADIO csv22 +10  +20  100 20, first label("CSV") option(csv22)
+	  RADIO txt22 +0   +20  100 20, last  label("TXT") option(txt22)
 	  
    TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
 	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
@@ -73,9 +80,9 @@ BEGIN
       CHECKBOX chkDF    @  +23  200 20, label("Distrito Federal") onclickoff(script nemtudoCO) option(DF)
       CHECKBOX chkMS    @  +23  200 20, label("Mato G. do Sul (1980 to 2022)") onclickoff(script nemtudoCO) option(MS)
 
-	CHECKBOX	eng     145  365 200 20, label("Labels em inglês") option(english)
-
-	TEXT     credit     225   435  300    ., label("PUC-Rio - Departamento de Economia") right
+	CHECKBOX	eng     145  365 120 20, label("Labels em inglês") option(english)  
+	  
+	TEXT     credit     250   475  250    20, label("PUC-Rio - Departamento de Economia") right
 
 END
 
@@ -88,6 +95,8 @@ BEGIN
    main.all.disable
    main.dbf91.disable
    main.dattxt91.disable
+   main.csv22.disable
+   main.txt22.disable
 END
 
 SCRIPT c70on
@@ -133,6 +142,13 @@ SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
+	main.csv22.enable
+	*main.txt22.enable // quando for implemementado esse recurso
+	main.fam.enable
+	main.both.disable // enquanto esse recurso não está implementado
+	*main.all.enable // quando for implemementado esse recurso
+	main.chkcomp.disable
+	main.eng.disable
 END
 
 PROGRAM c80off
@@ -342,6 +358,7 @@ BEGIN
 	  option radio(main pes dom fam both all)
 	  option main.eng
 	  option radio(main dbf91 dattxt91)
+	  option radio(main csv22 txt22)
 	  
    endoptions
    stata
