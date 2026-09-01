@@ -3549,42 +3549,40 @@ rename P0460 def_mental
 
 /* D.7. NATURALIDADE E MIGRAÇÃO  */
 
-g sempre_morou = 1 if v* == 1 & v** == 2 // v1101 == 1 & v1102 == 2
-replace sempre_morou = 0 if v* != 1 | v** == 1
+g sempre_morou = 1 if P0480 == 1 & P0530 == 2
+replace sempre_morou = 0 if (P0480 == 2 | P0480 == 3) | P0530 == 1
 lab var sempre_morou "sempre morou neste município"
 * sempre_morou = 1 - sim
 *				 0 - nao
 
-rename v* nasceu_mun // v1101
-recode nasceu_mun (1 = 1) (2 3 = 0)
+g nasceu_mun = P0480
+recode nasceu_mun (1 = 1) (2 3 = 0) (9 = .)
 lab var nasceu_mun "nasceu neste município"
 * nasceu_mun = 1 - Sim
 *			   0 - Não
 
-rename v* nasceu_UF // g nasceu_UF = 1 if v1101 == 2 & v11011 == UF provavel combinacao de UF com v11011
-recode nasceu_UF (1 2 = 1) (3 = 0) // replace nasceu_UF = 0 if (v1101 == 2 & v11011 != UF) | v1101 == 3
+g nasceu_UF = 1 if P0480 == 2 & P0490 == UF
+replace nasceu_UF = 0 if (P0480 == 2 & P0490 != UF) | P0480 == 3
 replace nasceu_UF = 1 if nasceu_mun == 1
-lab var nasceu_mun "nasceu nesta UF"
+lab var nasceu_UF "nasceu nesta UF"
 * nasceu_UF = 1 - Sim
 *			  0 - Não
 
-rename v* nacionalidade // v1103
+drop P0480 
+
+rename P0520 nacionalidade
 recode nacionalidade (1 = 0) (2 = 1) (3 = 2)
-replace nacionalidade = 0 if nasceu_UF == 1
 * nacionalidade = 0 - Brasileiro nato
 *				  1 - Naturalizado brasileiro
 *				  2 - Estrangeiro
 	
-rename v* ano_fix_res // v1104
+rename P0540 ano_fix_res
 * ano em que fixou residência no Brasil
 
-drop v*
+replace P0490 = . if P0490 > 53
+rename P0490 UF_nascim
 
-*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
-*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
-rename v* UF_nascim // v11011
-
-recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11013 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
+recode P0510 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11013 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -3655,20 +3653,20 @@ recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000
 	(8000583 8000242 8000584 8000090 8000296 8000520 8000554 8000585 ///
 		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_nascim)
 label var pais_nascim "País de nascimento - códigos 1970"
-* Obs: Em 2010, a Irlanda do Norte possui o mesmo código que os países da Grã-Bretanha. Não dá
-* pra saber se nos anos anteriores o equívoco foi cometido. Isso vale para todas os itens 
-* desta seção, quando aplicável.
+* Obs: Em 2022, foram considerados os seguintes países como Grã-Bretanha: ESCOCIA, INGLATERRA, IRLANDA DO 
+* NORTE, PAIS DE GALES, e REINO UNIDO. Isso vale para todas os itens desta seção, quando aplicável.
+* Nos anos anteriores, se classificou a Coreia do Norte como "Coreia" e a Coreia do Sul como "Asia - Outros".
+* Mantive esse padrão, mas pode ser que queiram rever no futuro.
 
-drop v*
+drop P0510
 
-*replace v* = floor(v*/10^5) // nao me parece que va ser necessario. verificar e apagar
-*replace v* = . if v*>53 // nao me parece que va ser necessario. verificar e apagar
-rename v* UF_mor_ant // v11061
+replace P0570 = . if P0570 > 53
+rename P0570 UF_mor_ant
 
-*replace v* = . if v*>5400000 // nao me parece que va ser necessario. verificar e apagar
-rename v* mun_mor_ant // v11062
+replace P0580 = . if P0580 >= 8888888
+rename P0580 mun_mor_ant
 
-recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11063 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
+recode P0590 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 /// // v11063 VERIFICAR O NOME DA VARIAVEL E COMPATIBILIDADE DOS CODIGOS DE PAIS
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -3740,42 +3738,27 @@ recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000
 		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor_ant)
 label var pais_mor_ant "País onde morava anteriormente (se migrou nos últ 10 anos)"
 
-drop v*
+drop P0590
 
-rename v* anos_mor_mun // v1105
-
-* Em 2010, ha discernimento entre quem nasceu e sempre morou na UF e quem nasceu mas
-* nem sempre morou, sendo que apenas os últimos respondem ha qto tempo moram na UF sem 
-* interrupção. Então, para compatibilizar, para quem nasceu e sempre morou, o tempo de 
-* moradia é a idade
-
-replace anos_mor_mun = idade if anos_mor_mun == . & sempre_morou == 1
-
-*replace v0623 = idade if v0623==. & anos_mor_mun~=. // em 2022 nao pergunta explicitamente o tempo morando na UF, entao a nao ser que ibge crie var derivada, nao da pra replicar => apagar
-*rename v0623 anos_mor_UF
+rename P0550 anos_mor_mun
 
 * tempo de moradia em 1970 só vale para quem não nasceu no município.
-*g t_mor_UF_70 = anos_mor_UF // verificar para apagar
 g t_mor_mun_70 = anos_mor_mun
-recode /*t_mor_UF_70*/ t_mor_mun_70 (7/10=6) (11/max=7) // verificar para apagar
-*lab var t_mor_UF_70 "tempo de moradia na UF - grupos de 1970" // verificar para apagar
+recode t_mor_mun_70 (7/10=6) (11/max=7)
 lab var t_mor_mun_70 "tempo de moradia no municipio - grupos de 1970"
 
 * De 1980 em diante, podemos montar a variavel de tempo de moradia incluindo
 * pessoas que nasceram mas nem sempre moraram no municipio em que residem
-*recode anos_mor_UF (7/9 = 6) (10/max = 7), g(t_mor_UF_80) // verificar para apagar
 recode anos_mor_mun (7/9 = 6) (10/max = 7), g(t_mor_mun_80)
-*lab var t_mor_UF_80 "tempo de moradia na UF - grupos de 1980" // verificar para apagar
 lab var t_mor_mun_80 "tempo de moradia no municipio - grupos de 1980"
 
-replace v* = floor(v*/10^5) // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
-replace v* = . if v*>53 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
-rename v* UF_mor5anos // v11071 
+replace P0610 = . if P0610 > 53
+rename P0610 UF_mor5anos // v11071 
 
-replace v* = . if v*>5400000 // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES
-rename v* mun_mor5anos // v11072
+replace P0620 = . if P0620 >= 8888888
+rename P0620 mun_mor5anos // v11072
 
-recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///  // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES // v11073
+recode P0630 (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000108 8000132 8000120 ///  // VERIFICAR SE VAI PRECISAR DESSAS TRANSFORMACOES // v11073
 	8000148 8000174 8000178 8000384 8000262 8000232 8000231 8000266 8000270 ///
 	8000288 8000324 8000624 8000226 8000426 8000430 8000434 8000450 8000454 ///
 	8000466 8000504 8000480 8000478 8000508 8000516 8000562 8000566 8000404 ///
@@ -3847,7 +3830,7 @@ recode v* (8000998/max =.) (8000710 8000024 8000012 8000204 8000072 8000854 8000
 		8000598 8000882 8000776 8000798 8000548 = 96 "Oceania - outros"), g(pais_mor5anos)
 label var pais_mor5anos "País onde morava há 5 anos"
 
-drop v*
+drop P0630
 
 /* D.8. EDUCACÃO */
 
