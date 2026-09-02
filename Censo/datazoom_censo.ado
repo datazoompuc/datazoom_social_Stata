@@ -3437,6 +3437,7 @@ recode sexo (2=0)
 /* D.2. CONDIÇÃO NA FAMÍLIA E NO DOMICÍLIO  */
 
 rename P0170 cond_dom
+destring cond_dom, replace
 recode cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 	(12 = 6) (7 13 14 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
 lab var cond_dom_B "condição no domicílio B"
@@ -3846,14 +3847,16 @@ recode alfabetizado (2 = 0)
 	
 ** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
 
-recode v* (1 = 1 "sim") (2 3 = 0 "nao"), g(freq_escola) //v1202
-replace freq_escola = 0 if v*<=2		// v1203	desconsidera creche e pre-escola para compatibilizar com todos
+destring P0660, replace
+
+recode P0650 (1 = 1 "sim") (2 3 = 0 "nao"), g(freq_escola)
+replace freq_escola = 0 if P0660 <= 2	//	desconsidera creche e pre-escola para compatibilizar com todos
 lab var freq_escola "frequenta escola"
 * freq_escola = 1 - Sim
 *			    0 - Não
 
 g freq_escolaB = freq_escola
-replace freq_escolaB = 1 if v*==2 // v1203	inclui pre-escola
+replace freq_escolaB = 1 if P0660 == 2 //	inclui pre-escola
 lab var freq_escolaB "frequenta escola - inclui pre-escola"
 * freq_escolaB = 1 - Sim
 *				 0 - Não
@@ -3862,10 +3865,10 @@ lab var freq_escolaB "frequenta escola - inclui pre-escola"
 * ser utilizada conjuntamente com a serie que frequenta
 * em 2022, nao tem opção de Classe de Alfabetização nem Pré-vestibular
 
-recode v* (3 = 4) (4 = 5) (5 = 7) (6 = 8) (7 = 10) (8 = 12) (9 10 11 = 13)	// v1203
-replace v* = 6 if v*==5 & v**==10 // v1203 ; v1203 == 4 & v1204 == 10
-replace v* = 9 if v*==8 & v**==5 // v1203 ; v1203 == 6 & v1205 == 10
-rename v* curso_freq
+recode P0660 (3 = 4) (4 = 5) (5 = 7) (6 = 8) (7 = 10) (8 = 12) (9 10 11 = 13) (99 = .)
+replace P0660 = 6 if P0660 == 5 & P0670 == 10
+replace P0660 = 9 if P0660 == 8 & (P0670 == 10 | P0680 == 10)
+rename P0660 curso_freq
 * curso_freq = 1  - Creche
 *              2  - Pré-escolar
 *              3  - Classe de alfabetização
@@ -3880,11 +3883,14 @@ rename v* curso_freq
 *              12 - Superior - graduação
 *              13 - Superior - mestrado ou doutorado
 
-rename v* serie_freq // v1204
-recode serie_freq (9 = 8) (10 = 9)
-replace serie_freq = v* if serie_freq==. & v* < 9 // v1205
-replace serie_freq = 8 if serie_freq==. & v* == 9 // v1205
-replace serie_freq = 9 if serie_freq==. & v* == 10 // v1205
+destring P0670, replace
+destring P0680, replace
+
+rename P0670 serie_freq
+recode serie_freq (9 = 8) (10 = 9) (99 = .)
+replace serie_freq = P0680 if serie_freq == . & P0680 < 9
+replace serie_freq = 8 if serie_freq == . & P0680 == 9
+replace serie_freq = 9 if serie_freq == . & P0680 == 10
 * serie_freq = 1 - Primeira série/ano
 *			   2 - Segunda série
 *			   3 - Terceira série
@@ -3914,15 +3920,15 @@ replace anos_estudoC = 3 if curso_freq==12		// superior de graduacao
 replace anos_estudoC = 4 if curso_freq==13		// mestrado ou doutorado
 
 * para ficar compativel com 2000, nao podemos recuperar a informacao abaixo
-*replace anos_estudoC = 4 if v*==1	// v1206 ja concluiu curso superior de graduacao
+*replace anos_estudoC = 4 if P0690 == 1	// ja concluiu curso superior de graduacao
 
 * para quem nao frequenta escola
 
 * não tem pré-vestibular
-recode v* (5 6 7 = 5) (8 = 7) (9 10 = 8) (11 = 10) (12 = 12) (13/15 = 13)	// v1207
-replace v* = 6 if v*== & v**== // v1207 ; (v1207 == 5 | v1207 == 6 | v1207 == 7) & (v1209 == 11 | v1210 == 11)
-replace v* = 9 if v*== & v**== // v1207 ; (v1207 == 9 | v1207 == 10) & v1210 == 11
-rename v* 
+recode P0700 (5 6 7 = 5) (8 = 7) (9 10 = 8) (11 = 10) (12 = 12) (13/15 = 13) (99 = .)
+replace P0700 = 6 if P0700 == 5 & (P0720 == 11 | P0730 == 11)
+replace P0700 = 9 if P0700 == 8 & (P0720 == 11 | P0730 == 11)
+rename P0700 curso_frequentou
 * curso_frequentou = 1  - Creche
 *              		 2  - Pré-escolar
 *              		 3  - Classe de alfabetização
@@ -3937,11 +3943,16 @@ rename v*
 *             		 12 - Superior - graduação
 *             		 13 - Superior - mestrado ou doutorado
 
-rename v* serie_frequentou // v1209
-recode serie_frequentou (1 = .) (2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9/10 = 8) (11 = 9)
-replace v* = v* - 1 // v1210
-recode v* (0 = .) (9 = 8) (10 = 9)
-replace serie_frequentou = v* if serie_frequentou==. // v1210
+destring P0720, replace
+destring P0730, replace
+
+rename P0720 serie_frequentou
+recode serie_frequentou (1 99 = .)
+replace serie_frequentou = serie_frequentou - 2
+recode serie_frequentou (0 = 1)
+replace P0730 = P0730 - 1
+recode P0730 (0 98 = .) (9 = 8) (10 = 9)
+replace serie_frequentou = P0730 if serie_frequentou == .
 * serie_frequentou = 1 - Primeira série/ano
 *			  		 2 - Segunda série
 *			  		 3 - Terceira série
@@ -3954,20 +3965,20 @@ replace serie_frequentou = v* if serie_frequentou==. // v1210
 
 replace anos_estudoC = 0 if curso_frequentou<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
 replace anos_estudoC = 0 if curso_frequentou==5 & serie_frequentou<4 // 1a-3a serie/1o-4o ano do 1o. grau ou fundamental 
-replace anos_estudoC = 0 if curso_frequentou==6 & v* == 2 // v1211 antigo primario sem conclusao
-replace anos_estudoC = 0 if curso_frequentou==7 & v* == 2 // v1211 supletivo 1o.grau/fundamental sem conclusao
+replace anos_estudoC = 0 if curso_frequentou==6 & P0740 == 2 // antigo primario sem conclusao
+replace anos_estudoC = 0 if curso_frequentou==7 & P0740 == 2 // supletivo 1o.grau/fundamental sem conclusao
 
-replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 & v* == 1 // v1211 ensino fundamental ate 7a serie com conclusao
+replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 & P0740 == 1 // ensino fundamental ate 7a serie com conclusao
 
-replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & v* == 1 // v1211 ensino fundamental com conclusao
-replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & v* == 1 // v1211 fundamental nao seriado ou supletivo com conclusao
-replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==2	// v1211 ensino medio sem conclusao
+replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & P0740 == 1 // ensino fundamental com conclusao
+replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & P0740 == 1 // fundamental nao seriado ou supletivo com conclusao
+replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & P0740 == 2	// ensino medio sem conclusao
 
-replace anos_estudoC = 3 if (curso_frequentou>=8 & curso_frequentou<=10) & v*==1	// v1211 antigo cientifico/classico/medio 2o.ciclo com conclusao
+replace anos_estudoC = 3 if (curso_frequentou>=8 & curso_frequentou<=10) & P0740 == 1	// antigo cientifico/classico/medio 2o.ciclo com conclusao
 
-replace anos_estudoC = 3 if curso_frequentou==12 & v*==2		// v1211 superior de graduacao sem conclusao
+replace anos_estudoC = 3 if curso_frequentou==12 & P0740 == 2		// superior de graduacao sem conclusao
 
-replace anos_estudoC = 4 if curso_frequentou==12 & v1211==1		// superior de graduacao com conclusao
+replace anos_estudoC = 4 if curso_frequentou==12 & P0740==1		// superior de graduacao com conclusao
 replace anos_estudoC = 4 if curso_frequentou==13		// especializacao/mestrado/doutorado 
 
 * anos_estudoC = 0 – sem instrução ou menos de 4 anos de estudo (primário incompleto)
@@ -3977,12 +3988,19 @@ replace anos_estudoC = 4 if curso_frequentou==13		// especializacao/mestrado/dou
 *			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
 lab var anos_estudoC "grupos de anos de escolaridade"
 
-drop v* curso_freq serie_freq
+* O IBGE fornece a variável P0770 com essa classificação de anos_estudoC compatível com Censo 2010
+* É uma possibilidade usá-la diretamente, se quiser.
+
+drop curso_freq serie_freq
+
+* Anos de estudo - cálculo IBGE
+rename P0790 anos_estudo
+	replace anos_estudo = 16 if anos_estudo > 16 // compatível com demais anos
 
 * Estuda no município em que reside?
-recode v* (2 3 = 0) // v1301
-replace v* = . if freq_escolaB==0 // v1301
-rename v* mun_escola // v1301
+recode P0800 (2 3 = 0)
+replace P0800 = . if freq_escolaB==0
+rename P0800 mun_escola
 lab var mun_escola "estuda no município em que reside?"
 * mun_escola = 1 - sim
 *			   0 - não
