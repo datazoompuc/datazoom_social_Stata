@@ -4005,13 +4005,13 @@ lab var mun_escola "estuda no município em que reside?"
 * mun_escola = 1 - sim
 *			   0 - não
 
-recode v* (140/226 321 322 347 380 = 3) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
-		 (421 641/727 813 = 4) ///
+recode P0750 (140/226 320/322 347 380 = 3) ///
+		 (260 270 421 641/727 = 4) ///
 		 (440/481 520/525 581 582 = 5) ///
 		 (620/624 = 6) ///
-		 (310/314 340 342/346 762 = 7) ///
+		 (310/314 342/346 762 = 7) ///
 		 (863 = 8) ///
-		 (341 420 422 482 483 540/544 761 810/812 814/862 085 = 9), g(cursos_c1)
+		 (240 420 422 483 541/554 810/862 870 900 910 = 9), g(cursos_c1)
 lab var cursos_c1 "curso superior concluído"
 * cursos_c1	=	3	ciências humanas
 *				4	ciências biológicas
@@ -4021,15 +4021,15 @@ lab var cursos_c1 "curso superior concluído"
 *				8	militar
 *				9	outros cursos
 		 
-recode v* (140/146 = 1) /// // v1212 VERIFICAR A CODIFICACAO PARA SABER SE MUDOU
-		 (210/226 = 2) ///
-		 (310/346 347 380 = 3) ///
+recode P0750 (140/146 = 1) ///
+		 (210/270 = 2) ///
+		 (310/380 = 3) ///
 		 (420/483 = 4) ///
 		 (520/582 623 = 5) ///
 		 (620/622 624 641 = 6) ///
 		 (720/762 = 7) ///
-		 (810/863 = 8) ///
-		 (085 = 9), g(cursos_c2)
+		 (810/870 = 8) ///
+		 (900 910 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
 *				2	Artes, Humanidades e Letras
@@ -4041,9 +4041,7 @@ lab var cursos_c2 "curso superior concluído - CONCLA"
 *				8	serviços
 *				9	Outros
 
-rename v* curso_concl	// COMP SO PARA CURSO SUPERIOR  // v1212
-
-drop v*
+rename P0750 curso_concl	// COMP SO PARA CURSO SUPERIOR 
 
 /* D.9. SITUAÇÃO CONJUGAL */
 
