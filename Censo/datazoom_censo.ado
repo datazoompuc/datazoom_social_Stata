@@ -2448,11 +2448,11 @@ recode v7616 (999999 = .)
 rename v7616 renda_dom
 drop v7617	// em salarios minimos
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NÃO SERIA agosto/2010?
-g double deflator = .515004440
+/* DEFLACIONANDO RENDAS: referência = julho/2022 */
+g double deflator = 0.2426823264085210000
 g conversor = 1
 
-lab var deflator "deflator de rendimentos - base 08/2010" // OU NÃO SERIA 07/2010?
+lab var deflator "deflator de rendimentos - base julho/2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -3066,10 +3066,10 @@ lab var rend_fam "renda familiar"
 
 drop  ESTR ESTRP
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
-g double deflator = 0.515004440
+/* DEFLACIONANDO RENDAS: referência = julho/2022 */
+g double deflator = 0.2426823264085210000
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010"  // OU NAO SERIA 07/2010?
+lab var deflator "deflator de rendimentos - base julho/2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_todos_trab rend_outras_fontes rend_total rend_fam {
@@ -4193,14 +4193,14 @@ rename P0370 filhos_vivos
 
 rename P0381 idade_ult_nasc_v
 	
-/* DEFLACIONANDO RENDAS: referência = julho de 2022 */
+/* DEFLACIONANDO RENDAS: referência = julho/2022 */
 /* Manual do entrevistador Censo 2022: Trabalho e Rendimento:
 Na investigação deste tema, serão considerados os seguintes períodos de referência:
 SEMANA DE REFERÊNCIA – 25 a 31 de julho de 2022.
 MÊS DE REFERÊNCIA – julho de 2022. */
 g double deflator = 1
 g conversor = 1
-lab var deflator "deflator de rendimentos - julho de 2022"
+lab var deflator "deflator de rendimentos - julho/2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fontes {
@@ -4489,11 +4489,11 @@ rename v6529 renda_dom
 
 drop v6530 v6531 v6532
 
-/* DEFLACIONANDO RENDAS:  */ NAO SERIA AGOSTO/2010?
-g double deflator = 1
+/* DEFLACIONANDO RENDAS: julho/2022 */
+g double deflator = 0.4802429326872950000
 g conversor = 1
 
-lab var deflator "deflator - referência: 08/2010" // OU NAO SERIA 07/2010?
+lab var deflator "deflator - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -5341,10 +5341,11 @@ label var f_nasc_m_mul "filhos nascidos mortos (mulheres)"
 
 drop v6664 v0667 v0668 v6681 v6682 
 	
-/* DEFLACIONANDO RENDAS:  */  NAO SERIA AGOSTO/2010?
-g double deflator = 1
+/* DEFLACIONANDO RENDAS: julho/2022 */
+g double deflator = 0.4802429326872950000
 g conversor = 1
-lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+
+lab var deflator "deflator - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_todos_trab rend_outras_fontes rend_total rend_fam {
@@ -5925,11 +5926,11 @@ if `p'==1 {
 	* mun_trab 	= 1 - sim
 	*			= 0 - não
 
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */  // NAO SERIA AGOSTO/2010?
-	g double deflator = 0.000015185/10^8
-	g double conversor = 2750000000000
+	/* DEFLACIONANDO RENDAS: julho/2022 */
+	g double deflator = 0.0000000000000711935
+	g conversor = 2750000000000
 	
-	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+	lab var deflator "deflator de rendimentos - referência: julho/2022"
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_total rend_fam {
@@ -6856,11 +6857,11 @@ if `p'==1 {
 	lab var renda_dom "renda domiciliar"
 	drop v608 v613  v680 v540 v682 v681
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
+	/* DEFLACIONANDO RENDAS: julho/2022 */
+	cap g double deflator = 0.0000000000015139096
+	cap g conversor = 2750000000000
 	
-	cap g double deflator = 0.000033234/10^7
-	cap g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+	lab var deflator "deflator de rendimentos - referência: julho/2022"
 	lab var conversor "conversor de moedas"
 
 	foreach var in rend_ocup_hab rend_outras_ocup rend_total rend_fam renda_dom {
@@ -7166,11 +7167,11 @@ rename v2012 renda_dom
 
 drop v2013 v2014
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
-g double deflator = 0.000038883
+/* DEFLACIONANDO RENDAS: julho/2022 */
+g double deflator = 0.0000160532976703994
 g double conversor = 2750000
 
-lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+lab var deflator "deflator de rendimentos - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -7855,10 +7856,11 @@ lab var pea "população economicamente ativa"
 * pea	= 1 economicamente ativo
 *         0 inativo
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
-g double deflator = 0.000038883
+/* DEFLACIONANDO RENDAS: julho/2022 */
+g double deflator = 0.0000160532976703994
 g double conversor = 2750000
-lab var deflator "deflator de rendimentos - base 08/2010" // NAO SERIA 07/2010?
+
+lab var deflator "deflator de rendimentos - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_hab rend_outras_ocup rend_outras_fontes rend_total rend_fam  {
@@ -8382,11 +8384,11 @@ rename v2012 renda_dom
 
 drop v2013 v2014
 
-/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
-g double deflator = 0.000038883
+/* DEFLACIONANDO RENDAS: julho/2022 */
+g double deflator = 0.0000160532976703994
 g double conversor = 2750000
 
-lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+lab var deflator "deflator de rendimentos - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
