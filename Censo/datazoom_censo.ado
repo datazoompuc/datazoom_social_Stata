@@ -3030,6 +3030,9 @@ drop v4523
 replace v4524 = . if rend_outras_ocup==.
 rename v4524 rend_outras_sm
 
+egen rend_todos_trab = rowtotal(rend_ocup_prin rend_outras_ocup)
+replace rend_todos_trab = . if rend_ocup_prin == . & rend_outras_ocup == .
+
 drop v4521
 
 drop v4525 v4526
@@ -3069,7 +3072,7 @@ g conversor = 1
 lab var deflator "deflator de rendimentos - base 08/2010"  // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
-foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
+foreach var in rend_ocup_prin rend_outras_ocup rend_todos_trab rend_outras_fontes rend_total rend_fam {
 		g `var'_def = (`var'/conversor)/deflator
 		lab var `var'_def "`var' deflacionada"
 }
@@ -4163,43 +4166,20 @@ Vamos disponibilizar o rendimento do trabalho principal, mas note que ela irá r
 Vamos também disponibilizar uma nova variável, rendimento de todos os trabalhos, somando trabalho principal com outras ocupações sob nome rend_todos_trab,
 aplicando também para 2000 e 2010. */
 
-replace	v* = . if v* == 0 // v14111
-rename v* rend_ocup_prin // v14111
-* rendimento bruto trabalho principal
+* rendimento bruto trabalho principal (se apenas 1 trabalho)
+gen rend_ocup_prin = P1080 if mais_de_um_trab == 0
+replace	P1080 = . if P1080 == 0
 
-drop v*
-
-replace v* = . if rend_ocup_prin==.
-rename v* rend_prin_sm
-* rendimento salarios minimos trabalho principal
-
-replace v* = . if v* == 0 // v14121
-rename v* rend_todos_trab // v14121
-replace rend_todos_trab = rend_ocup_prin if rend_todos_trab == . & mais_de_um_trab == 0
 * rendimento bruto todos trabalhos
-
-rename v* rend_todos_trab_sm
-replace rend_todos_trab_sm = rend_prin_sm if rend_todos_trab_sm == . & mais_de_um_trab == 0
-* rendimento em salarios mínimos em todos os trabalhos
-
-drop v*
+replace P1080 = . if P1080 == 0
+rename P1080 rend_todos_trab
 
 * em anos anteriores já disponibilizava a total pronta, ver se em 2022 também
-rename v* rend_total
+rename P1110 rend_total
+lab var rend_total "rendimento de todas as fontes"
 
-rename v* rend_total_sm
-
-* renda familiar
-replace v* = v**n_pes_fam
-rename v* rend_fam
-lab var rend_fam "renda familiar"
-
-drop v*
-
-rename v* rend_outras_fontes // v14131
+rename P1100 rend_outras_fontes
 lab var rend_outras_fontes "rendimento de outras fontes"
-
-drop v*
 
 /* D.11. FECUNDIDADE */
 
@@ -4230,7 +4210,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fo
 
 /* D.12. OUTRAS INFORMAÇÕES */
  
-drop v*
+drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0560 P0600 P0710 P0760 P0770 P0780 P0810 P0820 P0830 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
 
 order ano UF regiao munic id_dom ordem
 
@@ -5287,6 +5267,10 @@ rename v6521 rend_outras_ocup
 rename v6524 rend_outras_sm
 *rendimento em salarios mínimos nos demais trabalhos
 
+egen rend_todos_trab = rowtotal(rend_ocup_prin rend_outras_ocup)
+replace rend_todos_trab = . if rend_ocup_prin == . & rend_outras_ocup == .
+* rendimento bruto em todos os trabalhos
+
 drop v6525 v6526
 
 rename v6527 rend_total
@@ -5363,7 +5347,7 @@ g conversor = 1
 lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
 lab var conversor "conversor de moedas"
 
-foreach var in rend_ocup_prin rend_outras_ocup rend_outras_fontes rend_total rend_fam {
+foreach var in rend_ocup_prin rend_outras_ocup rend_todos_trab rend_outras_fontes rend_total rend_fam {
 		g `var'_def = (`var'/conversor)/deflator
 		lab var `var'_def "`var' deflacionada"
 }
@@ -5463,14 +5447,14 @@ if `d'==1 {
 
 	recode v010 (9 0 = .)
 	rename v010 aluguel_70
-	* aluguel_70 = 1 - até 15 salários mínimos
-	*              2 - de 16 a 30 salários mínimos
-	*              3 - de 31 a 60 salários mínimos
-	*              4 - de 61 a 120 salários mínimos
-	*              5 - de 121 a 240 salários mínimos
-	*              6 - de 241 a 480 salários mínimos
-	*              7 - de 481 a 960 salários mínimos
-	*              8 - de 961 e mais salários mínimos
+	* aluguel_70 = 1 - até 15 NCr$
+	*              2 - de 16 a 30 NCr$
+	*              3 - de 31 a 60 NCr$
+	*              4 - de 61 a 120 NCr$
+	*              5 - de 121 a 240 NCr$
+	*              6 - de 241 a 480 NCr$
+	*              7 - de 481 a 960 NCr$
+	*              8 - de 961 e mais NCr$
 
 
 	/* C.7. ABASTECIMENTO DE ÁGUA */
