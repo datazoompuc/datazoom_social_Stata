@@ -4071,16 +4071,16 @@ label var estado_conj_B "estado conjugal B - mais agregado"
 
 /* D.10.1 TRABALHO */
 
-gen trab_rem_sem = 1 if v* == 1 | v** == 1 | v*** == 1 // v14011 == 1 | v14012 == 1 | v14013 == 1
-replace trab_rem_sem = 0 if trab_rem_sem == . & | v*** == 2 // v14013 == 2
+gen trab_rem_sem = 1 if P0840 == 1 | P0850 == 1 | P0860 == 1
+replace trab_rem_sem = 0 if trab_rem_sem == . & P0860 == 2
 * trab_rem_sem = 1 - Sim
 *				 0 - Não
 
 /* Atenção! Em 2022, a pergunta se ajudou sem pagamento algum morador do domicílio ou parente veio antes da de estar afastado de trabalho remunerado.
 Vamos disponibilizar sob mesmo nome, pois a pergunta é igual, mas cuidado ao comparar os anos, pois o fluxo pode afetar a quantidade de pessoas que
 aparece em cada categoria. */
-rename v* afast_trab_sem // v14015
-recode afast_trab_sem (2 = 0)
+rename P0880 afast_trab_sem
+recode afast_trab_sem (2 = 0) (9 = .)
 * afast_trab_sem = 1 - Sim
 *				   0 - Não
 
@@ -4088,38 +4088,42 @@ recode afast_trab_sem (2 = 0)
 * Em 2000, sao duas questoes, uma referente a aprendiz/estagiário e outra sobre
 * ajuda sem remuneração a morador em atividade de extração e cultivo; em 2010 e 2022,
 * é uma pergunta genérica sobre ajuda sem remuneração a morador do domicílio
-rename v* nao_remun // v14014
-recode nao_remun (2 = 0)	
+rename P0870 nao_remun
+recode nao_remun (2 = 0) (9 = .)
 * nao_remun = 1 - Sim
 *			  0 - Não
 	
-rename v* trab_proprio_cons // v14016
-recode trab_proprio_cons (2 = 0)
+rename P0890 trab_proprio_cons
+recode trab_proprio_cons (2 = 0) (9 = .)
 * trab_proprio_cons = 1 - Sim
 *					  0 - Não
 
-recode v* (1 = 0) (2 3 = 1) // v1402
-rename v* mais_de_um_trab // v1402
+recode P0900 (1 = 0) (2 3 = 1) (9 = .)
+rename P0900 mais_de_um_trab
 lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
 *			   	    1 - Sim
 
-rename v* ocup2010 // v14031
-rename v* ativ2010	// v14041
+rename P0970 ocup2010
+recode ocup2010 (K000 = 0000)
+rename P0980 ativ2010
+recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 
-rename v* ocup2000 // v14032
-rename v* ativ2000 // v14042
+* PEA nesse ano é apenas para 14 anos ou mais
+rename P0930 pea
 
-* Posição na Ocupação // Verificar se virá uma variável derivada composta de informações de mais de uma variável na divulgação
-gen pos_ocup_sem = 1 if v* == 3 & v** == 1 // v1405 == 3 & v1406 == 1
-replace pos_ocup_sem = 2 if v* == 2 | v* == 4 | (v* == 5 & v** == 1) | (v* == 6 & v** == 1) // v1405 == 2 | v1405 == 4 | (v1405 == 5 & v1406 == 1) | (v1405 == 6 & v1406 == 1)
-replace pos_ocup_sem = 3 if v* == 3 & v** == 2 // v1405 == 3 & v1406 == 2
-replace pos_ocup_sem = 4 if v* == 1 & v** == 1 // v1405 == 1 & v1406 == 1
-replace pos_ocup_sem = 5 if v* == 1 & v** == 2 // v1405 == 1 & v1406 == 2
-replace pos_ocup_sem = 6 if v* == 8 // v1405 == 8
-replace pos_ocup_sem = 7 if v* == 7 // v1405 == 7
-replace pos_ocup_sem = 8 if v* == 9 // v1405 == 9
-replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
+* Posição na Ocupação
+* Não considerei funcionários públicos não estatutários que não tivessem carteira de
+* trabalho assinada em nenhum grupo. Pode ser revisto, se necessário.
+gen pos_ocup_sem = 1 if P0990 == 3 & P1000 == 1
+replace pos_ocup_sem = 2 if P0990 == 2 | P0990 == 4 | (P0990 == 5 & P1000 == 1) | (P0990 == 6 & P1000 == 1)
+replace pos_ocup_sem = 3 if P0990 == 3 & P1000 == 2
+replace pos_ocup_sem = 4 if P0990 == 1 & P1000 == 1
+replace pos_ocup_sem = 5 if P0990 == 1 & P1000 == 2
+replace pos_ocup_sem = 6 if P0990 == 8
+replace pos_ocup_sem = 7 if P0990 == 7
+replace pos_ocup_sem = 8 if P0990 == 9
+replace pos_ocup_sem = 9 if pos_ocup_sem == . & trab_proprio_cons == 1
 * pos_ocup_sem  = 1 - Empregado com carteira
 *				  2 - Militar e Funcionário Públicos
 *				  3 - Empregado sem carteira
@@ -4130,31 +4134,26 @@ replace pos_ocup_sem = 9 if v* == 9 & trab_proprio_cons == 1 // v1405 == 9
 *				  8 - Não remunerado
 *                 9 - Trabalhador na produção para o próprio consumo
 
+drop P0990 P1000
 
-drop v* // v1405 v1406 v1407
-
-rename v* previd_B // v1408
-recode previd_B (2 = 0) 
+* para pessoas de 14 anos ou mais
+rename P0940 previd_B
 * previd = 1 - Sim
 *          0 - Não
 
-drop v*
-
 * providência para conseguir trabalho
-recode v* (2 = 0) // v1409
-rename v* tomou_prov // v1409
+recode P1050 (2 = 0) (9 = .)
+rename P1050 tomou_prov
 lab var tomou_prov "tomou providências para conseguir trabalho"
 * tom_prov = 1 - sim
 *            0 - não
 
 * trabalha no município 
-recode v* (1 2 = 1) (3/5 = 0) (else = .) // v1501
-rename v* mun_trab // v1501
+recode P1120 (1 2 = 1) (3/5 = 0) (9 = .)
+rename P1120 mun_trab
 lab var mun_trab "trabalha no município em que reside"
 * mun_trab 	= 1 - sim
 *			  0 - não
-
-drop v*
 
 /* D.10.2 RENDIMENTOS */
 
