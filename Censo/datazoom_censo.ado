@@ -3360,7 +3360,7 @@ MÊS DE REFERÊNCIA – julho de 2022. */
 g double deflator = 1
 g conversor = 1
 
-lab var deflator "deflator - referência: julho de 2022"
+lab var deflator "deflator de rendimentos - referência: julho de 2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -4493,7 +4493,7 @@ drop v6530 v6531 v6532
 g double deflator = 0.4802429326872950000
 g conversor = 1
 
-lab var deflator "deflator - referência: julho/2022"
+lab var deflator "deflator de rendimentos - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 g renda_dom_def = (renda_dom/conversor)/deflator
@@ -5345,7 +5345,7 @@ drop v6664 v0667 v0668 v6681 v6682
 g double deflator = 0.4802429326872950000
 g conversor = 1
 
-lab var deflator "deflator - referência: julho/2022"
+lab var deflator "deflator de rendimentos - referência: julho/2022"
 lab var conversor "conversor de moedas"
 
 foreach var in rend_ocup_prin rend_outras_ocup rend_todos_trab rend_outras_fontes rend_total rend_fam {
