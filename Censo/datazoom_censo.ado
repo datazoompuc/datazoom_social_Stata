@@ -4001,7 +4001,7 @@ rename P0790 anos_estudo
 	replace anos_estudo = 16 if anos_estudo > 16 // compatível com demais anos
 
 * Estuda no município em que reside?
-recode P0800 (2 3 = 0)
+recode P0800 (2 3 = 0) (9 = .)
 replace P0800 = . if freq_escolaB==0
 rename P0800 mun_escola
 lab var mun_escola "estuda no município em que reside?"
