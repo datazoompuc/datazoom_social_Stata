@@ -2031,7 +2031,6 @@ else if `ano' == 2022 {
 					
 					
 			* logica de leitura com csv
-					clear all
 					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") clear
 										
 					gen ano = 2022
