@@ -3867,6 +3867,8 @@ lab var freq_escolaB "frequenta escola - inclui pre-escola"
 * ser utilizada conjuntamente com a serie que frequenta
 * em 2022, nao tem opção de Classe de Alfabetização nem Pré-vestibular
 
+destring P0670, replace
+destring P0680, replace
 recode P0660 (3 = 4) (4 = 5) (5 = 7) (6 = 8) (7 = 10) (8 = 12) (9 10 11 = 13) (99 = .)
 replace P0660 = 6 if P0660 == 5 & P0670 == 10
 replace P0660 = 9 if P0660 == 8 & (P0670 == 10 | P0680 == 10)
@@ -3885,8 +3887,6 @@ rename P0660 curso_freq
 *              12 - Superior - graduação
 *              13 - Superior - mestrado ou doutorado
 
-destring P0670, replace
-destring P0680, replace
 
 rename P0670 serie_freq
 recode serie_freq (1 2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9 = 8) (10 = 9) (99 = .)
@@ -3927,6 +3927,9 @@ replace anos_estudoC = 4 if curso_freq==13		// mestrado ou doutorado
 * para quem nao frequenta escola
 
 * não tem pré-vestibular
+destring P0700, replace
+destring P0720, replace
+destring P0730, replace
 recode P0700 (5 6 7 = 5) (8 = 7) (9 10 = 8) (11 = 10) (12 = 12) (13/15 = 13) (99 = .)
 replace P0700 = 6 if P0700 == 5 & (P0720 == 11 | P0730 == 11)
 replace P0700 = 9 if P0700 == 8 & (P0720 == 11 | P0730 == 11)
@@ -3945,8 +3948,6 @@ rename P0700 curso_frequentou
 *             		 12 - Superior - graduação
 *             		 13 - Superior - mestrado ou doutorado
 
-destring P0720, replace
-destring P0730, replace
 
 rename P0720 serie_frequentou
 recode serie_frequentou (1 99 = .)
