@@ -2031,7 +2031,7 @@ else if `ano' == 2022 {
 					
 					
 			* logica de leitura com csv
-					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") clear
+					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					lab var ano "ano da pesquisa"
@@ -2082,7 +2082,7 @@ else if `ano' == 2022 {
 					quietly cap infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear */
 					
 					* Leitura para csv
-					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") clear
+					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
 					
 					gen ano = 2022
 					lab var ano "ano da pesquisa"
@@ -2154,7 +2154,7 @@ else if `ano' == 2022 {
 					if "`fam'"!="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."	
 					
-					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") clear
+					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					lab var ano "ano da pesquisa"
@@ -2167,7 +2167,7 @@ else if `ano' == 2022 {
 					if "`mort'"~="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."	
 					
-					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") clear
+					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					lab var ano "ano da pesquisa"
