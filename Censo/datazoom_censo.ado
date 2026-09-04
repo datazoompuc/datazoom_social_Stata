@@ -3889,7 +3889,7 @@ destring P0670, replace
 destring P0680, replace
 
 rename P0670 serie_freq
-recode serie_freq (9 = 8) (10 = 9) (99 = .)
+recode serie_freq (1 2 = 1) (3 = 2) (4 = 3) (5 = 4) (6 = 5) (7 = 6) (8 = 7) (9 = 8) (10 = 9) (99 = .)
 replace serie_freq = P0680 if serie_freq == . & P0680 < 9
 replace serie_freq = 8 if serie_freq == . & P0680 == 9
 replace serie_freq = 9 if serie_freq == . & P0680 == 10
