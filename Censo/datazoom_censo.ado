@@ -3585,7 +3585,7 @@ rename P0540 ano_fix_res
 replace P0490 = . if P0490 > 53
 rename P0490 UF_nascim
 
-recode P0510 (8000999000/max =.) ///
+recode P0510 (8000998000/max =.) ///
 (8000818000=82 "Egito") ///
 (8000032000=30 "Argentina") ///
 (8000124000=32 "Canadá") ///
@@ -3672,7 +3672,7 @@ rename P0570 UF_mor_ant
 replace P0580 = . if P0580 >= 8888888
 rename P0580 mun_mor_ant
 
-recode P0590 (8000999000/max =.) ///
+recode P0590 (8000998000/max =.) ///
 (8000818000=82 "Egito") ///
 (8000032000=30 "Argentina") ///
 (8000124000=32 "Canadá") ///
@@ -3765,7 +3765,7 @@ rename P0610 UF_mor5anos // v11071
 replace P0620 = . if P0620 >= 8888888
 rename P0620 mun_mor5anos // v11072
 
-recode P0630 (8000999000/max =.) ///
+recode P0630 (8000998000/max =.) ///
 (8000818000=82 "Egito") ///
 (8000032000=30 "Argentina") ///
 (8000124000=32 "Canadá") ///
