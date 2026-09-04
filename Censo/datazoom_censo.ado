@@ -3512,6 +3512,7 @@ lab var racaB "cor ou raça (indigenous=mulatto)"
 recode P0411 (27 28 29 = 0) (1 = 1) (4 5 6 7 = 2) (12 = 3) (13 14 15 = 4) (17 18 19 20 21 = 5) ///
              (16 = 6) (2 3 8 9 10 11 22 23 24 25 26 30 31 = 7) (32 33 = .)
 rename P0411 religiao_A
+lab var religiao_A "religião A - mais agregada"
 * religiao_A = 0 - sem religião
 *            1 - católica
 *            2 - evangélica
@@ -4202,6 +4203,10 @@ rename P0360 f_vivos_mul
 rename P0370 filhos_vivos
 
 rename P0381 idade_ult_nasc_v
+
+label var f_nasc_v_hom "filhos nascidos vivos (homens)"
+label var f_nasc_v_mul "filhos nascidos vivos (mulheres)"
+label var idade_ult_nasc_v "idade calculada do ultimo filho nascido vivo"
 	
 /* DEFLACIONANDO RENDAS: referência = julho/2022 */
 /* Manual do entrevistador Censo 2022: Trabalho e Rendimento:
