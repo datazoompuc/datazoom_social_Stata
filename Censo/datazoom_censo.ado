@@ -3970,7 +3970,7 @@ replace anos_estudoC = 0 if curso_frequentou==5 & serie_frequentou<4 // 1a-3a se
 replace anos_estudoC = 0 if curso_frequentou==6 & P0740 == 2 // antigo primario sem conclusao
 replace anos_estudoC = 0 if curso_frequentou==7 & P0740 == 2 // supletivo 1o.grau/fundamental sem conclusao
 
-replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 & P0740 == 1 // ensino fundamental ate 7a serie com conclusao
+replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 // ensino fundamental ate a 7a serie
 
 replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & P0740 == 1 // ensino fundamental com conclusao
 replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & P0740 == 1 // fundamental nao seriado ou supletivo com conclusao
