@@ -4009,7 +4009,7 @@ drop curso_freq serie_freq
 
 * Anos de estudo - cálculo IBGE
 rename P0790 anos_estudo
-	replace anos_estudo = 16 if anos_estudo > 16 // compatível com demais anos
+	replace anos_estudo = 16 if anos_estudo > 16 & anos_estudo < . // compatível com demais anos
 
 * Estuda no município em que reside?
 recode P0800 (2 3 = 0) (9 = .)
