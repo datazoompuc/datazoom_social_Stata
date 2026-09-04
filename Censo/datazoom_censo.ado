@@ -13,9 +13,9 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `comp' especifica que será feita a compatibilização.
 * `pes' indica arquivo de pessoas
 * `dom' indica arquivo de domicilios
-* `fam' indica arquivo de família, disponível apenas para o ano 2000
+* `fam' indica arquivo de família, disponível apenas para os anos de 2000 e 2022
 * `both' indica arquivo de domicilios e pessoas merged
-* `all' indica arquivo de domicilios, pessoas e família merged para o ano 2000
+* `all' indica arquivo de domicilios, pessoas e família merged, disponível apenas para os anos de 2000 e 2022
 * `english' indica labels das variáveis em inglês
 * `dbf91' indica que o formato de dados originais usados é dbf para o ano de 1991
 * `dattxt91' indica que o formato de dados originais usados é dat ou txt para o ano de 1991
@@ -1988,12 +1988,6 @@ else if `ano' == 2022 {
 // PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
 // NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
 
-/* tambem tem a opcao de familia para 2022, entao esse bloco n é valido
-		if "`fam'" != "" {
-						di as err "Opção Família não disponível para o ano `ano'"
-						exit
-						}
-						*/
 		if "`txt22'"!="" {
 		    di as err "Ainda não foi implementada a leitura em TXT para o Censo de 2022. Use os arquivos em CSV"
 			exit
