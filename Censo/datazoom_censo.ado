@@ -2114,7 +2114,7 @@ else if `ano' == 2022 {
 					tempfile CENSO22_`UF'_dom_`suf' 
 					save `CENSO22_`UF'_dom_`suf'', replace */
 					
-					save `CENSO22_`UF'_dom, replace
+					save CENSO22_`UF'_dom, replace
 					
 				}/* logica de merge e compatibilizacao, que ainda vai ser implementada
 				if "`comp'"~="" loc var = "id_dom"
