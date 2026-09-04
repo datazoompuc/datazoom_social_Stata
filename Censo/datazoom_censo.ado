@@ -4165,12 +4165,12 @@ Vamos disponibilizar o rendimento do trabalho principal, mas note que ela irá r
 Vamos também disponibilizar uma nova variável, rendimento de todos os trabalhos, somando trabalho principal com outras ocupações sob nome rend_todos_trab,
 aplicando também para 2000 e 2010. */
 
+replace P1080 = . if P1080 == 0
+
 * rendimento bruto trabalho principal (se apenas 1 trabalho)
 gen rend_ocup_prin = P1080 if mais_de_um_trab == 0
-replace	P1080 = . if P1080 == 0
 
 * rendimento bruto todos trabalhos
-replace P1080 = . if P1080 == 0
 rename P1080 rend_todos_trab
 
 * em anos anteriores já disponibilizava a total pronta, ver se em 2022 também
