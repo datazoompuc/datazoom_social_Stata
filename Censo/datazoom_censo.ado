@@ -41,7 +41,7 @@ if "`all'"~="" {
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91' `csv22' `txt22'
 
 end
 
@@ -1995,7 +1995,8 @@ else if `ano' == 2022 {
 						}
 						*/
 		if "`txt22'"!="" {
-		    display as input "Ainda não foi implementada a leitura em TXT para o Censo de 2022. Use os arquivos em CSV"
+		    di as err "Ainda não foi implementada a leitura em TXT para o Censo de 2022. Use os arquivos em CSV"
+			exit
 		}
 		
 		if "`csv22'"!="" {
