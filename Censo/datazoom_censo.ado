@@ -4202,7 +4202,7 @@ g conversor = 1
 lab var deflator "deflator de rendimentos - julho/2022"
 lab var conversor "conversor de moedas"
 
-foreach var in rend_ocup_prin rend_todos_trab rend_total rend_fam rend_outras_fontes {
+foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 		g `var'_def = (`var'/conversor)/deflator
 		lab var `var'_def "`var' deflacionada"
 }
