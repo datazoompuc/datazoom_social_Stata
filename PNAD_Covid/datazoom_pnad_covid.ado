@@ -195,7 +195,7 @@ foreach month in `months'{
 	cap label var F002A4		"No seu domicílio há os seguintes itens básicos de limepeza e proteção: luvas descartáveis	"
 	cap label var F002A5		"No seu domicílio há os seguintes itens básicos de limepeza e proteção: água sanitária ou desinfetante	"
 	cap label var F0061		"Quem respondeu ao questionário?	"
-	cap label var F006		"Número de ordem do morador que prestou as label var"
+	cap label var F006		"Número de ordem do morador que prestou as informações"
 	//
 		cap label var ano			"Ano de referência	"
 	cap label var uf			"Unidade da Federação	"
@@ -344,7 +344,7 @@ foreach month in `months'{
 	cap label var f002a4		"No seu domicílio há os seguintes itens básicos de limepeza e proteção: luvas descartáveis	"
 	cap label var f002a5		"No seu domicílio há os seguintes itens básicos de limepeza e proteção: água sanitária ou desinfetante	"
 	cap label var f0061		"Quem respondeu ao questionário?	"
-	cap label var f006		"Número de ordem do morador que prestou as label var"
+	cap label var f006		"Número de ordem do morador que prestou as informações"
 
 	if `month' < 10 {
 	save PNAD_COVID_0`month'2020, replace
