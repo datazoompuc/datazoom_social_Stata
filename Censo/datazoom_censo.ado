@@ -2931,6 +2931,16 @@ label var estado_conj "estado conjugal"
 *               8 divorciado(a)
 *               9 viúvo(a)
 
+gen estado_conj_B = estado_conj
+recode estado_conj_B (7 8 9 = 6)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
+*                 2 só casamento civil
+*                 3 só casamento religioso
+*                 4 união consensual
+*                 5 solteiro
+*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
+
 drop v0437 v0438
 
 /* D.10. RENDA E ATIVIDADE ECONÔMICA */
@@ -5178,6 +5188,16 @@ label var estado_conj "estado conjugal"
 *               7 desquitado(a)/separado(a) judicialmente
 *               8 divorciado(a)
 *               9 viúvo(a)
+
+gen estado_conj_B = estado_conj
+recode estado_conj_B (7 8 9 = 6)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
+*                 2 só casamento civil
+*                 3 só casamento religioso
+*                 4 união consensual
+*                 5 solteiro
+*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 drop v0639 v0640
 
 
@@ -5798,6 +5818,16 @@ if `p'==1 {
 	*               7 desquitado(a)/separado(a) judicialmente
 	*               8 divorciado(a)
 	*               9 viúvo(a)
+	
+	gen estado_conj_B = estado_conj
+	recode estado_conj_B (7 8 9 = 6)
+	label var estado_conj_B "estado conjugal B - mais agregado"
+	* estado_conj_B = 1 casamento civil e religioso
+	*                 2 só casamento civil
+	*                 3 só casamento religioso
+	*                 4 união consensual
+	*                 5 solteiro
+	*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 
 	/* D.10. RENDA E ATIVIDADE ECONÔMICA */
 
@@ -6615,6 +6645,16 @@ if `p'==1 {
 	*               7 desquitado(a)/separado(a) judicialmente
 	*               8 divorciado(a)
 	*               9 viúvo(a)
+	
+	gen estado_conj_B = estado_conj
+	recode estado_conj_B (7 8 9 = 6)
+	label var estado_conj_B "estado conjugal B - mais agregado"
+	* estado_conj_B = 1 casamento civil e religioso
+	*                 2 só casamento civil
+	*                 3 só casamento religioso
+	*                 4 união consensual
+	*                 5 solteiro
+	*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 
 
 	/* D.10. RENDA E ATIVIDADE ECONÔMICA  */
@@ -7690,6 +7730,16 @@ label var estado_conj "estado conjugal"
 *               7 desquitado(a)/separado(a) judicialmente
 *               8 divorciado(a)
 *               9 viúvo(a)
+
+gen estado_conj_B = estado_conj
+recode estado_conj_B (7 8 9 = 6)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
+*                 2 só casamento civil
+*                 3 só casamento religioso
+*                 4 união consensual
+*                 5 solteiro
+*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 drop v0332 v0333
 
 drop v3311 v3312 v3341
@@ -8886,6 +8936,16 @@ label var estado_conj "estado conjugal"
 *               7 desquitado(a)/separado(a) judicialmente
 *               8 divorciado(a)
 *               9 viúvo(a)
+
+gen estado_conj_B = estado_conj
+recode estado_conj_B (7 8 9 = 6)
+label var estado_conj_B "estado conjugal B - mais agregado"
+* estado_conj_B = 1 casamento civil e religioso
+*                 2 só casamento civil
+*                 3 só casamento religioso
+*                 4 união consensual
+*                 5 solteiro
+*                 6 outros: separado(a) OU desquitado(a)/separado(a) judicialmente OU divorciado(a) OU viúvo(a)
 drop v0332 v0333
 
 drop v3311 v3312 v3341
