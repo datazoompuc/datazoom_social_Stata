@@ -13,6 +13,7 @@ BEGIN
    CHECKBOX	chk91     @  +20 100 20, label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 20, label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 20, label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
+   CHECKBOX	chk22     @  +20 100 20, label("2022")  onclickon(script c22on) onclickoff(program c22off) option(2022)
    
    BUTTON fldata      10 +35  115 25, label("Original files...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Saving...") onpush(script salvando)
@@ -127,16 +128,22 @@ BEGIN
 	main.chkMS.enable
 END
 
+SCRIPT c22on
+BEGIN
+	main.chkTO.enable
+	main.chkMS.enable
+END
+
 PROGRAM c80off
 BEGIN
-	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 	}
 END
 
 PROGRAM	c91off
 BEGIN
-	if main.chk00.isneq(1) & main.chk10.isneq(1) {
+	if main.chk00.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
@@ -146,7 +153,7 @@ END
 
 PROGRAM	c00off
 BEGIN
-	if main.chk91.isneq(1) & main.chk10.isneq(1) {
+	if main.chk91.isneq(1) & main.chk10.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
@@ -156,12 +163,19 @@ END
 
 PROGRAM	c10off
 BEGIN
-	if main.chk91.isneq(1) & main.chk00.isneq(1) {
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk22.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
 END	
 
+PROGRAM	c22off
+BEGIN
+	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
+		call main.chkMS.disable
+		call main.chkTO.disable
+	}
+END
 
 SCRIPT dados
 BEGIN
@@ -311,7 +325,7 @@ BEGIN
    put "datazoom_censo"
    beginoptions
       put "years("
-	  option main.chk70 main.chk80 main.chk91 main.chk00 main.chk10
+	  option main.chk70 main.chk80 main.chk91 main.chk00 main.chk10 main.chk22
 	  put ") "
       put "ufs("
       option main.chkRO main.chkAC main.chkAM main.chkRR main.chkPA main.chkAP ///
@@ -325,7 +339,7 @@ BEGIN
       option main.chkcomp 
 	  option radio(main pes dom fam both all)
 	  option main.eng
-	  option radio(dbf91 dattxt91)
+	  option radio(main dbf91 dattxt91)
 	  
    endoptions
    stata
