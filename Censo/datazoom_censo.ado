@@ -3236,7 +3236,7 @@ recode cond_ocup_C (6=5) (7=6)
 *               4 - Cedido por empregador
 *               5 - Cedido de outra forma
 *               6 - Outra Condição
-lab var cond_ocup_B "condição de ocupação do domicílio C"
+lab var cond_ocup_C "condição de ocupação do domicílio C"
 
 g dom_pago = 1 if cond_ocup_C == 1
 replace dom_pago = 0 if cond_ocup_C == 2
@@ -3442,7 +3442,7 @@ rename P0170 cond_dom
 destring cond_dom, replace
 recode cond_dom (1 = 1) (2 3 = 2) (4 5 6 = 3) (8 9 = 4) (10 11 = 5) ///
 	(12 = 6) (7 13 14 = 7) (15 16 = 8) (17 = 9) (18 = 10)(19 = 11) (20 = 12)
-lab var cond_dom_B "condição no domicílio B"
+lab var cond_dom "condição no domicílio"
 * condicao_dom = 1	pessoa responsável
 *				 2	cônjuge, companheiro
 *				 3	filho, enteado
