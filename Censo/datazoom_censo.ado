@@ -6216,11 +6216,11 @@ if `d'==1 {
 	drop v204 v211 
 
 	
-	/* DEFLACIONANDO RENDAS: referência = julho/2010 */ // NAO SERIA AGOSTO/2010?
+	/* DEFLACIONANDO RENDAS: julho/2022 */
 	
-	g double deflator = 0.000033234/10^7
+	g double deflator = 0.0000000000015139096
 	g double conversor = 2750000000000
-	lab var deflator "deflator de rendimentos - base 08/2010" // OU NAO SERIA 07/2010?
+	lab var deflator "deflator de rendimentos - referência: julho/2022"
 	lab var conversor "conversor de moedas"
 
 	g aluguel_def = (aluguel/conversor)/deflator
