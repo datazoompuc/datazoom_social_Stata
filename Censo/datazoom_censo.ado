@@ -3369,14 +3369,14 @@ lab var renda_dom_def "renda_dom deflacionada"
 /* Será necessário adaptar o peso de acordo com a versão dos microdados.
 Acesso público: D0110.
 Acesso controlado: D0111.
-Acesso restrito: D0112. AJUSTAR DE ACORDO COM A ESTRUTURA DE LEITURA. */
-if "`versao_censo22'" = "`publico'" {
-	rename D0110 peso_dom
-	if "`versao_censo22'" = "`controlado'" {
-	rename D0111 peso_dom
-	}
-	else rename D0112 peso_dom
-}
+Acesso restrito: D0112.
+ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
+nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
+o peso amostral não é renomeado. */
+if "`versao_censo22'" == "publico"         rename D0110 peso_dom
+else if "`versao_censo22'" == "controlado" rename D0111 peso_dom
+else if "`versao_censo22'" == "restrito"   rename D0112 peso_dom
+else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_dom"
 
 /* Variáveis de domicílio não utilizadas */
 
@@ -3398,14 +3398,14 @@ rename P0010 regiao
 /* Será necessário adaptar o peso de acordo com a versão dos microdados.
 Acesso público: P0110.
 Acesso controlado: P0111.
-Acesso restrito: P0112. AJUSTAR DE ACORDO COM A ESTRUTURA DE LEITURA. */
-if "`versao_censo22'" = "`publico'" {
-	rename P0110 peso_pess
-	if "`versao_censo22'" = "`controlado'" {
-	rename PD0111 peso_pess
-	}
-	else rename P0112 peso_pess
-}
+Acesso restrito: P0112.
+ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
+nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
+o peso amostral não é renomeado. */
+if "`versao_censo22'" == "publico"         rename P0110 peso_pess
+else if "`versao_censo22'" == "controlado" rename P0111 peso_pess
+else if "`versao_censo22'" == "restrito"   rename P0112 peso_pess
+else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
 sort UF munic id_dom
 by UF munic id_dom: egen n_homem_dom = total(P0160==1)
