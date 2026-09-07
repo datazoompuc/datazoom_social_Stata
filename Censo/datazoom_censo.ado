@@ -4287,28 +4287,7 @@ replace serie_freq = 9 if serie_freq == . & P0680 == 10
 * 			   8 - Oitava série
 *			   9 - Não seriado
 	
-* grupos de anos de estudo
-g anos_estudoC = .
-* para quem frequenta escola
-replace anos_estudoC = 0 if curso_freq<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
-replace anos_estudoC = 0 if curso_freq==6	// fundamental ou 1o grau nao seriado
-replace anos_estudoC = 0 if curso_freq==7	// supletivo fundamental ou 1o grau
-replace anos_estudoC = 0 if curso_freq==5 & serie_freq<=4	// fundamental ou 1o grau seriado - até 4o ano (inclusive)
-
-replace anos_estudoC = 1 if curso_freq==5 & serie_freq>=5 & serie_freq<=8	// fundamental ou 1o grau seriado - 5o a 8o ano
-
-replace anos_estudoC = 2 if curso_freq==8 	// medio ou 2o grau seriado - 1o ano
-replace anos_estudoC = 2 if curso_freq==9	// medio ou 2o grau nao seriado
-replace anos_estudoC = 2 if curso_freq==10	// supletivo medio ou 2o grau
-
-replace anos_estudoC = 3 if curso_freq==12		// superior de graduacao
-
-replace anos_estudoC = 4 if curso_freq==13		// mestrado ou doutorado
-
-* para ficar compativel com 2000, nao podemos recuperar a informacao abaixo
-*replace anos_estudoC = 4 if P0690 == 1	// ja concluiu curso superior de graduacao
-
-* para quem nao frequenta escola
+* anos_estudoC é construída abaixo a partir de P0790, calculada pelo IBGE
 
 * não tem pré-vestibular
 destring P0700, replace
@@ -4350,39 +4329,23 @@ replace serie_frequentou = P0730 if serie_frequentou == .
 * 			  		 8 - Oitava série
 *			  		 9 - Não seriado
 
-replace anos_estudoC = 0 if curso_frequentou<=4	// Creche, pre-escolar, classe de alfabetização e alfabetização de adultos
-replace anos_estudoC = 0 if curso_frequentou==5 & serie_frequentou<4 // 1a-3a serie/1o-4o ano do 1o. grau ou fundamental 
-replace anos_estudoC = 0 if curso_frequentou==6 & P0740 == 2 // antigo primario sem conclusao
-replace anos_estudoC = 0 if curso_frequentou==7 & P0740 == 2 // supletivo 1o.grau/fundamental sem conclusao
+drop curso_freq serie_freq
 
-replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 // ensino fundamental ate a 7a serie
+* Anos de estudo - cálculo IBGE
+capture confirm string variable P0790
+if !_rc destring P0790, replace
+rename P0790 anos_estudo
+replace anos_estudo = 16 if anos_estudo > 16 & anos_estudo < . // compatível com demais anos
 
-replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 // oito series concluidas equivalem ao ensino fundamental completo
-replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & P0740 == 1 // fundamental nao seriado ou supletivo com conclusao
-replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & P0740 == 2	// ensino medio sem conclusao
-
-replace anos_estudoC = 3 if (curso_frequentou>=8 & curso_frequentou<=10) & P0740 == 1	// antigo cientifico/classico/medio 2o.ciclo com conclusao
-
-replace anos_estudoC = 3 if curso_frequentou==12 & P0740 == 2		// superior de graduacao sem conclusao
-
-replace anos_estudoC = 4 if curso_frequentou==12 & P0740==1		// superior de graduacao com conclusao
-replace anos_estudoC = 4 if curso_frequentou==13		// especializacao/mestrado/doutorado 
-
+* Grupos de anos de estudo construídos a partir dos anos calculados pelo IBGE
+recode anos_estudo (min/3 = 0) (4/7 = 1) (8/10 = 2) (11/14 = 3) (15/max = 4), g(anos_estudoC)
+replace anos_estudoC = . if missing(anos_estudo)
+lab var anos_estudoC "grupos de anos de escolaridade"
 * anos_estudoC = 0 – sem instrução ou menos de 4 anos de estudo (primário incompleto)
 *                1 – de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
 *				 2 – de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
 *			 	 3 – de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
 *			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
-lab var anos_estudoC "grupos de anos de escolaridade"
-
-* O IBGE fornece a variável P0770 com essa classificação de anos_estudoC compatível com Censo 2010
-* É uma possibilidade usá-la diretamente, se quiser.
-
-drop curso_freq serie_freq
-
-* Anos de estudo - cálculo IBGE
-rename P0790 anos_estudo
-	replace anos_estudo = 16 if anos_estudo > 16 & anos_estudo < . // compatível com demais anos
 
 * Estuda no município em que reside?
 recode P0800 (2 3 = 0) (9 = .)
@@ -5381,6 +5344,7 @@ recode alfabetizado (2 = 0)
 	
 ** frequencia a escola: 2010 DESCONSIDERA PRE-VESTIBULAR, por isso, diversas variaveis de frequencia
 
+gen byte nunca_freq_escola = v0628==4
 recode v0628 (1 2=1 "sim") (3 4 =0 "nao"), g(freq_escola)
 replace freq_escola = 0 if v0629<=3		// 	desconsidera creche e pre-escola para compatibilizar com todos
 lab var freq_escola "frequenta escola"
@@ -5480,7 +5444,9 @@ replace anos_estudoC = 3 if v0633==10 & v0634==1		// regular/supletivo ensino me
 replace anos_estudoC = 3 if v0633==11 & v0634==2		// superior de graduacao sem conclusao
 
 replace anos_estudoC = 4 if v0633==11 & v0634==1		// superior de graduacao com conclusao
-replace anos_estudoC = 4 if v0633==12 & v0633<=14		// especializacao/mestrado/doutorado 
+replace anos_estudoC = 4 if inrange(v0633, 12, 14)		// especializacao/mestrado/doutorado
+
+replace anos_estudoC = 0 if nunca_freq_escola==1		// nunca frequentou escola ou creche
 
 * anos_estudoC = 0 – sem instrução ou menos de 4 anos de estudo (primário incompleto)
 *                1 – de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
@@ -5489,7 +5455,7 @@ replace anos_estudoC = 4 if v0633==12 & v0633<=14		// especializacao/mestrado/do
 *			 	 4 – 15 ou mais (superior completo, mestrado, doutorado)
 lab var anos_estudoC "grupos de anos de escolaridade"
 
-drop v0631 v0632 curso_freq serie_freq
+drop v0631 v0632 curso_freq serie_freq nunca_freq_escola
 
 * Estuda no município em que reside?
 recode v0636 (2 3 = 0)
