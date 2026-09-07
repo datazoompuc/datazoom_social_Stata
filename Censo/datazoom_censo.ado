@@ -1981,6 +1981,7 @@ foreach ano in `years' {
 		}
 	}
 
+
 **************
 * CENSO 2022 *
 **************
@@ -2029,7 +2030,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					lab var ano "ano da pesquisa"
+					label_censo22, registro(pess) versao_censo22(publico)
 					
 					save CENSO22_`UF'_pes, replace
 
@@ -2080,7 +2081,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
 					
 					gen ano = 2022
-					lab var ano "ano da pesquisa"
+					label_censo22, registro(dom) versao_censo22(publico)
 					
 					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
 
@@ -2152,7 +2153,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					lab var ano "ano da pesquisa"
+					label_censo22, registro(fam) versao_censo22(publico)
 					
 					save CENSO22_`UF'_fam, replace
 					
@@ -2165,7 +2166,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					lab var ano "ano da pesquisa"
+					label_censo22, registro(mort) versao_censo22(publico)
 					
 					save CENSO22_`UF'_mort, replace }*/
 					
@@ -2183,6 +2184,384 @@ else if `ano' == 2022 {
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
 di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016, do Censo 2000 divulgados em 08/09/2017, e do Censo de 2022 divulgados em 31/08/2026."
+
+end
+
+program define label_censo22
+syntax, registro(string) versao_censo22(string)
+
+if !inlist("`versao_censo22'", "publico", "controlado") {
+    di as err "Versão dos microdados de 2022 inválida para aplicação dos rótulos"
+    exit 198
+}
+
+label var ano "Ano do Censo Demográfico"
+
+if "`registro'" == "dom" {
+    label var D0010 "Grande Região"
+    label var D0020 "Unidade da Federação"
+    label var D0100 "Controle"
+    label var D0120 "Situação do Setor"
+    label var D0130 "Espécie da unidade visitada"
+    label var D0140 "Situação do domicílio"
+    label var D0150 "Moradores do domicílio, número"
+    label var D0160 "Crianças do domicílio, número"
+    label var D0170 "Sexo do morador responsável pelo domicílio"
+    label var D0180 "Idade da pessoa responsável pelo domicílio, categoria"
+    label var D0190 "Condição de ocupação do domicílio, categoria"
+    label var D0200 "Tipo de espécie"
+    label var D0210 "Material das paredes do domicílio, categoria"
+    label var D0220 "Cômodos no domicílio, número"
+    label var D0230 "Cômodos servindo de dormitório no domicílio, número"
+    label var D0240 "Número de moradores por cômodo utilizado como dormitório"
+    label var D0250 "Tipo de esgotamento sanitário do domicílio"
+    label var D0260 "Abastecimento de água do domicílio, categoria"
+    label var D0270 "Existência de banheiro ou sanitário e número de banheiros de uso exclusivo do"
+    label var D0280 "Banheiros de uso exclusivo com chuveiro e vaso sanitário no domicílio, inclusive"
+    label var D0290 "Acesso à rede geral de distribuição de água do domicílio, categoria"
+    label var D0300 "Existência de água canalizada do domicílio, categoria"
+    label var D0310 "Destino do lixo do domicílio, categoria"
+    label var D0320 "Existência de máquina de lavar roupa no domicílio, categoria"
+    label var D0330 "Acesso à internet, existência"
+    label var D0340 "Ocorrência de óbito de morador do domicílio (de janeiro de 2019 a julho de"
+    label var D0350 "Rendimento domiciliar"
+    label var D0360 "Rendimento domiciliar per capita"
+    label var D0370 "Total de homens no domicílio"
+    label var D0380 "Total de mulheres no domicílio"
+    label var D0390 "Total de moradores com deficiência no domicílio"
+    label var D0400 "Total de moradores adultos com deficiência no domicílio"
+    label var D0410 "Total de moradores crianças com deficiência no domicílio"
+    label var MD0130 "MARCA DE IMPUTAÇÃO NA D0130"
+    label var MD0150 "MARCA DE IMPUTAÇÃO NA D0150"
+    label var MD0160 "MARCA DE IMPUTAÇÃO NA D0160"
+    label var MD0170 "MARCA DE IMPUTAÇÃO NA D0170"
+    label var MD0180 "MARCA DE IMPUTAÇÃO NA D0180"
+    label var MD0190 "MARCA DE IMPUTAÇÃO NA D0190"
+    label var MD0200 "MARCA DE IMPUTAÇÃO NA D0200"
+    label var MD0210 "MARCA DE IMPUTAÇÃO NA D0210"
+    label var MD0220 "MARCA DE IMPUTAÇÃO NA D0220"
+    label var MD0230 "MARCA DE IMPUTAÇÃO NA D0230"
+    label var MD0240 "MARCA DE IMPUTAÇÃO NA D0240"
+    label var MD0250 "MARCA DE IMPUTAÇÃO NA D0250"
+    label var MD0260 "MARCA DE IMPUTAÇÃO NA D0260"
+    label var MD0270 "MARCA DE IMPUTAÇÃO NA D0270"
+    label var MD0280 "MARCA DE IMPUTAÇÃO NA D0280"
+    label var MD0290 "MARCA DE IMPUTAÇÃO NA D0290"
+    label var MD0300 "MARCA DE IMPUTAÇÃO NA D0300"
+    label var MD0310 "MARCA DE IMPUTAÇÃO NA D0310"
+    label var MD0320 "MARCA DE IMPUTAÇÃO NA D0320"
+    label var MD0330 "MARCA DE IMPUTAÇÃO NA D0330"
+    label var MD0340 "MARCA DE IMPUTAÇÃO NA D0340"
+    if "`versao_censo22'" == "publico" {
+        label var D0110 "Peso Amostral (Versão acesso Público)"
+    }
+    else {
+        label var D0030 "Mesorregião"
+        label var D0040 "Microrregião"
+        label var D0050 "Região Geográfica Intermediária"
+        label var D0060 "Região Geográfica Imediata"
+        label var D0070 "Concentração urbana"
+        label var D0080 "Município"
+        label var D0090 "Área de Ponderação"
+        label var D0111 "Peso Amostral (Versão acesso Controlado)"
+        label var D0171 "Sexo do morador responsável pelo domicílio"
+        label var D0181 "Idade da pessoa responsável pelo domicílio"
+    }
+}
+
+else if "`registro'" == "pess" {
+    label var MP0150 "MARCA DE IMPUTAÇÃO NA P0150"
+    label var MP0170 "MARCA DE IMPUTAÇÃO NA P0170"
+    label var MP0180 "MARCA DE IMPUTAÇÃO NA P0180"
+    label var MP0210 "MARCA DE IMPUTAÇÃO NA P0210"
+    label var MP0230 "MARCA DE IMPUTAÇÃO NA P0230"
+    label var MP0260 "MARCA DE IMPUTAÇÃO NA P0260"
+    label var MP0270 "MARCA DE IMPUTAÇÃO NA P0270"
+    label var MP0280 "MARCA DE IMPUTAÇÃO NA P0280"
+    label var MP0290 "MARCA DE IMPUTAÇÃO NA P0290"
+    label var MP0300 "MARCA DE IMPUTAÇÃO NA P0300"
+    label var MP0310 "MARCA DE IMPUTAÇÃO NA P0310"
+    label var MP0320 "MARCA DE IMPUTAÇÃO NA P0320"
+    label var MP0330 "MARCA DE IMPUTAÇÃO NA P0330"
+    label var MP0350 "MARCA DE IMPUTAÇÃO NA P0350"
+    label var MP0360 "MARCA DE IMPUTAÇÃO NA P0360"
+    label var MP0410 "MARCA DE IMPUTAÇÃO NA P0410"
+    label var MP0411 "MARCA DE IMPUTAÇÃO NA P0411"
+    label var MP0420 "MARCA DE IMPUTAÇÃO NA P0420"
+    label var MP0430 "MARCA DE IMPUTAÇÃO NA P0430"
+    label var MP0440 "MARCA DE IMPUTAÇÃO NA P0440"
+    label var MP0450 "MARCA DE IMPUTAÇÃO NA P0450"
+    label var MP0460 "MARCA DE IMPUTAÇÃO NA P0460"
+    label var MP0480 "MARCA DE IMPUTAÇÃO NA P0480"
+    label var MP0490 "MARCA DE IMPUTAÇÃO NA P0490"
+    label var MP0520 "MARCA DE IMPUTAÇÃO NA P0520"
+    label var MP0530 "MARCA DE IMPUTAÇÃO NA P0530"
+    label var MP0540 "MARCA DE IMPUTAÇÃO NA P0540"
+    label var MP0550 "MARCA DE IMPUTAÇÃO NA P0550"
+    label var MP0560 "MARCA DE IMPUTAÇÃO NA P0560"
+    label var MP0570 "MARCA DE IMPUTAÇÃO NA P0570"
+    label var MP0600 "MARCA DE IMPUTAÇÃO NA P0600"
+    label var MP0610 "MARCA DE IMPUTAÇÃO NA P0610"
+    label var MP0640 "MARCA DE IMPUTAÇÃO NA P0640"
+    label var MP0650 "MARCA DE IMPUTAÇÃO NA P0650"
+    label var MP0660 "MARCA DE IMPUTAÇÃO NA P0660"
+    label var MP0670 "MARCA DE IMPUTAÇÃO NA P0670"
+    label var MP0680 "MARCA DE IMPUTAÇÃO NA P0680"
+    label var MP0690 "MARCA DE IMPUTAÇÃO NA P0690"
+    label var MP0700 "MARCA DE IMPUTAÇÃO NA P0700"
+    label var MP0710 "MARCA DE IMPUTAÇÃO NA P0710"
+    label var MP0720 "MARCA DE IMPUTAÇÃO NA P0720"
+    label var MP0730 "MARCA DE IMPUTAÇÃO NA P0730"
+    label var MP0740 "MARCA DE IMPUTAÇÃO NA P0740"
+    label var MP0800 "MARCA DE IMPUTAÇÃO NA P0800"
+    label var MP0810 "MARCA DE IMPUTAÇÃO NA P0810"
+    label var MP0840 "MARCA DE IMPUTAÇÃO NA P0840"
+    label var MP0850 "MARCA DE IMPUTAÇÃO NA P0850"
+    label var MP0860 "MARCA DE IMPUTAÇÃO NA P0860"
+    label var MP0870 "MARCA DE IMPUTAÇÃO NA P0870"
+    label var MP0880 "MARCA DE IMPUTAÇÃO NA P0880"
+    label var MP0890 "MARCA DE IMPUTAÇÃO NA P0890"
+    label var MP0900 "MARCA DE IMPUTAÇÃO NA P0900"
+    label var MP0990 "MARCA DE IMPUTAÇÃO NA P0990"
+    label var MP1000 "MARCA DE IMPUTAÇÃO NA P1000"
+    label var MP1010 "MARCA DE IMPUTAÇÃO NA P1010"
+    label var MP1050 "MARCA DE IMPUTAÇÃO NA P1050"
+    label var MP1060 "MARCA DE IMPUTAÇÃO NA P1060"
+    label var MP1070 "MARCA DE IMPUTAÇÃO NA P1070"
+    label var MP1080 "MARCA DE IMPUTAÇÃO NA P1080"
+    label var MP1090 "MARCA DE IMPUTAÇÃO NA P1090"
+    label var MP1100 "MARCA DE IMPUTAÇÃO NA P1100"
+    label var MP1120 "MARCA DE IMPUTAÇÃO NA P1120"
+    label var MP1130 "MARCA DE IMPUTAÇÃO NA P1130"
+    label var MP1160 "MARCA DE IMPUTAÇÃO NA P1160"
+    label var MP1170 "MARCA DE IMPUTAÇÃO NA P1170"
+    label var MP1180 "MARCA DE IMPUTAÇÃO NA P1180"
+    label var MP1200 "MARCA DE IMPUTAÇÃO NA P1200"
+    label var MP1210 "MARCA DE IMPUTAÇÃO NA P1210"
+    label var MP1220 "MARCA DE IMPUTAÇÃO NA P1220"
+    label var P0010 "Grande Região"
+    label var P0020 "Unidade da Federação"
+    label var P0100 "Controle"
+    label var P0101 "Número de ordem do morador"
+    label var P0120 "Situação do Setor"
+    label var P0130 "Espécie da unidade visitada"
+    label var P0140 "Situação do domicílio"
+    label var P0150 "Sexo"
+    label var P0170 "Condição no domicílio da pessoa, categoria"
+    label var P0180 "Idade calculada em anos da pessoa, categoria"
+    label var P0200 "Forma de declaração de idade"
+    label var P0210 "Cor ou raça da pessoa, categoria"
+    label var P0220 "Pessoa Indígena, categoria"
+    label var P0230 "Uso da língua portuguesa no domicílio da pessoa, categoria."
+    label var P0240 "Status de declaração de etnia"
+    label var P0250 "Status de declaração de língua indígena"
+    label var P0260 "Pessoa quilombola, categoria"
+    label var P0270 "Existência e tipo de registro de nascimento da pessoa, categoria"
+    label var P0280 "Convivência com cônjuge ou companheiro da pessoa, categoria"
+    label var P0290 "Natureza da união, categoria"
+    label var P0300 "Moradia da mãe ou madrasta no domicílio da pessoa, categoria"
+    label var P0310 "Moradia do pai ou padrasto no domicílio da pessoa, categoria"
+    label var P0320 "Filhos homens nascidos vivos da pessoa, número"
+    label var P0330 "Filhas mulheres nascidas vivas da pessoa, número"
+    label var P0340 "Filhos nascidos vivos da pessoa, número"
+    label var P0350 "Filhos homens vivos da pessoa, número"
+    label var P0360 "Filhas mulheres vivas da pessoa, número"
+    label var P0370 "Filhos vivos da pessoa, número"
+    label var P0380 "Idade calculada do último filho nascido vivo da pessoa, categoria"
+    label var P0390 "Forma de declaração de idade do último filho tido nascido vivo"
+    label var P0400 "Existência de filho nascido vivo no período de 12 meses, categoria"
+    label var P0410 "Religião ou culto, categoria"
+    label var P0420 "Existência de deficiência visual da pessoa, categoria"
+    label var P0430 "Existência de deficiência auditiva da pessoa, categoria"
+    label var P0440 "Existência de deficiência motora da pessoa, categoria"
+    label var P0450 "Existência de dificuldade em pegar objetos da pessoa, categoria"
+    label var P0460 "Existência de deficiência mental ou intelectual da pessoa, categoria"
+    label var P0470 "Variável indicadora da Existência de Deficiência"
+    label var P0480 "Local de nascimento da pessoa, categoria"
+    label var P0490 "Unidade da Federação de nascimento da pessoa, código"
+    label var P0520 "Nacionalidade da pessoa, categoria"
+    label var P0530 "Moradia em outro município ou país estrangeiro da pessoa, categoria"
+    label var P0540 "Ano de fixação de residência da pessoa, número"
+    label var P0550 "Tempo de moradia no município da pessoa, número"
+    label var P0560 "Unidade da Federação e município ou país estrangeiro de moradia anterior da"
+    label var P0570 "Unidade da Federação de moradia anterior da pessoa, código"
+    label var P0600 "Unidade da Federação e município ou país estrangeiro de moradia há 5 anos da"
+    label var P0610 "Unidade da Federação de moradia há 5 anos da pessoa, código"
+    label var P0640 "Alfabetização da pessoa, categoria"
+    label var P0650 "Frequência escolar da pessoa, categoria"
+    label var P0660 "Curso frequentado pela pessoa, categoria"
+    label var P0670 "Ano do curso frequentado pela pessoa, categoria"
+    label var P0680 "Série do curso frequentado pela pessoa, categoria"
+    label var P0690 "Conclusão de outro curso superior de graduação da pessoa, categoria"
+    label var P0700 "Curso mais elevado frequentado anteriormente da pessoa, categoria"
+    label var P0710 "Duração do curso frequentado anteriormente da pessoa, categoria"
+    label var P0720 "Último ano concluído com aprovação no curso frequentado anteriormente da pessoa,"
+    label var P0730 "Última série concluída com aprovação no curso frequentado anteriormente da"
+    label var P0740 "Conclusão de curso frequentado anteriormente pela pessoa, categoria"
+    label var P0760 "Morador, nível de instrução de ensino"
+    label var P0770 "Morador, nível de instrução de ensino, compatível com o Censo Demográfico de"
+    label var P0780 "Variável indicadora de frequência escolar em nível adequado à idade"
+    label var P0790 "Anos de estudo da pessoa"
+    label var P0800 "Unidade da Federação e município ou país estrangeiro da escola da pessoa,"
+    label var P0810 "Unidade da Federação do local de estudo da pessoa, categoria"
+    label var P0840 "Existência de trabalho remunerado em dinheiro da pessoa, categoria"
+    label var P0850 "Existência de trabalho remunerado em produtos, mercadorias ou benefícios da"
+    label var P0860 "Existência de bico ou atividade ocasional remunerada da pessoa, categoria"
+    label var P0870 "Existência de trabalho não remunerado como ajuda na atividade remunerada de"
+    label var P0880 "Existência de afastamento temporário do trabalho remunerado da pessoa, categoria"
+    label var P0890 "Existência de trabalho na plantação, criação de animais ou pesca, para"
+    label var P0900 "Trabalhos da pessoa, categoria"
+    label var P0910 "Pessoa de 10 anos ou mais de idade, categoria"
+    label var P0920 "Pessoa de 14 anos ou mais de idade, categoria"
+    label var P0930 "Pessoa de 14 anos ou mais de idade na força de trabalho, categoria"
+    label var P0940 "Pessoa de 14 anos ou mais, ocupada, contribuinte de instituto de previdência no"
+    label var P0950 "Pessoas de 14 anos ou mais ocupada, categoria"
+    label var P0960 "Pessoas de 10 anos ou mais ocupada, categoria"
+    label var P0990 "Posição na ocupação do trabalho principal da pessoa, categoria"
+    label var P1000 "Existência de carteira de trabalho assinada no trabalho principal da pessoa,"
+    label var P1010 "Existência de registro no CNPJ do negócio ou empresa da pessoa, categoria"
+    label var P1020 "Posição na ocupação no trabalho principal, semana de referência, pessoas de 10"
+    label var P1050 "Existência de providência para conseguir trabalho no período de 30 dias da"
+    label var P1060 "Disponibilidade para começar a trabalhar da pessoa, categoria"
+    label var P1070 "Tipo de rendimento bruto mensal habitualmente recebido em todos os trabalhos"
+    label var P1080 "Valor do Rendimento bruto mensal habitual de todos os trabalhos para pessoas de"
+    label var P1090 "Existência de rendimento bruto mensal, Aposentadoria/Pensão/Bolsa"
+    label var P1100 "Rendimento bruto mensal, Aposentadoria/Pensão/Bolsa Família/BPC/Aluguel, Valor"
+    label var P1110 "Rendimento recebido em todas as fontes"
+    label var P1120 "Unidade da Federação e município ou país estrangeiro do local de trabalho da"
+    label var P1130 "Unidade da Federação do local de trabalho da pessoa, código"
+    label var P1160 "Retorna do trabalho para casa 3 dias ou mais na semana, categoria"
+    label var P1170 "Meios de transporte de deslocamento para o local de trabalho da pessoa,"
+    label var P1180 "Tempo em que a pessoa leva entre sua casa e o local de trabalho normalmente,"
+    label var P1190 "Tempo do deslocamento para trabalho, calculado em minutos"
+    label var P1200 "Existência de diagnóstico de autismo por profissional de saúde"
+    label var P1210 "Quem prestou as informações da pessoa, categoria"
+    label var P1220 "Número de ordem de quem prestou as informações da pessoa, código"
+    if "`versao_censo22'" == "publico" {
+        label var P0110 "Peso Amostral (Versão acesso Público)"
+    }
+    else {
+        label var MP0181 "MARCA DE IMPUTAÇÃO NA P0181"
+        label var MP0190 "MARCA DE IMPUTAÇÃO NA P0190"
+        label var MP0500 "MARCA DE IMPUTAÇÃO NA P0500"
+        label var MP0510 "MARCA DE IMPUTAÇÃO NA P0510"
+        label var MP0580 "MARCA DE IMPUTAÇÃO NA P0580"
+        label var MP0590 "MARCA DE IMPUTAÇÃO NA P0590"
+        label var MP0620 "MARCA DE IMPUTAÇÃO NA P0620"
+        label var MP0630 "MARCA DE IMPUTAÇÃO NA P0630"
+        label var MP0750 "MARCA DE IMPUTAÇÃO NA P0750"
+        label var MP0820 "MARCA DE IMPUTAÇÃO NA P0820"
+        label var MP0830 "MARCA DE IMPUTAÇÃO NA P0830"
+        label var MP0970 "MARCA DE IMPUTAÇÃO NA P0970"
+        label var MP0980 "MARCA DE IMPUTAÇÃO NA P0980"
+        label var MP1140 "MARCA DE IMPUTAÇÃO NA P1140"
+        label var MP1150 "MARCA DE IMPUTAÇÃO NA P1150"
+        label var P0030 "Mesorregião"
+        label var P0040 "Microrregião"
+        label var P0050 "Região Geográfica Intermediária"
+        label var P0060 "Região Geográfica Imediata"
+        label var P0070 "Concentração urbana"
+        label var P0080 "Município"
+        label var P0090 "Área de Ponderação"
+        label var P0111 "Peso Amostral (Versão acesso Controlado)"
+        label var P0160 "Sexo"
+        label var P0181 "Idade calculada em anos da pessoa, número"
+        label var P0190 "Idade calculada em meses da pessoa, número"
+        label var P0381 "Idade calculada do último filho nascido vivo da pessoa, número"
+        label var P0411 "Religião ou culto, categoria"
+        label var P0500 "Município de nascimento da pessoa, código"
+        label var P0510 "País de nascimento da pessoa, código"
+        label var P0580 "Município de moradia anterior da pessoa, código"
+        label var P0590 "País estrangeiro de moradia anterior da pessoa, código"
+        label var P0620 "Município de moradia da pessoa há 5 anos, código"
+        label var P0630 "País de moradia há 5 anos da pessoa, código"
+        label var P0750 "Área detalhada do curso superior de graduação cursado pela pessoa"
+        label var P0820 "Município do local de estudo da pessoa, categoria"
+        label var P0830 "País estrangeiro do local de estudo da pessoa, categoria"
+        label var P0970 "Ocupação – código:"
+        label var P0980 "Atividade – código"
+        label var P1030 "Atividade principal, no trabalho principal, semana de referência, pessoas de 10"
+        label var P1040 "Grandes Grupos Ocupacionais, trabalho principal, semana de referência, pessoas"
+        label var P1140 "Município do local de trabalho da pessoa, código"
+        label var P1150 "País estrangeiro do local de trabalho da pessoa, categoria"
+    }
+}
+
+else if "`registro'" == "mort" {
+    label var M0010 "Grande Região"
+    label var M0020 "Unidade da Federação"
+    label var M0100 "Controle"
+    label var M0101 "Número de ordem da pessoa falecida"
+    label var M0120 "Situação do Setor"
+    label var M0130 "Espécie da unidade visitada"
+    label var M0140 "Situação do domicílio"
+    label var M0150 "Ano de ocorrência do óbito de morador do domicílio, categoria"
+    label var M0160 "Sexo da pessoa falecida do domicílio, categoria"
+    label var M0170 "Pessoa falecida, idade calculada, categoria"
+    label var MM0150 "MARCA DE IMPUTAÇÃO NA M0150"
+    label var MM0160 "MARCA DE IMPUTAÇÃO NA M0160"
+    label var MM0170 "MARCA DE IMPUTAÇÃO NA M0170"
+    if "`versao_censo22'" == "publico" {
+        label var M0110 "Peso Amostral (Versão acesso Público)"
+    }
+    else {
+        label var M0030 "Mesorregião"
+        label var M0040 "Microrregião"
+        label var M0050 "Região Geográfica Intermediária"
+        label var M0060 "Região Geográfica Imediata"
+        label var M0070 "Concentração urbana"
+        label var M0080 "Município"
+        label var M0090 "Área de Ponderação"
+        label var M0111 "Peso Amostral (Versão acesso Controlado)"
+        label var M0151 "Mês e ano de ocorrência do óbito de morador do domicílio, categoria"
+        label var M0171 "Pessoa falecida, idade calculada, número"
+        label var MM0151 "MARCA DE IMPUTAÇÃO NA M0151"
+        label var MM0171 "MARCA DE IMPUTAÇÃO NA M0171"
+    }
+}
+
+else if "`registro'" == "fam" {
+    label var F0010 "Grande Região"
+    label var F0020 "Unidade da Federação"
+    label var F0100 "Controle"
+    label var F0101 "Número de ordem da Família"
+    label var F0120 "Situação do Setor"
+    label var F0130 "Espécie da unidade visitada"
+    label var F0140 "Situação do domicílio"
+    label var F0150 "Família, identificação"
+    label var F0160 "Pessoas na família, número"
+    label var F0170 "Sexo do responsável pela família única ou convivente principal"
+    label var F0180 "Idade em anos do responsável pela família única ou convivente principal,"
+    label var F0190 "Nível de instrução do responsável pela família única ou convivente principal"
+    label var F0200 "Cor ou raça do responsável pela família única ou convivente principal"
+    label var F0210 "Família únicas e conviventes principais, tipologia"
+    label var F0220 "Famílias conviventes secundárias, tipologia"
+    label var F0230 "Filhos menores de 10 anos ou não economicamente ativos das Famílias únicas e"
+    label var F0240 "Integrantes da família, homens, número"
+    label var F0250 "Integrantes da família, mulheres, número"
+    label var F0260 "Rendimento familiar per capita"
+    label var F0270 "Rendimento familiar, participação"
+    label var MF0190 "MARCA DE IMPUTAÇÃO NA F019"
+    label var MF0200 "MARCA DE IMPUTAÇÃO NA F0200"
+    if "`versao_censo22'" == "publico" {
+        label var F0110 "Peso Amostral (Versão acesso Público)"
+    }
+    else {
+        label var F0030 "Mesorregião"
+        label var F0040 "Microrregião"
+        label var F0050 "Região Geográfica Intermediária"
+        label var F0060 "Região Geográfica Imediata"
+        label var F0070 "Concentração urbana"
+        label var F0080 "Município"
+        label var F0090 "Área de Ponderação"
+        label var F0111 "Peso Amostral (Versão acesso Controlado)"
+        label var F0181 "Idade em anos do responsável pela família única ou convivente principal, número"
+    }
+}
+else {
+    di as err "Registro de 2022 inválido para aplicação dos rótulos"
+    exit 198
+}
 
 end
 
