@@ -3263,7 +3263,7 @@ rename D0280 banheiros_B
 *               9 - 9 ou mais banheiros
 
 g banheiros = banheiros_B
-replace banheiros = 5 if banheiros >= 5
+replace banheiros = 5 if banheiros >= 5 & banheiros < .
 lab var banheiros "número de banheiros"
 * banheiros = 0 - não tem
 *			 1 - 1 banheiro
@@ -3433,9 +3433,8 @@ lab var sit_setor_C "situação do domicílio - urbano/rural"
 rename P0101 ordem
 
 /* D.1. SEXO */
-/* Há também a variável P0150, elaborada com restrições para atender aos critérios de controle estatístico 
-de confidencialidade. Necessário verificar o que irá funcionar ou se será necessário criar uma condicional
-aqui também. */
+/* P0150 é a alternativa com restrições de confidencialidade usada no acesso público.
+É preservada na base pública e descartada na versão de acesso controlado. */
 rename P0160 sexo
 recode sexo (2=0)
 * sexo = 0 - Feminino
@@ -3979,7 +3978,7 @@ replace anos_estudoC = 0 if curso_frequentou==7 & P0740 == 2 // supletivo 1o.gra
 
 replace anos_estudoC = 1 if curso_frequentou==5 & serie_frequentou>=4 & serie_frequentou<=7 // ensino fundamental ate a 7a serie
 
-replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 & P0740 == 1 // ensino fundamental com conclusao
+replace anos_estudoC = 2 if curso_frequentou==5 & serie_frequentou==8 // oito series concluidas equivalem ao ensino fundamental completo
 replace anos_estudoC = 2 if (curso_frequentou==6 | curso_frequentou==7) & P0740 == 1 // fundamental nao seriado ou supletivo com conclusao
 replace anos_estudoC = 2 if (curso_frequentou>=8 & curso_frequentou<=10) & P0740 == 2	// ensino medio sem conclusao
 
@@ -4014,13 +4013,13 @@ lab var mun_escola "estuda no município em que reside?"
 * mun_escola = 1 - sim
 *			   0 - não
 
-recode P0750 (140/226 320/322 347 380 = 3) ///
-		 (260 270 421 641/727 = 4) ///
-		 (440/481 520/525 581 582 = 5) ///
-		 (620/624 = 6) ///
-		 (310/314 342/346 762 = 7) ///
+recode P0750 (142 145 146 210 211 212 213 214 215 220 221 222 223 225 226 320 321 322 347 380 = 3) ///
+		 (260 270 421 641 720 721 723 724 725 726 727 = 4) ///
+		 (440 441 442 443 461 462 481 520 521 522 523 524 525 541 543 544 554 581 582 = 5) ///
+		 (620 621 622 623 624 = 6) ///
+		 (310 311 312 313 314 342 343 344 345 346 762 = 7) ///
 		 (863 = 8) ///
-		 (240 420 422 483 541/554 810/862 870 900 910 = 9), g(cursos_c1)
+		 (240 420 422 483 814 840 841 850 851 852 853 861 862 870 900 910 = 9), g(cursos_c1)
 lab var cursos_c1 "curso superior concluído"
 * cursos_c1	=	3	ciências humanas
 *				4	ciências biológicas
@@ -4030,14 +4029,14 @@ lab var cursos_c1 "curso superior concluído"
 *				8	militar
 *				9	outros cursos
 		 
-recode P0750 (140/146 = 1) ///
-		 (210/270 = 2) ///
-		 (310/380 = 3) ///
-		 (420/483 = 4) ///
-		 (520/582 623 = 5) ///
-		 (620/622 624 641 = 6) ///
-		 (720/762 = 7) ///
-		 (810/870 = 8) ///
+recode P0750 (142 145 146 = 1) ///
+		 (210 211 212 213 214 215 220 221 222 223 225 226 240 260 270 = 2) ///
+		 (310 311 312 313 314 320 321 322 342 343 344 345 346 347 380 = 3) ///
+		 (420 421 422 440 441 442 443 461 462 481 483 = 4) ///
+		 (520 521 522 523 524 525 541 543 544 554 581 582 = 5) ///
+		 (620 621 622 623 624 641 = 6) ///
+		 (720 721 723 724 725 726 727 762 = 7) ///
+		 (814 840 841 850 851 852 853 861 862 863 870 = 8) ///
 		 (900 910 = 9), g(cursos_c2)
 lab var cursos_c2 "curso superior concluído - CONCLA"
 * cursos_c2 =	1	Educação
@@ -4113,8 +4112,11 @@ lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
 *			   	    1 - Sim
 
+replace P0970 = "0000" if P0970 == "K000"
+destring P0970, replace
+capture confirm string variable P0980
+if !_rc destring P0980, replace
 rename P0970 ocup2010
-recode ocup2010 (K000 = 0000)
 rename P0980 ativ2010
 recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 
@@ -4221,6 +4223,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 /* D.12. OUTRAS INFORMAÇÕES */
  
 drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
+if "`versao_censo22'" == "controlado" drop P0150
 
 order ano UF regiao munic id_dom ordem
 
@@ -4351,7 +4354,7 @@ rename v0205 banheiros_B
 *              9 - 9 ou mais banheiros
 
 g banheiros = banheiros_B
-replace banheiros = 5 if banheiros >= 5
+replace banheiros = 5 if banheiros >= 5 & banheiros < .
 lab var banheiros "número de banheiros"
 *banheiros = 0 - não tem
 *			 1 - 1 banheiro
