@@ -3820,9 +3820,9 @@ Acesso restrito: D0112.
 ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
 nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
 o peso amostral não é renomeado. */
-if "`versao_censo22'" == "publico"         rename D0110 peso_dom
-else if "`versao_censo22'" == "controlado" rename D0111 peso_dom
-else if "`versao_censo22'" == "restrito"   rename D0112 peso_dom
+if "`pub22'" != ""         rename D0110 peso_dom
+else if "`con22'" != "" rename D0111 peso_dom
+* else if "`res22'" != ""   rename D0112 peso_dom // para quando tiver a leitura para a versão restrita
 else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_dom"
 
 /* Variáveis de domicílio não utilizadas */
@@ -3849,9 +3849,9 @@ Acesso restrito: P0112.
 ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
 nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
 o peso amostral não é renomeado. */
-if "`versao_censo22'" == "publico"         rename P0110 peso_pess
-else if "`versao_censo22'" == "controlado" rename P0111 peso_pess
-else if "`versao_censo22'" == "restrito"   rename P0112 peso_pess
+if "`pub22'" != ""         rename P0110 peso_pess
+else if "`con22'" != "" rename P0111 peso_pess
+* else if "`res22'" != ""   rename P0112 peso_pess // para quando tiver a leitura para a versão restrita
 else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
 sort UF munic id_dom
