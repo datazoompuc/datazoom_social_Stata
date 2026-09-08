@@ -2020,7 +2020,7 @@ else if `ano' == 2022 {
 			*		read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'") */
 					
 					
-			* logica de leitura com csv
+					* logica de leitura com csv
 					
 					if "`pub22'"!="" {
 					
@@ -2039,8 +2039,12 @@ else if `ano' == 2022 {
 					gen ano = 2022
 					label_censo22, registro(pess) versao_censo22(controlado)
 
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
+					* Compatibiliza, se especificado 
+	            	if "`comp'" != "" {
 					
+					* mantendo a antiga logica de criacao de munic de 2010, por seguranca
+					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
+
 					* Deixando a variável v0002 com 5 dígitos
 					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
 					replace v0002="....." if v0002=="."
@@ -2049,24 +2053,28 @@ else if `ano' == 2022 {
 					destring munic, replace
 					replace munic = int(munic/10)
 					lab var munic "municipality codes without DV (6 digits)" */
+					
+					
+					*Com as variaveis de 2022:
+				
+					gen munic = D0080
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+					
+					compat_censo22pess
 
-					/* compatibilizacao, que vai ser implementada em breve
-					
-					* Compatibiliza, se especificado
-	            	if "`comp'" != "" {
-						compat_censo22pess
-
-						* Áreas Mínimas Comparáveis
-						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
-						sort munic
-						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-					}
-					tempfile CENSO22_`UF'_pes_`suf'
-					save `CENSO22_`UF'_pes_`suf'', replace
-					
-					*/
-					
-					save CENSO22_`UF'_pes_con, replace
+					* Áreas Mínimas Comparáveis 
+					findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
+					sort munic
+					merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+					display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
+					save CENSO22_`UF'_pes_con_comp, replace
+				}
+				else {
+						display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' ..."					
+						save CENSO22_`UF'_pes_con, replace
+						}
 				}
 			}
 		}
