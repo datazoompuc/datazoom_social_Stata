@@ -3838,10 +3838,16 @@ lab var renda_dom_def "renda_dom deflacionada"
 Acesso público: D0110.
 Acesso controlado: D0111.
 Acesso restrito: D0112. */
-if "`pub22'" != ""         rename D0110 peso_dom
-else if "`con22'" != "" rename D0111 peso_dom
-* else if "`res22'" != ""   rename D0112 peso_dom // para quando tiver a leitura para a versão restrita
-else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_dom"
+if "`pub22'" != "" {
+	        rename D0110 peso_dom
+	}
+	else if "`con22'" != "" {
+			rename D0111 peso_dom
+	} 
+/* 	else if {
+		"`res22'" != ""   rename D0112 peso_dom // para quando tiver a leitura para a versão restrita
+} */
+	else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_dom"
 
 /* Variáveis de domicílio não utilizadas */
 
@@ -3870,10 +3876,17 @@ rename P0010 regiao
 Acesso público: P0110.
 Acesso controlado: P0111.
 Acesso restrito: P0112. */
-if "`pub22'" != ""         rename P0110 peso_pess
-else if "`con22'" != "" rename P0111 peso_pess
-* else if "`res22'" != ""   rename P0112 peso_pess // para quando tiver a leitura para a versão restrita
-else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
+
+if "`pub22'" != "" {
+	        rename P0110 peso_pess
+	}
+	else if "`con22'" != "" {
+			rename P0111 peso_pess
+	} 
+/* 	else if {
+		"`res22'" != ""   rename P0112 peso_dom // para quando tiver a leitura para a versão restrita
+} */
+	else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
 sort UF munic id_dom
 by UF munic id_dom: egen n_homem_dom = total(P0160==1)
