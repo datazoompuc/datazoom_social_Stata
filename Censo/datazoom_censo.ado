@@ -3739,6 +3739,7 @@ drop banheiros_B
 gen sanitario = D0270
 recode sanitario (7 = 0)
 replace sanitario = 1 if sanitario >= 1 & sanitario <= 6
+lab var sanitario "dummy para acesso a sanitário"
 * sanitario = 0 - Não
 *             1 - Sim
 
@@ -4520,6 +4521,7 @@ label var estado_conj_B "estado conjugal B - mais agregado"
 
 gen trab_rem_sem = 1 if P0840 == 1 | P0850 == 1 | P0860 == 1
 replace trab_rem_sem = 0 if trab_rem_sem == . & P0860 == 2
+lab var trab_rem_sem "trabalho remunerado na semana de referência"
 * trab_rem_sem = 1 - Sim
 *				 0 - Não
 
@@ -4572,6 +4574,7 @@ replace pos_ocup_sem = 6 if P0990 == 8
 replace pos_ocup_sem = 7 if P0990 == 7
 replace pos_ocup_sem = 8 if P0990 == 9
 replace pos_ocup_sem = 9 if pos_ocup_sem == . & trab_proprio_cons == 1
+lab var pos_ocup_sem "posição na ocupação na semana de referência"
 * pos_ocup_sem  = 1 - Empregado com carteira
 *				  2 - Militar e Funcionário Públicos
 *				  3 - Empregado sem carteira
@@ -4615,6 +4618,7 @@ replace P1080 = . if P1080 == 0
 
 * rendimento bruto trabalho principal (se apenas 1 trabalho)
 gen rend_ocup_prin = P1080 if mais_de_um_trab == 0
+lab var rend_ocup_prin "rendimento bruto no trabalho principal"
 
 * rendimento bruto todos trabalhos
 rename P1080 rend_todos_trab
