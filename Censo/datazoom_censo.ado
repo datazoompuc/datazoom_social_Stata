@@ -2064,7 +2064,7 @@ else if `ano' == 2022 {
 					replace munic = int(munic/10)
 					lab var munic "municipality codes without DV (6 digits)"
 					
-					compat_censo22pess
+					compat_censo22pess, `pub22' `con22'
 
 					* Áreas Mínimas Comparáveis 
 					findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
@@ -2145,7 +2145,7 @@ else if `ano' == 2022 {
 						replace munic = int(munic/10)
 						lab var munic "municipality codes without DV (6 digits)"
 						
-						compat_censo22dom
+						compat_censo22dom, `pub22' `con22'
 
 						* Áreas Mínimas Comparáveis 
 						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
@@ -3584,6 +3584,12 @@ end
 * CENSO 2022 *
 **************
 program define compat_censo22dom
+syntax, [pub22 con22]
+
+if ("`pub22'" == "") == ("`con22'" == "") {
+	di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
+	exit 198
+}
 
 /* A. ANO */
 * Essa variável é definida antes de chamar este programa.
@@ -3844,6 +3850,12 @@ drop D0030 D0040 D0050 D0060 D0070 D0080 D0090 D0160 D0170 D0171 D0180 D0181 D02
 end
  
 program define compat_censo22pess
+syntax, [pub22 con22]
+
+if ("`pub22'" == "") == ("`con22'" == "") {
+	di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
+	exit 198
+}
 
 /* A. ANO */
 * Essa variável é definida antes de chamar este programa.
