@@ -13,7 +13,7 @@ BEGIN
    CHECKBOX	chk91     @  +20 100 20, label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 20, label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 20, label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
-   CHECKBOX	chk22     @  +20 100 20, label("2022")  onclickon(script c22on) onclickoff(program c22off) option(2022)
+   CHECKBOX	chk22     @  +20 100 20, label("2022 (CSV)")  onclickon(script c22on) onclickoff(program c22off) option(2022)
    
    BUTTON fldata      10 +35  115 25, label("Dados originais...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Salvando...") onpush(script salvando)
@@ -36,9 +36,9 @@ BEGIN
 	  RADIO dbf91    +10  +20  100   20, first label("DBF") option(dbf91)  
 	  RADIO dattxt91 +0   +20  100   20, last label("DAT/TXT") option(dattxt91)
 
-   GROUPBOX caixaFormat22 130 -40 115 65, label("Formato 2022")
-	  RADIO csv22 +10  +20  100 20, first label("CSV") option(csv22)
-	  RADIO txt22 +0   +20  100 20, last  label("TXT") option(txt22)
+   GROUPBOX caixaTipo22 130 -40 115 65, label("Tipo 2022")
+	  RADIO pub22 +10  +20  100 20, first label("Público") option(pub22)
+	  RADIO con22 +0   +20  100 20, last  label("Controlado") option(con22)
 	  
    TEXT instrUF       145    5  350   ., label("Selecione estados e/ou regiões:")
 	  CHECKBOX chkregN   140   30  175 126, label("Norte") onclickon(script marcatudoN) onclickoff(script desmarcatudoN) groupbox
@@ -95,8 +95,8 @@ BEGIN
    main.all.disable
    main.dbf91.disable
    main.dattxt91.disable
-   main.csv22.disable
-   main.txt22.disable
+   main.pub22.disable
+   main.con22.disable
 END
 
 SCRIPT c70on
@@ -142,12 +142,11 @@ SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
-	main.csv22.enable
-	*main.txt22.enable // quando for implemementado esse recurso
+	main.pub22.enable
+	main.con22.enable // quando for implemementado esse recurso
 	main.fam.enable
 	main.both.disable // enquanto esse recurso não está implementado
 	*main.all.enable // quando for implemementado esse recurso
-	main.chkcomp.disable
 	main.eng.disable
 END
 
@@ -192,6 +191,8 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
+	call main.con22.disable
+	call main.pub22.disable
 END	
 
 
@@ -358,7 +359,7 @@ BEGIN
 	  option radio(main pes dom fam both all)
 	  option main.eng
 	  option radio(main dbf91 dattxt91)
-	  option radio(main csv22 txt22)
+	  option radio(main pub22 con22)
 	  
    endoptions
    stata

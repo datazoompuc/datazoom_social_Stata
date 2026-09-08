@@ -4,7 +4,7 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf91 dattxt91 csv22 txt22]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf91 dattxt91 pub22 con22]
 
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
@@ -19,8 +19,8 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `english' indica labels das variáveis em inglês
 * `dbf91' indica que o formato de dados originais usados é dbf para o ano de 1991
 * `dattxt91' indica que o formato de dados originais usados é dat ou txt para o ano de 1991
-* `csv22' indica que o formato de dados originais usados é csv para o ano de 2022
-* `txt22' indica que o formato de dados originais usados é txt para o ano de 2022
+* `pub22' indica que o tipo de microdados originais usados é para o ano de 2022 é de acesso público
+* `con22' indica que o tipo de microdados originais usados é para o ano de 2022 é de acesso controlado
  
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
@@ -41,7 +41,7 @@ if "`all'"~="" {
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91' `csv22' `txt22'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91' `pub22' `con22'
 
 end
 
@@ -1989,14 +1989,7 @@ else if `ano' == 2022 {
 // PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
 // NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
 
-		if "`txt22'"!="" {
-		    di as err "Ainda não foi implementada a leitura em TXT para o Censo de 2022. Use os arquivos em CSV"
-			exit
-		}
-		
-		if "`csv22'"!="" {
-		    display as input "Certifique de estar usando os dados originais em CSV para a leitura correta do Censo de 2022"
-		}
+		display as input "Certifique-se de estar usando os dados originais em CSV para a leitura correta do Censo de 2022. Ainda não foi implementada a leitura dos microdados em TXT para esse ano."
 			
 		foreach UF in `ufs' {
 			* Achando posição da UF nas listas:
@@ -2013,6 +2006,7 @@ else if `ano' == 2022 {
 			tokenize `codUFs'
 			local codUF = "``pos''"
 			foreach suf in `sufixos' {
+				
 				if "`pes'"~="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
@@ -2027,12 +2021,22 @@ else if `ano' == 2022 {
 					
 					
 			* logica de leitura com csv
+					
+					if "`pub22'"~="" {
+					
 					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					label_censo22, registro(pess) versao_censo22(publico)
 					
-					save CENSO22_`UF'_pes, replace
+					save CENSO22_`UF'_pes_pub, replace
+					} else{
+					if "`con22'"~="" {
+						
+					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+										
+					gen ano = 2022
+					label_censo22, registro(pess) versao_censo22(controlado)
 
 					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
 					
@@ -2060,7 +2064,14 @@ else if `ano' == 2022 {
 					save `CENSO22_`UF'_pes_`suf'', replace
 					
 					*/
+					
+					save CENSO22_`UF'_pes_con, replace
 				}
+			}
+		}
+					
+					
+			
 				if "`dom'"!="" /*| "`both'"~="" //quando tiver implementado o recurso de mergear pes e dom*/ { 
 					/* Agora os domicílios */
 					display as input "Extraindo `ano' `UF' - `suf' ..."
@@ -2078,10 +2089,23 @@ else if `ano' == 2022 {
 					quietly cap infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear */
 					
 					* Leitura para csv
+					
+					if "`pub22'"~="" {
+					
 					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
 					
 					gen ano = 2022
 					label_censo22, registro(dom) versao_censo22(publico)
+					
+					save CENSO22_`UF'_dom_pub, replace
+					
+					} else{
+					if "`con22'"~="" {
+						
+					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+										
+					gen ano = 2022
+					label_censo22, registro(dom) versao_censo22(controlado)	
 					
 					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
 
@@ -2109,9 +2133,10 @@ else if `ano' == 2022 {
 					tempfile CENSO22_`UF'_dom_`suf' 
 					save `CENSO22_`UF'_dom_`suf'', replace */
 					
-					save CENSO22_`UF'_dom, replace
-					
-				}/* logica de merge e compatibilizacao, que ainda vai ser implementada
+					save CENSO22_`UF'_dom_con, replace
+					}
+				}
+			}/* logica de merge e compatibilizacao, que ainda vai ser implementada
 				if "`comp'"~="" loc var = "id_dom"
 				else loc var = "v0300" // VARIAVEL DE CONTROLE - VERIFICAL O NUMERO NO NOVO CENSO
 				if "`both'"~="" {
@@ -2150,14 +2175,36 @@ else if `ano' == 2022 {
 					if "`fam'"!="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."	
 					
+					if "`pub22'"~="" {
 					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					label_censo22, registro(fam) versao_censo22(publico)
 					
-					save CENSO22_`UF'_fam, replace
+					save CENSO22_`UF'_fam_pub, replace
 					
+					} else{
+					if "`con22'"~="" {
+						
+					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+										
+					gen ano = 2022
+					label_censo22, registro(fam) versao_censo22(controlado)	
+					
+					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
+
+					* Deixando a variável v0002 com 5 dígitos
+					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+					replace v0002="....." if v0002=="."
+					*Criando a variável munic
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)" */
+					
+					save CENSO22_`UF'_fam_con, replace
 					}
+				}
 					
 					/* criando leitura para o dataset de mortalidade
 					if "`mort'"~="" {
@@ -2170,7 +2217,8 @@ else if `ano' == 2022 {
 					
 					save CENSO22_`UF'_mort, replace }*/
 					
-					
+					}
+				
 				}
 			}
 		}
