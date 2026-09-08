@@ -2226,6 +2226,11 @@ else if `ano' == 2022 {
 					replace munic = int(munic/10)
 					lab var munic "municipality codes without DV (6 digits)" */
 					
+					gen munic = F0080
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+					
 					save CENSO22_`UF'_fam_con, replace
 					}
 				}
