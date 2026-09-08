@@ -3824,10 +3824,7 @@ lab var renda_dom_def "renda_dom deflacionada"
 /* Será necessário adaptar o peso de acordo com a versão dos microdados.
 Acesso público: D0110.
 Acesso controlado: D0111.
-Acesso restrito: D0112.
-ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
-nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
-o peso amostral não é renomeado. */
+Acesso restrito: D0112. */
 if "`pub22'" != ""         rename D0110 peso_dom
 else if "`con22'" != "" rename D0111 peso_dom
 * else if "`res22'" != ""   rename D0112 peso_dom // para quando tiver a leitura para a versão restrita
@@ -3853,10 +3850,7 @@ rename P0010 regiao
 /* Será necessário adaptar o peso de acordo com a versão dos microdados.
 Acesso público: P0110.
 Acesso controlado: P0111.
-Acesso restrito: P0112.
-ATENÇÃO: a opção `versao_censo22' ainda não é repassada por datazoom_censo
-nem por load_censo. Enquanto isso não for feito nenhum ramo é escolhido e
-o peso amostral não é renomeado. */
+Acesso restrito: P0112. */
 if "`pub22'" != ""         rename P0110 peso_pess
 else if "`con22'" != "" rename P0111 peso_pess
 * else if "`res22'" != ""   rename P0112 peso_pess // para quando tiver a leitura para a versão restrita
@@ -4636,7 +4630,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 /* D.12. OUTRAS INFORMAÇÕES */
  
 drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
-if "`versao_censo22'" == "controlado" drop P0150
+if "`con22'" != "" drop P0150
 
 order ano UF regiao munic id_dom ordem
 
