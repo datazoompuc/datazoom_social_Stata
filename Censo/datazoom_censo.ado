@@ -2035,6 +2035,8 @@ else if `ano' == 2022 {
 					if "`con22'"!="" {
 						
 					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+					format P0970 %04.0f
+					format P0980 %05.0f
 										
 					gen ano = 2022
 					label_censo22, registro(pess) `pub22' `con22'
@@ -4524,12 +4526,10 @@ lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
 *			   	    1 - Sim
 
-replace P0970 = "0000" if P0970 == "K000"
-destring P0970, replace
-capture confirm string variable P0980
-if !_rc destring P0980, replace
 rename P0970 ocup2010
 rename P0980 ativ2010
+format ocup2010 %04.0f
+format ativ2010 %05.0f
 recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 
 * PEA nesse ano é apenas para 14 anos ou mais
