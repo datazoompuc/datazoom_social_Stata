@@ -2057,7 +2057,7 @@ else if `ano' == 2022 {
 					
 					*Com as variaveis de 2022:
 				
-					gen munic = D0080
+					gen munic = P0080
 					destring munic, replace
 					replace munic = int(munic/10)
 					lab var munic "municipality codes without DV (6 digits)"
