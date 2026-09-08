@@ -397,7 +397,10 @@ Limitations and points to note
     2000](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2000.xlsx)
   - [Dicionário Censo
     2010](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/dicionario_2010.xls)
-  - Em breve: Dicionário Censo 2022
+  - [Dicionário Censo 2022 (Acesso
+    Público)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Dicionario%Microdados%CD2022%-%acesso%Publico.xlsx)
+  - [Dicionário Censo 2022 (Acesso
+    Controlado)](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Dicionario%Microdados%CD2022%-%acesso%Controlado.xlsx)
 
   </details>
 
