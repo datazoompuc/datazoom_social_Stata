@@ -2030,7 +2030,8 @@ else if `ano' == 2022 {
 					label_censo22, registro(pess) versao_censo22(publico)
 					
 					save CENSO22_`UF'_pes_pub, replace
-					} else{
+					} 
+					else {
 					if "`con22'"~="" {
 						
 					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
@@ -2099,7 +2100,8 @@ else if `ano' == 2022 {
 					
 					save CENSO22_`UF'_dom_pub, replace
 					
-					} else{
+					} 
+					else {
 					if "`con22'"~="" {
 						
 					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
@@ -2183,7 +2185,8 @@ else if `ano' == 2022 {
 					
 					save CENSO22_`UF'_fam_pub, replace
 					
-					} else{
+					} 
+					else {
 					if "`con22'"~="" {
 						
 					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
