@@ -46,7 +46,7 @@ load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `d
 end
 
 program load_censo
-syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf91 dattxt91]
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf91 dattxt91 pub22 con22]
 
 if "`english'" != "" local lang "_en"
 
@@ -2007,7 +2007,7 @@ else if `ano' == 2022 {
 			local codUF = "``pos''"
 			foreach suf in `sufixos' {
 				
-				if "`pes'"~="" {
+				if "`pes'"!="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 					
 			/* logica de leitura para txt (usando dicionario)		
@@ -2022,7 +2022,7 @@ else if `ano' == 2022 {
 					
 			* logica de leitura com csv
 					
-					if "`pub22'"~="" {
+					if "`pub22'"!="" {
 					
 					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
@@ -2032,7 +2032,7 @@ else if `ano' == 2022 {
 					save CENSO22_`UF'_pes_pub, replace
 					} 
 					else {
-					if "`con22'"~="" {
+					if "`con22'"!="" {
 						
 					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
 										
@@ -2073,7 +2073,8 @@ else if `ano' == 2022 {
 					
 					
 			
-				if "`dom'"!="" /*| "`both'"~="" //quando tiver implementado o recurso de mergear pes e dom*/ { 
+				if "`dom'"!="" { 
+					/*| "`both'"~="" //quando tiver implementado o recurso de mergear pes e dom*/
 					/* Agora os domicílios */
 					display as input "Extraindo `ano' `UF' - `suf' ..."
 															
@@ -2091,7 +2092,7 @@ else if `ano' == 2022 {
 					
 					* Leitura para csv
 					
-					if "`pub22'"~="" {
+					if "`pub22'"!="" {
 					
 					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
 					
@@ -2102,7 +2103,7 @@ else if `ano' == 2022 {
 					
 					} 
 					else {
-					if "`con22'"~="" {
+					if "`con22'"!="" {
 						
 					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
 										
@@ -2134,6 +2135,7 @@ else if `ano' == 2022 {
 	            	}
 					tempfile CENSO22_`UF'_dom_`suf' 
 					save `CENSO22_`UF'_dom_`suf'', replace */
+					display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' ..."
 					
 					save CENSO22_`UF'_dom_con, replace
 					}
@@ -2177,7 +2179,7 @@ else if `ano' == 2022 {
 					if "`fam'"!="" {
 					display as input "Extraindo `ano' `UF' - `suf' ..."	
 					
-					if "`pub22'"~="" {
+					if "`pub22'"!="" {
 					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
@@ -2187,7 +2189,7 @@ else if `ano' == 2022 {
 					
 					} 
 					else {
-					if "`con22'"~="" {
+					if "`con22'"!="" {
 						
 					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
 										
@@ -2221,7 +2223,6 @@ else if `ano' == 2022 {
 					save CENSO22_`UF'_mort, replace }*/
 					
 					}
-				
 				}
 			}
 		}
