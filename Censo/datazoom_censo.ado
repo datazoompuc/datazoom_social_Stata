@@ -2027,7 +2027,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					label_censo22, registro(pess) versao_censo22(publico)
+					label_censo22, registro(pess) `pub22' `con22'
 					
 					save CENSO22_`UF'_pes_pub, replace
 					} 
@@ -2035,9 +2035,11 @@ else if `ano' == 2022 {
 					if "`con22'"!="" {
 						
 					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+					format P0970 %04.0f
+					format P0980 %05.0f
 										
 					gen ano = 2022
-					label_censo22, registro(pess) versao_censo22(controlado)
+					label_censo22, registro(pess) `pub22' `con22'
 
 					* Compatibiliza, se especificado 
 	            	if "`comp'" != "" {
@@ -2105,7 +2107,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
 					
 					gen ano = 2022
-					label_censo22, registro(dom) versao_censo22(publico)
+					label_censo22, registro(dom) `pub22' `con22'
 					
 					save CENSO22_`UF'_dom_pub, replace
 					
@@ -2116,7 +2118,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					label_censo22, registro(dom) versao_censo22(controlado)	
+					label_censo22, registro(dom) `pub22' `con22'
 					
 					
 
@@ -2202,7 +2204,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					label_censo22, registro(fam) versao_censo22(publico)
+					label_censo22, registro(fam) `pub22' `con22'
 					
 					save CENSO22_`UF'_fam_pub, replace
 					
@@ -2213,7 +2215,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					label_censo22, registro(fam) versao_censo22(controlado)	
+					label_censo22, registro(fam) `pub22' `con22'
 					
 					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
 
@@ -2242,7 +2244,7 @@ else if `ano' == 2022 {
 					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
-					label_censo22, registro(mort) versao_censo22(publico)
+					label_censo22, registro(mort) `pub22' `con22'
 					
 					save CENSO22_`UF'_mort, replace }*/
 					
@@ -2264,10 +2266,10 @@ di _newline "Esta versão do pacote datazoom_censo é compatível com os microda
 end
 
 program define label_censo22
-syntax, registro(string) versao_censo22(string)
+syntax, registro(string) [pub22 con22]
 
-if !inlist("`versao_censo22'", "publico", "controlado") {
-    di as err "Versão dos microdados de 2022 inválida para aplicação dos rótulos"
+if ("`pub22'" == "") == ("`con22'" == "") {
+    di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
     exit 198
 }
 
@@ -2328,7 +2330,7 @@ if "`registro'" == "dom" {
     label var MD0320 "MARCA DE IMPUTAÇÃO NA D0320"
     label var MD0330 "MARCA DE IMPUTAÇÃO NA D0330"
     label var MD0340 "MARCA DE IMPUTAÇÃO NA D0340"
-    if "`versao_censo22'" == "publico" {
+    if "`pub22'" != "" {
         label var D0110 "Peso Amostral (Versão acesso Público)"
     }
     else {
@@ -2513,7 +2515,7 @@ else if "`registro'" == "pess" {
     label var P1200 "Existência de diagnóstico de autismo por profissional de saúde"
     label var P1210 "Quem prestou as informações da pessoa, categoria"
     label var P1220 "Número de ordem de quem prestou as informações da pessoa, código"
-    if "`versao_censo22'" == "publico" {
+    if "`pub22'" != "" {
         label var P0110 "Peso Amostral (Versão acesso Público)"
     }
     else {
@@ -2577,7 +2579,7 @@ else if "`registro'" == "mort" {
     label var MM0150 "MARCA DE IMPUTAÇÃO NA M0150"
     label var MM0160 "MARCA DE IMPUTAÇÃO NA M0160"
     label var MM0170 "MARCA DE IMPUTAÇÃO NA M0170"
-    if "`versao_censo22'" == "publico" {
+    if "`pub22'" != "" {
         label var M0110 "Peso Amostral (Versão acesso Público)"
     }
     else {
@@ -2619,7 +2621,7 @@ else if "`registro'" == "fam" {
     label var F0270 "Rendimento familiar, participação"
     label var MF0190 "MARCA DE IMPUTAÇÃO NA F019"
     label var MF0200 "MARCA DE IMPUTAÇÃO NA F0200"
-    if "`versao_censo22'" == "publico" {
+    if "`pub22'" != "" {
         label var F0110 "Peso Amostral (Versão acesso Público)"
     }
     else {
@@ -4541,12 +4543,10 @@ lab var mais_de_um_trab "tinha mais de um trabalho"
 * mais_de_um_trab = 0 - Não
 *			   	    1 - Sim
 
-replace P0970 = "0000" if P0970 == "K000"
-destring P0970, replace
-capture confirm string variable P0980
-if !_rc destring P0980, replace
 rename P0970 ocup2010
 rename P0980 ativ2010
+format ocup2010 %04.0f
+format ativ2010 %05.0f
 recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 
 * PEA nesse ano é apenas para 14 anos ou mais
