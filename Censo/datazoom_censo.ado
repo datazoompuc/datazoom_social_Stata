@@ -2034,7 +2034,7 @@ else if `ano' == 2022 {
 					else {
 					if "`con22'"!="" {
 						
-					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					label_censo22, registro(pess) versao_censo22(controlado)
@@ -2105,39 +2105,50 @@ else if `ano' == 2022 {
 					else {
 					if "`con22'"!="" {
 						
-					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					label_censo22, registro(dom) versao_censo22(controlado)	
 					
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-					* Deixando a variável v0002 com 5 dígitos
-					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-					replace v0002="....." if v0002=="."
-					*Criando a variável munic
-					egen munic = concat(v0001 v0002)
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)" */
 					
-					
-					/* compatibilizacao, que vai ser implementada em breve
 
 					* Compatibiliza, se especificado 
 	            	if "`comp'" != "" {
+						
+						* mantendo a antiga logica de criacao de munic de 2010, por seguranca
+						/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
+
+						* Deixando a variável v0002 com 5 dígitos
+						tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
+						replace v0002="....." if v0002=="."
+						*Criando a variável munic
+						egen munic = concat(v0001 v0002)
+						destring munic, replace
+						replace munic = int(munic/10)
+						lab var munic "municipality codes without DV (6 digits)" */
+						
+						
+						*Com as variaveis de 2022:
+					
+						munic = D0080
+						destring munic, replace
+						replace munic = int(munic/10)
+						lab var munic "municipality codes without DV (6 digits)"
+						
 						compat_censo22dom
 
 						* Áreas Mínimas Comparáveis 
 						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
 						sort munic
 						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+						display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
+						save CENSO22_`UF'_dom_con_comp, replace
 	            	}
-					tempfile CENSO22_`UF'_dom_`suf' 
-					save `CENSO22_`UF'_dom_`suf'', replace */
-					display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' ..."
+					else {
+							display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' ..."					
+							save CENSO22_`UF'_dom_con, replace
+							}
 					
-					save CENSO22_`UF'_dom_con, replace
 					}
 				}
 			}/* logica de merge e compatibilizacao, que ainda vai ser implementada
@@ -2191,7 +2202,7 @@ else if `ano' == 2022 {
 					else {
 					if "`con22'"!="" {
 						
-					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear // conferir se esse é o padrao do nome dos arquivos
+					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
 										
 					gen ano = 2022
 					label_censo22, registro(fam) versao_censo22(controlado)	
