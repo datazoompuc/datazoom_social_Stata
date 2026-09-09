@@ -34,7 +34,6 @@
 {synopt:{opt original(str)}} path to original microdata {p_end}
 {synopt:{opt saving(str)}} path where databases will be saved {p_end}
 {synopt:{opt ufs(str)}} Federation Unit codes {p_end}
-{synopt:{opt english}} variable labels in English {p_end}
 
 {syntab:Compatibility}
 {synopt:{opt comp}} compatible variables across the years {p_end}
@@ -42,9 +41,9 @@
 {syntab:Types of Register}
 {synopt:{opt pes}} individual {p_end}
 {synopt:{opt dom}} household {p_end}
-{synopt:{opt fam}} family (2000) {p_end}
+{synopt:{opt fam}} family (2000 and 2022) {p_end}
 {synopt:{opt both}} individual and household merged {p_end}
-{synopt:{opt all}} individual, family, and household merged (2000) {p_end}
+{synopt:{opt all}} individual, family, and household merged (2000, soon also 2022 ) {p_end}
 
 {syntab:Translation}
 {synopt:{opt english}} Translate variable labels from Portuguese to English {p_end}
@@ -52,6 +51,10 @@
 {syntab:Types of Format (only for 1991)}
 {synopt:{opt dbf91}} original data in dbf format {p_end}
 {synopt:{opt dattxt91}} original data in dbf format in dat or txt format {p_end}
+
+{syntab access type (only for the 2022 Census)}
+{synopt:{opt pub22}} original data access type for the 2022 Census: Public Access {p_end}
+{synopt:{opt con22}} original data access type for the 2022 Census: Controlled Access {p_end}
 
 {synoptline}
 {p2colreset}{...}
@@ -64,7 +67,7 @@ Use command {cmd:db datazoom_censo_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_censo} extracts and builds Censo databases from the original IBGE microdata. 
-Program can be used for Censo years 1970 to 2010.
+Program can be used for Censo years 1970 to 2022.
 
 {p 4 4 2}
 The program can implement an algorithm to make variables compatible through waves. 
@@ -72,15 +75,15 @@ This is valid for those variables that exist in at least two waves and are not t
 of survey methodology. The procedures applied through that algorithm are documented in "Census - Making variables compatible" 
 disposable for download on the Portal website. In addition, to address the administrative boundaries changes 
 issue, variables identifying consistet areas over time are included in the database. Under this option, 
-noncompatible variables are deleted during the process. Moreover, monetary variables are deflated to August 2010.
+noncompatible variables are deleted during the process. Moreover, monetary variables are deflated to July 2022.
 
 {p 4 4 2}
 The program generates one database for each federative unit and wave chosen. If necessary, use the
 command {help append} so as to aggregate all states.  
 
 {p 4 4 2}
-If only one option {opt pes} {opt fam} {opt dom} is selected, the program will  generate a database with the option variables
- in one file. The file family exists only for the Census 2000. If the option {opt both} is selected, the program will
+If one option from {opt pes} {opt fam} {opt dom} is selected, the program will  generate a database with the option variables
+ in one file. The dataset family exists only for the Census 2000 and 2022. If the option {opt both} is selected, the program will
  generate a database with both household and individual variables in the same file. If the option {opt all} is selected, the program will
  generate a database with household, family and individual variables in the same file.
  
@@ -89,16 +92,16 @@ If only one option {opt pes} {opt fam} {opt dom} is selected, the program will  
 {dlgtab:Input}
 
 {phang} {opt years(numlist)}  specifies the list of waves the user wants to work with. Alternatives are the
-1970, 1980, 1991, 2000 and 2010 waves.
+1970, 1980, 1991, 2000, 2010 and 2022 waves.
 
 {phang} {opt original(str)} indicates the folder path where the user has copied the original data files. Each
  census has at least one file for each state.  All files must be located in the same folder so that the program functions properly.
 
 {phang} {opt saving(str)} indicates the folder path where the new databases are to be saved.
 
-{phang} {opt ufs(str)} specifies which states to include in the database. Each state code in the list must be the 
+{phang} {opt ufs(str)} specifies which states datasets are to be read. Each state code in the list must be the 
 two-letter code often used to identify a Brazilian state. State codes: Rondônia RO, Acre AC, Amazonas AM, Roraima RR, 
-Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piaui PI, Ceará CE, Rio Grande do Norte RN, 
+Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piauí PI, Ceará CE, Rio Grande do Norte RN, 
 Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
 Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
 MT, Goiás GO, Distrito Federal DF.
@@ -127,7 +130,7 @@ waves. Even so, due to methodological changes, some variables are not subject to
  automatically so as to aggregate both types of variables.
  
 {phang} 
-{opt all} specifies that the user wants to get variables at household, family and individual levels (2000). In this option,
+{opt all} specifies that the user wants to get variables at household, family and individual levels. In this option,
  the three types of variables are merged in a single database. The program executes the command {help merge} 
  automatically so as to aggregate the three types of variables.
 
@@ -143,6 +146,14 @@ waves. Even so, due to methodological changes, some variables are not subject to
 
 {phang}
 {opt dattxt91} specifies that the original data in use for 1991 Census is in dat or txt format {p_end} 
+
+{dlgtab: Access Type (only for 2022)}
+
+{phang}
+{opt pub22} specifies that the original data type used for the 2022 Census is Public Access data (cannot be combined with {opt con22}).
+
+{phang}
+{opt con22} specifies that the original data type used for the 2022 Census is Controlled Access data (cannot be combined with {opt pub22}).
  
 {marker examples}{...}
 {title:Examples}
@@ -161,7 +172,12 @@ Same eight databases, but now at both the individual and household levels, as we
 Produces two databases from the year of 1991 at household level, one for each selected state, in which the original data is in .dat format.
 
 {p 8 6 2}. datazoom_censo, years(1991) original("~/mydir") saving("~/mydir") ufs(ES MG) dom dattxt91
- 
+
+{p 4 4 2}
+Produces a dataset containing family-level variables for 2022, for the state of Amazonas, using Public Access data.
+
+{p 8 6 2}. datazoom_censo, years(2022) original("~/mydir") saving("~/mydir") ufs(AM) dom pub22
+
 {marker remarks}{...}
 {title:Note on the original data}
 
@@ -234,7 +250,17 @@ available for download on our website {browse "https://datazoom.com.br/en":dataz
 
 {phang} - note that 14munic refers to the Census 2000 file redefined by IBGE for 14 municipalities
  
- 
+{phang} 2022
+
+{phang} - prefixes: Pessoas_ (for individuals), Domicilios_ (for households) and Familia_ (for families)
+
+{phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
+
+{phang} - suffixes (by data access type): _publico (for Public Access data) and _controlado (for Controlled Access data)
+
+{phang} - Example: Pessoas_11_publico.csv
+
+
 {title:Author}
 
 {p 4 4 2}
