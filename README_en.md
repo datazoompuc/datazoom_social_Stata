@@ -75,8 +75,8 @@ IBGE also conducts a more detailed interview on a large random sample of
 households, investigating household members’ socio-demographic
 characteristics (schooling, income etc.), household’s characteristics
 (wall materials, plumbing etc.), and possession of physical assets
-(refrigerator, car etc.). In the 2022 Census sample, there are \[UPDATED
-INFO\] million households and \[UPDATED INFO\] million individuals.
+(refrigerator, car etc.). In the 2022 Census sample, there are 7.8
+million households and more than 22 million individuals.
 
 ### Microdata
 
