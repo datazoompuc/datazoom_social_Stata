@@ -76,9 +76,10 @@ uma grande amostra aleatória dos domicílios, na qual investiga
 características sociodemográficas dos moradores (como escolaridade e
 rendimentos), características físicas do local de residência (material
 das paredes, existência de água encanada, etc.) e posse de bens (como
-geladeira e automóvel). No Censo de 2022, tal amostra cobria \[INSERIR
-INFORMAÇÃO NOVA\] milhões de domicílios com \[INSERIR INFORMAÇÃO NOVA\]
-milhões de indivíduos.
+geladeira e automóvel). No Censo de 2022, a [amostra efetivamente obtida
+pelo
+IBGE](https://www.ibge.gov.br/biblioteca/visualizacao/livros/liv102149.pdf)
+abrangeu cerca de 7,8 milhões de domicílios e 22,0 milhões de pessoas.
 
 Há diferenças nos questionários da amostra ao longo dos anos. Por isso,
 diversas variáveis não estão disponíveis em todos os anos ou têm opções
