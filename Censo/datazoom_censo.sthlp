@@ -31,10 +31,9 @@
 {synoptline}
 {syntab:Input}
 {synopt:{opt years(numlist)}} anos do Censo {p_end}
-{synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais (.txt ou .dat) {p_end}
+{synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
 {synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
 {synopt:{opt ufs(str)}} códigos dos estados {p_end}
-{synopt:{opt english}} labels das variáveis em inglês {p_end}
 
 {syntab:Compatibilidade}
 {synopt:{opt comp}} compatibiliza variáveis ao longo dos anos {p_end}
@@ -42,16 +41,20 @@
 {syntab:Tipos de Registro}
 {synopt:{opt pes}} pessoas {p_end}
 {synopt:{opt dom}} domicílios {p_end}
-{synopt:{opt fam}} famílias (2000) {p_end}
+{synopt:{opt fam}} famílias (2000 e 2022) {p_end}
 {synopt:{opt both}} pessoas e domicílios em um mesmo arquivo {p_end}
-{synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000) {p_end}
+{synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000, e em breve também 2022) {p_end}
 
-{syntab:Traduz}
+{syntab:Tradução}
 {synopt:{opt english}} traduz labels das variáveis para o inglês {p_end}
 
 {syntab:Formato dos dados (apenas para o Censo de 1991)}
 {synopt:{opt dbf91}} dados originais do Censo de 91 em dbf {p_end}
 {synopt:{opt dattxt91}} dados originais do Censo de 91 em dat ou txt {p_end}
+
+{syntab:Tipo dos dados (apenas para o Censo de 2022)}
+{synopt:{opt pub22}} tipo dos dados originais do Censo de 22: de Acesso Público {p_end}
+{synopt:{opt con22}} tipo dos dados originais do Censo de 22: de Acesso Controlado {p_end}
 
 {synoptline}
 {p2colreset}{...}
@@ -75,17 +78,17 @@ termos metodológicos. O processo de compatibilização está documentado em
 somente as variáveis compatibilizadas permanecem na base de dados final (além das variáveis
 de controle). Além disso, são incorporadas variáveis relacionadas a mudanças geopolíticas ocorridas no 
 período, as chamadas Áreas Mínimas Comparáveis. Finalmente, as variáveis monetárias são deflacionadas 
-para [VER DE ACORDO COM O PERIODO DE REFERENCIA DO CENSO 2022] de 2022.
+para julho de 2022.
 
 {p 4 4 2}
 O programa gera uma base de dados para cada unidade da federação e ano escolhidos. Se for o caso, use o comando 
 {help append} para juntar todos os estados. 
 
 {p 4 4 2}
-Se apenas uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
-correspondentes à seleção em um único arquivo. O arquivo família existe somente para o Censo 2000. Se a opção {opt both} for escolhida, o programa 
-gera uma base de dados inclindo as variáveis de domicílios e pessoas no mesmo arquivo. Se a opção {opt all} for escolhida, disponível apenas para 
-o ano 2000, o programa gera uma base de dados inclindo as variáveis de domicílios, famílias e pessoas no mesmo arquivo.
+Se uma das opções dentre {opt pes}, {opt fam} ou {opt dom} for escolhida, o programa gera uma base de dados com as variáveis 
+correspondentes à seleção em um único arquivo. O arquivo família existe somente para os Censos de 2000 e 2022. Se a opção {opt both} for escolhida, o programa 
+gera uma base de dados incluindo as variáveis de domicílios e pessoas no mesmo arquivo. Se a opção {opt all} for escolhida, disponível apenas para 
+o ano 2000, e em breve para o de 2022, o programa gera uma base de dados incluindo as variáveis de domicílios, famílias e pessoas no mesmo arquivo.
 
 {marker options}{...}
 {title:Options}
@@ -103,7 +106,7 @@ para que o programa funcione adequadamente.
 {phang} {opt ufs(str)} especifica os estados para os quais o programa deve gerar uma base de dados. Cada estado é
 identificado por meio de um código de duas letras, o mesmo usualmente utilizado como referência para cada estado: 
 Rondônia RO, Acre AC, Amazonas AM, Roraima RR, 
-Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piaui PI, Ceará CE, Rio Grande do Norte RN, 
+Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piauí PI, Ceará CE, Rio Grande do Norte RN, 
 Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
 Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
 MT, Goiás GO, Distrito Federal DF.
@@ -120,7 +123,7 @@ algumas variáveis não são passíveis de compatibilização, sendo excluídas 
 
 {phang}
 {opt pes}  especifica que o usuário deseja obter apenas o arquivo de pessoas, compatibilizado ou não. 
-Se nenhum tipo de registro for escolhido, o programa automaticamente executa essa opção. (Não pode ser
+Essa é a opção padrão. Ou seja: se nenhum tipo de registro for escolhido, o programa automaticamente executa essa opção. (Não pode ser
 combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
 
 {phang}
@@ -128,7 +131,7 @@ combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
 (Não pode ser combinada com {opt pes}, {opt fam}, {opt both} ou {opt all}).
 
 {phang}
-{opt fam}  especifica que o usuário deseja obter apenas o arquivo de famílias para o ano 2000. 
+{opt fam}  especifica que o usuário deseja obter apenas o arquivo de famílias, disponível apenas para os anos 2000 e 2022. 
 (Não pode ser combinada com {opt pes}, {opt dom}, {opt both} ou {opt all}).
 
 {phang} 
@@ -137,11 +140,11 @@ combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
  dois tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt all}).
 
 {phang} 
-{opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados 
-para o ano 2000, ou seja, o programa executa o comando {help merge} automaticamente para unir os
+{opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados, 
+disponível para o ano 2000 e em breve para o ano de 2022. Ou seja, o programa executa o comando {help merge} automaticamente para unir os
  três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
  
-{dlgtab:Traduz}
+{dlgtab:Tradução}
 
 {phang}
 {opt english} solicita que o dataset final venha com as labels das variáveis traduzidas em inglês.
@@ -153,6 +156,15 @@ para o ano 2000, ou seja, o programa executa o comando {help merge} automaticame
 
 {phang}
 {opt dattxt91}  especifica que os dados originais em uso do Censo de 91 estão em dat ou em txt (Não pode ser combinada com {opt dbf91}).
+
+
+{dlgtab:Tipo dos dados (apenas para 2022)}
+
+{phang}
+{opt pub22}  especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Público (Não pode ser combinada com {opt con22}).
+
+{phang}
+{opt con22}   especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Controlado (Não pode ser combinada com {opt pub22}).
 
 {marker examples}{...}
 {title:Examples}
@@ -171,6 +183,11 @@ As mesmas oito bases de dados do exemplo anterior. A diferença é que cada base
 Produz duas bases de dados com as variáveis de domicílio do ano de 1991, uma para cada estado escolhido, sendo que os dados originais estão em .dat
 
 {p 8 6 2}. datazoom_censo, years(1991) original("~/mydir") saving("~/mydir") ufs(ES MG) dom dattxt91
+
+{p 4 4 2}
+Produz uma base de dados com as variáveis de famílias do ano de 2022, para o estado do Amazonas, usando os dados de Acesso Público
+
+{p 8 6 2}. datazoom_censo, years(2022) original("~/mydir") saving("~/mydir") ufs(AM) fam pub22
  
 {marker remarks}{...}
 {title:Nota sobre os dados originais}
@@ -245,10 +262,15 @@ variáveis disponível para download em nosso site {browse "https://datazoom.com
 
 {phang} 2022
 
-{phang} - prefixos: [INCLUIR QUANDO SOUBER] (para pessoas) e [INCLUIR QUANDO SOUBER] (para domicílios)
+{phang} - prefixos: Pessoas_ (para pessoas), Domicilios_ (para domicílios) e Familia_ (para famílias)
 
 {phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
- 
+
+{phang} - sufixos (por tipo de dados): _publico (para dados de acesso público) e _controlado (para dados de acesso controlado)
+
+{phang} - Exemplo: Pessoas_11_publico.csv
+
+
  
 {title:Author}
 
