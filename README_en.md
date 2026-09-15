@@ -127,13 +127,8 @@ Expand the section below to view the main changes to the 1991 Census
 data import process and the documentation for the new household
 identifier constructed by Data Zoom.
 
-<details>
-
-<summary style="font-size:1.5em">
-
-<strong> Reading of the 1991 Census DBF files and Household Identifier
-(id_dom) Construction </strong>
-</summary>
+<details><summary style="font-size:1.5em"><strong>Reading 1991 Census DBF files and Household Identifier
+Construction</strong></summary>
 
 <h3>
 

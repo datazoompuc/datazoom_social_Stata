@@ -97,7 +97,8 @@ para conhecer toda a metodologia de compatibilização.
 Para utilizar o pacote do Data Zoom no Stata, você deve baixar os
 arquivos de microdados para o seu computador. O IBGE disponibiliza
 gratuitamente para download os microdados e a documentação para os
-Censos de 2010, 2000, 1991, 1980 e 1970. Encontre os arquivos [neste
+Censos de 2022, 2010, 2000, 1991, 1980 e 1970. Encontre os arquivos
+[neste
 link](https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html?=&t=downloads).
 Para 2010, além dos arquivos referentes às 27 UFs, há um arquivo com
 dados de 14 municípios que sofreram reponderação posteriormente.
