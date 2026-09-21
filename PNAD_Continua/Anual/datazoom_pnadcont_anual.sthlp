@@ -1,101 +1,53 @@
-{smcl}
-{viewerdialog "PNAD Contínua Anual" "dialog datazoom_pnadcont_anual"}
-{viewerdialog "Pacote" "dialog datazoom_social"}
-{vieweralsosee "PNAD" "help datazoom_pnad"}{...}
-{vieweralsosee "Censo" "help datazoom_censo"}{...}
-{vieweralsosee "PNAD Contínua Trimestral" "help datazoom_pnadcontinua"}{...}
-{vieweralsosee "PNS" "help datazoom_pns"}{...}
-{vieweralsosee "PNAD Covid" "help datazoom_pnad_covid"}{...}
-{vieweralsosee "PME" "help datazoom_pme"}{...}
-{vieweralsosee "POF" "help datazoom_pof"}{...}
-{vieweralsosee "ECINF" "help datazoom_ecinf"}{...}
-{viewerjumpto "Syntax" "datazoom_pnadcont_anual##syntax"}{...}
-{viewerjumpto "Description" "datazoom_pnadcont_anual##description"}{...}
-{viewerjumpto "Options" "datazoom_pnadcont_anual##options"}{...}
-{viewerjumpto "Examples" "datazoom_pnadcont_anual##examples"}{...}
-{p 8 8 2} {it:For the English version}, {help datazoom_pnadcont_anual_en}
+{smcl
+{* *! version 2.0  2026}{...}
+{title:Título}
 
-{title:Title}
+    {cmd:datazoom_pnadcont_anual} -- Acesso aos microdados da PNAD Contínua - Divulgação Anual
 
-{p 4 4 2}
-{cmd:datazoom_pnadcont_anual} {hline 2} Acesso aos microdados da PNAD Contínua {c -}  Divulgação Anual
+{title:Sintaxe}
 
-{marker syntax}{...}
-{title:Syntax}
+        {cmd:datazoom_pnadcont_anual} [{cmd:,} {it:opções}]
 
-{p 8 8 2} {cmd:datazoom_pnadcont_anual} [, {it:options}]
-	
-{synoptset 20 tabbed}{...}
-{synopthdr}
-{synoptline}
-{syntab:Input}
-{synopt:{opt years(numlist)}} anos seguidos por visitas ou trimestres da PNAD Contínua Anual {p_end}
-{synopt:{opt original(str)}} caminho da pasta onde se localizam os arquivos de dados originais {p_end}
-{synopt:{opt saving(str)}} caminho da pasta onde serão salvas as novas bases de dados {p_end}
-{synopt:{opt english}} define que labels das variáveis sejam apresentados em inglês {p_end}
-{synoptline}
-{p2colreset}{...}
-{p 4 6 2}
+    {synoptset 20 tabbed}{...}
+    {synopthdr:opções}
+    {synoptline}
+    {syntab:Entrada}
+    {synopt :{opt years(lista)}}especifica os anos, visitas e trimestres a serem extraídos (ex: 2025_vis1, 2025_tri2){p_end}
+    {synopt :{opt original(caminho)}}caminho da pasta onde estão os microdados originais (.txt){p_end}
+    {synopt :{opt saving(caminho)}}caminho da pasta onde as bases tratadas (.dta) serão salvas{p_end}
+    {synopt :{opt english}}aplica os rótulos (labels) das variáveis em inglês{p_end}
+    {synoptline}
 
-Digite {cmd:db datazoom_pnadcont_anual} para utilizar a função via caixa de diálogo.
+{p 4 4 2}Use o comando {cmd:db datazoom_pnadcont_anual} para acessar a interface por caixa de diálogo em português.{p_end}
 
-{marker description}{...}
-{title:Description}
+{title:Descrição}
 
-{p 4 4 2}
-{cmd:datazoom_pnadcont_anual} extrai e constrói bases de dados da PNAD Contínua Anual em formato Stata a partir
-dos microdados originais do IBGE, para os anos de 2012 a 2024.
+    {cmd:datazoom_pnadcont_anual} extrai e constrói bases de dados em formato Stata (.dta) a partir dos microdados originais da Divulgação Anual da PNAD Contínua do IBGE, cobrindo o período de {b:2012 a 2025}.
 
-{p 4 4 2}
-Este programa permite, para cada ano, a escolha de entrevistas (visitas) e trimestres específicos para extração. Ex: years(2016_vis1 2017_tri2) são
-referentes às 1ªentrevistas (acumuladas) do domicílio em 2016 e ao 2°trimestre de 2017. Os dados da PNAD Contínua Anual são especialmente úteis para analisar
-os suplementos da PNAD Contínua, em que o IBGE faz perguntas adicionais de temas específicos em trimestres e visitas específicas em determinados anos.
-Para ver em quais períodos estão cada suplemento, consulte o Guia de Suplementos. Você pode gerar um link de download usando nossa dialog box,
-ou pode pesquisar diretamente no site do IBGE.
-Para maiores informações sobre os dados de visitas acumuladas, trimestres e suplementos, olhar nota técnica da pesquisa no site do IBGE.
-Para cada visita e cada trimestre, há uma base original em txt disponível no site do IBGE. Faça o download dos dados originais e coloque o caminho dessa pasta como parâmetro de "original" para usar corretamente a função.
+    A pesquisa contempla dados acumulados por entrevista/visita (Visita 1, Visita 2 e Visita 5) e dados concentrados em trimestres específicos (Trimestres 1, 2, 3 e 4). As opções incluem os suplementos mais recentes de 2025:
+    - {b:2025_vis1}: Rendimento de outras fontes e características gerais dos moradores
+    - {b:2025_tri2}: Educação
+    - {b:2025_tri3}: Trabalho por meio de plataformas digitais
+    - {b:2025_tri4}: Tecnologia da Informação e Comunicação (TIC / Internet e TV)
 
+    O programa gera uma base de dados em formato Stata (.dta) para cada seleção realizada. Se necessário, utilize o comando {cmd:append} para consolidar múltiplos anos/suplementos.
 
-{p 4 4 2}
-Como a pesquisa ainda é publicada pelo IBGE, este programa está em constante atualização.
-  
-{p 4 4 2}
-O programa gera uma base para cada período (ano_visita e/ou ano_trimestre) selecionado. Pode ser útil utilizar o comando {help append} para empilhar as bases, caso sejam compatíveis.
+{title:Opções}
 
-{marker options}{...}
-{title:Options}
-{dlgtab:Input}
+    {cmd:years(}{it:lista}{cmd:)} especifica a lista de anos e combinações de visita/trimestre que deseja extrair. Exemplo de valores válidos: {it:2012_vis1 ... 2025_vis1 2025_tri2 2025_tri3 2025_tri4}.
 
-{phang} 
-{opt years(numlist)} especifica a lista de anos, com suas visitas e/ou trimestres com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para o período de 2012 a 2024, com visitas e trimestres específicos. Não há arquivos de microdados na disseminação anual para todo trimestre ou visita.
-Portanto, é necessário verificar quais trimestres e visitas estão disponível para chamar corretamente a função.
+    {cmd:original(}{it:caminho}{cmd:)} indica o diretório onde estão localizados os arquivos de texto (.txt) baixados do FTP do IBGE.
 
-{phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
-Existem arquivos de microdados para cada ano da pesquisa, podendo haver um ou mais por ano, referentes às visitas acumuladas e aos trimestres. 
-Todos eles devem estar na mesma pasta para que o programa funcione adequadamente.
-O Portal não disponibiliza os dados originais, que podem ser obtidos no site do IBGE.
+    {cmd:saving(}{it:caminho}{cmd:)} especifica a pasta onde as bases tratadas em Stata (.dta) serão salvas.
 
-{phang} {opt saving(str)} indica o caminho da pasta onde devem ser salvas as bases de dados produzidas pelo programa.
+{title:Exemplos}
 
-{phang} {opt english} especifica que os rótulos das variáveis sejam apresentados em inglês. O padrão é português (Brasil).
+    Extração dos suplementos de Educação e Plataformas Digitais de 2025:
 
-{marker examples}{...}
-{title:Examples}
+        {cmd:. datazoom_pnadcont_anual, years(2025_tri2 2025_tri3) original("~/meus_dados") saving("~/minhas_bases")}
 
-{p 4 4 2}
-Bases de dados anuais
+{title:Autor}
 
-{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2024_tri4) original("~/mydir") saving("~/mydir") 
-
-{p 6 6 2}
-Três bases de dados são geradas, uma para cada visita e trimestre selecionado.
-
-{title:Author}
-
-{p 4 4 2}
-DataZoom     {break}
-PUC-Rio - Departamento de Economia      {break}
-Contato pelo  {browse "https://github.com/datazoompuc/datazoom_social_Stata":Github}      {break}
-
-{space 4}{hline}
+    DataZoom
+    PUC-Rio - Departamento de Economia
+    Contato via GitHub
