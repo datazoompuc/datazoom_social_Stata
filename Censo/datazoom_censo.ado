@@ -3889,11 +3889,22 @@ if "`pub22'" != "" {
 } */
 	else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
-sort UF munic id_dom
+destring P0115, replace
+rename P0115 num_fam
+lab var num_fam "n�mero da fam�lia"
+
+sort UF munic id_dom num_fam
 by UF munic id_dom: egen n_homem_dom = total(P0160==1)
 by UF munic id_dom: egen n_mulher_dom = total(P0160==2)
 lab var n_homem_dom "numero de homens no domicilio"
 lab var n_mulher_dom "numero de mulheres no domicilio"
+
+by UF munic id_dom num_fam: egen n_homem_fam = total(P0160==1)
+by UF munic id_dom num_fam: egen n_mulher_fam = total(P0160==2)
+egen n_pes_fam = rowtotal(n_homem_fam n_mulher_fam)
+lab var n_homem_fam "numero de homens na familia"
+lab var n_mulher_fam "numero de mulheres na familia"
+lab var n_pes_fam "numero de pessoas na familia"
 
 /* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
 
@@ -4666,7 +4677,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
 if "`con22'" != "" drop P0150
 
-order ano UF regiao munic id_dom ordem
+order ano UF regiao munic id_dom num_fam ordem
 
 end
 
