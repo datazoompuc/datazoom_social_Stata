@@ -44,12 +44,11 @@ Use command {cmd:db datazoom_pnadcont_anual_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_pnadcont_anual} extracts and builds databases from the original PNAD Contínua 
-Annual Dissemination microdata, for years 2012 to 2019. 
+Annual Dissemination microdata, for years 2012 to 2025. 
 
 {p 4 4 2}
 Although Annual Continuous PNAD is an annual survey, from 2016 this program allows selection for the first interview of the household (2016_entr1 and 2017_entr1 ) and 
-for the 5th interview of the household (2016_entr5 and 2017_entr5). This is due to the change in IBGE's survey with the transfer of the questions  "Other forms of work"
- to the 5th home interview in the years 2016 and 2019. For each interview, there is an original txt database available on the IBGE website. 
+for the 5th interview of the household (2016_entr5 and 2017_entr5). The survey covers accumulated data by visit (1st, 2nd, and 5th visits) and specific quarter supplements (Quarters 1, 2, 3, and 4), including the new 2025 supplements (2025_vis1, 2025_tri2, 2025_tri3, 2025_tri4). For each interview, there is an original txt database available on the IBGE website. 
  For more information about the survey's change, read the technical note of the survey on the IBGE website.
  
 {p 4 4 2}
@@ -64,8 +63,7 @@ command {help append} in order to aggregate all years.
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} specifies the list of years the user wants to work with. This program
-covers all years from 2012 to 2019.
+{opt years(numlist)} specifies the list of years, visits, or quarters to extract (e.g., 2025_vis1 2025_tri2).
 
 {phang} {opt original(str)} indicates the path of the original data files. 
 There is one data file for each annual survey, except for 2016 and 2017, when there are two annual surveys per year 
