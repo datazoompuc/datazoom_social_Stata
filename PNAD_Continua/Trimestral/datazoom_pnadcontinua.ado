@@ -16,6 +16,7 @@ di "`original'"
 /* Dicionário */
 
 tempfile dic
+local dic "`dic'.dct"
 
 findfile dict.dta
 

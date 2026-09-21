@@ -28,6 +28,7 @@ save `deflator', replace
 tokenize `years'
 
 tempfile dic
+local dic "`dic'.dct"
 
 findfile dict.dta
 

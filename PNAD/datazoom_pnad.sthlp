@@ -56,7 +56,7 @@ Digite {cmd:db datazoom_pnad} para utilizar a função via caixa de diálogo.
 
 {p 4 4 2}
 {cmd:datazoom_pnad} extrai e constrói bases de dados da PNAD em formato Stata (.dta) a partir dos microdados originais do IBGE. 
-O programa pode ser utilizado para todos anos desde 1981 (exceto os anos censitários e 1994).
+O programa pode ser utilizado para todos anos desde 1981 até 2015 (exceto os anos censitários e 1994).
 
 {p 4 4 2}
 Existe a opção de compatibilizar variáveis ao longo dos anos. Isso é feito para as variáveis mais frequentes na PNAD, ou seja, 

@@ -14,7 +14,7 @@ GROUPBOX caixaAnos 160 15 150 73, label("Ano(s)")
 	RADIO  ck2013  +25 +20 100 25, first label("2013")  option(2013)
 	RADIO  ck2019  @   +20 100 25, last label("2019")  option(2019)
 
-	CHECKBOX	eng     180  95 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     180  95 200 20, label("Labels em inglês") option(english)
 
 TEXT credit 5 130 300 15, label("PUC-Rio - Departamento de Economia") left
 

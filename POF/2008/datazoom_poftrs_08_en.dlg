@@ -31,11 +31,11 @@ GROUPBOX trs 5 5 390 290, label("Types of Register")
 GROUPBOX opc_dic 5 300 390 50, label("Databases")
 	
 *	TEXT   tx_base     10 +20 310  ., label("Select or insert the data and dictionaries folder (same for both)")
-	BUTTON   fl_base     70 +20 90 ., label("Original files...") onpush(script dados)
+	BUTTON   fl_base     70 +20 90 25, label("Original files...") onpush(script dados)
 *	TEXT   tx_salvabase 10 +25 290  ., label("File path where database(s) will be saved.")
-	BUTTON   fl_salvabase +170 @ 90 ., label("Saving...") onpush(script salvando)
+	BUTTON   fl_salvabase +170 @ 90 25, label("Saving...") onpush(script salvando)
 
-	CHECKBOX	eng     5  360 150 ., label("Labels in English") option(english)
+	CHECKBOX	eng     5  360 150 20, label("Labels in English") option(english)
 
 	TEXT     credit     160   360  235    ., label("PUC-Rio - Department of Economics") right  
 

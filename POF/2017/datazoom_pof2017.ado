@@ -82,6 +82,7 @@ forvalues i = 1/`: word count `trs''{
 	di as input "Extraindo TR`num': `registro'"
 	
 	tempfile dic
+	local dic "`dic'.dct"
 
 	findfile dict.dta
 

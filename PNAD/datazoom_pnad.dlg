@@ -10,73 +10,73 @@ BEGIN
 
 GROUPBOX caixaPeriodo 10 25 145 310, label("Escolha um Periodo ...")
 
-   RADIO    rad8190 20 +20 120    .,                           ///
+   RADIO    rad8190 20 +20 120 20,                           ///
       first label("1981 a 1990")                              ///
       onclickon(script mostra8190)
 
-   RADIO    rad9201 @ +20 120    .,                          ///
+   RADIO    rad9201 @ +20 120 20,                          ///
       middle label("1992 a 2001")                             ///
       onclickon(script mostra9201)
 
-   RADIO    rad0209 @ +20 120    .,                          ///
+   RADIO    rad0209 @ +20 120 20,                          ///
       last label("2002 a 2015")                               ///
       onclickon(script mostra0209)
 
    TEXT     instr1     +0   +30  130    ., label("...e selecione o(s) ano(s)") left
 
-   CHECKBOX    ck80 20 140 120    ., label("Todos") onclickon(script marcatudo80) onclickoff(script desmarcatudo80)
-   CHECKBOX    ck1981 20 +24 120    ., label("1981") onclickon(program ad1981) onclickoff(program rm1981)
-   CHECKBOX    ck1982 +56 +0 120    ., label("1982") onclickon(program ad1982) onclickoff(program rm1982)
-   CHECKBOX    ck1983 20 +24 120    ., label("1983") onclickon(program ad1983) onclickoff(program rm1983)
-   CHECKBOX    ck1984 +56 +0 120    ., label("1984") onclickon(program ad1984) onclickoff(program rm1984)
-   CHECKBOX    ck1985 20 +24 120    ., label("1985") onclickon(program ad1985) onclickoff(program rm1985)
-   CHECKBOX    ck1986 +56 +0 120    ., label("1986") onclickon(program ad1986) onclickoff(program rm1986)
-   CHECKBOX    ck1987 20 +24 120    ., label("1987") onclickon(program ad1987) onclickoff(program rm1987)
-   CHECKBOX    ck1988 +56 +0 120    ., label("1988") onclickon(program ad1988) onclickoff(program rm1988)
-   CHECKBOX    ck1989 20 +24 120    ., label("1989") onclickon(program ad1989) onclickoff(program rm1989)
-   CHECKBOX    ck1990 +56 +0 120    ., label("1990") onclickon(program ad1990) onclickoff(program rm1990)
-   CHECKBOX    ck90 20 140 120    ., label("Todos") onclickon(script marcatudo90) onclickoff(script desmarcatudo90)
-   CHECKBOX    ck1992 20 +24 120    ., label("1992") onclickon(program ad1992) onclickoff(program rm1992)
-   CHECKBOX    ck1993 +56 +0 120    ., label("1993") onclickon(program ad1993) onclickoff(program rm1993)
-   CHECKBOX    ck1995 20 +24 120    ., label("1995") onclickon(program ad1995) onclickoff(program rm1995)
-   CHECKBOX    ck1996 +56 +0 120    ., label("1996") onclickon(program ad1996) onclickoff(program rm1996)
-   CHECKBOX    ck1997 20 +24 120    ., label("1997") onclickon(program ad1997) onclickoff(program rm1997)
-   CHECKBOX    ck1998 +56 +0 120    ., label("1998") onclickon(program ad1998) onclickoff(program rm1998)
-   CHECKBOX    ck1999 20 +24 120    ., label("1999") onclickon(program ad1999) onclickoff(program rm1999)
-   CHECKBOX    ck2001 +56 +0 120    ., label("2001") onclickon(program ad2001) onclickoff(program rm2001)
-   CHECKBOX    ck00 20 140 120    ., label("Todos") onclickon(script marcatudo00) onclickoff(script desmarcatudo00)
-   CHECKBOX    ck2002 20 +24 120    ., label("2002") onclickon(program ad2002) onclickoff(program rm2002)
-   CHECKBOX    ck2003 +56 +0 120    ., label("2003") onclickon(program ad2003) onclickoff(program rm2003)
-   CHECKBOX    ck2004 20 +24 120    ., label("2004") onclickon(program ad2004) onclickoff(program rm2004)
-   CHECKBOX    ck2005 +56 +0 120    ., label("2005") onclickon(program ad2005) onclickoff(program rm2005)
-   CHECKBOX    ck2006 20 +24 120    ., label("2006") onclickon(program ad2006) onclickoff(program rm2006)
-   CHECKBOX    ck2007 +56 +0 120    ., label("2007") onclickon(program ad2007) onclickoff(program rm2007)
-   CHECKBOX    ck2008 20 +24 120    ., label("2008") onclickon(program ad2008) onclickoff(program rm2008)
-   CHECKBOX    ck2009 +56 +0 120    ., label("2009") onclickon(program ad2009) onclickoff(program rm2009)
-   CHECKBOX    ck2011 20 +24 120    ., label("2011") onclickon(program ad2011) onclickoff(program rm2011)
-   CHECKBOX    ck2012 +56 +0 120    ., label("2012") onclickon(program ad2012) onclickoff(program rm2012)
-   CHECKBOX    ck2013 20 +24 120    ., label("2013") onclickon(program ad2013) onclickoff(program rm2013)
-   CHECKBOX    ck2014 +56 +0 120    ., label("2014") onclickon(program ad2014) onclickoff(program rm2014)
-   CHECKBOX    ck2015 20 +24 120    ., label("2015") onclickon(program ad2015) onclickoff(program rm2015)
+   CHECKBOX    ck80 20 140 120 20, label("Todos") onclickon(script marcatudo80) onclickoff(script desmarcatudo80)
+   CHECKBOX    ck1981 20 +24 120 20, label("1981") onclickon(program ad1981) onclickoff(program rm1981)
+   CHECKBOX    ck1982 +56 +0 120 20, label("1982") onclickon(program ad1982) onclickoff(program rm1982)
+   CHECKBOX    ck1983 20 +24 120 20, label("1983") onclickon(program ad1983) onclickoff(program rm1983)
+   CHECKBOX    ck1984 +56 +0 120 20, label("1984") onclickon(program ad1984) onclickoff(program rm1984)
+   CHECKBOX    ck1985 20 +24 120 20, label("1985") onclickon(program ad1985) onclickoff(program rm1985)
+   CHECKBOX    ck1986 +56 +0 120 20, label("1986") onclickon(program ad1986) onclickoff(program rm1986)
+   CHECKBOX    ck1987 20 +24 120 20, label("1987") onclickon(program ad1987) onclickoff(program rm1987)
+   CHECKBOX    ck1988 +56 +0 120 20, label("1988") onclickon(program ad1988) onclickoff(program rm1988)
+   CHECKBOX    ck1989 20 +24 120 20, label("1989") onclickon(program ad1989) onclickoff(program rm1989)
+   CHECKBOX    ck1990 +56 +0 120 20, label("1990") onclickon(program ad1990) onclickoff(program rm1990)
+   CHECKBOX    ck90 20 140 120 20, label("Todos") onclickon(script marcatudo90) onclickoff(script desmarcatudo90)
+   CHECKBOX    ck1992 20 +24 120 20, label("1992") onclickon(program ad1992) onclickoff(program rm1992)
+   CHECKBOX    ck1993 +56 +0 120 20, label("1993") onclickon(program ad1993) onclickoff(program rm1993)
+   CHECKBOX    ck1995 20 +24 120 20, label("1995") onclickon(program ad1995) onclickoff(program rm1995)
+   CHECKBOX    ck1996 +56 +0 120 20, label("1996") onclickon(program ad1996) onclickoff(program rm1996)
+   CHECKBOX    ck1997 20 +24 120 20, label("1997") onclickon(program ad1997) onclickoff(program rm1997)
+   CHECKBOX    ck1998 +56 +0 120 20, label("1998") onclickon(program ad1998) onclickoff(program rm1998)
+   CHECKBOX    ck1999 20 +24 120 20, label("1999") onclickon(program ad1999) onclickoff(program rm1999)
+   CHECKBOX    ck2001 +56 +0 120 20, label("2001") onclickon(program ad2001) onclickoff(program rm2001)
+   CHECKBOX    ck00 20 140 120 20, label("Todos") onclickon(script marcatudo00) onclickoff(script desmarcatudo00)
+   CHECKBOX    ck2002 20 +24 120 20, label("2002") onclickon(program ad2002) onclickoff(program rm2002)
+   CHECKBOX    ck2003 +56 +0 120 20, label("2003") onclickon(program ad2003) onclickoff(program rm2003)
+   CHECKBOX    ck2004 20 +24 120 20, label("2004") onclickon(program ad2004) onclickoff(program rm2004)
+   CHECKBOX    ck2005 +56 +0 120 20, label("2005") onclickon(program ad2005) onclickoff(program rm2005)
+   CHECKBOX    ck2006 20 +24 120 20, label("2006") onclickon(program ad2006) onclickoff(program rm2006)
+   CHECKBOX    ck2007 +56 +0 120 20, label("2007") onclickon(program ad2007) onclickoff(program rm2007)
+   CHECKBOX    ck2008 20 +24 120 20, label("2008") onclickon(program ad2008) onclickoff(program rm2008)
+   CHECKBOX    ck2009 +56 +0 120 20, label("2009") onclickon(program ad2009) onclickoff(program rm2009)
+   CHECKBOX    ck2011 20 +24 120 20, label("2011") onclickon(program ad2011) onclickoff(program rm2011)
+   CHECKBOX    ck2012 +56 +0 120 20, label("2012") onclickon(program ad2012) onclickoff(program rm2012)
+   CHECKBOX    ck2013 20 +24 120 20, label("2013") onclickon(program ad2013) onclickoff(program rm2013)
+   CHECKBOX    ck2014 +56 +0 120 20, label("2014") onclickon(program ad2014) onclickoff(program rm2014)
+   CHECKBOX    ck2015 20 +24 120 20, label("2015") onclickon(program ad2015) onclickoff(program rm2015)
 
 GROUPBOX caixaBase 170 25 155 80, label("Bases de dados")
 
-    BUTTON  fldata    +17 +18 100     ., label("Dados originais...") onpush(script dadosoriginais)
-    BUTTON  fldata1    +0 +30 100     ., label("Salvando...") onpush(script dadosfinais)
+    BUTTON  fldata    +17 +18 100 25, label("Dados originais...") onpush(script dadosoriginais)
+    BUTTON  fldata1    +0 +30 100 25, label("Salvando...") onpush(script dadosfinais)
 
 GROUPBOX caixaarq 170 +40 155 89, label("Tipo de Registro") 
 
-	RADIO	pes 	 +10 +21 100 .,  first 	label("Pessoas") 	option(pes) 
-	RADIO	dom	 	 +0 +21 100 .,   middle	label("Domicílios")  	option(dom) 
-	RADIO	both 	 +0 +21 100 .,   last	label("Ambos Merged")  	option(both) 
+	RADIO	pes 	 +10 +21 100 20,  first 	label("Pessoas") 	option(pes) 
+	RADIO	dom	 	 +0 +21 100 20,   middle	label("Domicílios")  	option(dom) 
+	RADIO	both 	 +0 +21 100 20,   last	label("Ambos Merged")  	option(both) 
 
 GROUPBOX caixaid 170 +35 155 94, label("Compatibilidade")
 
-	RADIO	ncomp       +10 +22 120 ., 	first	label("Não-compatível")  option(ncomp)
-	RADIO 	comp81		+0 +22 150 .,  	middle	label("Compatível anos 1980") option(comp81)
-	RADIO 	comp92		+0 +22 150 .,  	last	label("Compatível anos 1990") option(comp92)
+	RADIO	ncomp       +10 +22 120 20, 	first	label("Não-compatível")  option(ncomp)
+	RADIO 	comp81		+0 +22 150 20,  	middle	label("Compatível anos 1980") option(comp81)
+	RADIO 	comp92		+0 +22 150 20,  	last	label("Compatível anos 1990") option(comp92)
 
-	CHECKBOX	eng     20  336 200 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     20  336 200 20, label("Labels em inglês") option(english)
 
 TEXT     credit     165   305  140    ., label("PUC-Rio - Departamento") right
 TEXT     credi2     165   320  140    ., label("de Economia") right

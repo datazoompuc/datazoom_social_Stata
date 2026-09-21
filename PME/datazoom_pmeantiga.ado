@@ -26,6 +26,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 
@@ -61,6 +62,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 
@@ -98,6 +100,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PR PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 
@@ -144,6 +147,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 
@@ -190,6 +194,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 
@@ -236,6 +241,7 @@ qui while "`*'" != "" {
 		foreach UF in BA MG PR PE RJ RS SP {
 		
 			tempfile dic
+			local dic "`dic'.dct"
 
 			findfile dict.dta
 

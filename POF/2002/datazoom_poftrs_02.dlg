@@ -27,10 +27,10 @@ GROUPBOX trs 5 5 435 260, label("Tipos de Registros")
 
 GROUPBOX opc_dic 5 275 435 50, label("Bases de Dados")
 	
-	BUTTON   fl_base     75 +20 130 ., label("Dados originais...") onpush(script dados)
-	BUTTON   fl_salvabase +170 @ 90 ., label("Salvando...") onpush(script salvando)
+	BUTTON   fl_base     75 +20 130 25, label("Dados originais...") onpush(script dados)
+	BUTTON   fl_salvabase +170 @ 90 25, label("Salvando...") onpush(script salvando)
 
-	CHECKBOX	eng     10  345 150 ., label("Labels em inglês") option(english)
+	CHECKBOX	eng     10  345 150 20, label("Labels em inglês") option(english)
 
 	TEXT     credit     200   345  240    ., label("PUC-Rio - Departamento de Economia") right  
 

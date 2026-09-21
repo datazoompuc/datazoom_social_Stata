@@ -12,6 +12,7 @@ f datazoom_social.pkg
 f datazoom_social.sthlp
 f datazoom_message.ado
 f datazoom_link.ado
+f datazoom_link_en.ado
 F dict.dta
 f read_compdct.ado
 f Censo/datazoom_censo.ado
