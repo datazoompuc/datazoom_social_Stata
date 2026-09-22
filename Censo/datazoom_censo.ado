@@ -2421,6 +2421,7 @@ else if "`registro'" == "pess" {
     label var P0020 "Unidade da Federação"
     label var P0100 "Controle"
     label var P0101 "Número de ordem do morador"
+    label var P0115 "Número de ordem da Família"
     label var P0120 "Situação do Setor"
     label var P0130 "Espécie da unidade visitada"
     label var P0140 "Situação do domicílio"
