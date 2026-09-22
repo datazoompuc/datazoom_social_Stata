@@ -145,8 +145,8 @@ BEGIN
 	main.pub22.enable
 	main.con22.enable
 	main.fam.enable
-	main.both.disable // enquanto esse recurso não está implementado
-	*main.all.enable // quando for implemementado esse recurso
+	main.both.enable
+	main.all.enable
 	main.eng.disable
 END
 

@@ -132,6 +132,9 @@ SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
+	main.fam.enable
+	main.both.enable
+	main.all.enable
 END
 
 PROGRAM c80off

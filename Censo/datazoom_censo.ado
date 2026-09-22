@@ -1986,278 +1986,216 @@ foreach ano in `years' {
 * CENSO 2022 *
 **************
 else if `ano' == 2022 {
-// PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
-// NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
+		display as input "Certifique-se de estar usando os dados originais em CSV para a leitura correta do Censo de 2022. Ainda n�o foi implementada a leitura dos microdados em TXT para esse ano."
 
-		display as input "Certifique-se de estar usando os dados originais em CSV para a leitura correta do Censo de 2022. Ainda não foi implementada a leitura dos microdados em TXT para esse ano."
-			
 		foreach UF in `ufs' {
-			* Achando posição da UF nas listas:
+			* Achando posi��o da UF nas listas:
 			local pos = 1
 			while word(`"`nomesUFs'"', `pos') != "`UF'" {
 				local pos = `pos' + 1
 			}
 
-			* Loop para todos os arquivos da UF                              
-			* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo
+			* Loop para todos os arquivos da UF
 			tokenize `suf2022'
 			local sufixos = "``pos''"
-			* Mesmo para o código
 			tokenize `codUFs'
 			local codUF = "``pos''"
+
 			foreach suf in `sufixos' {
-				
-				if "`pes'"!="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."
-					
-			/* logica de leitura para txt (usando dicionario)		
-			* 		Abrindo arquivo principal
-					
-			*		tempfile dic
 
-			*		findfile dict.dta
-
-			*		read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'") */
-					
-					
-					* logica de leitura com csv
-					
-					if "`pub22'"!="" {
-					
-					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(pess) `pub22' `con22'
-					
-					save CENSO22_`UF'_pes_pub, replace
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-					format P0970 %04.0f
-					format P0980 %05.0f
-										
-					gen ano = 2022
-					label_censo22, registro(pess) `pub22' `con22'
-
-					* Compatibiliza, se especificado 
-	            	if "`comp'" != "" {
-					
-					* mantendo a antiga logica de criacao de munic de 2010, por seguranca
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-					* Deixando a variável v0002 com 5 dígitos
-					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-					replace v0002="....." if v0002=="."
-					*Criando a variável munic
-					egen munic = concat(v0001 v0002)
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)" */
-					
-					
-					*Com as variaveis de 2022:
-				
-					gen munic = P0080
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)"
-					
-					compat_censo22pess, `pub22' `con22'
-
-					* Áreas Mínimas Comparáveis 
-					findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
-					sort munic
-					merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-					display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
-					save CENSO22_`UF'_pes_con_comp, replace
-				}
-				else {
-						display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' ..."					
-						save CENSO22_`UF'_pes_con, replace
-						}
-				}
-			}
-		}
-					
-					
-			
-				if "`dom'"!="" { 
-					/*| "`both'"~="" //quando tiver implementado o recurso de mergear pes e dom*/
-					/* Agora os domicílios */
-					display as input "Extraindo `ano' `UF' - `suf' ..."
-															
-					
-					/* logica para txt (com dicionario)
-					* Abrindo arquivo principal
-					
-					tempfile dic
-
-					findfile dict.dta
-
-					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
-					
-					quietly cap infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear */
-					
-					* Leitura para csv
-					
-					if "`pub22'"!="" {
-					
-					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
-					
-					gen ano = 2022
-					label_censo22, registro(dom) `pub22' `con22'
-					
-					save CENSO22_`UF'_dom_pub, replace
-					
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(dom) `pub22' `con22'
-					
-					
-
-					* Compatibiliza, se especificado 
-	            	if "`comp'" != "" {
-						
-						* mantendo a antiga logica de criacao de munic de 2010, por seguranca
-						/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-						* Deixando a variável v0002 com 5 dígitos
-						tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-						replace v0002="....." if v0002=="."
-						*Criando a variável munic
-						egen munic = concat(v0001 v0002)
-						destring munic, replace
-						replace munic = int(munic/10)
-						lab var munic "municipality codes without DV (6 digits)" */
-						
-						
-						*Com as variaveis de 2022:
-					
-						gen munic = D0080
+				/* 1. LEITURA DE FAM�LIAS */
+				if "`fam'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Fam�lias) ..."
+					if "`pub22'" != "" {
+						import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						gen ano = 2022
+						label_censo22, registro(fam) `pub22' `con22' `english'
+					}
+					else if "`con22'" != "" {
+						import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						gen ano = 2022
+						label_censo22, registro(fam) `pub22' `con22' `english'
+						gen munic = F0080
 						destring munic, replace
 						replace munic = int(munic/10)
 						lab var munic "municipality codes without DV (6 digits)"
-						
-						compat_censo22dom, `pub22' `con22'
-
-						* Áreas Mínimas Comparáveis 
-						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
-						sort munic
-						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-						display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
-						save CENSO22_`UF'_dom_con_comp, replace
-	            	}
-					else {
-							display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' ..."					
-							save CENSO22_`UF'_dom_con, replace
-							}
-					
 					}
+					if "`comp'" == "" {
+						cap gen double P0100 = F0100
+						cap gen str P0115 = F0101
+					}
+					tempfile CENSO22_`UF'_fam_`suf'
+					save `CENSO22_`UF'_fam_`suf'', replace
 				}
-			}/* logica de merge e compatibilizacao, que ainda vai ser implementada
-				if "`comp'"~="" loc var = "id_dom"
-				else loc var = "v0300" // VARIAVEL DE CONTROLE - VERIFICAL O NUMERO NO NOVO CENSO
-				if "`both'"~="" {
-					use `CENSO22_`UF'_pes_`suf'', clear
-					merge m:1 `var' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
-					/* Se não for o primeiro arquivo, junta com o anterior */
-					if "`suf'" != word(`"`sufixos'"', 1) {
-						if "`comp'"~= "" append using CENSO22_`UF'_comp
-						else append using CENSO22_`UF'
+
+				/* 2. LEITURA DE PESSOAS */
+				if "`pes'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Pessoas) ..."
+					if "`pub22'" != "" {
+						import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						gen ano = 2022
+						label_censo22, registro(pess) `pub22' `con22' `english'
 					}
-					if "`comp'"~= "" save CENSO22_`UF'_comp, replace
-					else save CENSO22_`UF', replace
+					else if "`con22'" != "" {
+						import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						format P0970 %04.0f
+						format P0980 %05.0f
+						gen ano = 2022
+						label_censo22, registro(pess) `pub22' `con22' `english'
+
+						if "`comp'" != "" {
+							gen munic = P0080
+							destring munic, replace
+							replace munic = int(munic/10)
+							lab var munic "municipality codes without DV (6 digits)"
+							compat_censo22pess, `pub22' `con22'
+
+							findfile amcs.dta
+							sort munic
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+						}
+					}
+					tempfile CENSO22_`UF'_pes_`suf'
+					save `CENSO22_`UF'_pes_`suf'', replace
+				}
+
+				/* 3. LEITURA DE DOMIC�LIOS */
+				if "`dom'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Domic�lios) ..."
+					if "`pub22'" != "" {
+						import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						gen ano = 2022
+						label_censo22, registro(dom) `pub22' `con22' `english'
+					}
+					else if "`con22'" != "" {
+						import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						gen ano = 2022
+						label_censo22, registro(dom) `pub22' `con22' `english'
+
+						if "`comp'" != "" {
+							gen munic = D0080
+							destring munic, replace
+							replace munic = int(munic/10)
+							lab var munic "municipality codes without DV (6 digits)"
+							compat_censo22dom, `pub22' `con22'
+
+							findfile amcs.dta
+							sort munic
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+						}
+					}
+					if "`comp'" == "" {
+						cap gen double P0100 = D0100
+					}
+					tempfile CENSO22_`UF'_dom_`suf'
+					save `CENSO22_`UF'_dom_`suf'', replace
+				}
+
+				/* 4. MERGE E SALVAMENTO */
+
+				* Chaves de merge:
+				if "`comp'" != "" {
+					loc var_dom = "id_dom"
+					loc var_fam = "num_fam"
 				}
 				else {
-					if "`pes'"~="" {
-						use `CENSO22_`UF'_pes_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
-						if "`suf'" != word(`"`sufixos'"', 1) {
-							if "`comp'"~= "" append using CENSO22_`UF'_pes_comp
-							else append using CENSO22_`UF'_pes
-						}
-						if "`comp'"~="" save CENSO22_`UF'_pes_comp, replace
-						else save CENSO22_`UF'_pes, replace
-					}
-					else {
-						use `CENSO22_`UF'_dom_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
-						if "`suf'" != word(`"`sufixos'"', 1) {
-							if "`comp'"~= "" append using CENSO22_`UF'_dom_comp
-							else append using CENSO22_`UF'_dom
-						}
-						if "`comp'"~="" save CENSO22_`UF'_dom_comp, replace
-						else save CENSO22_`UF'_dom, replace 
-						*/
-						
-					if "`fam'"!="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."	
-					
-					if "`pub22'"!="" {
-					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(fam) `pub22' `con22'
-					
-					save CENSO22_`UF'_fam_pub, replace
-					
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(fam) `pub22' `con22'
-					
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
+					loc var_dom = "P0100"
+					loc var_fam = "P0115"
+				}
 
-					* Deixando a variável v0002 com 5 dígitos
-					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-					replace v0002="....." if v0002=="."
-					*Criando a variável munic
-					egen munic = concat(v0001 v0002)
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)" */
-					
-					gen munic = F0080
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)"
-					
-					save CENSO22_`UF'_fam_con, replace
+				/* A. BOTH MERGED (Pessoas + Domic�lios) */
+				if "`both'" != "" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					if "`comp'" != "" {
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
+					}
+					else {
+						* Nos dados brutos, domic�lio usa D0100 como chave
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+					}
+
+					if "`suf'" != word(`"`sufixos'"', 1) {
+						if "`comp'" != "" append using CENSO22_both_`UF'_con_comp
+						else if "`con22'" != "" append using CENSO22_both_`UF'_con
+						else append using CENSO22_both_`UF'_pub
+					}
+					if "`comp'" != "" save CENSO22_both_`UF'_con_comp, replace
+					else if "`con22'" != "" save CENSO22_both_`UF'_con, replace
+					else save CENSO22_both_`UF'_pub, replace
+				}
+
+				/* B. ALL MERGED (Pessoas + Domic�lios + Fam�lias) */
+				else if "`all'" != "" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					if "`comp'" != "" {
+						* Merge pessoas com fam�lia
+						merge m:1 `var_dom' `var_fam' using `CENSO22_`UF'_fam_`suf'', nogen keep(match master)
+						* Merge com domic�lios
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+
+						if "`suf'" != word(`"`sufixos'"', 1) append using CENSO22_all_`UF'_con_comp
+						save CENSO22_all_`UF'_con_comp, replace
+					}
+					else {
+						* Nos dados brutos:
+						* Fam�lia usa F0100 (domic�lio) e F0101 (ordem da fam�lia)
+						* Casamos P0100 com F0100 e P0115 com F0101:
+						merge m:1 P0100 P0115 using `CENSO22_`UF'_fam_`suf'', nogen keep(match master)
+						* Merge com domic�lios: P0100 com D0100
+						merge m:1 P0100 using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`con22'" != "" append using CENSO22_all_`UF'_con
+							else append using CENSO22_all_`UF'_pub
+						}
+						if "`con22'" != "" save CENSO22_all_`UF'_con, replace
+						else save CENSO22_all_`UF'_pub, replace
 					}
 				}
-					
-					/* criando leitura para o dataset de mortalidade
-					if "`mort'"~="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."	
-					
-					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(mort) `pub22' `con22'
-					
-					save CENSO22_`UF'_mort, replace }*/
-					
+
+				/* C. ARQUIVOS INDIVIDUAIS (pes, dom ou fam) */
+				else {
+					if "`fam'" != "" {
+						use `CENSO22_`UF'_fam_`suf'', clear
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`pub22'" != "" append using CENSO22_`UF'_fam_pub
+							else append using CENSO22_`UF'_fam_con
+						}
+						if "`pub22'" != "" save CENSO22_`UF'_fam_pub, replace
+						else save CENSO22_`UF'_fam_con, replace
+					}
+					if "`pes'" != "" {
+						use `CENSO22_`UF'_pes_`suf'', clear
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`pub22'" != "" append using CENSO22_`UF'_pes_pub
+							else if "`comp'" != "" append using CENSO22_`UF'_pes_con_comp
+							else append using CENSO22_`UF'_pes_con
+						}
+						if "`pub22'" != "" save CENSO22_`UF'_pes_pub, replace
+						else if "`comp'" != "" save CENSO22_`UF'_pes_con_comp, replace
+						else save CENSO22_`UF'_pes_con, replace
+					}
+					if "`dom'" != "" {
+						use `CENSO22_`UF'_dom_`suf'', clear
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`pub22'" != "" append using CENSO22_`UF'_dom_pub
+							else if "`comp'" != "" append using CENSO22_`UF'_dom_con_comp
+							else append using CENSO22_`UF'_dom_con
+						}
+						if "`pub22'" != "" save CENSO22_`UF'_dom_pub, replace
+						else if "`comp'" != "" save CENSO22_`UF'_dom_con_comp, replace
+						else save CENSO22_`UF'_dom_con, replace
 					}
 				}
-			}
-		}
-	}
+
+			} // fim do foreach suf
+		} // fim do foreach UF
+	} // fim do else if 2022
+} // fim do foreach ano
 
 **************
 * CENSO 2022 *
 **************
-
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
