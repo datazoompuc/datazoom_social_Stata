@@ -160,8 +160,10 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
-	call main.fam.disable
-	call main.all.disable
+	if main.chk22.isneq(1) {
+		call main.fam.disable
+		call main.all.disable
+	}
 END
 
 PROGRAM	c10off
@@ -177,6 +179,10 @@ BEGIN
 	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
+	}
+	if main.chk00.isneq(1) {
+		call main.fam.disable
+		call main.all.disable
 	}
 END
 
