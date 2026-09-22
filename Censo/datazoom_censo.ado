@@ -3890,6 +3890,7 @@ if "`pub22'" != "" {
 } */
 	else di as err "VersÃ£o dos microdados de 2022 nÃ£o especificada: peso amostral nÃ£o renomeado para peso_pess"
 
+replace P0115 = subinstr(P0115, "F", "", .) if !missing(P0115)
 destring P0115, replace
 rename P0115 num_fam
 lab var num_fam "número da família"
