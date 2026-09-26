@@ -43,7 +43,7 @@
 {synopt:{opt dom}} domicílios {p_end}
 {synopt:{opt fam}} famílias (2000 e 2022) {p_end}
 {synopt:{opt both}} pessoas e domicílios em um mesmo arquivo {p_end}
-{synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000, e em breve também 2022) {p_end}
+{synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000 e 2022) {p_end}
 
 {syntab:Tradução}
 {synopt:{opt english}} traduz labels das variáveis para o inglês {p_end}

@@ -43,7 +43,7 @@
 {synopt:{opt dom}} household {p_end}
 {synopt:{opt fam}} family (2000 and 2022) {p_end}
 {synopt:{opt both}} individual and household merged {p_end}
-{synopt:{opt all}} individual, family, and household merged (2000, soon also 2022 ) {p_end}
+{synopt:{opt all}} individual, family, and household merged (2000 and 2022) {p_end}
 
 {syntab:Translation}
 {synopt:{opt english}} Translate variable labels from Portuguese to English {p_end}
