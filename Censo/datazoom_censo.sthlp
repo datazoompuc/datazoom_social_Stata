@@ -141,7 +141,7 @@ combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
 
 {phang} 
 {opt all} especifica que o usuário deseja obter as variáveis de pessoas, famílias e domicílios em uma única base de dados, 
-disponível para o ano 2000 e em breve para o ano de 2022. Ou seja, o programa executa o comando {help merge} automaticamente para unir os
+disponível para os anos 2000 e 2022. Ou seja, o programa executa o comando {help merge} automaticamente para unir os
  três tipos de registro. (Não pode ser combinada com {opt pes}, {opt dom}, {opt fam} ou {opt both}).
  
 {dlgtab:Tradução}
@@ -161,10 +161,11 @@ disponível para o ano 2000 e em breve para o ano de 2022. Ou seja, o programa e
 {dlgtab:Tipo dos dados (apenas para 2022)}
 
 {phang}
-{opt pub22}  especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Público (Não pode ser combinada com {opt con22}).
+{opt pub22}  especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Público em formato CSV ou TXT (Não pode ser combinada com {opt con22}).
 
 {phang}
-{opt con22}   especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Controlado (Não pode ser combinada com {opt pub22}).
+{opt con22}  especifica que o tipo dos dados originais em uso do Censo de 2022 são os de Acesso Controlado em formato CSV ou TXT (Não pode ser combinada com {opt pub22}).
+
 
 {marker examples}{...}
 {title:Examples}

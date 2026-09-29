@@ -1986,7 +1986,8 @@ foreach ano in `years' {
 * CENSO 2022 *
 **************
 else if `ano' == 2022 {
-		display as input "Certifique-se de estar usando os dados originais em CSV para a leitura correta do Censo de 2022. Ainda n�o foi implementada a leitura dos microdados em TXT para esse ano."
+		findfile dict.dta
+		local dict_file "`r(fn)'"
 
 		foreach UF in `ufs' {
 			* Achando posi��o da UF nas listas:
@@ -2007,12 +2008,23 @@ else if `ano' == 2022 {
 				if "`fam'" != "" {
 					display as input "Extraindo `ano' `UF' - `suf' (Fam�lias) ..."
 					if "`pub22'" != "" {
-						import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						* Tenta primeiro CSV e fallback para TXT
+						capture import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022fam_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Familia_`suf'_publico.txt") clear
+						}
 						gen ano = 2022
 						label_censo22, registro(fam) `pub22' `con22' `english'
 					}
 					else if "`con22'" != "" {
-						import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						capture import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022fam_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Familia_`suf'_controlado.txt") clear
+						}
 						gen ano = 2022
 						label_censo22, registro(fam) `pub22' `con22' `english'
 						gen munic = F0080
@@ -2032,12 +2044,22 @@ else if `ano' == 2022 {
 				if "`pes'" != "" {
 					display as input "Extraindo `ano' `UF' - `suf' (Pessoas) ..."
 					if "`pub22'" != "" {
-						import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						capture import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022pes_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Pessoas_`suf'_publico.txt") clear
+						}
 						gen ano = 2022
 						label_censo22, registro(pess) `pub22' `con22' `english'
 					}
 					else if "`con22'" != "" {
-						import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						capture import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022pes_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Pessoas_`suf'_controlado.txt") clear
+						}
 						format P0970 %04.0f
 						format P0980 %05.0f
 						gen ano = 2022
@@ -2063,12 +2085,22 @@ else if `ano' == 2022 {
 				if "`dom'" != "" {
 					display as input "Extraindo `ano' `UF' - `suf' (Domic�lios) ..."
 					if "`pub22'" != "" {
-						import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						capture import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022dom_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear
+						}
 						gen ano = 2022
 						label_censo22, registro(dom) `pub22' `con22' `english'
 					}
 					else if "`con22'" != "" {
-						import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						capture import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022dom_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Domicilios_`suf'_controlado.txt") clear
+						}
 						gen ano = 2022
 						label_censo22, registro(dom) `pub22' `con22' `english'
 
@@ -2360,7 +2392,7 @@ else if "`registro'" == "pess" {
     label var P0020 "State"
     label var P0100 "Control number"
     label var P0101 "Person order number in household"
-    label var P0115 "Family order number"
+    cap label var P0115 "Family order number"
     label var P0120 "Census sector setting"
     label var P0130 "Type of unit visited"
     label var P0140 "Household situation (urban/rural)"
@@ -2730,7 +2762,7 @@ else if "`registro'" == "pess" {
     label var P0020 "Unidade da FederaÃ§Ã£o"
     label var P0100 "Controle"
     label var P0101 "NÃºmero de ordem do morador"
-    label var P0115 "NÃºmero de ordem da FamÃ­lia"
+    cap label var P0115 "NÃºmero de ordem da FamÃ­lia"
     label var P0120 "SituaÃ§Ã£o do Setor"
     label var P0130 "EspÃ©cie da unidade visitada"
     label var P0140 "SituaÃ§Ã£o do domicÃ­lio"
