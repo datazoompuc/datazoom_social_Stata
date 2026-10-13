@@ -13,7 +13,7 @@ BEGIN
    CHECKBOX	chk91     @  +20 100 20, label("1991")  onclickon(script c91on) onclickoff(program c91off) option(1991)
    CHECKBOX	chk00     @  +20 100 20, label("2000")  onclickon(script c00on) onclickoff(program c00off) option(2000)
    CHECKBOX	chk10     @  +20 100 20, label("2010")  onclickon(script c10on) onclickoff(program c10off) option(2010)
-   CHECKBOX	chk22     @  +20 100 20, label("2022 (CSV/TXT)")  onclickon(script c22on) onclickoff(program c22off) option(2022)
+   CHECKBOX	chk22     @  +20 100 20, label("2022")  onclickon(script c22on) onclickoff(program c22off) option(2022)
    
    BUTTON fldata      10 +35  115 25, label("Dados originais...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Salvando...") onpush(script salvando)
