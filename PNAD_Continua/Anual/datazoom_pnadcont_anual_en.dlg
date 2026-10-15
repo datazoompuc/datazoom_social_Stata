@@ -54,6 +54,9 @@ BEGIN
    CHECKBOX ck2024_tri2 190 140 150 20, label("2024 trimester 2") option(2024_tri2)
    CHECKBOX ck2024_tri3 190 160 150 20, label("2024 trimester 3") option(2024_tri3)
    CHECKBOX ck2024_tri4 190 180 150 20, label("2024 trimester 4") option(2024_tri4)
+   CHECKBOX ck2025_tri2 190 200 150 20, label("2025 trimester 2") option(2025_tri2)
+   CHECKBOX ck2025_tri3 190 220 150 20, label("2025 trimester 3") option(2025_tri3)
+   CHECKBOX ck2025_tri4 190 240 150 20, label("2025 trimester 4") option(2025_tri4)
 END
 
 DIALOG bases, tabtitle("Databases")
@@ -101,7 +104,7 @@ BEGIN
    put "datazoom_pnadcont_anual "
    beginoptions
       put "years("
-      option main.ck2012_vis1 main.ck2013_vis1 main.ck2014_vis1 main.ck2015_vis1 main.ck2016_vis1 main.ck2017_vis1 main.ck2018_vis1 main.ck2019_vis1 main.ck2022_vis1 main.ck2023_vis1 main.ck2024_vis1 main.ck2025_vis1 main.ck2016_vis5 main.ck2017_vis5 main.ck2018_vis5 main.ck2019_vis5 main.ck2020_vis5 main.ck2021_vis5 main.ck2022_vis5 main.ck2023_vis5 main.ck2024_vis5 main.ck2020_vis2 main.ck2021_vis2 main.ck2023_vis2 main.ck2024_vis2 trimestres.ck2016_tri2 trimestres.ck2016_tri4 trimestres.ck2017_tri2 trimestres.ck2017_tri4 trimestres.ck2018_tri2 trimestres.ck2018_tri4 trimestres.ck2019_tri2 trimestres.ck2019_tri3 trimestres.ck2019_tri4 trimestres.ck2021_tri4 trimestres.ck2022_tri2 trimestres.ck2022_tri3 trimestres.ck2022_tri4 trimestres.ck2023_tri1 trimestres.ck2023_tri2 trimestres.ck2023_tri4 trimestres.ck2024_tri2 trimestres.ck2024_tri3 trimestres.ck2024_tri4
+      option main.ck2012_vis1 main.ck2013_vis1 main.ck2014_vis1 main.ck2015_vis1 main.ck2016_vis1 main.ck2017_vis1 main.ck2018_vis1 main.ck2019_vis1 main.ck2022_vis1 main.ck2023_vis1 main.ck2024_vis1 main.ck2025_vis1 main.ck2016_vis5 main.ck2017_vis5 main.ck2018_vis5 main.ck2019_vis5 main.ck2020_vis5 main.ck2021_vis5 main.ck2022_vis5 main.ck2023_vis5 main.ck2024_vis5 main.ck2020_vis2 main.ck2021_vis2 main.ck2023_vis2 main.ck2024_vis2 trimestres.ck2016_tri2 trimestres.ck2016_tri4 trimestres.ck2017_tri2 trimestres.ck2017_tri4 trimestres.ck2018_tri2 trimestres.ck2018_tri4 trimestres.ck2019_tri2 trimestres.ck2019_tri3 trimestres.ck2019_tri4 trimestres.ck2021_tri4 trimestres.ck2022_tri2 trimestres.ck2022_tri3 trimestres.ck2022_tri4 trimestres.ck2023_tri1 trimestres.ck2023_tri2 trimestres.ck2023_tri4 trimestres.ck2024_tri2 trimestres.ck2024_tri3 trimestres.ck2024_tri4 trimestres.ck2025_tri2 trimestres.ck2025_tri3 trimestres.ck2025_tri4
       put ") "
       put saidadata " "
       put saidasalvando
