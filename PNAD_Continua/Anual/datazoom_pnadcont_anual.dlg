@@ -31,7 +31,7 @@ BEGIN
    CHECKBOX ck2024_vis2 190 220 150 20, label("2024 visita 2") option(2024_vis2)
    CHECKBOX ck2024_vis5 190 240 150 20, label("2024 visita 5") option(2024_vis5)
    CHECKBOX ck2025_vis1 190 260 150 20, label("2025 visita 1") option(2025_vis1)
-   CHECKBOX eng 20 290 340 20, label("Labels em inglês") option(english)
+   CHECKBOX eng 20 280 340 20, label("Labels em inglês") option(english)
 END
 
 DIALOG trimestres, tabtitle("Trimestres")
