@@ -60,7 +60,7 @@ The program generates one dataset for each selected period (year_visit and/or ye
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} Specifies the list of years, together with the household visits and/or quarters with which the user wishes to work. This program can be used for the period from 2012 to 2025, with specific visits and quarters. Annual dissemination microdata files are not available for all visits or quarters; for 2025, visit 1 is available. Therefore, it is necessary to verify which visits and quarters are available in order to call the command correctly.
+{opt years(numlist)} Specifies the list of years, together with the household visits and/or quarters with which the user wishes to work. This program can be used for the period from 2012 to 2025, with specific visits and quarters. Annual dissemination microdata files are not available for all visits or quarters. Therefore, it is necessary to verify which visits and quarters are available in order to call the command correctly.
 
 {phang} {opt original(str)} Indicates the path to the folder where the original data files are located. There are microdata files for each survey year, and there may be one or more files per year, referring to cumulative household visits and quarters. All files must be stored in the same folder in order for the program to work properly. 
 The Portal does not provide the original data files, which can be obtained from the IBGE website.
@@ -75,7 +75,7 @@ The Portal does not provide the original data files, which can be obtained from 
 {p 4 4 2}
 Annual databases, with English variable labels
 
-{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2017_tri2) original("~/mydir") saving("~/mydir") english 
+{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2024_tri4) original("~/mydir") saving("~/mydir") english 
 
 {p 6 6 2}
 Three databases are created, one per visit or quarter.

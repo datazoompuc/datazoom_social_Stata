@@ -68,7 +68,7 @@ O programa gera uma base para cada período (ano_visita e/ou ano_trimestre) sele
 
 {phang} 
 {opt years(numlist)} especifica a lista de anos, com suas visitas e/ou trimestres com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para o período de 2012 a 2025, com visitas e trimestres específicos. Não há arquivos de microdados na disseminação anual para toda visita ou trimestre; em 2025, está disponível a visita 1.
+pode ser utilizado para o período de 2012 a 2025, com visitas e trimestres específicos. Não há arquivos de microdados na disseminação anual para todo trimestre ou visita.
 Portanto, é necessário verificar quais trimestres e visitas estão disponível para chamar corretamente a função.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
