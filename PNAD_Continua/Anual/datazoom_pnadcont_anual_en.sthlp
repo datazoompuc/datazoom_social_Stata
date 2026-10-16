@@ -44,7 +44,7 @@ Use command {cmd:db datazoom_pnadcont_anual_en} to access through dialog box.
 
 {p 4 4 2}
 {cmd:datazoom_pnadcont_anual} extracts and builds databases from the original PNAD Contínua 
-Annual Dissemination microdata, for years 2012 to 2024. 
+Annual Dissemination microdata, for years 2012 to 2025. 
 
 {p 4 4 2}
 This program allows, for each year, the selection of the available household acumulated visits and quarters for data extraction. For example, years(2016_vis1 2017_tri2) refers to the first cumulative household visits in 2016 and to the second quarter (trimester) of 2017. Annual Continuous PNAD data are particularly useful for the analysis of PNAD supplements, in which IBGE includes additional questions on specific topics in particular quarters and household visits in selected years. To verify the periods in which each supplement is available, consult the Supplements Guide. Users may generate a download link using the program’s dialog box, or alternatively search directly on the IBGE website. For further information on cumulative visits data, quarters, and supplements, read the survey’s technical note available on the IBGE website. For each household visit and each quarter, there is an original txt database available on the IBGE website. Users must download the original data files and provide the path to this folder in the option original() in order to use the command correctly.
@@ -60,7 +60,7 @@ The program generates one dataset for each selected period (year_visit and/or ye
 {dlgtab:Input}
 
 {phang} 
-{opt years(numlist)} Specifies the list of years, together with the household visits and/or quarters with which the user wishes to work. This program can be used for the period from 2012 to 2024, with specific visits and quarters. Annual dissemination microdata files are not available for all visits or quarters. Therefore, it is necessary to verify which visits and quarters are available in order to call the command correctly.
+{opt years(numlist)} Specifies the list of years, together with the household visits and/or quarters with which the user wishes to work. This program can be used for the period from 2012 to 2025, with specific visits and quarters. Annual dissemination microdata files are not available for all visits or quarters. Therefore, it is necessary to verify which visits and quarters are available in order to call the command correctly.
 
 {phang} {opt original(str)} Indicates the path to the folder where the original data files are located. There are microdata files for each survey year, and there may be one or more files per year, referring to cumulative household visits and quarters. All files must be stored in the same folder in order for the program to work properly. 
 The Portal does not provide the original data files, which can be obtained from the IBGE website.
@@ -75,7 +75,7 @@ The Portal does not provide the original data files, which can be obtained from 
 {p 4 4 2}
 Annual databases, with English variable labels
 
-{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2017_tri2) original("~/mydir") saving("~/mydir") english 
+{p 8 6 2}. datazoom_pnadcont_anual, years(2012_vis1 2014_vis1 2024_tri4) original("~/mydir") saving("~/mydir") english 
 
 {p 6 6 2}
 Three databases are created, one per visit or quarter.
