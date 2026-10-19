@@ -44,7 +44,7 @@ Digite {cmd:db datazoom_pnadcont_anual} para utilizar a função via caixa de di
 
 {p 4 4 2}
 {cmd:datazoom_pnadcont_anual} extrai e constrói bases de dados da PNAD Contínua Anual em formato Stata a partir
-dos microdados originais do IBGE, para os anos de 2012 a 2024.
+dos microdados originais do IBGE, para os anos de 2012 a 2025.
 
 {p 4 4 2}
 Este programa permite, para cada ano, a escolha de entrevistas (visitas) e trimestres específicos para extração. Ex: years(2016_vis1 2017_tri2) são
@@ -68,7 +68,7 @@ O programa gera uma base para cada período (ano_visita e/ou ano_trimestre) sele
 
 {phang} 
 {opt years(numlist)} especifica a lista de anos, com suas visitas e/ou trimestres com os quais o usuário deseja trabalhar. Este programa 
-pode ser utilizado para o período de 2012 a 2024, com visitas e trimestres específicos. Não há arquivos de microdados na disseminação anual para todo trimestre ou visita.
+pode ser utilizado para o período de 2012 a 2025, com visitas e trimestres específicos. Não há arquivos de microdados na disseminação anual para todo trimestre ou visita.
 Portanto, é necessário verificar quais trimestres e visitas estão disponível para chamar corretamente a função.
 
 {phang} {opt original(str)} indica o caminho da pasta onde estão localizados os arquivos de dados originais. 
