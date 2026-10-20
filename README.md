@@ -372,7 +372,7 @@ Limitações e pontos de atenção
 
   </details>
 
-  - <details><summary>Deflacionamento dos Censos</summary>
+- <details><summary>Deflacionamento dos Censos</summary>
 
   - [Descrição e Valores de Deflacionamento dos
     Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Deflacionamento_dos_Censos.xlsx)
