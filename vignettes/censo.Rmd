@@ -217,6 +217,12 @@ A pequena diferença apresentada indica que o identificador criado pelo Data Zoo
     - [Manual do Recenseador Censo 2022](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Manual%20do%20Recenseador_2022.pdf)
 
     </details>
+  - <details>
+    <summary> Deflacionamento dos Censos </summary>
+
+    - [Descrição e Valores de Deflacionamento dos Censos](https://raw.githubusercontent.com/datazoompuc/datazoom_social_Stata/main/docs/pt/Censo/Deflacionamento_dos_Censos.xlsx)
+
+    </details>
 </details>
 
 <details>
