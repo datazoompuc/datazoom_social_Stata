@@ -18,10 +18,11 @@ BEGIN
    BUTTON fldata      10 +35  115 25, label("Original files...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Saving...") onpush(script salvando)
    
-  GROUPBOX caixaarq 10 +30 115 125, label("Type of Register") 
+  GROUPBOX caixaarq 10 +30 115 145, label("Type of Register") 
    RADIO	pes     +10 +20 100 20, first 	label("Individual") onclickon(script peson) option(pes) 
    RADIO	dom		+0 +20 100 20, middle 	label("Household") onclickon(script domon) option(dom) 
    RADIO	fam		+0 +20 100 20, middle 	label("Family") onclickon(script famon) option(fam) 
+   RADIO	mort	+0 +20 100 20, middle 	label("Mortality") onclickon(script morton) option(mort) 
    RADIO	both		+0 +20 100 20, middle	label("Both merged") onclickon(script bothon) option(both) 
    RADIO	all		+0 +20 100 20, last 		label("All merged") onclickon(script allon) option(all) 
  
@@ -84,6 +85,7 @@ BEGIN
    create STRING saidasalvando
    main.chkTO.disable
    main.fam.disable
+   main.mort.disable
    main.all.disable
    main.dbf91.disable
    main.dattxt91.disable
@@ -126,12 +128,15 @@ SCRIPT c10on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
+	main.mort.enable
 END
 
 SCRIPT c22on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
+	main.fam.enable
+	main.mort.enable
 END
 
 PROGRAM c80off
@@ -167,6 +172,9 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
+	if main.chk22.isneq(1) {
+		call main.mort.disable
+	}
 END	
 
 PROGRAM	c22off
@@ -174,6 +182,9 @@ BEGIN
 	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
+	}
+	if main.chk10.isneq(1) {
+		call main.mort.disable
 	}
 END
 
@@ -337,7 +348,7 @@ BEGIN
       put saidadata " "
       put saidasalvando
       option main.chkcomp 
-	  option radio(main pes dom fam both all)
+	  option radio(main pes dom fam mort both all)
 	  option main.eng
 	  option radio(main dbf91 dattxt91)
 	  

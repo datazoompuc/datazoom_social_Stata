@@ -42,6 +42,7 @@
 {synopt:{opt pes}} individual {p_end}
 {synopt:{opt dom}} household {p_end}
 {synopt:{opt fam}} family (2000 and 2022) {p_end}
+{synopt:{opt mort}} mortality (2010 and 2022) {p_end}
 {synopt:{opt both}} individual and household merged {p_end}
 {synopt:{opt all}} individual, family, and household merged (2000, soon also 2022 ) {p_end}
 
@@ -123,6 +124,9 @@ waves. Even so, due to methodological changes, some variables are not subject to
 
 {phang}
 {opt fam}  specifies that the user wants to get variables at the family level.
+
+{phang}
+{opt mort}  specifies that the user wants to get variables at the mortality level, available only for 2010 and 2022.
 
 {phang} 
 {opt both} specifies that the user wants to get variables at household and individual levels. In this option,

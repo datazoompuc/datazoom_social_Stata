@@ -42,6 +42,7 @@
 {synopt:{opt pes}} pessoas {p_end}
 {synopt:{opt dom}} domicílios {p_end}
 {synopt:{opt fam}} famílias (2000 e 2022) {p_end}
+{synopt:{opt mort}} mortalidade (2010 e 2022) {p_end}
 {synopt:{opt both}} pessoas e domicílios em um mesmo arquivo {p_end}
 {synopt:{opt all}} pessoas, famílias e domicílios em um mesmo arquivo (2000, e em breve também 2022) {p_end}
 
@@ -132,7 +133,11 @@ combinada com {opt dom}, {opt fam}, {opt both} ou {opt all}).
 
 {phang}
 {opt fam}  especifica que o usuário deseja obter apenas o arquivo de famílias, disponível apenas para os anos 2000 e 2022. 
-(Não pode ser combinada com {opt pes}, {opt dom}, {opt both} ou {opt all}).
+(Não pode ser combinada com {opt pes}, {opt dom}, {opt mort}, {opt both} ou {opt all}).
+
+{phang}
+{opt mort}  especifica que o usuário deseja obter apenas o arquivo de mortalidade, disponível apenas para os anos 2010 e 2022. 
+(Não pode ser combinada com {opt pes}, {opt dom}, {opt fam}, {opt both} ou {opt all}).
 
 {phang} 
 {opt both} especifica que o usuário deseja obter as variáveis de pessoas e domicílios em uma única base de dados,

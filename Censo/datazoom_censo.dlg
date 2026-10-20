@@ -18,10 +18,11 @@ BEGIN
    BUTTON fldata      10 +35  115 25, label("Dados originais...") onpush(script dados)
    BUTTON fldict      10 +25  115 25, label("Salvando...") onpush(script salvando)
    
-   GROUPBOX caixaarq 10 +30 115 125, label("Tipo de Registro") 
+   GROUPBOX caixaarq 10 +30 115 145, label("Tipo de Registro") 
    RADIO	pes     +10 +20 100 20, first 	label("Pessoas") onclickon(script peson) option(pes) 
    RADIO	dom		+0 +20 100 20, middle 	label("Domicílios") onclickon(script domon) option(dom) 
    RADIO	fam		+0 +20 100 20, middle 	label("Famílias") onclickon(script famon) option(fam) 
+   RADIO	mort	+0 +20 100 20, middle 	label("Mortalidade") onclickon(script morton) option(mort) 
    RADIO	both		+0 +20 100 20, middle	label("Ambos merged") onclickon(script bothon) option(both) 
    RADIO	all		+0 +20 100 20, last 		label("Todos merged") onclickon(script allon) option(all) 
  
@@ -92,6 +93,7 @@ BEGIN
    create STRING saidasalvando
    main.chkTO.disable
    main.fam.disable
+   main.mort.disable
    main.all.disable
    main.dbf91.disable
    main.dattxt91.disable
@@ -136,6 +138,7 @@ SCRIPT c10on
 BEGIN
 	main.chkTO.enable
 	main.chkMS.enable
+	main.mort.enable
 END
 
 SCRIPT c22on
@@ -145,6 +148,7 @@ BEGIN
 	main.pub22.enable
 	main.con22.enable
 	main.fam.enable
+	main.mort.enable
 	main.both.disable // enquanto esse recurso não está implementado
 	*main.all.enable // quando for implemementado esse recurso
 	main.eng.disable
@@ -183,6 +187,9 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
+	if main.chk22.isneq(1) {
+		call main.mort.disable
+	}
 END	
 
 PROGRAM	c22off
@@ -190,6 +197,9 @@ BEGIN
 	if main.chk91.isneq(1) & main.chk00.isneq(1) & main.chk10.isneq(1) {
 		call main.chkMS.disable
 		call main.chkTO.disable
+	}
+	if main.chk10.isneq(1) {
+		call main.mort.disable
 	}
 	call main.con22.disable
 	call main.pub22.disable
@@ -356,7 +366,7 @@ BEGIN
       put saidadata " "
       put saidasalvando
       option main.chkcomp 
-	  option radio(main pes dom fam both all)
+	  option radio(main pes dom fam mort both all)
 	  option main.eng
 	  option radio(main dbf91 dattxt91)
 	  option radio(main pub22 con22)
