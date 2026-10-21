@@ -4,7 +4,7 @@ name: Compila compatibilizacao.pdf
 # o .tex (ou este workflow) mudar na branch main, e commita o PDF em docs/.
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]
     paths:
       - compatibilizacao_censos.tex
       - .github/workflows/compila-compatibilizacao.yml
