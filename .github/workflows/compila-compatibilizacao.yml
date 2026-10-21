@@ -1,0 +1,35 @@
+name: Compila compatibilizacao.pdf
+
+# Recompila o PDF da documentação de compatibilização dos Censos sempre que
+# o .tex (ou este workflow) mudar na branch main, e commita o PDF em docs/.
+on:
+  push:
+    branches: [main]
+    paths:
+      - compatibilizacao_censos.tex
+      - .github/workflows/compila-compatibilizacao.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compila o LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: compatibilizacao_censos.tex
+          latexmk_use_lualatex: false
+
+      - name: Move o PDF para docs/
+        run: cp compatibilizacao_censos.pdf docs/pt/Censo/compatibilizacao.pdf
+
+      - name: Commita o PDF atualizado
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Recompila compatibilizacao.pdf a partir do .tex"
+          file_pattern: docs/pt/Censo/compatibilizacao.pdf
