@@ -43,7 +43,7 @@
 {synopt:{opt dom}} household {p_end}
 {synopt:{opt fam}} family (2000 and 2022) {p_end}
 {synopt:{opt both}} individual and household merged {p_end}
-{synopt:{opt all}} individual, family, and household merged (2000, soon also 2022 ) {p_end}
+{synopt:{opt all}} individual, family, and household merged (2000 and 2022) {p_end}
 
 {syntab:Translation}
 {synopt:{opt english}} Translate variable labels from Portuguese to English {p_end}
@@ -150,10 +150,10 @@ waves. Even so, due to methodological changes, some variables are not subject to
 {dlgtab: Access Type (only for 2022)}
 
 {phang}
-{opt pub22} specifies that the original data type used for the 2022 Census is Public Access data (cannot be combined with {opt con22}).
+{opt pub22} specifies that the original data type used for the 2022 Census is Public Access data in CSV or TXT format (cannot be combined with {opt con22}).
 
 {phang}
-{opt con22} specifies that the original data type used for the 2022 Census is Controlled Access data (cannot be combined with {opt pub22}).
+{opt con22} specifies that the original data type used for the 2022 Census is Controlled Access data in CSV or TXT format (cannot be combined with {opt pub22}).
  
 {marker examples}{...}
 {title:Examples}
