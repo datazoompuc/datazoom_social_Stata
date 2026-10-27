@@ -256,13 +256,13 @@ foreach ano in `years' {
 					
 					/* Definindo um arquivo temporário */
 					tempfile step_to_merge
-					import dbase "`original'\CD80DOM`codUF'.dbf", clear
+					import dbase "`original'/CD80DOM`codUF'.dbf", clear
 					rename *, lower
 					rename contadom ndom
 					save `step_to_merge', replace
 					
 					/* Abrindo outro arquivo*/
-					import dbase "`original'\CD80PES`codUF'.dbf", clear
+					import dbase "`original'/CD80PES`codUF'.dbf", clear
 					rename *, lower
 					
 					/* Merge de fato */
