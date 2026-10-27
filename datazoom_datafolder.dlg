@@ -4,7 +4,7 @@ POSITION . . 360 65
 DIALOG main
 BEGIN
    TEXT txCaminho     10  5 330   ., label(Selecione a pasta onde se localizam os arquivos de dados originais)
-   FILE caminho       @ +20 330   ., label(Procurar...) dir
+   FILE caminho       @ +20 330   25, label(Procurar...) dir
 END
 
 OK ok1,      label("OK")
