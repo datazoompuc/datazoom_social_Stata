@@ -4,7 +4,7 @@ POSITION . . 300 65
 DIALOG main
 BEGIN
    TEXT txCaminho     10  5 280   ., label(Select the folder to save new datafiles)
-   FILE caminho       @ +20 280   ., label(Search...) dir
+   FILE caminho       @ +20 280   25, label(Search...) dir
 END
 
 OK ok1,      label("OK")
