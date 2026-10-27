@@ -9,17 +9,17 @@ BEGIN
    
 GROUPBOX caixaAnos 15 15 123 170, label("Ano(s)")
 
-   CHECKBOX    ck1991 +14 +20 120 20, label("1991") option(1991)
-   CHECKBOX    ck1992 @ +24 120 20, label("1992")  option(1992)
-   CHECKBOX    ck1993 @ +24 120 20, label("1993")  option(1993)
-   CHECKBOX    ck1994 @ +24 120 20, label("1994")  option(1994)
-   CHECKBOX    ck1995 @ +24 120 20, label("1995")  option(1995)
-   CHECKBOX    ck1996 @ +24 120 20, label("1996")  option(1996)
-   CHECKBOX    ck1997 +56 35 120 20, label("1997") option(1997)
-   CHECKBOX    ck1998 @ +24 120 20, label("1998")  option(1998)
-   CHECKBOX    ck1999 @ +24 120 20, label("1999")  option(1999)
-   CHECKBOX    ck2000 @ +24 120 20, label("2000")  option(2000)
-   CHECKBOX    ck2001 @ +24 120 20, label("2001")  option(2001)
+   CHECKBOX    ck1991 +14 +20 50 20, label("1991") option(1991)
+   CHECKBOX    ck1992 @ +24 50 20, label("1992")  option(1992)
+   CHECKBOX    ck1993 @ +24 50 20, label("1993")  option(1993)
+   CHECKBOX    ck1994 @ +24 50 20, label("1994")  option(1994)
+   CHECKBOX    ck1995 @ +24 50 20, label("1995")  option(1995)
+   CHECKBOX    ck1996 @ +24 50 20, label("1996")  option(1996)
+   CHECKBOX    ck1997 +56 35 50 20, label("1997") option(1997)
+   CHECKBOX    ck1998 @ +24 50 20, label("1998")  option(1998)
+   CHECKBOX    ck1999 @ +24 50 20, label("1999")  option(1999)
+   CHECKBOX    ck2000 @ +24 50 20, label("2000")  option(2000)
+   CHECKBOX    ck2001 @ +24 50 20, label("2001")  option(2001)
 
 GROUPBOX caixaDicionários 165 15 260 72, label("Bases de Dados")
 

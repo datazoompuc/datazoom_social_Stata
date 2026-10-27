@@ -40,7 +40,7 @@ BEGIN
 	TEXTBOX txb_pof 			+158 @ @ @, label("Consumer Expenditure Survey - 1995 to 2018") center
 	
     TEXT bottom1   10   243  480  ., label("PUC-Rio - Department of Economics") left
-	TEXT bottom2   568   243  100  ., label("Version 2.0") left
+	TEXT bottom2   540   243   95  ., label("Version 2.0") right
 END
 
 CANCEL can1, label("Cancel")

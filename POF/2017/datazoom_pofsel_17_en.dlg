@@ -39,9 +39,9 @@ GROUPBOX opc_extr 5 ps_opc_extr_y 265 65, label("Identification type")
 	
 GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	
-	RADIO rd_ali +15 +20 . 20, label("Food") onclickon(script habilita_ali) first
-	RADIO rd_des +55  @ 120 20, label("Other Expenditures") onclickon(script habilita_desp) middle
-	RADIO rd_ren +125 @ 60 20, label("Income") onclickon(script habilita_ren) last
+	RADIO rd_ali +15 +20 50 20, label("Food") onclickon(script habilita_ali) first
+	RADIO rd_des +55  @ 130 20, label("Other Expenditures") onclickon(script habilita_desp) middle
+	RADIO rd_ren +135 @ 60 20, label("Income") onclickon(script habilita_ren) last
 	
 	TEXT        agr_ali         10 ps_agr_ali_y 180 ., label("Food items:")
 	COMBOBOX	cb_alimentos    @  +20 250 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
