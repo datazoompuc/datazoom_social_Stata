@@ -11,10 +11,10 @@ GROUPBOX caixaBase 5 15 150 105, label("Bases de Dados")
     BUTTON  fl_salvabase    @   +40 100 25, label("Salvando...")        onpush(script salvando)
 
 GROUPBOX caixaAnos 160 15 150 73, label("Ano(s)")
-	RADIO  ck2013  +25 +20 100 25, first label("2013")  option(2013)
-	RADIO  ck2019  @   +20 100 25, last label("2019")  option(2019)
+	RADIO  ck2013  +25 +20 100 20, first label("2013")  option(2013)
+	RADIO  ck2019  @   +20 100 20, last label("2019")  option(2019)
 
-	CHECKBOX	eng     180  95 200 20, label("Labels em inglês") option(english)
+	CHECKBOX	eng     180  95 125 20, label("Labels em inglês") option(english)
 
 TEXT credit 5 130 300 15, label("PUC-Rio - Departamento de Economia") left
 
