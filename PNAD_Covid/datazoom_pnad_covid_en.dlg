@@ -9,13 +9,13 @@ BEGIN
 ******************************************************************************   
 GROUPBOX caixaAnos 5 20 190 220, label("Month")
 
-   CHECKBOX    ck05 +14 +20 210 20, label("May/2020")  option(05)
-   CHECKBOX    ck06 @ +24 210 20, label("June/2020")  option(06)
-   CHECKBOX    ck07 @ +24 210 20, label("July/2020")  option(07)
-   CHECKBOX    ck08 @ +24 210 20, label("August/2020")  option(08)
-   CHECKBOX    ck09 @ +24 210 20, label("September/2020")  option(09)
-   CHECKBOX    ck10 @ +24 210 20, label("October/2020")  option(10)
-   CHECKBOX    ck11 @ +24 210 20, label("November/2020")  option(11)
+   CHECKBOX    ck05 +14 +20 160 20, label("May/2020")  option(05)
+   CHECKBOX    ck06 @ +24 160 20, label("June/2020")  option(06)
+   CHECKBOX    ck07 @ +24 160 20, label("July/2020")  option(07)
+   CHECKBOX    ck08 @ +24 160 20, label("August/2020")  option(08)
+   CHECKBOX    ck09 @ +24 160 20, label("September/2020")  option(09)
+   CHECKBOX    ck10 @ +24 160 20, label("October/2020")  option(10)
+   CHECKBOX    ck11 @ +24 160 20, label("November/2020")  option(11)
 
 GROUPBOX caixaDicionários 200 65 160 130, label("Databases")
 
