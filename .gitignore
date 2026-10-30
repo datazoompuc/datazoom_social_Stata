@@ -8,6 +8,7 @@ docs/en/Censo/~$dicionario_1991_dbf_en.xlsx
 *.smcl
 
 # Arquivos e scripts de teste locais
+/tests/
 teste_*.do
 teste_*.log
 rodar_todos_testes_stata.*
