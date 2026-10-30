@@ -1,5 +1,20 @@
-
 .DS_Store
 .Rhistory
 /.Rproj.user
 docs/en/Censo/~$dicionario_1991_dbf_en.xlsx
+
+# Logs e arquivos de execução do Stata
+*.log
+*.smcl
+
+# Arquivos e scripts de teste locais
+/tests/
+teste_*.do
+teste_*.log
+rodar_todos_testes_stata.*
+dados_censo_teste/
+bases_teste/
+
+# Documentação interna de progresso e notas de desenvolvimento
+PROGRESS_*.md
+Censo_label22_original.txt

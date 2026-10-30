@@ -1986,11 +1986,9 @@ foreach ano in `years' {
 * CENSO 2022 *
 **************
 else if `ano' == 2022 {
-// PRECISA VERIFICAR SE TEM ALGUMA OUTRA PADRONIZACAO NECESSARIA PARA O ANO DE 2022 QUE NAO TINHA SIDO FEITA EM ANOS ANTERIORES
-// NOTAR OUTROS COMENTARIOS EM CADA ETAPA DA LEITURA E AGRUPAMENTO DOS ARQUIVOS DE DOMICILIOS E PESSOAS
+		findfile dict.dta
+		local dict_file "`r(fn)'"
 
-		display as input "Certifique-se de estar usando os dados originais em CSV para a leitura correta do Censo de 2022. Ainda não foi implementada a leitura dos microdados em TXT para esse ano."
-			
 		foreach UF in `ufs' {
 			* Achando posição da UF nas listas:
 			local pos = 1
@@ -1998,283 +1996,596 @@ else if `ano' == 2022 {
 				local pos = `pos' + 1
 			}
 
-			* Loop para todos os arquivos da UF                              
-			* Transformo os conjuntos de sufixos "tokens" e pego o pos-ésimo
+			* Loop para todos os arquivos da UF
 			tokenize `suf2022'
 			local sufixos = "``pos''"
-			* Mesmo para o código
 			tokenize `codUFs'
 			local codUF = "``pos''"
+
 			foreach suf in `sufixos' {
-				
-				if "`pes'"!="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."
-					
-			/* logica de leitura para txt (usando dicionario)		
-			* 		Abrindo arquivo principal
-					
-			*		tempfile dic
 
-			*		findfile dict.dta
-
-			*		read_compdct, compdct("`r(fn)'") dict_name("censo`ano'pes`lang'") out("`dic'") */
-					
-					
-					* logica de leitura com csv
-					
-					if "`pub22'"!="" {
-					
-					import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(pess) `pub22' `con22'
-					
-					save CENSO22_`UF'_pes_pub, replace
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-					format P0970 %04.0f
-					format P0980 %05.0f
-										
-					gen ano = 2022
-					label_censo22, registro(pess) `pub22' `con22'
-
-					* Compatibiliza, se especificado 
-	            	if "`comp'" != "" {
-					
-					* mantendo a antiga logica de criacao de munic de 2010, por seguranca
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-					* Deixando a variável v0002 com 5 dígitos
-					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-					replace v0002="....." if v0002=="."
-					*Criando a variável munic
-					egen munic = concat(v0001 v0002)
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)" */
-					
-					
-					*Com as variaveis de 2022:
-				
-					gen munic = P0080
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)"
-					
-					compat_censo22pess, `pub22' `con22'
-
-					* Áreas Mínimas Comparáveis 
-					findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
-					sort munic
-					merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-					display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
-					save CENSO22_`UF'_pes_con_comp, replace
-				}
-				else {
-						display as input "Salvando dados de pessoas de acesso controlado de `ano' `UF' - `suf' ..."					
-						save CENSO22_`UF'_pes_con, replace
+				/* 1. LEITURA DE FAMÍLIAS */
+				if "`fam'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Famílias) ..."
+					if "`pub22'" != "" {
+						capture import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022fam_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Familia_`suf'_publico.txt") clear
 						}
-				}
-			}
-		}
-					
-					
-			
-				if "`dom'"!="" { 
-					/*| "`both'"~="" //quando tiver implementado o recurso de mergear pes e dom*/
-					/* Agora os domicílios */
-					display as input "Extraindo `ano' `UF' - `suf' ..."
-															
-					
-					/* logica para txt (com dicionario)
-					* Abrindo arquivo principal
-					
-					tempfile dic
-
-					findfile dict.dta
-
-					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'dom`lang'") out("`dic'")
-					
-					quietly cap infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear */
-					
-					* Leitura para csv
-					
-					if "`pub22'"!="" {
-					
-					import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
-					
-					gen ano = 2022
-					label_censo22, registro(dom) `pub22' `con22'
-					
-					save CENSO22_`UF'_dom_pub, replace
-					
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(dom) `pub22' `con22'
-					
-					
-
-					* Compatibiliza, se especificado 
-	            	if "`comp'" != "" {
-						
-						* mantendo a antiga logica de criacao de munic de 2010, por seguranca
-						/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-						* Deixando a variável v0002 com 5 dígitos
-						tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-						replace v0002="....." if v0002=="."
-						*Criando a variável munic
-						egen munic = concat(v0001 v0002)
-						destring munic, replace
-						replace munic = int(munic/10)
-						lab var munic "municipality codes without DV (6 digits)" */
-						
-						
-						*Com as variaveis de 2022:
-					
-						gen munic = D0080
+						gen ano = 2022
+						label_censo22, registro(fam) `pub22' `con22' `english'
+					}
+					else if "`con22'" != "" {
+						capture import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022fam_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Familia_`suf'_controlado.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(fam) `pub22' `con22' `english'
+						gen munic = F0080
 						destring munic, replace
 						replace munic = int(munic/10)
 						lab var munic "municipality codes without DV (6 digits)"
-						
-						compat_censo22dom, `pub22' `con22'
-
-						* Áreas Mínimas Comparáveis 
-						findfile amcs.dta // VERIFICAR NOVO DOCUMENTO DE AREAS MINIMAS COMPARAVEIS COM COMPATIBILIZACAO PARA ANO DE 2022
-						sort munic
-						merge m:1 munic using `"`r(fn)'"', nogen keep(match)
-						display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' compatibilizados ..."
-						save CENSO22_`UF'_dom_con_comp, replace
-	            	}
-					else {
-							display as input "Salvando dados de domicílio de acesso controlado de `ano' `UF' - `suf' ..."					
-							save CENSO22_`UF'_dom_con, replace
-							}
-					
 					}
+					if "`comp'" == "" {
+						cap gen double P0100 = F0100
+						cap gen str P0115 = F0101
+					}
+					tempfile CENSO22_`UF'_fam_`suf'
+					save `CENSO22_`UF'_fam_`suf'', replace
 				}
-			}/* logica de merge e compatibilizacao, que ainda vai ser implementada
-				if "`comp'"~="" loc var = "id_dom"
-				else loc var = "v0300" // VARIAVEL DE CONTROLE - VERIFICAL O NUMERO NO NOVO CENSO
-				if "`both'"~="" {
-					use `CENSO22_`UF'_pes_`suf'', clear
-					merge m:1 `var' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
-					/* Se não for o primeiro arquivo, junta com o anterior */
-					if "`suf'" != word(`"`sufixos'"', 1) {
-						if "`comp'"~= "" append using CENSO22_`UF'_comp
-						else append using CENSO22_`UF'
+
+				/* 2. LEITURA DE PESSOAS */
+				if "`pes'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Pessoas) ..."
+					if "`pub22'" != "" {
+						capture import delimited "`original'/Pessoas_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022pes_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Pessoas_`suf'_publico.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(pess) `pub22' `con22' `english'
 					}
-					if "`comp'"~= "" save CENSO22_`UF'_comp, replace
-					else save CENSO22_`UF', replace
+					else if "`con22'" != "" {
+						capture import delimited "`original'/Pessoas_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022pes_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Pessoas_`suf'_controlado.txt") clear
+						}
+						format P0970 %04.0f
+						format P0980 %05.0f
+						gen ano = 2022
+						label_censo22, registro(pess) `pub22' `con22' `english'
+
+						if "`comp'" != "" {
+							gen munic = P0080
+							destring munic, replace
+							replace munic = int(munic/10)
+							lab var munic "municipality codes without DV (6 digits)"
+							compat_censo22pess, `pub22' `con22'
+
+							findfile amcs.dta
+							sort munic
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+						}
+					}
+					tempfile CENSO22_`UF'_pes_`suf'
+					save `CENSO22_`UF'_pes_`suf'', replace
+				}
+
+				/* 3. LEITURA DE DOMICÍLIOS */
+				if "`dom'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Domicílios) ..."
+					if "`pub22'" != "" {
+						capture import delimited "`original'/Domicilios_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022dom_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Domicilios_`suf'_publico.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(dom) `pub22' `con22' `english'
+					}
+					else if "`con22'" != "" {
+						capture import delimited "`original'/Domicilios_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022dom_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Domicilios_`suf'_controlado.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(dom) `pub22' `con22' `english'
+
+						if "`comp'" != "" {
+							gen munic = D0080
+							destring munic, replace
+							replace munic = int(munic/10)
+							lab var munic "municipality codes without DV (6 digits)"
+							compat_censo22dom, `pub22' `con22'
+
+							findfile amcs.dta
+							sort munic
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+						}
+					}
+					if "`comp'" == "" {
+						cap gen double P0100 = D0100
+					}
+					tempfile CENSO22_`UF'_dom_`suf'
+					save `CENSO22_`UF'_dom_`suf'', replace
+				}
+
+				/* 4. MERGE E SALVAMENTO */
+
+				* Chaves de merge:
+				if "`comp'" != "" {
+					loc var_dom = "id_dom"
+					loc var_fam = "num_fam"
 				}
 				else {
-					if "`pes'"~="" {
+					loc var_dom = "P0100"
+					loc var_fam = "P0115"
+				}
+
+				/* A. BOTH MERGED (Pessoas + Domicílios) */
+				if "`both'" != "" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					if "`comp'" != "" {
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match)
+					}
+					else {
+						* Nos dados brutos, domicílio usa D0100 como chave
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+					}
+
+					if "`suf'" != word(`"`sufixos'"', 1) {
+						if "`comp'" != "" append using CENSO22_both_`UF'_con_comp
+						else if "`con22'" != "" append using CENSO22_both_`UF'_con
+						else append using CENSO22_both_`UF'_pub
+					}
+					if "`comp'" != "" save CENSO22_both_`UF'_con_comp, replace
+					else if "`con22'" != "" save CENSO22_both_`UF'_con, replace
+					else save CENSO22_both_`UF'_pub, replace
+				}
+
+				/* B. ALL MERGED (Pessoas + Domicílios + Famílias) */
+				else if "`all'" != "" {
+					use `CENSO22_`UF'_pes_`suf'', clear
+					if "`comp'" != "" {
+						* Merge pessoas com família
+						merge m:1 `var_dom' `var_fam' using `CENSO22_`UF'_fam_`suf'', nogen keep(match master)
+						* Merge com domicílios
+						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+
+						if "`suf'" != word(`"`sufixos'"', 1) append using CENSO22_all_`UF'_con_comp
+						save CENSO22_all_`UF'_con_comp, replace
+					}
+					else {
+						* Nos dados brutos:
+						* Família usa F0100 (domicílio) e F0101 (ordem da família)
+						* Casamos P0100 com F0100 e P0115 com F0101:
+						merge m:1 P0100 P0115 using `CENSO22_`UF'_fam_`suf'', nogen keep(match master)
+						* Merge com domicílios: P0100 com D0100
+						merge m:1 P0100 using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
+
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`con22'" != "" append using CENSO22_all_`UF'_con
+							else append using CENSO22_all_`UF'_pub
+						}
+						if "`con22'" != "" save CENSO22_all_`UF'_con, replace
+						else save CENSO22_all_`UF'_pub, replace
+					}
+				}
+
+				/* C. ARQUIVOS INDIVIDUAIS (pes, dom ou fam) */
+				else {
+					if "`fam'" != "" {
+						use `CENSO22_`UF'_fam_`suf'', clear
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`pub22'" != "" append using CENSO22_`UF'_fam_pub
+							else append using CENSO22_`UF'_fam_con
+						}
+						if "`pub22'" != "" save CENSO22_`UF'_fam_pub, replace
+						else save CENSO22_`UF'_fam_con, replace
+					}
+					if "`pes'" != "" {
 						use `CENSO22_`UF'_pes_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
-							if "`comp'"~= "" append using CENSO22_`UF'_pes_comp
-							else append using CENSO22_`UF'_pes
+							if "`pub22'" != "" append using CENSO22_`UF'_pes_pub
+							else if "`comp'" != "" append using CENSO22_`UF'_pes_con_comp
+							else append using CENSO22_`UF'_pes_con
 						}
-						if "`comp'"~="" save CENSO22_`UF'_pes_comp, replace
-						else save CENSO22_`UF'_pes, replace
+						if "`pub22'" != "" save CENSO22_`UF'_pes_pub, replace
+						else if "`comp'" != "" save CENSO22_`UF'_pes_con_comp, replace
+						else save CENSO22_`UF'_pes_con, replace
 					}
-					else {
+					if "`dom'" != "" {
 						use `CENSO22_`UF'_dom_`suf'', clear
-						/* Se não for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
-							if "`comp'"~= "" append using CENSO22_`UF'_dom_comp
-							else append using CENSO22_`UF'_dom
+							if "`pub22'" != "" append using CENSO22_`UF'_dom_pub
+							else if "`comp'" != "" append using CENSO22_`UF'_dom_con_comp
+							else append using CENSO22_`UF'_dom_con
 						}
-						if "`comp'"~="" save CENSO22_`UF'_dom_comp, replace
-						else save CENSO22_`UF'_dom, replace 
-						*/
-						
-					if "`fam'"!="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."	
-					
-					if "`pub22'"!="" {
-					import delimited "`original'/Familia_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(fam) `pub22' `con22'
-					
-					save CENSO22_`UF'_fam_pub, replace
-					
-					} 
-					else {
-					if "`con22'"!="" {
-						
-					import delimited "`original'/Familia_`suf'_controlado.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(fam) `pub22' `con22'
-					
-					/* criacao de codigo de municipio, que nao tem nos dados de acesso publico
-
-					* Deixando a variável v0002 com 5 dígitos
-					tostring v0002, format(%05.0f) replace // VERIFICAR SE VIRA COM 6 DIGITOS A VARIAVEL DE MUNIC E VERIFICAR O NUMERO DA VARIAVEL DE MUNIC
-					replace v0002="....." if v0002=="."
-					*Criando a variável munic
-					egen munic = concat(v0001 v0002)
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)" */
-					
-					gen munic = F0080
-					destring munic, replace
-					replace munic = int(munic/10)
-					lab var munic "municipality codes without DV (6 digits)"
-					
-					save CENSO22_`UF'_fam_con, replace
+						if "`pub22'" != "" save CENSO22_`UF'_dom_pub, replace
+						else if "`comp'" != "" save CENSO22_`UF'_dom_con_comp, replace
+						else save CENSO22_`UF'_dom_con, replace
 					}
 				}
-					
-					/* criando leitura para o dataset de mortalidade
-					if "`mort'"~="" {
-					display as input "Extraindo `ano' `UF' - `suf' ..."	
-					
-					import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
-										
-					gen ano = 2022
-					label_censo22, registro(mort) `pub22' `con22'
-					
-					save CENSO22_`UF'_mort, replace }*/
-					
-					}
-				}
-			}
-		}
-	}
 
-**************
-* CENSO 2022 *
-**************
-
+			} // fim do foreach suf
+		} // fim do foreach UF
+	} // fim do else if 2022
+} // fim do foreach ano
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
-di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016, do Censo 2000 divulgados em 08/09/2017, e do Censo de 2022 divulgados em 31/08/2026."
+di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016, do Censo 2000 divulgados em 08/09/2017, e do Censo de 2022 atualizados em 14/09/2026."
 
 end
 
 program define label_censo22
-syntax, registro(string) [pub22 con22]
+syntax, registro(string) [pub22 con22 english]
 
 if ("`pub22'" == "") == ("`con22'" == "") {
     di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
     exit 198
 }
 
-label var ano "Ano do Censo Demográfico"
-
+if "`english'" != "" {
+    label var ano "Demographic Census Year"
+    if "`registro'" == "dom" {
+        cap label var D0010 "Major Region"
+        cap label var D0020 "State"
+        cap label var D0030 "Meso-region code"
+        cap label var D0040 "Micro-region code"
+        cap label var D0050 "Intermediate Geographic Region"
+        cap label var D0060 "Immediate Geographic Region"
+        cap label var D0070 "Urban concentration"
+        cap label var D0080 "Municipality code"
+        cap label var D0090 "Weighting area"
+        cap label var D0100 "Control number"
+        cap label var D0111 "Sampling weight (Controlled version)"
+        cap label var D0120 "Census sector setting"
+        cap label var D0130 "Type of unit visited"
+        cap label var D0140 "Household situation (urban/rural)"
+        cap label var D0150 "Number of residents in household"
+        cap label var D0160 "Number of children in household"
+        cap label var D0170 "Gender of head of household"
+        cap label var D0171 "Gender of head of household (detailed)"
+        cap label var D0180 "Age category of head of household"
+        cap label var D0181 "Age of head of household (years)"
+        cap label var D0190 "Household tenure status"
+        cap label var D0200 "Type of household species"
+        cap label var D0210 "Material of external walls"
+        cap label var D0220 "Number of rooms in household"
+        cap label var D0230 "Number of rooms used as bedrooms"
+        cap label var D0240 "Density of residents per bedroom"
+        cap label var D0250 "Type of sanitary sewage"
+        cap label var D0260 "Water supply category"
+        cap label var D0270 "Presence of bathroom or toilet and exclusive use"
+        cap label var D0280 "Exclusive use bathrooms with shower and toilet"
+        cap label var D0290 "Access to general water distribution network"
+        cap label var D0300 "Piped water existence in household"
+        cap label var D0310 "Garbage disposal category"
+        cap label var D0320 "Washing machine existence in household"
+        cap label var D0330 "Internet access existence"
+        cap label var D0340 "Occurrence of resident death (Jan 2019 to Jul 2022)"
+        cap label var D0350 "Household total income"
+        cap label var D0360 "Household income per capita"
+        cap label var D0370 "Total number of men in household"
+        cap label var D0380 "Total number of women in household"
+        cap label var D0390 "Total number of residents with disabilities"
+        cap label var D0400 "Total number of adult residents with disabilities"
+        cap label var D0410 "Total number of child residents with disabilities"
+        cap label var MD0130 "IMPUTATION FLAG FOR D0130"
+        cap label var MD0150 "IMPUTATION FLAG FOR D0150"
+        cap label var MD0160 "IMPUTATION FLAG FOR D0160"
+        cap label var MD0170 "IMPUTATION FLAG FOR D0170"
+        cap label var MD0180 "IMPUTATION FLAG FOR D0180"
+        cap label var MD0190 "IMPUTATION FLAG FOR D0190"
+        cap label var MD0200 "IMPUTATION FLAG FOR D0200"
+        cap label var MD0210 "IMPUTATION FLAG FOR D0210"
+        cap label var MD0220 "IMPUTATION FLAG FOR D0220"
+        cap label var MD0230 "IMPUTATION FLAG FOR D0230"
+        cap label var MD0240 "IMPUTATION FLAG FOR D0240"
+        cap label var MD0250 "IMPUTATION FLAG FOR D0250"
+        cap label var MD0260 "IMPUTATION FLAG FOR D0260"
+        cap label var MD0270 "IMPUTATION FLAG FOR D0270"
+        cap label var MD0280 "IMPUTATION FLAG FOR D0280"
+        cap label var MD0290 "IMPUTATION FLAG FOR D0290"
+        cap label var MD0300 "IMPUTATION FLAG FOR D0300"
+        cap label var MD0310 "IMPUTATION FLAG FOR D0310"
+        cap label var MD0320 "IMPUTATION FLAG FOR D0320"
+        cap label var MD0330 "IMPUTATION FLAG FOR D0330"
+        cap label var MD0340 "IMPUTATION FLAG FOR D0340"
+    }
+    else if "`registro'" == "pess" {
+        cap label var P0010 "Major Region"
+        cap label var P0020 "State"
+        cap label var P0030 "Meso-region code"
+        cap label var P0040 "Micro-region code"
+        cap label var P0050 "Intermediate Geographic Region"
+        cap label var P0060 "Immediate Geographic Region"
+        cap label var P0070 "Urban concentration"
+        cap label var P0080 "Municipality code"
+        cap label var P0090 "Weighting area"
+        cap label var P0100 "Control number"
+        cap label var P0101 "Person order number in household"
+        cap label var P0110 "Sampling weight (Public version)"
+        cap label var P0115 "Family order number"
+        cap label var P0111 "Sampling weight (Controlled version)"
+        cap label var P0120 "Census sector setting"
+        cap label var P0130 "Type of unit visited"
+        cap label var P0140 "Household situation (urban/rural)"
+        cap label var P0150 "Gender (confidentiality restricted)"
+        cap label var P0160 "Gender"
+        cap label var P0170 "Condition in household category"
+        cap label var P0180 "Age category in years"
+        cap label var P0181 "Age in years (number)"
+        cap label var P0190 "Age in months (for infants under 1 year)"
+        cap label var P0200 "Age reporting method"
+        cap label var P0210 "Race or color category"
+        cap label var P0220 "Indigenous person category"
+        cap label var P0230 "Portuguese language spoken at home"
+        cap label var P0240 "Indigenous ethnicity declaration status"
+        cap label var P0250 "Indigenous language declaration status"
+        cap label var P0260 "Quilombola person category"
+        cap label var P0270 "Birth registration existence and type"
+        cap label var P0280 "Cohabitation with spouse/partner"
+        cap label var P0290 "Nature of union category"
+        cap label var P0300 "Mother or stepmother living in household"
+        cap label var P0310 "Father or stepfather living in household"
+        cap label var P0320 "Number of male children born alive"
+        cap label var P0330 "Number of female children born alive"
+        cap label var P0340 "Number of children born alive"
+        cap label var P0350 "Number of living male children"
+        cap label var P0360 "Number of living female children"
+        cap label var P0370 "Number of living children"
+        cap label var P0380 "Age category at birth of first child"
+        cap label var P0381 "Age of mother at birth of first child (number)"
+        cap label var P0390 "Occurrence of live birth in past 12 months"
+        cap label var P0400 "Live birth occurrence in past 12 months category"
+        cap label var P0410 "Religion or cult category"
+        cap label var P0411 "Religion or cult (detailed)"
+        cap label var P0420 "Visual difficulty degree"
+        cap label var P0430 "Hearing difficulty degree"
+        cap label var P0440 "Walking or climbing stairs difficulty degree"
+        cap label var P0450 "Self-care difficulty degree"
+        cap label var P0460 "Mental or intellectual permanent disability"
+        cap label var P0470 "Communicating difficulty degree"
+        cap label var P0480 "Place of birth (municipality/country)"
+        cap label var P0490 "State of birth"
+        cap label var P0500 "Country of birth category"
+        cap label var P0510 "Foreign country of birth code"
+        cap label var P0520 "Nationality category"
+        cap label var P0530 "Lived in another municipality or foreign country"
+        cap label var P0540 "Year of arrival in Brazil"
+        cap label var P0550 "Continuous residence time in municipality"
+        cap label var P0560 "Previous place of residence"
+        cap label var P0570 "Previous state of residence"
+        cap label var P0580 "Previous country of residence category"
+        cap label var P0590 "Previous foreign country of residence code"
+        cap label var P0600 "Residence in another municipality/country on 31/07/2017"
+        cap label var P0610 "State of residence on 31/07/2017"
+        cap label var P0620 "Country of residence on 31/07/2017 category"
+        cap label var P0630 "Foreign country of residence code on 31/07/2017"
+        cap label var P0640 "Literacy category"
+        cap label var P0650 "School attendance category"
+        cap label var P0660 "Course attending level"
+        cap label var P0670 "Grade or year currently attending"
+        cap label var P0680 "Grade attended previously in current course"
+        cap label var P0690 "Completed another undergraduate degree"
+        cap label var P0700 "Highest previous course attended"
+        cap label var P0710 "Degree or certificate obtained in highest course"
+        cap label var P0720 "Last grade/year completed in highest course"
+        cap label var P0730 "Grade completed in highest course attended"
+        cap label var P0740 "Highest course completed status"
+        cap label var P0750 "Undergraduate course major area"
+        cap label var P0760 "Master degree completed major area"
+        cap label var P0770 "Doctorate degree completed major area"
+        cap label var P0780 "Transportation time from home to school"
+        cap label var P0790 "Calculated years of schooling (IBGE)"
+        cap label var P0800 "School location municipality"
+        cap label var P0810 "Attends school in another municipality or foreign country"
+        cap label var P0820 "State of school location"
+        cap label var P0830 "Country of school location"
+        cap label var P0840 "Paid work in cash in reference week"
+        cap label var P0850 "Paid work in goods/products in reference week"
+        cap label var P0860 "Occasional paid job or gig in reference week"
+        cap label var P0870 "Unpaid helping work in reference week"
+        cap label var P0880 "Temporary absence from paid work in reference week"
+        cap label var P0890 "Work in farming/fishing for own household food"
+        cap label var P0900 "Number of jobs in reference week"
+        cap label var P0910 "Main job occupation title category"
+        cap label var P0920 "Main job industry/activity category"
+        cap label var P0930 "Secondary job occupation title category"
+        cap label var P0940 "Secondary job industry/activity category"
+        cap label var P0950 "Institutional sector of main job"
+        cap label var P0960 "Institutional sector of secondary job"
+        cap label var P0970 "Main job occupation classification code (COD)"
+        cap label var P0980 "Main job economic activity classification code (CNAE-Dom)"
+        cap label var P0990 "Secondary job occupation classification code"
+        cap label var P1000 "Formal employment contract in main job"
+        cap label var P1010 "CNPJ registered business in main job"
+        cap label var P1020 "Employment status in main job"
+        cap label var P1030 "Employment status in secondary job"
+        cap label var P1040 "Usual weekly hours worked in all jobs"
+        cap label var P1050 "Took job search measures in past 30 days"
+        cap label var P1060 "Availability to start work in reference week"
+        cap label var P1070 "Social security contribution status"
+        cap label var P1080 "Main job gross monthly cash income"
+        cap label var P1090 "Retirement/Pension/Bolsa Familia income presence"
+        cap label var P1100 "Retirement/Pension/Bolsa Familia monthly gross value"
+        cap label var P1110 "Total monthly gross income from all sources"
+        cap label var P1120 "Workplace location municipality"
+        cap label var P1130 "Workplace location in another municipality/country"
+        cap label var P1140 "Workplace state"
+        cap label var P1150 "Workplace country"
+        cap label var P1160 "Returns home from work 3 or more days per week"
+        cap label var P1170 "Commute travel time from home to work"
+        cap label var P1180 "Main means of transportation to work"
+        cap label var P1190 "Transportation time from work to home"
+        cap label var P1200 "Autism diagnosis by healthcare professional"
+        cap label var P1210 "Main job monthly gross value in goods/benefits"
+        cap label var P1220 "Secondary job monthly gross cash income"
+        cap label var MP0150 "IMPUTATION FLAG FOR P0150"
+        cap label var MP0170 "IMPUTATION FLAG FOR P0170"
+        cap label var MP0180 "IMPUTATION FLAG FOR P0180"
+        cap label var MP0181 "IMPUTATION FLAG FOR P0181"
+        cap label var MP0190 "IMPUTATION FLAG FOR P0190"
+        cap label var MP0210 "IMPUTATION FLAG FOR P0210"
+        cap label var MP0230 "IMPUTATION FLAG FOR P0230"
+        cap label var MP0260 "IMPUTATION FLAG FOR P0260"
+        cap label var MP0270 "IMPUTATION FLAG FOR P0270"
+        cap label var MP0280 "IMPUTATION FLAG FOR P0280"
+        cap label var MP0290 "IMPUTATION FLAG FOR P0290"
+        cap label var MP0300 "IMPUTATION FLAG FOR P0300"
+        cap label var MP0310 "IMPUTATION FLAG FOR P0310"
+        cap label var MP0320 "IMPUTATION FLAG FOR P0320"
+        cap label var MP0330 "IMPUTATION FLAG FOR P0330"
+        cap label var MP0350 "IMPUTATION FLAG FOR P0350"
+        cap label var MP0360 "IMPUTATION FLAG FOR P0360"
+        cap label var MP0410 "IMPUTATION FLAG FOR P0410"
+        cap label var MP0411 "IMPUTATION FLAG FOR P0411"
+        cap label var MP0420 "IMPUTATION FLAG FOR P0420"
+        cap label var MP0430 "IMPUTATION FLAG FOR P0430"
+        cap label var MP0440 "IMPUTATION FLAG FOR P0440"
+        cap label var MP0450 "IMPUTATION FLAG FOR P0450"
+        cap label var MP0460 "IMPUTATION FLAG FOR P0460"
+        cap label var MP0480 "IMPUTATION FLAG FOR P0480"
+        cap label var MP0490 "IMPUTATION FLAG FOR P0490"
+        cap label var MP0500 "IMPUTATION FLAG FOR P0500"
+        cap label var MP0510 "IMPUTATION FLAG FOR P0510"
+        cap label var MP0520 "IMPUTATION FLAG FOR P0520"
+        cap label var MP0530 "IMPUTATION FLAG FOR P0530"
+        cap label var MP0540 "IMPUTATION FLAG FOR P0540"
+        cap label var MP0550 "IMPUTATION FLAG FOR P0550"
+        cap label var MP0560 "IMPUTATION FLAG FOR P0560"
+        cap label var MP0570 "IMPUTATION FLAG FOR P0570"
+        cap label var MP0580 "IMPUTATION FLAG FOR P0580"
+        cap label var MP0590 "IMPUTATION FLAG FOR P0590"
+        cap label var MP0600 "IMPUTATION FLAG FOR P0600"
+        cap label var MP0610 "IMPUTATION FLAG FOR P0610"
+        cap label var MP0620 "IMPUTATION FLAG FOR P0620"
+        cap label var MP0630 "IMPUTATION FLAG FOR P0630"
+        cap label var MP0640 "IMPUTATION FLAG FOR P0640"
+        cap label var MP0650 "IMPUTATION FLAG FOR P0650"
+        cap label var MP0660 "IMPUTATION FLAG FOR P0660"
+        cap label var MP0670 "IMPUTATION FLAG FOR P0670"
+        cap label var MP0680 "IMPUTATION FLAG FOR P0680"
+        cap label var MP0690 "IMPUTATION FLAG FOR P0690"
+        cap label var MP0700 "IMPUTATION FLAG FOR P0700"
+        cap label var MP0710 "IMPUTATION FLAG FOR P0710"
+        cap label var MP0720 "IMPUTATION FLAG FOR P0720"
+        cap label var MP0730 "IMPUTATION FLAG FOR P0730"
+        cap label var MP0740 "IMPUTATION FLAG FOR P0740"
+        cap label var MP0750 "IMPUTATION FLAG FOR P0750"
+        cap label var MP0800 "IMPUTATION FLAG FOR P0800"
+        cap label var MP0810 "IMPUTATION FLAG FOR P0810"
+        cap label var MP0820 "IMPUTATION FLAG FOR P0820"
+        cap label var MP0830 "IMPUTATION FLAG FOR P0830"
+        cap label var MP0840 "IMPUTATION FLAG FOR P0840"
+        cap label var MP0850 "IMPUTATION FLAG FOR P0850"
+        cap label var MP0860 "IMPUTATION FLAG FOR P0860"
+        cap label var MP0870 "IMPUTATION FLAG FOR P0870"
+        cap label var MP0880 "IMPUTATION FLAG FOR P0880"
+        cap label var MP0890 "IMPUTATION FLAG FOR P0890"
+        cap label var MP0900 "IMPUTATION FLAG FOR P0900"
+        cap label var MP0970 "IMPUTATION FLAG FOR P0970"
+        cap label var MP0980 "IMPUTATION FLAG FOR P0980"
+        cap label var MP0990 "IMPUTATION FLAG FOR P0990"
+        cap label var MP1000 "IMPUTATION FLAG FOR P1000"
+        cap label var MP1010 "IMPUTATION FLAG FOR P1010"
+        cap label var MP1050 "IMPUTATION FLAG FOR P1050"
+        cap label var MP1060 "IMPUTATION FLAG FOR P1060"
+        cap label var MP1070 "IMPUTATION FLAG FOR P1070"
+        cap label var MP1080 "IMPUTATION FLAG FOR P1080"
+        cap label var MP1090 "IMPUTATION FLAG FOR P1090"
+        cap label var MP1100 "IMPUTATION FLAG FOR P1100"
+        cap label var MP1120 "IMPUTATION FLAG FOR P1120"
+        cap label var MP1130 "IMPUTATION FLAG FOR P1130"
+        cap label var MP1140 "IMPUTATION FLAG FOR P1140"
+        cap label var MP1150 "IMPUTATION FLAG FOR P1150"
+        cap label var MP1160 "IMPUTATION FLAG FOR P1160"
+        cap label var MP1170 "IMPUTATION FLAG FOR P1170"
+        cap label var MP1180 "IMPUTATION FLAG FOR P1180"
+        cap label var MP1200 "IMPUTATION FLAG FOR P1200"
+        cap label var MP1210 "IMPUTATION FLAG FOR P1210"
+        cap label var MP1220 "IMPUTATION FLAG FOR P1220"
+    }
+    else if "`registro'" == "mort" {
+        cap label var M0010 "Major Region"
+        cap label var M0020 "State"
+        cap label var M0030 "Meso-region code"
+        cap label var M0040 "Micro-region code"
+        cap label var M0050 "Intermediate Geographic Region"
+        cap label var M0060 "Immediate Geographic Region"
+        cap label var M0070 "Urban concentration"
+        cap label var M0080 "Municipality code"
+        cap label var M0090 "Weighting area"
+        cap label var M0100 "Control number"
+        cap label var M0101 "Deceased person order number"
+        cap label var M0111 "Sampling weight (Controlled version)"
+        cap label var M0120 "Census sector setting"
+        cap label var M0130 "Type of unit visited"
+        cap label var M0140 "Household situation (urban/rural)"
+        cap label var M0150 "Gender of deceased person"
+        cap label var M0151 "Gender of deceased person (detailed)"
+        cap label var M0160 "Age of deceased person in years"
+        cap label var M0170 "Month of death"
+        cap label var M0171 "Month of death (number)"
+        cap label var MM0150 "IMPUTATION FLAG FOR M0150"
+        cap label var MM0151 "IMPUTATION FLAG FOR M0151"
+        cap label var MM0160 "IMPUTATION FLAG FOR M0160"
+        cap label var MM0170 "IMPUTATION FLAG FOR M0170"
+        cap label var MM0171 "IMPUTATION FLAG FOR M0171"
+    }
+    else if "`registro'" == "fam" {
+        cap label var F0010 "Major Region"
+        cap label var F0020 "State"
+        cap label var F0030 "Meso-region code"
+        cap label var F0040 "Micro-region code"
+        cap label var F0050 "Intermediate Geographic Region"
+        cap label var F0060 "Immediate Geographic Region"
+        cap label var F0070 "Urban concentration"
+        cap label var F0080 "Municipality code"
+        cap label var F0090 "Weighting area"
+        cap label var F0100 "Control number"
+        cap label var F0101 "Family order number"
+        cap label var F0111 "Sampling weight (Controlled version)"
+        cap label var F0120 "Census sector setting"
+        cap label var F0130 "Type of unit visited"
+        cap label var F0140 "Household situation (urban/rural)"
+        cap label var F0150 "Family identification type"
+        cap label var F0160 "Number of family members"
+        cap label var F0170 "Gender of family head"
+        cap label var F0180 "Age category of family head"
+        cap label var F0181 "Age of family head (years)"
+        cap label var F0190 "Education level of family head"
+        cap label var F0200 "Race of family head"
+        cap label var F0210 "Primary family typology"
+        cap label var F0220 "Secondary cohabiting family typology"
+        cap label var F0230 "Number of children under 10 or inactive in family"
+        cap label var F0240 "Number of male family members"
+        cap label var F0250 "Number of female family members"
+        cap label var F0260 "Family income per capita"
+        cap label var F0270 "Family income participation"
+        cap label var MF0190 "IMPUTATION FLAG FOR F0190"
+        cap label var MF0200 "IMPUTATION FLAG FOR F0200"
+    }
+    else {
+        di as err "Registro de 2022 inválido para aplicação dos rótulos"
+        exit 198
+    }
+}
+else {
 if "`registro'" == "dom" {
     label var D0010 "Grande Região"
     label var D0020 "Unidade da Federação"
@@ -2421,6 +2732,7 @@ else if "`registro'" == "pess" {
     label var P0020 "Unidade da Federação"
     label var P0100 "Controle"
     label var P0101 "Número de ordem do morador"
+    cap label var P0115 "Número de ordem da Família"
     label var P0120 "Situação do Setor"
     label var P0130 "Espécie da unidade visitada"
     label var P0140 "Situação do domicílio"
@@ -2639,6 +2951,8 @@ else if "`registro'" == "fam" {
 else {
     di as err "Registro de 2022 inválido para aplicação dos rótulos"
     exit 198
+}
+
 }
 
 end
@@ -3889,11 +4203,23 @@ if "`pub22'" != "" {
 } */
 	else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
-sort UF munic id_dom
+replace P0115 = subinstr(P0115, "F", "", .) if !missing(P0115)
+destring P0115, replace
+rename P0115 num_fam
+lab var num_fam "número da família"
+
+sort UF munic id_dom num_fam
 by UF munic id_dom: egen n_homem_dom = total(P0160==1)
 by UF munic id_dom: egen n_mulher_dom = total(P0160==2)
 lab var n_homem_dom "numero de homens no domicilio"
 lab var n_mulher_dom "numero de mulheres no domicilio"
+
+by UF munic id_dom num_fam: egen n_homem_fam = total(P0160==1)
+by UF munic id_dom num_fam: egen n_mulher_fam = total(P0160==2)
+egen n_pes_fam = rowtotal(n_homem_fam n_mulher_fam)
+lab var n_homem_fam "numero de homens na familia"
+lab var n_mulher_fam "numero de mulheres na familia"
+lab var n_pes_fam "numero de pessoas na familia"
 
 /* C. OUTRAS VARIÁVEIS DE DOMICÍLIO */
 
@@ -4666,7 +4992,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
 if "`con22'" != "" drop P0150
 
-order ano UF regiao munic id_dom ordem
+order ano UF regiao munic id_dom num_fam ordem
 
 end
 
@@ -9608,3 +9934,4 @@ order ano UF regiao munic id_dom ordem
 datazoom_message
 
 end
+
