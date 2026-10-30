@@ -2226,7 +2226,7 @@ else if `ano' == 2022 {
 
 display as result "As bases de dados foram salvas na pasta `c(pwd)'"
 
-di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016, do Censo 2000 divulgados em 08/09/2017, e do Censo de 2022 divulgados em 31/08/2026."
+di _newline "Esta versão do pacote datazoom_censo é compatível com os microdados do Censo 2010 divulgados em 11/03/2016, do Censo 2000 divulgados em 08/09/2017, e do Censo de 2022 atualizados em 14/09/2026."
 
 end
 
