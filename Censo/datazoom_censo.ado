@@ -2031,6 +2031,12 @@ else if `ano' == 2022 {
 						replace munic = int(munic/10)
 						lab var munic "municipality codes without DV (6 digits)"
 					}
+					if "`comp'" != "" {
+						cap gen double id_dom = F0100
+						cap gen str num_fam = F0101
+						replace num_fam = subinstr(num_fam, "F", "", .) if !missing(num_fam)
+						destring num_fam, replace
+					}
 					if "`comp'" == "" {
 						cap gen double P0100 = F0100
 						cap gen str P0115 = F0101
@@ -2064,13 +2070,21 @@ else if `ano' == 2022 {
 						gen ano = 2022
 						label_censo22, registro(pess) `pub22' `con22' `english'
 
-						if "`comp'" != "" {
+					}
+					if "`comp'" != "" {
+						if "`pub22'" != "" {
+							gen double munic = .
+							lab var munic "Municipality code unavailable in public microdata"
+						}
+						else {
 							gen munic = P0080
 							destring munic, replace
 							replace munic = int(munic/10)
 							lab var munic "municipality codes without DV (6 digits)"
-							compat_censo22pess, `pub22' `con22'
+						}
+						compat_censo22pess, `pub22' `con22'
 
+						if "`con22'" != "" {
 							findfile amcs.dta
 							sort munic
 							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -2103,13 +2117,21 @@ else if `ano' == 2022 {
 						gen ano = 2022
 						label_censo22, registro(dom) `pub22' `con22' `english'
 
-						if "`comp'" != "" {
+					}
+					if "`comp'" != "" {
+						if "`pub22'" != "" {
+							gen double munic = .
+							lab var munic "Municipality code unavailable in public microdata"
+						}
+						else {
 							gen munic = D0080
 							destring munic, replace
 							replace munic = int(munic/10)
 							lab var munic "municipality codes without DV (6 digits)"
-							compat_censo22dom, `pub22' `con22'
+						}
+						compat_censo22dom, `pub22' `con22'
 
+						if "`con22'" != "" {
 							findfile amcs.dta
 							sort munic
 							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
@@ -2146,11 +2168,17 @@ else if `ano' == 2022 {
 					}
 
 					if "`suf'" != word(`"`sufixos'"', 1) {
-						if "`comp'" != "" append using CENSO22_both_`UF'_con_comp
+						if "`comp'" != "" {
+							if "`pub22'" != "" append using CENSO22_both_`UF'_pub_comp
+							else append using CENSO22_both_`UF'_con_comp
+						}
 						else if "`con22'" != "" append using CENSO22_both_`UF'_con
 						else append using CENSO22_both_`UF'_pub
 					}
-					if "`comp'" != "" save CENSO22_both_`UF'_con_comp, replace
+					if "`comp'" != "" {
+						if "`pub22'" != "" save CENSO22_both_`UF'_pub_comp, replace
+						else save CENSO22_both_`UF'_con_comp, replace
+					}
 					else if "`con22'" != "" save CENSO22_both_`UF'_con, replace
 					else save CENSO22_both_`UF'_pub, replace
 				}
@@ -2164,8 +2192,12 @@ else if `ano' == 2022 {
 						* Merge com domicílios
 						merge m:1 `var_dom' using `CENSO22_`UF'_dom_`suf'', nogen keep(match master)
 
-						if "`suf'" != word(`"`sufixos'"', 1) append using CENSO22_all_`UF'_con_comp
-						save CENSO22_all_`UF'_con_comp, replace
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							if "`pub22'" != "" append using CENSO22_all_`UF'_pub_comp
+							else append using CENSO22_all_`UF'_con_comp
+						}
+						if "`pub22'" != "" save CENSO22_all_`UF'_pub_comp, replace
+						else save CENSO22_all_`UF'_con_comp, replace
 					}
 					else {
 						* Nos dados brutos:
@@ -3905,6 +3937,14 @@ if ("`pub22'" == "") == ("`con22'" == "") {
 	exit 198
 }
 
+* Convert public category codes before recoding them.
+if "`pub22'" != "" {
+	foreach v in D0010 D0020 D0120 D0130 D0140 D0190 D0200 D0210 D0250 D0260 D0270 D0280 D0300 D0310 D0320 {
+		capture confirm string variable `v'
+		if !_rc destring `v', replace
+	}
+}
+
 /* A. ANO */
 * Essa variável é definida antes de chamar este programa.
 
@@ -4166,7 +4206,7 @@ if "`pub22'" != "" {
 
 /* Variáveis de domicílio não utilizadas */
 
-drop D0030 D0040 D0050 D0060 D0070 D0080 D0090 D0160 D0170 D0171 D0180 D0181 D0240 D0290 D0330 D0340 D0360 D0390 D0400 D0410 MD*
+capture drop D0030 D0040 D0050 D0060 D0070 D0080 D0090 D0160 D0170 D0171 D0180 D0181 D0240 D0290 D0330 D0340 D0360 D0390 D0400 D0410 MD*
 
 end
  
@@ -4176,6 +4216,51 @@ syntax, [pub22 con22]
 if ("`pub22'" == "") == ("`con22'" == "") {
 	di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
 	exit 198
+}
+
+* Public microdata use coarser or omit several variables present in the controlled layout.
+if "`pub22'" != "" {
+	foreach v in P0010 P0020 P0101 P0140 P0150 P0170 P0200 P0210 P0280 P0290 P0420 P0430 P0440 P0460 P0480 P0490 P0520 P0530 P0550 P0570 P0610 P0640 P0650 P0660 P0670 P0680 P0700 P0720 P0730 P0800 P0840 P0850 P0860 P0870 P0880 P0890 P0900 P0930 P0990 P1000 P1050 P1120 {
+		capture confirm string variable `v'
+		if !_rc destring `v', replace
+	}
+
+	capture confirm string variable P0150
+	if !_rc destring P0150, generate(P0160)
+	else generate double P0160 = P0150
+	replace P0160 = . if P0160 == 9
+
+	capture confirm variable P0180
+	if !_rc rename P0180 idade_faixa_pub
+	capture confirm variable P0410
+	if !_rc rename P0410 religiao_cat_pub
+	capture confirm variable P0380
+	if !_rc rename P0380 idade_ult_nasc_v_cat_pub
+
+	capture confirm variable P0181
+	if _rc gen double P0181 = .
+	capture confirm variable P0190
+	if _rc gen double P0190 = .
+	capture confirm variable P0381
+	if _rc gen double P0381 = .
+	capture confirm variable P0411
+	if _rc gen double P0411 = .
+	capture confirm variable P0510
+	if _rc gen double P0510 = .
+	capture confirm variable P0580
+	if _rc gen double P0580 = .
+	capture confirm variable P0590
+	if _rc gen double P0590 = .
+	capture confirm variable P0620
+	if _rc gen double P0620 = .
+	capture confirm variable P0630
+	if _rc gen double P0630 = .
+	capture confirm variable P0750
+	if _rc gen double P0750 = .
+	capture confirm variable P0970
+	if _rc gen double P0970 = .
+	capture confirm variable P0980
+	if _rc gen double P0980 = .
 }
 
 /* A. ANO */
@@ -4989,7 +5074,7 @@ foreach var in rend_ocup_prin rend_todos_trab rend_total rend_outras_fontes {
 
 /* D.12. OUTRAS INFORMAÇÕES */
  
-drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
+capture drop P0030 P0040 P0050 P0060 P0070 P0080 P0090 P0120 P0130 P0180 P0220 P0230 P0240 P0250 P0260 P0270 P0290 P0300 P0310 P0380 P0390 P0400 P0410 P0450 P0470 P0500 P0530 P0560 P0600 P0650 P0680 P0690 P0710 P0730 P0740 P0760 P0770 P0780 P0810 P0820 P0830 P0840 P0850 P0860 P0910 P0920 P0950 P0960 P1010 P1020 P1030 P1040 P1060 P1070 P1090 P1130 P1140 P1150 P1160 P1170 P1180 P1190 P1200 P1210 P1220 MP*
 if "`con22'" != "" drop P0150
 
 order ano UF regiao munic id_dom num_fam ordem
