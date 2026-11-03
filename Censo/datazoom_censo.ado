@@ -4,7 +4,7 @@
 * version 1.4
 program define datazoom_censo
 
-syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both all english dbf91 dattxt91 pub22 con22]
+syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom mort both all english dbf91 dattxt91 pub22 con22]
 
 * `years' é lista de anos a extrair 
 * `ufs' são as unidades da federação
@@ -14,6 +14,7 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
 * `pes' indica arquivo de pessoas
 * `dom' indica arquivo de domicilios
 * `fam' indica arquivo de família, disponível apenas para os anos de 2000 e 2022
+* `mort' indica arquivo de mortalidade, disponível apenas para os anos de 2010 e 2022
 * `both' indica arquivo de domicilios e pessoas merged
 * `all' indica arquivo de domicilios, pessoas e família merged, disponível apenas para os anos de 2000 e 2022
 * `english' indica labels das variáveis em inglês
@@ -25,7 +26,8 @@ syntax, years(numlist) ufs(str) original(str) saving(str) [comp pes fam dom both
  display as result _newline "Tipo(s) de Registro:"
 if "`pes'"~="" display as result " Pessoas"
 if "`dom'"~="" display as result " Domicílios"
-if "`fam'"~="" display as result " Famílias (2000)"
+if "`fam'"~="" display as result " Famílias (2000/2022)"
+if "`mort'"~="" display as result " Mortalidade (2010/2022)"
 if "`both'"~="" {
 	loc pes "pes"
 	loc dom "dom"
@@ -35,18 +37,18 @@ if "`all'"~="" {
 	loc pes "pes"
 	loc dom "dom"
 	loc fam "fam"
-	display as result "Pessoas, Famílias e Domicílios (2000)"
+	display as result "Pessoas, Famílias e Domicílios (2000/2022)"
 }
 
 /* Pastas para guardar arquivos da sessão */
 cd `"`saving'"'
 
-load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `both' `all' `english' `dbf91' `dattxt91' `pub22' `con22'
+load_censo, years(`years') ufs(`ufs') original(`original') `comp' `pes' `fam' `dom' `mort' `both' `all' `english' `dbf91' `dattxt91' `pub22' `con22'
 
 end
 
 program load_censo
-syntax, years(numlist) ufs(str) original(str) [comp pes fam dom both all english dbf91 dattxt91 pub22 con22]
+syntax, years(numlist) ufs(str) original(str) [comp pes fam dom mort both all english dbf91 dattxt91 pub22 con22]
 
 if "`english'" != "" local lang "_en"
 
@@ -69,6 +71,10 @@ foreach ano in `years' {
 		if "`fam'" != "" {
 						di as err "Opção Família não disponível para o ano `ano'"
 						exit
+						}
+		if "`mort'" != "" {
+						di as err "Opção Mortalidade não disponível para o ano `ano'"
+						exit 198
 						}
 		foreach UF in `ufs' {
 			/* Achando posição da UF nas listas: */
@@ -222,6 +228,10 @@ foreach ano in `years' {
 		if "`fam'" != "" {
 						di as err "Opção Família não disponível para o ano `ano'"
 						exit
+						}
+		if "`mort'" != "" {
+						di as err "Opção Mortalidade não disponível para o ano `ano'"
+						exit 198
 						}
 		
 
@@ -449,6 +459,10 @@ foreach ano in `years' {
 		if "`fam'" != "" {
 						di as err "Opção Família não disponível para o ano `ano'"
 						exit
+						}
+		if "`mort'" != "" {
+						di as err "Opção Mortalidade não disponível para o ano `ano'"
+						exit 198
 						}
 		
 		if "`dbf91'" != "" & "`dattxt91'" == "" {
@@ -1607,6 +1621,11 @@ foreach ano in `years' {
 	}	
 	else if `ano' == 2000 {
 
+		if "`mort'" != "" {
+						di as err "Opção Mortalidade não disponível para o ano `ano'"
+						exit 198
+						}
+
 	di as input "Atenção: utilize os microdados do Censo 2000 atualizados em 08/09/2017"
 
 		foreach UF in `ufs' {
@@ -1942,6 +1961,39 @@ foreach ano in `years' {
 					tempfile CENSO10_`UF'_dom_`suf'
 					save `CENSO10_`UF'_dom_`suf'', replace
 				}
+				if "`mort'"~="" {
+					display as input "Extraindo `ano' `UF' - `suf' ..."
+					
+					tempfile dic
+					local dic "`dic'.dct"
+
+					findfile dict.dta
+
+					read_compdct, compdct("`r(fn)'") dict_name("censo`ano'mort`lang'") out("`dic'")
+					
+					quietly cap infile using `dic', using("`original'/Amostra_Mortalidade_`suf'.txt") clear
+					if _rc == 601 quietly cap infile using `dic', using("`original'/Amostra_Mortalidade_`suf'.dat") clear
+					if _rc == 601 {
+						di as err "Arquivo Amostra_Mortalidade_`suf' (.txt ou .dat) não encontrado"
+						exit 601
+					}
+					
+					gen ano = 2010
+					lab var ano "ano da pesquisa"
+					tostring v0002, format(%05.0f) replace
+					replace v0002="....." if v0002=="."
+					egen munic = concat(v0001 v0002)
+					destring munic, replace
+					replace munic = int(munic/10)
+					lab var munic "municipality codes without DV (6 digits)"
+
+					if "`comp'" != "" {
+						di as err "Compatibilização não disponível para opção Mortalidade"
+						exit
+					}
+					tempfile CENSO10_`UF'_mort_`suf'
+					save `CENSO10_`UF'_mort_`suf'', replace
+				}
 				if "`comp'"~="" loc var = "id_dom"
 				else loc var = "v0300"
 				if "`both'"~="" {
@@ -1956,6 +2008,14 @@ foreach ano in `years' {
 					else save CENSO10_`UF', replace
 				}
 				else {
+					if "`mort'"~="" {
+						use `CENSO10_`UF'_mort_`suf'', clear
+						/* Se não for o primeiro arquivo, junta com o anterior */
+						if "`suf'" != word(`"`sufixos'"', 1) {
+							append using CENSO10_`UF'_mort
+						}
+						save CENSO10_`UF'_mort, replace
+					}
 					if "`pes'"~="" {
 						use `CENSO10_`UF'_pes_`suf'', clear
 						/* Se não for o primeiro arquivo, junta com o anterior */
@@ -1966,7 +2026,7 @@ foreach ano in `years' {
 						if "`comp'"~="" save CENSO10_`UF'_pes_comp, replace
 						else save CENSO10_`UF'_pes, replace
 					}
-					else {
+					if "`dom'"~="" {
 						use `CENSO10_`UF'_dom_`suf'', clear
 						/* Se não for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
@@ -2217,6 +2277,47 @@ else if `ano' == 2022 {
 						else if "`comp'" != "" save CENSO22_`UF'_dom_con_comp, replace
 						else save CENSO22_`UF'_dom_con, replace
 					}
+				}
+
+				/* 4. LEITURA DE MORTALIDADE */
+				if "`mort'" != "" {
+					display as input "Extraindo `ano' `UF' - `suf' (Mortalidade) ..."
+					if "`pub22'" != "" {
+						capture import delimited "`original'/Mortalidade_`suf'_publico.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022mort_pub`lang'") out("`dic'")
+							infile using `dic', using("`original'/Mortalidade_`suf'_publico.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(mort) `pub22' `con22' `english'
+						tempfile CENSO22_`UF'_mort_`suf'
+						save `CENSO22_`UF'_mort_`suf'', replace
+					}
+					else if "`con22'" != "" {
+						capture import delimited "`original'/Mortalidade_`suf'_controlado.csv", delimiter(";") case(preserve) clear
+						if _rc != 0 {
+							tempfile dic
+							read_compdct, compdct("`dict_file'") dict_name("censo2022mort_con`lang'") out("`dic'")
+							infile using `dic', using("`original'/Mortalidade_`suf'_controlado.txt") clear
+						}
+						gen ano = 2022
+						label_censo22, registro(mort) `pub22' `con22' `english'
+						gen munic = M0080
+						destring munic, replace
+						replace munic = int(munic/10)
+						lab var munic "municipality codes without DV (6 digits)"
+						tempfile CENSO22_`UF'_mort_`suf'
+						save `CENSO22_`UF'_mort_`suf'', replace
+					}
+					
+					use `CENSO22_`UF'_mort_`suf'', clear
+					if "`suf'" != word(`"`sufixos'"', 1) {
+						if "`pub22'" != "" append using CENSO22_`UF'_mort_pub
+						else if "`con22'" != "" append using CENSO22_`UF'_mort_con
+					}
+					if "`pub22'" != "" save CENSO22_`UF'_mort_pub, replace
+					else if "`con22'" != "" save CENSO22_`UF'_mort_con, replace
 				}
 
 			} // fim do foreach suf
