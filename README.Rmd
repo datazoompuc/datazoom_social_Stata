@@ -51,6 +51,9 @@ Todas as funções do pacote podem ser usadas pelas caixas de diálogo. Para ace
 db datazoom_social
 ```
 
+Aviso: No macOS, as caixas de diálogo podem apresentar problemas. Para usar o Censo 2022 pela linha de comando do Stata, consulte o [tutorial de leitura do Censo 2022](https://github.com/datazoompuc/datazoom_social_Stata/wiki/Leitura-do-Censo-2022-pela-linha-de-comando-no-Stata).
+
+
 Para usar as nossas funções, os microdados originais devem estar salvos no seu computador. Temos tutoriais de como usar o pacote em nosso [canal do YouTube](https://www.youtube.com/@datazoom9654/videos).
 
 Clique nos botões abaixo para ver informações adicionais sobre cada pesquisa.

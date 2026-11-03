@@ -137,6 +137,8 @@ BEGIN
 	main.chkMS.enable
 	main.fam.enable
 	main.mort.enable
+	main.both.enable
+	main.all.enable
 END
 
 PROGRAM c80off
@@ -162,8 +164,10 @@ BEGIN
 		call main.chkMS.disable
 		call main.chkTO.disable
 	}
-	call main.fam.disable
-	call main.all.disable
+	if main.chk22.isneq(1) {
+		call main.fam.disable
+		call main.all.disable
+	}
 END
 
 PROGRAM	c10off
@@ -185,6 +189,10 @@ BEGIN
 	}
 	if main.chk10.isneq(1) {
 		call main.mort.disable
+	}
+	if main.chk00.isneq(1) {
+		call main.fam.disable
+		call main.all.disable
 	}
 END
 
