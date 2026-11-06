@@ -37,12 +37,12 @@ A seguir, são apresentadas as variáveis construídas, juntamente com detalhes 
 
 \section{Identificação de domicílios}
 
-Frequentemente é preciso associar a determinado indivíduo as características do domicílio em que ele reside. Para tanto, é fornecida, no arquivo de domicílios e de pessoas, a variável ‘\vr{id\_dom}’, que identifica as observações no arquivo de ‘domicílios’ permitindo relacioná-las aos respectivos residentes no arquivo de ‘pessoas’. Variáveis de identificação para domicílios encontram-se prontamente disponíveis a partir do Censo 1980. Nesses anos ‘\vr{id\_dom}’ recebeu o valor destas variáveis, mas foi necessário construir a identificação para 1970 (para detalhes, veja o quadro abaixo).
+Frequentemente é preciso associar a determinado indivíduo as características do domicílio em que ele reside. Para tanto, é fornecida, no arquivo de domicílios e de pessoas, a variável ‘\vr{id\_dom}’, que identifica as observações no arquivo de ‘domicílios’ permitindo relacioná-las aos respectivos residentes no arquivo de ‘pessoas’. Variáveis de identificação para domicílios encontram-se prontamente disponíveis a partir do Censo 1980, exceto para a versão em .DBF de 1990. Nesses anos ‘\vr{id\_dom}’ recebeu o valor destas variáveis, mas foi necessário construir a identificação para 1970 e para o formato .DBF de 1990 (para detalhes, veja o quadro abaixo).
 
 \medskip
 \textbf{Observação:} a variável ‘\vr{id\_dom}’ simplesmente permite, com respeito aos dados de um determinado ano, associar os domicílios a seus moradores. Não é possível identificar um mesmo domicílio ou pessoa em anos diferentes.
 
-\subsection{Organização dos dados e identificação dos domicílios nos Censos de 1970 a 2010}
+\subsection{Organização dos dados e identificação dos domicílios nos Censos de 1970 a 2022}
 Com respeito à separação entre informações de domicílios e pessoas e à forma de relacionar estes dois tipos de unidades, há várias diferenças entre os arquivos de microdados originais dos sucessivos censos.
 
 Nos Censos 1970 e 1980, cada arquivo de dados (que corresponde a uma UF) contém informações tanto sobre os domicílios da amostra quanto sobre os indivíduos residentes. Cada linha do arquivo diz respeito a um indivíduo, e os dados de um domicílio aparecem (repetidamente) como parte do registro de cada um de seus residentes. Quanto à identificação, o Censo 1980 apresenta explicitamente a variável “identificação do domicílio”, que se repete para todos os moradores, mas o mesmo não ocorre para 1970.
