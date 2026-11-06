@@ -80,8 +80,8 @@ A compatibilização com os dados de 1980 exige a agregação das categorias 1 e
 
 Finalmente, na compatibilização com 1970 e 2010, só é possível distinguir a área urbana e a rural. A distinção entre as duas áreas está prontamente disponível de 1980 em diante, enquanto para os dados de 1970 foi necessário agregar a categoria “suburbana” à situação urbana.
 \begin{itemize}
-  \item \vr{sit\_setor\_C} = 1 -- Urbano
-  \item 0 -- Rural
+  \item \vr{sit\_setor\_C} = 1 - Urbano
+  \item 0 - Rural
 \end{itemize}
 
 \subsection{Espécie do domicílio}\label{sec:c2}
@@ -152,7 +152,7 @@ Por consistência, esta variável foi construída apenas para os domicílios par
 \subsection{Condição de ocupação e aluguel}\label{sec:c6}
 Em todos os anos considerados, os domicílios são divididos, quanto à condição de ocupação, em “próprio”, “alugado”, “cedido” e “outra condição”. Além disso, desde 1980 diferencia-se “cedido pelo empregador” de “cedido de outra forma”. Para estes anos, temos:
 \begin{itemize}
-  \item \vr{cond\_ocup} = 1 -- próprio
+  \item \vr{cond\_ocup} = 1 - próprio
   \item 2 - alugado
   \item 3 - cedido por empregador
   \item 4 - cedido de outra forma
@@ -161,23 +161,23 @@ Em todos os anos considerados, os domicílios são divididos, quanto à condiç�
 
 Para a compatibilização com o Censo 1970, as categorias 3 e 4 são agregadas:
 \begin{itemize}
-  \item \vr{cond\_ocup\_B} = 1 -- próprio
+  \item \vr{cond\_ocup\_B} = 1 - próprio
   \item 2 - alugado
-  \item 3 -- cedido
+  \item 3 - cedido
   \item 4 - outra condição
 \end{itemize}
 
-Para 2000 e 2010, a condição de ocupação “próprio” é desagregada em duas categorias, indicando se já pagou pelo domicílio ou se continua pagando. Temos:
+Para 2000, 2010 e 2022, a condição de ocupação “próprio” é desagregada em duas categorias, indicando se já pagou pelo domicílio ou se continua pagando. Temos:
 \begin{itemize}
-  \item \vr{cond\_ocup\_C} = 1 -- próprio, já pago
-  \item 2 -- próprio, ainda pagando
+  \item \vr{cond\_ocup\_C} = 1 - próprio, já pago
+  \item 2 - próprio, ainda pagando
   \item 3 - alugado
   \item 4 - cedido por empregador
   \item 5 - cedido de outra forma
   \item 6 - outra condição
 \end{itemize}
 
-Exceto em 1991, é possível distinguir o domicílio próprio já pago daquele em aquisição. Assim, para 1970, 1980, 2000 e 2010, é apresentada:
+Exceto em 1991, é possível distinguir o domicílio próprio já pago daquele em aquisição. Assim, para 1970, 1980, 2000, 2010 e 2022, é apresentada:
 \begin{itemize}
   \item \vr{dom\_pago} = 0 - Domicílio próprio em aquisição
   \item 1 - Domicílio próprio já pago
@@ -186,7 +186,7 @@ Exceto em 1991, é possível distinguir o domicílio próprio já pago daquele e
 Em 1991 e 2000, é avaliada também a propriedade do terreno, para o caso dos imóveis próprios; assim, está disponível:
 \begin{itemize}
   \item \vr{terr\_proprio} = 0 - não
-  \item 1 -- sim, terreno é próprio
+  \item 1 - sim
 \end{itemize}
 
 O aluguel mensal pago pelo domicílio, fornecido nos Censos 1980, 1991 e 2010, é armazenado em ‘\vr{aluguel}’. Para 1970, esta variável está disponível apenas em intervalos de valores nominais. A variável ‘\vr{aluguel\_70}’ foi mantida na base compatibilizada, para uma eventual tentativa de compatibilização por parte do usuário.
@@ -201,7 +201,7 @@ Para todos os anos, foi possível construir a seguinte variável:
   \item 5 - outra forma
 \end{itemize}
 
-Para 2000 e 2010, é investigada a existência de água canalizada no domicílio:
+Para 2000, 2010 e 2022, é investigada a existência de água canalizada no domicílio:
 \begin{itemize}
   \item \vr{agua\_canal} = 1 - Canalizada em pelo menos um cômodo
   \item 2 - Canalizada só na propriedade ou terreno
@@ -212,7 +212,7 @@ Para 2000 e 2010, é investigada a existência de água canalizada no domicílio
 Em todos os anos foi aferida (para os domicílios particulares permanentes) a existência de acesso a alguma instalação sanitária, ainda que comum a mais de um domicílio, o que permitiu construir a variável:
 \begin{itemize}
   \item \vr{sanitario} = 0 - não tem acesso
-  \item 1 - tem acesso a sanitário
+  \item 1 - tem acesso
 \end{itemize}
 
 Além disso, em todas as ocasiões foi possível classificar o tipo de escoadouro das instalações sanitárias (para os domicílios que tinham acesso) nas seguintes categorias:
@@ -223,17 +223,17 @@ Além disso, em todas as ocasiões foi possível classificar o tipo de escoadour
   \item 4 - Outro escoadouro
 \end{itemize}
 
-Estas correspondem exatamente às categorias de 1970 e 1980. Posteriormente houve ampliações da classificação, que são idênticas em 2000 e 2010 (para 1991, houve ampliação, mas não da forma encontrada nos anos seguintes.). Portanto, apenas para 2000 e 2010, tem-se:
+Estas correspondem exatamente às categorias de 1970 e 1980. Posteriormente houve ampliações da classificação, que são idênticas em 2000 e 2010 (para 1991, houve ampliação, mas não da forma encontrada nos anos seguintes.). Em 2022, a categoria 'Fossa séptica ou fossa filtro' foi classificada de acordo com ser ou não ligada à rede. Ambas foram combinadas para 'Fossa séptica', enquanto as demais categorias são iguais. Portanto, para 2000 a 2022, tem-se:
 \begin{itemize}
-  \item \vr{tipo\_esc\_san\_B} = 1 - Rede geral
+  \item \vr{tipo\_esc\_san\_B} = 1 - Rede geral de esgoto ou pluvial
   \item 2 - Fossa séptica
   \item 3 - Fossa rudimentar
-  \item 4 -- Vala
-  \item 5 -- Rio, lago ou mar
+  \item 4 - Vala
+  \item 5 - Rio, lago ou mar
   \item 6 - Outro
 \end{itemize}
 
-Adicionalmente, em 1980 e 1991, a exclusividade da instalação sanitária foi investigada, sendo possível obter:
+Adicionalmente, em 1980, 1991 e 2022, a exclusividade da instalação sanitária foi investigada, sendo possível obter:
 \begin{itemize}
   \item \vr{sanitario\_ex} = 0 - não tem acesso a instalação sanitária exclusiva
   \item 1 - tem acesso a instalação sanitária exclusiva
@@ -251,15 +251,25 @@ Somente pesquisado a partir de 1991. As mesmas categorias são empregadas em 200
 \begin{itemize}
   \item \vr{dest\_lixo} = 1 - Coletado por serviço de limpeza
   \item 2 - Colocado em caçamba de serviço de limpeza
-  \item 3 - Queimado(na propriedade)
-  \item 4 - Enterrado(na propriedade)
+  \item 3 - Queimado (na propriedade)
+  \item 4 - Enterrado (na propriedade)
   \item 5 - Jogado em terreno baldio ou logradouro
   \item 6 - Jogado em rio, lago ou mar
   \item 7 - Tem outro destino
 \end{itemize}
 
+Para compatibilizar com 2022, juntaram-se as categorias 5 e 6 acima, criando-se:
+\begin{itemize}
+  \item \vr{dest\_lixo\_B} = 1 - Coletado no domicílio por serviço de limpeza
+  \item 2 - Colocado em caçamba de serviço de limpeza
+  \item 3 - Queimado na propriedade
+  \item 4 - Enterrado na propriedade
+  \item 5 - Jogado em terreno baldio, encosta ou área pública
+  \item 6 - Outro destino
+\end{itemize}
+
 \subsection{Iluminação elétrica}\label{sec:c10}
-Em todos os anos considerados, investiga-se a presença de iluminação elétrica, registrada por:
+Em todos os anos de 1970 a 2010, investiga-se a presença de iluminação elétrica, registrada por:
 \begin{itemize}
   \item \vr{ilum\_eletr} = 0 não tem
   \item 1 tem
@@ -272,13 +282,13 @@ Adicionalmente, em 1980 e 1991, avalia-se a presença de medidor do consumo de e
 \end{itemize}
 
 \subsection{Bens de consumo duráveis}\label{sec:c11}
-O Censo avalia a existência de diversos tipos de bens de consumo duráveis (e em alguns casos a quantidade ou características destes) nos domicílios. Como a captação destes itens não foi uniforme ao longo do tempo, nem todas as informações coletadas em determinado ano podem ser acompanhadas nos dados dos recenseamentos seguintes. Os itens detalhados a seguir abrangem as informações que podem ser obtidas igualmente em pelo menos um par de anos cobertos pelo Portal.
+O Censo avalia a existência de diversos tipos de bens de consumo duráveis (e em alguns casos a quantidade ou características destes) nos domicílios. Como a captação destes itens não foi uniforme ao longo do tempo, nem todas as informações coletadas em determinado ano podem ser acompanhadas nos dados dos recenseamentos seguintes. Os itens detalhados a seguir abrangem as informações que podem ser obtidas igualmente em pelo menos um par de anos.
 
 \medskip
-\textbf{Fogão} -- Este item não está presente nos Censos 2000 e 2010. Nos demais anos, a presença de equipamento para cozinhar é investigada juntamente com o tipo de energia utilizado. Enquanto em 1991 foi investigado o combustível (ou fonte de energia) usado nos domicílios que tivessem qualquer tipo de equipamento para cozinhar, quer fosse fogão ou fogareiro, em 1970 o quesito foi desconsiderado onde havia apenas este último. Assim os dados desses anos não são compatíveis. No entanto, em 1980 é possível avaliar separadamente a presença de fogão e de fogareiro, o que permite construir, para 1970 e 1980 as variáveis:
+\textbf{Fogão} -- Este item não está presente nos Censos 2000 a 2022. Nos demais anos, a presença de equipamento para cozinhar é investigada juntamente com o tipo de energia utilizado. Enquanto em 1991 foi investigado o combustível (ou fonte de energia) usado nos domicílios que tivessem qualquer tipo de equipamento para cozinhar, quer fosse fogão ou fogareiro, em 1970 o quesito foi desconsiderado onde havia apenas este último. Assim os dados desses anos não são compatíveis. No entanto, em 1980 é possível avaliar separadamente a presença de fogão e de fogareiro, o que permite construir, para 1970 e 1980 as variáveis:
 \begin{itemize}
   \item \vr{fogao} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
   \item \vr{comb\_fogao} = 1 - gás
   \item 2 - lenha
   \item 3 - carvão
@@ -289,7 +299,7 @@ O Censo avalia a existência de diversos tipos de bens de consumo duráveis (e e
 Além disso, para 1980 e 1991 é possível observar:
 \begin{itemize}
   \item \vr{fogao\_ou\_fog} = 0 - não tem
-  \item 1 -- tem (fogão ou fogareiro)
+  \item 1 - tem (fogão ou fogareiro)
   \item \vr{comb\_cozinha} = 1 - gás
   \item 2 - lenha
   \item 3 - carvão
@@ -297,47 +307,47 @@ Além disso, para 1980 e 1991 é possível observar:
   \item 0 - não tem fogão nem fogareiro
 \end{itemize}
 
-\textbf{Rádio} -- Este item tem sido pesquisado de maneira uniforme entre 1970 e 2010. Temos:
+\textbf{Rádio} -- Este item foi pesquisado de maneira uniforme entre 1970 e 2010. Temos:
 \begin{itemize}
   \item \vr{radio} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
 \end{itemize}
 
-\textbf{Geladeira} -- Em 1970, 1980 e 2010 é investigada simplesmente a presença de geladeira, enquanto em 2000 afere-se a presença de geladeira ou freezer, sem discriminação. Em 1991 é possível avaliar, separadamente a presença de geladeira e de freezer. Assim, para 1970 a 1991 é possível comparar:
+\textbf{Geladeira} -- Em 1970, 1980 e 2010 é investigada simplesmente a presença de geladeira, enquanto em 2000 afere-se a presença de geladeira ou freezer, sem discriminação. Em 1991 é possível avaliar, separadamente a presença de geladeira e de freezer. Assim, para 1970 a 1991 e 2010 é possível comparar:
 \begin{itemize}
   \item \vr{geladeira} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
 \end{itemize}
 
 Para 1991 e 2000:
 \begin{itemize}
   \item \vr{gelad\_ou\_fre} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
 \end{itemize}
 
 Cabe ainda observar que, em 1991, só foram consideradas geladeiras elétricas (o que exclui aparelhos a gás ou querosene). Como nesse ano a investigação da presença de eletrodomésticos se restringe a domicílios com acesso à rede elétrica (ver comentário no final da seção), a distinção parece ser de pouca importância.
 
-\textbf{Telefone} -- Este quesito não foi investigado em 1970. Nos demais anos, diz respeito à existência de acesso a linha telefônica instalada, ainda que extensão de linha de outro domicílio. Em 2010, além de telefone fixo, foi investigada a existência de telefone celular. Apenas o telefone fixo foi considerado na construção da variável abaixo.
+\textbf{Telefone} -- Este quesito não foi investigado em 1970 e 2022. Nos demais anos, diz respeito à existência de acesso a linha telefônica instalada, ainda que extensão de linha de outro domicílio. Em 2010, além de telefone fixo, foi investigada a existência de telefone celular. Apenas o telefone fixo foi considerado na construção da variável abaixo.
 \begin{itemize}
   \item \vr{telefone} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
 \end{itemize}
 
 \textbf{Televisão} -- Em 1980 e 1991, é possível avaliar, separadamente, a presença de TV em cores e em preto e branco. Para esses anos, são construídas:
 \begin{itemize}
   \item \vr{televisao}, \vr{tv\_pb}, \vr{tv\_cores} = 0 - não tem
-  \item 1 -- tem
+  \item 1 - tem
 \end{itemize}
 
-Em 1970, 2000 e 2010 não é feita essa distinção, e somente a primeira variável está disponível.
+Em 1970, 2000 e 2010 não é feita essa distinção, e somente a primeira variável está disponível. Em 2022 essa variável não é investigada.
 
-\textbf{Automóvel} -- A presença de automóvel no domicílio é investigada em todos os anos, sendo excluídos automóveis de carga, mas incluídos os utilitários. Em 1970 e 2010, somente é avaliada a presença de automóvel para uso particular. Em 1980 registra-se disponibilidade de automóvel particular e, apenas em caso negativo, de carro de trabalho. Em 1991 os dois tipos são registrados separadamente (além da quantidade dos particulares e se o de trabalho é próprio ou cedido pelo empregador). Finalmente, no Censo 2000 agregam-se os dois tipos. Em síntese, para os anos de 1980 e 1991 temos as duas variáveis abaixo, mas, para 2000, só a primeira, e para 1970 e 2010, a segunda.
+\textbf{Automóvel} -- A presença de automóvel no domicílio é investigada em todos os anos entre 1970 e 2010, sendo excluídos automóveis de carga, mas incluídos os utilitários. Em 1970 e 2010, somente é avaliada a presença de automóvel para uso particular. Em 1980 registra-se disponibilidade de automóvel particular e, apenas em caso negativo, de carro de trabalho. Em 1991 os dois tipos são registrados separadamente (além da quantidade dos particulares e se o de trabalho é próprio ou cedido pelo empregador). Finalmente, no Censo 2000 agregam-se os dois tipos. Em síntese, para os anos de 1980 e 1991 temos as duas variáveis abaixo, mas, para 2000, só a primeira, e para 1970 e 2010, a segunda.
 \begin{itemize}
   \item \vr{automovel}, \vr{automov\_part} = 0 - não tem
   \item 1 - tem
 \end{itemize}
 
-\textbf{Máquina de lavar} -- Desde 1991, investiga-se a presença de máquina de lavar roupa no domicílio. E desde 2000, de computador.
+\textbf{Máquina de lavar} -- Desde 1991, investiga-se a presença de máquina de lavar roupa no domicílio. E em 2000 e 2010, de computador.
 \begin{itemize}
   \item \vr{lavaroupa} = 0 - não tem
   \item 1 - tem
@@ -412,7 +422,7 @@ Em 1991, por outro lado, admitiu-se, excepcionalmente no caso citado acima, cons
 \subsection{Idade}\label{sec:d3}
 Os microdados de todos os Censos considerados permitem avaliar a idade em anos completos (\vr{idade}) e, para crianças com menos de um ano, a idade em meses (\vr{idade\_meses}). Além disso, com exceção de 1980, também é reportado se a idade foi presumida (isto é, se foi fornecida diretamente, em vez de calculada a partir da informação da data de nascimento), de acordo com a seguinte variável:
 \begin{itemize}
-  \item \vr{idade\_presumida} = 0 -- não
+  \item \vr{idade\_presumida} = 0 - não
   \item 1 - sim
 \end{itemize}
 
@@ -587,8 +597,8 @@ Em 1970, 1980 e 1991, foi investigada a situação (zona urbana ou rural) do dom
 
 \textbf{Local de moradia há 5 anos} -- Desde 1991 passou a ser investigado o local em que cada indivíduo residia exatamente 5 anos antes da data da pesquisa. Logo foi possível a construção das variáveis ‘\vr{mun\_mor5anos}’, ‘\vr{UF\_mor5anos}’ e ‘\vr{pais\_mor5anos}’, que informam o município, a UF e o país em que o indivíduo residia nessa data. Para 1991 e 2000, também foi averiguada a situação do domicílio em que as pessoas residiam cinco 5 anos antes, indicada em:
 \begin{itemize}
-  \item \vr{sit\_dom5anos} = 1 zona urbana
-  \item 0 zona rural
+  \item \vr{sit\_dom5anos} = 1 - zona urbana
+  \item 0 - zona rural
 \end{itemize}
 
 \subsection{Educação}\label{sec:d8}
@@ -603,25 +613,25 @@ Com respeito à escolaridade, sempre foi pesquisada a frequência à escola, emb
 Por conta dos fatos acima, para construir uma variável compatível em todos os Censos, deve-se considerar aqueles que frequentam creche, pré-escola e curso pré-vestibular como não frequentadores de escola (além daqueles que fazem curso supletivo por rádio e TV em 1980). A variável ‘\vr{freq\_escola}’ foi construída dessa forma.
 \begin{itemize}
   \item \vr{freq\_escola} = 0 - não
-  \item 1 -- sim
+  \item 1 - sim
 \end{itemize}
 
 A variável ‘\vr{freq\_escolaB}’ inclui quem frequenta pré-escola na alternativa ‘1’. Nesse caso, não é compatível com 1970, mas vale para todos os demais Censos.
 \begin{itemize}
   \item \vr{freq\_escolaB} = 0 - não
-  \item 1 -- sim
+  \item 1 - sim
 \end{itemize}
 
 Em 2000 e 2010, também foi investigada a rede de ensino frequentada pelo aluno, registrada na variável ‘\vr{rede\_freq}’:
 \begin{itemize}
-  \item \vr{rede\_freq} = 0 -- rede privada
-  \item 1 -- rede pública
+  \item \vr{rede\_freq} = 0 - rede privada
+  \item 1 - rede pública
 \end{itemize}
 
 Exceto em 1991, é possível identificar se o aluno frequenta escola no mesmo município em que reside. Criou-se a variável ‘\vr{mun\_escola}’. Vale lembrar que, para compatibilizar com 1970, é preciso considerar os casos em que ‘\vr{freq\_escola}’ é igual a 1, e não a variável ‘\vr{freq\_escolaB}’.
 \begin{itemize}
   \item \vr{mun\_escola} = 0 - não
-  \item 1 -- sim, escola localiza-se no município de residência
+  \item 1 - sim, escola localiza-se no município de residência
 \end{itemize}
 
 O nível de escolaridade das pessoas foi investigado de forma distinta em diferentes anos. Em 1970 é perguntada a série mais elevada concluída com aprovação para cada indivíduo. Nos Censos 1980 e 2000, esta informação é pesquisada apenas para indivíduos que não frequentam escola, enquanto os que frequentam informam a série e o grau atualmente cursados. Assim, um indivíduo que se matricula novamente num nível de ensino inferior ao mais elevado que cursou “perde” (no sentido da mensuração efetuada no Censo) esta escolaridade mais avançada. Em 1991 segue-se o procedimento de 1980 e 2000, mas há uma instrução explícita no manual do entrevistador para a recuperação da informação do curso mais elevado em casos como esse.
@@ -630,11 +640,11 @@ Logo, nos Censos 1970 e 1991 é possível calcular o número de anos de estudo d
 
 Em 2010, a mesma “perda” ocorrida em 1980 e 2000 se repete; porém, se o curso frequentado é superior de graduação, o entrevistado responde se já concluiu outro curso de graduação. Por outro lado, tanto para quem frequenta curso superior quanto para quem não frequenta escola, não é investigado qual a série ou o ano atualmente cursado ou mais elevado que fora frequentado anteriormente. Dessa forma, é impossível construir uma variável “contínua” de anos de estudo para 2010. Para haver uma variável de escolaridade para 2010 compatível com outros Censos, criou-se uma variável de grupos de anos de estudo, válida para todos os anos, com exceção de 1970 (já que o cálculo considera a variável \vr{anos\_estudoB}).
 \begin{itemize}
-  \item \vr{anos\_estudoC} = 0 -- sem instrução ou menos de 3 anos de estudo (primário incompleto)
-  \item 1 -- de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
-  \item 2 -- de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
-  \item 3 -- de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
-  \item 4 -- 15 ou mais (superior completo, mestrado, doutorado)
+  \item \vr{anos\_estudoC} = 0 - sem instrução ou menos de 3 anos de estudo (primário incompleto)
+  \item 1 - de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
+  \item 2 - de 8 a 10 (médio/ 2º. Grau/ médio segundo ciclo incompleto)
+  \item 3 - de 11 a 14 (médio/ 2º. Grau/ médio segundo ciclo completo ou superior incompleto)
+  \item 4 - 15 ou mais (superior completo, mestrado, doutorado)
 \end{itemize}
 
 Todos os Censos possuem uma variável indicando o curso superior concluído. Ao longo dos anos, novos cursos foram criados, outros tiveram seu nome alterado e houve aqueles com mudanças substanciais em seu conteúdo, tornando a compatibilização uma tarefa além dos objetivos deste projeto. Houve uma tentativa de agrupar os cursos por área, utilizando as próprias denominações utilizadas pelo IBGE. Duas classificações foram criadas, uma utilizando classificações mais ‘antigas’ e outra mais ‘modernas’, esta última seguindo a classificação CONCLA. Além disso, a variável original foi mantida, com o nome ‘\vr{curso\_concl}”.
@@ -689,7 +699,7 @@ Estas regras de atribuição de estado conjugal equivalem às prescritas pelo ma
 Nos dados compatibilizados também consta a variável ‘\vr{vive\_conjuge}’, derivada do estado conjugal, que informa se a pessoa vive em companhia de cônjuge. Para os anos de 1991, 2000 e 2010 (mas não para 1970 e 1980) também foi possível determinar quais indivíduos viveram, em algum momento, em companhia de cônjuge, informação registrada na variável ‘\vr{teve\_conjuge}’.
 \begin{itemize}
   \item \vr{vive\_conjuge}, \vr{teve\_conjuge} = 0 - não
-  \item 1 -- sim
+  \item 1 - sim
 \end{itemize}
 
 \subsection{Atividade econômica e renda}\label{sec:d10}
@@ -763,7 +773,7 @@ Em 1970, os “trabalhadores agrícolas volantes” não formaram uma categoria 
 A contribuição para previdência é registrada para todas as posições na ocupação. Essa informação está contida na variável ‘\vr{previd}’.
 \begin{itemize}
   \item \vr{previd\_A} = 0 - não
-  \item 1 -- sim, contribui p/ previdência
+  \item 1 - sim, contribui p/ previdência
 \end{itemize}
 
 Desde 1980, investigou-se a remuneração e a quantidade de horas habitualmente trabalhadas na ocupação habitual (agregando todos os estabelecimentos) e em todas as ocupações. Em 1991, registrou-se o número de horas (com arredondamento para cima no caso de fração maior ou igual a 30 minutos), mas em 1980 foi adotada uma divisão por categorias, seguida no arquivo compatibilizado. Assim, temos, para a ocupação principal e para todas as ocupações, respectivamente:
@@ -847,23 +857,23 @@ A investigação da atividade econômica dos indivíduos foi modificada drastica
 Todas as variáveis abaixo se referem somente aos Censos 2000 e 2010. Para esses anos, é possível identificar se o indivíduo exerceu atividade remunerada na semana de referência e se estava afastado de algum trabalho por motivo de saúde, férias, licença etc. Esses casos estão registrados nas variáveis abaixo:
 \begin{itemize}
   \item \vr{trab\_rem\_sem} = 0 - não
-  \item 1 -- sim, trabalhou em atividade remunerada
+  \item 1 - sim, trabalhou em atividade remunerada
   \item \vr{afast\_trab\_sem} = 0 - não
-  \item 1 -- sim, estava afastado de trabalho remunerado
+  \item 1 - sim, estava afastado de trabalho remunerado
 \end{itemize}
 
 Dentre aqueles que não trabalharam nem estavam afastados, investigou-se a possibilidade do indivíduo ter ajudado algum morador do domicílio em sua atividade ou ter exercido atividade de cultivo, extração vegetal, criação de animais, etc., destinada à alimentação de moradores. Porém, há diferenças na obtenção dessas informações. Em 2000, há explícita referência ao trabalho não-remunerado como aprendiz ou estagiário em ajuda a algum morador. Além disso, não é especificado se a atividade do morador ajudado é remunerada ou não. Em 2010, há apenas uma referência genérica de ajuda em atividade remunerada de outro morador. Apesar disso, essas divergências não devem impactar de forma substancial o conceito de trabalho não-remunerado, registado em duas variáveis:
 \begin{itemize}
   \item \vr{nao\_remun} = 0 - não
-  \item 1 -- sim, ajudou sem remuneração
+  \item 1 - sim, ajudou sem remuneração
   \item \vr{trab\_proprio\_cons} = 0 - não
-  \item 1 -- sim, exerceu atividades de cultivo para alimentação dos moradores
+  \item 1 - sim, exerceu atividades de cultivo para alimentação dos moradores
 \end{itemize}
 
 Há também informação sobre o número de trabalhos que a pessoa tinha na semana de referência:
 \begin{itemize}
-  \item \vr{mais\_de\_um\_trab} = 0 -- não, tinha somente um trabalho
-  \item 1 -- sim, tinha mais de um trabalho
+  \item \vr{mais\_de\_um\_trab} = 0 - não, tinha somente um trabalho
+  \item 1 - sim, tinha mais de um trabalho
 \end{itemize}
 
 Os códigos da ocupação principal são registrados nas variáveis ‘\vr{ocup2000}’ e ‘\vr{ocup2010}’. Em 2010, existem as duas variáveis. Isso ocorre por conta de uma nova classificação utilizada pelo IBGE em 2010. Para haver comparabilidade, o IBGE manteve as duas classificações. Para 2000, as ocupações também são classificadas de acordo com os códigos de 1991. Isso foi mantido a variável ‘\vr{ocup1991}’ para o caso de uma eventual tentativa de compatibilização, lembrando que o horizonte temporal em 2000 difere daquele observado em 1991.
@@ -890,7 +900,7 @@ Para os empregadores, pode-se obter o número de empregados no empreendimento, a
 A contribuição para previdência é registrada para os empregados sem carteira de trabalho assinada (exclusive servidores públicos e militares), para trabalhadores por conta-própria e para empregadores. Porém, em 2000, pergunta-se apenas sobre o trabalho principal, enquanto em 2010, há opção de responder se contribui em outros trabalhos. Essa última informação foi ignorada para construir a variável ‘\vr{previd\_B}’.
 \begin{itemize}
   \item \vr{previd\_B} = 0 - não
-  \item 1 -- sim, contribui p/ previdência no trab. principal
+  \item 1 - sim, contribui p/ previdência no trab. principal
 \end{itemize}
 
 O número de horas trabalhadas no trabalho principal da semana é registrado em ‘\vr{horas\_trabprin}’. Em 2000, a informação a respeito do número de horas trabalhadas nos demais trabalhos foi coletada e mantida na variável ‘\vr{horas\_outros\_sem}’, para alguma eventualidade, apesar dos problemas de compatibilização com 1980 e 1991.
@@ -898,7 +908,7 @@ O número de horas trabalhadas no trabalho principal da semana é registrado em 
 Para aqueles que não trabalharam, de forma remunerada ou não, pergunta-se se tomou alguma providência para conseguir trabalho no mês de referência. Isso é registrado em:
 \begin{itemize}
   \item \vr{tomou\_prov} = 0 - não
-  \item 1 -- sim, tomou providência para conseguir trabalho
+  \item 1 - sim, tomou providência para conseguir trabalho
 \end{itemize}
 
 O rendimento foi investigado para o trabalho principal ‘\vr{rend\_ocup\_prin}’ e os demais trabalhos ‘\vr{rend\_outras\_ocup}’, sendo computada a remuneração bruta ou a retirada do empreendimento (rendimento bruto menos gastos realizados), e excluindo benefícios, como auxílio moradia e transporte. Caso o rendimento seja em produtos ou mercadorias, consta o valor real ou estimado; se sazonal, consta a média mensal para o mês de referência.\footnote{Essas orientações estão contidas na documentação do Censo 2000, mas não aparecem explicitamente nas descrições das variáveis em 2010; por outro lado, não há indicações de que tenham sido alteradas substancialmente.} Além das variáveis ‘contínuas’, tanto em 2000 quanto em 2010 há variáveis indicando o rendimento em salários mínimos: ‘\vr{rend\_prin\_sm}’ e ‘\vr{rend\_outras\_sm}’.
@@ -916,8 +926,8 @@ Todos os rendimentos são deflacionados para julho/2010, mas as variáveis com o
 
 Exceto em 1991, investiga-se o município onde o indivíduo trabalha, mas apenas em 2010 essa pergunta refere-se explicitamente a trabalho; nos demais censos, a pergunta refere-se a trabalho ou estudo, ou seja, não é possível identificar se a resposta do indivíduo refere-se ao local de trabalho ou de estudo se o mesmo estuda e trabalha. Optou-se pela suposição de que o indivíduo respondeu o local de trabalho nesse caso de dupla jornada. Foi construída uma variável dummy para este quesito, válida somente para quem trabalha (independentemente da frequência escolar):
 \begin{itemize}
-  \item \vr{mun\_trab} = 0 -- não, trabalha em município diferente do qual reside
-  \item 1 -- sim, trabalha no mesmo município em que reside
+  \item \vr{mun\_trab} = 0 - não, trabalha em município diferente do qual reside
+  \item 1 - sim, trabalha no mesmo município em que reside
 \end{itemize}
 
 \medskip
@@ -945,7 +955,7 @@ De 1980 em diante, esses valores foram computados separadamente de acordo com o 
 Desde 1980, adicionalmente, foi possível obter a idade do último filho nascido vivo, e a partir de 1991 o sexo do mesmo. Esses dados são registrados nas variáveis ‘\vr{idade\_ult\_nas\_v}’, valor em anos completos, e ‘\vr{sexo\_ult\_nasc\_v}’, descrita a seguir.
 \begin{itemize}
   \item \vr{sexo\_ult\_nasc\_v} = 0 - feminino
-  \item 1 -- masculino
+  \item 1 - masculino
 \end{itemize}
 
 Os “filhos tidos” são aqueles cuja gestação alcançou pelo menos sete meses. Estes são classificados como “nascidos vivos” (ou “nascidos mortos”) conforme a presença de algum (ou ausência de qualquer) sinal de vida -- como respiração, batimento cardíaco, pulsação do cordão umbilical etc.-- depois de separados do corpo da mãe.
