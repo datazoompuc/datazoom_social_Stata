@@ -58,7 +58,7 @@ Finalmente, em 2000, 2010 e 2022, os microdados de pessoas e domicílios se apre
 \subsection{Situação do domicílio}\label{sec:c1}
 Em 1970, os domicílios do Censo eram classificados, com respeito à situação, em três categorias, conforme se localizassem em “área urbana”, “suburbana” ou “rural”, conforme delimitadas pela administração municipal. Nos anos seguintes, foi eliminada a classificação “suburbana”, que havia sido incorporada legalmente à área urbana. Além disso, a situação do domicílio passou a combinar o elemento legal (localização no quadro urbano ou rural do município) com outros geográficos (contiguidade, presença de serviços, infraestrutura).
 
-Nos arquivos compatibilizados, utilizando apenas os Censos 1991 e 2000, é possível manter a classificação mais desagregada:
+Nos arquivos compatibilizados, utilizando os Censos 1991, 2000 e 2022, é possível manter a classificação mais desagregada, sendo que em 2022 não há a alternativa 4 (Rural - extensão urbana):
 \begin{itemize}
   \item \vr{sit\_setor} = 1 - Área urbanizada de vila ou cidade
   \item 2 - Área não urbanizada de vila ou cidade
@@ -80,7 +80,7 @@ A compatibilização com os dados de 1980 exige a agregação das categorias 1 e
 
 Finalmente, na compatibilização com 1970 e 2010, só é possível distinguir a área urbana e a rural. A distinção entre as duas áreas está prontamente disponível de 1980 em diante, enquanto para os dados de 1970 foi necessário agregar a categoria “suburbana” à situação urbana.
 \begin{itemize}
-  \item \vr{sit\_setor\_C} = 1 -- Urbana
+  \item \vr{sit\_setor\_C} = 1 -- Urbano
   \item 0 -- Rural
 \end{itemize}
 
@@ -93,49 +93,58 @@ Foi mantida a classificação adotada nos sucessivos Censos. Como somente em 198
 \end{itemize}
 
 \subsection{Material das paredes}\label{sec:c3}
-Este item foi investigado apenas em 1980, 1991 e 2010. Em 1980 e 1991, as alternativas são as mesmas, apesar de possuírem códigos diferentes. Os códigos de 1980 foram alterados para se adequar aos de 1991. Em 2010, as alternativas são mais desagregadas, mas não há maiores problemas em agrupá-las para o formato encontrado nos anos anteriores: ‘alvenaria com ou sem revestimento’ = ‘alvenaria’; ‘taipa revestida ou não revestida’ = ‘taipa’; ‘madeira aproveitada’ = ‘material aproveitado’. A alternativa ‘sem parede’ foi considerada missing.
+Este item foi investigado em 1980, 1991, 2010 e 2022. Em 1980 e 1991, as alternativas são as mesmas, apesar de possuírem códigos diferentes. Os códigos de 1980 foram alterados para se adequar aos de 1991. Em 2010, as alternativas são mais desagregadas, mas não há maiores problemas em agrupá-las para o formato encontrado nos anos anteriores: ‘alvenaria com ou sem revestimento’ = ‘alvenaria’; ‘taipa revestida ou não revestida’ = ‘taipa’; ‘madeira aproveitada’ = ‘material aproveitado’. A alternativa ‘sem parede’ foi considerada missing.
 \begin{itemize}
-  \item \vr{paredes} = 1 Alvenaria
-  \item = 2 Madeira aparelhada
-  \item = 3 Taipa não revestida
-  \item = 4 Material aproveitado
-  \item = 5 Palha
-  \item = 6 Outro
+  \item \vr{paredes} = 1 - Alvenaria
+  \item = 2 - Madeira aparelhada
+  \item = 3 - Taipa não revestida
+  \item = 4 - Material aproveitado
+  \item = 5 - Palha
+  \item = 6 - Outro material
+\end{itemize}
+
+Como em 2022 não havia a categoria 'Palha', criou-se outra variável que juntava a alternativa 'palha' à categoria 'outro material', disponível para os quatro anos: 1980, 1991, 2010 e 2022.
+\begin{itemize}
+  \item \vr{paredes_B} = 1 - Alvenaria
+  \item = 2 - Madeira aparelhada
+  \item = 3 - Taipa não revestida
+  \item = 4 - Material aproveitado
+  \item = 5 - Outro material
 \end{itemize}
 
 \subsection{Material da cobertura}\label{sec:c4}
 Essa variável existe apenas para 1980 e 1991, com uma diferença nos códigos das alternativas. Além disso, em 1980, há a alternativa ‘telha de amianto’, e, em 1990, a alternativa é ‘telha de cimento-amianto’.
 \begin{itemize}
-  \item \vr{cobertura} = 1 laje de concreto
-  \item = 2 telha de barro
-  \item = 3 telha de amianto
-  \item = 4 zinco
-  \item = 5 madeira aparelhada
-  \item = 6 palha
-  \item = 7 material aproveitado
-  \item = 8 outro material
+  \item \vr{cobertura} = 1 - laje de concreto
+  \item = 2 - telha de barro
+  \item = 3 - telha de amianto
+  \item = 4 - zinco
+  \item = 5 - madeira aparelhada
+  \item = 6 - palha
+  \item = 7 - material aproveitado
+  \item = 8 - outro material
 \end{itemize}
 
 \subsection{Tipo de domicílio}\label{sec:c5}
-Desde o Censo de 1991, é possível distinguir três tipos de domicílio: “casa”, “apartamento” e “cômodo”. No arquivo com os anos 1991 e 2000 esta informação se apresenta da seguinte forma:
+Desde o Censo de 1991, é possível distinguir três tipos de domicílio: “casa”, “apartamento” e “cômodo”. No arquivo com os anos de 1991 e 2000, esta informação se apresenta da seguinte forma:
 \begin{itemize}
   \item \vr{tipo\_dom} = 1 - casa
   \item 2 - apartamento
-  \item 3 -- cômodo
+  \item 3 - cômodo
 \end{itemize}
 
 Em 1980 só existiam as categorias “casa” e “apartamento”. Como esta última era atribuída aos domicílios que posteriormente seriam classificados como cômodos (IBGE, 1980, p. 32), a compatibilização com o ano de 1980 requer a agregação de 2 e 3.
 \begin{itemize}
   \item \vr{tipo\_dom\_B} = 1 - casa
-  \item 2 -- apartamento (ou cômodo)
+  \item 2 - apartamento (ou cômodo)
 \end{itemize}
 
-Em 1970 não se averiguou o tipo do domicílio. Já em 2010, duas particularidades. Para domicílios particulares permanentes, há a alternativa ‘oca ou maloca’ para áreas indígenas, que foi codificada como ‘casa’. E diferentemente dos outros anos, investigou-se o tipo de domicílio para domicílios improvisados (‘tenda’, ‘trailer’, etc.) ou coletivos (‘asilo’, ‘penitenciária’, etc.). Esses foram considerados missing.
+Em 1970 não se averiguou o tipo do domicílio. Em 2010, duas particularidades. Para domicílios particulares permanentes, há a alternativa ‘oca ou maloca’ para áreas indígenas, que foi codificada como ‘casa’. E investigou-se o tipo de domicílio para domicílios improvisados (‘tenda’, ‘trailer’, etc.) ou coletivos (‘asilo’, ‘penitenciária’, etc.), o que também ocorreu em 2022. Esses foram considerados missing. Em 2022, as categorias de casa são mais detalhadas, tendo sido agrupadas da seguinte forma: 'Casa', 'Casa de vila ou em condomínio', 'Habitação indígena sem paredes ou maloca', e 'Estrutura residencial permanente degradada ou inacabada' foram consideradas Casa. 
 
 Em 1991 e 2000, adicionalmente ao tipo de domicílio, é investigado o tipo de setor em que este se localiza, permitindo identificar os chamados aglomerados subnormais (favelas e outras formas de ocupação desordenada).
 \begin{itemize}
-  \item \vr{subnormal} = 0 -- não
-  \item 1 -- sim
+  \item \vr{subnormal} = 0 - não
+  \item 1 - sim
 \end{itemize}
 
 Por consistência, esta variável foi construída apenas para os domicílios particulares permanentes dos tipos “casa” e “apartamento” (mesmo estando disponível para a totalidade da amostra em 2000), uma vez que em 1991 a informação necessária somente é aferida para este conjunto.
