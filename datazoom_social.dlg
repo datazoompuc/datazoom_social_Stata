@@ -40,7 +40,7 @@ BEGIN
 	TEXTBOX txb_pof 			+158 @ @ @, label("Pesquisa de Orçamentos Familiares - 1995 a 2018") center
 	
     TEXT bottom1   10   230  480  ., label("PUC-Rio - Departamento de Economia") left
-	TEXT bottom2   568   230  100  ., label("Versão 2.0") left
+	TEXT bottom2   540   230   95  ., label("Versão 2.0") right
 END
 
 CANCEL can1, label("Cancel")
