@@ -40,7 +40,7 @@ GROUPBOX opc_extr 5 ps_opc_extr_y 295 65, label("Tipo de Identificação")
 GROUPBOX opc_agr 5 ps_opc_agr_y 295 183, label("Adicione itens à cesta")
 	
 	RADIO rd_ali +15 +20 . 20, label("Alimentação") onclickon(script habilita_ali) first
-	RADIO rd_des +90  @ 120 20, label("Outros Gastos") onclickon(script habilita_desp) middle
+	RADIO rd_des +90  @ 95 20, label("Outros Gastos") onclickon(script habilita_desp) middle
 	RADIO rd_ren +100 @ 55 20, label("Renda") onclickon(script habilita_ren) last
 	
 	TEXT        agr_ali         20 ps_agr_ali_y 230 ., label("Itens em Alimentação: Selecione um item e...")
