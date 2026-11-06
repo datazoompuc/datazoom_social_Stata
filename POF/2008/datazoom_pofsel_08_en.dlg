@@ -44,11 +44,11 @@ GROUPBOX opc_agr 5 ps_opc_agr_y 265 183, label("Add item to the basket")
 	RADIO rd_ren +125 @ 60 20, label("Income") onclickon(script habilita_ren) last
 	
 	TEXT        agr_ali         10 ps_agr_ali_y 180 ., label("Food items:")
-	COMBOBOX	cb_alimentos    @  +20 250 ., dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
+	COMBOBOX	cb_alimentos    @  +20 250 20, dropdownlist contents(nomes_alimentos) values(nomes_alimentos2)
 	TEXT        agr_desp        @ ps_agr_ali_y 180 ., label("Other expenditures items:")
-	COMBOBOX	cb_despesas     @  +20 250 ., dropdownlist contents(nomes_despesas) values(nomes_despesas2)
+	COMBOBOX	cb_despesas     @  +20 250 20, dropdownlist contents(nomes_despesas) values(nomes_despesas2)
 	TEXT        agr_ren         @ ps_agr_ali_y 180 ., label("Income items:")
-	COMBOBOX	cb_rendas       @  +20 250 ., dropdownlist contents(nomes_rendas) values(nomes_rendas2)
+	COMBOBOX	cb_rendas       @  +20 250 20, dropdownlist contents(nomes_rendas) values(nomes_rendas2)
 	
 	BUTTON  btn_ch   110 +60 150 25, label("...click to add item") onpush(program atualizaListas)
 	
