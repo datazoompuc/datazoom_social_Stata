@@ -1,0 +1,16 @@
+dictionary {
+_column(1)	str1	M0010	%1s	"Major Region"
+_column(2)	str2	M0020	%2s	"State"
+_column(4)	long	M0100	%8.0f	"Control number"
+_column(12)	str4	M0101	%4s	"Deceased person's order number"
+_column(16)	double	M0110	%16.13f	"Sampling weight (Public version)"
+_column(32)	str2	M0120	%2s	"Census sector setting"
+_column(34)	str2	M0130	%2s	"Type of unit visited"
+_column(36)	str1	M0140	%1s	"Household situation (urban/rural)"
+_column(37)	str1	M0150	%1s	"Ano de ocorrência do óbito de morador do domicílio, categoria"
+_column(38)	str1	M0160	%1s	"Sexo da pessoa falecida do domicílio, categoria"
+_column(39)	str2	M0170	%2s	"Pessoa falecida, idade calculada, categoria"
+_column(41)	str1	MM0150	%1s	"MARCA DE IMPUTAÇÃO NA M0150  "
+_column(42)	str1	MM0160	%1s	"MARCA DE IMPUTAÇÃO NA M0160  "
+_column(43)	str1	MM0170	%1s	"MARCA DE IMPUTAÇÃO NA M0170  "
+}

@@ -105,7 +105,7 @@ Este item foi investigado em 1980, 1991, 2010 e 2022. Em 1980 e 1991, as alterna
 
 Como em 2022 não havia a categoria 'Palha', criou-se outra variável que juntava a alternativa 'palha' à categoria 'outro material', disponível para os quatro anos: 1980, 1991, 2010 e 2022.
 \begin{itemize}
-  \item \vr{paredes_B} = 1 - Alvenaria
+  \item \vr{paredes\_B} = 1 - Alvenaria
   \item = 2 - Madeira aparelhada
   \item = 3 - Taipa não revestida
   \item = 4 - Material aproveitado
@@ -967,5 +967,84 @@ A variável ‘\vr{peso\_pess}’ registra o peso amostral da pessoa. Esta vari�
 
 \subsection{Número de moradores da família}\label{sec:d13}
 As variáveis ‘\vr{n\_pes\_fam}’, ‘\vr{n\_homem\_fam}’ e ‘\vr{n\_mulher\_fam}’ indicam o número total de moradores da família, o número de moradores do sexo masculino e o número de moradores do sexo feminino, respectivamente. Essas variáveis não estão presentes no arquivo de domicílios compatibilizado, uma vez que pode haver mais de uma família por domicílio.
+
+\section{Compatibilização de dados de mortalidade}
+
+A investigação sobre óbitos ocorridos no domicílio em período recente foi realizada nos Censos Demográficos de 2010 e 2022. Os microdados de mortalidade desses dois censos contêm informações a respeito dos indivíduos falecidos pertencentes aos domicílios entrevistados na amostra.
+
+O pacote \texttt{datazoom\_censo} permite extrair e compatibilizar essas bases através da opção \texttt{mort} combinada com \texttt{comp}. As principais variáveis construídas e suas decisões de compatibilização são apresentadas a seguir.
+
+\subsection{Identificação e localização geográfica}
+\begin{itemize}
+  \item \vr{ano}: ano da pesquisa (2010 e 2022).
+  \item \vr{UF}: unidade da federação onde residia a pessoa falecida (códigos IBGE de 11 a 53).
+  \item \vr{regiao}: grande região geográfica (1 -- Norte, 2 -- Nordeste, 3 -- Sudeste, 4 -- Sul, 5 -- Centro-Oeste).
+  \item \vr{id\_dom}: controle de identificação do domicílio (compatível com o \vr{id\_dom} das bases de domicílios e pessoas do respectivo censo).
+  \item \vr{ordem\_falec}: número de ordem da pessoa falecida no domicílio (disponível no Censo 2022 a partir de \vr{M0101}).
+  \item \vr{munic}: código do município com 6 dígitos (sem o dígito verificador). Disponível no Censo 2010 e na versão de acesso controlado do Censo 2022 (\vr{M0080}).
+  \item \vr{area\_ponderacao}: área de ponderação geográfica. Disponível no Censo 2010 e no acesso controlado de 2022 (\vr{M0090}).
+  \item \vr{mesorregiao} e \vr{microrregiao}: divisões regionais geográficas, disponíveis no Censo 2010 e no acesso controlado do Censo 2022.
+\end{itemize}
+
+\subsection{Situação do domicílio}
+A variável ‘\vr{sit\_dom}’ classifica o domicílio onde ocorreu o óbito segundo a situação censitária (urbano ou rural). No Censo 2010 (\vr{v1006}) e no Censo 2022 (\vr{M0140}), as categorias originais (1 -- Urbana, 2 -- Rural) foram recodificadas seguindo a convenção padrão de variáveis binárias (dummies) do Data Zoom:
+\begin{itemize}
+  \item \vr{sit\_dom} = 1 -- Urbana
+  \item 0 -- Rural
+\end{itemize}
+
+\subsection{Sexo da pessoa falecida}
+A variável ‘\vr{sexo\_falec}’ registra o sexo do falecido, padronizada conforme as convenções do pacote:
+\begin{itemize}
+  \item \vr{sexo\_falec} = 0 -- Feminino
+  \item 1 -- Masculino
+  \item 9 -- Ignorado
+\end{itemize}
+No Censo 2010 (\vr{v0704}) e no Censo 2022 (\vr{M0160}), a categoria 2 (feminino) foi recodificada para 0, mantendo 1 para masculino e 9 para ignorado.
+
+\subsection{Idade e faixa etária da pessoa falecida}
+No Censo 2010, os microdados fornecem a idade contínua em anos completos (\vr{v7051}) e, para menores de 1 ano, a idade em meses (\vr{v7052}). No Censo 2022, a divulgação pública disponibiliza a idade agrupada em 17 faixas etárias quinquenais e a categoria ignorada (\vr{M0170}), enquanto a idade contínua (\vr{M0171}) restringe-se ao acesso controlado.
+
+Para assegurar perfeita comparabilidade direta entre os Censos de 2010 e 2022 (inclusive na versão de acesso público), construiu-se a variável categórica padronizada ‘\vr{faixa\_etaria\_falec}’, compatibilizada a partir da idade em anos de 2010 e das faixas de 2022:
+\begin{itemize}
+  \item 1 -- 0 a 4 anos
+  \item 2 -- 5 a 9 anos
+  \item 3 -- 10 a 14 anos
+  \item 4 -- 15 a 19 anos
+  \item 5 -- 20 a 24 anos
+  \item 6 -- 25 a 29 anos
+  \item 7 -- 30 a 34 anos
+  \item 8 -- 35 a 39 anos
+  \item 9 -- 40 a 44 anos
+  \item 10 -- 45 a 49 anos
+  \item 11 -- 50 a 54 anos
+  \item 12 -- 55 a 59 anos
+  \item 13 -- 60 a 64 anos
+  \item 14 -- 65 a 69 anos
+  \item 15 -- 70 a 74 anos
+  \item 16 -- 75 a 79 anos
+  \item 17 -- 80 anos ou mais
+  \item 99 -- Idade ignorada
+\end{itemize}
+Além disso, as variáveis contínuas ‘\vr{idade\_anos\_falec}’ (anos) e ‘\vr{idade\_meses\_falec}’ (meses para menores de 1 ano) são disponibilizadas quando presentes nos dados originais.
+
+\subsection{Data do falecimento}
+O período de referência para investigação de mortalidade abrange os meses que antecederam a data de referência de cada censo (aproximadamente os 12 meses anteriores mais os meses do ano corrente da pesquisa):
+\begin{itemize}
+  \item ‘\vr{ano\_falec}’: ano calendário de ocorrência do falecimento, padronizado com os códigos 1 (ano anterior: 2009 no Censo 2010 / 2019 no Censo 2022), 2 (2010 no Censo 2010 / 2020 no Censo 2022), 3 (2021 no Censo 2022), 4 (2022 no Censo 2022) e 9 (ignorado).
+  \item ‘\vr{mes\_ano\_falec}’: código detalhado de mês e ano do falecimento, disponível no Censo 2010 (\vr{v0703}) e no acesso controlado de 2022 (\vr{M0151}).
+\end{itemize}
+
+\subsection{Marcas de imputação}
+Ambos os censos investigam e indicam se determinadas informações foram objeto de imputação pelo IBGE. Criaram-se variáveis indicadoras padronizadas (0 -- Não imputado, 1 -- Imputado):
+\begin{itemize}
+  \item \vr{marca\_imput\_data}: marca de imputação na data do óbito (\vr{m0703} em 2010; \vr{MM0150}/\vr{MM0151} em 2022).
+  \item \vr{marca\_imput\_sexo}: marca de imputação no sexo (\vr{m0704} em 2010; \vr{MM0160} em 2022).
+  \item \vr{marca\_imput\_idade}: marca de imputação na idade ao falecer (\vr{m7051}/\vr{m7052} em 2010; \vr{MM0170}/\vr{MM0171} em 2022).
+\end{itemize}
+
+\subsection{Fator de ponderação}
+A variável ‘\vr{peso\_amostral}’ traz o peso calibrado de expansão amostral do domicílio e de seus respectivos eventos de mortalidade (\vr{v0010} em 2010; \vr{M0110} na versão pública de 2022 e \vr{M0111} na versão controlada de 2022).
+
 
 \end{document}
