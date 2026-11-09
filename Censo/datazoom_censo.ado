@@ -1988,8 +1988,7 @@ foreach ano in `years' {
 					lab var munic "municipality codes without DV (6 digits)"
 
 					if "`comp'" != "" {
-						di as err "Compatibilização não disponível para opção Mortalidade"
-						exit
+						compat_censo10mort
 					}
 					tempfile CENSO10_`UF'_mort_`suf'
 					save `CENSO10_`UF'_mort_`suf'', replace
@@ -2012,9 +2011,11 @@ foreach ano in `years' {
 						use `CENSO10_`UF'_mort_`suf'', clear
 						/* Se não for o primeiro arquivo, junta com o anterior */
 						if "`suf'" != word(`"`sufixos'"', 1) {
-							append using CENSO10_`UF'_mort
+							if "`comp'"~= "" append using CENSO10_`UF'_mort_comp
+							else append using CENSO10_`UF'_mort
 						}
-						save CENSO10_`UF'_mort, replace
+						if "`comp'"~="" save CENSO10_`UF'_mort_comp, replace
+						else save CENSO10_`UF'_mort, replace
 					}
 					if "`pes'"~="" {
 						use `CENSO10_`UF'_pes_`suf'', clear
@@ -2279,7 +2280,7 @@ else if `ano' == 2022 {
 					}
 				}
 
-				/* 4. LEITURA DE MORTALIDADE */
+				/* leitura para o dataset de mortalidade */
 				if "`mort'" != "" {
 					display as input "Extraindo `ano' `UF' - `suf' (Mortalidade) ..."
 					if "`pub22'" != "" {
@@ -2291,6 +2292,9 @@ else if `ano' == 2022 {
 						}
 						gen ano = 2022
 						label_censo22, registro(mort) `pub22' `con22' `english'
+						if "`comp'" != "" {
+							compat_censo22mort, `pub22' `con22'
+						}
 						tempfile CENSO22_`UF'_mort_`suf'
 						save `CENSO22_`UF'_mort_`suf'', replace
 					}
@@ -2307,17 +2311,33 @@ else if `ano' == 2022 {
 						destring munic, replace
 						replace munic = int(munic/10)
 						lab var munic "municipality codes without DV (6 digits)"
+						if "`comp'" != "" {
+							compat_censo22mort, `pub22' `con22'
+						}
 						tempfile CENSO22_`UF'_mort_`suf'
 						save `CENSO22_`UF'_mort_`suf'', replace
 					}
 					
+					/* Salvamento / append de mortalidade */
 					use `CENSO22_`UF'_mort_`suf'', clear
 					if "`suf'" != word(`"`sufixos'"', 1) {
-						if "`pub22'" != "" append using CENSO22_`UF'_mort_pub
-						else if "`con22'" != "" append using CENSO22_`UF'_mort_con
+						if "`pub22'" != "" {
+							if "`comp'" != "" append using CENSO22_`UF'_mort_pub_comp
+							else append using CENSO22_`UF'_mort_pub
+						}
+						else if "`con22'" != "" {
+							if "`comp'" != "" append using CENSO22_`UF'_mort_con_comp
+							else append using CENSO22_`UF'_mort_con
+						}
 					}
-					if "`pub22'" != "" save CENSO22_`UF'_mort_pub, replace
-					else if "`con22'" != "" save CENSO22_`UF'_mort_con, replace
+					if "`pub22'" != "" {
+						if "`comp'" != "" save CENSO22_`UF'_mort_pub_comp, replace
+						else save CENSO22_`UF'_mort_pub, replace
+					}
+					else if "`con22'" != "" {
+						if "`comp'" != "" save CENSO22_`UF'_mort_con_comp, replace
+						else save CENSO22_`UF'_mort_con, replace
+					}
 				}
 
 			} // fim do foreach suf
@@ -2687,6 +2707,8 @@ if "`english'" != "" {
     }
 }
 else {
+
+label var ano "ano da pesquisa"
 if "`registro'" == "dom" {
     label var D0010 "Grande Região"
     label var D0020 "Unidade da Federação"
@@ -3998,6 +4020,205 @@ end
 **************
 * CENSO 2022 *
 **************
+
+
+********************************************************************************
+* COMPATIBILIZAÇÃO MORTALIDADE 2022
+********************************************************************************
+
+program define compat_censo22mort
+syntax, [pub22 con22]
+
+if ("`pub22'" == "") == ("`con22'" == "") {
+	di as err "Especifique exatamente uma versão dos microdados de 2022: pub22 ou con22"
+	exit 198
+}
+
+/* Identificação geográfica e do domicílio */
+rename M0020 UF
+lab var UF "unidade da federação"
+
+rename M0010 regiao
+lab var regiao "região geográfica"
+
+rename M0100 id_dom
+lab var id_dom "identificação do domicílio"
+
+rename M0101 ordem_falec
+lab var ordem_falec "número de ordem da pessoa falecida no domicílio"
+
+/* Situação do domicílio */
+recode M0140 (2=0) (1=1)
+rename M0140 sit_dom
+lab var sit_dom "situação do domicílio"
+
+/* Sexo da pessoa falecida */
+recode M0160 (2=0) (1=1) (9=9)
+rename M0160 sexo_falec
+lab var sexo_falec "sexo da pessoa falecida"
+
+/* Faixa etária */
+rename M0170 faixa_etaria_falec
+lab var faixa_etaria_falec "faixa etária da pessoa falecida"
+
+/* Variáveis específicas por tipo de acesso */
+if "`pub22'" != "" {
+	rename M0110 peso_amostral
+	lab var peso_amostral "fator de ponderação/peso amostral"
+	
+	rename M0150 ano_falec
+	lab var ano_falec "ano de ocorrência do falecimento"
+	
+	rename MM0150 marca_imput_data
+	lab var marca_imput_data "marca de imputação na data do falecimento"
+	
+	rename MM0160 marca_imput_sexo
+	lab var marca_imput_sexo "marca de imputação no sexo da pessoa falecida"
+	
+	rename MM0170 marca_imput_idade
+	lab var marca_imput_idade "marca de imputação na idade ao falecer"
+	
+	/* Descarte de variáveis não compatibilizadas */
+	cap drop M0120 M0130
+}
+else if "`con22'" != "" {
+	rename M0111 peso_amostral
+	lab var peso_amostral "fator de ponderação/peso amostral"
+	
+	rename M0150 ano_falec
+	lab var ano_falec "ano de ocorrência do falecimento"
+	
+	rename M0151 mes_ano_falec
+	lab var mes_ano_falec "mês e ano de ocorrência do falecimento"
+	
+	rename M0171 idade_anos_falec
+	lab var idade_anos_falec "idade ao falecer (em anos completos)"
+	
+	rename M0090 area_ponderacao
+	lab var area_ponderacao "área de ponderação"
+	
+	rename M0030 mesorregiao
+	lab var mesorregiao "mesorregião geográfica"
+	
+	rename M0040 microrregiao
+	lab var microrregiao "microrregião geográfica"
+	
+	rename MM0150 marca_imput_data
+	lab var marca_imput_data "marca de imputação na data do falecimento"
+	
+	rename MM0160 marca_imput_sexo
+	lab var marca_imput_sexo "marca de imputação no sexo da pessoa falecida"
+	
+	rename MM0170 marca_imput_idade
+	lab var marca_imput_idade "marca de imputação na idade ao falecer"
+	
+	/* Descarte de variáveis não compatibilizadas */
+	cap drop M0050 M0060 M0070 M0080 M0120 M0130 MM0151 MM0171
+}
+
+/* Ordenação padrão */
+cap order ano UF regiao munic id_dom ordem_falec sit_dom sexo_falec faixa_etaria_falec ano_falec
+
+end
+
+
+********************************************************************************
+* COMPATIBILIZAÇÃO MORTALIDADE 2010
+********************************************************************************
+
+program define compat_censo10mort
+
+/* Identificação geográfica e do domicílio */
+rename v0001 UF
+lab var UF "unidade da federação"
+
+rename v1001 regiao
+lab var regiao "região geográfica"
+
+rename v0300 id_dom
+lab var id_dom "identificação do domicílio"
+
+/* Situação do domicílio */
+recode v1006 (2=0) (1=1)
+rename v1006 sit_dom
+lab var sit_dom "situação do domicílio"
+
+/* Sexo da pessoa falecida */
+recode v0704 (2=0) (1=1) (9=9)
+rename v0704 sexo_falec
+lab var sexo_falec "sexo da pessoa falecida"
+
+/* Idades */
+rename v7051 idade_anos_falec
+lab var idade_anos_falec "idade ao falecer (em anos completos)"
+
+rename v7052 idade_meses_falec
+lab var idade_meses_falec "idade ao falecer das crianças menores de 1 ano (em meses)"
+
+/* Faixa etária compatível com 2022 (M0170) */
+gen faixa_etaria_falec = .
+replace faixa_etaria_falec = 1 if idade_anos_falec >= 0 & idade_anos_falec <= 4
+replace faixa_etaria_falec = 2 if idade_anos_falec >= 5 & idade_anos_falec <= 9
+replace faixa_etaria_falec = 3 if idade_anos_falec >= 10 & idade_anos_falec <= 14
+replace faixa_etaria_falec = 4 if idade_anos_falec >= 15 & idade_anos_falec <= 19
+replace faixa_etaria_falec = 5 if idade_anos_falec >= 20 & idade_anos_falec <= 24
+replace faixa_etaria_falec = 6 if idade_anos_falec >= 25 & idade_anos_falec <= 29
+replace faixa_etaria_falec = 7 if idade_anos_falec >= 30 & idade_anos_falec <= 34
+replace faixa_etaria_falec = 8 if idade_anos_falec >= 35 & idade_anos_falec <= 39
+replace faixa_etaria_falec = 9 if idade_anos_falec >= 40 & idade_anos_falec <= 44
+replace faixa_etaria_falec = 10 if idade_anos_falec >= 45 & idade_anos_falec <= 49
+replace faixa_etaria_falec = 11 if idade_anos_falec >= 50 & idade_anos_falec <= 54
+replace faixa_etaria_falec = 12 if idade_anos_falec >= 55 & idade_anos_falec <= 59
+replace faixa_etaria_falec = 13 if idade_anos_falec >= 60 & idade_anos_falec <= 64
+replace faixa_etaria_falec = 14 if idade_anos_falec >= 65 & idade_anos_falec <= 69
+replace faixa_etaria_falec = 15 if idade_anos_falec >= 70 & idade_anos_falec <= 74
+replace faixa_etaria_falec = 16 if idade_anos_falec >= 75 & idade_anos_falec <= 79
+replace faixa_etaria_falec = 17 if idade_anos_falec >= 80 & idade_anos_falec < 999
+replace faixa_etaria_falec = 99 if idade_anos_falec == 999 | missing(idade_anos_falec)
+lab var faixa_etaria_falec "faixa etária da pessoa falecida"
+
+/* Mês e ano de falecimento */
+rename v0703 mes_ano_falec
+lab var mes_ano_falec "mês e ano de ocorrência do falecimento"
+
+/* Ano de falecimento (1 = 2009, 2 = 2010, 9 = Ignorado) */
+gen ano_falec = .
+replace ano_falec = 1 if mes_ano_falec >= 109 & mes_ano_falec <= 1209
+replace ano_falec = 2 if mes_ano_falec >= 110 & mes_ano_falec <= 710
+replace ano_falec = 9 if mes_ano_falec == 9999 | missing(mes_ano_falec)
+lab var ano_falec "ano de ocorrência do falecimento"
+
+/* Variáveis geográficas e pesos */
+rename v0010 peso_amostral
+lab var peso_amostral "fator de ponderação/peso amostral"
+
+rename v0011 area_ponderacao
+lab var area_ponderacao "área de ponderação"
+
+rename v1002 mesorregiao
+lab var mesorregiao "mesorregião geográfica"
+
+rename v1003 microrregiao
+lab var microrregiao "microrregião geográfica"
+
+/* Marcas de imputação */
+rename m0703 marca_imput_data
+lab var marca_imput_data "marca de imputação na data do falecimento"
+
+rename m0704 marca_imput_sexo
+lab var marca_imput_sexo "marca de imputação no sexo da pessoa falecida"
+
+rename m7051 marca_imput_idade
+lab var marca_imput_idade "marca de imputação na idade ao falecer"
+
+/* Descarte de variáveis não utilizadas */
+cap drop v0002 v1004 m7052
+
+/* Ordenação padrão */
+cap order ano UF regiao munic id_dom sit_dom sexo_falec faixa_etaria_falec ano_falec
+
+end
+
 program define compat_censo22dom
 syntax, [pub22 con22]
 
