@@ -2120,8 +2120,6 @@ else if `ano' == 2022 {
 							read_compdct, compdct("`dict_file'") dict_name("censo2022pes_con`lang'") out("`dic'")
 							infile using `dic', using("`original'/Pessoas_`suf'_controlado.txt") clear
 						}
-						format P0970 %04.0f
-						format P0980 %05.0f
 						gen ano = 2022
 						label_censo22, registro(pess) `pub22' `con22' `english'
 
@@ -4500,6 +4498,18 @@ if ("`pub22'" == "") == ("`con22'" == "") {
 	exit 198
 }
 
+* O TXT guarda varios codigos como texto. A compatibilizacao usa valores numericos.
+if "`con22'" != "" {
+	local numericas P0010 P0020 P0100 P0101 P0111 P0140 P0160 P0170 P0181 P0190 ///
+		P0200 P0210 P0280 P0290 P0320 P0330 P0340 P0350 P0360 P0370 P0381 ///
+		P0411 P0420 P0430 P0440 P0460 P0480 P0490 P0510 P0520 P0530 P0540 P0550 ///
+		P0570 P0580 P0590 P0610 P0620 P0630 P0640 P0650 P0660 P0670 P0680 P0700 ///
+		P0720 P0730 P0750 P0790 P0800 P0840 P0850 P0860 P0870 P0880 P0890 P0900 ///
+		P0930 P0940 P0970 P0980 P0990 P1000 P1050 P1080 P1100 P1110 P1120
+	quietly destring `numericas', replace
+	confirm numeric variable `numericas'
+}
+
 /* A. ANO */
 * Essa variável é definida antes de chamar este programa.
 
@@ -4525,8 +4535,12 @@ if "`pub22'" != "" {
 } */
 	else di as err "Versão dos microdados de 2022 não especificada: peso amostral não renomeado para peso_pess"
 
-replace P0115 = subinstr(P0115, "F", "", .) if !missing(P0115)
-destring P0115, replace
+capture confirm string variable P0115
+if !_rc {
+	replace P0115 = subinstr(P0115, "F", "", .) if !missing(P0115)
+	destring P0115, replace
+}
+confirm numeric variable P0115
 rename P0115 num_fam
 lab var num_fam "número da família"
 
