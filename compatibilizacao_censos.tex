@@ -448,7 +448,7 @@ Os dados compatibilizados com 1980, por sua vez, apresentam:
 onde os indivíduos classificados como indígenas ente 1991 e 2022 foram reclassificados como pardos.
 
 \subsection{Religião}\label{sec:d5}
-O número de categorias cresceu a cada Censo. Desde 1980, entretanto, manteve-se a possibilidade de agregar as denominações nos grupos representados pela seguinte variável:
+O número de categorias cresceu a cada Censo. De 1980 a 2010, as denominações foram agregadas nos grupos representados pela seguinte variável:
 \begin{itemize}
   \item \vr{religiao} = 0 - sem religião
   \item 1 - católica
@@ -461,6 +461,18 @@ O número de categorias cresceu a cada Censo. Desde 1980, entretanto, manteve-se
   \item 8 - outras religiões
 \end{itemize}
 
+Em 2022, não foi possível distinguir os tipos de denominação evangélica, tendo sido criada a variável:
+\begin{itemize}
+  \item \vr{religiao\_A} = 0 - sem religião
+  \item 1 - católica
+  \item 2 - evangélica 
+  \item 3 - espírita kardecista
+  \item 4 - espírita afro-brasileira
+  \item 5 - religiões orientais
+  \item 6 - judaica/israelita
+  \item 7 - outras religiões
+\end{itemize}
+
 Para tornar a informação compatível com a de 1970 foi necessário agregar ainda mais as categorias, fazendo-as corresponder às classificações disponíveis naquele ano:
 \begin{itemize}
   \item \vr{religiao\_B} = 0 - sem religião
@@ -471,11 +483,11 @@ Para tornar a informação compatível com a de 1970 foi necessário agregar ain
 \end{itemize}
 
 \subsection{Deficiência física e mental}\label{sec:d6}
-Os Censos 1991, 2000 e 2010 investigaram o tema. Em 1991 foi investigada a presença de sete tipos de deficiência, para indivíduos afetados por apenas um deles, ou registrada a ocorrência de “mais de um”, neste caso sendo impossível avaliar quais são estes problemas.
+Os Censos 1991, 2000, 2010 e 2022 investigaram o tema. Em 1991 foi investigada a presença de sete tipos de deficiência, para indivíduos afetados por apenas um deles, ou registrada a ocorrência de “mais de um”, neste caso sendo impossível avaliar quais são estes problemas.
 
-Nos Censos 2000 e 2010, um questionário mais abrangente foi aplicado, com questões individuais para indicar a ocorrência de cada tipo de deficiência, além de avaliar a intensidade de algumas delas. Por exemplo, enquanto em 1991 somente se avaliava a presença de cegueira total, em 2000 há também dois níveis intermediários de “dificuldade de enxergar”. Por outro lado, o questionário de 2000 reúne os três tipos de paralisia e a ausência de membro (ou parte) numa mesma questão e aponta apenas a deficiência mais grave. Assim, se um indivíduo, além de paraplégico, também tenha perdido um membro, só a paralisia é indicada.
+Nos Censos 2000, 2010 e 2022, um questionário mais abrangente foi aplicado, com questões individuais para indicar a ocorrência de cada tipo de deficiência, além de avaliar a intensidade de algumas delas. Por exemplo, enquanto em 1991 somente se avaliava a presença de cegueira total, em 2000 há também dois níveis intermediários de “dificuldade de enxergar”. Por outro lado, o questionário de 2000 reúne os três tipos de paralisia e a ausência de membro (ou parte) numa mesma questão e aponta apenas a deficiência mais grave. Assim, se um indivíduo, além de paraplégico, também tenha perdido um membro, só a paralisia é indicada.
 
-Por conta dessas diferenças, optou-se por não compatibilizar 1991 com os demais anos. Para 2000 e 2010, têm-se as seguintes variáveis que indicam o grau de dificuldade de enxergar, ouvir e caminhar:
+Por conta dessas diferenças, optou-se por não compatibilizar 1991 com os demais anos. Para 2000, 2010 e 2022, têm-se as seguintes variáveis que indicam o grau de dificuldade de enxergar, ouvir e caminhar:
 \begin{itemize}
   \item \vr{dif\_enxergar}, \vr{dif\_ouvir}, \vr{dif\_caminhar} = 1 não consegue de modo algum
   \item 2 grande dificuldade
@@ -490,7 +502,7 @@ Além disso, existe a variável indicadora de deficiência mental:
 \end{itemize}
 
 \subsection{Naturalidade e migração}\label{sec:d7}
-\textbf{Condição de migrante} -- Desde 1980, é possível saber se o indivíduo sempre morou no mesmo município. Em 1970 não é possível distinguir os indivíduos que sempre residiram em um município daqueles que, tendo morado em outras localidades, voltaram a residir no município onde nasceram. Assim, nos dados de 1980, 1991, 2000 e 2010 foi construída:
+\textbf{Condição de migrante} -- Desde 1980, é possível saber se o indivíduo sempre morou no mesmo município. Em 1970 não é possível distinguir os indivíduos que sempre residiram em um município daqueles que, tendo morado em outras localidades, voltaram a residir no município onde nasceram. Assim, nos dados de 1980, 1991, 2000, 2010 e 2022 foi construída:
 \begin{itemize}
   \item \vr{sempre\_morou} = 0 - não
   \item 1 - sim
@@ -522,7 +534,7 @@ Para quem não nasceu na UF de residência, é informada a unidade da federaçã
   \item \vr{pais\_nascim} = 30-98 código do país estrangeiro
 \end{itemize}
 
-Finalmente, em 1991, 2000 e 2010, foi investigado ainda o ano em que cada estrangeiro fixou residência no país, registrado na variável ‘\vr{ano\_fix\_res}’.
+Finalmente, em 1991, 2000, 2010 e 2022, foi investigado ainda o ano em que cada estrangeiro fixou residência no país, registrado na variável ‘\vr{ano\_fix\_res}’.
 
 \textbf{Última migração/tempo de moradia} -- Em 1970, o tempo de moradia no município somente foi investigado para quem não nasceu no município de residência atual (na época da pesquisa). Ou seja, ao contrário dos outros anos, em 1970, para aqueles que nasceram, migraram e eventualmente retornaram ao município natal, não foi coletada essa informação. Já em 1980, infelizmente, os intervalos de tempo de moradia são diferentes daqueles observados em 1970. A partir de 1991, a variável passa a ser contínua, sendo registrada em ‘\vr{anos\_mor\_mun}’. Assim, para todos os anos, exceto 1980, foi construída:
 \begin{itemize}
@@ -550,13 +562,13 @@ E, exceto para 1970:
 
 Note que, para obter uma variável compatível com intervalos idênticos para todos os anos, basta recodificar as variáveis acima para criar a alternativa “6 anos ou mais”. Importante: para obter uma estatística compatível para todos os anos, é necessário considerar ‘\vr{nasceu\_mun}’ igual a zero, de modo a obter a mesma amostra pesquisada em 1970. Caso 1970 seja desconsiderado, esse procedimento não se faz necessário.
 
-Os procedimentos adotados para o tempo de moradia na UF de residência atual variam ao longo dos anos. Em 1970, há informação somente para quem não nasceu no município, mas a pessoa que nasceu e sempre morou na UF de residência atual é obrigada a escolher alguma alternativa, quer será aquela que representa sua idade.
+Os procedimentos adotados para o tempo de moradia na UF de residência atual variam ao longo dos anos. Em 1970, há informação somente para quem não nasceu no município, mas a pessoa que nasceu e sempre morou na UF de residência atual é obrigada a escolher alguma alternativa, que será aquela que representa sua idade.
 
 Em 1980, para esse caso há a alternativa “nasceu”, que deve ser assinalada para aqueles que nasceram e sempre moraram na UF. Esse procedimento é equivalente ao adotado em 2010, embora por meio da aplicação de um questionário distinto, isto é, em 2010, quem nasceu e sempre morou na UF de residência não é questionado quanto ao tempo de moradia na UF.
 
-Em 1991, a pessoa indica o número de anos que mora na UF, mesmo tendo nascido e sempre morado na UF de residência. A diferença para 1970 é o fato de terem ou não nascido no município de residência: enquanto em 1970 somente aqueles que não nasceram no município são questionados, em 1991, aqueles que nasceram, mas nem sempre moraram, no município também respondem ao quesito. Em 2000, apesar das diferenças no questionário, o resultado é qualitativamente igual ao de 1991, ou seja, mesmo aqueles que nasceram e sempre moraram na UF devem indicar o tempo de moradia na UF de residência.
+Em 1991, a pessoa indica o número de anos que mora na UF, mesmo tendo nascido e sempre morado na UF de residência. A diferença para 1970 é o fato de terem ou não nascido no município de residência: enquanto em 1970 somente aqueles que não nasceram no município são questionados, em 1991, aqueles que nasceram, mas nem sempre moraram, no município também respondem ao quesito. Em 2000, apesar das diferenças no questionário, o resultado é qualitativamente igual ao de 1991, ou seja, mesmo aqueles que nasceram e sempre moraram na UF devem indicar o tempo de moradia na UF de residência. Em 2022, não foi investigado o tempo de moradia na UF da pessoa.
 
-Como em 1970 a variável não é contínua, não é possível separar quem nasceu e sempre morou na UF de quem eventualmente migrou. Assim, optou-se por adaptar os Censos 1980 e 2010 aos demais, considerando a idade como o tempo de moradia na UF para quem não há informação. Além da variável contínua ‘\vr{anos\_mor\_UF}’ para 1991, 2000 e 2010, foi criada para todos os anos, exceto 1980:
+Como em 1970 a variável não é contínua, não é possível separar quem nasceu e sempre morou na UF de quem eventualmente migrou. Assim, optou-se por adaptar os Censos 1980 e 2010 aos demais, considerando a idade como o tempo de moradia na UF para quem não há informação. Além da variável contínua ‘\vr{anos\_mor\_UF}’ para 1991, 2000 e 2010, foi criada para os anos 1970, 1991, 2000 e 2010:
 \begin{itemize}
   \item \vr{t\_mor\_UF\_70} = 0 - menos de 1 ano
   \item 1 - 1 ano
@@ -568,7 +580,7 @@ Como em 1970 a variável não é contínua, não é possível separar quem nasce
   \item 7 - 11 anos ou mais
 \end{itemize}
 
-E, exceto para 1970:
+E para 1980, 1991, 2000 e 2010:
 \begin{itemize}
   \item \vr{t\_mor\_UF\_80} = 0 - menos de 1 ano
   \item 1 - 1 ano
@@ -582,7 +594,7 @@ E, exceto para 1970:
 
 Vale lembrar que há duas variáveis por causa da diferença nos intervalos. Novamente, para incluir 1970, devem-se considerar apenas os indivíduos para os quais ‘\vr{nasceu\_mun}’ é igual a zero.
 
-Também foram investigados o município, a UF e o país de residência anterior para quem migrou há menos de 10 anos. Porém, essa investigação variou ao longo do tempo. Apenas em 1991 e 2010 foram pesquisadas as três localidades. Em 1970 e 2000, não foi pesquisado o município. E em 1980, apesar de haver esse quesito no questionário, nos microdados não consta uma variável indicando o país de residência anterior. Note-se ainda que, em 1970, não vale a restrição de tempo de migração, ou seja, mesmo quem migrou há 10 anos ou mais respondem aos quesitos de local de residência anterior. Aliado ao fato de que somente respondem ao tema de migração aqueles que não nasceram no município, deve-se avaliar cuidadosamente a utilização das variáveis abaixo para 1970. Os códigos dos países são os mesmos utilizados em 1970, de tal forma que países que se desmembraram foram reagrupados nessa compatibilização.
+Também foram investigados o município, a UF e o país de residência anterior para quem migrou há menos de 10 anos. Porém, essa investigação variou ao longo do tempo. Apenas em 1991, 2010 e 2022 foram pesquisadas as três localidades. Em 1970 e 2000, não foi pesquisado o município. E em 1980, apesar de haver esse quesito no questionário, nos microdados não consta uma variável indicando o país de residência anterior. Note-se ainda que, em 1970, não vale a restrição de tempo de migração, ou seja, mesmo quem migrou há 10 anos ou mais respondem aos quesitos de local de residência anterior. Aliado ao fato de que somente respondem ao tema de migração aqueles que não nasceram no município, deve-se avaliar cuidadosamente a utilização das variáveis abaixo para 1970. Os códigos dos países são os mesmos utilizados em 1970, de tal forma que países que se desmembraram foram reagrupados nessa compatibilização.
 \begin{itemize}
   \item \vr{mun\_mor\_ant} = códigos dos municípios
   \item \vr{UF\_mor\_ant} = 11-53 código da UF em que morava
