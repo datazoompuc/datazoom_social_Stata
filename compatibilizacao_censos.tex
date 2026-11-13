@@ -620,7 +620,7 @@ Em todos os anos, a alfabetização de cada indivíduo com cinco anos de idade o
   \item 1 - sim
 \end{itemize}
 
-Com respeito à escolaridade, sempre foi pesquisada a frequência à escola, embora o conteúdo deste quesito tenha se modificado ao longo do tempo. Em todos os anos, foram excluídos cursos rápidos de especialização profissional e cursos de extensão cultural. Foi considerado como frequência à escola o fato de o indivíduo estar regularmente matriculado, ainda que afastado por motivos como doença ou férias escolares. Em 1970, excluíram-se também os indivíduos que apenas frequentavam jardim de infância. Este grupo passou a ser considerado como frequentador de escola em 1980 e 1991, anos em que, por outro lado, não se considerava atendimento a creche. Além disso, em 1980, foi considerada a “frequência” das pessoas que assistiam a aulas ministradas por rádio ou TV como forma de preparação para exame de aptidão escolar, condição desconsiderada nos anos seguintes. No Censo 2000 foi investigada simultaneamente a frequência a creche ou escola. Finalmente, no Censo 2010, a frequência a cursos pré-vestibulares foi desconsiderada.
+Com respeito à escolaridade, sempre foi pesquisada a frequência à escola, embora o conteúdo deste quesito tenha se modificado ao longo do tempo. Em todos os anos, foram excluídos cursos rápidos de especialização profissional e cursos de extensão cultural. Foi considerado como frequência à escola o fato de o indivíduo estar regularmente matriculado, ainda que afastado por motivos como doença ou férias escolares. Em 1970, excluíram-se também os indivíduos que apenas frequentavam jardim de infância. Este grupo passou a ser considerado como frequentador de escola em 1980 e 1991, anos em que, por outro lado, não se considerava atendimento a creche. Além disso, em 1980, foi considerada a “frequência” das pessoas que assistiam a aulas ministradas por rádio ou TV como forma de preparação para exame de aptidão escolar, condição desconsiderada nos anos seguintes. No Censo 2000 foi investigada simultaneamente a frequência a creche ou escola. Finalmente, nos Censos 2010 e 2022, a frequência a cursos pré-vestibulares foi desconsiderada.
 
 Por conta dos fatos acima, para construir uma variável compatível em todos os Censos, deve-se considerar aqueles que frequentam creche, pré-escola e curso pré-vestibular como não frequentadores de escola (além daqueles que fazem curso supletivo por rádio e TV em 1980). A variável ‘\vr{freq\_escola}’ foi construída dessa forma.
 \begin{itemize}
@@ -648,9 +648,9 @@ Exceto em 1991, é possível identificar se o aluno frequenta escola no mesmo mu
 
 O nível de escolaridade das pessoas foi investigado de forma distinta em diferentes anos. Em 1970 é perguntada a série mais elevada concluída com aprovação para cada indivíduo. Nos Censos 1980 e 2000, esta informação é pesquisada apenas para indivíduos que não frequentam escola, enquanto os que frequentam informam a série e o grau atualmente cursados. Assim, um indivíduo que se matricula novamente num nível de ensino inferior ao mais elevado que cursou “perde” (no sentido da mensuração efetuada no Censo) esta escolaridade mais avançada. Em 1991 segue-se o procedimento de 1980 e 2000, mas há uma instrução explícita no manual do entrevistador para a recuperação da informação do curso mais elevado em casos como esse.
 
-Logo, nos Censos 1970 e 1991 é possível calcular o número de anos de estudo de cada pessoa, considerando o nível e a série mais altos cursados. Esta é a informação contida na variável ‘\vr{anos\_estudo}’. Para 1980 e 2000 é possível realizar um cálculo alternativo para as pessoas que frequentam escola, considerando como série final aquela que precede imediatamente o nível atualmente cursado. A variável ‘\vr{anos\_estudoB}’ combina esse conteúdo com a informação obtida da primeira forma para os não estudantes.
+Logo, nos Censos 1970 e 1991 é possível calcular o número de anos de estudo de cada pessoa, considerando o nível e a série mais altos cursados. Em 2022, o IBGE disponibiliza já calculado os anos de estudo para todos aqueles que frequentam ou frequentaram escola, sendo apenas recodificada para valores maiores de 16 anos serem classificados como 16 para compatibilizar com 1970 e 1991. Esta é a informação contida na variável ‘\vr{anos\_estudo}’. Para 1980 e 2000 é possível realizar um cálculo alternativo para as pessoas que frequentam escola, considerando como série final aquela que precede imediatamente o nível atualmente cursado. A variável ‘\vr{anos\_estudoB}’ combina esse conteúdo com a informação obtida da primeira forma para os não estudantes.
 
-Em 2010, a mesma “perda” ocorrida em 1980 e 2000 se repete; porém, se o curso frequentado é superior de graduação, o entrevistado responde se já concluiu outro curso de graduação. Por outro lado, tanto para quem frequenta curso superior quanto para quem não frequenta escola, não é investigado qual a série ou o ano atualmente cursado ou mais elevado que fora frequentado anteriormente. Dessa forma, é impossível construir uma variável “contínua” de anos de estudo para 2010. Para haver uma variável de escolaridade para 2010 compatível com outros Censos, criou-se uma variável de grupos de anos de estudo, válida para todos os anos, com exceção de 1970 (já que o cálculo considera a variável \vr{anos\_estudoB}).
+Em 2010, a mesma “perda” ocorrida em 1980 e 2000 se repete; porém, se o curso frequentado é superior de graduação, o entrevistado responde se já concluiu outro curso de graduação. Por outro lado, tanto para quem frequenta curso superior quanto para quem não frequenta escola, não é investigado qual a série ou o ano atualmente cursado ou mais elevado que fora frequentado anteriormente. Dessa forma, é impossível construir uma variável “contínua” de anos de estudo para 2010. Para haver uma variável de escolaridade para 2010 compatível com outros Censos, criou-se uma variável de grupos de anos de estudo, válida para todos os anos, com exceção de 1970.
 \begin{itemize}
   \item \vr{anos\_estudoC} = 0 - sem instrução ou menos de 3 anos de estudo (primário incompleto)
   \item 1 - de 4 a 7 (fundamental/ ginásio/ 1º. Grau/ médio primeiro ciclo incompleto)
@@ -680,7 +680,7 @@ Todos os Censos possuem uma variável indicando o curso superior concluído. Ao 
 \end{itemize}
 
 \subsection{Situação conjugal}\label{sec:d9}
-O Censo 1991 apresenta o questionário mais extenso, investigando duração da situação conjugal atual, e idade em que o indivíduo teve sua primeira união, além do estado conjugal na data da pesquisa. Em 1970 e 1980, somente o estado conjugal foi obtido, embora -- como será discutido adiante -- com uma pequena diferença conceitual. O estado conjugal também pode ser obtido para 2000 e 2010 (como veremos a seguir), de modo que para todos os anos foi construída a variável:
+O Censo 1991 apresenta o questionário mais extenso, investigando duração da situação conjugal atual, e idade em que o indivíduo teve sua primeira união, além do estado conjugal na data da pesquisa. Em 1970 e 1980, somente o estado conjugal foi obtido, embora -- como será discutido adiante -- com uma pequena diferença conceitual. O estado conjugal também pode ser obtido para 2000 e 2010 (como veremos a seguir), de modo que para todos os anos até 2010 foi construída a variável:
 \begin{itemize}
   \item \vr{estado\_conj} = 1 casamento civil e religioso
   \item 2 só casamento civil
@@ -708,7 +708,17 @@ Outra questão a se considerar é que o estado conjugal não foi diretamente inv
 
 Estas regras de atribuição de estado conjugal equivalem às prescritas pelo manual do entrevistador de 1991, exceto por ser impossível distinguir um indivíduo que teve união estável e tenha se separado daquele cujo cônjuge tenha morrido.
 
-Nos dados compatibilizados também consta a variável ‘\vr{vive\_conjuge}’, derivada do estado conjugal, que informa se a pessoa vive em companhia de cônjuge. Para os anos de 1991, 2000 e 2010 (mas não para 1970 e 1980) também foi possível determinar quais indivíduos viveram, em algum momento, em companhia de cônjuge, informação registrada na variável ‘\vr{teve\_conjuge}’.
+Em 2022, não foi investigado diretamente o estado conjugal, mas perguntou-se sobre convivência com cônjuge ou companheiro e natureza da união. Desta forma, combinando-se as informações, construiu-se uma variável mais agregada de estado conjugal, \vr{estado\_conj\_B}, compatível para todos os anos:
+\begin{itemize}
+  \item \vr{estado\_conj\_B} = 1 casamento civil e religioso
+  \item 2 só casamento civil
+  \item 3 só casamento religioso
+  \item 4 união consensual
+  \item 5 solteiro
+  \item 6 outros: separado(a), desquitado(a)/separado(a) judicialmente, divorciado(a), ou viúvo(a)
+\end{itemize}
+
+Nos dados compatibilizados para os anos de 1991, 2000, 2010 e 2022 (mas não para 1970 e 1980) também consta a variável ‘\vr{vive\_conjuge}’, derivada do estado conjugal ou da variável de convivência, que informa se a pessoa vive em companhia de cônjuge, e foi possível determinar quais indivíduos viveram, em algum momento, em companhia de cônjuge, informação registrada na variável ‘\vr{teve\_conjuge}’.
 \begin{itemize}
   \item \vr{vive\_conjuge}, \vr{teve\_conjuge} = 0 - não
   \item 1 - sim
