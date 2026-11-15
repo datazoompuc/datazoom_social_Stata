@@ -5435,6 +5435,13 @@ rename v0201 cond_ocup_C
 *              4 - Cedido por empregador
 *              5 - Cedido de outra forma
 *              6 - Outra Condição
+lab var cond_ocup_C "condição de ocupação do domicílio C"
+
+g dom_pago = 1 if cond_ocup_C == 1
+replace dom_pago = 0 if cond_ocup_C == 2
+lab var dom_pago "dummy para domicílio próprio já pago"
+* dom_pago = 0 - Domicílio próprio em aquisição
+*            1 - Domicílio próprio já pago
 
 /* ALUGUEL */
 rename v2011 aluguel

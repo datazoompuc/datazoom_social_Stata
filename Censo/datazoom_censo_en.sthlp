@@ -105,7 +105,8 @@ two-letter code often used to identify a Brazilian state. State codes: Rondônia
 Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piauí PI, Ceará CE, Rio Grande do Norte RN, 
 Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
 Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
-MT, Goiás GO, Distrito Federal DF.
+MT, Goiás GO, Distrito Federal DF. To extract all states, pass the complete list of abbreviations to the option, for instance:
+{opt ufs(RO AC AM RR PA AP TO MA PI CE RN PB PE AL SE BA MG ES RJ SP PR SC RS MS MT GO DF)}.
 
 {dlgtab:Compatibility}
 
@@ -246,7 +247,7 @@ available for download on our website {browse "https://datazoom.com.br/en":dataz
 
 {phang} 2010
 
-{phang} - prefixes: Amostra_Pessoas_ (for individuals) and Amostra_Domicilios_ (for households)
+{phang} - prefixes: Amostra_Pessoas_ (for individuals), Amostra_Domicilios_ (for households) and Amostra_Mortalidade_ (for mortality)
 
 {phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53 14munic
 
@@ -256,9 +257,9 @@ available for download on our website {browse "https://datazoom.com.br/en":dataz
  
 {phang} 2022
 
-{phang} - prefixes: Pessoas_ (for individuals), Domicilios_ (for households) and Familia_ (for families)
+{phang} - prefixes: Pessoas_ (for individuals), Domicilios_ (for households), Familia_ (for families) and Mortalidade_ (for mortality)
 
-{phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
+{phang} - suffixes: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
 
 {phang} - suffixes (by data access type): _publico (for Public Access data) and _controlado (for Controlled Access data)
 
