@@ -180,7 +180,7 @@ Below is the list of file names expectedby the program until 1999.
 In case user files do not match the list, the program should work once the files are renamed. 
 
 If there are deeper structural differences, the program will not function normally. To check, 
-a dictionary of expected variables is avaliable at www.econ.puc-rio.br/datazoom and can 
+a dictionary of expected variables is avaliable at datazoom.com.br/en/dz_stata/ and can 
 be compared to the dictionary that came with the user files.
 
 {phang} - List of file names: 

@@ -138,12 +138,12 @@ The automated do-file `atualizacao_dict.do` is used to update `dict.dta`.
 
 ## Credits
 
-[Data Zoom](https://www.econ.puc-rio.br/datazoom/)is developed by a team at the PUC-Rio Department of Economics.
+[Data Zoom](https://datazoom.com.br/en/) is developed by a team at the PUC-Rio Department of Economics.
 
 To cite package `datazoom_social`, use:
 
 > Data Zoom (2023). Data Zoom: Simplifying Access To Brazilian Microdata.  
-> https://www.econ.puc-rio.br/datazoom/english/index.html
+> https://datazoom.com.br/en/
 
 Or in BibTeX format:
 
@@ -151,7 +151,7 @@ Or in BibTeX format:
 @Unpublished{DataZoom2023,
 	author = {Data Zoom},
 	title = {Data Zoom: Simplifying Access To Brazilian Microdata},
-	url = {https://www.econ.puc-rio.br/datazoom/english/index.html},
+	url = {https://datazoom.com.br/en/},
 	year = {2023},
 }
 

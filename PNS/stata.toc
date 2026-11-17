@@ -24,7 +24,7 @@ d de uma pesquisa, deflacionar valores monetários, etc. Para facilitar sua util
 d cada programa pode ser executado através de uma interface gráfica incluída em seu
 d pacote.
 d
-d Mais informações disponíveis em www.econ.puc-rio.br/datazoom.
+d Mais informações disponíveis em datazoom.com.br/pt/dz_stata/.
 
 p datazoom_censo Extrai e compatibiliza dados do Censos Demográficos de 1970 a 2010.
 p datazoom_pnad Extrai e compatibiliza dados da PNAD desde 1981.
