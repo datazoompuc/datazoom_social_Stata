@@ -199,7 +199,7 @@ corretamente somente após o usuário renomear seus arquivos de dados adaptando-
 No entanto, é possível que a estrutura dos dados utilizados pelo Data Zoom seja diferente da estrutura 
 dos dados possuídos pelo usuário mesmo no caso em que há apenas diferenças nos nomes aparentemente. Se isso ocorrer, 
 o programa não irá funcionar corretamente. Para verificar se há diferenças estruturais, confira o dicionário de 
-variáveis disponível para download em www.econ.puc-rio.br/datazoom e compare com o dicionário em mãos.
+variáveis disponível para download em datazoom.com.br/pt/dz_stata/ e compare com o dicionário em mãos.
 
 {phang} - Lista dos nomes dos arquivos de microdados: 
 

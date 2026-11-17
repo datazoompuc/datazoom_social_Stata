@@ -158,12 +158,12 @@ Periodicamente, na manutenção do pacote, temos que rodar a do-file `atualizaca
 
 ## Créditos
 
-O [Data Zoom](https://www.econ.puc-rio.br/datazoom/) é desenvolvido por uma equipe do Departamento de Economia da Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)
+O [Data Zoom](https://datazoom.com.br/pt/) é desenvolvido por uma equipe do Departamento de Economia da Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)
 
 Para citar o pacote `datazoom_social`, utilize:
 
 > Data Zoom (2023). Data Zoom: Simplifying Access To Brazilian Microdata.  
-> https://www.econ.puc-rio.br/datazoom/english/index.html
+> https://datazoom.com.br/pt/
 
 Ou, em formato BibTeX:
 
@@ -171,7 +171,7 @@ Ou, em formato BibTeX:
 @Unpublished{DataZoom2023,
 	author = {Data Zoom},
 	title = {Data Zoom: Simplifying Access To Brazilian Microdata},
-	url = {https://www.econ.puc-rio.br/datazoom/english/index.html},
+	url = {https://datazoom.com.br/pt/},
 	year = {2023},
 }
 
