@@ -5225,11 +5225,12 @@ recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 rename P0930 pea
 
 * Posição na Ocupação
-* Não considerei funcionários públicos não estatutários que não tivessem carteira de
-* trabalho assinada em nenhum grupo. Pode ser revisto, se necessário.
-gen pos_ocup_sem = 1 if P0990 == 3 & P1000 == 1
-replace pos_ocup_sem = 2 if P0990 == 2 | P0990 == 4 | (P0990 == 5 & P1000 == 1) | (P0990 == 6 & P1000 == 1)
-replace pos_ocup_sem = 3 if P0990 == 3 & P1000 == 2
+* Funcionários públicos não estatutários (P0990 == 5) sem carteira assinada (P1000 == 2)
+* entram em "Empregado sem carteira", como em 2010. Empregados de empresas estatais
+* (P0990 == 6) são tratados como empregados comuns: com ou sem carteira.
+gen pos_ocup_sem = 1 if (P0990 == 3 | P0990 == 6) & P1000 == 1
+replace pos_ocup_sem = 2 if P0990 == 2 | P0990 == 4 | (P0990 == 5 & P1000 == 1)
+replace pos_ocup_sem = 3 if (P0990 == 3 | P0990 == 5 | P0990 == 6) & P1000 == 2
 replace pos_ocup_sem = 4 if P0990 == 1 & P1000 == 1
 replace pos_ocup_sem = 5 if P0990 == 1 & P1000 == 2
 replace pos_ocup_sem = 6 if P0990 == 8
