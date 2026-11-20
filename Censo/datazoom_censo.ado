@@ -2132,7 +2132,7 @@ else if `ano' == 2022 {
 
 							findfile amcs.dta
 							sort munic
-							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match master)
 						}
 					}
 					tempfile CENSO22_`UF'_pes_`suf'
@@ -2171,7 +2171,7 @@ else if `ano' == 2022 {
 
 							findfile amcs.dta
 							sort munic
-							merge m:1 munic using `"`r(fn)'"', nogen keep(match)
+							merge m:1 munic using `"`r(fn)'"', nogen keep(match master)
 						}
 					}
 					if "`comp'" == "" {
