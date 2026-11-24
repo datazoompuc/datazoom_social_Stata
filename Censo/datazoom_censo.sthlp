@@ -110,7 +110,8 @@ Rondônia RO, Acre AC, Amazonas AM, Roraima RR,
 Pará PA, Amapá AP, Tocantins TO, Fernando de Noronha FN, Maranhão MA, Piauí PI, Ceará CE, Rio Grande do Norte RN, 
 Paraíba PB, Pernambuco PE, Alagoas AL, Sergipe SE, Bahia BA, Minas Gerais MG, Espírito Santo ES, Rio de Janeiro RJ, 
 Guanabara GB, São Paulo SP, Paraná PR, Santa Catarina SC, Rio Grande do Sul RS, Mato Grosso do Sul MS, Mato Grosso 
-MT, Goiás GO, Distrito Federal DF.
+MT, Goiás GO, Distrito Federal DF. Para extrair todas as UFs, passe a lista completa de siglas na opção, por exemplo:
+{opt ufs(RO AC AM RR PA AP TO MA PI CE RN PB PE AL SE BA MG ES RJ SP PR SC RS MS MT GO DF)}.
 
 {dlgtab:Compatibilidade}
 
@@ -258,7 +259,7 @@ variáveis disponível para download em nosso site {browse "https://datazoom.com
 
 {phang} 2010
 
-{phang} - prefixos: Amostra_Pessoas_ (para pessoas) e Amostra_Domicilios_ (para domicílios)
+{phang} - prefixos: Amostra_Pessoas_ (para pessoas), Amostra_Domicilios_ (para domicílios) e Amostra_Mortalidade_ (para mortalidade)
 
 {phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53 14munic
 
@@ -268,9 +269,9 @@ variáveis disponível para download em nosso site {browse "https://datazoom.com
 
 {phang} 2022
 
-{phang} - prefixos: Pessoas_ (para pessoas), Domicilios_ (para domicílios) e Familia_ (para famílias)
+{phang} - prefixos: Pessoas_ (para pessoas), Domicilios_ (para domicílios), Familia_ (para famílias) e Mortalidade_ (para mortalidade)
 
-{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35_outras 35_RMSP 41 42 43 50 51 52 53
+{phang} - sufixos: 11 12 13 14 15 16 17 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53
 
 {phang} - sufixos (por tipo de dados): _publico (para dados de acesso público) e _controlado (para dados de acesso controlado)
 
