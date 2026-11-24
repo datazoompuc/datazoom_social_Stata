@@ -5225,11 +5225,12 @@ recode ativ2010 (32991 32998 = 32999) (84997 84998 = 84999) (00999 = 00000)
 rename P0930 pea
 
 * Posição na Ocupação
-* Não considerei funcionários públicos não estatutários que não tivessem carteira de
-* trabalho assinada em nenhum grupo. Pode ser revisto, se necessário.
-gen pos_ocup_sem = 1 if P0990 == 3 & P1000 == 1
-replace pos_ocup_sem = 2 if P0990 == 2 | P0990 == 4 | (P0990 == 5 & P1000 == 1) | (P0990 == 6 & P1000 == 1)
-replace pos_ocup_sem = 3 if P0990 == 3 & P1000 == 2
+* Como em 2000 e 2010, militares e estatutários formam uma categoria própria.
+* Empregados do setor privado, do setor público não estatutário e de estatais
+* são classificados pela existência de carteira assinada.
+gen pos_ocup_sem = 1 if inlist(P0990, 3, 5, 6) & P1000 == 1
+replace pos_ocup_sem = 2 if inlist(P0990, 2, 4)
+replace pos_ocup_sem = 3 if inlist(P0990, 3, 5, 6) & P1000 == 2
 replace pos_ocup_sem = 4 if P0990 == 1 & P1000 == 1
 replace pos_ocup_sem = 5 if P0990 == 1 & P1000 == 2
 replace pos_ocup_sem = 6 if P0990 == 8
@@ -5238,7 +5239,7 @@ replace pos_ocup_sem = 8 if P0990 == 9
 replace pos_ocup_sem = 9 if pos_ocup_sem == . & trab_proprio_cons == 1
 lab var pos_ocup_sem "posição na ocupação na semana de referência"
 * pos_ocup_sem  = 1 - Empregado com carteira
-*				  2 - Militar e Funcionário Públicos
+*				  2 - Militar e servidor público estatutário
 *				  3 - Empregado sem carteira
 *				  4 - Trabalhador doméstico com carteira
 *				  5 - Trabalhador doméstico sem carteira
