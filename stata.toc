@@ -1,7 +1,7 @@
 v 3
 d DataZoom Social - Leitura de microdados
 
-l www.econ.puc-rio.br/datazoom.
+l datazoom.com.br/pt/dz_stata/
 
 d O pacote traz dicionários, programas e interface gráfica
 d que permitem a extração de dados de diversas pesquisas socioeconômicas. 
