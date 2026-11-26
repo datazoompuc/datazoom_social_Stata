@@ -891,6 +891,18 @@ A posição na ocupação no trabalho principal da semana foi investigada de for
   \item 9 - Trabalhador na produção para o próprio consumo
 \end{itemize}
 
+Em 2022, a posição na ocupação é investigada em \vr{P0990} e a existência de carteira de trabalho assinada em \vr{P1000}. O questionário detalha mais o setor público do que o de 2010, distinguindo o servidor estatutário, o empregado público não estatutário e o empregado de empresa estatal. Para seguir o padrão de 2000 e 2010, abriu-se mão dessa granularidade e a variável ‘\vr{pos\_ocup\_sem}’ foi construída da seguinte forma:
+\begin{itemize}
+  \item Empregados do setor privado (\vr{P0990} = 3), empregados públicos não estatutários (5) e empregados de empresas estatais (6) são classificados de acordo com a carteira de trabalho (\vr{P1000}): com carteira em 1 - Empregado com carteira, e sem carteira em 3 - Empregado sem carteira.
+  \item Militares (\vr{P0990} = 2) e servidores públicos estatutários (4) permanecem em 2 - Militar e Funcionário Públicos.
+  \item Trabalhadores domésticos (\vr{P0990} = 1) são classificados em 4 - com carteira ou 5 - sem carteira.
+  \item Empregadores (7) ficam em 7, conta-própria (8) em 6 e não remunerados (9) em 8.
+\end{itemize}
+
+A categoria 2 identifica o tipo de vínculo e não representa o total de empregados do setor público: os não estatutários e os empregados de estatais integram as categorias 1 e 3, junto com os empregados do setor privado. A distinção de setor existe em \vr{P0990} em 2022, mas não fica disponível na variável compatibilizada, por conta do padrão de 2000 e 2010. A produção para o próprio consumo vem de outro quesito (\vr{P0890}) e só preenche a categoria 9 quando nenhuma das regras acima atribuiu uma categoria. Uma posição ou uma resposta sobre carteira ignorada, nos grupos que dependem dela, deixa ‘\vr{pos\_ocup\_sem}’ sem classificação.
+
+A única categoria que pode representar situações diferentes entre os Censos é a de trabalho não remunerado (8). Em 2000, ela inclui aprendizes e estagiários sem remuneração; em 2010, o quesito se refere à ajuda a morador do domicílio; em 2022, inclui também a ajuda a parente que mora em outro domicílio. Essas diferenças vêm da coleta de dados e não podem ser harmonizadas.
+
 Para os empregadores, pode-se obter o número de empregados no empreendimento, após recodificação das alternativas em 2000 para adequar-se a 2010:
 \begin{itemize}
   \item \vr{qtos\_empregados} = 1 - Um a cinco empregados
